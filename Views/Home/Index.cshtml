@@ -1,0 +1,109 @@
+﻿@using CampeonatosNParty.Models
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="hero-unit">
+    <h1>Campeonatos N-Party</h1>
+    <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    <p><a href="#" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
+</div>
+
+<!-- Example row of columns -->
+<div class="row">
+    <div class="span4">
+        
+        <h2>Top 5 Ranking</h2>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Posição</th>
+                    <th>Nome</th>
+                    <th>Nick</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    List<Usuarios> usuarios = NPartyDb<Usuarios>.Instance.Select().ToList();
+                    foreach (Usuarios usuario in usuarios)
+                    {
+                        <tr>
+                            <td>@usuario.Id</td>
+                            <td>@usuario.Nome</td>
+                            <td>@usuario.Apelido</td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+        <p><a class="btn" href="#">Ver os detalhes &raquo;</a></p>
+    </div>
+    <div class="span4">
+        <h2>Últimos Eventos</h2>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Anime Friends 2012</td>
+                    <td>10/07/2012</td>
+                </tr>
+                <tr>
+                    <td>Anime Friends 2012</td>
+                    <td>10/07/2012</td>
+                </tr>
+                <tr>
+                    <td>Anime Friends 2012</td>
+                    <td>10/07/2012</td>
+                </tr>
+                <tr>
+                    <td>Anime Friends 2012</td>
+                    <td>10/07/2012</td>
+                </tr>
+                <tr>
+                    <td>Anime Friends 2012</td>
+                    <td>10/07/2012</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><a class="btn" href="#">Ver os detalhes &raquo;</a></p>
+    </div>
+    <div class="span4">
+        <h2>Últimos Campeonatos</h2>
+        <table class="table table-bordered table-striped table-condensed">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mario Kart 7</td>
+                    <td>10/07/2012</td>
+                </tr>
+                <tr>
+                    <td>Mario Kart 7</td>
+                    <td>10/07/2012</td>
+                </tr>
+                <tr>
+                    <td>Mario Kart 7</td>
+                    <td>10/07/2012</td>
+                </tr>
+                <tr>
+                    <td>Mario Kart 7</td>
+                    <td>10/07/2012</td>
+                </tr>
+                <tr>
+                    <td>Mario Kart 7</td>
+                    <td>10/07/2012</td>
+                </tr>
+            </tbody>
+        </table>
+        <p><a class="btn" href="#">Ver os detalhes &raquo;</a></p>
+    </div>
+</div>

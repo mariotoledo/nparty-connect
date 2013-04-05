@@ -1,0 +1,51 @@
+﻿@{
+    ViewBag.Title = "_Layout";
+    int topMenu = Convert.ToInt32(ViewData["TopMenu"]);
+}
+
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Static/css/united.css")" />
+    <style>
+        body {
+            padding-top: 60px;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Static/css/responsive.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="@Url.Content("~/")">Campeonatos N-Party</a>
+                <div class="nav-collapse collapse">
+                    <ul class="nav">
+                        <li class="@(topMenu == 1 ? "active" : "")"><a href="@Url.Content("~/Eventos/")">Eventos</a></li>
+                        <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
+                        <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Ranking/")">Ranking</a></li>
+                    </ul>
+                    <form class="navbar-form pull-right">
+                      <a href="#" class="btn">Login</a>
+                    </form>
+                </div>
+                <!--/.nav-collapse -->
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+        <footer>
+            <hr />
+            <p>© N-Party 2013 - www.nparty.com.br</p>
+        </footer>
+    </div>
+</body>
+</html>
