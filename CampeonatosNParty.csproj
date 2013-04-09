@@ -108,9 +108,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\NPartyDb.cs" />
-    <Compile Include="Models\NPartyDbModel.cs" />
-    <Compile Include="Models\Usuarios.cs" />
+    <Compile Include="Models\Database\Ranking.cs" />
+    <Compile Include="Models\Database\tb_eventos.cs" />
+    <Compile Include="Models\Database\tb_campeonatos.cs" />
+    <Compile Include="Models\Database\NPartyDb.cs" />
+    <Compile Include="Models\Database\NPartyDbModel.cs" />
+    <Compile Include="Models\Database\tb_usuarios.cs" />
+    <Compile Include="Models\ViewModel\HomeView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -131,7 +135,9 @@
     <Content Include="Static\css\variables.css" />
     <Content Include="Static\img\glyphicons-halflings-white.png" />
     <Content Include="Static\img\glyphicons-halflings.png" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

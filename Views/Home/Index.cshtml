@@ -1,4 +1,5 @@
-﻿@using CampeonatosNParty.Models
+﻿@using CampeonatosNParty.Models.Database
+@model CampeonatosNParty.Models.ViewModel.HomeView
 @{
     ViewBag.Title = "Index";
 }
@@ -24,13 +25,12 @@
             </thead>
             <tbody>
                 @{
-                    List<Usuarios> usuarios = NPartyDb<Usuarios>.Instance.Select().ToList();
-                    foreach (Usuarios usuario in usuarios)
+                    foreach (Ranking rank in Model.ranking)
                     {
                         <tr>
-                            <td>@usuario.Id</td>
-                            <td>@usuario.Nome</td>
-                            <td>@usuario.Apelido</td>
+                            <td>@rank.NM_Usuario</td>
+                            <td>@rank.NM_Apelido</td>
+                            <td>@rank.Pontos</td>
                         </tr>
                     }
                 }
@@ -48,26 +48,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Anime Friends 2012</td>
-                    <td>10/07/2012</td>
-                </tr>
-                <tr>
-                    <td>Anime Friends 2012</td>
-                    <td>10/07/2012</td>
-                </tr>
-                <tr>
-                    <td>Anime Friends 2012</td>
-                    <td>10/07/2012</td>
-                </tr>
-                <tr>
-                    <td>Anime Friends 2012</td>
-                    <td>10/07/2012</td>
-                </tr>
-                <tr>
-                    <td>Anime Friends 2012</td>
-                    <td>10/07/2012</td>
-                </tr>
+                @{
+                    foreach (tb_eventos evento in Model.eventos)
+                    {
+                        <tr>
+                            <td>@evento.NM_Evento</td>
+                            <td>@evento.Dt_Evento.ToString()</td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
         <p><a class="btn" href="#">Ver os detalhes &raquo;</a></p>
@@ -82,26 +71,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Mario Kart 7</td>
-                    <td>10/07/2012</td>
-                </tr>
-                <tr>
-                    <td>Mario Kart 7</td>
-                    <td>10/07/2012</td>
-                </tr>
-                <tr>
-                    <td>Mario Kart 7</td>
-                    <td>10/07/2012</td>
-                </tr>
-                <tr>
-                    <td>Mario Kart 7</td>
-                    <td>10/07/2012</td>
-                </tr>
-                <tr>
-                    <td>Mario Kart 7</td>
-                    <td>10/07/2012</td>
-                </tr>
+                 @{
+                    foreach (tb_campeonatos campeonato in Model.campeonatos)
+                    {
+                        <tr>
+                            <td>@campeonato.NM_Campeonato</td>
+                            <td>@campeonato.Data_Campeonato.ToString()</td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
         <p><a class="btn" href="#">Ver os detalhes &raquo;</a></p>
