@@ -18,9 +18,9 @@
         <table class="table table-bordered table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>Posição</th>
                     <th>Nome</th>
                     <th>Nick</th>
+                    <th>Pontos</th>
                 </tr>
             </thead>
             <tbody>
@@ -28,8 +28,8 @@
                     foreach (Ranking rank in Model.ranking)
                     {
                         <tr>
-                            <td>@rank.NM_Usuario</td>
-                            <td>@rank.NM_Apelido</td>
+                            <td>@rank.NomeUsuario</td>
+                            <td>@rank.ApelidoUsuario</td>
                             <td>@rank.Pontos</td>
                         </tr>
                     }
@@ -49,11 +49,22 @@
             </thead>
             <tbody>
                 @{
-                    foreach (tb_eventos evento in Model.eventos)
+                    foreach (Eventos evento in Model.eventos)
                     {
                         <tr>
-                            <td>@evento.NM_Evento</td>
-                            <td>@evento.Dt_Evento.ToString()</td>
+                            <td>@evento.Nome</td>
+                            @{
+                                string dataEvento;
+                                if (evento.DataEventoInicio.CompareTo(evento.DataEventoFim) > 0)
+                                {
+                                    dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy");
+                                }
+                                else
+                                {
+                                    dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + evento.DataEventoFim.ToString("dd/MM/yyyy"); ;
+                                }
+                            }
+                            <td>@dataEvento</td>
                         </tr>
                     }
                 }
@@ -72,11 +83,11 @@
             </thead>
             <tbody>
                  @{
-                    foreach (tb_campeonatos campeonato in Model.campeonatos)
+                     foreach (CampeonatoPorEvento campeonato in Model.campeonatos)
                     {
                         <tr>
-                            <td>@campeonato.NM_Campeonato</td>
-                            <td>@campeonato.Data_Campeonato.ToString()</td>
+                            <td>@campeonato.NomeJogo</td>
+                            <td>@campeonato.DataCampeonato.ToString("dd/MM/yyyy")</td>
                         </tr>
                     }
                 }

@@ -108,6 +108,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Database\Cidade.cs" />
+    <Compile Include="Models\Database\Campeonatos.cs" />
+    <Compile Include="Models\Database\Classificacao.cs" />
+    <Compile Include="Models\Database\Consoles.cs" />
+    <Compile Include="Models\Database\CampeonatoPorEvento.cs" />
+    <Compile Include="Models\Database\TipoEvento.cs" />
+    <Compile Include="Models\Database\Jogos.cs" />
+    <Compile Include="Models\Database\Inscricao.cs" />
+    <Compile Include="Models\Database\Eventos.cs" />
+    <Compile Include="Models\Database\Estado.cs" />
+    <Compile Include="Models\Database\Usuarios.cs" />
     <Compile Include="Models\Database\Ranking.cs" />
     <Compile Include="Models\Database\tb_eventos.cs" />
     <Compile Include="Models\Database\tb_campeonatos.cs" />

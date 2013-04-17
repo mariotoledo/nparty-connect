@@ -14,18 +14,19 @@ namespace CampeonatosNParty.Models.ViewModel
             }
         }
 
-        public List<tb_eventos> eventos
+        public List<Eventos> eventos
         {
             get
             {
-                return NPartyDb<tb_eventos>.Instance.Select().Take(5).ToList();
+                return NPartyDb<Eventos>.Instance.Select().OrderBy("DataEventoInicio", EixoX.Data.SortDirection.Descending).Take(5).ToList();
             }
         }
 
-        public List<tb_campeonatos> campeonatos{
+        public List<CampeonatoPorEvento> campeonatos
+        {
             get
             {
-                return NPartyDb<tb_campeonatos>.Instance.Select().Take(5).ToList();
+                return NPartyDb<CampeonatoPorEvento>.Instance.Select().OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending).Take(5).ToList();
             }
         }
     }

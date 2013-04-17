@@ -11,18 +11,20 @@ using EixoX.UI;
 namespace CampeonatosNParty.Models.Database
 {
     [DatabaseTable]
-    public class Ranking : NPartyDbModel<Ranking>
+    public class Inscricao : NPartyDbModel<Inscricao>
     {
+        [DatabaseColumn(DatabaseColumnKind.Identity)]
+        public int Id { get; set; }
+
         [DatabaseColumn]
+        [Required]
+        public int IdCampeonato { get; set; }
+
+        [DatabaseColumn]
+        [Required]
         public int IdUsuario { get; set; }
 
         [DatabaseColumn]
-        public string NomeUsuario { get; set; }
-
-        [DatabaseColumn]
-        public string ApelidoUsuario { get; set; }
-
-        [DatabaseColumn]
-        public int Pontos { get; set; }
+        public string IdInscricaoOriginal { get; set; }
     }
 }
