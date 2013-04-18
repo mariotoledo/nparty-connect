@@ -1,31 +1,8 @@
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\CampeonatosNParty.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\CampeonatosNParty.pdb
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\Microsoft.Web.Infrastructure.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\Newtonsoft.Json.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Net.Http.Formatting.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Helpers.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Http.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Http.WebHost.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Mvc.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Razor.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.WebPages.Deployment.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.WebPages.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.WebPages.Razor.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\Newtonsoft.Json.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Net.Http.Formatting.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Helpers.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Http.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Http.WebHost.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Mvc.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.Razor.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.WebPages.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.WebPages.Deployment.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\bin\System.Web.WebPages.Razor.xml
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\obj\Debug\CampeonatosNParty.csprojResolveAssemblyReference.cache
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\obj\Debug\CampeonatosNParty.dll
-c:\users\mario\documents\visual studio 2012\Projects\CampeonatosNParty\obj\Debug\CampeonatosNParty.pdb
+C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Globalization\EixoX.Globalization.Example.xml
+C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Restrictions\RestrictionMessages.xml
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\CampeonatosNParty.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\CampeonatosNParty.pdb
+C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\EixoX.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Net.Http.Formatting.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Web.Helpers.dll
@@ -36,8 +13,8 @@ C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Web.Razor.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Web.WebPages.Deployment.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Web.WebPages.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Web.WebPages.Razor.dll
+C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\EixoX.pdb
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Microsoft.Web.Infrastructure.xml
-C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Newtonsoft.Json.xml
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Net.Http.Formatting.xml
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Web.Helpers.xml
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Web.Http.xml
@@ -50,7 +27,3 @@ C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Web.WebPages.Razor.
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\obj\Debug\CampeonatosNParty.csprojResolveAssemblyReference.cache
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\obj\Debug\CampeonatosNParty.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\obj\Debug\CampeonatosNParty.pdb
-C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Globalization\EixoX.Globalization.Example.xml
-C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Restrictions\RestrictionMessages.xml
-C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\EixoX.dll
-C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\EixoX.pdb

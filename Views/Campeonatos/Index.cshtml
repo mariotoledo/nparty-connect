@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 
-    List<Campeonatos> campeonatos = NPartyDb<Campeonatos>.Instance.Select().OrderBy("DataCampeonato", EixoX.Reflection.ClassSortDirection.Descending).ToList();
+    List<Campeonatos> campeonatos = NPartyDb<Campeonatos>.Instance.Select().OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending).ToList();
 
     Dictionary<int, Jogos> listaJogos = Jogos.Select().ToDictionary(g => g.Id, f => f);
     Dictionary<int, string> listaConsoles = Consoles.Select().ToDictionary(g => g.Id, f => f.Nome);

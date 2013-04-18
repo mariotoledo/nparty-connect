@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Index";
 
-    List<JogadoresItem> jogadores = NPartyDb<JogadoresItem>.Instance.Select().OrderBy("Pontos", EixoX.Reflection.ClassSortDirection.Descending).ToList();
+    List<JogadoresItem> jogadores = NPartyDb<JogadoresItem>.Instance.Select().OrderBy("Pontos", EixoX.Data.SortDirection.Descending).ToList();
 }
 
 <div class="page-header">
