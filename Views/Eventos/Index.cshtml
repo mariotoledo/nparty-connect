@@ -1,11 +1,13 @@
 ﻿@using CampeonatosNParty.Models.Database
 @{
     ViewBag.Title = "Index";
+    Dictionary<int, string> eventoTipo = TipoEvento.Select().ToDictionary(g => g.Id, f => f.Nome);
+
     List<Eventos> eventos = NPartyDb<Eventos>.Instance.Select().OrderBy("DataEventoInicio", EixoX.Reflection.ClassSortDirection.Descending).ToList();
 }
 
 <div class="page-header">
-  <h1>Eventos <small>Confira os últimos que participamos</small></h1>
+  <h1>Eventos <small>Confira todos os eventos que participamos</small></h1>
 </div>
 
 <!-- Example row of columns -->
@@ -26,7 +28,7 @@
                     {
                         <tr>
                             <td>@evento.Nome</td>
-                            <td>@evento.TipoEvento</td>
+                            <td>@eventoTipo[evento.TipoEvento]</td>
                             <td>@evento.Local</td>
                             @{
                                 string dataEvento;

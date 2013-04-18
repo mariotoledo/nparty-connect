@@ -1,0 +1,45 @@
+﻿@using CampeonatosNParty.Models.Database
+@{
+    ViewBag.Title = "Index";
+
+    List<Campeonatos> campeonatos = NPartyDb<Campeonatos>.Instance.Select().OrderBy("DataCampeonato", EixoX.Reflection.ClassSortDirection.Descending).ToList();
+
+    Dictionary<int, Jogos> listaJogos = Jogos.Select().ToDictionary(g => g.Id, f => f);
+    Dictionary<int, string> listaConsoles = Consoles.Select().ToDictionary(g => g.Id, f => f.Nome);
+    Dictionary<int, string> listaEventos = Eventos.Select().ToDictionary(g => g.Id, f => f.Nome);
+    Dictionary<int, string> listaStatusCampeonato = StatusCampeonato.Select().ToDictionary(g => g.Id, f => f.Nome);
+}
+
+<div class="page-header">
+  <h1>Campeonatos <small>Confira todos os campeonatos que realizamos</small></h1>
+</div>
+
+<div class="row">
+    <div class="span12">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th>Jogo</th>
+                    <th>Console</th>
+                    <th>Evento</th>
+                    <th>Data</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach(Campeonatos campeonato in campeonatos)
+                    {
+                        <tr>
+                            <td>@listaJogos[campeonato.IdJogo].Nome</td>
+                            <td>@listaConsoles[listaJogos[campeonato.IdJogo].IdConsole]</td>
+                            <td>@listaEventos[campeonato.IdEvento]</td>
+                            <td>@campeonato.DataCampeonato.ToString("dd/MM/yyyy")</td>
+                            <td>@listaStatusCampeonato[campeonato.IdStatus]</td>
+                        </tr>
+                    }
+                }           
+            </tbody>
+        </table>
+    </div>
+</div>
