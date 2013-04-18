@@ -107,6 +107,7 @@
     <Compile Include="Controllers\CampeonatosController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\JogadoresController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -115,6 +116,7 @@
     <Compile Include="Models\Database\Classificacao.cs" />
     <Compile Include="Models\Database\Consoles.cs" />
     <Compile Include="Models\Database\CampeonatoPorEvento.cs" />
+    <Compile Include="Models\Database\JogadoresItem.cs" />
     <Compile Include="Models\Database\StatusCampeonato.cs" />
     <Compile Include="Models\Database\TipoEvento.cs" />
     <Compile Include="Models\Database\Jogos.cs" />
@@ -186,6 +188,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Campeonatos\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Jogadores\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

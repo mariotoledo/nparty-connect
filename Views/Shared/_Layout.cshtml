@@ -30,7 +30,7 @@
                     <ul class="nav">
                         <li class="@(topMenu == 1 ? "active" : "")"><a href="@Url.Content("~/Eventos/")">Eventos</a></li>
                         <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
-                        <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Ranking/")">Ranking</a></li>
+                        <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
                     </ul>
                     <form class="navbar-form pull-right">
                       <a href="#" class="btn">Login</a>
@@ -44,7 +44,8 @@
         @RenderBody()
         <footer>
             <hr />
-            <p>© N-Party 2013 - www.nparty.com.br</p>
+            <p style="float: left;">© N-Party 2013 - www.nparty.com.br</p>
+            <p style="float: right">Idealizado e Projetado por <b>Rafael Farias</b><br />Desenvolvido por <b>Mario Toledo</b></p>
         </footer>
     </div>
 </body>
