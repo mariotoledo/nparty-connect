@@ -45,7 +45,7 @@
                             foreach (Eventos evento in eventosList)
                             {
                                 <tr>
-                                    <td>@evento.Nome</td>
+                                    <td><a href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">@evento.Nome</a></td>
                                     <td>@eventoTipo[evento.TipoEvento]</td>
                                     <td>@evento.Local</td>
                                     @{

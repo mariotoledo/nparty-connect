@@ -131,6 +131,7 @@
     <Compile Include="Models\Database\NPartyDb.cs" />
     <Compile Include="Models\Database\NPartyDbModel.cs" />
     <Compile Include="Models\Database\tb_usuarios.cs" />
+    <Compile Include="Models\ViewModel\EventosDetailView.cs" />
     <Compile Include="Models\ViewModel\HomeView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -192,6 +193,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Jogadores\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Eventos\Detalhes.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

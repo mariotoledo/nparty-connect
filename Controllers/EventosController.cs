@@ -31,5 +31,11 @@ namespace CampeonatosNParty.Controllers
 
             return View(result);
         }
+
+        public ActionResult Detalhes(int? id)
+        {
+            EventosDetailView view = new EventosDetailView(id.Value);
+            return View(view);
+        }
     }
 }

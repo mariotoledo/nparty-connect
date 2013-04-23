@@ -13,7 +13,7 @@ namespace CampeonatosNParty.Models.Database
     [DatabaseTable]
     public class Cidade : NPartyDbModel<Cidade>
     {
-        [DatabaseColumn(DatabaseColumnKind.PrimaryKey)]
+        [DatabaseColumn(DatabaseColumnKind.Identity)]
         public int CidadeId { get; set; }
 
         [DatabaseColumn]

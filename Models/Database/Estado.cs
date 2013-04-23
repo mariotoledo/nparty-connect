@@ -13,7 +13,7 @@ namespace CampeonatosNParty.Models.Database
     [DatabaseTable]
     public class Estado : NPartyDbModel<Estado>
     {
-        [DatabaseColumn(DatabaseColumnKind.PrimaryKey)]
+        [DatabaseColumn(DatabaseColumnKind.Identity)]
         public int EstadoId { get; set; }
 
         [DatabaseColumn]
