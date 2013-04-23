@@ -1,4 +1,7 @@
-﻿using System;
+﻿using CampeonatosNParty.Models.Database;
+using CampeonatosNParty.Models.ViewModel;
+using EixoX.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,10 +14,20 @@ namespace CampeonatosNParty.Controllers
         //
         // GET: /Jogadores/
 
+        ClassSelectResult<JogadoresItem> result;
+
         public ActionResult Index()
         {
-            return View();
-        }
+            int page = 0;
+            int.TryParse(Request.QueryString["page"], out page);
 
+            ClassSelect<JogadoresItem> search = JogadoresItem.Search(Request.QueryString["filter"]);
+            search.Page(25, page);
+            search.OrderBy("NomeUsuario");
+
+            result = search.ToResult();
+
+            return View(result);
+        }
     }
 }
