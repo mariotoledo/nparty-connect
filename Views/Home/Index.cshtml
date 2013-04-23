@@ -52,7 +52,7 @@
                     foreach (Eventos evento in Model.eventos)
                     {
                         <tr>
-                            <td>@evento.Nome</td>
+                            <td><a href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">@evento.Nome</a></td>
                             @{
                                 string dataEvento;
                                 if (evento.DataEventoInicio.CompareTo(evento.DataEventoFim) > 0)

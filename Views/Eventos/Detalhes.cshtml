@@ -1,33 +1,56 @@
 ﻿@model CampeonatosNParty.Models.ViewModel.EventosDetailView
 @{
-    ViewBag.Title = "Detalhes";
-    CampeonatosNParty.Models.Database.Cidade cidade = CampeonatosNParty.Models.Database.Cidade.WithIdentity(Model.evento.IdCidade);
-    CampeonatosNParty.Models.Database.Estado estado = CampeonatosNParty.Models.Database.Estado.WithIdentity(Model.evento.IdEstado);
-    CampeonatosNParty.Models.Database.TipoEvento tipoEvento = CampeonatosNParty.Models.Database.TipoEvento.WithIdentity(Model.evento.TipoEvento);
-}
+    if(Model != null)
+    {
+        ViewBag.Title = "Detalhes";
+        CampeonatosNParty.Models.Database.Cidade cidade = CampeonatosNParty.Models.Database.Cidade.WithIdentity(Model.evento.IdCidade);
+        CampeonatosNParty.Models.Database.Estado estado = CampeonatosNParty.Models.Database.Estado.WithIdentity(Model.evento.IdEstado);
+        CampeonatosNParty.Models.Database.TipoEvento tipoEvento = CampeonatosNParty.Models.Database.TipoEvento.WithIdentity(Model.evento.TipoEvento);
 
-<div class="page-header">
-  <h1>@Model.evento.Nome</h1>
-</div>
-<div class="row">
-    <div class="span3">
-    @{
-        if(cidade != null && !string.IsNullOrEmpty(cidade.Nome))
-        {
-            string cidadeSigla = estado != null && !string.IsNullOrEmpty(estado.Sigla) ? cidade.Nome + " - " + estado.Sigla : cidade.Nome;
-            <div class="row">
-                <div class="span1">Cidade</div>
-                <div class="span2">@cidadeSigla</div>
-            </div>
-        }
+        <div class="page-header">
+          <h1>@Model.evento.Nome</h1>
+        </div>
+        <div class="row">
+            <div class="span3">
+            @{
+                if(cidade != null && !string.IsNullOrEmpty(cidade.Nome))
+                {
+                    string cidadeSigla = estado != null && !string.IsNullOrEmpty(estado.Sigla) ? cidade.Nome + " - " + estado.Sigla : cidade.Nome;
+                    <div class="row">
+                        <div class="span1"><b>Cidade</b></div>
+                        <div class="span2">@cidadeSigla</div>
+                    </div>
+                }
 
-        if (tipoEvento != null && !string.IsNullOrEmpty(tipoEvento.Nome))
-        {
-            <div class="row">
-                <div class="span1">Tipo</div>
-                <div class="span2">@tipoEvento.Nome</div>
+                if (tipoEvento != null && !string.IsNullOrEmpty(tipoEvento.Nome))
+                {
+                    <div class="row">
+                        <div class="span1"><b>Tipo</b></div>
+                        <div class="span2">@tipoEvento.Nome</div>
+                    </div>
+                }
+                
+                if (!string.IsNullOrEmpty(Model.evento.Local))
+                {
+                    <div class="row">
+                        <div class="span1"><b>Local</b></div>
+                        <div class="span2">@Model.evento.Local</div>
+                    </div>
+                }
+        
+                if (Model.evento.DataEventoInicio != null)
+                {
+                    string dataEvento = Model.evento.DataEventoInicio.CompareTo(Model.evento.DataEventoFim) > 0 ?
+                        Model.evento.DataEventoInicio.ToString("dd/MM/yyyy") :
+                        Model.evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + Model.evento.DataEventoFim.ToString("dd/MM/yyyy");
+                                        
+                    <div class="row">
+                        <div class="span1"><b>Data</b></div>
+                        <div class="span2">@dataEvento</div>
+                    </div>
+                }
+            }
             </div>
-        }
+        </div>
     }
-    </div>
-</div>
+}
