@@ -17,7 +17,7 @@ namespace CampeonatosNParty.Models.ViewModel
             if (evento == null)
                 evento = new Eventos();
 
-            detalheCampeonatos = DetalhesCampeonatoPorEvento.Select().Where("IdEvento", evento.Id).ToList();
+            detalheCampeonatos = DetalhesCampeonatoPorEvento.Select().Where("IdEvento", evento.Id).OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending).ToList();
         }
     }
 }

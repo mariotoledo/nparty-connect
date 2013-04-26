@@ -36,5 +36,8 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public int Pontuacao { get; set; }
+
+        [DatabaseColumn]
+        public DateTime DataCampeonato { get; set; }
     }
 }

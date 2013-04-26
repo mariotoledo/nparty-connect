@@ -2,7 +2,7 @@
 @{
     if(Model != null)
     {
-        ViewBag.Title = "Detalhes";
+        ViewBag.Title = "Detalhes do evento";
         CampeonatosNParty.Models.Database.Cidade cidade = CampeonatosNParty.Models.Database.Cidade.WithIdentity(Model.evento.IdCidade);
         CampeonatosNParty.Models.Database.Estado estado = CampeonatosNParty.Models.Database.Estado.WithIdentity(Model.evento.IdEstado);
         CampeonatosNParty.Models.Database.TipoEvento tipoEvento = CampeonatosNParty.Models.Database.TipoEvento.WithIdentity(Model.evento.TipoEvento);
@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="span6">
-                <h3>Detalhes</h3>
+                <h3>Detalhes do evento</h3>
                 <hr />
             @{
                 if(cidade != null && !string.IsNullOrEmpty(cidade.Nome))
@@ -54,21 +54,22 @@
             }
             </div>
             <div class="span6">
-                <h3>Campeonatos</h3>
+                <h3>Classificação dos campeonatos</h3>
                 <hr />
                 @{
                     if (Model.detalheCampeonatos.Count > 0)
                     {
                         int lastCampId = Model.detalheCampeonatos.First().IdCampeonato;
-                        <h4>@Model.detalheCampeonatos.First().Nome</h4>
-                        @Html.Raw("<table width=\"100%\"><thead><tr><th>Nome do Jogador</th><th>Apelido</th><th>Pontos</th></tr></thead>");
+                        <h4>@Model.detalheCampeonatos.First().Nome <small>@Model.detalheCampeonatos.First().DataCampeonato.ToString("dd/MM/yyyy")</small></h4>
+                        @Html.Raw("<table class=\"table table-bordered table-hover\" width=\"100%\"><thead><tr><th>Nome do Jogador</th><th>Apelido</th><th>Pontos</th></tr></thead>");
                         foreach (CampeonatosNParty.Models.Database.DetalhesCampeonatoPorEvento camp in Model.detalheCampeonatos)
                         {
                             if (camp.IdCampeonato != lastCampId)
                             {
                                 lastCampId = camp.IdCampeonato;
-                                <h4>@camp.Nome</h4>
-                                @Html.Raw("</table><table width=\"100%\"><thead><tr><th>Nome do Jogador</th><th>Apelido</th><th>Pontos</th></tr></thead>");
+                                @Html.Raw("</table>");
+                                <h4>@camp.Nome <small>@camp.DataCampeonato.ToString("dd/MM/yyyy")</small></h4>
+                                @Html.Raw("<table class=\"table table-bordered table-hover\" width=\"100%\"><thead><tr><th>Nome do Jogador</th><th>Apelido</th><th>Pontos</th></tr></thead>");
                                 
                             }
                                 <tr>
