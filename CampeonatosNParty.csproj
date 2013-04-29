@@ -116,8 +116,9 @@
     <Compile Include="Models\Database\Classificacao.cs" />
     <Compile Include="Models\Database\Consoles.cs" />
     <Compile Include="Models\Database\CampeonatoPorEvento.cs" />
+    <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\DetalhesCampeonatoPorEvento.cs" />
-    <Compile Include="Models\Database\Copy of CampeonatosDashboardItem.cs" />
+    <Compile Include="Models\Database\CampeonatosDashboardItem.cs" />
     <Compile Include="Models\Database\JogadoresItem.cs" />
     <Compile Include="Models\Database\StatusCampeonato.cs" />
     <Compile Include="Models\Database\TipoEvento.cs" />
@@ -132,6 +133,7 @@
     <Compile Include="Models\Database\NPartyDb.cs" />
     <Compile Include="Models\Database\NPartyDbModel.cs" />
     <Compile Include="Models\Database\tb_usuarios.cs" />
+    <Compile Include="Models\ViewModel\CampeonatosDetailView.cs" />
     <Compile Include="Models\ViewModel\EventosDetailView.cs" />
     <Compile Include="Models\ViewModel\HomeView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -198,6 +200,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Eventos\Detalhes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Campeonatos\Detalhes.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -28,5 +28,11 @@ namespace CampeonatosNParty.Controllers
 
             return View(result);
         }
+
+        public ActionResult Detalhes(int? id)
+        {
+            CampeonatosNParty.Models.ViewModel.CampeonatosDetailView view = new CampeonatosNParty.Models.ViewModel.CampeonatosDetailView(id.Value);
+            return View(view);
+        }
     }
 }

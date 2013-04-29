@@ -86,7 +86,7 @@
                      foreach (CampeonatoPorEvento campeonato in Model.campeonatos)
                     {
                         <tr>
-                            <td>@campeonato.NomeJogo</td>
+                            <td><a href="@Url.Content("~/Campeonatos/Detalhes/" + campeonato.IdCampeonato)">@campeonato.NomeJogo</a></td>
                             <td>@campeonato.DataCampeonato.ToString("dd/MM/yyyy")</td>
                         </tr>
                     }
