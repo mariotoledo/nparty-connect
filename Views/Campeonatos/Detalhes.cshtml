@@ -5,8 +5,8 @@
         ViewBag.Title = "Detalhes do evento";
         <ul class="breadcrumb">
             <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
-            <li><a href="@Url.Content("/")">Library</a> <span class="divider">/</span></li>
-            <li class="active">Data</li>
+            <li><a href="@Url.Content("/Campeonatos")">Campeonatos</a> <span class="divider">/</span></li>
+            <li class="active">@Model.campeonato.NomeJogo</li>
         </ul>
         <div class="page-header">
           <h2>@Model.campeonato.NomeJogo</h2>

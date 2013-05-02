@@ -7,6 +7,11 @@
         CampeonatosNParty.Models.Database.Estado estado = CampeonatosNParty.Models.Database.Estado.WithIdentity(Model.evento.IdEstado);
         CampeonatosNParty.Models.Database.TipoEvento tipoEvento = CampeonatosNParty.Models.Database.TipoEvento.WithIdentity(Model.evento.TipoEvento);
 
+        <ul class="breadcrumb">
+            <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+            <li><a href="@Url.Content("/Eventos")">Eventos</a> <span class="divider">/</span></li>
+            <li class="active">@Model.evento.Nome</li>
+        </ul>
         <div class="page-header">
           <h2>@Model.evento.Nome</h2>
         </div>

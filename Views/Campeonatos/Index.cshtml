@@ -16,7 +16,10 @@
     
     Dictionary<int, string> listaStatusCampeonato = StatusCampeonato.Select().ToDictionary(g => g.Id, f => f.Nome);
 }
-
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li class="active">Campeonatos</li>
+</ul>
 <div class="page-header">
   <h1>Campeonatos <small>Confira todos os campeonatos que realizamos</small></h1>
 </div>

@@ -10,6 +10,12 @@
 
         string apelido = string.IsNullOrEmpty(Model.usuario.Apelido) ? "" : "(" + Model.usuario.Apelido + ")";
         
+        <ul class="breadcrumb">
+            <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+            <li><a href="@Url.Content("/Jogadores")">Jogadores</a> <span class="divider">/</span></li>
+            <li class="active">@Model.usuario.Nome @apelido</li>
+        </ul>
+
         <div class="page-header">
           <h2>@Model.usuario.Nome <small>@apelido</small></h2><br />
         </div>
