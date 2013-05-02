@@ -3,7 +3,11 @@
     if(Model != null)
     {
         ViewBag.Title = "Detalhes do evento";
-
+        <ul class="breadcrumb">
+            <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+            <li><a href="@Url.Content("/")">Library</a> <span class="divider">/</span></li>
+            <li class="active">Data</li>
+        </ul>
         <div class="page-header">
           <h2>@Model.campeonato.NomeJogo</h2>
         </div>
@@ -24,7 +28,7 @@
                 {
                     <div class="row">
                         <div class="span1"><b>Evento</b></div>
-                        <div class="span2">@Model.campeonato.NomeEvento</div>
+                        <div class="span2"><a href="@Url.Content("/Eventos/Detalhes/" + Model.campeonato.IdEvento)">@Model.campeonato.NomeEvento</a></div>
                     </div>
                 }
 
@@ -58,7 +62,7 @@
                                 {
                                     <tr>
                                         <td>@classificacao.NumeroClassificacao</td>
-                                        <td>@classificacao.Nome</td>
+                                        <td><a href="@Url.Content("/Jogadores/Detalhes/" + classificacao.IdUsuario)">@classificacao.Nome</a></td>
                                         <td>@classificacao.Apelido</td>
                                         <td>@classificacao.Pontuacao</td>
                                     </tr>

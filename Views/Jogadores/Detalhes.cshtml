@@ -1,0 +1,45 @@
+﻿@model CampeonatosNParty.Models.ViewModel.UsuariosDetailView
+@{
+    CampeonatosNParty.Models.Database.Cidade cidade = CampeonatosNParty.Models.Database.Cidade.WithIdentity(Model.usuario.Id_Cidade);
+    CampeonatosNParty.Models.Database.Estado estado = CampeonatosNParty.Models.Database.Estado.WithIdentity(Model.usuario.Id_Estado);
+    CampeonatosNParty.Models.Database.Ranking ranking = CampeonatosNParty.Models.Database.Ranking.WithMember("IdUsuario", Model.usuario.Id);
+    
+    if(Model != null)
+    {
+        ViewBag.Title = "Detalhes do evento";
+
+        string apelido = string.IsNullOrEmpty(Model.usuario.Apelido) ? "" : "(" + Model.usuario.Apelido + ")";
+        
+        <div class="page-header">
+          <h2>@Model.usuario.Nome <small>@apelido</small></h2><br />
+        </div>
+        <div class="row">
+            <div class="span6">
+                <h3>Dados Gerais</h3>
+                <hr />
+            @{
+                if (ranking != null)
+                {
+                    <div class="row">
+                        <div class="span1"><b>Pontuação</b></div>
+                        <div class="span2">@ranking.Pontos pontos</div>
+                    </div>
+                }
+                if(cidade != null && !string.IsNullOrEmpty(cidade.Nome))
+                {
+                    string cidadeSigla = estado != null && !string.IsNullOrEmpty(estado.Sigla) ? cidade.Nome + " - " + estado.Sigla : cidade.Nome;
+                    <div class="row">
+                        <div class="span1"><b>Cidade</b></div>
+                        <div class="span2">@cidadeSigla</div>
+                    </div>
+                }
+            }
+            </div>
+            <div class="span6">
+                <h3>Histórico de campeonatos participados</h3>
+                <hr />
+                
+            </div>
+        </div>
+    }
+}

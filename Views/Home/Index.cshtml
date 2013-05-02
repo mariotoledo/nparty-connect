@@ -28,7 +28,7 @@
                     foreach (Ranking rank in Model.ranking)
                     {
                         <tr>
-                            <td>@rank.NomeUsuario</td>
+                            <td><a href="@Url.Content("/Jogadores/Detalhes/" + rank.IdUsuario)">@rank.NomeUsuario</a></td>
                             <td>@rank.ApelidoUsuario</td>
                             <td>@rank.Pontos</td>
                         </tr>

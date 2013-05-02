@@ -49,7 +49,7 @@
                                 <tr>
                                     <td>@campeonato.CampeonatoNome</td>
                                     <td>@campeonato.ConsoleNome</td>
-                                    <td>@campeonato.EventoNome</td>
+                                    <td><a href="@Url.Content("/Eventos/Detalhes/" + campeonato.IdEvento)">@campeonato.EventoNome</a></td>
                                     <td>@campeonato.DataCampeonato.ToString("dd/MM/yyyy")</td>
                                     <td>@listaStatusCampeonato[campeonato.IdStatus]</td>
                                 </tr>

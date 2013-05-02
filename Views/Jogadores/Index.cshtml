@@ -44,7 +44,7 @@
                             foreach(JogadoresItem jogador in jogadores)
                             {
                                 <tr>
-                                    <td>@jogador.NomeUsuario</td>
+                                    <td><a href="@Url.Content("~/Jogadores/Detalhes/" + jogador.IdUsuario)">@jogador.NomeUsuario</a></td>
                                     <td>@jogador.ApelidoUsuario</td>
                                     <td>@jogador.Estado</td>
                                     <td>@jogador.Pontos</td>
