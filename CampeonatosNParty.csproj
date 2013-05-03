@@ -104,6 +104,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AuthenticationBasedController.cs" />
     <Compile Include="Controllers\CampeonatosController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -111,6 +112,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Cookie\Cookie.cs" />
+    <Compile Include="Models\Cookie\CookieContext.cs" />
     <Compile Include="Models\Database\Cidade.cs" />
     <Compile Include="Models\Database\Campeonatos.cs" />
     <Compile Include="Models\Database\Classificacao.cs" />
