@@ -1,5 +1,7 @@
-﻿using CampeonatosNParty.Models.Database;
+﻿using CampeonatosNParty.Models.Cookie;
+using CampeonatosNParty.Models.Database;
 using CampeonatosNParty.Models.ViewModel;
+using EixoX.Restrictions;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,7 +12,7 @@ using System.Web.Mvc;
 
 namespace CampeonatosNParty.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : AuthenticationBasedController
     {
         //
         // GET: /Home/
@@ -75,6 +77,57 @@ namespace CampeonatosNParty.Controllers
                     sbReturn.Append(letter);
             }
             return sbReturn.ToString();
+        }
+
+        [HttpGet]
+        public ActionResult Login()
+        {
+            return View (new CampeonatosNParty.Models.StructModel.Login());
+        }
+
+        [HttpPost]
+        public ActionResult Login(CampeonatosNParty.Models.StructModel.Login model)
+        {
+            string senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(model.Senha);
+            if (RestrictionAspect<CampeonatosNParty.Models.StructModel.Login>.Instance.Validate(model))
+            {
+                Usuarios usuario = Usuarios.Select().Where("Email", model.Email).SingleOrDefault();
+                if (usuario != null && !string.IsNullOrEmpty(usuario.Senha))
+                {
+                    if (CampeonatosNParty.Helpers.RegisterHelper.CheckValidPassword(usuario.Senha, model.Senha))
+                    {
+                        //passwords match, saving into cookie
+                        NPartyCookie.UserId = usuario.Id;
+                        NPartyCookie.IsLoggedIn = true;
+                        NPartyDb<Cookie>.Instance.Save(NPartyCookie);
+
+                        string redir = Request.QueryString["redir"];
+
+                        if (string.IsNullOrEmpty(redir))
+                            redir = Url.Content("~/Home/");
+
+                        return Redirect(redir);
+                    }
+                    else
+                    {
+                        ViewData["LoginError"] = "Usuário ou senha inválidos.";
+                    }
+                }
+                else
+                {
+                    ViewData["LoginError"] = "Usuário não registrado.";
+                }
+            }
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Logout()
+        {
+            this.NPartyCookie.IsLoggedIn = false;
+            NPartyDb<Cookie>.Instance.Save(NPartyCookie);
+            return Redirect("~/Home/");
         }
     }
 }

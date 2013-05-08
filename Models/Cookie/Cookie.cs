@@ -60,7 +60,7 @@ namespace CampeonatosNParty.Models.Cookie
             return cookie;
         }
 
-        public Usuarios LogIn(string email, string password)
+        public Usuarios Login(string email, string password)
         {
             Usuarios usuario = null;
 
@@ -70,7 +70,7 @@ namespace CampeonatosNParty.Models.Cookie
                 EixoX.ValidationHelper.IsEmail(usuario.Email))
             {
                 string pwdHash = EixoX.CryptoHelper.Md5Hash(password);
-                usuario = NPartyDb<Usuarios>.Instance.Select().Where("Email", email).And("Password", pwdHash).FirstOrDefault();
+                usuario = NPartyDb<Usuarios>.Instance.Select().Where("Email", email).And("Senha", pwdHash).FirstOrDefault();
                 if (usuario != null)
                 {
                     this.UserId = usuario.Id;
@@ -83,7 +83,7 @@ namespace CampeonatosNParty.Models.Cookie
 
         }
 
-        public void LogOut()
+        public void Logout()
         {
             this.IsLoggedIn = false;
             NPartyDb<Cookie>.Instance.Update(this);

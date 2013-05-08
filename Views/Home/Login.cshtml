@@ -1,0 +1,21 @@
+﻿@model CampeonatosNParty.Models.StructModel.Login
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<div class="row">
+    <div class="span6"></div>
+    <div class="span6">
+        <form class="form-horizontal" method="post">
+            @{
+                EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.Login>.GetInstance(UICulture).Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase));
+            }
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">Login</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

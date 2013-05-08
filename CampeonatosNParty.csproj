@@ -112,6 +112,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\RegistrationHelper.cs" />
     <Compile Include="Models\Cookie\Cookie.cs" />
     <Compile Include="Models\Cookie\CookieContext.cs" />
     <Compile Include="Models\Database\Cidade.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Models\Database\NPartyDb.cs" />
     <Compile Include="Models\Database\NPartyDbModel.cs" />
     <Compile Include="Models\Database\tb_usuarios.cs" />
+    <Compile Include="Models\StructModel\Login.cs" />
     <Compile Include="Models\ViewModel\CampeonatosDetailView.cs" />
     <Compile Include="Models\ViewModel\UsuariosDetailView.cs" />
     <Compile Include="Models\ViewModel\EventosDetailView.cs" />
@@ -173,7 +175,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\StructModel\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -210,6 +211,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Jogadores\Detalhes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

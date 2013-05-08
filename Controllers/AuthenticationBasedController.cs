@@ -29,8 +29,8 @@ namespace CampeonatosNParty.Controllers
                 Cookie npartyCookie = this.NPartyCookie;
                 if (npartyCookie.IsLoggedIn && npartyCookie.UserId > 0)
                 {
-                    this._CurrentUser = Usuarios.WithMember("PersonId", npartyCookie.UserId);
-                    ViewData["CurrentPerson"] = this._CurrentUser;
+                    this._CurrentUser = Usuarios.WithMember("Id", npartyCookie.UserId);
+                    ViewData["CurrentUser"] = this._CurrentUser;
                 }
             }
 

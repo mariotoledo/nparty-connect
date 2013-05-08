@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Campeonatos N-Party";
     int topMenu = Convert.ToInt32(ViewData["TopMenu"]);
+    CampeonatosNParty.Models.Database.Usuarios currentUser = (CampeonatosNParty.Models.Database.Usuarios) ViewData["CurrentUser"];
 }
 
 <html>
@@ -32,9 +33,20 @@
                         <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
                         <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
                     </ul>
-                    <form class="navbar-form pull-right">
-                      <a href="#" class="btn">Login</a>
-                    </form>
+                    @if (currentUser == null)
+                    {
+                        <div class="pull-right">
+                            <a href="@Url.Content("~/Home/Login")">Login</a>
+                        </div>
+                    }
+                    else
+                    {   
+                        <div class="pull-right">
+                            Olá <a href="@Url.Content("/Home")">@(currentUser.Nome)</a>
+                            <span>|</span>
+                            <a href="@Url.Content("~/Home/Logout")">Logout</a>
+                        </div>
+                    }
                 </div>
                 <!--/.nav-collapse -->
             </div>
