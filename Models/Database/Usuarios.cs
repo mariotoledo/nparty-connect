@@ -35,6 +35,8 @@ namespace CampeonatosNParty.Models.Database
         public string Email { get; set; }
 
         [DatabaseColumn]
+        [UISingleline]
+        [Required]
         public DateTime Nascimento;
 
         [DatabaseColumn]
@@ -44,6 +46,7 @@ namespace CampeonatosNParty.Models.Database
         public int Id_Estado { get; set; }
 
         [DatabaseColumn]
+        [UISingleline]
         public string Telefone { get; set; }
 
         [DatabaseColumn]
@@ -55,6 +58,7 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn]
         [MaxLength(255)]
         [UISingleline]
+        [Required]
         public string Senha { get; set; }
 
         [DatabaseColumn]

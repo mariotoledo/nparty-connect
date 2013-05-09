@@ -1,0 +1,29 @@
+﻿@model CampeonatosNParty.Models.Database.Usuarios
+@{
+    ViewBag.Title = "Registrar";
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios> presenter = EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios>.GetInstance(1046);
+    bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
+}
+
+<h2>Criar uma conta</h2>
+<p>Preencha os campos abaixo corretamente, e clique em "Cadastrar" para prosseguir com o cadastro.</p>
+<form class="form-horizontal" method="post">
+    <div class="row">
+        <div class="span6">
+            <h4>Informações pessoais</h4>
+            @{presenter["Nome"].Render(this.Output, Model, validate);}
+            @{presenter["Apelido"].Render(this.Output, Model, validate);}
+            @{presenter["Telefone"].Render(this.Output, Model, validate);}
+            @{presenter["Nascimento"].Render(this.Output, Model, validate);}
+        </div>
+        <div class="span6">
+            <h4>Informações da conta</h4>
+            @{presenter["Email"].Render(this.Output, Model, validate);}
+            @{presenter["Senha"].Render(this.Output, Model, validate);}
+            <div class="control-group">
+                <label for="ConfirmacaoSenha" class="control-label">Confirme sua senha</label><div class="controls">
+                <input type="text" name="ConfirmacaoSenha" id="ConfirmacaoSenha" value="" placeholder=""></div>
+            </div>
+        </div>
+    </div>
+</form>

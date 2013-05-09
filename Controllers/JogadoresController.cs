@@ -35,5 +35,11 @@ namespace CampeonatosNParty.Controllers
             CampeonatosNParty.Models.ViewModel.UsuariosDetailView view = new CampeonatosNParty.Models.ViewModel.UsuariosDetailView(id.Value);
             return View(view);
         }
+
+        [HttpGet]
+        public ActionResult Registrar()
+        {
+            return View(new CampeonatosNParty.Models.Database.Usuarios());
+        }
     }
 }

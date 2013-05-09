@@ -62,7 +62,7 @@ namespace CampeonatosNParty.Controllers
         {
             HttpCookie npartyCookie = NPartyHttpCookie;
             if (npartyCookie == null)
-                npartyCookie = new HttpCookie("Glambox");
+                npartyCookie = new HttpCookie("NParty");
 
             npartyCookie.Expires = DateTime.Today.AddYears(10);
             npartyCookie["cid"] = id;

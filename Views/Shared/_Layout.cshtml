@@ -16,6 +16,7 @@
     </style>
     <link rel="stylesheet" type="text/css" href="@Url.Content("~/Static/css/responsive.css")" />
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
 </head>
 <body>
     <div class="navbar navbar-fixed-top">
@@ -33,20 +34,23 @@
                         <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
                         <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
                     </ul>
-                    @if (currentUser == null)
-                    {
-                        <div class="pull-right">
-                            <a href="@Url.Content("~/Home/Login")">Login</a>
-                        </div>
-                    }
-                    else
-                    {   
-                        <div class="pull-right">
-                            Olá <a href="@Url.Content("/Home")">@(currentUser.Nome)</a>
-                            <span>|</span>
-                            <a href="@Url.Content("~/Home/Logout")">Logout</a>
-                        </div>
-                    }
+                    <ul class="nav pull-right">
+                        @if (currentUser == null)
+                        {
+                            <li><a href="@Url.Content("~/Home/Login")">Login</a></li>
+                        }
+                        else
+                        {  
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" id="loginLabel" role="button" data-toggle="dropdown">Olá, @(currentUser.Nome) <b class="caret"></b></a>
+                                <ul class="dropdown-menu" aria-labelledby="loginLabel" role="menu">
+                                  <li><a href="@Url.Content("/Home")">Meu Perfil</a></li>
+                                  <li class="divider"></li>
+                                  <li><a href="@Url.Content("~/Home/Logout")">Logout</a></li>
+                                </ul>
+                            </li>  
+                        }
+                    </ul>
                 </div>
                 <!--/.nav-collapse -->
             </div>
