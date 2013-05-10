@@ -57,11 +57,30 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         [MaxLength(255)]
-        [UISingleline]
+        [UIPassword]
         [Required]
         public string Senha { get; set; }
 
         [DatabaseColumn]
         public int IdOriginal { get; set; }
+
+        [DatabaseColumn]
+        [UISingleline]
+        [MaxLength(255)]
+        public string UrlFotoPerfil { get; set; }
+
+        [DatabaseColumn]
+        [UISingleline]
+        [MaxLength(50)]
+        public string PsnId { get; set; }
+
+        [DatabaseColumn]
+        [UISingleline]
+        [MaxLength(50)]
+        public string LiveId { get; set; }
+
+        [DatabaseColumn]
+        [UICheckbox]
+        public bool Newsletter { get; set; }
     }
 }

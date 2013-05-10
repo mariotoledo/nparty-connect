@@ -14,7 +14,48 @@
             @{presenter["Nome"].Render(this.Output, Model, validate);}
             @{presenter["Apelido"].Render(this.Output, Model, validate);}
             @{presenter["Telefone"].Render(this.Output, Model, validate);}
-            @{presenter["Nascimento"].Render(this.Output, Model, validate);}
+            <div class="control-group">
+                <label for="BirthdayDay" class="control-label">Data de Nascimento</label>
+                <div class="controls">
+                    <select name="BirthdayDay" class="input-mini">
+                        @for(int i = 1; i <= 31; i++)
+                        {
+                            <option value="@i">@i.ToString()</option>
+                        }
+                    </select>
+                    <select name="BirthdayMonth" class="input-mini">
+                        @for(int i = 1; i <= 12; i++)
+                        {
+                            <option value="@i">@i.ToString()</option>
+                        }
+                    </select>
+                    <select name="BirthdayYear" class="input-small">
+                        @for(int i = 0; i < 100; i++)
+                        {
+                            int year = DateTime.Now.Year - 10 - i;
+                                        
+                            <option value="@year">@year.ToString()</option>
+                        }
+                    </select>
+                </div>
+            </div>
+           <label class="control-label" for="Id_Estado">Estado</label>
+            <div class="controls">
+                <select name="Id_Estado" id="Id_Estado" onchange="loadCities(this.value)">
+                    <option value="">Selecione</option>
+                    @foreach (CampeonatosNParty.Models.Database.Estado item in CampeonatosNParty.Models.Database.Estado.Select().OrderBy("Sigla"))
+                    {
+                        <option value="@item.EstadoId">@item.Sigla</option>
+                    }
+                </select>
+            </div>
+            <br />
+            <label class="control-label" for="Id_Cidade">Cidade</label>
+            <div class="controls">
+                <select name="Id_Cidade" id="Id_Cidade">
+                    <option value="">Selecione</option>
+                </select>
+            </div>
         </div>
         <div class="span6">
             <h4>Informações da conta</h4>
@@ -22,8 +63,45 @@
             @{presenter["Senha"].Render(this.Output, Model, validate);}
             <div class="control-group">
                 <label for="ConfirmacaoSenha" class="control-label">Confirme sua senha</label><div class="controls">
-                <input type="text" name="ConfirmacaoSenha" id="ConfirmacaoSenha" value="" placeholder=""></div>
+                <input type="password" name="ConfirmacaoSenha" id="ConfirmacaoSenha" value="" placeholder=""></div>
             </div>
         </div>
     </div>
+    <div class="row">
+        <div class="span12">
+            <h4>Informações adicionais</h4>
+            @{presenter["UrlFotoPerfil"].Render(this.Output, Model, validate);}
+            @{presenter["PsnId"].Render(this.Output, Model, validate);}
+            @{presenter["LiveId"].Render(this.Output, Model, validate);}
+            @{presenter["Newsletter"].Render(this.Output, Model, validate);}
+        </div>
+    </div>
+
 </form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Id_Cidade').prop('disabled', true);
+    });
+    function loadCities(selectedCode) {
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
+            success: function (json) {
+                $('#Id_Cidade').prop('disabled', false);
+                var optionArray = [];
+                optionArray.push('<option value="">Selecione</option>');
+
+                $.each(json, function (i, item) {
+                    if (selectedCode == item.CidadeId) {
+                        optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
+                    }
+                    else {
+                        optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
+                    }
+                });
+
+
+                $('#Id_Cidade').html(optionArray.join(''));
+            }
+        });
+    }
+</script>
