@@ -67,7 +67,7 @@ namespace CampeonatosNParty.Controllers
                         NPartyDb<Usuarios>.Instance.Insert(model);
 
                         NPartyCookie.UserId = model.Id;
-                        NPartyCookie.IsLoggedIn = false;
+                        NPartyCookie.IsLoggedIn = true;
                         NPartyDb<Cookie>.Instance.Update(NPartyCookie);
 
                         return View("BemVindo");
