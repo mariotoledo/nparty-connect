@@ -49,7 +49,9 @@ namespace CampeonatosNParty.Models.Database
         [UISingleline]
         public string Telefone { get; set; }
 
+        [UIHidden]
         [DatabaseColumn]
+        [GetDateGenerator(DataScope.Insert)]
         public DateTime Data_Cadastro { get; set; }
 
         [DatabaseColumn]

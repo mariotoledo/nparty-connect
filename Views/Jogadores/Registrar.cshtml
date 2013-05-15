@@ -8,6 +8,16 @@
 <h2>Criar uma conta</h2>
 <p>Preencha os campos abaixo corretamente, e clique em "Cadastrar" para prosseguir com o cadastro.</p>
 <form class="form-horizontal" method="post">
+    @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterError"]))
+    {
+    <div class="row">
+        <div class="span12">
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterError"]
+            </div>
+        </div>
+    </div>
+    }
     <div class="row">
         <div class="span6">
             <h4>Informações pessoais</h4>
@@ -76,7 +86,12 @@
             @{presenter["Newsletter"].Render(this.Output, Model, validate);}
         </div>
     </div>
-
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <a class="btn" href="@Url.Content("~/Home/Login")">Cancelar</a>
+        </div>
+    </div>
 </form>
 <script type="text/javascript">
     $(document).ready(function () {

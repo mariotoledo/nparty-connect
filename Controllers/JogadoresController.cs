@@ -1,4 +1,5 @@
-﻿using CampeonatosNParty.Models.Database;
+﻿using CampeonatosNParty.Models.Cookie;
+using CampeonatosNParty.Models.Database;
 using CampeonatosNParty.Models.ViewModel;
 using EixoX.Data;
 using System;
@@ -9,7 +10,7 @@ using System.Web.Mvc;
 
 namespace CampeonatosNParty.Controllers
 {
-    public class JogadoresController : Controller
+    public class JogadoresController : AuthenticationBasedController
     {
         //
         // GET: /Jogadores/
@@ -40,6 +41,45 @@ namespace CampeonatosNParty.Controllers
         public ActionResult Registrar()
         {
             return View(new CampeonatosNParty.Models.Database.Usuarios());
+        }
+
+        [HttpPost]
+        public ActionResult Registrar(FormCollection form, Usuarios model)
+        {
+
+            model.Data_Cadastro = DateTime.Now;
+            model.Nivel_Permissao = 0;
+            model.Nascimento = new DateTime(Int32.Parse(form["BirthdayYear"]), Int32.Parse(form["BirthdayMonth"]), Int32.Parse(form["BirthdayDay"]));
+
+            if (EixoX.Restrictions.RestrictionAspect<Usuarios>.Instance.Validate(model))
+            {
+                if (form["Senha"] != form["ConfirmacaoSenha"])
+                {
+                    ViewData["RegisterError"] = "Senha e confirmação diferem!";
+                    return View(model);
+                }
+                else
+                {
+                    Usuarios u = Usuarios.Select().Where("Email", model.Email).SingleOrDefault();
+                    if (u == null)
+                    {
+                        model.Senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(model.Senha);
+                        NPartyDb<Usuarios>.Instance.Insert(model);
+
+                        NPartyCookie.UserId = model.Id;
+                        NPartyCookie.IsLoggedIn = false;
+                        NPartyDb<Cookie>.Instance.Update(NPartyCookie);
+
+                        return View("BemVindo");
+                    }
+                    else
+                    {
+                        ViewData["RegisterError"] = "Este e-mail já está registrado.";
+                        return View(model);
+                    }
+                }
+            }
+            return View(model);
         }
     }
 }
