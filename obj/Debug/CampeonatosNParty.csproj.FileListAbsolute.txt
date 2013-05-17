@@ -38,6 +38,7 @@ C:\Users\User\Documents\GitHub\CampeonatosNParty\obj\Debug\CampeonatosNParty.dll
 C:\Users\User\Documents\GitHub\CampeonatosNParty\obj\Debug\CampeonatosNParty.pdb
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Globalization\EixoX.Globalization.Example.xml
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Restrictions\RestrictionMessages.xml
+C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\Globalization\CampeonatosNParty.Models.Database.Usuarios.xml
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\CampeonatosNParty.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\CampeonatosNParty.pdb
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\EixoX.dll

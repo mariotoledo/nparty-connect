@@ -44,7 +44,7 @@
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" id="loginLabel" role="button" data-toggle="dropdown">Olá, @(currentUser.Nome) <b class="caret"></b></a>
                                 <ul class="dropdown-menu" aria-labelledby="loginLabel" role="menu">
-                                  <li><a href="@Url.Content("/Home")">Meu Perfil</a></li>
+                                  <li><a href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)">Meu Perfil</a></li>
                                   <li class="divider"></li>
                                   <li><a href="@Url.Content("~/Home/Logout")">Logout</a></li>
                                 </ul>

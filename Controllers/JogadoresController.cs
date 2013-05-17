@@ -46,7 +46,6 @@ namespace CampeonatosNParty.Controllers
         [HttpPost]
         public ActionResult Registrar(FormCollection form, Usuarios model)
         {
-
             model.Data_Cadastro = DateTime.Now;
             model.Nivel_Permissao = 0;
             model.Nascimento = new DateTime(Int32.Parse(form["BirthdayYear"]), Int32.Parse(form["BirthdayMonth"]), Int32.Parse(form["BirthdayDay"]));
@@ -55,8 +54,15 @@ namespace CampeonatosNParty.Controllers
             {
                 if (form["Senha"] != form["ConfirmacaoSenha"])
                 {
-                    ViewData["RegisterError"] = "Senha e confirmação diferem!";
-                    return View(model);
+                    ViewData["RegisterError"] = "Senha e confirmação diferem. Por favor, confirme-as novamente.";
+                }
+                else if (string.IsNullOrEmpty(form["Id_Estado"]) || Int32.Parse(form["Id_Estado"]) == 0)
+                {
+                    ViewData["RegisterError"] = "Por favor, selecione o estado onde mora";
+                }
+                else if (string.IsNullOrEmpty(form["Id_Cidade"]) || Int32.Parse(form["Id_Cidade"]) == 0)
+                {
+                    ViewData["RegisterError"] = "Por favor, selecione a cidade onde mora";
                 }
                 else
                 {
@@ -75,7 +81,6 @@ namespace CampeonatosNParty.Controllers
                     else
                     {
                         ViewData["RegisterError"] = "Este e-mail já está registrado.";
-                        return View(model);
                     }
                 }
             }

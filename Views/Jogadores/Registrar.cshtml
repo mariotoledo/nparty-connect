@@ -51,7 +51,7 @@
                     </select>
                 </div>
             </div>
-           <label class="control-label" for="Id_Estado">Estado</label>
+           <label class="control-label" for="Id_Estado">Estado*</label>
             <div class="controls">
                 <select name="Id_Estado" id="Id_Estado" onchange="loadCities(this.value)">
                     <option value="">Selecione</option>
@@ -62,7 +62,7 @@
                 </select>
             </div>
             <br />
-            <label class="control-label" for="Id_Cidade">Cidade</label>
+            <label class="control-label" for="Id_Cidade">Cidade*</label>
             <div class="controls">
                 <select name="Id_Cidade" id="Id_Cidade">
                     <option value="">Selecione</option>
@@ -74,7 +74,7 @@
             @{presenter["Email"].Render(this.Output, Model, validate);}
             @{presenter["Senha"].Render(this.Output, Model, validate);}
             <div class="control-group">
-                <label for="ConfirmacaoSenha" class="control-label">Confirme sua senha</label><div class="controls">
+                <label for="ConfirmacaoSenha" class="control-label">Confirme sua senha*</label><div class="controls">
                 <input type="password" name="ConfirmacaoSenha" id="ConfirmacaoSenha" value="" placeholder=""></div>
             </div>
         </div>

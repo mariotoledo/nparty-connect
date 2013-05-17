@@ -5,6 +5,16 @@
 <h2>Faça o login com sua conta da N-Party</h2>
 <div class="row">
     <div class="span6">
+        @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["LoginError"]))
+        {
+        <div class="row">
+            <div class="span12">
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["LoginError"]
+                </div>
+            </div>
+        </div>
+        }
         <h4>Já possui uma conta?</h4>
         <form method="post" class="form-horizontal">
             @{
