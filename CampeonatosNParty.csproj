@@ -103,7 +103,7 @@
   <ItemGroup>
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AuthenticationBasedController.cs" />
-    <Compile Include="Controllers\CampeonatosController.cs" />
+    <Compile Include="Controllers\JogosController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogadoresController.cs" />
@@ -120,7 +120,6 @@
     <Compile Include="Models\Database\CampeonatoPorEvento.cs" />
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\DetalhesCampeonatoPorEvento.cs" />
-    <Compile Include="Models\Database\CampeonatosDashboardItem.cs" />
     <Compile Include="Models\Database\JogadoresItem.cs" />
     <Compile Include="Models\Database\StatusCampeonato.cs" />
     <Compile Include="Models\Database\TipoEvento.cs" />
@@ -199,7 +198,7 @@
     <Content Include="Views\Eventos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Campeonatos\Index.cshtml" />
+    <Content Include="Views\Jogos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Jogadores\Index.cshtml" />
@@ -208,7 +207,7 @@
     <Content Include="Views\Eventos\Detalhes.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Campeonatos\Detalhes.cshtml" />
+    <Content Include="Views\Jogos\Detalhes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Jogadores\Detalhes.cshtml" />

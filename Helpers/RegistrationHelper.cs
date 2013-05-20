@@ -16,7 +16,7 @@ namespace CampeonatosNParty.Helpers
             {
                 char code;
                 int number = random.Next();
-                if ((number % 2) == 0)
+                if ((number % 3) == 0)
                 {
                     code = (char)(0x30 + ((ushort)(number % 10)));
                 }

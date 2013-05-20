@@ -1,0 +1,73 @@
+﻿@using CampeonatosNParty.Models.Database
+@model EixoX.Data.ClassSelectResult<Jogos>
+@{
+    ViewBag.Title = "Index";
+
+
+    List<Jogos> campeonatosList;
+    if (Model == null)
+    {
+        campeonatosList = NPartyDb<Jogos>.Instance.Select().OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending).ToList();
+    }
+    else
+    {
+        campeonatosList = Model.ToList();
+    }
+    
+    Dictionary<int, string> listaStatusCampeonato = StatusCampeonato.Select().ToDictionary(g => g.Id, f => f.Nome);
+}
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li class="active">Campeonatos</li>
+</ul>
+<div class="page-header">
+  <h1>Campeonatos <small>Confira todos os campeonatos que realizamos</small></h1>
+</div>
+<form method="get" class="form-search pull-right">
+    <div class="input-append">
+        <input type="text" name="filter" placeholder="Procurar por campeonato" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
+        <button class="btn btn-primary">
+            <i class="icon-search icon-white"></i>
+        </button>
+    </div>
+</form>
+@{
+    if(campeonatosList.Count > 0){
+        <div class="row">
+            <div class="span12">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Jogo</th>
+                            <th>Console</th>
+                            <th>Evento</th>
+                            <th>Data</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{
+                            foreach (Jogos campeonato in campeonatosList)
+                            {
+                                <tr>
+                                    <td>@campeonato.CampeonatoNome</td>
+                                    <td>@campeonato.ConsoleNome</td>
+                                    <td><a href="@Url.Content("/Eventos/Detalhes/" + campeonato.IdEvento)">@campeonato.EventoNome</a></td>
+                                    <td>@campeonato.DataCampeonato.ToString("dd/MM/yyyy")</td>
+                                    <td>@listaStatusCampeonato[campeonato.IdStatus]</td>
+                                </tr>
+                            }
+                        }           
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+    else {
+        <div class="row">
+            <div class="span12">
+                <p>Nenhum campeonato foi encontrado.</p>
+            </div>
+        </div>
+    }
+}

@@ -26,7 +26,7 @@ namespace CampeonatosNParty.Models.ViewModel
         {
             get
             {
-                return NPartyDb<CampeonatoPorEvento>.Instance.Select().OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending).Take(5).ToList();
+                return NPartyDb<CampeonatoPorEvento>.Instance.Select().ToList();
             }
         }
     }

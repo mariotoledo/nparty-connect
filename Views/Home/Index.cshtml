@@ -12,15 +12,15 @@
 
 <!-- Example row of columns -->
 <div class="row">
-    <div class="span4">
+    <div class="span5">
         
         <h2>Top 5 Ranking</h2>
         <table class="table table-bordered table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Nick</th>
-                    <th>Pontos</th>
+                    <th class="span2">Nome</th>
+                    <th class="span2">Nick</th>
+                    <th class="span1">Pontos</th>
                 </tr>
             </thead>
             <tbody>
@@ -38,13 +38,14 @@
         </table>
         <p><a class="btn" href="@Url.Content("~/Jogadores")">Ver os detalhes &raquo;</a></p>
     </div>
-    <div class="span4">
+    <div class="span7">
         <h2>Últimos Eventos</h2>
         <table class="table table-bordered table-striped table-condensed">
             <thead>
                 <tr>
-                    <th>Nome</th>
-                    <th>Data</th>
+                    <th class="span2">Nome</th>
+                    <th class="span3">Campeonatos</th>
+                    <th class="span2">Data</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +54,18 @@
                     {
                         <tr>
                             <td><a href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">@evento.Nome</a></td>
+                            <td>
+                                @{
+                                    int i = 0;
+                                    List<CampeonatoPorEvento> campList = Model.campeonatos.Where(x => x.IdEvento == evento.Id).ToList();
+                                    foreach (CampeonatoPorEvento camp in campList)
+                                    {
+                                        string appendConmma = i == campList.Count() - 1 ? "" : ", <br/>";
+                                        i++;
+                                        <a>@camp.NomeJogo</a>@Html.Raw(appendConmma)
+                                    }
+                                }
+                            </td>
                             @{
                                 string dataEvento;
                                 if (evento.DataEventoInicio.CompareTo(evento.DataEventoFim) > 0)
@@ -61,7 +74,7 @@
                                 }
                                 else
                                 {
-                                    dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + evento.DataEventoFim.ToString("dd/MM/yyyy"); ;
+                                    dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + evento.DataEventoFim.ToString("dd/MM/yyyy");
                                 }
                             }
                             <td>@dataEvento</td>
@@ -71,28 +84,5 @@
             </tbody>
         </table>
         <p><a class="btn" href="@Url.Content("~/Eventos")">Ver os detalhes &raquo;</a></p>
-    </div>
-    <div class="span4">
-        <h2>Últimos Campeonatos</h2>
-        <table class="table table-bordered table-striped table-condensed">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Data</th>
-                </tr>
-            </thead>
-            <tbody>
-                 @{
-                     foreach (CampeonatoPorEvento campeonato in Model.campeonatos)
-                    {
-                        <tr>
-                            <td><a href="@Url.Content("~/Campeonatos/Detalhes/" + campeonato.IdCampeonato)">@campeonato.NomeJogo</a></td>
-                            <td>@campeonato.DataCampeonato.ToString("dd/MM/yyyy")</td>
-                        </tr>
-                    }
-                }
-            </tbody>
-        </table>
-        <p><a class="btn" href="@Url.Content("~/Campeonatos")">Ver os detalhes &raquo;</a></p>
     </div>
 </div>
