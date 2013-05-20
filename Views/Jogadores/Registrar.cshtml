@@ -89,6 +89,13 @@
         </div>
     </div>
     <div class="control-group">
+        <label for="BirthdayDay" class="control-label">Digite os caracteres conforme estão na imagem</label>
+        <div class="controls">
+            <img src="@Url.Action("GetCaptchaImage")" /><br /><br />
+            <input type="text" name="Captcha" id="Captcha" placeholder="Digite aqui os caracteres acima" />
+        </div>
+    </div>
+    <div class="control-group">
         <div class="controls">
             <button type="submit" class="btn btn-primary">Cadastrar</button>
             <a class="btn" href="@Url.Content("~/Home/Login")">Cancelar</a>

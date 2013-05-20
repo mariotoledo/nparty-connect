@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Web;
 
@@ -48,6 +49,23 @@ namespace CampeonatosNParty.Helpers
                 return pwdHash.Equals(pwd[2], StringComparison.OrdinalIgnoreCase);
             }
             return false;
+        }
+
+        public static Bitmap GenerateImage(int Width, int Height, string Phrase)
+        {
+            Bitmap CaptchaImg = new Bitmap(Width, Height);
+            Random Randomizer = new Random();
+            Graphics Graphic = Graphics.FromImage(CaptchaImg);
+            Graphic.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.HighQuality;
+            Graphic.TextRenderingHint = System.Drawing.Text.TextRenderingHint.AntiAlias;
+            Graphic.FillRectangle(new SolidBrush(Color.FromArgb(Randomizer.Next(0, 100),
+                Randomizer.Next(0, 100), Randomizer.Next(0, 100))), 0, 0, Width, Height);
+            Graphic.RotateTransform(Randomizer.Next(-15, 5));
+            Graphic.DrawString(Phrase, new Font("Verdana", 30),
+                new SolidBrush(Color.FromArgb(Randomizer.Next(150, 255),
+                Randomizer.Next(150, 255), Randomizer.Next(150, 255))), 15, 35);
+            Graphic.Flush();
+            return CaptchaImg;
         }
     }
 }

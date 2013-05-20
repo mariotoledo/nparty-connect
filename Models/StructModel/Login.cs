@@ -21,5 +21,10 @@ namespace CampeonatosNParty.Models.StructModel
         [UIPassword]
         [MaxLength(50)]
         public string Senha { get; set; }
+
+        [Required]
+        [UIPassword]
+        [MaxLength(50)]
+        public string ConfirmacaoSenha { get; set; }
     }
 }
