@@ -11,20 +11,18 @@ using EixoX.UI;
 namespace CampeonatosNParty.Models.Database
 {
     [DatabaseTable]
-    public class Jogos : NPartyDbModel<Jogos>
+    public class JogosPorConsole : NPartyDbModel<JogosPorConsole>
     {
-        [DatabaseColumn(DatabaseColumnKind.Identity)]
-        public int Id { get; set; }
+        [DatabaseColumn]
+        public int IdJogo { get; set; }
 
         [DatabaseColumn]
-        [Required]
-        public string Nome { get; set; }
+        public string NomeJogo { get; set; }
 
         [DatabaseColumn]
-        [Required]
-        public int IdConsole { get; set; }
+        public string ImagemJogo { get; set; }
 
         [DatabaseColumn]
-        public string ImagemURL { get; set; }
+        public string NomeConsole { get; set; }
     }
 }

@@ -29,5 +29,13 @@ namespace CampeonatosNParty.Models.ViewModel
                 return NPartyDb<CampeonatoPorEvento>.Instance.Select().ToList();
             }
         }
+
+        public EixoX.Data.ClassSelect<JogosPorConsole> jogosPorConsole
+        {
+            get 
+            {
+                return NPartyDb<JogosPorConsole>.Instance.Select();
+            }
+        }
     }
 }

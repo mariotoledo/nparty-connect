@@ -8,7 +8,7 @@
     List<Eventos> eventosList;
     if(Model == null)
     {
-        eventosList = NPartyDb<Eventos>.Instance.Select().OrderBy("DataEventoInicio", EixoX.Data.SortDirection.Descending).ToList();
+        eventosList = NPartyDb<Eventos>.Instance.Select().OrderBy("DataEventoInicio", EixoX.Data.SortDirection.Descending).Page(25, 0).ToList();
     }
     else{
         eventosList = Model.ToList();
@@ -30,47 +30,25 @@
         </button>
     </div>
 </form>
-
 @{
     if(eventosList.Count > 0){
+        
         <div class="row">
             <div class="span12">
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Tipo</th>
-                            <th>Local</th>
-                            <th>Data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @{
-                            foreach (Eventos evento in eventosList)
-                            {
-                                <tr>
-                                    <td><a href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">@evento.Nome</a></td>
-                                    <td>@eventoTipo[evento.TipoEvento]</td>
-                                    <td>@evento.Local</td>
-                                    @{
-                                        string dataEvento;
-                                        if (evento.DataEventoInicio.CompareTo(evento.DataEventoFim) > 0)
-                                        {
-                                            dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy");
-                                        }
-                                        else
-                                        {
-                                            dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + evento.DataEventoFim.ToString("dd/MM/yyyy"); ;
-                                        }
-                                    }
-                                    <td>@dataEvento</td>
-                                </tr>
-                            }
-                        }            
-                    </tbody>
-                </table>
+                <div class="thumbnails">
+                   @{
+                        foreach (Eventos evento in eventosList)
+                        {
+                            <div class="thumbnail span3">
+                                <img data-src="holder.js/300x200" alt="Mario Kart 7" src="/Static/img/gameCovers/mariokart7.jpg">
+				                <h4><a href="@Url.Content("~/Evento/Detalhes/" + evento.Id)">@evento.Nome</a></h4>
+				                <p>Local: @evento.Local</p>
+                            </div>
+                        }
+                    } 
+                </div>
             </div>
-        </div>        
+        </div>
     } else {
         <div class="row">
             <div class="span12">

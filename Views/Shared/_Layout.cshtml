@@ -8,61 +8,57 @@
 <head>
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Static/css/united.css")" />
-    <style>
-        body {
-            padding-top: 60px;
-        }
-    </style>
-    <link rel="stylesheet" type="text/css" href="@Url.Content("~/Static/css/responsive.css")" />
+    <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/nparty.css")" />
+    <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap.min.css")" />
+    <link rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap-responsive.min.css")" />
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
 </head>
 <body>
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container">
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="@Url.Content("~/")">Campeonatos N-Party</a>
-                <div class="nav-collapse collapse">
-                    <ul class="nav">
-                        <li class="@(topMenu == 1 ? "active" : "")"><a href="@Url.Content("~/Eventos/")">Eventos</a></li>
-                        <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Jogos/")">Jogos</a></li>
-                        <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
-                    </ul>
-                    <ul class="nav pull-right">
-                        @if (currentUser == null)
-                        {
-                            <li><a href="@Url.Content("~/Home/Login")">Login</a></li>
-                        }
-                        else
-                        {  
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" id="loginLabel" role="button" data-toggle="dropdown">Olá, @(currentUser.Nome) <b class="caret"></b></a>
-                                <ul class="dropdown-menu" aria-labelledby="loginLabel" role="menu">
-                                  <li><a href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)">Meu Perfil</a></li>
-                                  <li class="divider"></li>
-                                  <li><a href="@Url.Content("~/Home/Logout")">Logout</a></li>
-                                </ul>
-                            </li>  
-                        }
-                    </ul>
-                </div>
-                <!--/.nav-collapse -->
+    <div class="container" id="main-wrapper">
+			<div class="header">
+				<div class="row">
+					<div class="span3">
+						<div class="logo" style="margin: 5px 5px 5px 5px;">
+							<a href="http://www.campeonatos.nparty.com.br"><img src="/Static/img/template/logo.png" style="height: 60px;" /></a>
+						</div>
+					</div>
+					<div class="span9">
+						<div class="nav-collapse collapse">
+							<ul class="nav">
+								<li class="@(topMenu == 1 ? "active" : "")"><a href="@Url.Content("~/Eventos/")">Eventos</a></li>
+                                <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
+                                <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
+							</ul>
+							<ul class="nav" style="float: right;">
+								 @if (currentUser == null)
+                                {
+                                    <li><a href="@Url.Content("~/Home/Login")">Login</a></li>
+                                }
+                                else
+                                {  
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle" id="loginLabel" role="button" data-toggle="dropdown">Olá, @(currentUser.Nome) <b class="caret"></b></a>
+                                        <ul class="dropdown-menu" aria-labelledby="loginLabel" role="menu">
+                                          <li><a href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)">Meu Perfil</a></li>
+                                          <li class="divider"></li>
+                                          <li><a href="@Url.Content("~/Home/Logout")">Logout</a></li>
+                                        </ul>
+                                    </li>  
+                                }
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="main-content">
+                 @RenderBody()
             </div>
-        </div>
-    </div>
-    <div class="container">
-        @RenderBody()
-        <footer>
-            <hr />
-            <p style="float: left;">© N-Party 2013 - www.nparty.com.br</p>
-            <p style="float: right">Idealizado e Projetado por <b>Rafael Farias</b><br />Desenvolvido por <b>Mario Toledo</b></p>
-        </footer>
+            <footer>
+				<hr>
+				<p style="float: left;">© N-Party 2013 - www.nparty.com.br</p>
+				<p style="float: right">Desenvolvido e Desenhado por <b>Mario Toledo</b><br>Idealizado e Projetado por <b>Rafael Farias</b></p>
+			</footer>
     </div>
 </body>
 </html>

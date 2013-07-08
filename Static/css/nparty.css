@@ -1,0 +1,111 @@
+			body {
+				background: url(../img/template/bg.png) fixed rgb(253, 253, 253);
+				color: #333333;
+				margin: 0;
+			}
+			
+			#main-wrapper{
+				box-shadow: rgb(180, 180, 180) 0px 0px 3px; 
+				background-color: #FFF;
+			}
+			
+			.header {
+				background-color: CD2B2B;
+				height: 50px;
+				margin-bottom: 30px;
+				margin-left: -10px;
+				margin-right: -10px;
+			}
+			.nav {
+				position: relative;
+				left: 0;
+				display: block;
+				float: left;
+				margin: 0 10px 0 0;
+			}
+			.nav {
+				margin-bottom: 20px;
+				margin-left: 0;
+				list-style: none;
+			}
+			.nav > li {
+				float: left;
+				line-height: 30px;
+				
+			}
+			.nav > li > a {
+				float: none;
+				padding: 10px 15px 10px;
+				color: #ffffff;
+				text-decoration: none;
+				display: block;
+				font-weight: 600;
+				text-transform: uppercase;
+				font-size: 12px;
+				border-right: 1px solid rgba(255, 255, 255, 0.2);
+				border-left: 1px solid rgba(255, 255, 255, 0.2);
+				text-shadow: 0 1px 0 #ce4213;
+				
+			}
+			.nav > li.active > a {
+				color: #FFF;
+				background-color: #CD2B2B;
+			}
+			
+			.nav > li > a:hover {
+				color: #CD2B2B;
+				background-color: #FFF!important;
+			}
+			
+			a {
+				color: #dd4814;
+				text-decoration: none;
+			}
+			.main-content {
+				background-color: #FFF;
+			}
+			.caption .lead {
+				margin: 0;
+				line-height: 1.25;
+				color: #fff;
+				text-shadow: 0 1px 1px rgba(0,0,0,.4);
+				font-size: 16px;
+				font-weight: 200;
+			}
+			
+			.carousel-caption h1, .carousel-caption .lead {
+				margin: 0;
+				line-height: 1.25;
+				color: #fff;
+				text-shadow: 0 1px 1px rgba(0,0,0,.4);
+			}
+			
+			.carousel-caption .lead{
+				font-size: 16px;
+			}
+			
+			.carousel-control {
+				height: 80px;
+				margin-top: 0;
+				font-size: 50px;
+				text-shadow: 0 1px 1px rgba(0,0,0,.4)!important;
+				background-color: transparent!important;
+				border: 0!important;
+				z-index: 10;
+			}
+			
+			.carousel-caption {
+				background: rgba(0,0,0,0.30);
+			}
+			.content-wrap {
+			}
+			
+			.black{
+				color: #000;
+			}
+			
+			#mainSlider{
+				margin-left: -10px;
+				margin-right: -10px;
+			}
+}
