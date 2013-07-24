@@ -1,6 +1,6 @@
 			body {
 				background: url(../img/template/bg.png) fixed rgb(253, 253, 253);
-				color: #333333;
+				color: #555;
 				margin: 0;
 			}
 			
@@ -10,7 +10,7 @@
 			}
 			
 			.header {
-				background-color: CD2B2B;
+				background-color: #CD2B2B;
 				height: 50px;
 				margin-bottom: 30px;
 				margin-left: -10px;
@@ -61,6 +61,12 @@
 				color: #dd4814;
 				text-decoration: none;
 			}
+
+                a:hover, a.hover {
+                    color: #ff8028;
+                    text-decoration: none;
+                }
+
 			.main-content {
 				background-color: #FFF;
 			}
@@ -101,11 +107,14 @@
 			}
 			
 			.black{
-				color: #000;
+				color: #555;
 			}
 			
 			#mainSlider{
 				margin-left: -10px;
 				margin-right: -10px;
 			}
+
+a.thumbnail p, a.thumbnail:hover p {
+    color: #555;
 }

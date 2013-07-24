@@ -35,18 +35,20 @@
         
         <div class="row">
             <div class="span12">
-                <div class="thumbnails">
+                <ul class="thumbnails">
                    @{
                         foreach (Eventos evento in eventosList)
                         {
-                            <div class="thumbnail span3">
-                                <img data-src="holder.js/300x200" alt="Mario Kart 7" src="/Static/img/gameCovers/mariokart7.jpg">
-				                <h4><a href="@Url.Content("~/Evento/Detalhes/" + evento.Id)">@evento.Nome</a></h4>
-				                <p>Local: @evento.Local</p>
-                            </div>
+                            <li class="span3">
+                                <a class="thumbnail" href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">
+                                    <img data-src="holder.js/300x200" alt="Mario Kart 7" src="/Static/img/gameCovers/mariokart7.jpg" />
+				                    <h4>@evento.Nome</h4>
+				                    <p>Local: @evento.Local</p>
+                                </a>
+                            </li>
                         }
                     } 
-                </div>
+                </ul>
             </div>
         </div>
     } else {
