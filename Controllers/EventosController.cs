@@ -25,7 +25,7 @@ namespace CampeonatosNParty.Controllers
 
             ClassSelect<Eventos> search = Eventos.Search(Request.QueryString["filter"]);
             search.Page(25, page);
-            search.OrderBy("Nome");
+            search.OrderBy("DataEventoInicio", SortDirection.Descending);
 
             result = search.ToResult();
 

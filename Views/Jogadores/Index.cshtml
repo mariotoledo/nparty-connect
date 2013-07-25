@@ -12,6 +12,9 @@
     {
         jogadores = Model.ToList();
     }
+
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+    string filter = Request.QueryString["filter"] != null ? "filter=" + Request.QueryString["filter"] : "";
 }
 
 <ul class="breadcrumb">
@@ -59,6 +62,19 @@
                 </table>
             </div>
         </div>
+        if(Model.HasPreviousPages || Model.HasMorePages)
+        {
+            @Html.Raw("<div class=\"paginationButton\">");
+            if(Model.HasPreviousPages)
+            {
+                <a class="pull-left btn btn-primary" href="/Jogadores/?page=@(currentPage - 1)@filter">Página anterior <i class="icon-chevron-left icon-white"></i></a>
+            }
+            if(Model.HasMorePages)
+            {
+                <a class="pull-right btn btn-primary" href="/Jogadores/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+            }
+            @Html.Raw("</div>");
+        }
     }
     else{
         <div class="row">

@@ -13,6 +13,9 @@
     else{
         eventosList = Model.ToList();
     }
+
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+    string filter = Request.QueryString["filter"] != null ? "filter=" + Request.QueryString["filter"] : "";
 }
 
 <ul class="breadcrumb">
@@ -22,17 +25,20 @@
 <div class="page-header">
   <h1>Eventos <small>Confira todos os eventos que participamos</small></h1>
 </div>
-<form method="get" class="form-search pull-right">
-    <div class="input-append">
-        <input type="text" name="filter" placeholder="Procurar por evento" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
-        <button class="btn btn-primary">
-            <i class="icon-search icon-white"></i>
-        </button>
+<div class="row">
+    <div class="span12">
+    <form method="get" class="form-search pull-right">
+        <div class="input-append">
+            <input type="text" name="filter" placeholder="Procurar por evento" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
+            <button class="btn btn-primary">
+                <i class="icon-search icon-white"></i>
+            </button>
+        </div>
+    </form>
     </div>
-</form>
+</div>
 @{
     if(eventosList.Count > 0){
-        
         <div class="row">
             <div class="span12">
                 <ul class="thumbnails">
@@ -43,7 +49,21 @@
                                 <a class="thumbnail" href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">
                                     <img data-src="holder.js/300x200" alt="Mario Kart 7" src="/Static/img/gameCovers/mariokart7.jpg" />
 				                    <h4>@evento.Nome</h4>
-				                    <p>Local: @evento.Local</p>
+				                    <div class="textDescription">
+                                        @if(!string.IsNullOrEmpty(evento.Local))
+                                        {
+                                            <div><b>Local:</b> @evento.Local</div>
+                                        }
+                                        @if(evento.DataEventoInicio != null && evento.DataEventoInicio != DateTime.MinValue)
+                                        {
+                                            <div><b>Data:</b> @evento.DataEventoInicio.ToString("dd/MM/yyyy")
+                                            @if (evento.DataEventoFim != null && evento.DataEventoFim != DateTime.MinValue)
+                                            {
+                                                <span>a @evento.DataEventoFim.ToString("dd/MM/yyyy")</span>
+                                            }
+                                            </div>
+                                        }
+				                    </div>
                                 </a>
                             </li>
                         }
@@ -51,6 +71,19 @@
                 </ul>
             </div>
         </div>
+        if(Model.HasPreviousPages || Model.HasMorePages)
+        {
+            @Html.Raw("<div class=\"paginationButton\">");
+            if(Model.HasPreviousPages)
+            {
+                <a class="pull-left btn btn-primary" href="/Jogadores/?page=@(currentPage - 1)@filter">Página anterior <i class="icon-chevron-left icon-white"></i></a>
+            }
+            if(Model.HasMorePages)
+            {
+                <a class="pull-right btn btn-primary" href="/Jogadores/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+            }
+            @Html.Raw("</div>");
+        }
     } else {
         <div class="row">
             <div class="span12">

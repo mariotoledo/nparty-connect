@@ -102,20 +102,30 @@
                 }
 		    <div id="gameCoverSlider" class="carousel slide">
 			    <div class="carousel-inner">
-                    @foreach (JogosPorConsole[] jogosArray in Model.jogosPorConsole.Segment(5))
-                    {
-                        <div class="@(gameCounter == 0 ? "item active span11" : "item span11")">
-                            @for (int i = 0; i < jogosArray.Length && jogosArray[i] != null; i++)
-                            {
-                                <div class="thumbnail span2">
-						            <img data-src="holder.js/300x200" alt="Mario Kart 7" src="/Static/img/gameCovers/mariokart7.jpg">
-						            <h4><a href="@Url.Content("~/Campeonatos/Detalhes/" + jogosArray[i].IdJogo)">@jogosArray[i].NomeJogo</a></h4>
-						            <p>Console: @jogosArray[i].NomeConsole</p>
-					            </div>
-                            }
-                        </div>
-                        gameCounter++;
-                    }
+                    
+                        @foreach (JogosPorConsole[] jogosArray in Model.jogosPorConsole.Segment(5))
+                        {
+                            <div class="span1" style="margin-left: 0px;"></div>
+                            <div class="@(gameCounter == 0 ? "item active span10" : "item span10")">
+                                <ul class="thumbnails">
+                                @for (int i = 0; i < jogosArray.Length && jogosArray[i] != null; i++)
+                                {
+                                    <li class="span2">
+                                        <a class="thumbnail" href="@Url.Content("~/Campeonatos/Detalhes/" + jogosArray[i].IdJogo)">
+						                    <img data-src="holder.js/300x200" alt="Mario Kart 7" src="/Static/img/gameCovers/mariokart7.jpg">
+						                    <h4>@jogosArray[i].NomeJogo</h4>
+                                            <div class="textDescription">
+						                        <div>Console: @jogosArray[i].NomeConsole</div>
+                                            </div>
+					                    </a>
+                                    </li>
+                                }
+                                </ul>
+                            </div>
+                           <div class="span1"></div>
+                            gameCounter++;
+                        }
+                    
 			    </div>
 			    <a class="left carousel-control black" href="#gameCoverSlider" data-slide="prev"><</a>
 			    <a class="right carousel-control black" href="#gameCoverSlider" data-slide="next">></a>

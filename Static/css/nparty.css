@@ -115,6 +115,41 @@
 				margin-right: -10px;
 			}
 
-a.thumbnail p, a.thumbnail:hover p {
+a.thumbnail .textDescription, a.thumbnail:hover .textDescription, a.thumbnail:focus .textDescription {
     color: #555;
+}
+
+.btn-primary {
+	color: #FFFFFF;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #BD361B;
+	*background-color: #BD361B;
+	background-image: -moz-linear-gradient(top, #F70A0A, #BD361B);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#F70A0A), to(#BD361B));
+	background-image: -webkit-linear-gradient(top, #F70A0A, #BD361B);
+	background-image: -o-linear-gradient(top, #F70A0A, #BD361B);
+	background-image: linear-gradient(to bottom, #F70A0A, #BD361B);
+	background-repeat: repeat-x;
+	border-color: #BD361B;
+	border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#F70A0A', endColorstr='#BD361B', GradientType=0);
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
+}
+.btn-primary:hover,
+.btn-primary:active,
+.btn-primary.active,
+.btn-primary.disabled,
+.btn-primary[disabled] {
+	color: #FFFFFF;
+	background-color: #BD361B;
+	*background-color: #003bb3;
+}
+
+a.thumbnail:hover, a.thumbnail:focus {
+    border-color: #ff8028;
+}
+
+.paginationButton {
+    margin-bottom: 20px;
+    height: 30px;
 }
