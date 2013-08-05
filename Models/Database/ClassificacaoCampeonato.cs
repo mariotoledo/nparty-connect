@@ -31,5 +31,8 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public int Pontuacao { get; set; }
+
+        [DatabaseColumn]
+        public string ImagemURL { get; set; }
     }
 }

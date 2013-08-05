@@ -47,7 +47,7 @@
                         {
                             <li class="span3">
                                 <a class="thumbnail" href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">
-                                    <img data-src="holder.js/300x200" alt="Mario Kart 7" src="/Static/img/gameCovers/mariokart7.jpg" />
+                                    <img data-src="holder.js/300x200" alt="@evento.Nome" src="@evento.ImagemURL" />
 				                    <h4>@evento.Nome</h4>
 				                    <div class="textDescription">
                                         @if(!string.IsNullOrEmpty(evento.Local))
@@ -76,7 +76,7 @@
             @Html.Raw("<div class=\"paginationButton\">");
             if(Model.HasPreviousPages)
             {
-                <a class="pull-left btn btn-primary" href="/Jogadores/?page=@(currentPage - 1)@filter">Página anterior <i class="icon-chevron-left icon-white"></i></a>
+                <a class="pull-left btn btn-primary" href="/Jogadores/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
             }
             if(Model.HasMorePages)
             {

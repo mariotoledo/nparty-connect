@@ -44,5 +44,8 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public DateTime DataCadastro { get; set; }
+
+        [DatabaseColumn]
+        public string ImagemURL { get; set; }
     }
 }

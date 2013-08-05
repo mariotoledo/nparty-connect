@@ -66,3 +66,4 @@ C:\Users\Mario\Documents\GitHub\CampeonatosNParty\bin\System.Web.WebPages.Razor.
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\obj\Debug\CampeonatosNParty.csprojResolveAssemblyReference.cache
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\obj\Debug\CampeonatosNParty.dll
 C:\Users\Mario\Documents\GitHub\CampeonatosNParty\obj\Debug\CampeonatosNParty.pdb
+C:\Users\User\Documents\GitHub\CampeonatosNParty\bin\Globalization\CampeonatosNParty.Models.Database.Usuarios.xml

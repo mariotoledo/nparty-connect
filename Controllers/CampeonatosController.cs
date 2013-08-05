@@ -13,16 +13,16 @@ namespace CampeonatosNParty.Controllers
         //
         // GET: /Campeonatos/
 
-        ClassSelectResult<Jogos> result;
+        ClassSelectResult<JogosPorConsole> result;
 
         public ActionResult Index()
         {
             int page = 0;
             int.TryParse(Request.QueryString["page"], out page);
 
-            ClassSelect<Jogos> search = Jogos.Search(Request.QueryString["filter"]);
-            search.Page(25, page);
-            search.OrderBy("Nome");
+            ClassSelect<JogosPorConsole> search = JogosPorConsole.Search(Request.QueryString["filter"]);
+            search.Page(12, page);
+            search.OrderBy("NomeJogo");
 
             result = search.ToResult();
 

@@ -1,7 +1,10 @@
 ﻿@using CampeonatosNParty.Models.Database
-@model EixoX.Data.ClassSelectResult<Jogos>
+@model EixoX.Data.ClassSelectResult<JogosPorConsole>
 @{
     ViewBag.Title = "Index";
+
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+    string filter = Request.QueryString["filter"] != null ? "filter=" + Request.QueryString["filter"] : "";
 }
 <ul class="breadcrumb">
     <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
@@ -19,8 +22,48 @@
     </div>
 </form>
 @{
-    foreach(Jogos jogo in Model.ToList())
-    {
-        
+    if(Model.Count > 0){
+        <div class="row">
+            <div class="span12">
+                <ul class="thumbnails">
+                   @{
+                        foreach (JogosPorConsole jogo in Model.ToList())
+                        {
+                            <li class="span3">
+                                <a class="thumbnail" href="@Url.Content("~/Campeonatos/Detalhes/" + jogo.IdJogo)">
+                                    <img alt="@jogo.NomeJogo" src="@jogo.ImagemJogo" />
+				                    <h4>@jogo.NomeJogo</h4>
+				                    <div class="textDescription">
+                                        @if (!string.IsNullOrEmpty(jogo.NomeConsole))
+                                        {
+                                            <div><b>Console:</b> @jogo.NomeConsole</div>
+                                        }
+				                    </div>
+                                </a>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+        if(Model.HasPreviousPages || Model.HasMorePages)
+        {
+            @Html.Raw("<div class=\"paginationButton\">");
+            if(Model.HasPreviousPages)
+            {
+                <a class="pull-left btn btn-primary" href="/Campeonatos/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+            }
+            if(Model.HasMorePages)
+            {
+                <a class="pull-right btn btn-primary" href="/Campeonatos/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+            }
+            @Html.Raw("</div>");
+        }
+    } else {
+        <div class="row">
+            <div class="span12">
+                <p>Nenhum evento foi encontrado.</p>
+            </div>
+        </div>
     }
 }

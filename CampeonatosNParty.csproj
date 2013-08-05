@@ -160,9 +160,11 @@
     <Content Include="Static\css\bootstrap.css" />
     <Content Include="Static\css\bootstrap.min.css" />
     <Content Include="Static\css\nparty.css" />
+    <Content Include="Static\img\gameCovers\default.jpg" />
     <Content Include="Static\img\gameCovers\mariokart7.jpg" />
     <Content Include="Static\img\glyphicons-halflings-white.png" />
     <Content Include="Static\img\glyphicons-halflings.png" />
+    <Content Include="Static\img\playerPhoto\default.jpg" />
     <Content Include="Static\img\slider\kidicarus.jpg" />
     <Content Include="Static\img\slider\mariokart7.jpg" />
     <Content Include="Static\img\template\bg.png" />

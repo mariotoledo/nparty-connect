@@ -5,38 +5,38 @@
 }
 
 <div class="row">
-	<div class="span12">
-		<div id="mainSlider" class="carousel slide">
-			<div class="carousel-inner">
-			<div class="item active">
-				<img src="/Static/img/slider/mariokart7.jpg" alt="">
-				<div class="container">
-				<div class="carousel-caption">
-					<h1>Mario Kart 7</h1>
-					<p class="lead">O Campeonato de Mario Kart 7 foi acirrado. Não deixe de conferir a classificação</p>
-				</div>
-				</div>
-			</div>
-			<div class="item">
-				<img src="/Static/img/slider/kidicarus.jpg" alt="">
-				<div class="container">
-				<div class="carousel-caption">
-					<h1>Kid Icarus: Uprising</h1>
-					<p class="lead">Muitas batalhas aconteceram em Kid Icarus: Uprising. Confira a classificação.</p>
-				</div>
-				</div>
-			</div>
-			</div>
-			<a class="left carousel-control" href="#mainSlider" data-slide="prev"><</a>
-			<a class="right carousel-control" href="#mainSlider" data-slide="next">></a>
-		</div>
-	</div>
+    <div class="span12">
+        <div id="mainSlider" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/Static/img/slider/mariokart7.jpg" alt="">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Mario Kart 7</h1>
+                            <p class="lead">O Campeonato de Mario Kart 7 foi acirrado. Não deixe de conferir a classificação</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/Static/img/slider/kidicarus.jpg" alt="">
+                    <div class="container">
+                        <div class="carousel-caption">
+                            <h1>Kid Icarus: Uprising</h1>
+                            <p class="lead">Muitas batalhas aconteceram em Kid Icarus: Uprising. Confira a classificação.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="left carousel-control" href="#mainSlider" data-slide="prev"><</a>
+            <a class="right carousel-control" href="#mainSlider" data-slide="next">></a>
+        </div>
+    </div>
 </div>
 <div class="content-wrap">
-	<div class="row">
-		<div class="span6">
-			<h2>Top 5 Ranking</h2>
-			<table class="table table-bordered table-striped table-condensed">
+    <div class="row">
+        <div class="span6">
+            <h2>Top 5 Ranking</h2>
+            <table class="table table-bordered table-striped table-condensed">
                 <thead>
                     <tr>
                         <th class="span2">Nome</th>
@@ -48,88 +48,89 @@
                     @{
                         foreach (Ranking rank in Model.ranking)
                         {
-                            <tr>
-                                <td><a href="@Url.Content("/Jogadores/Detalhes/" + rank.IdUsuario)">@rank.NomeUsuario</a></td>
-                                <td>@rank.ApelidoUsuario</td>
-                                <td>@rank.Pontos</td>
-                            </tr>
+                        <tr>
+                            <td><a href="@Url.Content("/Jogadores/Detalhes/" + rank.IdUsuario)">@rank.NomeUsuario</a></td>
+                            <td>@rank.ApelidoUsuario</td>
+                            <td>@rank.Pontos</td>
+                        </tr>
                         }
                     }
                 </tbody>
             </table>
-		</div>
-		<div class="span6">
-			<h2>Últimos Eventos</h2>
-			<table class="table table-bordered table-striped table-condensed">
-				<thead>
-				<tr>
-					<th class="span3">Nome</th>
-					<th class="span3">Data</th>
-				</tr>
-				</thead>
-				<tbody>
-					<tbody>
+        </div>
+        <div class="span6">
+            <h2>Últimos Eventos</h2>
+            <table class="table table-bordered table-striped table-condensed">
+                <thead>
+                    <tr>
+                        <th class="span3">Nome</th>
+                        <th class="span3">Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tbody>
                         @{
                             foreach (Eventos evento in Model.eventos)
                             {
-                                <tr>
-                                    <td><a href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">@evento.Nome</a></td>
-                                    @{
-                                        string dataEvento;
-                                        if (evento.DataEventoInicio.CompareTo(evento.DataEventoFim) > 0)
-                                        {
-                                            dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy");
-                                        }
-                                        else
-                                        {
-                                            dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + evento.DataEventoFim.ToString("dd/MM/yyyy");
-                                        }
-                                        <td>@dataEvento</td>
-                                    }
-                                </tr>
+                            <tr>
+                                <td><a href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">@evento.Nome</a></td>
+                                @{
+                                string dataEvento;
+                                if (evento.DataEventoInicio.CompareTo(evento.DataEventoFim) > 0)
+                                {
+                                    dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy");
+                                }
+                                else
+                                {
+                                    dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + evento.DataEventoFim.ToString("dd/MM/yyyy");
+                                }
+                                    <td>@dataEvento</td>
+                                }
+                            </tr>
                             }
                         }
                     </tbody>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="row">
-		<div class="span12">
-		    <h2>Campeonatos realizados</h2>
-                @{
-                    int gameCounter = 0;
-                }
-		    <div id="gameCoverSlider" class="carousel slide">
-			    <div class="carousel-inner">
-                    
-                        @foreach (JogosPorConsole[] jogosArray in Model.jogosPorConsole.Segment(5))
-                        {
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <h2>Campeonatos realizados</h2>
+            @{
+                int gameCounter = 0;
+            }
+            <div id="gameCoverSlider" class="carousel slide">
+                <div class="carousel-inner">
+                    @foreach (JogosPorConsole[] jogosArray in Model.jogosPorConsole.Segment(5))
+                    {
+                        <div class="@(gameCounter == 0 ? "item active" : "item")">
                             <div class="span1" style="margin-left: 0px;"></div>
-                            <div class="@(gameCounter == 0 ? "item active span10" : "item span10")">
+                            <div class="span10">
                                 <ul class="thumbnails">
-                                @for (int i = 0; i < jogosArray.Length && jogosArray[i] != null; i++)
-                                {
-                                    <li class="span2">
-                                        <a class="thumbnail" href="@Url.Content("~/Campeonatos/Detalhes/" + jogosArray[i].IdJogo)">
-						                    <img data-src="holder.js/300x200" alt="Mario Kart 7" src="/Static/img/gameCovers/mariokart7.jpg">
-						                    <h4>@jogosArray[i].NomeJogo</h4>
-                                            <div class="textDescription">
-						                        <div>Console: @jogosArray[i].NomeConsole</div>
-                                            </div>
-					                    </a>
-                                    </li>
-                                }
+                                    @for (int i = 0; i < jogosArray.Length && jogosArray[i] != null; i++)
+                                    {
+                                        <li class="span2">
+                                            <a class="thumbnail campeonatoDashboard" href="@Url.Content("~/Campeonatos/Detalhes/" + jogosArray[i].IdJogo)">
+                                                <img data-src="holder.js/300x300" alt="@jogosArray[i].NomeJogo" src="@jogosArray[i].ImagemJogo">
+                                                <h4>@jogosArray[i].NomeJogo</h4>
+                                                <div class="textDescription">
+                                                    <div>Console: @jogosArray[i].NomeConsole</div>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    }
                                 </ul>
                             </div>
-                           <div class="span1"></div>
-                            gameCounter++;
-                        }
-                    
-			    </div>
-			    <a class="left carousel-control black" href="#gameCoverSlider" data-slide="prev"><</a>
-			    <a class="right carousel-control black" href="#gameCoverSlider" data-slide="next">></a>
-		    </div>
-		</div>
-	</div>
+                            <div class="span1"></div>
+                        </div>
+                        gameCounter++;
+
+                    }
+                </div>
+                <a class="left carousel-control black" href="#gameCoverSlider" data-slide="prev"><</a>
+                <a class="right carousel-control black" href="#gameCoverSlider" data-slide="next">></a>
+            </div>
+        </div>
+    </div>
 </div>
