@@ -24,5 +24,8 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public int Pontos { get; set; }
+
+        [DatabaseColumn]
+        public string UrlFotoPerfil { get; set; }
     }
 }

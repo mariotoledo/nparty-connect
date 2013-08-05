@@ -2,6 +2,9 @@
 @model CampeonatosNParty.Models.ViewModel.HomeView
 @{
     ViewBag.Title = "Index";
+    Eventos pastEvent = NPartyDb<Eventos>.Instance.Query(System.Data.CommandType.Text, 
+                                                    "select * from Eventos where DataEventoInicio = (select MAX(DataEventoInicio) from Eventos where DataEventoInicio < @data)",
+                                                    new System.Data.SqlClient.SqlParameter("@data", DateTime.Now.ToString())).First();
 }
 
 <div class="row">
@@ -9,7 +12,7 @@
         <div id="mainSlider" class="carousel slide">
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="/Static/img/slider/mariokart7.jpg" alt="">
+                    <img src="/Static/img/slider/mariokart7.jpg" alt="Mario Kart 7">
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>Mario Kart 7</h1>
@@ -18,7 +21,7 @@
                     </div>
                 </div>
                 <div class="item">
-                    <img src="/Static/img/slider/kidicarus.jpg" alt="">
+                    <img src="/Static/img/slider/kidicarus.jpg" alt="Kid Icarus: Uprising">
                     <div class="container">
                         <div class="carousel-caption">
                             <h1>Kid Icarus: Uprising</h1>
@@ -39,6 +42,7 @@
             <table class="table table-bordered table-striped table-condensed">
                 <thead>
                     <tr>
+                        <th width="32"></th>
                         <th class="span2">Nome</th>
                         <th class="span2">Nick</th>
                         <th class="span1">Pontos</th>
@@ -48,50 +52,50 @@
                     @{
                         foreach (Ranking rank in Model.ranking)
                         {
-                        <tr>
-                            <td><a href="@Url.Content("/Jogadores/Detalhes/" + rank.IdUsuario)">@rank.NomeUsuario</a></td>
-                            <td>@rank.ApelidoUsuario</td>
-                            <td>@rank.Pontos</td>
-                        </tr>
+                            <tr>
+                                <td><img src="@rank.UrlFotoPerfil" width="32"/></td>
+                                <td><a href="@Url.Content("/Jogadores/Detalhes/" + rank.IdUsuario)">@rank.NomeUsuario</a></td>
+                                <td>@rank.ApelidoUsuario</td>
+                                <td>@rank.Pontos</td>
+                            </tr>
                         }
                     }
                 </tbody>
             </table>
         </div>
-        <div class="span6">
-            <h2>Últimos Eventos</h2>
-            <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                    <tr>
-                        <th class="span3">Nome</th>
-                        <th class="span3">Data</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tbody>
-                        @{
-                            foreach (Eventos evento in Model.eventos)
-                            {
-                            <tr>
-                                <td><a href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">@evento.Nome</a></td>
-                                @{
-                                string dataEvento;
-                                if (evento.DataEventoInicio.CompareTo(evento.DataEventoFim) > 0)
-                                {
-                                    dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy");
-                                }
-                                else
-                                {
-                                    dataEvento = evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + evento.DataEventoFim.ToString("dd/MM/yyyy");
-                                }
-                                    <td>@dataEvento</td>
-                                }
-                            </tr>
-                            }
-                        }
-                    </tbody>
-                </tbody>
-            </table>
+        <div class="span3">
+            <h2>Último Evento</h2>
+            <img src="@pastEvent.ImagemURL"/>
+            <h4>@pastEvent.Nome</h4>
+            @{
+                string dataEventoPassado;
+                if (pastEvent.DataEventoInicio.CompareTo(pastEvent.DataEventoFim) > 0)
+                {
+                    dataEventoPassado = pastEvent.DataEventoInicio.ToString("dd/MM/yyyy");
+                }
+                else
+                {
+                    dataEventoPassado = pastEvent.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + pastEvent.DataEventoFim.ToString("dd/MM/yyyy");
+                }
+                <div>Data: @dataEventoPassado</div>
+            }
+        </div>
+        <div class="span3">
+            <h2>Próximo Evento</h2>
+            <img src="@pastEvent.ImagemURL" />
+            <h4>@pastEvent.Nome</h4>
+            @{
+                string dataEventoPassado2;
+                if (pastEvent.DataEventoInicio.CompareTo(pastEvent.DataEventoFim) > 0)
+                {
+                    dataEventoPassado2 = pastEvent.DataEventoInicio.ToString("dd/MM/yyyy");
+                }
+                else
+                {
+                    dataEventoPassado2 = pastEvent.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + pastEvent.DataEventoFim.ToString("dd/MM/yyyy");
+                }
+                <div>Data: @dataEventoPassado2</div>
+            }
         </div>
     </div>
     <div class="row">
