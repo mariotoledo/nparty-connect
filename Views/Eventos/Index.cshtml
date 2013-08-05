@@ -41,39 +41,47 @@
     if(eventosList.Count > 0){
         <div class="row">
             <div class="span12">
-                <ul class="thumbnails">
                    @{
-                        foreach (Eventos evento in eventosList)
+                        foreach (Eventos[] eventosArray in eventosList.Segment(4))
                         {
-                            <li class="span3">
-                                <a class="thumbnail" href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">
-                                    <img data-src="holder.js/300x200" alt="@evento.Nome" src="@evento.ImagemURL" />
-				                    <h4>@evento.Nome</h4>
-				                    <div class="textDescription">
-                                        @if(!string.IsNullOrEmpty(evento.Local))
-                                        {
-                                            <div><b>Local:</b> @evento.Local</div>
-                                        }
-                                        @if(evento.DataEventoInicio != null && evento.DataEventoInicio != DateTime.MinValue)
-                                        {
-                                            <div><b>Data:</b> @evento.DataEventoInicio.ToString("dd/MM/yyyy")
-                                            @if (evento.DataEventoFim != null && evento.DataEventoFim != DateTime.MinValue)
-                                            {
-                                                <span>a @evento.DataEventoFim.ToString("dd/MM/yyyy")</span>
-                                            }
-                                            </div>
-                                        }
-				                    </div>
-                                </a>
-                            </li>
+                            <ul class="thumbnails">
+                                @foreach (Eventos evento in eventosArray)
+                                {
+                                    if(evento != null)
+                                    {
+                                        <li class="span3">
+                                            <a class="thumbnail" href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">
+                                                <img data-src="holder.js/300x200" alt="@evento.Nome" src="@evento.ImagemURL" />
+				                                <h4>@evento.Nome</h4>
+				                                <div class="textDescription">
+                                                    @if(!string.IsNullOrEmpty(evento.Local))
+                                                    {
+                                                        <div><b>Local:</b> @evento.Local</div>
+                                                    }
+                                                    @if(evento.DataEventoInicio != null && evento.DataEventoInicio != DateTime.MinValue)
+                                                    {
+                                                        <div><b>Data:</b> @evento.DataEventoInicio.ToString("dd/MM/yyyy")
+                                                        @if (evento.DataEventoFim != null && evento.DataEventoFim != DateTime.MinValue)
+                                                        {
+                                                            <span>a @evento.DataEventoFim.ToString("dd/MM/yyyy")</span>
+                                                        }
+                                                        </div>
+                                                    }
+				                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
                         }
                     } 
-                </ul>
             </div>
         </div>
         if(Model.HasPreviousPages || Model.HasMorePages)
         {
             @Html.Raw("<div class=\"paginationButton\">");
+            filter = string.IsNullOrEmpty(filter) ? filter : "&" + filter;
+            
             if(Model.HasPreviousPages)
             {
                 <a class="pull-left btn btn-primary" href="/Jogadores/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>

@@ -15,6 +15,7 @@
 
     int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
     string filter = Request.QueryString["filter"] != null ? "filter=" + Request.QueryString["filter"] : "";
+   
 }
 
 <ul class="breadcrumb">
@@ -76,8 +77,11 @@
         if(Model.HasPreviousPages || Model.HasMorePages)
         {
             @Html.Raw("<div class=\"paginationButton\">");
+            filter = string.IsNullOrEmpty(filter) ? filter : "&" + filter;
+            
             if(Model.HasPreviousPages)
             {
+                
                 <a class="pull-left btn btn-primary" href="/Jogadores/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
             }
             if(Model.HasMorePages)
