@@ -24,7 +24,7 @@ namespace CampeonatosNParty.Controllers
             int.TryParse(Request.QueryString["page"], out page);
 
             ClassSelect<JogadoresItem> search = JogadoresItem.Search(Request.QueryString["filter"]);
-            search.Page(2, page);
+            search.Page(18, page);
             search.OrderBy("NomeUsuario");
 
             result = search.ToResult();

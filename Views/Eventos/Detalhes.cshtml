@@ -60,30 +60,39 @@
             </div>
             <div class="span8">
                 <h3>Classificação dos campeonatos</h3>
-                <hr />
                 @{
                     if (Model.detalheCampeonatos.Count > 0)
                     {
-                        int lastCampId = Model.detalheCampeonatos.First().IdCampeonato;
-                        <h4>@Model.detalheCampeonatos.First().Nome <small>@Model.detalheCampeonatos.First().DataCampeonato.ToString("dd/MM/yyyy")</small></h4>
-                        @Html.Raw("<table class=\"table table-bordered table-hover\" width=\"100%\"><thead><tr><th>Nome do Jogador</th><th>Apelido</th><th>Pontos</th></tr></thead>");
-                        foreach (CampeonatosNParty.Models.Database.DetalhesCampeonatoPorEvento camp in Model.detalheCampeonatos)
+                        foreach (List<CampeonatosNParty.Models.Database.DetalhesCampeonatoPorEvento> campeonatos in Model.detalheCampeonatos)
                         {
-                            if (camp.IdCampeonato != lastCampId)
-                            {
-                                lastCampId = camp.IdCampeonato;
-                                @Html.Raw("</table>");
-                                <h4>@camp.Nome <small>@camp.DataCampeonato.ToString("dd/MM/yyyy")</small></h4>
-                                @Html.Raw("<table class=\"table table-bordered table-hover\" width=\"100%\"><thead><tr><th>Nome do Jogador</th><th>Apelido</th><th>Pontos</th></tr></thead>");
-                                
-                            }
-                                <tr>
-                                    <td><a href="@Url.Content("/Jogadores/Detalhes/" + camp.IdUsuario)">@camp.NomeJogador</a></td>
-                                    <td>@camp.ApelidoJogador</td>
-                                    <td>@camp.Pontuacao</td>
-                                </tr>
+                            <div class="row">
+                                <div class="span2">
+                                    <img src="@campeonatos.First().ImagemJogo" />
+                                    <h4>@campeonatos.First().Nome <small>@campeonatos.First().DataCampeonato.ToString("dd/MM/yyyy")</small></h4>
+                                </div>
+                                <div class="span6">
+                                    <table class="table table-bordered table-hover" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th width="32"></th>
+                                                <th class="span2">Nome do Jogador</th>
+                                                <th class="span2">Apelido</th>
+                                                <th class="span1">Pontos</th>
+                                            </tr>
+                                        </thead>
+                                        @foreach (CampeonatosNParty.Models.Database.DetalhesCampeonatoPorEvento camp in campeonatos)
+                                        {
+                                            <tr>
+                                                <td><img src="@camp.ImagemJogador" width="32"/></td>
+                                                <td><a href="@Url.Content("/Jogadores/Detalhes/" + camp.IdUsuario)">@camp.NomeJogador</a></td>
+                                                <td>@camp.ApelidoJogador</td>
+                                                <td>@camp.Pontuacao</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </div>
+                            </div>
                         }
-                         @Html.Raw("</table>");
                     }
                 }
             </div>

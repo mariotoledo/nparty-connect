@@ -39,5 +39,11 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public DateTime DataCampeonato { get; set; }
+
+        [DatabaseColumn]
+        public string ImagemJogo { get; set; }
+
+        [DatabaseColumn]
+        public string ImagemJogador { get; set; }
     }
 }
