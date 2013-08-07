@@ -65,13 +65,13 @@
                     {
                         foreach (List<CampeonatosNParty.Models.Database.DetalhesCampeonatoPorEvento> campeonatos in Model.detalheCampeonatos)
                         {
-                            <div class="row">
+                            <div class="row" style="margin-top: 20px;">
                                 <div class="span2">
                                     <img src="@campeonatos.First().ImagemJogo" />
                                     <h4>@campeonatos.First().Nome <small>@campeonatos.First().DataCampeonato.ToString("dd/MM/yyyy")</small></h4>
                                 </div>
                                 <div class="span6">
-                                    <table class="table table-bordered table-hover" width="100%">
+                                    <table class="table table-bordered table-hover  table-condensed" width="100%">
                                         <thead>
                                             <tr>
                                                 <th width="32"></th>
