@@ -12,16 +12,18 @@
             <li><a href="@Url.Content("/Eventos")">Eventos</a> <span class="divider">/</span></li>
             <li class="active">@Model.evento.Nome</li>
         </ul>
+        <div class="page-header">
+          <h2>@Model.evento.Nome</h2>
+        </div>
         <div class="row">
             <div class="span4">
                 <div class="eventoDetail">
-                    <h2>@Model.evento.Nome</h2>
-                    <img src="@Model.evento.ImagemURL" alt="@Model.evento.Nome" />
+                    <h3>Detalhes do jogo</h3>
+                    <img src="@Model.evento.ImagemURL" alt="@Model.evento.Nome" style="margin-bottom: 20px;"/>
                 </div>
                 @{
                     if(cidade != null && !string.IsNullOrEmpty(cidade.Nome))
                     {
-                        <br />
                         string cidadeSigla = estado != null && !string.IsNullOrEmpty(estado.Sigla) ? cidade.Nome + " - " + estado.Sigla : cidade.Nome;
                         <div class="row">
                             <div class="span1"><b>Cidade</b></div>
@@ -68,7 +70,7 @@
                             <div class="row" style="margin-top: 20px;">
                                 <div class="span2">
                                     <img src="@campeonatos.First().ImagemJogo" />
-                                    <h4>@campeonatos.First().Nome <small>@campeonatos.First().DataCampeonato.ToString("dd/MM/yyyy")</small></h4>
+                                    <h4>@campeonatos.First().NomeJogo <small>@campeonatos.First().DataCampeonato.ToString("dd/MM/yyyy")</small></h4>
                                 </div>
                                 <div class="span6">
                                     <table class="table table-bordered table-hover  table-condensed" width="100%">

@@ -2,73 +2,65 @@
 @{
     if(Model != null)
     {
-        ViewBag.Title = "Detalhes do evento";
+        ViewBag.Title = "Detalhes do jogo";
+        CampeonatosNParty.Models.Database.Consoles console = CampeonatosNParty.Models.Database.Consoles.WithIdentity(Model.jogo.IdConsole);
         <ul class="breadcrumb">
             <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
             <li><a href="@Url.Content("/Campeonatos")">Campeonatos</a> <span class="divider">/</span></li>
-            <li class="active">@Model.campeonato.NomeJogo</li>
+            <li class="active">@Model.jogo.Nome</li>
         </ul>
         <div class="page-header">
-          <h2>@Model.campeonato.NomeJogo</h2>
+          <h2>@Model.jogo.Nome</h2>
         </div>
         <div class="row">
-            <div class="span6">
-                <h3>Detalhes do campeonato</h3>
-                <hr />
+            <div class="span4">
+                <h3>Detalhes do jogo</h3>
+                <img src="@Model.jogo.ImagemURL" alt="@Model.jogo.Nome" style="margin-bottom: 20px;"/>
             @{
-                if(Model.campeonato.DataCampeonato != null)
+                if (console != null)
                 {
                     <div class="row">
-                        <div class="span1"><b>Data</b></div>
-                        <div class="span2">@Model.campeonato.DataCampeonato.ToString("dd/MM/yyyy") as @Model.campeonato.DataCampeonato.ToString("HH:mm")</div>
-                    </div>
-                }
-
-                if (!string.IsNullOrEmpty(Model.campeonato.NomeEvento))
-                {
-                    <div class="row">
-                        <div class="span1"><b>Evento</b></div>
-                        <div class="span2"><a href="@Url.Content("/Eventos/Detalhes/" + Model.campeonato.IdEvento)">@Model.campeonato.NomeEvento</a></div>
-                    </div>
-                }
-
-                List<CampeonatosNParty.Models.Database.Inscricao> inscricaoLista = CampeonatosNParty.Models.Database.Inscricao.Select().Where("IdCampeonato", Model.campeonato.IdCampeonato).ToList();
-                if (inscricaoLista.Count > 0)
-                {
-                    <div class="row">
-                        <div class="span1"><b>Número de inscritos</b></div>
-                        <div class="span2">@inscricaoLista.Count</div>
+                        <div class="span1"><b>Console</b></div>
+                        <div class="span2">@console.Nome</div>
                     </div>
                 }
             }
             </div>
-            <div class="span6">
-                <h3>Classificação dos campeonato</h3>
-                <hr />
-                @{
-                    if (Model.classificacao.Count > 0)
+            <div class="span8">
+                <h3>Classificação dos campeonatos</h3>
+                 @{
+                    if (Model.detalheCampeonatos.Count > 0)
                     {
-                        <table class="table table-bordered table-hover" width="100%">
-                            <thead>
-                                <tr>
-                                    <th>Colocação</th>
-                                    <th>Nome</th>
-                                    <th>Apelido</th>
-                                    <th>Pontos ganhos</th>
-                                </tr>
-                            </thead>
-                            @{
-                                foreach (CampeonatosNParty.Models.Database.ClassificacaoCampeonato classificacao in Model.classificacao)
-                                {
-                                    <tr>
-                                        <td>@classificacao.NumeroClassificacao</td>
-                                        <td><a href="@Url.Content("/Jogadores/Detalhes/" + classificacao.IdUsuario)">@classificacao.Nome</a></td>
-                                        <td>@classificacao.Apelido</td>
-                                        <td>@classificacao.Pontuacao</td>
-                                    </tr>
-                                }
-                            }
-                        </table>
+                        foreach (List<CampeonatosNParty.Models.Database.DetalhesCampeonatoPorEvento> campeonatos in Model.detalheCampeonatos)
+                        {
+                            <div class="row" style="margin-top: 20px;">
+                                <div class="span2">
+                                    <img src="@campeonatos.First().ImagemEvento" />
+                                    <h4>@campeonatos.First().EventoNome <small>@campeonatos.First().DataCampeonato.ToString("dd/MM/yyyy")</small></h4>
+                                </div>
+                                <div class="span6">
+                                    <table class="table table-bordered table-hover  table-condensed" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th width="32"></th>
+                                                <th class="span2">Nome do Jogador</th>
+                                                <th class="span2">Apelido</th>
+                                                <th class="span1">Pontos</th>
+                                            </tr>
+                                        </thead>
+                                        @foreach (CampeonatosNParty.Models.Database.DetalhesCampeonatoPorEvento camp in campeonatos)
+                                        {
+                                            <tr>
+                                                <td><img src="@camp.ImagemJogador" width="32"/></td>
+                                                <td><a href="@Url.Content("/Jogadores/Detalhes/" + camp.IdUsuario)">@camp.NomeJogador</a></td>
+                                                <td>@camp.ApelidoJogador</td>
+                                                <td>@camp.Pontuacao</td>
+                                            </tr>
+                                        }
+                                    </table>
+                                </div>
+                            </div>
+                        }
                     }
                 }
             </div>

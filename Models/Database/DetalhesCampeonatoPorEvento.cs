@@ -23,7 +23,13 @@ namespace CampeonatosNParty.Models.Database
         public int IdJogo { get; set; }
 
         [DatabaseColumn]
-        public string Nome { get; set; }
+        public string EventoNome { get; set; }
+
+        [DatabaseColumn]
+        public string ImagemEvento { get; set; }
+
+        [DatabaseColumn]
+        public string NomeJogo { get; set; }
 
         [DatabaseColumn]
         public int IdUsuario { get; set; }

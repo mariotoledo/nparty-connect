@@ -8,20 +8,29 @@ namespace CampeonatosNParty.Models.ViewModel
 {
     public class CampeonatosDetailView
     {
-        public CampeonatoPorEvento campeonato { get; set; }
-        public List<ClassificacaoCampeonato> classificacao { get; set; }
+        public Jogos jogo { get; set; }
+        public List<List<DetalhesCampeonatoPorEvento>> detalheCampeonatos { get; set; }
 
-        public CampeonatosDetailView(int campeonatoId)
+        public CampeonatosDetailView(int jogoId)
         {
-            campeonato = CampeonatoPorEvento.WithMember("IdCampeonato", campeonatoId);
-            if (campeonato == null)
+            jogo = Jogos.WithIdentity(jogoId);
+
+            if (jogo == null)
+                jogo = new Jogos();
+
+            int lastEventId = 0;
+
+            detalheCampeonatos = new List<List<DetalhesCampeonatoPorEvento>>();
+
+            foreach (DetalhesCampeonatoPorEvento detalheCampeonato in DetalhesCampeonatoPorEvento.Select().Where("IdJogo", jogo.Id).OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending))
             {
-                campeonato = new CampeonatoPorEvento();
-                classificacao = new List<ClassificacaoCampeonato>();
-            }
-            else
-            {
-                classificacao = ClassificacaoCampeonato.Select().Where("IdCampeonato", campeonato.IdCampeonato).OrderBy("Pontuacao", EixoX.Data.SortDirection.Descending).ToList();
+                if (lastEventId != detalheCampeonato.IdEvento)
+                {
+                    detalheCampeonatos.Add(new List<DetalhesCampeonatoPorEvento>());
+                    lastEventId = detalheCampeonato.IdEvento;
+                }
+
+                detalheCampeonatos.Last().Add(detalheCampeonato);
             }
         }
     }
