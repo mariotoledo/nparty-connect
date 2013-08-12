@@ -16,7 +16,6 @@ namespace CampeonatosNParty.Controllers
         // GET: /Jogadores/
 
         ClassSelectResult<JogadoresItem> result;
-        static string captcha = "";
 
         public ActionResult Index()
         {
@@ -41,7 +40,7 @@ namespace CampeonatosNParty.Controllers
         [HttpGet]
         public ActionResult Registrar()
         {
-            captcha = CampeonatosNParty.Helpers.RegisterHelper.GetRandWord(5);
+            Session["captcha"] = CampeonatosNParty.Helpers.RegisterHelper.GetRandWord(5);
             return View(new CampeonatosNParty.Models.Database.Usuarios());
         }
 
@@ -66,7 +65,7 @@ namespace CampeonatosNParty.Controllers
                 {
                     ViewData["RegisterError"] = "Por favor, selecione a cidade onde mora";
                 }
-                else if (string.IsNullOrEmpty(form["Captcha"]) || form["Captcha"].ToLower() != captcha.ToLower())
+                else if (string.IsNullOrEmpty(form["Captcha"]) || form["Captcha"].ToLower() != ((string)Session["captcha"]).ToLower())
                 {
                     ViewData["RegisterError"] = "Por favor, digite os caracteres do captcha corretamente";
                 }
@@ -96,8 +95,15 @@ namespace CampeonatosNParty.Controllers
         public FileContentResult GetCaptchaImage()
         {
             System.Drawing.ImageConverter converter = new System.Drawing.ImageConverter();
-            byte[] bytes = (byte[])converter.ConvertTo(CampeonatosNParty.Helpers.RegisterHelper.GenerateImage(200, 100, captcha), typeof(byte[])); 
+            byte[] bytes = (byte[])converter.ConvertTo(CampeonatosNParty.Helpers.RegisterHelper.GenerateImage(200, 100, ((string)Session["captcha"])), typeof(byte[])); 
             return File(bytes, "image/jpeg");
+        }
+
+        [HttpGet]
+        [AuthenticationRequired]
+        public ActionResult EditarMinhasInformacoes()
+        {
+            return View(CurrentUsuario);
         }
     }
 }

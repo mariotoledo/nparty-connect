@@ -2,12 +2,12 @@
 @using EixoX.Html
 @model CampeonatosNParty.Models.Database.Usuarios
 @{
-    ViewBag.Title = "Registrar";
+    ViewBag.Title = "Editar Minhas Informações";
     EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios> presenter = EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios>.GetInstance(1046);
     bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
 }
 
-<h2>Criar uma conta</h2>
+<h2>Editar Minhas Informações</h2>
 <p>Preencha os campos abaixo corretamente, e clique em "Cadastrar" para prosseguir com o cadastro.</p>
 <form class="form-horizontal" method="post">
     @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterError"]))
@@ -23,34 +23,8 @@
     <div class="row">
         <div class="span6">
             <h4>Informações pessoais</h4>
-            @{presenter["Nome"].Render(this.Output, Model, validate);}
             @{presenter["Apelido"].Render(this.Output, Model, validate);}
             @{presenter["Telefone"].Render(this.Output, Model, validate);}
-            <div class="control-group">
-                <label for="BirthdayDay" class="control-label">Data de Nascimento</label>
-                <div class="controls">
-                    <select name="BirthdayDay" class="input-mini">
-                        @for(int i = 1; i <= 31; i++)
-                        {
-                            <option value="@i">@i.ToString()</option>
-                        }
-                    </select>
-                    <select name="BirthdayMonth" class="input-mini">
-                        @for(int i = 1; i <= 12; i++)
-                        {
-                            <option value="@i">@i.ToString()</option>
-                        }
-                    </select>
-                    <select name="BirthdayYear" class="input-small">
-                        @for(int i = 0; i < 100; i++)
-                        {
-                            int year = DateTime.Now.Year - 10 - i;
-                                        
-                            <option value="@year">@year.ToString()</option>
-                        }
-                    </select>
-                </div>
-            </div>
            <label class="control-label" for="Id_Estado">Estado*</label>
             <div class="controls">
                 <select name="Id_Estado" id="Id_Estado" onchange="loadCities(this.value)">
@@ -69,15 +43,6 @@
                 </select>
             </div>
         </div>
-        <div class="span6">
-            <h4>Informações da conta</h4>
-            @{presenter["Email"].Render(this.Output, Model, validate);}
-            @{presenter["Senha"].Render(this.Output, Model, validate);}
-            <div class="control-group">
-                <label for="ConfirmacaoSenha" class="control-label">Confirme sua senha*</label><div class="controls">
-                <input type="password" name="ConfirmacaoSenha" id="ConfirmacaoSenha" value="" placeholder=""></div>
-            </div>
-        </div>
     </div>
     <div class="row">
         <div class="span12">
@@ -86,15 +51,8 @@
         </div>
     </div>
     <div class="control-group">
-        <label for="BirthdayDay" class="control-label">Digite os caracteres conforme estão na imagem</label>
         <div class="controls">
-            <img src="@Url.Action("GetCaptchaImage")" /><br /><br />
-            <input type="text" name="Captcha" id="Captcha" placeholder="Digite aqui os caracteres acima" />
-        </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <button type="submit" class="btn btn-primary">Salvar</button>
             <a class="btn" href="@Url.Content("~/Home/Login")">Cancelar</a>
         </div>
     </div>
