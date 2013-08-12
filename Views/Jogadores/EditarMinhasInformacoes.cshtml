@@ -25,6 +25,7 @@
             <h4>Informações pessoais</h4>
             @{presenter["Apelido"].Render(this.Output, Model, validate);}
             @{presenter["Telefone"].Render(this.Output, Model, validate);}
+            @{presenter["UrlFotoPerfil"].Render(this.Output, Model, validate);}
            <label class="control-label" for="Id_Estado">Estado*</label>
             <div class="controls">
                 <select name="Id_Estado" id="Id_Estado" onchange="loadCities(this.value)">
@@ -43,17 +44,21 @@
                 </select>
             </div>
         </div>
+        <div class="span6">
+            <h4>Informações adicionais</h4>
+            @{presenter["Newsletter"].Render(this.Output, Model, validate);}
+            @{presenter["PsnId"].Render(this.Output, Model, validate);}
+            @{presenter["LiveId"].Render(this.Output, Model, validate);}
+        </div>
     </div>
     <div class="row">
         <div class="span12">
-            <h4>Informações adicionais</h4>
-            @{presenter["Newsletter"].Render(this.Output, Model, validate);}
-        </div>
-    </div>
-    <div class="control-group">
-        <div class="controls">
-            <button type="submit" class="btn btn-primary">Salvar</button>
-            <a class="btn" href="@Url.Content("~/Home/Login")">Cancelar</a>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a class="btn" href="@Url.Content("~/Home/Login")">Cancelar</a>
+                </div>
+            </div>
         </div>
     </div>
 </form>
