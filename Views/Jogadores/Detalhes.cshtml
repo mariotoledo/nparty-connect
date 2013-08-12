@@ -20,9 +20,9 @@
           <h2>@Model.usuario.Nome <small>@apelido</small></h2><br />
         </div>
         <div class="row">
-            <div class="span6">
+            <div class="span3">
                 <h3>Dados Gerais</h3>
-                <hr />
+                <img src="@Model.usuario.UrlFotoPerfil" alt="@Model.usuario.UrlFotoPerfil" style="margin-bottom: 20px;"/>
             @{
                 if (ranking != null)
                 {
@@ -39,12 +39,65 @@
                         <div class="span2">@cidadeSigla</div>
                     </div>
                 }
+                if (!string.IsNullOrEmpty(Model.usuario.LiveId))
+                {
+                    <div class="row">
+                        <div class="span1"><b>Live Id</b></div>
+                        <div class="span2">@Model.usuario.LiveId</div>
+                    </div>
+                }
+                if (!string.IsNullOrEmpty(Model.usuario.PsnId))
+                {
+                    <div class="row">
+                        <div class="span1"><b>Live Id</b></div>
+                        <div class="span2">@Model.usuario.PsnId</div>
+                    </div>
+                }
             }
             </div>
-            <div class="span6">
-                <h3>Histórico de campeonatos participados</h3>
-                <hr />
-                
+            <div class="span8">
+                @{
+                    if(Model.classificacao.Count > 0)
+                    {
+                        <h3>Histórico de campeonatos participados</h3>
+                        int i = 0;
+                    
+                        foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador classificacao in Model.classificacao)
+                        {
+                            if (i == 0)
+                            {
+                                @Html.Raw("<ul class=\"thumbnails\">");
+                            }
+                            @Html.Raw("<li class=\"span2\">");
+                            <a class="thumbnail">
+                                <img data-src="holder.js/300x300" alt="@classificacao.NomeCampeonato" src="@classificacao.ImagemJogoCampeonato" />
+				                <h4>@classificacao.NomeCampeonato</h4>
+				                <div class="textDescription">
+                                    @if (!string.IsNullOrEmpty(classificacao.NomeEvento))
+                                    {
+                                        <div><b>Evento:</b> @classificacao.NomeEvento</div>
+                                    }
+                                    @if (classificacao.DataCampeonato != null)
+                                    {
+                                        <div><b>Data:</b> @classificacao.DataCampeonato.ToString("dd/MM/yyyy")</div>
+                                    }
+                                    @if (classificacao.Pontuacao > 0)
+                                    {
+                                        <div><b>Pontos:</b> @classificacao.Pontuacao</div>
+                                    }
+				                </div>
+                            </a>
+                            @Html.Raw("</li>")
+                            i++;
+
+                            if (classificacao == Model.classificacao.Last() || i == 4)
+                            {
+                                @Html.Raw("</ul>")
+                                i = 0;
+                            }
+                        }
+                    }
+                }
             </div>
         </div>
     }

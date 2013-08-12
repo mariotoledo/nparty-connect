@@ -61,10 +61,10 @@
                 }
             </div>
             <div class="span8">
-                <h3>Classificação dos campeonatos</h3>
                 @{
                     if (Model.detalheCampeonatos.Count > 0)
                     {
+                        <h3>Classificação dos campeonatos</h3>
                         foreach (List<CampeonatosNParty.Models.Database.DetalhesCampeonatoPorEvento> campeonatos in Model.detalheCampeonatos)
                         {
                             <div class="row" style="margin-top: 20px;">

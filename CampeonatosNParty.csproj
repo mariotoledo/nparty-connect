@@ -119,6 +119,7 @@
     <Compile Include="Models\Database\Consoles.cs" />
     <Compile Include="Models\Database\CampeonatoPorEvento.cs" />
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
+    <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
     <Compile Include="Models\Database\JogosPorConsole.cs" />
     <Compile Include="Models\Database\DetalhesCampeonatoPorEvento.cs" />
     <Compile Include="Models\Database\JogadoresItem.cs" />
