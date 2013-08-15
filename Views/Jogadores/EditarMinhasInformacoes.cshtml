@@ -1,9 +1,9 @@
 ﻿@using EixoX.UI
 @using EixoX.Html
-@model CampeonatosNParty.Models.Database.Usuarios
+@model CampeonatosNParty.Models.StructModel.MinhasInformacoes
 @{
     ViewBag.Title = "Editar Minhas Informações";
-    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios> presenter = EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios>.GetInstance(1046);
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.MinhasInformacoes> presenter = EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.MinhasInformacoes>.GetInstance(1046);
     bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
 }
 
@@ -26,21 +26,34 @@
             @{presenter["Apelido"].Render(this.Output, Model, validate);}
             @{presenter["Telefone"].Render(this.Output, Model, validate);}
             @{presenter["UrlFotoPerfil"].Render(this.Output, Model, validate);}
-           <label class="control-label" for="Id_Estado">Estado*</label>
+           <label class="control-label" for="Id_Estado">Estado</label>
             <div class="controls">
                 <select name="Id_Estado" id="Id_Estado" onchange="loadCities(this.value)">
                     <option value="">Selecione</option>
                     @foreach (CampeonatosNParty.Models.Database.Estado item in CampeonatosNParty.Models.Database.Estado.Select().OrderBy("Sigla"))
                     {
-                        <option value="@item.EstadoId">@item.Sigla</option>
+                        string selected = item.EstadoId == Model.Id_Estado ? "selected" : "";
+                        <option @selected value="@item.EstadoId">@item.Sigla</option>
                     }
                 </select>
             </div>
             <br />
-            <label class="control-label" for="Id_Cidade">Cidade*</label>
+            <label class="control-label" for="Id_Cidade">Cidade</label>
             <div class="controls">
                 <select name="Id_Cidade" id="Id_Cidade">
                     <option value="">Selecione</option>
+                    @{
+                        if(Model.Id_Estado > 0)
+                        {
+                            foreach (CampeonatosNParty.Models.Database.Cidade item in CampeonatosNParty.Models.Database.Cidade.Select().OrderBy("Nome"))
+                            {
+                                string selected = item.CidadeId == Model.Id_Cidade ? "selected" : "";
+                                <option @selected value="@item.EstadoId">@item.Nome</option>
+                            }
+                        } else {
+                            <script>$('#Id_Cidade').prop('disabled', true);</script>
+                        }
+                    }
                 </select>
             </div>
         </div>
@@ -63,9 +76,6 @@
     </div>
 </form>
 <script type="text/javascript">
-    $(document).ready(function () {
-        $('#Id_Cidade').prop('disabled', true);
-    });
     function loadCities(selectedCode) {
         $.ajax({
             url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,

@@ -137,6 +137,7 @@
     <Compile Include="Models\Database\NPartyDb.cs" />
     <Compile Include="Models\Database\NPartyDbModel.cs" />
     <Compile Include="Models\Database\tb_usuarios.cs" />
+    <Compile Include="Models\StructModel\MinhasInformacoes.cs" />
     <Compile Include="Models\StructModel\Login.cs" />
     <Compile Include="Models\ViewModel\CampeonatosDetailView.cs" />
     <Compile Include="Models\ViewModel\UsuariosDetailView.cs" />

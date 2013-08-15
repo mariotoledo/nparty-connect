@@ -4,7 +4,7 @@
     ViewBag.Title = "Index";
     Eventos pastEvent = NPartyDb<Eventos>.Instance.Query(System.Data.CommandType.Text, 
                                                     "select * from Eventos where DataEventoInicio = (select MAX(DataEventoInicio) from Eventos where DataEventoInicio < @data)",
-                                                    new System.Data.SqlClient.SqlParameter("@data", DateTime.Now.ToString())).First();
+                                                    new System.Data.SqlClient.SqlParameter("@data", DateTime.Now.ToString("yyyy-MM-dd"))).First();
 }
 
 <div class="row">

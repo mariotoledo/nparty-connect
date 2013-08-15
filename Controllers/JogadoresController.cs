@@ -1,5 +1,6 @@
 ﻿using CampeonatosNParty.Models.Cookie;
 using CampeonatosNParty.Models.Database;
+using CampeonatosNParty.Models.StructModel;
 using CampeonatosNParty.Models.ViewModel;
 using EixoX.Data;
 using System;
@@ -103,7 +104,37 @@ namespace CampeonatosNParty.Controllers
         [AuthenticationRequired]
         public ActionResult EditarMinhasInformacoes()
         {
-            return View(CurrentUsuario);
+            return View(new MinhasInformacoes()
+            {
+                Apelido = CurrentUsuario.Apelido,
+                Telefone = CurrentUsuario.Telefone,
+                UrlFotoPerfil = CurrentUsuario.UrlFotoPerfil,
+                Id_Estado = CurrentUsuario.Id_Estado,
+                Id_Cidade = CurrentUsuario.Id_Cidade,
+                Newsletter = CurrentUsuario.Newsletter,
+                PsnId = CurrentUsuario.PsnId,
+                LiveId = CurrentUsuario.LiveId
+            });
+        }
+
+        [HttpPost]
+        [AuthenticationRequired]
+        public ActionResult EditarMinhasInformacoes(FormCollection form, MinhasInformacoes model)
+        {
+            if (EixoX.Restrictions.RestrictionAspect<MinhasInformacoes>.Instance.Validate(model))
+            {
+                CurrentUsuario.Apelido = model.Apelido;
+                CurrentUsuario.Telefone = model.Telefone;
+                CurrentUsuario.UrlFotoPerfil = model.UrlFotoPerfil;
+                CurrentUsuario.Id_Estado = model.Id_Estado > 0 ? model.Id_Estado : CurrentUsuario.Id_Estado;
+                CurrentUsuario.Id_Cidade = model.Id_Cidade > 0 ? model.Id_Cidade : CurrentUsuario.Id_Cidade;
+                CurrentUsuario.Newsletter = model.Newsletter;
+                CurrentUsuario.PsnId = model.PsnId;
+                CurrentUsuario.LiveId = model.LiveId;
+
+                NPartyDb<Usuarios>.Instance.Update(CurrentUsuario);
+            }
+            return View(model);
         }
     }
 }
