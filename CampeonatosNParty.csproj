@@ -153,6 +153,9 @@
     <Content Include="Globalization\CampeonatosNParty.Models.Database.Usuarios.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Globalization\CampeonatosNParty.Models.StructModel.MinhasInformacoes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />

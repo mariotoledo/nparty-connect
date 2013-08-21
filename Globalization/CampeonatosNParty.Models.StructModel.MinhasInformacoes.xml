@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Globalization>
+  <Aspect culture="1046">
+    <Nome label="Nome*" placeholder="Digite seu nome completo" hint="Digite seu nome completo"></Nome>
+    <Apelido label="Apelido" placeholder="Digite seu apelido" hint="Digite seu apelido (caso tenha)"></Apelido>
+    <Email label="Email*" placeholder="Digite seu email" hint="Digite seu email"></Email>
+    <Telefone label="Telefone" placeholder="Digite seu telefone" hint="Digite seu telefone"></Telefone>
+    <Senha label="Senha*" placeholder="Insira uma senha" hint="Insira uma senha"></Senha>
+    <UrlFotoPerfil label="URL da foto de perfil" placeholder="Url da foto de perfil" hint="Caso deseje, insira uma url para sua foto de perfil. Você pode utilizar a foto de seu Facebook, clicando com botão direito e cima da mesma, e selecionando a opção copiar url da imagem."></UrlFotoPerfil>
+    <PsnId label="Id na PSN" placeholder="Insira seu id da PSN" hint="Se você possui uma conta na PSN, insira seu id no campo acima"></PsnId>
+    <LiveId label="Id na Live" placeholder="Insira seu id da Live" hint="Se você possui uma conta na Live, insira seu id no campo acima"></LiveId>
+    <Newsletter label="Você deseja receber informações dos campeonatos da N-Party em seu email? "></Newsletter>
+  </Aspect>
+  <Aspect culture="1033">
+    <Nome label="Nome*" placeholder="Digite seu nome completo" hint="Digite seu nome completo"></Nome>
+    <Apelido label="Apelido" placeholder="Digite seu apelido" hint="Digite seu apelido (caso tenha)"></Apelido>
+    <Email label="Email*" placeholder="Digite seu email" hint="Digite seu email"></Email>
+    <Telefone label="Telefone" placeholder="Digite seu telefone" hint="Digite seu telefone"></Telefone>
+    <Senha label="Senha*" placeholder="Insira uma senha" hint="Insira uma senha"></Senha>
+    <UrlFotoPerfil label="URL da foto de perfil" placeholder="Url da foto de perfil" hint="Caso deseje, insira uma url para sua foto de perfil. Você pode utilizar a foto de seu Facebook, clicando com botão direito e cima da mesma, e selecionando a opção copiar url da imagem."></UrlFotoPerfil>
+    <PsnId label="Id na PSN" placeholder="Insira seu id da PSN" hint="Se você possui uma conta na PSN, insira seu id no campo acima"></PsnId>
+    <LiveId label="Id na Live" placeholder="Insira seu id da Live" hint="Se você possui uma conta na Live, insira seu id no campo acima"></LiveId>
+    <Newsletter label="Você deseja receber informações dos campeonatos da N-Party em seu email? "></Newsletter>
+  </Aspect>
+</Globalization>

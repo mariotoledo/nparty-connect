@@ -8,7 +8,7 @@
 }
 
 <h2>Editar Minhas Informações</h2>
-<p>Preencha os campos abaixo corretamente, e clique em "Cadastrar" para prosseguir com o cadastro.</p>
+<p>Preencha os campos abaixo corretamente, e clique em "Salvar" para atualizar suas informações.</p>
 <form class="form-horizontal" method="post">
     @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterError"]))
     {
@@ -16,6 +16,16 @@
         <div class="span12">
             <div class="alert alert-error">
                 <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterError"]
+            </div>
+        </div>
+    </div>
+    }
+    @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterSuccess"]))
+    {
+    <div class="row">
+        <div class="span12">
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterSuccess"]
             </div>
         </div>
     </div>
@@ -62,6 +72,11 @@
             @{presenter["Newsletter"].Render(this.Output, Model, validate);}
             @{presenter["PsnId"].Render(this.Output, Model, validate);}
             @{presenter["LiveId"].Render(this.Output, Model, validate);}
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            &nbsp;
         </div>
     </div>
     <div class="row">

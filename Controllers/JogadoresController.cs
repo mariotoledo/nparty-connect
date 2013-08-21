@@ -123,16 +123,30 @@ namespace CampeonatosNParty.Controllers
         {
             if (EixoX.Restrictions.RestrictionAspect<MinhasInformacoes>.Instance.Validate(model))
             {
-                CurrentUsuario.Apelido = model.Apelido;
-                CurrentUsuario.Telefone = model.Telefone;
-                CurrentUsuario.UrlFotoPerfil = model.UrlFotoPerfil;
-                CurrentUsuario.Id_Estado = model.Id_Estado > 0 ? model.Id_Estado : CurrentUsuario.Id_Estado;
-                CurrentUsuario.Id_Cidade = model.Id_Cidade > 0 ? model.Id_Cidade : CurrentUsuario.Id_Cidade;
-                CurrentUsuario.Newsletter = model.Newsletter;
-                CurrentUsuario.PsnId = model.PsnId;
-                CurrentUsuario.LiveId = model.LiveId;
+                if (string.IsNullOrEmpty(form["Id_Estado"]) || Int32.Parse(form["Id_Estado"]) == 0)
+                {
+                    ViewData["RegisterError"] = "Por favor, selecione o estado onde mora";
+                }
+                else if (string.IsNullOrEmpty(form["Id_Cidade"]) || Int32.Parse(form["Id_Cidade"]) == 0)
+                {
+                    ViewData["RegisterError"] = "Por favor, selecione a cidade onde mora";
+                }
+                else
+                {
 
-                NPartyDb<Usuarios>.Instance.Update(CurrentUsuario);
+                    CurrentUsuario.Apelido = model.Apelido;
+                    CurrentUsuario.Telefone = model.Telefone;
+                    CurrentUsuario.UrlFotoPerfil = model.UrlFotoPerfil;
+                    CurrentUsuario.Id_Estado = model.Id_Estado > 0 ? model.Id_Estado : CurrentUsuario.Id_Estado;
+                    CurrentUsuario.Id_Cidade = model.Id_Cidade > 0 ? model.Id_Cidade : CurrentUsuario.Id_Cidade;
+                    CurrentUsuario.Newsletter = model.Newsletter;
+                    CurrentUsuario.PsnId = model.PsnId;
+                    CurrentUsuario.LiveId = model.LiveId;
+
+                    NPartyDb<Usuarios>.Instance.Update(CurrentUsuario);
+
+                    ViewData["RegisterSuccess"] = "Dados atualizados com sucesso.";
+                }
             }
             return View(model);
         }
