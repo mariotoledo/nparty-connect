@@ -101,6 +101,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AuthenticationBasedController.cs" />
     <Compile Include="Controllers\CampeonatosController.cs" />
@@ -201,12 +202,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\csharp-jetfuel\EixoX\EixoX.csproj">
-      <Project>{0a418683-14d0-433f-ba4d-c4919c8069a7}</Project>
-      <Name>EixoX</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Eventos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -236,6 +231,15 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Mario.pubxml" />
     <Content Include="Views\Jogadores\EditarMinhasInformacoes.cshtml" />
+    <Content Include="Views\Admin\Index.cshtml" />
+    <Content Include="Views\Admin\Usuarios.cshtml" />
+    <Content Include="Views\Admin\DetalhesUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\csharp-jetfuel\EixoX\EixoX.csproj">
+      <Project>{0a418683-14d0-433f-ba4d-c4919c8069a7}</Project>
+      <Name>EixoX</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

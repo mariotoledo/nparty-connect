@@ -1,0 +1,83 @@
+﻿@using CampeonatosNParty.Models.Database
+@model EixoX.Data.ClassSelectResult<JogadoresItem>
+@{
+    ViewBag.Title = "Usuarios";
+
+    List<JogadoresItem> jogadores;
+    if (Model == null)
+    {
+        jogadores = NPartyDb<JogadoresItem>.Instance.Select().OrderBy("Pontos", EixoX.Data.SortDirection.Descending).ToList();
+    }
+    else
+    {
+        jogadores = Model.ToList();
+    }
+
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+    string filter = Request.QueryString["filter"] != null ? "filter=" + Request.QueryString["filter"] : "";
+}
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Admin</a> <span class="divider">/</span></li>
+    <li class="active">Usuários</li>
+</ul>
+<div class="page-header">
+  <h1>Usuários</h1>
+</div>
+<form method="get" class="form-search pull-right">
+    <div class="input-append">
+        <input type="text" name="filter" placeholder="Procurar por jogador" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
+        <button class="btn btn-primary">
+            <i class="icon-search icon-white"></i>
+        </button>
+    </div>
+</form>
+@{
+    if (jogadores.Count > 0)
+    {
+        <table class="table table-bordered table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Apelido</th>
+                    <th>Pontos</th>
+                    <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (JogadoresItem jogador in jogadores)
+                {
+                    <tr>
+                        <td><a href="@Url.Content("~/Admin/DetalhesUsuario/" + jogador.IdUsuario)">@jogador.NomeUsuario</a></td>
+                        <td>@jogador.ApelidoUsuario</td>
+                        <td>@jogador.Pontos</td>
+                        <td>@jogador.Estado</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        if(Model.HasPreviousPages || Model.HasMorePages)
+        {
+            @Html.Raw("<div class=\"paginationButton\">");
+            filter = string.IsNullOrEmpty(filter) ? filter : "&" + filter;
+            
+            if(Model.HasPreviousPages)
+            {
+                
+                <a class="pull-left btn btn-primary" href="/Admin/Usuarios/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+            }
+            if(Model.HasMorePages)
+            {
+                <a class="pull-right btn btn-primary" href="/Admin/Usuarios/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+            }
+            @Html.Raw("</div>");
+        }
+    }
+    else
+    {
+        <div class="row">
+            <div class="span12">
+                <p>Nenhum jogador foi encontrado.</p>
+            </div>
+        </div>
+    }
+}

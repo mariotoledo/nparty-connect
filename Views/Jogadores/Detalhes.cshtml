@@ -6,7 +6,7 @@
     
     if(Model != null)
     {
-        ViewBag.Title = "Detalhes do evento";
+        ViewBag.Title = Model.usuario.Nome;
 
         string apelido = string.IsNullOrEmpty(Model.usuario.Apelido) ? "" : "(" + Model.usuario.Apelido + ")";
         
@@ -49,7 +49,7 @@
                 if (!string.IsNullOrEmpty(Model.usuario.PsnId))
                 {
                     <div class="row">
-                        <div class="span1"><b>Live Id</b></div>
+                        <div class="span1"><b>PSN Id</b></div>
                         <div class="span2">@Model.usuario.PsnId</div>
                     </div>
                 }

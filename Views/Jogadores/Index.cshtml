@@ -1,7 +1,7 @@
 ﻿@using CampeonatosNParty.Models.Database
 @model EixoX.Data.ClassSelectResult<JogadoresItem>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Jogadores";
 
     List<JogadoresItem> jogadores;
     if(Model == null)
@@ -38,7 +38,6 @@
     {
         <div class="row">
             <div class="span12">
-                
                    @{
                         foreach (JogadoresItem[] jogadoresArray in jogadores.Segment(6))
                         {

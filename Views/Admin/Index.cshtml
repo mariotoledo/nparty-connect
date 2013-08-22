@@ -1,0 +1,23 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Painel Administrativo</h2>
+<div class="container">
+    <div class="row">
+        <div class="span6">
+            <a href="@Url.Content("~/Admin/Usuarios/")" class="btn btn-large btn-block btn-danger"><i class="icon-user icon-white"></i> Gerenciar Usuários</a><br />
+        </div>
+        <div class="span6">
+            <a href="@Url.Content("~/Admin/Campeonatos")" class="btn btn-large btn-block btn-success"><i class="icon-resize-small icon-white"></i> Gerenciar Campeonatos</a><br />
+        </div>
+    </div>
+    <div class="row">
+        <div class="span6">
+            <a href="@Url.Content("~/Admin/Eventos/")" class="btn btn-large btn-block btn-warning"><i class="icon-calendar icon-white"></i> Gerenciar Eventos</a><br /> 
+        </div>
+        <div class="span6">
+            <a href="@Url.Content("~/Admin")" class="btn btn-large btn-block btn-inverse"><i class="icon-certificate icon-white"></i> Outras opções</a><br />
+        </div>
+    </div>
+</div>
