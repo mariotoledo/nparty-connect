@@ -21,7 +21,7 @@
     
         if (ViewData["CurrentUser"] != null && ((CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"]).Nivel_Permissao > 90)
         {
-            <a class="btn btn-large pull-right" href="@Url.Content("/Admin/Usuarios/EditarUsuario/" + Model.usuario.Id)">Editar</a>
+            <a class="btn btn-large pull-right" href="@Url.Content("/Admin/EditarUsuario/" + Model.usuario.Id)">Editar</a>
         }
         
         <div class="page-header">

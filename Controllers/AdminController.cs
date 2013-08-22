@@ -39,5 +39,13 @@ namespace CampeonatosNParty.Controllers
             return View(view);
         }
 
+        [AuthenticationRequired]
+        [HttpGet]
+        public ActionResult EditarUsuario(int? id)
+        {
+            CampeonatosNParty.Models.Database.Usuarios view = NPartyDb<Usuarios>.Instance.WithIdentity(id.Value);
+            return View(view);
+        }
+
     }
 }

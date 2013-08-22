@@ -1,0 +1,43 @@
+﻿@model CampeonatosNParty.Models.Database.Usuarios
+@{
+    ViewBag.Title = "EditarUsuario";
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios> presenter =
+        EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios>.GetInstance(UICulture);
+    string errorMessage = (string)ViewData["ErrorMessage"];
+}
+@{
+    if(Model != null)
+    {
+        <ul class="breadcrumb">
+            <li><a href="@Url.Content("~/Admin")">Admin</a> <span class="divider">/</span></li>
+            <li><a href="@Url.Content("~/Admin/Usuarios")">Usuários</a> <span class="divider">/</span></li>
+            <li><a href="@Url.Content("~/Admin/DetalhesUsuario/" + Model.Id)">@Model.Nome</a> <span class="divider">/</span></li>
+            <li class="active">Editar</li>
+        </ul>
+
+        <h2>Editar Usuario</h2>
+        <form method="post" class="form-horizontal" enctype="multipart/form-data">
+            @if (!string.IsNullOrEmpty(errorMessage))
+            {
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    <strong>Warning!</strong> @errorMessage
+                </div>
+            }
+            <div class="row">
+                <div class="span6">
+                     @{ 
+                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Nome");
+                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Apelido");
+                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Email");
+                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Telefone");
+                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Nome");
+                     }
+                </div>
+            </div>
+        </form>
+    }
+    else{
+        <p>Cuidado: Usuário não encontrado</p>
+    }
+}
