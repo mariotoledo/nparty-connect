@@ -1,0 +1,122 @@
+﻿@using EixoX.UI
+@using EixoX.Html
+@model CampeonatosNParty.Models.Database.Usuarios
+@{
+    ViewBag.Title = "Registrar Usuário";
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios> presenter = EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios>.GetInstance(1046);
+    bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
+}
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("~/Admin")">Admin</a> <span class="divider">/</span></li>
+    <li><a href="@Url.Content("~/Admin/Usuarios")">Usuários</a> <span class="divider">/</span></li>
+    <li class="active">Registrar Usuário</li>
+</ul>
+
+<h2>Registrar Usuário</h2>
+<p>Preencha os campos abaixo corretamente, e clique em "Cadastrar" para prosseguir com o cadastro.</p>
+<form class="form-horizontal" method="post">
+    @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterError"]))
+    {
+        <div class="row">
+            <div class="span12">
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterError"]
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="span6">
+            <h4>Informações pessoais</h4>
+            @{presenter["Nome"].Render(this.Output, Model, validate);}
+            @{presenter["Apelido"].Render(this.Output, Model, validate);}
+            @{presenter["Telefone"].Render(this.Output, Model, validate);}
+            <div class="control-group">
+                <label for="BirthdayDay" class="control-label">Data de Nascimento</label>
+                <div class="controls">
+                    <select name="BirthdayDay" class="input-mini">
+                        @for(int i = 1; i <= 31; i++)
+                        {
+                            <option value="@i">@i.ToString()</option>
+                        }
+                    </select>
+                    <select name="BirthdayMonth" class="input-mini">
+                        @for(int i = 1; i <= 12; i++)
+                        {
+                            <option value="@i">@i.ToString()</option>
+                        }
+                    </select>
+                    <select name="BirthdayYear" class="input-small">
+                        @for(int i = 0; i < 100; i++)
+                        {
+                            int year = DateTime.Now.Year - 10 - i;
+                                        
+                            <option value="@year">@year.ToString()</option>
+                        }
+                    </select>
+                </div>
+            </div>
+           <label class="control-label" for="Id_Estado">Estado*</label>
+            <div class="controls">
+                <select name="Id_Estado" id="Id_Estado" onchange="loadCities(this.value)">
+                    <option value="">Selecione</option>
+                    @foreach (CampeonatosNParty.Models.Database.Estado item in CampeonatosNParty.Models.Database.Estado.Select().OrderBy("Sigla"))
+                    {
+                        <option value="@item.EstadoId">@item.Sigla</option>
+                    }
+                </select>
+            </div>
+            <br />
+            <label class="control-label" for="Id_Cidade">Cidade*</label>
+            <div class="controls">
+                <select name="Id_Cidade" id="Id_Cidade">
+                    <option value="">Selecione</option>
+                </select>
+            </div>
+        </div>
+        <div class="span6">
+            <h4>Informações da conta</h4>
+            @{presenter["Email"].Render(this.Output, Model, validate);}
+            
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            <h4>Informações adicionais</h4>
+            @{presenter["Newsletter"].Render(this.Output, Model, validate);}
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-primary">Cadastrar</button>
+            <a class="btn" href="@Url.Content("~/Admin/Usuarios/")">Cancelar</a>
+        </div>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#Id_Cidade').prop('disabled', true);
+    });
+    function loadCities(selectedCode) {
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
+            success: function (json) {
+                $('#Id_Cidade').prop('disabled', false);
+                var optionArray = [];
+                optionArray.push('<option value="">Selecione</option>');
+
+                $.each(json, function (i, item) {
+                    if (selectedCode == item.CidadeId) {
+                        optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
+                    }
+                    else {
+                        optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
+                    }
+                });
+
+
+                $('#Id_Cidade').html(optionArray.join(''));
+            }
+        });
+    }
+</script>

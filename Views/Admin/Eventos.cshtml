@@ -1,16 +1,18 @@
 ﻿@using CampeonatosNParty.Models.Database
-@model EixoX.Data.ClassSelectResult<JogadoresItem>
+@model EixoX.Data.ClassSelectResult<Eventos>
 @{
-    ViewBag.Title = "Usuarios";
+    ViewBag.Title = "Eventos";
 
-    List<JogadoresItem> jogadores;
+    Dictionary<int, string> eventoTipo = TipoEvento.Select().ToDictionary(g => g.Id, f => f.Nome);
+
+    List<Eventos> eventosList;
     if (Model == null)
     {
-        jogadores = NPartyDb<JogadoresItem>.Instance.Select().OrderBy("Pontos", EixoX.Data.SortDirection.Descending).ToList();
+        eventosList = NPartyDb<Eventos>.Instance.Select().OrderBy("DataEventoInicio", EixoX.Data.SortDirection.Descending).Page(25, 0).ToList();
     }
     else
     {
-        jogadores = Model.ToList();
+        eventosList = Model.ToList();
     }
 
     int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
@@ -18,43 +20,41 @@
 }
 <ul class="breadcrumb">
     <li><a href="@Url.Content("/Admin")">Admin</a> <span class="divider">/</span></li>
-    <li class="active">Usuários</li>
+    <li class="active">Eventos</li>
 </ul>
-@if (ViewData["CurrentUser"] != null && ((CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"]).Nivel_Permissao > 90)
-{
-    <a class="btn btn-large pull-right" href="@Url.Content("/Admin/RegistrarUsuario/")">Registrar novo usuário</a>
-}
 <div class="page-header">
-  <h1>Usuários</h1>
+  <h1>Eventos</h1>
 </div>
 <form method="get" class="form-search pull-right">
     <div class="input-append">
-        <input type="text" name="filter" placeholder="Procurar por jogador" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
+        <input type="text" name="filter" placeholder="Procurar por evento" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
         <button class="btn btn-primary">
             <i class="icon-search icon-white"></i>
         </button>
     </div>
 </form>
 @{
-    if (jogadores.Count > 0)
+    if (eventosList.Count > 0)
     {
         <table class="table table-bordered table-condensed table-hover">
             <thead>
                 <tr>
                     <th>Nome</th>
-                    <th>Apelido</th>
-                    <th>Pontos</th>
-                    <th>Estado</th>
+                    <th>Local</th>
+                    <th>Data</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (JogadoresItem jogador in jogadores)
+                @foreach (Eventos evento in eventosList)
                 {
                     <tr>
-                        <td><a href="@Url.Content("~/Admin/DetalhesUsuario/" + jogador.IdUsuario)">@jogador.NomeUsuario</a></td>
-                        <td>@jogador.ApelidoUsuario</td>
-                        <td>@jogador.Pontos</td>
-                        <td>@jogador.Estado</td>
+                        <td><a href="@Url.Content("~/Admin/DetalhesEvento/" + evento.Id)">@evento.Nome</a></td>
+                        <td>@evento.Local</td>
+                        <td> @evento.DataEventoInicio.ToString("dd/MM/yyyy")
+                        @if (evento.DataEventoFim != null && evento.DataEventoFim != DateTime.MinValue)
+                        {
+                            <span>a @evento.DataEventoFim.ToString("dd/MM/yyyy")</span>
+                        }</td>
                     </tr>
                 }
             </tbody>
@@ -67,11 +67,11 @@
             if(Model.HasPreviousPages)
             {
                 
-                <a class="pull-left btn btn-primary" href="/Admin/Usuarios/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+                <a class="pull-left btn btn-primary" href="/Admin/Eventos/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
             }
             if(Model.HasMorePages)
             {
-                <a class="pull-right btn btn-primary" href="/Admin/Usuarios/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+                <a class="pull-right btn btn-primary" href="/Admin/Eventos/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
             }
             @Html.Raw("</div>");
         }

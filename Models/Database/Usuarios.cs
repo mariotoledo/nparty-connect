@@ -32,6 +32,7 @@ namespace CampeonatosNParty.Models.Database
         [MaxLength(50)]
         [Required]
         [UISingleline]
+        [Email]
         public string Email { get; set; }
 
         [DatabaseColumn]

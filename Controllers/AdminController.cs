@@ -19,6 +19,12 @@ namespace CampeonatosNParty.Controllers
             return View();
         }
 
+        /*
+         * =======================================================================
+         *                              USUARIOS
+         * =======================================================================
+         */
+
         [AuthenticationRequired]
         public ActionResult Usuarios()
         {
@@ -38,6 +44,51 @@ namespace CampeonatosNParty.Controllers
         {
             CampeonatosNParty.Models.ViewModel.UsuariosDetailView view = new CampeonatosNParty.Models.ViewModel.UsuariosDetailView(id.Value);
             return View(view);
+        }
+
+        [AuthenticationRequired]
+        [HttpGet]
+        public ActionResult RegistrarUsuario()
+        {
+            return View(new CampeonatosNParty.Models.Database.Usuarios());
+        }
+
+        [AuthenticationRequired]
+        [HttpPost]
+        public ActionResult RegistrarUsuario(FormCollection form, Usuarios model)
+        {
+            model.Data_Cadastro = DateTime.Now;
+            model.Nivel_Permissao = 0;
+            model.Nascimento = new DateTime(Int32.Parse(form["BirthdayYear"]), Int32.Parse(form["BirthdayMonth"]), Int32.Parse(form["BirthdayDay"]));
+            model.Senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(CampeonatosNParty.Helpers.RegisterHelper.GetRandWord(5));
+            model.UrlFotoPerfil = "/Static/img/playerPhoto/default.jpg";
+
+            if (EixoX.Restrictions.RestrictionAspect<Usuarios>.Instance.Validate(model))
+            {
+                if (string.IsNullOrEmpty(form["Id_Estado"]) || Int32.Parse(form["Id_Estado"]) == 0)
+                {
+                    ViewData["RegisterError"] = "Por favor, selecione o estado onde o usuário mora";
+                }
+                else if (string.IsNullOrEmpty(form["Id_Cidade"]) || Int32.Parse(form["Id_Cidade"]) == 0)
+                {
+                    ViewData["RegisterError"] = "Por favor, selecione a cidade onde o usuário mora";
+                }
+                else
+                {
+                    Usuarios u = CampeonatosNParty.Models.Database.Usuarios.Select().Where("Email", model.Email).SingleOrDefault();
+
+                    if (u == null)
+                    {
+                        NPartyDb<Usuarios>.Instance.Insert(model);
+                        return Redirect("~/Admin/DetalhesUsuario/" + model.Id);
+                    }
+                    else
+                    {
+                        ViewData["RegisterError"] = "Este e-mail já está registrado.";
+                    }
+                }
+            }
+            return View(model);
         }
 
         [AuthenticationRequired]
@@ -99,5 +150,23 @@ namespace CampeonatosNParty.Controllers
             return View(model);
         }
 
+        /*
+         * =======================================================================
+         *                              EVENTOS
+         * =======================================================================
+         */
+
+        [AuthenticationRequired]
+        public ActionResult Eventos()
+        {
+            int page = 0;
+            int.TryParse(Request.QueryString["page"], out page);
+
+            ClassSelect<Eventos> search = CampeonatosNParty.Models.Database.Eventos.Search(Request.QueryString["filter"]);
+            search.Page(18, page);
+            search.OrderBy("DataEventoInicio");
+
+            return View(search.ToResult());
+        }
     }
 }

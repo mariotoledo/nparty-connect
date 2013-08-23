@@ -2,7 +2,7 @@
 @using EixoX.Data
 @model EixoX.Data.ClassSelectResult<Eventos>
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Eventos";
     Dictionary<int, string> eventoTipo = TipoEvento.Select().ToDictionary(g => g.Id, f => f.Nome);
 
     List<Eventos> eventosList;

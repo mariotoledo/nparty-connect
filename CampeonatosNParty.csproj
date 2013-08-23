@@ -236,6 +236,8 @@
     <Content Include="Views\Admin\Usuarios.cshtml" />
     <Content Include="Views\Admin\DetalhesUsuario.cshtml" />
     <Content Include="Views\Admin\EditarUsuario.cshtml" />
+    <Content Include="Views\Admin\Eventos.cshtml" />
+    <Content Include="Views\Admin\RegistrarUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-jetfuel\EixoX\EixoX.csproj">
