@@ -42,6 +42,10 @@
                                         <ul class="dropdown-menu" aria-labelledby="loginLabel" role="menu">
                                           <li><a href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)">Meu Perfil</a></li>
                                           <li><a href="@Url.Content("~/Jogadores/EditarMinhasInformacoes/")">Editar Minhas Informações</a></li>
+                                          @if (currentUser.Nivel_Permissao > 90)
+                                          {
+                                              <li><a href="@Url.Content("~/Admin/")">Painel Administrativo</a></li>
+                                          }
                                           <li class="divider"></li>
                                           <li><a href="@Url.Content("~/Home/Logout")">Logout</a></li>
                                         </ul>

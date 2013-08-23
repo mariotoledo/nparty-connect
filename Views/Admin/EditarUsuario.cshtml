@@ -1,9 +1,10 @@
-﻿@model CampeonatosNParty.Models.Database.Usuarios
+﻿@model CampeonatosNParty.Models.StructModel.EditarInformacoes
 @{
     ViewBag.Title = "EditarUsuario";
-    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios> presenter =
-        EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios>.GetInstance(UICulture);
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.EditarInformacoes> presenter =
+        EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.EditarInformacoes>.GetInstance(UICulture);
     string errorMessage = (string)ViewData["ErrorMessage"];
+    string successMessage = (string)ViewData["SuccessMessage"];
 }
 @{
     if(Model != null)
@@ -21,18 +22,81 @@
             {
                 <div class="alert alert-error">
                     <button type="button" class="close" data-dismiss="alert">&times;</button>
-                    <strong>Warning!</strong> @errorMessage
+                    <strong>Atenção!</strong> @errorMessage
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(successMessage))
+            {
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>
+                    @successMessage
                 </div>
             }
             <div class="row">
                 <div class="span6">
                      @{ 
+                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Id");
                         presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Nome");
                         presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Apelido");
                         presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Email");
                         presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Telefone");
-                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Nome");
                      }
+                </div>
+                <div class="span6">
+                    <div class="control-group">
+                        <label for="BirthdayDay" class="control-label">Data de Nascimento</label>
+                        <div class="controls">
+                            <select name="BirthdayDay" class="input-mini">
+                                @for(int i = 1; i <= 31; i++)
+                                {
+                                    string selected = Model.Nascimento.Day == i ? "selected" : "";
+                                    <option @selected value="@i">@i.ToString()</option>
+                                }
+                            </select>
+                            <select name="BirthdayMonth" class="input-mini">
+                                @for(int i = 1; i <= 12; i++)
+                                {
+                                    string selected = Model.Nascimento.Month == i ? "selected" : "";
+                                    <option @selected value="@i">@i.ToString()</option>
+                                }
+                            </select>
+                            <select name="BirthdayYear" class="input-small">
+                                @for(int i = 0; i < 100; i++)
+                                {
+                                    int year = DateTime.Now.Year - 10 - i;
+                                    string selected = Model.Nascimento.Year == year ? "selected" : "";
+                                    <option @selected value="@year">@year.ToString()</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <label class="control-label" for="Id_Estado">Estado*</label>
+                    <div class="controls">
+                        <select name="Id_Estado" id="Id_Estado" onchange="loadCities(this.value)">
+                            @foreach (CampeonatosNParty.Models.Database.Estado item in CampeonatosNParty.Models.Database.Estado.Select().OrderBy("Sigla"))
+                            {
+                                string selected = Model.Id_Estado == item.EstadoId ? "selected" : "";
+                                <option @selected value="@item.EstadoId">@item.Sigla</option>
+                            }
+                        </select>
+                    </div>
+                    <br />
+                    <label class="control-label" for="Id_Cidade">Cidade*</label>
+                    <div class="controls">
+                        <select name="Id_Cidade" id="Id_Cidade">
+                            @foreach (CampeonatosNParty.Models.Database.Cidade item in CampeonatosNParty.Models.Database.Cidade.Select().Where("EstadoId", Model.Id_Estado).OrderBy("Nome"))
+                            {
+                                string selected = Model.Id_Cidade == item.CidadeId ? "selected" : "";
+                                <option @selected value="@item.CidadeId">@item.Nome</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                    <a class="btn" href="@Url.Content("~/Admin/DetalhesUsuario/" + Model.Id)">Cancelar</a>
                 </div>
             </div>
         </form>
@@ -41,3 +105,28 @@
         <p>Cuidado: Usuário não encontrado</p>
     }
 }
+
+<script type="text/javascript">
+   function loadCities(selectedCode) {
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
+            success: function (json) {
+                $('#Id_Cidade').prop('disabled', false);
+                var optionArray = [];
+                optionArray.push('<option value="">Selecione</option>');
+
+                $.each(json, function (i, item) {
+                    if (selectedCode == item.CidadeId) {
+                        optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
+                    }
+                    else {
+                        optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
+                    }
+                });
+
+
+                $('#Id_Cidade').html(optionArray.join(''));
+            }
+        });
+    }
+</script>
