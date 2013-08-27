@@ -96,7 +96,7 @@ namespace CampeonatosNParty.Controllers
         public ActionResult EditarUsuario(int? id)
         {
             CampeonatosNParty.Models.Database.Usuarios user = NPartyDb<Usuarios>.Instance.WithIdentity(id.Value);
-            return View(new EditarInformacoes()
+            return View(new EditarUsuario()
             {
                 Apelido = user.Apelido,
                 Email = user.Email,
@@ -111,11 +111,11 @@ namespace CampeonatosNParty.Controllers
 
         [AuthenticationRequired]
         [HttpPost]
-        public ActionResult EditarUsuario(FormCollection form, EditarInformacoes model)
+        public ActionResult EditarUsuario(FormCollection form, EditarUsuario model)
         {
             model.Nascimento = new DateTime(Int32.Parse(form["BirthdayYear"]), Int32.Parse(form["BirthdayMonth"]), Int32.Parse(form["BirthdayDay"]));
 
-            if (EixoX.Restrictions.RestrictionAspect<EditarInformacoes>.Instance.Validate(model))
+            if (EixoX.Restrictions.RestrictionAspect<EditarUsuario>.Instance.Validate(model))
             {
                 if (string.IsNullOrEmpty(form["Id_Estado"]) || Int32.Parse(form["Id_Estado"]) == 0)
                 {
@@ -167,6 +167,33 @@ namespace CampeonatosNParty.Controllers
             search.OrderBy("DataEventoInicio");
 
             return View(search.ToResult());
+        }
+
+        [AuthenticationRequired]
+        [HttpGet]
+        public ActionResult DetalhesEvento(int? id)
+        {
+            CampeonatosNParty.Models.ViewModel.EventosDetailView view = 
+                new CampeonatosNParty.Models.ViewModel.EventosDetailView(id.Value);
+            return View(view);
+        }
+
+        [AuthenticationRequired]
+        [HttpGet]
+        public ActionResult EditarEvento(int? id)
+        {
+            CampeonatosNParty.Models.Database.Eventos evento = NPartyDb<Eventos>.Instance.WithIdentity(id.Value);
+            return View(new EditarEvento()
+            {
+                Id = evento.Id,
+                Nome = evento.Nome,
+                DataEventoFim = evento.DataEventoFim,
+                DataEventoInicio = evento.DataEventoInicio, 
+                IdCidade = evento.IdCidade,
+                IdEstado = evento.IdEstado,
+                Local = evento.Local,
+                TipoEvento = evento.TipoEvento
+            });
         }
     }
 }

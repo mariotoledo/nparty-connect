@@ -9,42 +9,41 @@ using EixoX.UI;
 
 namespace CampeonatosNParty.Models.StructModel
 {
-    public class EditarInformacoes
+    public class EditarEvento
     {
         [DatabaseColumn(DatabaseColumnKind.Identity)]
         [UIHidden]
         public int Id { get; set; }
 
         [DatabaseColumn]
-        [MaxLength(50)]
         [Required]
+        [MaxLength(50)]
         [UISingleline]
         public string Nome { get; set; }
 
         [DatabaseColumn]
+        [Required]
+        public int TipoEvento { get; set; }
+
+        [DatabaseColumn]
         [MaxLength(50)]
         [UISingleline]
-        public string Apelido { get; set; }
+        public string Local { get; set; }
 
         [DatabaseColumn]
-        [MaxLength(50)]
+        public int IdCidade { get; set; }
+
+        [DatabaseColumn]
+        public int IdEstado { get; set; }
+
+        [DatabaseColumn]
         [Required]
-        [UISingleline]
-        public string Email { get; set; }
+        [UIDatepicker]
+        public DateTime DataEventoInicio { get; set; }
 
         [DatabaseColumn]
-        [UISingleline]
-        [Required]
-        public DateTime Nascimento {get; set;}
+        [UIDatepicker]
+        public DateTime DataEventoFim { get; set; }
 
-        [DatabaseColumn]
-        public int Id_Cidade { get; set; }
-
-        [DatabaseColumn]
-        public int Id_Estado { get; set; }
-
-        [DatabaseColumn]
-        [UISingleline]
-        public string Telefone { get; set; }
     }
 }
