@@ -16,6 +16,11 @@
             <li class="active">Editar</li>
         </ul>
 
+        @if (ViewData["CurrentUser"] != null && ((CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"]).Nivel_Permissao > 90)
+        {
+            <a class="btn btn-large pull-right" href="@Url.Content("/Admin/CriarEvento/")">Criar novo usuário</a>
+        }
+    
         <h2>Editar Usuario</h2>
         <form method="post" class="form-horizontal" enctype="multipart/form-data">
             @if (!string.IsNullOrEmpty(errorMessage))
@@ -35,11 +40,11 @@
             <div class="row">
                 <div class="span6">
                      @{ 
-                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Id");
-                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Nome");
-                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Apelido");
-                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Email");
-                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Telefone");
+            presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Id");
+            presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Nome");
+            presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Apelido");
+            presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Email");
+            presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Telefone");
                      }
                 </div>
                 <div class="span6">
@@ -47,21 +52,21 @@
                         <label for="BirthdayDay" class="control-label">Data de Nascimento</label>
                         <div class="controls">
                             <select name="BirthdayDay" class="input-mini">
-                                @for(int i = 1; i <= 31; i++)
+                                @for (int i = 1; i <= 31; i++)
                                 {
                                     string selected = Model.Nascimento.Day == i ? "selected" : "";
                                     <option @selected value="@i">@i.ToString()</option>
                                 }
                             </select>
                             <select name="BirthdayMonth" class="input-mini">
-                                @for(int i = 1; i <= 12; i++)
+                                @for (int i = 1; i <= 12; i++)
                                 {
                                     string selected = Model.Nascimento.Month == i ? "selected" : "";
                                     <option @selected value="@i">@i.ToString()</option>
                                 }
                             </select>
                             <select name="BirthdayYear" class="input-small">
-                                @for(int i = 0; i < 100; i++)
+                                @for (int i = 0; i < 100; i++)
                                 {
                                     int year = DateTime.Now.Year - 10 - i;
                                     string selected = Model.Nascimento.Year == year ? "selected" : "";
@@ -101,7 +106,8 @@
             </div>
         </form>
     }
-    else{
+    else
+    {
         <p>Cuidado: Usuário não encontrado</p>
     }
 }
