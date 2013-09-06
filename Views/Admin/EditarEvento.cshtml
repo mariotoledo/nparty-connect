@@ -5,6 +5,8 @@
         EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.EditarEvento>.GetInstance(UICulture);
     string errorMessage = (string)ViewData["ErrorMessage"];
     string successMessage = (string)ViewData["SuccessMessage"];
+
+    string HasMoreDayInputValue = Model.DataEventoInicio != Model.DataEventoFim ? "checked" : "";
 }
 @{
     if (Model != null)
@@ -35,8 +37,8 @@
             <div class="row">
                 <div class="span6">
                      @{ 
-            presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Id");
-            presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Nome");
+                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Id");
+                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "Nome");
                         <label class="control-label" for="TipoEvento">Tipo do Evento*</label>
                         <div class="controls">
                             <select name="TipoEvento" id="TipoEvento">
@@ -74,6 +76,7 @@
                 </div>
                 <div class="span6">
                     @{
+                        presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase), "ImagemURL");
                         <label for="DataEventoInicioDay" class="control-label">Data de início do evento</label>
                         <div class="controls">
                             <select name="DataEventoInicioDay" class="input-mini">
@@ -99,7 +102,9 @@
                                 }
                             </select>
                         </div><br />
-                        
+                        <div class="controls">
+                            <label class="checkbox">Evento ocorre em mais de um dia? <input type="checkbox" id="MoreDays" name="MoreDays" @HasMoreDayInputValue></label>
+                        </div><br />
                         <div id="DataEventoFimParent">
                             <label for="DataEventoFimDay" class="control-label">Data de fim do evento</label>
                             <div class="controls">
@@ -145,6 +150,17 @@
 }
 
 <script type="text/javascript">
+    $(document).ready(function () {
+        hideOrShowInput();
+        $('#MoreDays').bind('change', hideOrShowInput);
+    });
+    function hideOrShowInput() {
+        if ($('#MoreDays').prop('checked')) {
+            $('#DataEventoFimParent').show();
+        } else {
+            $('#DataEventoFimParent').hide();
+        }
+    }
    function loadCities(selectedCode) {
         $.ajax({
             url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,

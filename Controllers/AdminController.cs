@@ -183,6 +183,11 @@ namespace CampeonatosNParty.Controllers
         public ActionResult EditarEvento(int? id)
         {
             CampeonatosNParty.Models.Database.Eventos evento = NPartyDb<Eventos>.Instance.WithIdentity(id.Value);
+            if (evento.ImagemURL == null || evento.ImagemURL.CompareTo("/Static/img/eventsLogos/default.jpg") == 0)
+            {
+                evento.ImagemURL = "";
+            }
+
             return View(new EditarEvento()
             {
                 Id = evento.Id,
@@ -192,8 +197,61 @@ namespace CampeonatosNParty.Controllers
                 IdCidade = evento.IdCidade,
                 IdEstado = evento.IdEstado,
                 Local = evento.Local,
-                TipoEvento = evento.TipoEvento
+                TipoEvento = evento.TipoEvento,
+                ImagemURL = evento.ImagemURL
             });
+        }
+
+        [AuthenticationRequired]
+        [HttpPost]
+        public ActionResult EditarEvento(FormCollection form, EditarEvento model)
+        {
+            model.DataEventoInicio = new DateTime(Int32.Parse(form["DataEventoInicioYear"]), Int32.Parse(form["DataEventoInicioMonth"]), Int32.Parse(form["DataEventoInicioDay"]));
+            model.DataEventoFim = new DateTime(Int32.Parse(form["DataEventoFimYear"]), Int32.Parse(form["DataEventoFimMonth"]), Int32.Parse(form["DataEventoFimDay"]));
+
+            if (EixoX.Restrictions.RestrictionAspect<EditarEvento>.Instance.Validate(model))
+            {
+                if (string.IsNullOrEmpty(form["IdEstado"]) || Int32.Parse(form["IdEstado"]) == 0)
+                {
+                    ViewData["ErrorMessage"] = "Por favor, selecione o estado onde mora";
+                }
+                else if (string.IsNullOrEmpty(form["IdCidade"]) || Int32.Parse(form["IdCidade"]) == 0)
+                {
+                    ViewData["ErrorMessage"] = "Por favor, selecione a cidade onde mora";
+                }
+                else
+                {
+                    Eventos e = CampeonatosNParty.Models.Database.Eventos.WithIdentity(model.Id);
+                    if (e != null)
+                    {
+                        e.Nome = model.Nome;
+                        e.TipoEvento = model.TipoEvento;
+                        e.Local = model.Local;
+                        e.IdEstado = model.IdEstado;
+                        e.IdCidade = model.IdCidade;
+
+                        if (string.IsNullOrEmpty(model.ImagemURL))
+                            e.ImagemURL = "/Static/img/eventsLogos/default.jpg";
+                        else
+                            e.ImagemURL = model.ImagemURL;
+
+                        e.DataEventoInicio = model.DataEventoInicio;
+
+                        if (form["MoreDays"] != null)
+                            e.DataEventoFim = model.DataEventoFim;
+                        else
+                            e.DataEventoFim = model.DataEventoInicio;
+
+                        NPartyDb<Eventos>.Instance.Save(e);
+                        ViewData["SuccessMessage"] = "Dados alterados com sucesso.";
+                    }
+                    else
+                    {
+                        ViewData["ErrorMessage"] = "Não foi possível atualizar - Você fez alguma burrada? Por favor, tente novamente.";
+                    }
+                }
+            }
+            return View(model);
         }
     }
 }

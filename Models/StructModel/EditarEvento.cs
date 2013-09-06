@@ -45,5 +45,9 @@ namespace CampeonatosNParty.Models.StructModel
         [UIDatepicker]
         public DateTime DataEventoFim { get; set; }
 
+        [DatabaseColumn]
+        [UISingleline]
+        public string ImagemURL { get; set; }
+
     }
 }
