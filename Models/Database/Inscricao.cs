@@ -25,6 +25,12 @@ namespace CampeonatosNParty.Models.Database
         public int IdUsuario { get; set; }
 
         [DatabaseColumn]
+        public bool IsPago { get; set; }
+
+        [DatabaseColumn]
+        public int Classificacao { get; set; }
+
+        [DatabaseColumn]
         public string IdOriginal { get; set; }
     }
 }

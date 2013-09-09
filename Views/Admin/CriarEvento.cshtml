@@ -1,24 +1,21 @@
-﻿@model CampeonatosNParty.Models.StructModel.EditarEvento
+﻿@model CampeonatosNParty.Models.Database.Eventos
 @{
-    ViewBag.Title = "Editar Evento";
-    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.EditarEvento> presenter =
-        EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.EditarEvento>.GetInstance(UICulture);
+    ViewBag.Title = "Criar Evento";
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Eventos> presenter =
+        EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Eventos>.GetInstance(UICulture);
     string errorMessage = (string)ViewData["ErrorMessage"];
     string successMessage = (string)ViewData["SuccessMessage"];
 
     string HasMoreDayInputValue = Model.DataEventoInicio != Model.DataEventoFim ? "checked" : "";
 }
 @{
-    if (Model != null)
-    {
         <ul class="breadcrumb">
             <li><a href="@Url.Content("~/Admin")">Admin</a> <span class="divider">/</span></li>
             <li><a href="@Url.Content("~/Admin/Eventos")">Eventos</a> <span class="divider">/</span></li>
-            <li><a href="@Url.Content("~/Admin/DetalhesEvento/" + Model.Id)">@Model.Nome</a> <span class="divider">/</span></li>
-            <li class="active">Editar</li>
+            <li class="active">Criar Evento</li>
         </ul>
 
-        <h2>Editar Evento</h2>
+        <h2>Criar Evento</h2>
         <form method="post" class="form-horizontal" enctype="multipart/form-data">
             @if (!string.IsNullOrEmpty(errorMessage))
             {
@@ -138,19 +135,15 @@
             <div class="control-group">
                 <div class="controls">
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a class="btn" href="@Url.Content("~/Admin/DetalhesEvento/" + Model.Id)">Cancelar</a>
+                    <a class="btn" href="@Url.Content("~/Admin/Eventos/")">Cancelar</a>
                 </div>
             </div>
         </form>
-    }
-    else
-    {
-        <p>Cuidado: Usuário não encontrado</p>
-    }
 }
 
 <script type="text/javascript">
     $(document).ready(function () {
+        $('#IdCidade').prop('disabled', true);
         hideOrShowInput();
         $('#MoreDays').bind('change', hideOrShowInput);
     });

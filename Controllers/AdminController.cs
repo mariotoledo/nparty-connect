@@ -171,6 +171,13 @@ namespace CampeonatosNParty.Controllers
 
         [AuthenticationRequired]
         [HttpGet]
+        public ActionResult CriarEvento()
+        {
+            return View(new CampeonatosNParty.Models.Database.Eventos());
+        }
+
+        [AuthenticationRequired]
+        [HttpGet]
         public ActionResult DetalhesEvento(int? id)
         {
             CampeonatosNParty.Models.ViewModel.EventosDetailView view = 
@@ -252,6 +259,76 @@ namespace CampeonatosNParty.Controllers
                 }
             }
             return View(model);
+        }
+
+        [AuthenticationRequired]
+        [HttpPost]
+        public ActionResult CriarEvento(FormCollection form, Eventos model)
+        {
+            model.DataEventoInicio = new DateTime(Int32.Parse(form["DataEventoInicioYear"]), Int32.Parse(form["DataEventoInicioMonth"]), Int32.Parse(form["DataEventoInicioDay"]));
+            model.DataEventoFim = new DateTime(Int32.Parse(form["DataEventoFimYear"]), Int32.Parse(form["DataEventoFimMonth"]), Int32.Parse(form["DataEventoFimDay"]));
+            model.DataCadastro = DateTime.Now;
+
+            if (EixoX.Restrictions.RestrictionAspect<Eventos>.Instance.Validate(model))
+            {
+                if (string.IsNullOrEmpty(form["IdEstado"]) || Int32.Parse(form["IdEstado"]) == 0)
+                {
+                    ViewData["ErrorMessage"] = "Por favor, selecione o estado onde mora";
+                }
+                else if (string.IsNullOrEmpty(form["IdCidade"]) || Int32.Parse(form["IdCidade"]) == 0)
+                {
+                    ViewData["ErrorMessage"] = "Por favor, selecione a cidade onde mora";
+                }
+                else
+                {
+                    Eventos e = CampeonatosNParty.Models.Database.Eventos.WithIdentity(model.Id);
+                    if (e != null)
+                    {
+                        ViewData["ErrorMessage"] = "Não foi possível criar o evento - Você fez alguma burrada? Por favor, tente novamente.";
+                    }
+                    else
+                    {
+                        if (string.IsNullOrEmpty(model.ImagemURL))
+                            model.ImagemURL = "/Static/img/eventsLogos/default.jpg";
+
+                        if (form["MoreDays"] == null)
+                            model.DataEventoFim = model.DataEventoInicio;
+
+                        NPartyDb<Eventos>.Instance.Save(model);
+                        ViewData["SuccessMessage"] = "Dados alterados com sucesso."; 
+                    }
+                }
+            }
+            return View(model);
+        }
+
+        /*
+         * =======================================================================
+         *                              CAMPEONATOS
+         * =======================================================================
+         */
+
+        [AuthenticationRequired]
+        public ActionResult Campeonatos()
+        {
+            int page = 0;
+            int.TryParse(Request.QueryString["page"], out page);
+
+            ClassSelect<Campeonatos> search = CampeonatosNParty.Models.Database.Campeonatos.Search(Request.QueryString["filter"]);
+            search.Page(18, page);
+            search.OrderBy("DataCampeonato", SortDirection.Descending);
+
+            return View(search.ToResult());
+        }
+
+        [AuthenticationRequired]
+        [HttpGet]
+        public ActionResult DetalhesCampeonato(int? id)
+        {
+            CampeonatosNParty.Models.ViewModel.CampeonatosDetailView view =
+                new CampeonatosNParty.Models.ViewModel.CampeonatosDetailView(id.Value);
+
+                return View(view);
         }
     }
 }

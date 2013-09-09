@@ -14,11 +14,13 @@ namespace CampeonatosNParty.Models.Database
     public class Eventos : NPartyDbModel<Eventos>
     {
         [DatabaseColumn(DatabaseColumnKind.Identity)]
+        [UIHidden]
         public int Id { get; set; }
 
         [DatabaseColumn]
         [Required]
         [MaxLength(50)]
+        [UISingleline]
         public string Nome { get; set; }
 
         [DatabaseColumn]
@@ -27,6 +29,7 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         [MaxLength(50)]
+        [UISingleline]
         public string Local { get; set; }
 
         [DatabaseColumn]
@@ -37,15 +40,18 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         [Required]
+        [UIDatepicker]
         public DateTime DataEventoInicio { get; set; }
 
         [DatabaseColumn]
+        [UIDatepicker]
         public DateTime DataEventoFim { get; set; }
 
         [DatabaseColumn]
         public DateTime DataCadastro { get; set; }
 
         [DatabaseColumn]
+        [UISingleline]
         public string ImagemURL { get; set; }
     }
 }

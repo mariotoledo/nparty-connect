@@ -121,6 +121,7 @@
     <Compile Include="Models\Database\CampeonatoPorEvento.cs" />
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
+    <Compile Include="Models\Database\InscricaoUsuario.cs" />
     <Compile Include="Models\Database\JogosPorConsole.cs" />
     <Compile Include="Models\Database\DetalhesCampeonatoPorEvento.cs" />
     <Compile Include="Models\Database\JogadoresItem.cs" />
@@ -241,6 +242,9 @@
     <Content Include="Views\Admin\RegistrarUsuario.cshtml" />
     <Content Include="Views\Admin\DetalhesEvento.cshtml" />
     <Content Include="Views\Admin\EditarEvento.cshtml" />
+    <Content Include="Views\Admin\CriarEvento.cshtml" />
+    <Content Include="Views\Admin\Campeonatos.cshtml" />
+    <Content Include="Views\Admin\DetalhesCampeonato.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-jetfuel\EixoX\EixoX.csproj">

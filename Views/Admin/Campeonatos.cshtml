@@ -1,0 +1,91 @@
+﻿@using CampeonatosNParty.Models.Database
+@model EixoX.Data.ClassSelectResult<Campeonatos>
+@{
+    ViewBag.Title = "Campeonatos";
+
+    Dictionary<int, string> jogos = Jogos.Select().ToDictionary(g => g.Id, f => f.Nome);
+    Dictionary<int, string> eventos = Eventos.Select().ToDictionary(g => g.Id, f => f.Nome);
+    Dictionary<int, string> statusCampeonato = StatusCampeonato.Select().ToDictionary(g => g.Id, f => f.Nome);
+    
+    List<Campeonatos> campeonatosList;
+    if (Model == null)
+    {
+        campeonatosList = NPartyDb<Campeonatos>.Instance.Select().OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending).Page(25, 0).ToList();
+    }
+    else
+    {
+        campeonatosList = Model.ToList();
+    }
+
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+    string filter = Request.QueryString["filter"] != null ? "filter=" + Request.QueryString["filter"] : "";
+}
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/Admin")">Admin</a> <span class="divider">/</span></li>
+    <li class="active">Eventos</li>
+</ul>
+
+@if (ViewData["CurrentUser"] != null && ((CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"]).Nivel_Permissao > 90)
+{
+    <a class="btn btn-large pull-right" href="@Url.Content("/Admin/CriarCampeonato/")">Criar novo campeonato</a>
+}
+
+<div class="page-header">
+  <h1>Campeonatos</h1>
+</div>
+<form method="get" class="form-search pull-right">
+    <div class="input-append">
+        <input type="text" name="filter" placeholder="Procurar por evento" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
+        <button class="btn btn-primary">
+            <i class="icon-search icon-white"></i>
+        </button>
+    </div>
+</form>
+@{
+    if (campeonatosList.Count > 0)
+    {
+        <table class="table table-bordered table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Evento</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (Campeonatos campeonato in campeonatosList)
+                {
+                    <tr>
+                        <td><a href="@Url.Content("~/Admin/DetalhesCampeonato/" + campeonato.Id)">@jogos[campeonato.IdJogo]</a> <span class="badge">@statusCampeonato[campeonato.IdStatus]</span></td>
+                        <td>@eventos[campeonato.IdEvento]</td>
+                        <td>@campeonato.DataCampeonato.ToString("dd/MM/yyyy")</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        if(Model.HasPreviousPages || Model.HasMorePages)
+        {
+            @Html.Raw("<div class=\"paginationButton\">");
+            filter = string.IsNullOrEmpty(filter) ? filter : "&" + filter;
+            
+            if(Model.HasPreviousPages)
+            {
+                
+                <a class="pull-left btn btn-primary" href="/Admin/Campeonatos/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+            }
+            if(Model.HasMorePages)
+            {
+                <a class="pull-right btn btn-primary" href="/Admin/Campeonatos/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+            }
+            @Html.Raw("</div>");
+        }
+    }
+    else
+    {
+        <div class="row">
+            <div class="span12">
+                <p>Nenhum campeonato foi encontrado.</p>
+            </div>
+        </div>
+    }
+}
