@@ -31,6 +31,13 @@ namespace CampeonatosNParty.Models.Database
         public DateTime DataCampeonato { get; set; }
 
         [DatabaseColumn]
-        public string ImagemURL { get; set; }
+        public string ImagemURL { private get; set; }
+
+        public string getImagemUrl()
+        {
+            if (String.IsNullOrEmpty(this.ImagemURL))
+                return "/Static/img/gameCovers/default.jpg";
+            return this.ImagemURL;
+        }
     }
 }

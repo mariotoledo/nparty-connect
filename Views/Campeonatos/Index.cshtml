@@ -1,5 +1,5 @@
 ﻿@using CampeonatosNParty.Models.Database
-@model EixoX.Data.ClassSelectResult<JogosPorConsole>
+@model EixoX.Data.ClassSelectResult<CampeonatoPorEvento>
 @{
     ViewBag.Title = "Index";
 
@@ -26,21 +26,25 @@
         <div class="row">
             <div class="span12">
                    @{
-                        foreach (JogosPorConsole[] jogosArray in Model.Segment(4))
+                        foreach (CampeonatoPorEvento[] campeonatosArray in Model.Segment(4))
                         {
                             <ul class="thumbnails">
-                                @foreach(JogosPorConsole jogo in jogosArray)
+                                @foreach (CampeonatoPorEvento campeonato in campeonatosArray)
                                 {
-                                    if(jogo != null)
+                                    if (campeonato != null)
                                     {
                                         <li class="span3">
-                                            <a class="thumbnail" href="@Url.Content("~/Campeonatos/Detalhes/" + jogo.IdJogo)">
-                                                <img alt="@jogo.NomeJogo" src="@jogo.ImagemJogo" />
-				                                <h4>@jogo.NomeJogo</h4>
+                                            <a class="thumbnail" href="@Url.Content("~/Campeonatos/Detalhes/" + campeonato.IdCampeonato)">
+                                                <img alt="@campeonato.NomeJogo" src="@campeonato.getImagemUrl()"  />
+				                                <h4>@campeonato.NomeJogo</h4>
 				                                <div class="textDescription">
-                                                    @if (!string.IsNullOrEmpty(jogo.NomeConsole))
+                                                    @if (!string.IsNullOrEmpty(campeonato.NomeEvento))
                                                     {
-                                                        <div><b>Console:</b> @jogo.NomeConsole</div>
+                                                        <div><b>Evento:</b> @campeonato.NomeEvento</div>
+                                                    }
+                                                    @if (campeonato.DataCampeonato != null)
+                                                    {
+                                                        <div><b>Data:</b> @campeonato.DataCampeonato.ToString("dd/MM/yyyy")</div>
                                                     }
 				                                </div>
                                             </a>

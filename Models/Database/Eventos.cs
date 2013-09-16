@@ -52,6 +52,24 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         [UISingleline]
-        public string ImagemURL { get; set; }
+        public string ImagemURL { private get; set; }
+
+        [DatabaseColumn]
+        [UISingleline]
+        public string CoverURL { private get; set; }
+
+        public string getCoverUrl()
+        {
+            if (String.IsNullOrEmpty(this.CoverURL))
+                return "/Static/img/eventsLogos/defaultCover.jpg";
+            return this.CoverURL;
+        }
+
+        public string getImagemUrl()
+        {
+            if (String.IsNullOrEmpty(this.ImagemURL))
+                return "/Static/img/eventsLogos/default.jpg";
+            return this.ImagemURL;
+        }
     }
 }

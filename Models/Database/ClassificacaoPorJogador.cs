@@ -14,21 +14,40 @@ namespace CampeonatosNParty.Models.Database
     public class ClassificacaoPorJogador : NPartyDbModel<ClassificacaoPorJogador>
     {
         [DatabaseColumn]
+        public int IdCampeonato { get; set; }
+
+        [DatabaseColumn]
         public int IdUsuario { get; set; }
 
         [DatabaseColumn]
-        public int Pontuacao { get; set; }
+        public string NomeJogo { get; set; }
+
+        [DatabaseColumn]
+        public string ImagemURLJogo { private get; set; }
+
+        [DatabaseColumn]
+        public int IdEvento;
+
+        [DatabaseColumn]
+        public string NomeEvento { get; set; }
 
         [DatabaseColumn]
         public DateTime DataCampeonato { get; set; }
 
-        [DatabaseColumn]
-        public string NomeCampeonato { get; set; }
+        public int Colocacao
+        {
+            get
+            {
+                return Convert.ToInt32(NPartyDb<ClassificacaoPorJogador>.Instance.Database.ExecuteScalarText(
+                    "SELECT [dbo].[GetPlayerPositionInChampionship] (" + this.IdUsuario + "," + this.IdCampeonato + ")"));
+            }
+        }
 
-        [DatabaseColumn]
-        public string ImagemJogoCampeonato { get; set; }
-
-        [DatabaseColumn]
-        public string NomeEvento { get; set; }
+        public string getImagemURLJogo()
+        {
+            if (String.IsNullOrEmpty(this.ImagemURLJogo))
+                return "/Static/img/gameCovers/default.jpg";
+            return this.ImagemURLJogo;
+        }
     }
 }

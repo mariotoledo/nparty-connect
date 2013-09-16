@@ -30,11 +30,11 @@ namespace CampeonatosNParty.Models.ViewModel
             }
         }
 
-        public EixoX.Data.ClassSelect<JogosPorConsole> jogosPorConsole
+        public EixoX.Data.ClassSelect<CampeonatoPorEvento> jogosPorConsole
         {
             get 
             {
-                return NPartyDb<JogosPorConsole>.Instance.Select();
+                return NPartyDb<CampeonatoPorEvento>.Instance.Select();
             }
         }
     }

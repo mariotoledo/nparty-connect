@@ -104,7 +104,7 @@ namespace CampeonatosNParty.Controllers
             {
                 Apelido = CurrentUsuario.Apelido,
                 Telefone = CurrentUsuario.Telefone,
-                UrlFotoPerfil = CurrentUsuario.UrlFotoPerfil.CompareTo("/Static/img/playerPhoto/default.jpg") == 0 ? "" : CurrentUsuario.UrlFotoPerfil,
+                UrlFotoPerfil = CurrentUsuario.getUrlFotoPerfil(),
                 Id_Estado = CurrentUsuario.Id_Estado,
                 Id_Cidade = CurrentUsuario.Id_Cidade,
                 Newsletter = CurrentUsuario.Newsletter,

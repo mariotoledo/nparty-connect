@@ -11,7 +11,7 @@ using System.Web.Mvc;
 
 namespace CampeonatosNParty.Controllers
 {
-    public class EventosController : Controller
+    public class EventosController : AuthenticationBasedController
     {
         //
         // GET: /Home/

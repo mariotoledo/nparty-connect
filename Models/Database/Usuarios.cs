@@ -70,7 +70,7 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn]
         [UISingleline]
         [MaxLength(255)]
-        public string UrlFotoPerfil { get; set; }
+        public string UrlFotoPerfil { private get; set; }
 
         [DatabaseColumn]
         [UISingleline]
@@ -85,5 +85,12 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn]
         [UICheckbox]
         public bool Newsletter { get; set; }
+
+        public string getUrlFotoPerfil()
+        {
+            if (String.IsNullOrEmpty(this.UrlFotoPerfil))
+                return "/Static/img/playerPhoto/default.jpg";
+            return this.UrlFotoPerfil;
+        }
     }
 }

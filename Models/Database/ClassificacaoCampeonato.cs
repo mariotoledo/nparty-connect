@@ -23,16 +23,19 @@ namespace CampeonatosNParty.Models.Database
         public string Nome { get; set; }
 
         [DatabaseColumn]
-        [Required]
         public string Apelido { get; set; }
 
         [DatabaseColumn]
-        public int NumeroClassificacao { get; set; }
+        public int Pontuacao;
 
         [DatabaseColumn]
-        public int Pontuacao { get; set; }
+        public string UrlFotoPerfil { private get; set; }
 
-        [DatabaseColumn]
-        public string ImagemURL { get; set; }
+        public string getUrlFotoPerfil()
+        {
+            if (String.IsNullOrEmpty(this.UrlFotoPerfil))
+                return "/Static/img/playerPhoto/default.jpg";
+            return this.UrlFotoPerfil;
+        }
     }
 }

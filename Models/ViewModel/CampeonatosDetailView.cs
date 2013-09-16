@@ -9,17 +9,24 @@ namespace CampeonatosNParty.Models.ViewModel
     public class CampeonatosDetailView
     {
         public Jogos jogo { get; set; }
+        public Consoles console { get; set; }
         public Eventos evento { get; set; }
         public Campeonatos campeonato { get; set; }
-        public IEnumerable<InscricaoUsuario[]> jogadoresInscritos { get; set; }
+        public IEnumerable<ClassificacaoCampeonato[]> classificacao { get; set; }
 
         public CampeonatosDetailView(int campeonatoId)
         {
             campeonato = Campeonatos.WithIdentity(campeonatoId);
-            jogo = Jogos.WithIdentity(campeonato.IdJogo);
-            evento = Eventos.WithIdentity(campeonato.IdEvento);
+            if (campeonato != null)
+            {
+                jogo = Jogos.WithIdentity(campeonato.IdJogo);
+                console = Consoles.WithIdentity(jogo.IdConsole);
+                evento = Eventos.WithIdentity(campeonato.IdEvento);
+            }
 
-            jogadoresInscritos = InscricaoUsuario.Select().Where("IdCampeonato", campeonato.Id).ToList().Segment(6);
+            classificacao = ClassificacaoCampeonato.Select()
+                            .Where("IdCampeonato", campeonatoId)
+                            .OrderBy("Pontuacao", EixoX.Data.SortDirection.Descending).Segment(6);
         }
     }
 }

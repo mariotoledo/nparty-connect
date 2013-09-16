@@ -8,21 +8,21 @@ using System.Web.Mvc;
 
 namespace CampeonatosNParty.Controllers
 {
-    public class CampeonatosController : Controller
+    public class CampeonatosController : AuthenticationBasedController
     {
         //
         // GET: /Campeonatos/
 
-        ClassSelectResult<JogosPorConsole> result;
+        ClassSelectResult<CampeonatoPorEvento> result;
 
         public ActionResult Index()
         {
             int page = 0;
             int.TryParse(Request.QueryString["page"], out page);
 
-            ClassSelect<JogosPorConsole> search = JogosPorConsole.Search(Request.QueryString["filter"]);
+            ClassSelect<CampeonatoPorEvento> search = CampeonatoPorEvento.Search(Request.QueryString["filter"]);
             search.Page(12, page);
-            search.OrderBy("NomeJogo");
+            search.OrderBy("DataCampeonato", SortDirection.Descending);
 
             result = search.ToResult();
 

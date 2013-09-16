@@ -101,7 +101,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AuthenticationBasedController.cs" />
     <Compile Include="Controllers\CampeonatosController.cs" />
@@ -116,14 +115,10 @@
     <Compile Include="Models\Cookie\CookieContext.cs" />
     <Compile Include="Models\Database\Cidade.cs" />
     <Compile Include="Models\Database\Campeonatos.cs" />
-    <Compile Include="Models\Database\Classificacao.cs" />
     <Compile Include="Models\Database\Consoles.cs" />
     <Compile Include="Models\Database\CampeonatoPorEvento.cs" />
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
-    <Compile Include="Models\Database\InscricaoUsuario.cs" />
-    <Compile Include="Models\Database\JogosPorConsole.cs" />
-    <Compile Include="Models\Database\DetalhesCampeonatoPorEvento.cs" />
     <Compile Include="Models\Database\JogadoresItem.cs" />
     <Compile Include="Models\Database\NPartyDbExtensions.cs" />
     <Compile Include="Models\Database\StatusCampeonato.cs" />
@@ -169,7 +164,11 @@
     <Content Include="Static\css\bootstrap.css" />
     <Content Include="Static\css\bootstrap.min.css" />
     <Content Include="Static\css\nparty.css" />
+    <Content Include="Static\img\eventsLogos\animeFriends.jpg" />
+    <Content Include="Static\img\eventsLogos\default.jpg" />
+    <Content Include="Static\img\eventsLogos\defaultCover.jpg" />
     <Content Include="Static\img\gameCovers\default.jpg" />
+    <Content Include="Static\img\gameCovers\defaultCover.jpg" />
     <Content Include="Static\img\gameCovers\mariokart7.jpg" />
     <Content Include="Static\img\glyphicons-halflings-white.png" />
     <Content Include="Static\img\glyphicons-halflings.png" />
@@ -234,17 +233,7 @@
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Mario.pubxml" />
     <Content Include="Views\Jogadores\EditarMinhasInformacoes.cshtml" />
-    <Content Include="Views\Admin\Index.cshtml" />
-    <Content Include="Views\Admin\Usuarios.cshtml" />
-    <Content Include="Views\Admin\DetalhesUsuario.cshtml" />
-    <Content Include="Views\Admin\EditarUsuario.cshtml" />
-    <Content Include="Views\Admin\Eventos.cshtml" />
-    <Content Include="Views\Admin\RegistrarUsuario.cshtml" />
-    <Content Include="Views\Admin\DetalhesEvento.cshtml" />
-    <Content Include="Views\Admin\EditarEvento.cshtml" />
-    <Content Include="Views\Admin\CriarEvento.cshtml" />
-    <Content Include="Views\Admin\Campeonatos.cshtml" />
-    <Content Include="Views\Admin\DetalhesCampeonato.cshtml" />
+    <Content Include="Views\Shared\ErroNotFound.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-jetfuel\EixoX\EixoX.csproj">

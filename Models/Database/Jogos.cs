@@ -25,6 +25,23 @@ namespace CampeonatosNParty.Models.Database
         public int IdConsole { get; set; }
 
         [DatabaseColumn]
-        public string ImagemURL { get; set; }
+        public string ImagemURL { private get; set; }
+
+        [DatabaseColumn]
+        public string CoverURL { private get; set; }
+
+        public string getCoverUrl()
+        {
+            if (String.IsNullOrEmpty(this.CoverURL))
+                return "/Static/img/gameCovers/defaultCover.jpg";
+            return this.CoverURL;
+        }
+
+        public string getImagemUrl()
+        {
+            if (String.IsNullOrEmpty(this.ImagemURL))
+                return "/Static/img/gameCovers/default.jpg";
+            return this.ImagemURL;
+        }
     }
 }

@@ -1,9 +1,5 @@
 ﻿@model CampeonatosNParty.Models.ViewModel.UsuariosDetailView
 @{
-    CampeonatosNParty.Models.Database.Cidade cidade = CampeonatosNParty.Models.Database.Cidade.WithIdentity(Model.usuario.Id_Cidade);
-    CampeonatosNParty.Models.Database.Estado estado = CampeonatosNParty.Models.Database.Estado.WithIdentity(Model.usuario.Id_Estado);
-    CampeonatosNParty.Models.Database.Ranking ranking = CampeonatosNParty.Models.Database.Ranking.WithMember("IdUsuario", Model.usuario.Id);
-    
     if(Model != null)
     {
         ViewBag.Title = Model.usuario.Nome;
@@ -16,89 +12,96 @@
             <li class="active">@Model.usuario.Nome @apelido</li>
         </ul>
 
-        <div class="page-header">
-          <h2>@Model.usuario.Nome <small>@apelido</small></h2><br />
-        </div>
         <div class="row">
-            <div class="span3">
-                <h3>Dados Gerais</h3>
-                <img src="@Model.usuario.UrlFotoPerfil" alt="@Model.usuario.UrlFotoPerfil" style="margin-bottom: 20px;"/>
-            @{
-                if (ranking != null)
-                {
-                    <div class="row">
-                        <div class="span1"><b>Pontuação</b></div>
-                        <div class="span2">@ranking.Pontos pontos</div>
-                    </div>
-                }
-                if(cidade != null && !string.IsNullOrEmpty(cidade.Nome))
-                {
-                    string cidadeSigla = estado != null && !string.IsNullOrEmpty(estado.Sigla) ? cidade.Nome + " - " + estado.Sigla : cidade.Nome;
-                    <div class="row">
-                        <div class="span1"><b>Cidade</b></div>
-                        <div class="span2">@cidadeSigla</div>
-                    </div>
-                }
-                if (!string.IsNullOrEmpty(Model.usuario.LiveId))
-                {
-                    <div class="row">
-                        <div class="span1"><b>Live Id</b></div>
-                        <div class="span2">@Model.usuario.LiveId</div>
-                    </div>
-                }
-                if (!string.IsNullOrEmpty(Model.usuario.PsnId))
-                {
-                    <div class="row">
-                        <div class="span1"><b>PSN Id</b></div>
-                        <div class="span2">@Model.usuario.PsnId</div>
-                    </div>
-                }
-            }
+            <div class="span4">
+                <img src="@Model.usuario.getUrlFotoPerfil()" alt="@Model.usuario.Nome" style="margin-bottom: 20px;"/>
             </div>
             <div class="span8">
-                @{
-                    if(Model.classificacao.Count > 0)
-                    {
-                        <h3>Histórico de campeonatos participados</h3>
-                        int i = 0;
-                    
-                        foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador classificacao in Model.classificacao)
+                <h2>@Model.usuario.Nome <small>@apelido</small></h2>
+                <div class="row">
+                    <div class="span4">
+                    @{
+                        <div class="pontuacao"><b>Pontuação</b>: @Model.Pontuacao pontos</div>
+                        if (Model.usuario.Nascimento != null && Model.usuario.Nascimento != DateTime.MinValue)
                         {
-                            if (i == 0)
+                            int idade = DateTime.Now.Year - Model.usuario.Nascimento.Year;
+                            if (DateTime.Now.Month < Model.usuario.Nascimento.Month || 
+                                (DateTime.Now.Month == Model.usuario.Nascimento.Month && 
+                                DateTime.Now.Day < Model.usuario.Nascimento.Day))
                             {
-                                @Html.Raw("<ul class=\"thumbnails\">");
+                                idade--;
                             }
-                            @Html.Raw("<li class=\"span2\">");
-                            <a class="thumbnail">
-                                <img data-src="holder.js/300x300" alt="@classificacao.NomeCampeonato" src="@classificacao.ImagemJogoCampeonato" />
-				                <h4>@classificacao.NomeCampeonato</h4>
-				                <div class="textDescription">
-                                    @if (!string.IsNullOrEmpty(classificacao.NomeEvento))
+                            <div><b>Idade</b>: @idade anos</div>
+                        }
+                        if (Model.cidade != null && !string.IsNullOrEmpty(Model.cidade.Nome))
+                        {
+                            string cidadeSigla = Model.estado != null &&
+                                    !string.IsNullOrEmpty(Model.estado.Sigla) ?
+                                    Model.cidade.Nome + " - " + Model.estado.Sigla :
+                                    Model.cidade.Nome;
+                            <div><b>Cidade</b>: @cidadeSigla</div>
+                        }
+                    }
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+         <div class="row">
+            <div class="span12">
+                @{
+                    if (Model.campeonatos != null && Model.campeonatos.Count<CampeonatosNParty.Models.Database.ClassificacaoPorJogador[]>() > 0)
+                    {
+                        <h3 id="campeonatosHeader">Histórico de Campeonatos</h3>
+                        <script type="text/javascript">
+                            var showHeaderCampeonatos = false;
+                        </script>
+                        foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador[] campeonatosArray in Model.campeonatos)
+                        {
+                            <ul class="thumbnails">
+                                @foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador campeonato in campeonatosArray)
+                                {
+                                    if (campeonato != null)
                                     {
-                                        <div><b>Evento:</b> @classificacao.NomeEvento</div>
+                                        <li class="span3">
+                                            <a class="thumbnail" href="@Url.Content("~/Campeonatos/Detalhes/" + campeonato.IdCampeonato)">
+                                                <img alt="@campeonato.NomeJogo" src="@campeonato.getImagemURLJogo()" />
+                                                <h4>@campeonato.NomeJogo</h4>
+                                                <div class="textDescription">
+                                                    @if (!string.IsNullOrEmpty(campeonato.NomeEvento))
+                                                    {
+                                                        <div><b>Evento:</b> @campeonato.NomeEvento</div>
+                                                    }
+                                                    @if (campeonato.DataCampeonato != null)
+                                                    {
+                                                        <div><b>Data:</b> @campeonato.DataCampeonato.ToString("dd/MM/yyyy")</div>
+                                                    }
+                                                    @{
+                                                        string classificacao = campeonato.Colocacao == 0 ? "Não classificado" : campeonato.Colocacao.ToString() + "º lugar";
+                                                        <div><b>Colocação:</b> @classificacao</div>
+                                                    }
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <script type="text/javascript">
+                                            showHeaderCampeonatos = true;
+                                        </script>
                                     }
-                                    @if (classificacao.DataCampeonato != null)
-                                    {
-                                        <div><b>Data:</b> @classificacao.DataCampeonato.ToString("dd/MM/yyyy")</div>
-                                    }
-                                    @if (classificacao.Pontuacao > 0)
-                                    {
-                                        <div><b>Pontos:</b> @classificacao.Pontuacao</div>
-                                    }
-				                </div>
-                            </a>
-                            @Html.Raw("</li>")
-                            i++;
-
-                            if (classificacao == Model.classificacao.Last() || i == 4)
-                            {
-                                @Html.Raw("</ul>")
-                                i = 0;
-                            }
+                                }
+                            </ul>
                         }
                     }
                 }
             </div>
         </div>
     }
+    else
+    {
+        Html.RenderPartial("ErroNotFound");
+    }
 }
+<script type="text/javascript">
+    if (showHeaderCampeonatos == false) {
+        document.getElementById('campeonatosHeader').style.display = 'none';
+    }
+</script>
