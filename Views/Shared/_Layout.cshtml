@@ -1,9 +1,36 @@
 ﻿@{
-    ViewBag.Title = "Campeonatos N-Party";
+    ViewBag.Title = "Campeonatos N-Party (Beta)";
     int topMenu = Convert.ToInt32(ViewData["TopMenu"]);
     CampeonatosNParty.Models.Database.Usuarios currentUser = (CampeonatosNParty.Models.Database.Usuarios) ViewData["CurrentUser"];
 }
+<!-- 
+    
+        ????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+      IIIIIII++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++II?
+    IIIII:   ,=?III?:                                                                                               =II?
+   III?.  ?I??????????I                                                                                             =II?
+ IIII.  IIIIIIIIIIIIII=                                                                                             =II?
+ II7. ~IIIIIIIIIIIIIII    I~                                                                                        =II?
+777  :IIIIII7IIIIIIII7   ,II7   .777777777777 777777777777?     77777    ~77777777777I.I777777777777=7777+   ~7777  =77I
+77+  7777777~ ,777777=   I777:  .77777777777777777777777777I   .77777:   ~7777777777777I777777777777=7777+   ~7777  =77+
+7$  =7777777    ~777$   ,7777$  .777777777777777777777777777   +77777$   ~77777777777777777777777777+7777+   ~7777  =77.
+$I .$7777777     .+7+   I77777= .7777:   ?777$7777$    $7777  .$777777+  ~7777    +777$    ,777$.   :$777+   ~$777  =$$ 
+$= ,$$$$$$$.       ,    $$$$$$I .$$$$:   ?$$$$$$$$$$$$$$$$$$  I$$$$$$$$  ~$$$$$$$$$$$$$    ,$$$$.   :$$$$$$$$$$$$$  =$$ 
+$? .Z$$$$$?            :$$$$$$? .$$$$:   I$$$$$$$$$$$$$$$$Z   Z$$$:$$$$. ~$$$$.$$$$$$$,    ,$$$Z.   .I$$$$$$$$$$$Z  =$$ 
+ZZ .7ZZZZZ    .O.      $ZZZZZZ, .ZZZZ:   IZZZZZZZZZ......    :ZZZZ $ZZZ$ ~ZZZZ ,ZZZZ~      ,ZZZZ.      ..?ZZZ$..    =ZZ 
+ZZ, :ZZZZO    $ZZ7    :ZZZZZZ$  .ZZZZ:   IZZZZZZZZO         .ZZZZZ =ZZZZ,~ZZZZ  ?ZZZZ      ,ZZZZ.        ?ZZZ$      =ZZ 
+ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ   OZZZO     ,ZZZO.        IZZZZ      =ZZ 
+ ZZ? .OOZ    OOOOOOOO OOOOOO.   .OOOO:   IOOOOOOOOO         OOOOZ ~OOOOOO~OOOO   ,OOOO,    ,OOOO.        IOOOZ      =ZZ 
+ OOOO .I    ,OOOOOOOOOOOOO8                                                                                         =OO 
+  OOO8      OOOOOOOOOOOO8=                                                                                          =OO 
+   OOOO8   .8888888888?.                                                                                            =OO 
+     OOOOOO:   ....                                                                                                 =8O 
+     III888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888OOOOOOOOOOOOO88888 
+    IIIIIII7OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 
 
+    N-Party Campeonatos v1.0b
+    Copyright N-Party 2013 - Todos os direitos reservados.
+     -->
 <html>
 <head>
     <title>@ViewBag.Title</title>
@@ -15,55 +42,87 @@
     <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/nparty.css")" />
 </head>
 <body>
-    <div class="container" id="main-wrapper">
-			<div class="header">
-				<div class="row">
-					<div class="span3">
-						<div class="logo" style="margin: 5px 5px 5px 5px;">
-							<a href="/"><img src="/Static/img/template/logo.png" style="height: 60px;" /></a>
-						</div>
-					</div>
-					<div class="span9">
-						<div class="nav-collapse collapse">
-							<ul class="nav">
-								<li class="@(topMenu == 1 ? "active" : "")"><a href="@Url.Content("~/Eventos/")">Eventos</a></li>
-                                <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
-                                <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
-							</ul>
-							<ul class="nav" style="float: right;">
-								 @if (currentUser == null)
-                                {
-                                    <li><a href="@Url.Content("~/Home/Login")">Login</a></li>
-                                }
-                                else
-                                {  
-                                    <li class="dropdown">
-                                        <a href="#" class="dropdown-toggle" id="loginLabel" role="button" data-toggle="dropdown">Olá, @(currentUser.Nome) <b class="caret" style="margin-top: 10px"></b></a>
-                                        <ul class="dropdown-menu" aria-labelledby="loginLabel" role="menu">
-                                          <li><a href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)">Meu Perfil</a></li>
-                                          <li><a href="@Url.Content("~/Jogadores/EditarMinhasInformacoes/")">Editar Minhas Informações</a></li>
-                                          @if (currentUser.Nivel_Permissao > 90)
-                                          {
-                                              <li><a href="@Url.Content("~/Admin/")">Painel Administrativo</a></li>
-                                          }
-                                          <li class="divider"></li>
-                                          <li><a href="@Url.Content("~/Home/Logout")">Logout</a></li>
-                                        </ul>
-                                    </li>  
-                                }
-							</ul>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="main-content">
-                 @RenderBody()
+    <div class="container" style="margin-top: 15px;">
+        <div class="header">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="brand"><img src="/Static/img/template/logoNPartyCampeonatosSmall.png" alt="M-Party Campeonatos"/></a>
+			        <div class="nav-collapse collapse" id="topMenu">
+				        <ul class="nav pull-right">
+					        <li class="@(topMenu == 1 ? "active" : "")"><a href="@Url.Content("~/Eventos/")">Eventos</a></li>
+                            <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
+                            <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
+                            @if (currentUser == null)
+                            {
+                                <li><a href="@Url.Content("~/Home/Login")">Login</a></li>
+                            }
+                            else
+                            {  
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" id="loginLabel" role="button" data-toggle="dropdown">Olá, @(currentUser.Nome) <b class="caret" style="margin-top: 10px"></b></a>
+                                    <ul class="dropdown-menu" aria-labelledby="loginLabel" role="menu">
+                                        <li><a href="@Url.Content("~/Jogadores/Notificacoes/")">Minhas Notificações</a></li>
+                                        <li><a href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)">Meu Perfil</a></li>
+                                        <li><a href="@Url.Content("~/Jogadores/EditarMinhasInformacoes/")">Editar Minhas Informações</a></li>
+                                        <li class="divider"></li>
+                                        <li><a href="@Url.Content("~/Home/Logout")">Logout</a></li>
+                                    </ul>
+                                </li>  
+                            }
+				        </ul>
+			        </div>
+                </div>
             </div>
-            <footer>
-				<hr>
-				<p style="float: left;">© N-Party 2013 - www.nparty.com.br</p>
-				<p style="float: right">Desenvolvido e Desenhado por <b>Mario Toledo</b><br>Idealizado e Projetado por <b>Rafael Farias</b></p>
-			</footer>
+		</div>
     </div>
+    <div class="container" id="main-wrapper">
+		<div class="main-content">
+             @RenderBody()
+        </div>
+    </div>
+    <div class="container">
+        <footer>
+            <div class="row">
+                <div class="span4">
+                    <p style="float: left;">
+                        © N-Party 2013 - <a href="http://www.nparty.com.br" target="_blank">www.nparty.com.br</a>
+			        </p>
+                    <br /><br />
+                    <ul>
+                        <li><a href="/Home/Sobre">Sobre</a></li>
+                        <li><a href="/Home/Privacidade">Termos de Privacidade</a></li>
+                        <li><a href="/Home/FAQ">FAQ</a></li>
+                        <li><a href="/Home/Contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="span4">
+                    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FNParty&amp;width=370&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=141992936007985" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:370px; height:258px;" allowTransparency="true"></iframe>
+                </div>
+                <div class="span4">
+                    <p style="float: right;">
+                        Desenvolvido e Desenhado por <b><a href="http://www.eixox.com.br/Home/Pessoas/" target="_blank">Mario Toledo</a></b><br/>
+                        Idealizado e Projetado por <b>Rafael Farias</b>
+                    </p>
+                </div>
+            </div>
+		</footer>
+    </div>
+    <!-- Analytics -->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-39862825-2']);
+        _gaq.push(['_trackPageview']);
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+    </script>
 </body>
 </html>

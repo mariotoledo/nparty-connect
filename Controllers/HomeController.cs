@@ -1,6 +1,7 @@
 ﻿using CampeonatosNParty.Models.Cookie;
 using CampeonatosNParty.Models.Database;
 using CampeonatosNParty.Models.ViewModel;
+using EixoX.Data;
 using EixoX.Restrictions;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,38 @@ namespace CampeonatosNParty.Controllers
         public ActionResult Index()
         {
             return View(new HomeView());
+        }
+
+        public ActionResult ConfirmarCadastro()
+        {
+            string encryptedPersonId = Request.QueryString["confirmationKey"];
+            int personId = CampeonatosNParty.Helpers.EncryptHelper.Decrypt(encryptedPersonId);
+            
+            if(personId == 0)
+                return RedirectToAction("ConfirmarEmail", "Jogadores");
+
+            Usuarios u = NPartyDb<Usuarios>.Instance.WithIdentity(personId);
+            if (u != null)
+            {
+                if (!u.EmailConfirmado)
+                {
+                    NPartyCookie.UserId = personId;
+                    NPartyCookie.IsLoggedIn = true;
+                    NPartyDb<Cookie>.Instance.Update(NPartyCookie);
+
+                    u.EmailConfirmado = true;
+                    NPartyDb<Usuarios>.Instance.Update(u);
+
+                    ViewData["Titulo"] = "Obrigado por confirmar seu cadastro!";
+                }
+                else
+                {
+                    ViewData["Titulo"] = "Este email já foi confirmado.";
+                }                
+
+                return View();
+            }
+            return RedirectToAction("ConfirmarEmail", "Jogadores");
         }
 
         public ActionResult MigrateUsers()
@@ -96,7 +129,9 @@ namespace CampeonatosNParty.Controllers
                 {
                     if (CampeonatosNParty.Helpers.RegisterHelper.CheckValidPassword(usuario.Senha, model.Senha))
                     {
-                        //passwords match, saving into cookie
+                        if(!usuario.EmailConfirmado)
+                            return RedirectToAction("ConfirmarEmail", "Jogadores");
+
                         NPartyCookie.UserId = usuario.Id;
                         NPartyCookie.IsLoggedIn = true;
                         NPartyDb<Cookie>.Instance.Save(NPartyCookie);
@@ -128,6 +163,99 @@ namespace CampeonatosNParty.Controllers
             this.NPartyCookie.IsLoggedIn = false;
             NPartyDb<Cookie>.Instance.Save(NPartyCookie);
             return Redirect("~/Home/");
+        }
+
+        [HttpGet]
+        public ActionResult Sobre()
+        {
+            return View("Sobre");
+        }
+
+        [HttpGet]
+        public ActionResult Privacidade()
+        {
+            return View("Privacidade");
+        }
+
+        [HttpGet]
+        public ActionResult FAQ()
+        {
+            return View("FAQ");
+        }
+
+        [HttpGet]
+        public ActionResult Contato()
+        {
+            if (CurrentUsuario == null)
+            {
+                return View("Contato", new CampeonatosNParty.Models.StructModel.Contato()); 
+            }
+            return View("Contato", new CampeonatosNParty.Models.StructModel.Contato{
+                Nome = CurrentUsuario.Nome,
+                Email = CurrentUsuario.Email,
+                Enviado = false
+            });
+        }
+
+        [HttpPost]
+        public ActionResult Contato(FormCollection form, CampeonatosNParty.Models.StructModel.Contato contato)
+        {
+            if (String.IsNullOrEmpty(form["Nome"]))
+            {
+                ViewData["Error"] = "O campo nome não pode estar vazio.";
+                return View("Contato", contato);
+            }
+            if (String.IsNullOrEmpty(form["Email"]))
+            {
+                ViewData["Error"] = "O campo email não pode estar vazio.";
+                return View("Contato", contato);
+            }
+            if (!EixoX.ValidationHelper.IsEmail(form["Email"]))
+            {
+                ViewData["Error"] = "Por favor, digite um email válido.";
+                return View("Contato", contato);
+            }
+            if (String.IsNullOrEmpty(form["Mensagem"]))
+            {
+                ViewData["Error"] = "O campo de mensagem não pode estar vazio";
+                return View("Contato", contato);
+            }
+            if (contato.Enviado)
+            {
+                ViewData["Error"] = "Uma mensagem já havia sido enviada, e nós não gostamos de flood :(";
+                return View("Contato", contato);
+            }
+            
+            CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+            emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/contatoTemplate.xml")));
+
+            IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+            infoChanges.Add("[=PersonName]", contato.Nome);
+            infoChanges.Add("[=PersonEmail]", contato.Email);
+            infoChanges.Add("[=PersonMessage]", contato.Mensagem);
+
+            emailTemplate.Send(infoChanges, "Contato Campeonatos N-Party", "contato@nparty.com.br");
+
+            ViewData["Success"] = "Obrigado por entrar em contato. Em breve responderemos a sua mensagem! :)";
+
+            //removendo a mensagem antes de enviar
+            contato.Mensagem = "";
+            //setando uma flag para minimizar o flood
+            contato.Enviado = true;
+            return View("Contato", contato);
+        }
+
+        public ActionResult Ranking()
+        {
+            int page = 0;
+            int.TryParse(Request.QueryString["page"], out page);
+
+            ClassSelect<CampeonatosNParty.Models.Database.Ranking> search = CampeonatosNParty.Models.Database.Ranking.Search(Request.QueryString["filter"]);
+            search.Page(18, page);
+            search.OrderBy("NomeUsuario");
+
+            return View(search.ToResult());
         }
     }
 }

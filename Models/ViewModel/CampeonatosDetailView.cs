@@ -26,7 +26,7 @@ namespace CampeonatosNParty.Models.ViewModel
 
             classificacao = ClassificacaoCampeonato.Select()
                             .Where("IdCampeonato", campeonatoId)
-                            .OrderBy("Pontuacao", EixoX.Data.SortDirection.Descending).Segment(6);
+                            .OrderBy("Classificacao", EixoX.Data.SortDirection.Ascending).Segment(6);
         }
     }
 }

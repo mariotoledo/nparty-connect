@@ -1,12 +1,12 @@
 ﻿@using CampeonatosNParty.Models.Database
-@model EixoX.Data.ClassSelectResult<JogadoresItem>
+@model EixoX.Data.ClassSelectResult<Ranking>
 @{
-    ViewBag.Title = "Jogadores";
+    ViewBag.Title = "Ranking";
 
-    List<JogadoresItem> jogadores;
+    List<Ranking> jogadores;
     if(Model == null)
     {
-        jogadores = NPartyDb<JogadoresItem>.Instance.Select().OrderBy("Pontos", EixoX.Data.SortDirection.Descending).ToList();
+        jogadores = NPartyDb<Ranking>.Instance.Select().OrderBy("Pontos", EixoX.Data.SortDirection.Descending).ToList();
     }
     else
     {
@@ -20,10 +20,10 @@
 
 <ul class="breadcrumb">
     <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
-    <li class="active">Jogadores</li>
+    <li class="active">Ranking</li>
 </ul>
 <div class="page-header">
-  <h1>Jogadores <small>Confira todos os jogadores que ja participaram de nossos campeonatos</small></h1>
+  <h1>Ranking <small>Confira a classificação de geral dos jogadores</small></h1>
 </div>
 <form method="get" class="form-search pull-right">
     <div class="input-append">
@@ -39,11 +39,11 @@
         <div class="row">
             <div class="span12">
                    @{
-                        foreach (JogadoresItem[] jogadoresArray in jogadores.Segment(6))
+                        foreach (Ranking[] jogadoresArray in jogadores.Segment(6))
                         {
                             <ul class="thumbnails">
                                 
-                                    @foreach (JogadoresItem jogador in jogadoresArray)
+                                    @foreach (Ranking jogador in jogadoresArray)
                                     {
                                         if(jogador != null)
                                         {
@@ -55,10 +55,6 @@
                                                         @if (!string.IsNullOrEmpty(jogador.ApelidoUsuario))
                                                         {
                                                             <div><b>Apelido:</b> @jogador.ApelidoUsuario</div>
-                                                        }
-                                                        @if (!string.IsNullOrEmpty(jogador.Estado))
-                                                        {
-                                                            <div><b>Estado:</b> @jogador.Estado</div>
                                                         }
                                                         <div><b>Pontos:</b> @jogador.Pontos @if(jogador.Pontos == 1) {<span>ponto</span>}else{<span>pontos</span>}</div>
 				                                    </div>
@@ -81,11 +77,11 @@
             if(Model.HasPreviousPages)
             {
                 
-                <a class="pull-left btn btn-primary" href="/Jogadores/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+                <a class="pull-left btn btn-primary" href="/Home/Ranking/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
             }
             if(Model.HasMorePages)
             {
-                <a class="pull-right btn btn-primary" href="/Jogadores/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+                <a class="pull-right btn btn-primary" href="/Home/Ranking/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
             }
             @Html.Raw("</div>");
         }

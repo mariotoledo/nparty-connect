@@ -67,12 +67,10 @@
                                                 }
                                                 <h4>@classificacao.Nome <small>@apelido</small></h4>
                                                 <div class="textDescription">
-                                                        <div>
-                                                            <b>Colocação:</b> @colocacaoString lugar
-                                                        </div>
-                                                        @{
-                                                            colocacao++;
-                                                        }
+                                                    @{
+                                                        string classificacaoCamp = classificacao.Classificacao == 0 || classificacao.Classificacao > 4 ? " - " : classificacao.Classificacao.ToString() + "º lugar";
+                                                        <div><b>Colocação:</b> @classificacaoCamp</div>
+                                                    }
                                                 </div>
                                             </a>
                                         </li>

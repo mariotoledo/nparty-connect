@@ -14,7 +14,7 @@
 
         <div class="row">
             <div class="span4">
-                <img src="@Model.usuario.getUrlFotoPerfil()" alt="@Model.usuario.Nome" style="margin-bottom: 20px;"/>
+                <div class="photoBig" style="background-image: url('@Model.usuario.getUrlFotoPerfil()')"></div>
             </div>
             <div class="span8">
                 <h2>@Model.usuario.Nome <small>@apelido</small></h2>
@@ -41,6 +41,57 @@
                                     Model.cidade.Nome;
                             <div><b>Cidade</b>: @cidadeSigla</div>
                         }
+                        if (!String.IsNullOrEmpty(Model.usuario.PsnId))
+                        {
+                            <div class="gamingSocialId psnId">
+                                <div class="title">PSN Id</div>
+                                <div class="id">@Model.usuario.PsnId</div>
+                                @{
+                                    if (Model.PSNButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
+                                    {
+                                        <a href="#psnAdd" role="button" class="btn btn-block" data-toggle="modal">Solicitar conexão</a>
+                                    }
+                                    else if (Model.PSNButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Disabled)
+                                    {
+                                        <a role="button" class="btn btn-block disabled" data-toggle="modal">Solicitação enviada</a>
+                                    }
+                                }
+                            </div>
+                        }
+                        if (!String.IsNullOrEmpty(Model.usuario.LiveId))
+                        {
+                            <div class="gamingSocialId liveId">
+                                <div class="title">Live Id</div>
+                                <div class="id">@Model.usuario.LiveId</div>
+                                @{
+                                    if (Model.LiveButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
+                                    {
+                                                <a href="#liveAdd" role="button" class="btn" data-toggle="modal">Solicitar conexão</a>
+                                    }
+                                    else if (Model.LiveButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Disabled)
+                                    {
+                                                <a role="button" class="btn disabled" data-toggle="modal">Solicitação enviada</a>
+                                    }
+                                }
+                            </div>
+                        }
+                        if (!String.IsNullOrEmpty(Model.usuario.NintendoNetworkId))
+                        {
+                            <div class="gamingSocialId nintendoId">
+                                <div class="title">Nintendo Network Id</div>
+                                <div class="id">@Model.usuario.NintendoNetworkId</div>
+                                @{
+                            if (Model.NintendoNetworkButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
+                            {
+                                        <a href="#nintendoNetworkAdd" role="button" class="btn" data-toggle="modal">Solicitar conexão</a>
+                            }
+                            else if (Model.NintendoNetworkButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Disabled)
+                            {
+                                        <a role="button" class="btn disabled" data-toggle="modal">Solicitação enviada</a>
+                            }
+                                }
+                            </div>
+                        }
                     }
                     </div>
                 </div>
@@ -50,14 +101,14 @@
          <div class="row">
             <div class="span12">
                 @{
-                    if (Model.campeonatos != null && Model.campeonatos.Count<CampeonatosNParty.Models.Database.ClassificacaoPorJogador[]>() > 0)
-                    {
+                        if (Model.campeonatos != null && Model.campeonatos.Count<CampeonatosNParty.Models.Database.ClassificacaoPorJogador[]>() > 0)
+                        {
                         <h3 id="campeonatosHeader">Histórico de Campeonatos</h3>
                         <script type="text/javascript">
                             var showHeaderCampeonatos = false;
                         </script>
-                        foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador[] campeonatosArray in Model.campeonatos)
-                        {
+                            foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador[] campeonatosArray in Model.campeonatos)
+                            {
                             <ul class="thumbnails">
                                 @foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador campeonato in campeonatosArray)
                                 {
@@ -77,7 +128,7 @@
                                                         <div><b>Data:</b> @campeonato.DataCampeonato.ToString("dd/MM/yyyy")</div>
                                                     }
                                                     @{
-                                                        string classificacao = campeonato.Colocacao == 0 ? "Não classificado" : campeonato.Colocacao.ToString() + "º lugar";
+                                                        string classificacao = campeonato.Classificacao == 0 || campeonato.Classificacao > 4 ? " - " : campeonato.Classificacao.ToString() + "º lugar";
                                                         <div><b>Colocação:</b> @classificacao</div>
                                                     }
                                                 </div>
@@ -89,17 +140,65 @@
                                     }
                                 }
                             </ul>
+                            }
                         }
-                    }
                 }
             </div>
         </div>
+    if (Model.PSNButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
+    { 
+        <div id="psnAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="psnAddLabel">Solicitar conexão no PSN</h3>
+            </div>
+            <div class="modal-body">
+                <p>Deseja solicitar uma conexão entre seu usuário da PSN?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <a href="@Url.Content("~/Jogadores/AdicionarPSN/" + Model.usuario.Id)" class="btn btn-primary">Sim, solicitar conexão</a>
+            </div>
+        </div>
     }
-    else
+    if (Model.LiveButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
     {
-        Html.RenderPartial("ErroNotFound");
+        <div id="liveAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="liveAddLabel">Solicitar conexão na Live</h3>
+            </div>
+            <div class="modal-body">
+                <p>Deseja solicitar uma conexão entre seu usuário da Live?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <a href="@Url.Content("~/Jogadores/AdicionarLive/" + Model.usuario.Id)" class="btn btn-primary">Sim, solicitar conexão</a>
+            </div>
+        </div>
     }
-}
+    if (Model.NintendoNetworkButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
+    {
+        <div id="nintendoNetworkAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="nintendoNetworkLabel">Solicitar conexão na Nintendo Network</h3>
+            </div>
+            <div class="modal-body">
+                <p>Deseja solicitar uma conexão entre seu usuário da Nintendo Network?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <a href="@Url.Content("~/Jogadores/AdicionarNintendoNetwork/" + Model.usuario.Id)" class="btn btn-primary">Sim, solicitar conexão</a>
+            </div>
+        </div>
+    }
+     }
+     else
+     {
+         Html.RenderPartial("ErroNotFound");
+     }
+    }
 <script type="text/javascript">
     if (showHeaderCampeonatos == false) {
         document.getElementById('campeonatosHeader').style.display = 'none';

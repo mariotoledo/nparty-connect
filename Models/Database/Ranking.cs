@@ -27,5 +27,12 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public string UrlFotoPerfil { get; set; }
+
+        public string getUrlFotoPerfil()
+        {
+            if (String.IsNullOrEmpty(this.UrlFotoPerfil))
+                return "/Static/img/playerPhoto/default.jpg";
+            return this.UrlFotoPerfil;
+        }
     }
 }

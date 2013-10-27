@@ -34,14 +34,8 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn]
         public DateTime DataCampeonato { get; set; }
 
-        public int Colocacao
-        {
-            get
-            {
-                return Convert.ToInt32(NPartyDb<ClassificacaoPorJogador>.Instance.Database.ExecuteScalarText(
-                    "SELECT [dbo].[GetPlayerPositionInChampionship] (" + this.IdUsuario + "," + this.IdCampeonato + ")"));
-            }
-        }
+        [DatabaseColumn]
+        public int Classificacao { get; set; }
 
         public string getImagemURLJogo()
         {

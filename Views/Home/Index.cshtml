@@ -2,9 +2,6 @@
 @model CampeonatosNParty.Models.ViewModel.HomeView
 @{
     ViewBag.Title = "Index";
-    Eventos pastEvent = NPartyDb<Eventos>.Instance.Query(System.Data.CommandType.Text, 
-                                                    "select * from Eventos where DataEventoInicio = (select MAX(DataEventoInicio) from Eventos where DataEventoInicio < @data)",
-                                                    new System.Data.SqlClient.SqlParameter("@data", DateTime.Now.ToString("yyyy-MM-dd"))).First();
 }
 
 <div class="row">
@@ -37,103 +34,83 @@
 </div>
 <div class="content-wrap">
     <div class="row">
-        <div class="span6">
-            <h2>Top 5 Ranking</h2>
-            <table class="table table-bordered table-striped table-condensed">
-                <thead>
-                    <tr>
-                        <th width="32"></th>
-                        <th class="span2">Nome</th>
-                        <th class="span2">Nick</th>
-                        <th class="span1">Pontos</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{
-                        foreach (Ranking rank in Model.ranking)
+        <div class="span12">
+            @{
+                if (Model.ranking != null && Model.ranking.Count() > 0)
+                {
+                    <h2>Ranking <small>(<a href="~/Home/Ranking">Visualizar lista completa</a>)</small></h2>
+                    <ul class="thumbnails">
+                        @foreach (CampeonatosNParty.Models.Database.Ranking ranking in Model.ranking)
                         {
-                            <tr>
-                                <td><img src="@rank.UrlFotoPerfil" width="32"/></td>
-                                <td><a href="@Url.Content("/Jogadores/Detalhes/" + rank.IdUsuario)">@rank.NomeUsuario</a></td>
-                                <td>@rank.ApelidoUsuario</td>
-                                <td>@rank.Pontos</td>
-                            </tr>
+                            if (ranking != null)
+                            {
+                                <li class="span2">
+                                    <a class="thumbnail" href="@Url.Content("~/Jogadores/Detalhes/" + ranking.IdUsuario)">
+                                        <img alt="@ranking.NomeUsuario" src="@ranking.getUrlFotoPerfil()" />
+                                        @{
+                                            string apelido = string.IsNullOrEmpty(ranking.ApelidoUsuario) ? "" : "(" + ranking.ApelidoUsuario + ")";
+                                        }
+                                        <h4>@ranking.NomeUsuario <small>@apelido</small></h4>
+                                        <div class="textDescription">
+                                                <div>
+                                                    <b>Pontos:</b> @ranking.Pontos pontos
+                                                </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
                         }
-                    }
-                </tbody>
-            </table>
-        </div>
-        <div class="span3">
-            <h2>Último Evento</h2>
-            <img src="@pastEvent.ImagemURL"/>
-            <h4>@pastEvent.Nome</h4>
-            @{
-                string dataEventoPassado;
-                if (pastEvent.DataEventoInicio.CompareTo(pastEvent.DataEventoFim) > 0)
-                {
-                    dataEventoPassado = pastEvent.DataEventoInicio.ToString("dd/MM/yyyy");
+                    </ul>
                 }
-                else
-                {
-                    dataEventoPassado = pastEvent.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + pastEvent.DataEventoFim.ToString("dd/MM/yyyy");
-                }
-                <div>Data: @dataEventoPassado</div>
-            }
-        </div>
-        <div class="span3">
-            <h2>Próximo Evento</h2>
-            <img src="@pastEvent.ImagemURL" />
-            <h4>@pastEvent.Nome</h4>
-            @{
-                string dataEventoPassado2;
-                if (pastEvent.DataEventoInicio.CompareTo(pastEvent.DataEventoFim) > 0)
-                {
-                    dataEventoPassado2 = pastEvent.DataEventoInicio.ToString("dd/MM/yyyy");
-                }
-                else
-                {
-                    dataEventoPassado2 = pastEvent.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + pastEvent.DataEventoFim.ToString("dd/MM/yyyy");
-                }
-                <div>Data: @dataEventoPassado2</div>
             }
         </div>
     </div>
     <div class="row">
         <div class="span12">
-            <h2>Campeonatos realizados</h2>
             @{
-                int gameCounter = 0;
-            }
-            <div id="gameCoverSlider" class="carousel slide">
-                <div class="carousel-inner">
-                    @foreach (JogosPorConsole[] jogosArray in Model.jogosPorConsole.Segment(5))
-                    {
-                        <div class="@(gameCounter == 0 ? "item active" : "item")">
-                            <div class="span1" style="margin-left: 0px;"></div>
-                            <div class="span10">
-                                <ul class="thumbnails">
-                                    @for (int i = 0; i < jogosArray.Length && jogosArray[i] != null; i++)
-                                    {
-                                        <li class="span2">
-                                            <a class="thumbnail campeonatoDashboard" href="@Url.Content("~/Campeonatos/Detalhes/" + jogosArray[i].IdJogo)">
-                                                <img data-src="holder.js/300x300" alt="@jogosArray[i].NomeJogo" src="@jogosArray[i].ImagemJogo">
-                                                <h4>@jogosArray[i].NomeJogo</h4>
-                                                <div class="textDescription">
-                                                    <div>Console: @jogosArray[i].NomeConsole</div>
-                                                </div>
-                                            </a>
-                                        </li>
+                if (Model.lastEvent != null)
+                {
+                    <h2>Último Evento</h2>
+                    <div class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="@Url.Content("~/Eventos/Detalhes/" + Model.lastEvent.Id)"><img src="@Model.lastEvent.getCoverUrl()" alt="@Model.lastEvent.Nome"/></a>
+                                <div class="carousel-caption white">
+                                    <h2>@Model.lastEvent.Nome</h2>
+                                    @{
+                                        if (Model.lastEventCidade != null && !string.IsNullOrEmpty(Model.lastEventCidade.Nome))
+                                        {
+                                            string cidadeSigla = Model.lastEventEstado != null && !string.IsNullOrEmpty(Model.lastEventEstado.Sigla) ?
+                                                Model.lastEventCidade.Nome + " - " + Model.lastEventEstado.Sigla :
+                                                Model.lastEventCidade.Nome;
+                                                                        <div><b>Cidade</b>: @cidadeSigla</div>
+                                        }
+
+                                        if (Model.lastEventType != null && !string.IsNullOrEmpty(Model.lastEventType.Nome))
+                                        {
+                                                                        <div><b>Tipo</b>: @Model.lastEventType.Nome</div>
+                                        }
+
+                                        if (!string.IsNullOrEmpty(Model.lastEvent.Local))
+                                        {
+                                                                        <div><b>Local</b>: @Model.lastEvent.Local</div>
+                                        }
+
+                                        if (Model.lastEvent.DataEventoInicio != null)
+                                        {
+                                            string dataEvento = Model.lastEvent.DataEventoFim != null && Model.lastEvent.DataEventoInicio.CompareTo(Model.lastEvent.DataEventoFim) == 0 ?
+                                                Model.lastEvent.DataEventoInicio.ToString("dd/MM/yyyy") :
+                                                Model.lastEvent.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + Model.lastEvent.DataEventoFim.ToString("dd/MM/yyyy");
+                                        
+                                                                        <div><b>Data</b>: @dataEvento</div>
+                                        }
                                     }
-                                </ul>
                             </div>
-                            <div class="span1"></div>
                         </div>
-                        gameCounter++;
-                    }
+                    </div>
                 </div>
-                <a class="left carousel-control black" href="#gameCoverSlider" data-slide="prev"><</a>
-                <a class="right carousel-control black" href="#gameCoverSlider" data-slide="next">></a>
-            </div>
+                }
+            }
         </div>
     </div>
 </div>

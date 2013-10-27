@@ -31,7 +31,146 @@ namespace CampeonatosNParty.Controllers
         public ActionResult Detalhes(int? id)
         {
             CampeonatosNParty.Models.ViewModel.UsuariosDetailView view = new CampeonatosNParty.Models.ViewModel.UsuariosDetailView(id.Value);
+            view.setPersonGamingRelation(CurrentUsuario);
             return View(view);
+        }
+
+        [HttpGet]
+        public ActionResult AdicionarPSN(int? id)
+        {
+            if (id.HasValue)
+            {
+                Usuarios usuario = Usuarios.WithIdentity(id.Value);
+                if (usuario != null)
+                {
+                    PersonGamingRelation relation = PersonGamingRelation.getPersonGamingRelations(CurrentUsuario, usuario);
+                    if (relation == null)
+                    {
+                        relation = new PersonGamingRelation()
+                        {
+                            PersonId1 = CurrentUsuario.Id,
+                            PersonId2 = id.Value,
+                            isPSN = true,
+                            isLive = false,
+                            isNintendoNetwork = false
+                        };
+                        NPartyDb<PersonGamingRelation>.Instance.Insert(relation);
+                    }
+                    else
+                    {
+                        relation.isPSN = true;
+                        NPartyDb<PersonGamingRelation>.Instance.Update(relation);
+                    }
+
+                    CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                    emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarContaSocial.xml")));
+
+                    IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                    infoChanges.Add("[=PersonName]", CurrentUsuario.Nome);
+                    infoChanges.Add("[=FriendName]", usuario.Nome);
+                    infoChanges.Add("[=AccountName]", "PSN");
+                    infoChanges.Add("[=Id]", usuario.PsnId);
+
+                    emailTemplate.Send(infoChanges, "Solicitação de amizade na PSN - Campeonatos N-Party", CurrentUsuario.Email);
+
+                    return Redirect("~/Jogadores/Detalhes/" + id.Value);
+                }                
+            }
+
+            return Redirect("~/Jogadores");
+        }
+
+        [HttpGet]
+        public ActionResult AdicionarLive(int? id)
+        {
+            if (id.HasValue)
+            {
+                Usuarios usuario = Usuarios.WithIdentity(id.Value);
+                if (usuario != null)
+                {
+                    PersonGamingRelation relation = PersonGamingRelation.getPersonGamingRelations(CurrentUsuario, usuario);
+                    if (relation == null)
+                    {
+                        relation = new PersonGamingRelation()
+                        {
+                            PersonId1 = CurrentUsuario.Id,
+                            PersonId2 = id.Value,
+                            isPSN = false,
+                            isLive = true,
+                            isNintendoNetwork = false
+                        };
+                        NPartyDb<PersonGamingRelation>.Instance.Insert(relation);
+                    }
+                    else
+                    {
+                        relation.isLive = true;
+                        NPartyDb<PersonGamingRelation>.Instance.Update(relation);
+                    }
+
+                    CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                    emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarContaSocial.xml")));
+
+                    IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                    infoChanges.Add("[=PersonName]", CurrentUsuario.Nome);
+                    infoChanges.Add("[=FriendName]", usuario.Nome);
+                    infoChanges.Add("[=AccountName]", "Live");
+                    infoChanges.Add("[=Id]", usuario.LiveId);
+
+                    emailTemplate.Send(infoChanges, "Solicitação de amizade na Live - Campeonatos N-Party", CurrentUsuario.Email);
+
+                    return Redirect("~/Jogadores/Detalhes/" + id.Value);
+                }
+            }
+
+            return Redirect("~/Jogadores");
+        }
+
+        [HttpGet]
+        public ActionResult AdicionarNintendoNetwork(int? id)
+        {
+            if (id.HasValue)
+            {
+                Usuarios usuario = Usuarios.WithIdentity(id.Value);
+                if (usuario != null)
+                {
+                    PersonGamingRelation relation = PersonGamingRelation.getPersonGamingRelations(CurrentUsuario, usuario);
+                    if (relation == null)
+                    {
+                        relation = new PersonGamingRelation()
+                        {
+                            PersonId1 = CurrentUsuario.Id,
+                            PersonId2 = id.Value,
+                            isPSN = false,
+                            isLive = false,
+                            isNintendoNetwork = true
+                        };
+                        NPartyDb<PersonGamingRelation>.Instance.Insert(relation);
+                    }
+                    else
+                    {
+                        relation.isNintendoNetwork = true;
+                        NPartyDb<PersonGamingRelation>.Instance.Update(relation);
+                    }
+
+                    CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                    emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarContaSocial.xml")));
+
+                    IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                    infoChanges.Add("[=PersonName]", CurrentUsuario.Nome);
+                    infoChanges.Add("[=FriendName]", usuario.Nome);
+                    infoChanges.Add("[=AccountName]", "Nintendo Network");
+                    infoChanges.Add("[=Id]", usuario.NintendoNetworkId);
+
+                    emailTemplate.Send(infoChanges, "Solicitação de amizade na Nintendo Network - Campeonatos N-Party", CurrentUsuario.Email);
+
+                    return Redirect("~/Jogadores/Detalhes/" + id.Value);
+                }
+            }
+
+            return Redirect("~/Jogadores");
         }
 
         [HttpGet]
@@ -72,13 +211,15 @@ namespace CampeonatosNParty.Controllers
                     if (u == null)
                     {
                         model.Senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(model.Senha);
+                        model.EmailConfirmado = false;
                         NPartyDb<Usuarios>.Instance.Insert(model);
 
                         NPartyCookie.UserId = model.Id;
-                        NPartyCookie.IsLoggedIn = true;
+                        NPartyCookie.IsLoggedIn = false;
                         NPartyDb<Cookie>.Instance.Update(NPartyCookie);
 
-                        return View("BemVindo");
+                        //return View("BemVindo");
+                        return RedirectToAction("EnviarEmailConfirmacao");
                     }
                     else
                     {
@@ -86,6 +227,7 @@ namespace CampeonatosNParty.Controllers
                     }
                 }
             }
+            Session["captcha"] = CampeonatosNParty.Helpers.RegisterHelper.GetRandWord(5);
             return View(model);
         }
 
@@ -145,6 +287,91 @@ namespace CampeonatosNParty.Controllers
                 }
             }
             return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult EsqueciMinhaSenha()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EsqueciMinhaSenha(FormCollection form)
+        {
+            if (string.IsNullOrEmpty(form["Email"]))
+            {
+                ViewData["Error"] = "Por favor, digite seu email.";
+            }
+            else if (!EixoX.Restrictions.Email.IsEmail(form["Email"]))
+            {
+                ViewData["Error"] = "Por favor, digite um email válido.";
+            }
+            else
+            {
+                Usuarios user = Usuarios.WithMember("Email", form["Email"]);
+                if (user == null)
+                {
+                    ViewData["Error"] = "Este email não esta cadastrado em nosso banco. Por favor, verifique se o digitou corretamente.";
+                }
+                else
+                {
+                    string newPassword = CampeonatosNParty.Helpers.RegisterHelper.GetRandWord(5);
+                    user.Senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(newPassword);
+                    NPartyDb<Usuarios>.Instance.Save(user);
+
+                    CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                    emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/esqueciSenhaTemplate.xml")));
+
+                    IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                    infoChanges.Add("[=PersonName]", user.Nome);
+                    infoChanges.Add("[=PersonPassword]", newPassword);
+
+                    emailTemplate.Send(infoChanges, "Campeonatos N-Party - Nova senha", user.Email);
+
+                    ViewData["Success"] = "Enviamos uma nova senha para seu email :)";
+                }
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult EnviarEmailConfirmacao()
+        {
+            int personId = NPartyCookie.UserId;
+            Usuarios usuario = Usuarios.WithIdentity(personId);
+            if (usuario != null)
+            {
+                CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/confirmarEmail.xml")));
+
+                IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                infoChanges.Add("[=PersonName]", usuario.Nome);
+                infoChanges.Add("[=PersonLink]", usuario.getConfirmationUrl());
+
+                emailTemplate.Send(infoChanges, "Campeonatos N-Party - Confirmação de email", usuario.Email);
+            }
+
+            return RedirectToAction("ConfirmarEmail");
+        }
+
+        [HttpGet]
+        public ActionResult ConfirmarEmail()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AuthenticationRequired]
+        public ActionResult Notificacoes()
+        {
+            List<Notificacoes> notificacoes = NPartyDb<Notificacoes>.Instance.Select()
+                                                .Where("PersonId", CurrentUsuario.Id)
+                                                .Or("PersonId", 0)
+                                                .OrderBy("DateSent", SortDirection.Descending)
+                                                .ToList();
+            return View(notificacoes);
         }
     }
 }

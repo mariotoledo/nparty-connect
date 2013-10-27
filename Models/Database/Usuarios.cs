@@ -18,8 +18,9 @@ namespace CampeonatosNParty.Models.Database
         public int Id { get; set; }
 
         [DatabaseColumn]
-        [MaxLength(50)]
         [Required]
+        [MaxLength(50)]
+        [MinLength(5)]
         [UISingleline]
         public string Nome { get; set; }
 
@@ -60,6 +61,7 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         [MaxLength(255)]
+        [MinLength(5)]
         [UIPassword]
         [Required]
         public string Senha { get; set; }
@@ -75,22 +77,38 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn]
         [UISingleline]
         [MaxLength(50)]
+        [MinLength(5)]
         public string PsnId { get; set; }
 
         [DatabaseColumn]
         [UISingleline]
         [MaxLength(50)]
+        [MinLength(5)]
         public string LiveId { get; set; }
+
+        [DatabaseColumn]
+        [UISingleline]
+        [MaxLength(50)]
+        [MinLength(5)]
+        public string NintendoNetworkId { get; set; }
 
         [DatabaseColumn]
         [UICheckbox]
         public bool Newsletter { get; set; }
+
+        [DatabaseColumn]
+        public bool EmailConfirmado { get; set; }
 
         public string getUrlFotoPerfil()
         {
             if (String.IsNullOrEmpty(this.UrlFotoPerfil))
                 return "/Static/img/playerPhoto/default.jpg";
             return this.UrlFotoPerfil;
+        }
+
+        public string getConfirmationUrl()
+        {
+            return "http://campeonatos.nparty.com.br/Home/ConfirmarCadastro?confirmationKey=" + CampeonatosNParty.Helpers.EncryptHelper.Encrypt(this.Id);
         }
     }
 }

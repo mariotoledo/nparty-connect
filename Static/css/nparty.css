@@ -1,62 +1,74 @@
 			body {
-				background: url(../img/template/bg.png) fixed rgb(253, 253, 253);
+                background-color: #AB2B2A;
 				color: #555;
 				margin: 0;
 			}
 			
 			#main-wrapper{
-				box-shadow: rgb(180, 180, 180) 0px 0px 3px; 
-				background-color: #FFF;
-			}
+                background-color: #FFF;
+				border-radius: 6px;
+                -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+                -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+                box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+                -webkit-border-radius: 6px;
+                padding-top: 15px;
+                padding-bottom: 15px;
+			}			
 			
-			.header {
-				background-color: #CD2B2B;
-				height: 50px;
-				margin-bottom: 30px;
-				margin-left: -10px;
-				margin-right: -10px;
-			}
-			.nav {
-				position: relative;
-				left: 0;
-				display: block;
-				float: left;
-				margin: 0 10px 0 0;
-			}
-			.nav {
-				margin-bottom: 20px;
-				margin-left: 0;
-				list-style: none;
-			}
-			.nav > li {
-				float: left;
-				line-height: 30px;
-				
-			}
-			.nav > li > a {
-				float: none;
-				padding: 10px 15px 10px;
-				color: #ffffff;
-				text-decoration: none;
-				display: block;
-				font-weight: 600;
-				text-transform: uppercase;
-				font-size: 12px;
-				border-right: 1px solid rgba(255, 255, 255, 0.2);
-				border-left: 1px solid rgba(255, 255, 255, 0.2);
-				text-shadow: 0 1px 0 #ce4213;
-				
-			}
-			.nav > li.active > a {
-				color: #FFF;
-				background-color: #CD2B2B;
-			}
-			
-			.nav > li > a:hover {
-				color: #CD2B2B;
-				background-color: #FFF!important;
-			}
-			
+            .navbar-inner {
+                min-height: 0px;
+                padding-right: 0px;
+                padding-left: 0px;
+                background-color: #AB2B2A;
+                background-image: -moz-linear-gradient(top,AB2B2A,AB2B2A);
+                background-image: -webkit-gradient(linear,0 0,0 100%,from(AB2B2A),to(AB2B2A));
+                background-image: -webkit-linear-gradient(top,AB2B2A,AB2B2A);
+                background-image: -o-linear-gradient(top,AB2B2A,AB2B2A);
+                background-image: linear-gradient(to bottom,AB2B2A,AB2B2A);
+                background-repeat: repeat-x;
+                border: 0;
+                -webkit-border-radius: 0;
+                -moz-border-radius: 0;
+                border-radius: 0;
+                filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#fff2f2f2',GradientType=0);
+                -moz-box-shadow: 0 0px 0px rgba(0,0,0,0.0);
+                box-shadow: 0 0px 0px rgba(0,0,0,0.0);
+            }
+
+            .navbar .brand {
+                padding-left: 0px;
+            }
+
+            .navbar .nav>li>a {
+                float: none;
+                padding: 10px 15px 10px;
+                color: #fff;
+                -webkit-transition: all 0.2s linear;
+                -moz-transition: all 0.2s linear;
+                -o-transition: all 0.2s linear;
+                transition: all 0.2s linear;
+                color: #FFF;
+                text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+            }
+
+            .navbar .nav > li > a:hover,  .navbar .nav > li > a.hover {
+                color: #ff8028;;
+            }
+
+            .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
+                color: #E28989;
+                background-color: #AB2B2A;
+            }
+
+            #topMenu {
+                margin-top: 50px;
+                font-size: 16px;
+            }
+
+            #topMenu.in {
+                margin-top: -50px;
+            }
+
 			a {
 				color: #dd4814;
 				text-decoration: none;
@@ -171,4 +183,128 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 
 .white {
     color:  #FFF;
+}
+
+footer {
+    margin-top: 10px;
+    color: #FFF;
+}
+
+footer ul {
+    list-style-type: none;
+    margin-left: 0px;
+}
+
+footer a {
+    font-weight: bold;
+    -webkit-transition: all 0.2s linear;
+    -moz-transition: all 0.2s linear;
+    -o-transition: all 0.2s linear;
+    transition: all 0.2s linear;
+    color: #FFF;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.gamingSocialId {
+     margin-top: 10px;
+     display: inline-block;
+     float: left;
+     width: 110px;
+     -moz-border-radius: 5px; 
+     border-radius: 5px; 
+     padding: 5px;
+}
+
+    .gamingSocialId .title {
+        font-size: 18px;
+        text-shadow: 2px 2px #000000;
+        text-align: center;
+    }
+
+.gamingSocialId .id {
+   background-color: #fff;
+   width: 100px;
+   margin: 10px auto;
+   -moz-border-radius: 5px; 
+   border-radius: 5px; 
+   padding: 5px;
+   color: #000;
+   text-align: center;
+   font-size: 12px;
+   font-weight: bold;   
+}
+
+.psnId {
+    margin-right: 5px;
+    background-color: #0065AD;
+    color: #fff;
+}
+
+.liveId {
+    margin-right: 5px;
+    background-color: #77BB44;
+    color: #fff;
+}
+
+.nintendoId {
+    background-color: #FF7D01;
+    color: #fff;
+}
+
+.nintendoId .title {
+    font-size: 11px;
+}
+
+.photoSmall {
+    display: block;
+    width: 160px; 
+    height: 160px; 
+    background-size:160px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+.photoBig {
+    display: block;
+    width: 370px; 
+    height: 370px; 
+    background-size:370px auto;
+    background-position: center center;
+    background-repeat: no-repeat;
+}
+
+ul.notifications{
+    background-color: #EEE;
+    border-radius: 6px;
+    border: 1px solid #D1D1D1;
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+    -webkit-border-radius: 6px;
+    padding: 5px;
+    margin-left: 0px;
+}
+
+ul.notifications li{
+    list-style: none;
+    padding: 5px;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+ul.notifications li h4{
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+ul.notifications li span.data{
+    font-size:  10px;
+    margin-bottom: 10px;
+}
+
+ul.notifications li p{
+    margin-bottom: 5px;
+}
+
+ul.notifications li:last-child{
+    border-bottom: none;
 }

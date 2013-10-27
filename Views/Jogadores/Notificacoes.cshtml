@@ -1,0 +1,51 @@
+﻿@model List<CampeonatosNParty.Models.Database.Notificacoes>
+@{
+    ViewBag.Title = "Notificações";
+}
+
+<h2>Notificações <small>Confira abaixo a sua lista de notificações</small></h2>
+@{
+    if (Model != null && Model.Count() > 0)
+    {
+        <div class="row">
+            <div class="span12">
+                <ul class="notifications">
+                    @foreach (CampeonatosNParty.Models.Database.Notificacoes notificacao in Model)
+                    {
+                        if (!string.IsNullOrEmpty(notificacao.Titulo) && !string.IsNullOrEmpty(notificacao.Corpo))
+                        {
+                            string corpo = notificacao.Corpo.Length > 50 ? notificacao.Corpo.Substring(0, 50) + "..." : notificacao.Corpo;
+                            <li>
+                                <h4><a href="#" onclick="showHeader('@notificacao.Titulo', '@notificacao.Corpo');">@notificacao.Titulo</a></h4>
+                                <span class="data">@notificacao.DateSent.ToString("dd/MM/yyyy")</span>
+                                <p>@corpo</p>
+                            </li>
+                        }
+                    }
+                </ul>
+            </div>
+        </div>
+    }
+    else
+    {
+        <p>Não foi encontrada nenhuma notificação no momento.</p>
+    }
+}
+<!-- Modal -->
+<div id="notificationModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="notificationModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="notificationModalLabel"></h3>
+  </div>
+  <div class="modal-body">
+    <p id="notificationModalBody"></p>
+  </div>
+</div>
+
+<script>
+    function showHeader(header, body) {
+        $('#notificationModalLabel').text(header);
+        $('#notificationModalBody').text(body);
+        $('#notificationModal').modal('show');
+    }
+</script>

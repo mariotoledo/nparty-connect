@@ -8,34 +8,22 @@ namespace CampeonatosNParty.Models.ViewModel
 {
     public class HomeView
     {
-        public List<Ranking> ranking{
-            get{
-                return NPartyDb<Ranking>.Instance.Select().OrderBy("Pontos", EixoX.Data.SortDirection.Descending).Take(5).ToList();
-            }
-        }
+        public Eventos lastEvent { get; private set; }
+        public Cidade lastEventCidade { get; set; }
+        public Estado lastEventEstado { get; set; }
+        public TipoEvento lastEventType { get; set; }
+        public List<Ranking> ranking { get; set; }
 
-        public List<Eventos> eventos
+        public HomeView()
         {
-            get
+            lastEvent = Eventos.Select().OrderBy("DataEventoInicio", EixoX.Data.SortDirection.Descending).First();
+            if (lastEvent != null)
             {
-                return NPartyDb<Eventos>.Instance.Select().OrderBy("DataEventoInicio", EixoX.Data.SortDirection.Descending).Take(5).ToList();
+                lastEventCidade = Cidade.WithIdentity(lastEvent.IdCidade);
+                lastEventEstado = Estado.WithIdentity(lastEvent.IdEstado);
+                lastEventType = TipoEvento.WithIdentity(lastEvent.TipoEvento);
             }
-        }
-
-        public List<CampeonatoPorEvento> campeonatos
-        {
-            get
-            {
-                return NPartyDb<CampeonatoPorEvento>.Instance.Select().ToList();
-            }
-        }
-
-        public EixoX.Data.ClassSelect<CampeonatoPorEvento> jogosPorConsole
-        {
-            get 
-            {
-                return NPartyDb<CampeonatoPorEvento>.Instance.Select();
-            }
+            ranking = Ranking.Select().OrderBy("Pontos", EixoX.Data.SortDirection.Descending).Take(6).ToList();
         }
     }
 }

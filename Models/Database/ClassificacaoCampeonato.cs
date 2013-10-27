@@ -29,6 +29,9 @@ namespace CampeonatosNParty.Models.Database
         public int Pontuacao;
 
         [DatabaseColumn]
+        public int Classificacao { get; set; }
+
+        [DatabaseColumn]
         public string UrlFotoPerfil { private get; set; }
 
         public string getUrlFotoPerfil()
