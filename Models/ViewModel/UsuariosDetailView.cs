@@ -19,9 +19,15 @@ namespace CampeonatosNParty.Models.ViewModel
         public int Pontuacao { get; set; }
         public SocialGamingButtonState PSNButtonState { get; set; }
         public SocialGamingButtonState LiveButtonState { get; set; }
-        public SocialGamingButtonState NintendoNetworkButtonState { get; set; }
+        public SocialGamingButtonState MiiverseButtonState { get; set; }
+        public SocialGamingButtonState FriendCodeButtonState { get; set; }
+        public List<UsuarioBadges> badges { get; set; }
+        public bool hasGamingConnection;
 
         public IEnumerable<ClassificacaoPorJogador[]> campeonatos { get; set; }
+
+        public PokemonFriendSafariType safariType;
+        public List<PokemonFriendSafari> pokemonFriendSafari;
 
         public UsuariosDetailView(int userId)
         {
@@ -35,6 +41,18 @@ namespace CampeonatosNParty.Models.ViewModel
             Pontuacao = JogadoresItem.WithMember("IdUsuario", userId).Pontos;
 
             campeonatos = ClassificacaoPorJogador.Select().Where("IdUsuario", userId).OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending).Segment(4);
+
+            badges = UsuarioBadges.Select().Where("PersonId", userId).ToList();
+
+            PersonPokemonFriendSafari personSafari = PersonPokemonFriendSafari.Select().Where("PersonId", userId).SingleResult();
+
+            if(personSafari != null)
+            {
+                safariType = PokemonFriendSafariType.WithIdentity(personSafari.PokemonTypeId);
+                pokemonFriendSafari = PokemonFriendSafari.Select().Where("Id", personSafari.PokemonSlot1Id)
+                                        .Or("Id", personSafari.PokemonSlot2Id)
+                                        .Or("Id", personSafari.PokemonSlot3Id).ToList();
+            }
         }
 
         public void setPersonGamingRelation(Usuarios CurrentPerson){
@@ -42,38 +60,61 @@ namespace CampeonatosNParty.Models.ViewModel
             {
                 PSNButtonState = SocialGamingButtonState.None;
                 LiveButtonState = SocialGamingButtonState.None;
-                NintendoNetworkButtonState = SocialGamingButtonState.None;
+                MiiverseButtonState = SocialGamingButtonState.None;
             }
             else
             {
                 PersonGamingRelation relation = PersonGamingRelation.getPersonGamingRelations(CurrentPerson, usuario);
 
-                if (relation == null)
+                if (!String.IsNullOrEmpty(CurrentPerson.PsnId) && !String.IsNullOrEmpty(usuario.PsnId))
                 {
-                    PSNButtonState = String.IsNullOrEmpty(CurrentPerson.PsnId) ||
-                                     String.IsNullOrEmpty(usuario.PsnId) ?
-                                     SocialGamingButtonState.None : SocialGamingButtonState.Enabled;
-
-                    LiveButtonState = String.IsNullOrEmpty(CurrentPerson.LiveId) ||
-                                     String.IsNullOrEmpty(usuario.LiveId) ?
-                                     SocialGamingButtonState.None : SocialGamingButtonState.Enabled;
-
-                    NintendoNetworkButtonState = String.IsNullOrEmpty(CurrentPerson.NintendoNetworkId) ||
-                                     String.IsNullOrEmpty(usuario.NintendoNetworkId) ?
-                                     SocialGamingButtonState.None : SocialGamingButtonState.Enabled;
+                    PSNButtonState = relation != null && relation.isPSN ?
+                                     SocialGamingButtonState.Disabled :
+                                     SocialGamingButtonState.Enabled;
                 }
                 else
                 {
-                    PSNButtonState = relation.isPSN ?
-                                     SocialGamingButtonState.Disabled : SocialGamingButtonState.Enabled;
+                    PSNButtonState = SocialGamingButtonState.None;
+                }
 
-                    LiveButtonState = relation.isLive ?
-                                     SocialGamingButtonState.Disabled : SocialGamingButtonState.Enabled;
+                if (!String.IsNullOrEmpty(CurrentPerson.LiveId) && !String.IsNullOrEmpty(usuario.LiveId))
+                {
+                    LiveButtonState = relation != null && relation.isLive ?
+                                     SocialGamingButtonState.Disabled :
+                                     SocialGamingButtonState.Enabled;
+                }
+                else
+                {
+                    LiveButtonState = SocialGamingButtonState.None;
+                }
 
-                    NintendoNetworkButtonState = relation.isNintendoNetwork ?
-                                     SocialGamingButtonState.Disabled : SocialGamingButtonState.Enabled;
+                if (!String.IsNullOrEmpty(CurrentPerson.MiiverseId) && !String.IsNullOrEmpty(usuario.MiiverseId))
+                {
+                    MiiverseButtonState = relation != null && relation.isMiiverse ?
+                                     SocialGamingButtonState.Disabled :
+                                     SocialGamingButtonState.Enabled;
+                }
+                else
+                {
+                    MiiverseButtonState = SocialGamingButtonState.None;
+                }
+
+                if (!String.IsNullOrEmpty(CurrentPerson.FriendCode) && !String.IsNullOrEmpty(usuario.FriendCode))
+                {
+                    FriendCodeButtonState = relation != null && relation.isFriendCode ?
+                                     SocialGamingButtonState.Disabled :
+                                     SocialGamingButtonState.Enabled;
+                }
+                else
+                {
+                    FriendCodeButtonState = SocialGamingButtonState.None;
                 }
             }
+
+            hasGamingConnection = !String.IsNullOrEmpty(usuario.PsnId) ||
+                                  !String.IsNullOrEmpty(usuario.LiveId) ||
+                                  !String.IsNullOrEmpty(usuario.MiiverseId) ||
+                                  !String.IsNullOrEmpty(usuario.FriendCode);
         }
     }
 }

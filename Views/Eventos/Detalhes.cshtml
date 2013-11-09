@@ -38,11 +38,12 @@
 
                                         if (Model.evento.DataEventoInicio != null)
                                         {
-                                            string dataEvento = Model.evento.DataEventoFim != null && Model.evento.DataEventoInicio.CompareTo(Model.evento.DataEventoFim) == 0 ?
-                                                Model.evento.DataEventoInicio.ToString("dd/MM/yyyy") :
-                                                Model.evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + Model.evento.DataEventoFim.ToString("dd/MM/yyyy");
-                                        
-                                                        <div><b>Data</b>: @dataEvento</div>
+                                            string dataEvento = Model.evento.DataEventoFim != null && 
+                                                                Model.evento.DataEventoFim != DateTime.MinValue &&
+                                                                Model.evento.DataEventoInicio.CompareTo(Model.evento.DataEventoFim) != 0 ?
+                                                  Model.evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + Model.evento.DataEventoFim.ToString("dd/MM/yyyy") :
+                                                  Model.evento.DataEventoInicio.ToString("dd/MM/yyyy");
+                                                  <div><b>Data</b>: @dataEvento</div>
                                         }
                                     }
                             </div>

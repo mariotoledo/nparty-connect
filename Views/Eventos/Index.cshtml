@@ -27,14 +27,14 @@
 </div>
 <div class="row">
     <div class="span12">
-    <form method="get" class="form-search pull-right">
-        <div class="input-append">
-            <input type="text" name="filter" placeholder="Procurar por evento" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
-            <button class="btn btn-primary">
-                <i class="icon-search icon-white"></i>
-            </button>
-        </div>
-    </form>
+        <form method="get" class="form-search pull-right">
+            <div class="input-append">
+                <input type="text" name="filter" placeholder="Procurar por evento" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
+                <button class="btn btn-primary">
+                    <i class="icon-search icon-white"></i>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 @{
@@ -61,7 +61,9 @@
                                                     @if(evento.DataEventoInicio != null && evento.DataEventoInicio != DateTime.MinValue)
                                                     {
                                                         <div><b>Data:</b> @evento.DataEventoInicio.ToString("dd/MM/yyyy")
-                                                        @if (evento.DataEventoFim != null && evento.DataEventoFim != DateTime.MinValue)
+                                                        @if (evento.DataEventoFim != null && 
+                                                             evento.DataEventoFim != DateTime.MinValue &&
+                                                             evento.DataEventoInicio.CompareTo(evento.DataEventoFim) != 0)
                                                         {
                                                             <span>a @evento.DataEventoFim.ToString("dd/MM/yyyy")</span>
                                                         }

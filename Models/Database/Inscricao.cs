@@ -28,9 +28,9 @@ namespace CampeonatosNParty.Models.Database
         public bool IsPago { get; set; }
 
         [DatabaseColumn]
-        public int Classificacao { get; set; }
+        public string IdOriginal { get; set; }
 
         [DatabaseColumn]
-        public string IdOriginal { get; set; }
+        public int Pontuacao { get; set; }
     }
 }

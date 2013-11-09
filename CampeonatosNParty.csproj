@@ -104,6 +104,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AuthenticationBasedController.cs" />
     <Compile Include="Controllers\CampeonatosController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogadoresController.cs" />
@@ -121,6 +122,13 @@
     <Compile Include="Models\Database\CampeonatoPorEvento.cs" />
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
+    <Compile Include="Models\Database\Badges.cs" />
+    <Compile Include="Models\Database\tb_inscricoes.cs" />
+    <Compile Include="Models\Database\PersonPokemonFriendSafari.cs" />
+    <Compile Include="Models\Database\PokemonFriendSafariType.cs" />
+    <Compile Include="Models\Database\PokemonFriendSafari.cs" />
+    <Compile Include="Models\Database\UsuarioBadges.cs" />
+    <Compile Include="Models\Database\PersonBadges.cs" />
     <Compile Include="Models\Database\Notificacoes.cs" />
     <Compile Include="Models\Database\PersonGamingRelation.cs" />
     <Compile Include="Models\Database\JogadoresItem.cs" />
@@ -144,6 +152,7 @@
     <Compile Include="Models\StructModel\MinhasInformacoes.cs" />
     <Compile Include="Models\StructModel\Login.cs" />
     <Compile Include="Models\ViewModel\CampeonatosDetailView.cs" />
+    <Compile Include="Models\ViewModel\DashboardView.cs" />
     <Compile Include="Models\ViewModel\UsuariosDetailView.cs" />
     <Compile Include="Models\ViewModel\EventosDetailView.cs" />
     <Compile Include="Models\ViewModel\HomeView.cs" />
@@ -156,6 +165,7 @@
     <Content Include="Global.asax" />
     <Content Include="Globalization\CampeonatosNParty.Models.Database.Usuarios.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Globalization\CampeonatosNParty.Models.StructModel.MinhasInformacoes.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -163,6 +173,7 @@
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-1.9.0.min.js" />
+    <Content Include="Scripts\jquery.maskedinput.min.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Static\css\bootstrap-responsive.css" />
     <Content Include="Static\css\bootstrap-responsive.min.css" />
@@ -176,9 +187,18 @@
     <Content Include="Static\EmailTemplates\adicionarContaSocial.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Static\EmailTemplates\adicionarMiiverse.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Static\EmailTemplates\adicionarFriendCode.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Static\EmailTemplates\esqueciSenhaTemplate.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Static\img\badges\default.jpg" />
+    <Content Include="Static\img\badges\mk7_1.jpg" />
+    <Content Include="Static\img\badges\poke_1.jpg" />
     <Content Include="Static\img\eventsLogos\animeFriends.jpg" />
     <Content Include="Static\img\eventsLogos\default.jpg" />
     <Content Include="Static\img\eventsLogos\defaultCover.jpg" />
@@ -191,6 +211,7 @@
     <Content Include="Static\img\slider\kidicarus.jpg" />
     <Content Include="Static\img\slider\mariokart7.jpg" />
     <Content Include="Static\img\template\bg.png" />
+    <Content Include="Static\img\template\hero.png" />
     <Content Include="Static\img\template\logoNPartyCampeonatosSmall.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -259,6 +280,11 @@
     <Content Include="Views\Home\ConfirmarCadastro.cshtml" />
     <Content Include="Views\Home\Ranking.cshtml" />
     <Content Include="Views\Jogadores\Notificacoes.cshtml" />
+    <None Include="Properties\PublishProfiles\Mario4.pubxml" />
+    <Content Include="Views\Jogadores\AlterarSenha.cshtml" />
+    <Content Include="Views\Home\Dashboard.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
+    <Content Include="Views\Error\PaginaNaoEncontrada.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-jetfuel\EixoX\EixoX.csproj">

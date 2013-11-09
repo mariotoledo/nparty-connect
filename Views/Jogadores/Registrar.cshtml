@@ -6,7 +6,7 @@
     EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios> presenter = EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios>.GetInstance(1046);
     bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
 }
-
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.maskedinput.min.js")"></script>
 <h2>Criar uma conta</h2>
 <p>Preencha os campos abaixo corretamente, e clique em "Cadastrar" para prosseguir com o cadastro.</p>
 <form class="form-horizontal" method="post">
@@ -24,6 +24,7 @@
         <div class="span6">
             <h4>Informações pessoais</h4>
             @{presenter["Nome"].Render(this.Output, Model, validate);}
+            @{presenter["Sobrenome"].Render(this.Output, Model, validate);}
             @{presenter["Apelido"].Render(this.Output, Model, validate);}
             @{presenter["Telefone"].Render(this.Output, Model, validate);}
             <div class="control-group">
@@ -80,7 +81,7 @@
         </div>
     </div>
     <div class="row">
-        <div class="span12">
+        <div class="span12"><br />
             <h4>Informações adicionais</h4>
             @{presenter["Newsletter"].Render(this.Output, Model, validate);}
         </div>
@@ -123,6 +124,9 @@ Você tem o direito de a qualquer momento receber e corrigir, adicionar ou apaga
     </div>
 </form>
 <script type="text/javascript">
+    jQuery(function ($) {
+        $("#Telefone").mask("(99) 99999999?9");
+    });
     $('form').submit(function () {
         if ($('#Termos').is(':checked')) {
             return true;

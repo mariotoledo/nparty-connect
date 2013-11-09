@@ -1,7 +1,7 @@
 ﻿@{
-    ViewBag.Title = "Campeonatos N-Party (Beta)";
+    ViewBag.Title = "N-Party Connect (Beta)";
     int topMenu = Convert.ToInt32(ViewData["TopMenu"]);
-    CampeonatosNParty.Models.Database.Usuarios currentUser = (CampeonatosNParty.Models.Database.Usuarios) ViewData["CurrentUser"];
+    CampeonatosNParty.Models.Database.Usuarios currentUser = (CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"];
 }
 <!-- 
     
@@ -28,13 +28,28 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
      III888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888OOOOOOOOOOOOO88888 
     IIIIIII7OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 
 
-    N-Party Campeonatos v1.0b
+    N-Party Connect v1.0.1b
     Copyright N-Party 2013 - Todos os direitos reservados.
      -->
-<html>
+<html lang="pt-br" dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr' xmlns:fb='http://ogp.me/ns/fb#'>
 <head>
     <title>@ViewBag.Title</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content='Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais.'/>
+    <meta content='nparty, 3DS, Wii U, Friend Code, rede social, Nintendo' name='keywords'/>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <meta content='Mario Toledo e Rafael Farias' name='author'/>
+
+    <link href='http://www.images.nparty.com.br/connect/favco.png' rel='icon' type='image/x-icon'/>
+    <link href='http://connect.nparty.com.br' rel='canonical'/>
+
+    <meta property='og:image' content='http://www.images.nparty.com.br/connect/connectFacebook.png' />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
     <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap.min.css")" />
     <link rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap-responsive.min.css")" />
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
@@ -63,16 +78,7 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
                             }
                             else
                             {  
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" id="loginLabel" role="button" data-toggle="dropdown">Olá, @(currentUser.Nome) <b class="caret" style="margin-top: 10px"></b></a>
-                                    <ul class="dropdown-menu" aria-labelledby="loginLabel" role="menu">
-                                        <li><a href="@Url.Content("~/Jogadores/Notificacoes/")">Minhas Notificações</a></li>
-                                        <li><a href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)">Meu Perfil</a></li>
-                                        <li><a href="@Url.Content("~/Jogadores/EditarMinhasInformacoes/")">Editar Minhas Informações</a></li>
-                                        <li class="divider"></li>
-                                        <li><a href="@Url.Content("~/Home/Logout")">Logout</a></li>
-                                    </ul>
-                                </li>  
+                                <li><a href="@Url.Content("~/Home/Dashboard")">Olá, @currentUser.Nome</a></li>
                             }
 				        </ul>
 			        </div>
@@ -90,9 +96,11 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
             <div class="row">
                 <div class="span4">
                     <p style="float: left;">
-                        © N-Party 2013 - <a href="http://www.nparty.com.br" target="_blank">www.nparty.com.br</a>
+                        © N-Party 2013 - <a href="http://www.nparty.com.br" target="_blank">www.nparty.com.br</a><br /><br />
+                        Desenvolvido e Desenhado por <b><a href="http://www.eixox.com.br/Home/Pessoas/" target="_blank">Mario Toledo</a></b><br/>
+                        Idealizado e Projetado por <b>Rafael Farias</b>
 			        </p>
-                    <br /><br />
+                    <br /><br /><br /><br /><br />
                     <ul>
                         <li><a href="/Home/Sobre">Sobre</a></li>
                         <li><a href="/Home/Privacidade">Termos de Privacidade</a></li>
@@ -100,13 +108,12 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
                         <li><a href="/Home/Contato">Contato</a></li>
                     </ul>
                 </div>
-                <div class="span4">
+                <div class="span4" style="overflow: hidden;">
                     <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FNParty&amp;width=370&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=141992936007985" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:370px; height:258px;" allowTransparency="true"></iframe>
                 </div>
                 <div class="span4">
                     <p style="float: right;">
-                        Desenvolvido e Desenhado por <b><a href="http://www.eixox.com.br/Home/Pessoas/" target="_blank">Mario Toledo</a></b><br/>
-                        Idealizado e Projetado por <b>Rafael Farias</b>
+                        
                     </p>
                 </div>
             </div>
@@ -114,6 +121,8 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
     </div>
     <!-- Analytics -->
     <script type="text/javascript">
+        
+
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-39862825-2']);
         _gaq.push(['_trackPageview']);

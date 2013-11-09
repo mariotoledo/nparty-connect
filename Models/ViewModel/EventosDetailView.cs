@@ -18,8 +18,8 @@ namespace CampeonatosNParty.Models.ViewModel
         {
             evento = Eventos.WithIdentity(eventoId);
             campeonatos = CampeonatoPorEvento.Select().Where("IdEvento", eventoId).Segment<CampeonatoPorEvento>(4);
-            cidade = Cidade.WithIdentity(eventoId);
-            estado = Estado.WithIdentity(eventoId);
+            cidade = Cidade.WithIdentity(evento.IdCidade);
+            estado = Estado.WithIdentity(evento.IdEstado);
             if (evento != null)
                 tipoEvento = TipoEvento.WithIdentity(evento.TipoEvento);
             else

@@ -49,6 +49,8 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         [UISingleline]
+        [DigitsOnly]
+        [MaxLength(14)]
         public string Telefone { get; set; }
 
         [UIHidden]
@@ -61,7 +63,7 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         [MaxLength(255)]
-        [MinLength(5)]
+        [MinLength(6)]
         [UIPassword]
         [Required]
         public string Senha { get; set; }
@@ -76,21 +78,27 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         [UISingleline]
-        [MaxLength(50)]
-        [MinLength(5)]
+        [MaxLength(16)]
+        [MinLength(3)]
         public string PsnId { get; set; }
 
         [DatabaseColumn]
         [UISingleline]
-        [MaxLength(50)]
-        [MinLength(5)]
+        [MaxLength(16)]
+        [MinLength(3)]
         public string LiveId { get; set; }
 
         [DatabaseColumn]
         [UISingleline]
-        [MaxLength(50)]
-        [MinLength(5)]
-        public string NintendoNetworkId { get; set; }
+        [MaxLength(16)]
+        [MinLength(3)]
+        public string MiiverseId { get; set; }
+
+        [DatabaseColumn]
+        [UISingleline]
+        [MaxLength(14)]
+        [MinLength(14)]
+        public string FriendCode { get; set; }
 
         [DatabaseColumn]
         [UICheckbox]
@@ -98,6 +106,18 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public bool EmailConfirmado { get; set; }
+
+        [DatabaseColumn]
+        [Required]
+        [MaxLength(50)]
+        [MinLength(1)]
+        [UISingleline]
+        public string Sobrenome { get; set; }
+
+        public string getFullName()
+        {
+            return Nome + " " + Sobrenome;
+        }
 
         public string getUrlFotoPerfil()
         {
@@ -108,7 +128,7 @@ namespace CampeonatosNParty.Models.Database
 
         public string getConfirmationUrl()
         {
-            return "http://campeonatos.nparty.com.br/Home/ConfirmarCadastro?confirmationKey=" + CampeonatosNParty.Helpers.EncryptHelper.Encrypt(this.Id);
+            return "http://connect.nparty.com.br/Home/ConfirmarCadastro?confirmationKey=" + CampeonatosNParty.Helpers.EncryptHelper.Encrypt(this.Id);
         }
     }
 }

@@ -24,6 +24,8 @@ namespace CampeonatosNParty.Models.StructModel
 
         [DatabaseColumn]
         [UISingleline]
+        [DigitsOnly]
+        [MaxLength(14)]
         public string Telefone { get; set; }
 
         [DatabaseColumn]
@@ -42,7 +44,20 @@ namespace CampeonatosNParty.Models.StructModel
         public string LiveId { get; set; }
 
         [DatabaseColumn]
+        [UISingleline]
+        [MaxLength(50)]
+        public string MiiverseId { get; set; }
+
+        [DatabaseColumn]
+        [UISingleline]
+        [MaxLength(14)]
+        [MinLength(14)]
+        public string FriendCode { get; set; }
+
+        [DatabaseColumn]
         [UICheckbox]
         public bool Newsletter { get; set; }
+
+        public bool hasPokemonFriendSafari { get; set; }
     }
 }

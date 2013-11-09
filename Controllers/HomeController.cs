@@ -55,11 +55,46 @@ namespace CampeonatosNParty.Controllers
             return RedirectToAction("ConfirmarEmail", "Jogadores");
         }
 
+        public ActionResult MigrateInscription()
+        {
+            List<tb_inscricoes> inscricoes = tb_inscricoes.Select().ToList();
+
+            foreach (tb_inscricoes insc in inscricoes)
+            {
+                Inscricao i = Inscricao.WithMember("IdOriginal", insc.ID_Inscricao);
+                if (i != null)
+                    continue;
+
+                i = new Inscricao();
+
+                Campeonatos camp = Campeonatos.WithMember("idOriginalk", insc.ID_Campeonato);
+                Usuarios u = Usuarios.WithMember("IdOriginal", insc.ID_Usuario);
+
+                i.IdOriginal = insc.ID_Inscricao;
+                i.IdCampeonato = camp.Id;
+                i.IdUsuario = u.Id;
+                i.IsPago = true;
+                i.Pontuacao = insc.NR_Pontos;
+
+                NPartyDb<Inscricao>.Instance.Insert(i);
+            }
+            return Redirect("~/");
+        }
+
         public ActionResult MigrateUsers()
         {
             List<tb_usuarios> usuarios = tb_usuarios.Select().ToList();
+
             foreach (tb_usuarios user in usuarios)
             {
+                Usuarios u = Usuarios.WithMember("IdOriginal", user.Id_Usuario);
+                if (u != null)
+                    continue;
+
+                Usuarios ui = Usuarios.WithMember("Email", user.NM_Email);
+                if (ui != null)
+                    continue;
+
                 Usuarios newUser = new Usuarios();
                 newUser.Nome = user.NM_Usuario;
                 newUser.Apelido = user.NM_Apelido;
@@ -139,7 +174,7 @@ namespace CampeonatosNParty.Controllers
                         string redir = Request.QueryString["redir"];
 
                         if (string.IsNullOrEmpty(redir))
-                            redir = Url.Content("~/Home/");
+                            redir = Url.Content("~/Home/Dashboard");
 
                         return Redirect(redir);
                     }
@@ -253,9 +288,17 @@ namespace CampeonatosNParty.Controllers
 
             ClassSelect<CampeonatosNParty.Models.Database.Ranking> search = CampeonatosNParty.Models.Database.Ranking.Search(Request.QueryString["filter"]);
             search.Page(18, page);
-            search.OrderBy("NomeUsuario");
+            search.OrderBy("Pontos", SortDirection.Descending);
 
             return View(search.ToResult());
+        }
+
+        [HttpGet]
+        [AuthenticationRequired]
+        public ActionResult Dashboard()
+        {
+            DashboardView view = new DashboardView(CurrentUsuario);
+            return View(view);
         }
     }
 }

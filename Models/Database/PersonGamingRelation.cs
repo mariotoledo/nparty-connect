@@ -31,7 +31,10 @@ namespace CampeonatosNParty.Models.Database
         public bool isLive { get; set; }
 
         [DatabaseColumn]
-        public bool isNintendoNetwork { get; set; }
+        public bool isMiiverse { get; set; }
+
+        [DatabaseColumn]
+        public bool isFriendCode { get; set; }
 
         public static PersonGamingRelation getPersonGamingRelations(Usuarios user1, Usuarios user2)
         {

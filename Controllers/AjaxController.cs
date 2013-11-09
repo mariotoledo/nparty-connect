@@ -22,5 +22,23 @@ namespace CampeonatosNParty.Controllers
         {
             return Json(NPartyDbModel<Cidade>.Select().Where("EstadoId", id), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult CarregarPokemonFriendSafariSlot1(int id)
+        {
+            return Json(NPartyDbModel<PokemonFriendSafari>.Select().Where("TypeId", id).And("SlotNumber", 1), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult CarregarPokemonFriendSafariSlot2(int id)
+        {
+            return Json(NPartyDbModel<PokemonFriendSafari>.Select().Where("TypeId", id).And("SlotNumber", 2), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpGet]
+        public ActionResult CarregarPokemonFriendSafariSlot3(int id)
+        {
+            return Json(NPartyDbModel<PokemonFriendSafari>.Select().Where("TypeId", id).And("SlotNumber", 3), JsonRequestBehavior.AllowGet);
+        }
     }
 }

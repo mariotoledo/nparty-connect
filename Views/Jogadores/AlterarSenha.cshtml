@@ -1,0 +1,53 @@
+﻿@{
+    ViewBag.Title = "Alterar Senha";
+}
+
+<h2>Alterar Senha</h2>
+@if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["Error"]))
+{
+<div class="row">
+    <div class="span12">
+        <div class="alert alert-error">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["Error"]
+        </div>
+    </div>
+</div>
+}
+@if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["Success"]))
+{
+<div class="row">
+    <div class="span12">
+        <div class="alert alert-success">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["Success"]
+        </div>
+    </div>
+</div>
+}
+<p>Para alterar sua senha, preencha os campos abaixo corretamente, e clique no botão "continuar"</p>
+<form method="post" class="form-horizontal">
+    <div class="control-group">
+        <label for="Email" class="control-label">Senha atual</label>
+        <div class="controls">
+            <input type="password" name="CurrentPassword" id="CurrentPassword" value="" placeholder="Digite sua senha atual">
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="Senha" class="control-label">Nova senha</label>
+        <div class="controls">
+            <input type="password" name="NewPassword" id="NewPassword" value="" placeholder="Digite sua nova senha">
+        </div>
+    </div>
+    <div class="control-group">
+        <label for="Senha" class="control-label">Confirmar nova senha</label>
+        <div class="controls">
+            <input type="password" name="NewPasswordConfirmation" id="NewPasswordConfirmation" value="" placeholder="Confirme sua nova senha">
+            <span class="help-inline">Sua nova senha deve conter de 6 a 8 dígitos.</span>
+        </div>
+    </div>
+    <div class="control-group">
+        <div class="controls">
+            <button type="submit" class="btn btn-large btn-primary">Continuar</button>
+            <a class="btn btn-large" href="@Url.Content("~/Jogadores/EditarMinhasInformacoes")">Cancelar</a>
+        </div>
+    </div>
+</form>

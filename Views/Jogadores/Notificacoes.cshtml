@@ -3,6 +3,11 @@
     ViewBag.Title = "Notificações";
 }
 
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li><a href="@Url.Content("/Home/Dashboard")">Dashboard</a> <span class="divider">/</span></li>
+    <li class="active">Notificações</li>
+</ul>
 <h2>Notificações <small>Confira abaixo a sua lista de notificações</small></h2>
 @{
     if (Model != null && Model.Count() > 0)

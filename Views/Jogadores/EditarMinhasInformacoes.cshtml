@@ -7,6 +7,12 @@
     bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
 }
 
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.maskedinput.min.js")"></script>
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li><a href="@Url.Content("/Home/Dashboard")">Dashboard</a> <span class="divider">/</span></li>
+    <li class="active">Editar Minhas Informações</li>
+</ul>
 <h2>Editar Minhas Informações</h2>
 <p>Preencha os campos abaixo corretamente, e clique em "Salvar" para atualizar suas informações.</p>
 <form class="form-horizontal" method="post">
@@ -55,10 +61,10 @@
                     @{
                         if(Model.Id_Estado > 0)
                         {
-                            foreach (CampeonatosNParty.Models.Database.Cidade item in CampeonatosNParty.Models.Database.Cidade.Select().OrderBy("Nome"))
+                            foreach (CampeonatosNParty.Models.Database.Cidade item in CampeonatosNParty.Models.Database.Cidade.Select().Where("EstadoId", Model.Id_Estado).OrderBy("Nome"))
                             {
                                 string selected = item.CidadeId == Model.Id_Cidade ? "selected" : "";
-                                <option @selected value="@item.EstadoId">@item.Nome</option>
+                                <option @selected value="@item.CidadeId">@item.Nome</option>
                             }
                         } else {
                             <script>$('#Id_Cidade').prop('disabled', true);</script>
@@ -66,10 +72,37 @@
                     }
                 </select>
             </div>
+            <br />
+            <h4>Alteração de senha</h4>
+            <p>Se você deseja alterar sua senha, <a href="/Jogadores/AlterarSenha/">clique aqui</a></p>
         </div>
         <div class="span6">
             <h4>Informações adicionais</h4>
             @{presenter["Newsletter"].Render(this.Output, Model, validate);}
+            @{presenter["MiiverseId"].Render(this.Output, Model, validate);}
+            <div >
+                @{presenter["FriendCode"].Render(this.Output, Model, validate);}
+            </div>
+            <div class="control-group" id="buttonManeiro">
+                <label for="FriendSafari" class="control-label">Friend Safari em Pokémon X / Y</label>
+                <div class="controls">
+                    @{
+                        if(Model.hasPokemonFriendSafari)
+                        {
+                            <div>
+                                <a href="#removeFriendSafariModal" role="button" class="btn btn-primary btn-large" data-toggle="modal">Remover Friend Safari</a>
+                                <span class="help-inline">Clique no botão acima caso deseje remover sua Friend Safari</span>
+                            </div>
+                        }
+                        else
+                        {
+                            <a href="#pokemonSafariModal" role="button" class="btn btn-primary btn-large" data-toggle="modal">Editar Friend Safari</a>
+                            <span class="help-inline">Clique no botão acima, e escolha seus Pokémon da Friend Safari</span>
+                        }
+                    }
+                    
+                </div>
+            </div>            
             @{presenter["PsnId"].Render(this.Output, Model, validate);}
             @{presenter["LiveId"].Render(this.Output, Model, validate);}
         </div>
@@ -84,13 +117,136 @@
             <div class="control-group">
                 <div class="controls">
                     <button type="submit" class="btn btn-primary">Salvar</button>
-                    <a class="btn" href="@Url.Content("~/")">Cancelar</a>
+                    <a class="btn" href="@Url.Content("~/Home/Dashboard")">Cancelar</a>
                 </div>
             </div>
         </div>
     </div>
-</form>
+
+    <!-- Modal -->
+<div id="removeFriendSafariModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="friendSafariRemoveLavel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="friendSafariRemoveLavel">Remover Friend Safari?</h3>
+  </div>
+  <div class="modal-body">
+    <p>Tem certeza que deseja remover sua Friend Safari?</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+    <a class="btn btn-primary" href="~/Jogadores/RemoverFriendSafari">Sim, remover</a>
+  </div>
+</div>
+
+    <!-- Modal -->
+    <div id="pokemonSafariModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="pokemonSafariLabel" aria-hidden="true">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="pokemonSafariLabel">Escolha os Pokémon de seu Safari</h3>
+          </div>
+          <div class="modal-body">
+                <table class="table table-hover table-striped">
+                    <tr>
+                        <td>
+                            Tipo do Safari
+                        </td>
+                        <td>
+                            <select id="PokemonType" name="PokemonType" onchange="loadPokemonSlot1(this.value); loadPokemonSlot2(this.value); loadPokemonSlot3(this.value);">
+                                <option value="0">Selecione...</option>
+                                @{
+                                    foreach (CampeonatosNParty.Models.Database.PokemonFriendSafariType pokemonType in
+                                        CampeonatosNParty.Models.Database.PokemonFriendSafariType.Select())
+                                    {
+                                        <option value="@pokemonType.Id">@pokemonType.TypeName</option>
+                                    }
+                                }
+                                </select>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;">
+                            Slot 1
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <select id="PokemonSlot1" name="PokemonSlot1" onchange="changePokemonSlot1Image(this.value)">
+                                <option value="0">Selecione...</option>
+                                <script>$('#PokemonSlot1').prop('disabled', true);</script>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;">
+                            Slot 2
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <select id="PokemonSlot2" name="PokemonSlot2" onchange="changePokemonSlot2Image(this.value)">
+                                <option value="0">Selecione...</option>
+                                <script>$('#PokemonSlot2').prop('disabled', true);</script>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="vertical-align: middle;">
+                            Slot 3
+                        </td>
+                        <td style="vertical-align: middle;">
+                            <select id="PokemonSlot3" name="PokemonSlot3" onchange="changePokemonSlot3Image(this.value)">
+                                <option value="0">Selecione...</option>
+                                <script>$('#PokemonSlot3').prop('disabled', true);</script>
+                            </select>
+                        </td>
+                    </tr>
+                </table>
+          </div>
+          <div class="modal-footer">
+            <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+            <button class="btn btn-primary" data-dismiss="modal">Ok</button>
+          </div>
+        </div>
+    </form>
 <script type="text/javascript">
+    $(document).ready(function () {
+        transitionManera();
+    });
+
+    $("#FriendCode").focusout(function () {
+        transitionManera();
+    });
+
+    jQuery(function ($) {
+        $("#FriendCode").mask("9999-9999-9999");
+        $("#Telefone").mask("(99) 99999999?9");
+        
+    });
+
+    var imagesSlot1 = {};
+    var imagesSlot2 = {};
+    var imagesSlot3 = {};
+
+    function transitionManera() {
+        if ($("#FriendCode").val().replace(/[^0-9]/g, '').length == 12) {
+            $("#buttonManeiro").show();
+        } else {
+            $("#buttonManeiro").hide();
+        }
+    }
+
+    function changePokemonSlot1Image(id)
+    {
+        $('#imageSlot1').attr('src', imagesSlot1[id]);
+    }
+
+    function changePokemonSlot2Image(id) {
+        $('#imageSlot2').attr('src', imagesSlot2[id]);
+    }
+
+    function changePokemonSlot3Image(id) {
+        $('#imageSlot3').attr('src', imagesSlot3[id]);
+    }
+
     function loadCities(selectedCode) {
         $.ajax({
             url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
@@ -108,8 +264,61 @@
                     }
                 });
 
-
                 $('#Id_Cidade').html(optionArray.join(''));
+            }
+        });
+    }
+    function loadPokemonSlot1(selectedType) {
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSlot1/")" + selectedType,
+            success: function (json) {
+                $('#PokemonSlot1').prop('disabled', false);
+                var optionArray = [];
+                var imagesSlot1 = {};
+                optionArray.push('<option value="">Selecione</option>');
+
+                $.each(json, function (i, item) {
+                    optionArray.push('<option value="' + item.Id + '">' + item.Name + '</option>');
+                    imagesSlot1["" + item.Id] = 'http://www.serebii.net/xy/pokemon/' + item.Id + '.png'
+                });
+
+                $('#PokemonSlot1').html(optionArray.join(''));
+            }
+        });
+    }
+    function loadPokemonSlot2(selectedType) {
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSlot2/")" + selectedType,
+            success: function (json) {
+                $('#PokemonSlot2').prop('disabled', false);
+                var optionArray = [];
+                var imagesSlot2 = {};
+                optionArray.push('<option value="">Selecione</option>');
+
+                $.each(json, function (i, item) {
+                    optionArray.push('<option value="' + item.Id + '">' + item.Name + '</option>');
+                    imagesSlot2[item.Id] = 'http://www.serebii.net/xy/pokemon/' + item.Id + '.png'
+                });
+
+                $('#PokemonSlot2').html(optionArray.join(''));
+            }
+        });
+    }
+    function loadPokemonSlot3(selectedType) {
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSlot3/")" + selectedType,
+            success: function (json) {
+                $('#PokemonSlot3').prop('disabled', false);
+                var optionArray = [];
+                var imagesSlot3 = {};
+                optionArray.push('<option value="">Selecione</option>');
+
+                $.each(json, function (i, item) {
+                    optionArray.push('<option value="' + item.Id + '">' + item.Name + '</option>');
+                    imagesSlot3[item.Id] = 'http://www.serebii.net/xy/pokemon/' + item.Id + '.png'
+                });
+
+                $('#PokemonSlot3').html(optionArray.join(''));
             }
         });
     }

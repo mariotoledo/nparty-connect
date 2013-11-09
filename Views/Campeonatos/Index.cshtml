@@ -13,14 +13,18 @@
 <div class="page-header">
   <h1>Campeonatos <small>Confira todos os jogos dos campeonatos que realizamos</small></h1>
 </div>
-<form method="get" class="form-search pull-right">
-    <div class="input-append">
-        <input type="text" name="filter" placeholder="Procurar por campeonato" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
-        <button class="btn btn-primary">
-            <i class="icon-search icon-white"></i>
-        </button>
+<div class="row">
+    <div class="span12">
+        <form method="get" class="form-search pull-right">
+            <div class="input-append">
+                <input type="text" name="filter" placeholder="Procurar por campeonato" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
+                <button class="btn btn-primary">
+                    <i class="icon-search icon-white"></i>
+                </button>
+            </div>
+        </form>
     </div>
-</form>
+</div>
 @{
     if(Model.Count > 0){
         <div class="row">

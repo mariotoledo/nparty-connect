@@ -266,9 +266,9 @@ footer a {
 
 .photoBig {
     display: block;
-    width: 370px; 
-    height: 370px; 
-    background-size:370px auto;
+    width: 270px; 
+    height: 270px; 
+    background-size:270px auto;
     background-position: center center;
     background-repeat: no-repeat;
 }
@@ -307,4 +307,16 @@ ul.notifications li p{
 
 ul.notifications li:last-child{
     border-bottom: none;
+}
+
+.gamingConnection tr td {
+    font-size: 12px;
+}
+
+.badges .description {
+    font-size:  12px;
+}
+
+.container {
+    padding: 10px;
 }

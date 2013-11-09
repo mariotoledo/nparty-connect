@@ -25,14 +25,19 @@
 <div class="page-header">
   <h1>Ranking <small>Confira a classificação de geral dos jogadores</small></h1>
 </div>
-<form method="get" class="form-search pull-right">
-    <div class="input-append">
-        <input type="text" name="filter" placeholder="Procurar por jogador" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
-        <button class="btn btn-primary">
-            <i class="icon-search icon-white"></i>
-        </button>
+<div class="row">
+    <div class="span12">
+        <form method="get" class="form-search pull-right">
+            <div class="input-append">
+                <input type="text" name="filter" placeholder="Procurar por jogador" class="search-query" style="height:24px;" value="@Request.QueryString["filter"]">
+                <button class="btn btn-primary">
+                    <i class="icon-search icon-white"></i>
+                </button>
+            </div>
+        </form>
     </div>
-</form>
+</div>
+
 @{
     if (jogadores.Count > 0)
     {
@@ -49,7 +54,7 @@
                                         {
                                             <li class="span2">
                                                 <a class="thumbnail" href="@Url.Content("~/Jogadores/Detalhes/" + jogador.IdUsuario)">
-                                                    <div class="photoSmall" style="background-image: url('@jogador.UrlFotoPerfil')"></div>
+                                                    <img class="photoSmall" style="background-image: url('@jogador.UrlFotoPerfil')"></img>
 				                                    <h4>@jogador.NomeUsuario</h4>
 				                                    <div class="textDescription">
                                                         @if (!string.IsNullOrEmpty(jogador.ApelidoUsuario))
