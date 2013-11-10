@@ -54,7 +54,7 @@
                                         {
                                             <li class="span2">
                                                 <a class="thumbnail" href="@Url.Content("~/Jogadores/Detalhes/" + jogador.IdUsuario)">
-                                                    <img class="photoSmall" style="background-image: url('@jogador.UrlFotoPerfil')"></img>
+                                                    <img src="@Url.Content("~/Static/img/default.png")" class="photoSmall" style="background-image: url('@jogador.UrlFotoPerfil')"></img>
 				                                    <h4>@jogador.NomeUsuario</h4>
 				                                    <div class="textDescription">
                                                         @if (!string.IsNullOrEmpty(jogador.ApelidoUsuario))

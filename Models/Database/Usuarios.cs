@@ -20,7 +20,7 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn]
         [Required]
         [MaxLength(50)]
-        [MinLength(5)]
+        [MinLength(3)]
         [UISingleline]
         public string Nome { get; set; }
 
@@ -110,7 +110,7 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn]
         [Required]
         [MaxLength(50)]
-        [MinLength(1)]
+        [MinLength(2)]
         [UISingleline]
         public string Sobrenome { get; set; }
 

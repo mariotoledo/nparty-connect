@@ -193,12 +193,16 @@
     <Content Include="Static\EmailTemplates\adicionarFriendCode.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Static\EmailTemplates\senhaNull.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Static\EmailTemplates\esqueciSenhaTemplate.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Static\img\badges\default.jpg" />
     <Content Include="Static\img\badges\mk7_1.jpg" />
     <Content Include="Static\img\badges\poke_1.jpg" />
+    <Content Include="Static\img\default.png" />
     <Content Include="Static\img\eventsLogos\animeFriends.jpg" />
     <Content Include="Static\img\eventsLogos\default.jpg" />
     <Content Include="Static\img\eventsLogos\defaultCover.jpg" />

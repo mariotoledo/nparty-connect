@@ -24,7 +24,7 @@ namespace CampeonatosNParty.Models.ViewModel
         public List<UsuarioBadges> badges { get; set; }
         public bool hasGamingConnection;
 
-        public IEnumerable<ClassificacaoPorJogador[]> campeonatos { get; set; }
+        public List<ClassificacaoPorJogador> campeonatos { get; set; }
 
         public PokemonFriendSafariType safariType;
         public List<PokemonFriendSafari> pokemonFriendSafari;
@@ -40,7 +40,7 @@ namespace CampeonatosNParty.Models.ViewModel
 
             Pontuacao = JogadoresItem.WithMember("IdUsuario", userId).Pontos;
 
-            campeonatos = ClassificacaoPorJogador.Select().Where("IdUsuario", userId).OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending).Segment(4);
+            campeonatos = ClassificacaoPorJogador.Select().Where("IdUsuario", userId).OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending).ToList();
 
             badges = UsuarioBadges.Select().Where("PersonId", userId).ToList();
 

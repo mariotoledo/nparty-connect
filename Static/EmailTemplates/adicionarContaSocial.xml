@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" standalone="yes"?>
 <EmailTemplate>
   <Smtp host="smtp.gmail.com" port="587" enableSSL="True" deliveryMethod="Network" username="contato@nparty.com.br" password="n@nparty13" />
-  <Subject><![CDATA[Solicitação de amizade - Campeonatos N-Party]]></Subject>
+  <Subject><![CDATA[Solicitação de amizade - N-Party Connect]]></Subject>
   <Sender address="contato@nparty.com.br" displayName="" />
   <From address="contato@nparty.com.br" displayName="" />
   <Body isHtml="True">

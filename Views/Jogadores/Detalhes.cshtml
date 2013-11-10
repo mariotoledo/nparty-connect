@@ -4,6 +4,9 @@
     {
         ViewBag.Title = Model.usuario.Nome;
 
+        string verListaCampeonatos = Model.campeonatos != null && Model.campeonatos.Count > 3 ? 
+            "<small >(<a href=\"#championshipList\" data-toggle=\"modal\">Ver lista completa</a>)</small>" : "";
+        
         string apelido = string.IsNullOrEmpty(Model.usuario.Apelido) ? "" : "(" + Model.usuario.Apelido + ")";
         
     <ul class="breadcrumb">
@@ -14,7 +17,7 @@
 
     <div class="row">
         <div class="span3">
-            <img class="photoBig" style="background-image: url('@Model.usuario.getUrlFotoPerfil()'); margin: auto;"></img>
+            <img src="@Url.Content("~/Static/img/default.png")" class="photoBig" style="background-image: url('@Model.usuario.getUrlFotoPerfil()'); margin: auto;"></img>
             <h4>@Model.usuario.getFullName() <small>@apelido</small></h4>
             @{
                 <div class="pontuacao"><b>Pontuação</b>: @Model.Pontuacao pontos</div>
@@ -123,14 +126,15 @@
                     </table>
         }
 
-        if (Model.badges != null && Model.badges.Count > 0)
-        {
+        
                     <br />
                     <table class="table badges table-striped table-bordered table-hover table-condensed">
+                        @if (Model.badges != null && Model.badges.Count > 0)
+                        {
                         <tr>
                             <th colspan="2" style="text-align:center;">Badges (@Model.badges.Count)</th>
                         </tr>
-                        @foreach (CampeonatosNParty.Models.Database.UsuarioBadges badge in Model.badges.Take(3))
+                        foreach (CampeonatosNParty.Models.Database.UsuarioBadges badge in Model.badges.Take(3))
                         {
                             <tr>
                                 <td style="vertical-align: middle;">
@@ -142,58 +146,61 @@
                                 </td>
                             </tr>
                         }
+                      } else {
+                            <tr>
+                                <th colspan="2" style="text-align:center;">Badges (0)</th>
+                            </tr>
+                            <tr>
+                                <td colspan="2" style="text-align:center;" class="description">Nenhuma badge conquistada.</td>
+                            </tr>
+                      }
                     </table>
-        }
+       
             }
         </div>
         <div class="span9">
-            <div class="row">
-                <div class="span9">
+            <h3>Campeonatos Participados @Html.Raw(verListaCampeonatos)</h3>
                     @{
-                        if (Model.campeonatos != null && Model.campeonatos.Count<CampeonatosNParty.Models.Database.ClassificacaoPorJogador[]>() > 0)
+                        if (Model.campeonatos != null && Model.campeonatos.Count() > 0)
                         {
-                                <h3 id="campeonatosHeader">Campeonatos Participados <small>(<a href="#championshipList" data-toggle="modal">Ver lista completa</a>)</small> </h3>
-                                <script type="text/javascript">
-                                    var showHeaderCampeonatos = false;
-                                </script>
-                                    <ul class="thumbnails">
-                                        @foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador campeonato in Model.campeonatos.First().Take(3))
+                                <ul class="thumbnails">
+                                    @foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador campeonato in Model.campeonatos.Take(3))
+                                    {
+                                        if (campeonato != null)
                                         {
-                                            if (campeonato != null)
-                                            {
-                                            <li class="span3">
-                                                <a class="thumbnail" href="@Url.Content("~/Campeonatos/Detalhes/" + campeonato.IdCampeonato)">
-                                                    <img alt="@campeonato.NomeJogo" src="@campeonato.getImagemURLJogo()" />
-                                                    <h4>@campeonato.NomeJogo</h4>
-                                                    <div class="textDescription">
-                                                        @if (!string.IsNullOrEmpty(campeonato.NomeEvento))
-                                                        {
-                                                            <div><b>Evento:</b> @campeonato.NomeEvento</div>
-                                                        }
-                                                        @if (campeonato.DataCampeonato != null)
-                                                        {
-                                                            <div><b>Data:</b> @campeonato.DataCampeonato.ToString("dd/MM/yyyy")</div>
-                                                        }
-                                                        @{
-                                                        string classificacao = campeonato.Classificacao == 0 || campeonato.Classificacao > 4 ? " - " : campeonato.Classificacao.ToString() + "º lugar";
-                                                            <div><b>Colocação:</b> @classificacao</div>
-                                                        }
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <script type="text/javascript">
-                                                showHeaderCampeonatos = true;
-                                            </script>
-                                            }
+                                        <li class="span3">
+                                            <a class="thumbnail" href="@Url.Content("~/Campeonatos/Detalhes/" + campeonato.IdCampeonato)">
+                                                <img alt="@campeonato.NomeJogo" src="@campeonato.getImagemURLJogo()" />
+                                                <h4>@campeonato.NomeJogo</h4>
+                                                <div class="textDescription">
+                                                    @if (!string.IsNullOrEmpty(campeonato.NomeEvento))
+                                                    {
+                                                        <div><b>Evento:</b> @campeonato.NomeEvento</div>
+                                                    }
+                                                    @if (campeonato.DataCampeonato != null)
+                                                    {
+                                                        <div><b>Data:</b> @campeonato.DataCampeonato.ToString("dd/MM/yyyy")</div>
+                                                    }
+                                                    @{
+                                                    string classificacao = campeonato.Classificacao == 0 || campeonato.Classificacao > 4 ? " - " : campeonato.Classificacao.ToString() + "º lugar";
+                                                        <div><b>Colocação:</b> @classificacao</div>
+                                                    }
+                                                </div>
+                                            </a>
+                                        </li>
                                         }
-                                    </ul>
-                                }
-                                if (Model.pokemonFriendSafari != null && Model.pokemonFriendSafari.Count > 0)
-                                {
-                                    string type = Model.safariType == null ? "" : "(" + Model.safariType.TypeName + ")";
+                                    }
+                                </ul>
+                        } else {
+                            <p id="campeonatosMessage">Nenhum campeonato participado.</p>
+                        }
+
+                        if (Model.pokemonFriendSafari != null && Model.pokemonFriendSafari.Count > 0)
+                        {
+                            string type = Model.safariType == null ? "" : "(" + Model.safariType.TypeName + ")";
                                    <h3>Pokémon Friend Safari <small>@type</small> </h3>
                                    <ul class="thumbnails">
-                                       @foreach(CampeonatosNParty.Models.Database.PokemonFriendSafari pokemon in Model.pokemonFriendSafari)
+                                       @foreach (CampeonatosNParty.Models.Database.PokemonFriendSafari pokemon in Model.pokemonFriendSafari)
                                        {
                                            <li class="span3">
                                                 <a class="thumbnail" href="#">
@@ -203,15 +210,13 @@
                                             </li>
                                        }
                                    </ul> 
-                                }
+                        }
                             }
                         
-                </div>
-            </div>
         </div>
     </div>
-                                if (Model.PSNButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
-                                { 
+                        if (Model.PSNButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
+                        { 
                     <div id="psnAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="psnAddLabel" aria-hidden="true">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -225,9 +230,9 @@
                             <a href="@Url.Content("~/Jogadores/AdicionarPSN/" + Model.usuario.Id)" class="btn btn-primary">Sim, solicitar conexão</a>
                         </div>
                     </div>
-                                }
-                                if (Model.LiveButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
-                                {
+                        }
+                        if (Model.LiveButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
+                        {
                     <div id="liveAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="liveAddLabel" aria-hidden="true">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -241,9 +246,9 @@
                             <a href="@Url.Content("~/Jogadores/AdicionarLive/" + Model.usuario.Id)" class="btn btn-primary">Sim, solicitar conexão</a>
                         </div>
                     </div>
-                                }
-                                if (Model.MiiverseButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
-                                {
+                        }
+                        if (Model.MiiverseButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
+                        {
                     <div id="miiverseAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -257,9 +262,9 @@
                             <a href="@Url.Content("~/Jogadores/AdicionarMiiverse/" + Model.usuario.Id)" class="btn btn-primary">Sim, solicitar conexão</a>
                         </div>
                     </div>
-                                }
-                                if (Model.FriendCodeButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
-                                {
+                        }
+                        if (Model.FriendCodeButtonState == CampeonatosNParty.Models.ViewModel.SocialGamingButtonState.Enabled)
+                        {
                     <div id="friendcodeAdd" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="friendcodeLabel" aria-hidden="true">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -273,9 +278,9 @@
                             <a href="@Url.Content("~/Jogadores/AdicionarFriendCode/" + Model.usuario.Id)" class="btn btn-primary">Sim, solicitar conexão</a>
                         </div>
                     </div>
-                                }
-                                if (Model.campeonatos != null && Model.campeonatos.Count<CampeonatosNParty.Models.Database.ClassificacaoPorJogador[]>() > 0)
-                                {
+                        }
+                        if (Model.campeonatos != null && Model.campeonatos.Count() > 0)
+                        {
             <div id="championshipList" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="championshipListLabel" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -285,10 +290,8 @@
                     <script type="text/javascript">
                         var showHeaderCampeonatos2 = false;
                     </script>
-                            @foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador[] campeonatosArray in Model.campeonatos)
-                            {
                                 <ul class="thumbnails">
-                                    @foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador campeonato in campeonatosArray)
+                                    @foreach (CampeonatosNParty.Models.Database.ClassificacaoPorJogador campeonato in Model.campeonatos)
                                     {
                                         if (campeonato != null)
                                         {
@@ -318,20 +321,14 @@
                                         }
                                     }
                                 </ul>
-                            }
                             </div>
                         </div>
                                         
-                    }
-        
+                        }
+
     }
     else
     {
         Html.RenderPartial("ErroNotFound");
     }
 }
-<script type="text/javascript">
-    if (showHeaderCampeonatos == false) {
-        document.getElementById('campeonatosHeader').style.display = 'none';
-    }
-</script>

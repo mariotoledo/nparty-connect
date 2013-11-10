@@ -23,6 +23,28 @@ namespace CampeonatosNParty.Controllers
             return View(new HomeView());
         }
 
+        /*public ActionResult SendEmailPraGalera()
+        {
+            List<Usuarios> usuario = Usuarios.Select().Where("Senha", null).ToList();
+            foreach (Usuarios u in usuario)
+            {
+                string senha = CampeonatosNParty.Helpers.RegisterHelper.GetRandWord(6);
+                u.Senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(senha);
+                NPartyDb<Usuarios>.Instance.Save(u);
+
+                CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/senhaNull.xml")));
+
+                IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                infoChanges.Add("[=PersonName]", u.Nome);
+                infoChanges.Add("[=PersonPassword]", senha);
+
+                emailTemplate.Send(infoChanges, "Bem vindo ao N-Party Connect", u.Email);
+            }
+            return Redirect("~/");
+        }*/
+
         public ActionResult ConfirmarCadastro()
         {
             string encryptedPersonId = Request.QueryString["confirmationKey"];
@@ -55,7 +77,7 @@ namespace CampeonatosNParty.Controllers
             return RedirectToAction("ConfirmarEmail", "Jogadores");
         }
 
-        public ActionResult MigrateInscription()
+       /* public ActionResult MigrateInscription()
         {
             List<tb_inscricoes> inscricoes = tb_inscricoes.Select().ToList();
 
@@ -132,7 +154,7 @@ namespace CampeonatosNParty.Controllers
                 NPartyDb<Usuarios>.Instance.Insert(newUser);
             }
             return View(new HomeView());
-        }
+        }*/
 
         public static string RemoveAccents(string text)
         {
@@ -270,7 +292,7 @@ namespace CampeonatosNParty.Controllers
             infoChanges.Add("[=PersonEmail]", contato.Email);
             infoChanges.Add("[=PersonMessage]", contato.Mensagem);
 
-            emailTemplate.Send(infoChanges, "Contato Campeonatos N-Party", "contato@nparty.com.br");
+            emailTemplate.Send(infoChanges, "Contato N-Party Connect", "contato@nparty.com.br");
 
             ViewData["Success"] = "Obrigado por entrar em contato. Em breve responderemos a sua mensagem! :)";
 

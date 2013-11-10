@@ -60,7 +60,7 @@
                                     {
                                         <li class="span2">
                                             <a class="thumbnail" href="@Url.Content("~/Jogadores/Detalhes/" + classificacao.IdUsuario)">
-                                                <img alt="@classificacao.Nome" src="@classificacao.getUrlFotoPerfil()" />
+                                                <img class="photoSmall" src="@Url.Content("~/Static/img/default.png")" style="background-image: url('@classificacao.getUrlFotoPerfil()')" />
                                                 @{
                                                     string apelido = string.IsNullOrEmpty(classificacao.Apelido) ? "" : "(" + classificacao.Apelido + ")";
                                                     string colocacaoString =  colocacao.ToString() + "º";

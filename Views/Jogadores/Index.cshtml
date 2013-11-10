@@ -23,7 +23,7 @@
     <li class="active">Jogadores</li>
 </ul>
 <div class="page-header">
-  <h1>Jogadores <small>Confira todos os jogadores que ja participaram de nossos campeonatos</small></h1>
+  <h1>Jogadores <small>Confira todos os jogadores cadastrados</small></h1>
 </div>
 <div class="row">
     <div class="span12">
@@ -53,7 +53,7 @@
                                         {
                                             <li class="span2">
                                                 <a class="thumbnail" href="@Url.Content("~/Jogadores/Detalhes/" + jogador.IdUsuario)">
-                                                    <img class="photoSmall" style="background-image: url('@jogador.UrlFotoPerfil')"></img>
+                                                    <img src="@Url.Content("~/Static/img/default.png")" class="photoSmall" style="background-image: url('@jogador.UrlFotoPerfil')"></img>
 				                                    <h4>@jogador.NomeUsuario</h4>
 				                                    <div class="textDescription">
                                                         @if (!string.IsNullOrEmpty(jogador.ApelidoUsuario))

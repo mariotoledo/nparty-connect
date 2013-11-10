@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" standalone="yes"?>
 <EmailTemplate>
   <Smtp host="smtp.gmail.com" port="587" enableSSL="True" deliveryMethod="Network" username="contato@nparty.com.br" password="n@nparty13" />
-  <Subject><![CDATA[Lembrete de senha - Campeonatos N-Party]]></Subject>
+  <Subject><![CDATA[Lembrete de senha - N-Party Connect]]></Subject>
   <Sender address="contato@nparty.com.br" displayName="" />
   <From address="contato@nparty.com.br" displayName="" />
   <Body isHtml="True">
@@ -22,7 +22,7 @@
     <p>Olá, [=PersonName]</p>
     <p>Conforme solicitado, segue a nova senha para acesso ao Campeonatos N-Party:</p>
     <span style="font-size: 30px; font-color: #ff0000;">[=PersonPassword]</span><br/><br/>
-    <p>O que esta esperando? Acesse agora mesmo <a href="http://campeonatos.nparty.com.br">clicando aqui</a><p>
+    <p>O que esta esperando? Acesse agora mesmo <a href="http://connect.nparty.com.br">clicando aqui</a><p>
 </body>
 </html>
 ]]>

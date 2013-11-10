@@ -41,7 +41,7 @@
                             {
                                 <li class="span2">
                                     <a class="thumbnail" href="@Url.Content("~/Jogadores/Detalhes/" + ranking.IdUsuario)">
-                                        <img alt="@ranking.NomeUsuario" src="@ranking.getUrlFotoPerfil()" />
+                                        <img class="photoSmall" src="@Url.Content("~/Static/img/default.png")" style="background-image: url('@ranking.getUrlFotoPerfil()')" />
                                         @{
                                             string apelido = string.IsNullOrEmpty(ranking.ApelidoUsuario) ? "" : "(" + ranking.ApelidoUsuario + ")";
                                         }

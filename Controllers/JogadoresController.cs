@@ -488,7 +488,7 @@ namespace CampeonatosNParty.Controllers
                     infoChanges.Add("[=PersonName]", user.Nome);
                     infoChanges.Add("[=PersonPassword]", newPassword);
 
-                    emailTemplate.Send(infoChanges, "Campeonatos N-Party - Nova senha", user.Email);
+                    emailTemplate.Send(infoChanges, "N-Party Connect - Nova senha", user.Email);
 
                     ViewData["Success"] = "Enviamos uma nova senha para seu email :)";
                 }
@@ -511,7 +511,7 @@ namespace CampeonatosNParty.Controllers
                 infoChanges.Add("[=PersonName]", usuario.Nome);
                 infoChanges.Add("[=PersonLink]", usuario.getConfirmationUrl());
 
-                emailTemplate.Send(infoChanges, "Campeonatos N-Party - Confirmação de email", usuario.Email);
+                emailTemplate.Send(infoChanges, "N-Party Connect - Confirmação de email", usuario.Email);
             }
 
             return RedirectToAction("ConfirmarEmail");
