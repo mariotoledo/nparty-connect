@@ -328,3 +328,11 @@ ul.notifications li:last-child{
 .container {
     padding: 10px;
 }
+
+.pokemonSafariItem {
+    font-size: 12px;
+}
+
+.pokemonSafariItem .pokemon{
+    text-align: center;
+}

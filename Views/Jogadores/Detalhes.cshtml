@@ -203,7 +203,7 @@
                                        @foreach (CampeonatosNParty.Models.Database.PokemonFriendSafari pokemon in Model.pokemonFriendSafari)
                                        {
                                            <li class="span3">
-                                                <a class="thumbnail" href="#">
+                                                <a class="thumbnail" href="@Url.Content("~/Widgets/PokemonFriendSafariFinder/?Pokemon=" + @pokemon.PokedexNumber)">
                                                     <img alt="@pokemon.Name" src="@pokemon.getImageUrl()" />
                                                     @pokemon.Name
                                                 </a>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" standalone="yes"?>
 <EmailTemplate>
-  <Smtp host="smtp.gmail.com" port="587" enableSSL="True" deliveryMethod="Network" username="contato@nparty.com.br" password="n@nparty13" />
+  <Smtp host="smtp.sendgrid.com" port="587" enableSSL="False" deliveryMethod="Network" username="mtoledo" password="lalala12" />
   <Subject><![CDATA[Bem vindo ao N-Party Connect]]></Subject>
   <Sender address="contato@nparty.com.br" displayName="" />
   <From address="contato@nparty.com.br" displayName="" />

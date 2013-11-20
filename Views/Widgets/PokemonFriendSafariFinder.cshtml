@@ -1,0 +1,168 @@
+﻿@using CampeonatosNParty.Models.Database
+@model EixoX.Data.ClassSelectResult<PokemonFriendSafariFinderItem>
+@{
+    ViewBag.Title = "Pokémon Friend Safari Finder - N-Party Connect";
+
+    List<PokemonFriendSafariFinderItem> safaris;
+    if (Model == null)
+    {
+        safaris = NPartyDb<PokemonFriendSafariFinderItem>.Instance.Select().ToList();
+    }
+    else
+    {
+        safaris = Model.ToList();
+    }
+
+    List<PokemonFriendSafariType> safarisTypes = PokemonFriendSafariType.Select().OrderBy("TypeName", EixoX.Data.SortDirection.Ascending).ToList();
+    
+    List<PokemonFriendSafari> pokemonList = null;
+    
+    int pokemonSafariTypeFilter = Request.QueryString["Type"] == null ? 0 : Int32.Parse(Request.QueryString["Type"]);
+    int pokemonSafariFilter = Request.QueryString["Pokemon"] == null ? 0 : Int32.Parse(Request.QueryString["Pokemon"]);
+
+    if (pokemonSafariTypeFilter > 0)
+    {
+        pokemonList = PokemonFriendSafari.Select().Where("TypeId", pokemonSafariTypeFilter).OrderBy("Name", EixoX.Data.SortDirection.Ascending).ToList();
+    } else {
+        pokemonList = PokemonFriendSafari.Select().OrderBy("Name", EixoX.Data.SortDirection.Ascending).ToList();
+    }
+    
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+    string isFilteredType = Request.QueryString["Type"] != null ? "Type=" + Request.QueryString["Type"] : "";
+    string isFilteredPokemon = Request.QueryString["Pokemon"] != null ? "Pokemon=" + Request.QueryString["Pokemon"] : "";
+}
+
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li><a href="@Url.Content("/Widgets")">Widgets</a> <span class="divider">/</span></li>
+    <li class="active">Pokémon Friend Safari Finder</li>
+</ul>
+
+<div class="row">
+    <div class="span12">
+        <div id="mainSlider" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/Static/img/widgets/heroPokemonFriendSafariFinder.png" alt="Bem vindo ao N-Party Connect">
+                    <div class="container">
+                        <div class="carousel-caption" style="bottom: 20px;">
+                            <h1>Pokémon Friend Safari Finder</h1>
+                            <p class="lead">Encontre os mais diversos Friend Safaris dos usuários cadastrados na N-Party Connect!</p><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="controls controls-row">
+        <form class="form-inline pull-right">
+            <select name="Type" class="span2" onchange="loadPokemonFromType(this.value)">
+                <option value="0">Qualquer tipo</option>
+                @foreach (PokemonFriendSafariType pokemonType in safarisTypes)
+                {
+                    string selected = pokemonSafariTypeFilter == pokemonType.Id ? "selected" : "";
+                    <option @selected value="@pokemonType.Id">@pokemonType.TypeName</option>
+                }
+            </select>
+            <select class="span2" name="Pokemon" id="Pokemon">
+                <option value="0">Qualquer Pokémon</option>
+                @foreach (PokemonFriendSafari pokemonItem in pokemonList)
+                {
+                    string selected = pokemonSafariFilter == pokemonItem.PokedexNumber ? "selected" : "";
+                    <option @selected value="@pokemonItem.PokedexNumber">@pokemonItem.Name</option>
+                }
+            </select>
+            <button class="btn btn-primary span2">
+                Filtrar
+            </button>
+        </form>
+</div>
+
+@{
+    if (safaris.Count > 0)
+    {
+        foreach (PokemonFriendSafariFinderItem[] safarisArray in safaris.Segment(6))
+        {
+            <div class="row">
+            @foreach (PokemonFriendSafariFinderItem safari in safarisArray)
+            {
+                if (safari != null)
+                {
+                    <div class="span4">
+                        <table class="table table-hover table-striped table-condensed table-bordered pokemonSafariItem">
+                            <tr>
+                                <th colspan="3"> <a href="@Url.Content("~/Jogadores/Detalhes/" + safari.PersonId)"><h4>@safari.PersonName</h4></a></th>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><b>Friend Code</b>: @safari.FriendCode</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3"><b>Tipo do Safari</b>: @safari.SafariTypeName</td>
+                            </tr>
+                            <tr>
+                                <td class="pokemon">
+                                    <img width="100" alt="@safari.Pokemon1Name" src="@safari.getImageUrl(safari.Pokemon1DexNumber)" /><br />
+                                    <div>@safari.Pokemon1Name</div>
+                                </td>
+                                <td class="pokemon">
+                                    <img width="100" alt="@safari.Pokemon2Name" src="@safari.getImageUrl(safari.Pokemon2DexNumber)" /><br />
+                                    <div>@safari.Pokemon2Name</div>
+                                </td>
+                                <td class="pokemon">
+                                    <img width="100" alt="@safari.Pokemon3Name" src="@safari.getImageUrl(safari.Pokemon3DexNumber)" /><br />
+                                    <div>@safari.Pokemon3Name</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+            }
+            </div>
+        }
+        if(Model.HasPreviousPages || Model.HasMorePages)
+        {
+            @Html.Raw("<div class=\"paginationButton\">");
+            isFilteredType = string.IsNullOrEmpty(isFilteredType) ? isFilteredType : "&" + isFilteredType;
+            isFilteredPokemon = string.IsNullOrEmpty(isFilteredPokemon) ? isFilteredPokemon : "&" + isFilteredPokemon;
+            
+            if(Model.HasPreviousPages)
+            {
+                <a class="pull-left btn btn-primary" href="/Widgets/PokemonFriendSafariFinder/?page=@(currentPage - 1)@isFilteredType@isFilteredPokemon"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+            }
+            if(Model.HasMorePages)
+            {
+                <a class="pull-right btn btn-primary" href="/Widgets/PokemonFriendSafariFinder/?page=@(currentPage + 1)@isFilteredType@isFilteredPokemon">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+            }
+            @Html.Raw("</div>");
+        }
+    }
+    else{
+        <div class="row">
+            <div class="span12">
+                <p>Nenhum safari foi encontrado.</p>
+            </div>
+        </div>
+    }
+}
+<script type="text/javascript">
+    function loadPokemonFromType(selectedType) {
+        $('#Pokemon').prop('disabled', true);
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSearch/")" + selectedType,
+            success: function (json) {
+                $('#Pokemon').prop('disabled', false);
+                var optionArray = [];
+                optionArray.push('<option value="0">Qualquer Pokémon</option>');
+
+                $.each(json, function (i, item) {
+                    optionArray.push('<option value="' + item.PokedexNumber + '">' + item.Name + '</option>');
+                });
+
+                $('#Pokemon').html(optionArray.join(''));
+                $('#Pokemon').prop('disabled', false);
+            }
+        });
+    }
+</script>

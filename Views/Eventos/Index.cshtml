@@ -86,11 +86,11 @@
             
             if(Model.HasPreviousPages)
             {
-                <a class="pull-left btn btn-primary" href="/Jogadores/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+                <a class="pull-left btn btn-primary" href="/Eventos/?page=@(currentPage - 1)@filter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
             }
             if(Model.HasMorePages)
             {
-                <a class="pull-right btn btn-primary" href="/Jogadores/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+                <a class="pull-right btn btn-primary" href="/Eventos/?page=@(currentPage + 1)@filter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
             }
             @Html.Raw("</div>");
         }

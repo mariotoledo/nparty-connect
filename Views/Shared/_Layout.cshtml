@@ -28,8 +28,11 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
      III888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888OOOOOOOOOOOOO88888 
     IIIIIII7OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 
 
-    N-Party Connect v1.0.2b
+    N-Party Connect v1.0.3b
     Copyright N-Party 2013 - Todos os direitos reservados.
+
+    Front-end framework: https://github.com/
+    Back-end framework: http://eixox.com.br/
      -->
 <html lang="pt-br" dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr' xmlns:fb='http://ogp.me/ns/fb#'>
 <head>
@@ -43,10 +46,10 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
     <link href='http://www.images.nparty.com.br/connect/favco.png' rel='icon' type='image/x-icon'/>
     <link href='http://connect.nparty.com.br' rel='canonical'/>
 
-    <meta property='og:image' content='http://www.images.nparty.com.br/connect/connectFacebook.png' />
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
     <meta property="og:title" content="N-Party Connect" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://connect.nparty.com.br" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:site_name" content="N-Party Connect" />
     <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
@@ -66,12 +69,13 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
                       <span class="icon-bar"></span>
                       <span class="icon-bar"></span>
                     </button>
-                    <a href="/" class="brand"><img src="/Static/img/template/logoNPartyCampeonatosSmall.png" alt="M-Party Campeonatos"/></a>
+                    <a href="/" class="brand"><img src="/Static/img/template/logoNPartyCampeonatosSmall.png" alt="N-Party Connect"/></a>
 			        <div class="nav-collapse collapse" id="topMenu">
 				        <ul class="nav pull-right">
 					        <li class="@(topMenu == 1 ? "active" : "")"><a href="@Url.Content("~/Eventos/")">Eventos</a></li>
                             <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
                             <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
+                            <li class="@(topMenu == 4 ? "active" : "")"><a href="@Url.Content("~/Widgets/")">Widgets</a></li>
                             @if (currentUser == null)
                             {
                                 <li><a href="@Url.Content("~/Home/Login")">Login</a></li>
@@ -97,8 +101,8 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
                 <div class="span4">
                     <p style="float: left;">
                         © N-Party 2013 - <a href="http://www.nparty.com.br" target="_blank">www.nparty.com.br</a><br /><br />
-                        Desenvolvido e Desenhado por <b><a href="http://www.eixox.com.br/Home/Pessoas/" target="_blank">Mario Toledo</a></b><br/>
-                        Idealizado e Projetado por <b>Rafael Farias</b>
+                        Desenvolvido e Desenhado por <b><a href="~/Jogadores/Detalhes/180">Mario Toledo</a></b><br/>
+                        Idealizado e Projetado por <b><a href="~/Jogadores/Detalhes/147">Rafael Farias</a></b>
 			        </p>
                     <br /><br /><br /><br /><br />
                     <ul>
@@ -121,8 +125,6 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
     </div>
     <!-- Analytics -->
     <script type="text/javascript">
-        
-
         var _gaq = _gaq || [];
         _gaq.push(['_setAccount', 'UA-39862825-2']);
         _gaq.push(['_trackPageview']);

@@ -108,6 +108,7 @@
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogadoresController.cs" />
+    <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -123,6 +124,7 @@
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
     <Compile Include="Models\Database\Badges.cs" />
+    <Compile Include="Models\Database\PokemonFriendSafariFinderItem.cs" />
     <Compile Include="Models\Database\tb_inscricoes.cs" />
     <Compile Include="Models\Database\PersonPokemonFriendSafari.cs" />
     <Compile Include="Models\Database\PokemonFriendSafariType.cs" />
@@ -212,11 +214,10 @@
     <Content Include="Static\img\glyphicons-halflings-white.png" />
     <Content Include="Static\img\glyphicons-halflings.png" />
     <Content Include="Static\img\playerPhoto\default.jpg" />
-    <Content Include="Static\img\slider\kidicarus.jpg" />
-    <Content Include="Static\img\slider\mariokart7.jpg" />
     <Content Include="Static\img\template\bg.png" />
     <Content Include="Static\img\template\hero.png" />
     <Content Include="Static\img\template\logoNPartyCampeonatosSmall.png" />
+    <Content Include="Static\img\widgets\heroPokemonFriendSafariFinder.png" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -289,6 +290,8 @@
     <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\PaginaNaoEncontrada.cshtml" />
+    <Content Include="Views\Widgets\Index.cshtml" />
+    <Content Include="Views\Widgets\PokemonFriendSafariFinder.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-jetfuel\EixoX\EixoX.csproj">

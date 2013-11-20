@@ -8,7 +8,7 @@
   <Message for="EixoX.Restrictions.Email" lcid="1046">Endereço inválido.</Message>
 
   <Message for="EixoX.Restrictions.EnumerationList" lcid="1046">Não está enumerado.</Message>
-  <Message for="EixoX.Restrictions.Length" lcid="1046">Tamanho de text inválido.</Message>
+  <Message for="EixoX.Restrictions.Length" lcid="1046">Tamanho de texto inválido.</Message>
   <Message for="EixoX.Restrictions.MaxExclusive" lcid="1046">Valor acima do máximo.</Message>
   <Message for="EixoX.Restrictions.MaxInclusive" lcid="1046">Valor acima do máximo.</Message>
   <Message for="EixoX.Restrictions.MaxLength" lcid="1046">Texto muito grande.</Message>
@@ -18,4 +18,7 @@
   <Message for="EixoX.Restrictions.MinLength" lcid="1046">Texto muito pequeno.</Message>
   
   <Message for="EixoX.Restrictions.Required" lcid="1046">Obrigatório.</Message>
+
+<Message for="EixoX.Restrictions.MaxAge" lcid="1046">Idosa demais para ser uma data válida.</Message>
+<Message for="EixoX.Restrictions.MinAge" lcid="1046">Novinha demais para ser uma data válida.</Message>
 </RestrictionMessages>

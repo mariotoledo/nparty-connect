@@ -40,5 +40,13 @@ namespace CampeonatosNParty.Controllers
         {
             return Json(NPartyDbModel<PokemonFriendSafari>.Select().Where("TypeId", id).And("SlotNumber", 3), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult CarregarPokemonFriendSafariSearch(int id)
+        {
+            if(id > 0)
+                return Json(NPartyDbModel<PokemonFriendSafari>.Select().Where("TypeId", id), JsonRequestBehavior.AllowGet);
+            return Json(NPartyDbModel<PokemonFriendSafari>.Select(), JsonRequestBehavior.AllowGet);
+        }
     }
 }
