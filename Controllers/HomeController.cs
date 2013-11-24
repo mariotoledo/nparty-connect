@@ -186,17 +186,17 @@ namespace CampeonatosNParty.Controllers
                 {
                     if (CampeonatosNParty.Helpers.RegisterHelper.CheckValidPassword(usuario.Senha, model.Senha))
                     {
-                        if(!usuario.EmailConfirmado)
-                            return RedirectToAction("ConfirmarEmail", "Jogadores");
-
                         NPartyCookie.UserId = usuario.Id;
                         NPartyCookie.IsLoggedIn = true;
                         NPartyDb<Cookie>.Instance.Save(NPartyCookie);
 
+                        if(!usuario.EmailConfirmado)
+                            return RedirectToAction("ConfirmarEmail", "Jogadores");
+
                         string redir = Request.QueryString["redir"];
 
                         if (string.IsNullOrEmpty(redir))
-                            redir = Url.Content("~/Home/Dashboard");
+                            redir = Url.Content("~/");
 
                         return Redirect(redir);
                     }
@@ -313,14 +313,6 @@ namespace CampeonatosNParty.Controllers
             search.OrderBy("Pontos", SortDirection.Descending);
 
             return View(search.ToResult());
-        }
-
-        [HttpGet]
-        [AuthenticationRequired]
-        public ActionResult Dashboard()
-        {
-            DashboardView view = new DashboardView(CurrentUsuario);
-            return View(view);
         }
     }
 }

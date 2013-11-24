@@ -2,6 +2,26 @@
     ViewBag.Title = "N-Party Connect (Beta)";
     int topMenu = Convert.ToInt32(ViewData["TopMenu"]);
     CampeonatosNParty.Models.Database.Usuarios currentUser = (CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"];
+    long notificationCount = 0;
+    string notificationBadge = "style='display: none'";
+    
+    if (currentUser != null)
+    {
+        notificationCount = CampeonatosNParty.Models.Database.NPartyDb<CampeonatosNParty.Models.Database.Notificacoes>
+                            .Instance.Select().Where("PersonId", currentUser.Id).And("FoiLida", false).Count();
+        
+        notificationBadge = notificationCount > 0 ? "style='display: inline-block'" : "style='display: none'";
+        
+        <script>
+            setTimeout(function () {
+                $.ajax({
+                    url: "server/checkStatus", success: function (data) {
+                        // check notification data and react accordingly
+                    }, dataType: "json"
+                });
+            }, 30000);
+        </script>
+    }
 }
 <!-- 
     
@@ -28,7 +48,7 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
      III888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888OOOOOOOOOOOOO88888 
     IIIIIII7OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 
 
-    N-Party Connect v1.0.3b
+    N-Party Connect v1.0.4b
     Copyright N-Party 2013 - Todos os direitos reservados.
 
     Front-end framework: https://github.com/
@@ -55,13 +75,13 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
     <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
     <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap.min.css")" />
     <link rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap-responsive.min.css")" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
     <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
     <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/nparty.css")" />
 </head>
 <body>
     <div class="container" style="margin-top: 15px;">
-        <div class="header">
             <div class="navbar">
                 <div class="navbar-inner">
                     <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -71,25 +91,37 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
                     </button>
                     <a href="/" class="brand"><img src="/Static/img/template/logoNPartyCampeonatosSmall.png" alt="N-Party Connect"/></a>
 			        <div class="nav-collapse collapse" id="topMenu">
-				        <ul class="nav pull-right">
+				        <ul class="nav pull-left">
 					        <li class="@(topMenu == 1 ? "active" : "")"><a href="@Url.Content("~/Eventos/")">Eventos</a></li>
                             <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
                             <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
                             <li class="@(topMenu == 4 ? "active" : "")"><a href="@Url.Content("~/Widgets/")">Widgets</a></li>
+                            
+				        </ul>
+                        <ul class="nav pull-right">
                             @if (currentUser == null)
                             {
-                                <li><a href="@Url.Content("~/Home/Login")">Login</a></li>
+                                <li><a href="@Url.Content("~/Home/Login")">Login ou Registrar</a></li>
                             }
                             else
                             {  
-                                <li><a href="@Url.Content("~/Home/Dashboard")">Olá, @currentUser.Nome</a></li>
+                                <li>
+                                    <a title="Perfil" href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)" style="float: left;">Olá, @currentUser.Nome</a>
+                                    <a title="Notificações" href="~/Jogadores/Notificacoes" style="float: left;">
+                                        <i class="fa fa-bullhorn icon" style="padding-top: 2px;"></i>
+                                        <span id="notificationCount" class="badge" @notificationBadge>
+                                            @notificationCount
+                                        </span>
+                                    </a>
+                                    <a title="Editar Informações" href="~/Jogadores/EditarMinhasInformacoes" style="float: left;"><i class="fa fa-cogs icon"  style="padding-top: 2px;"></i></a>
+                                    <a title="Logout" href="~/Home/Logout" style="float: left;"><i class="fa fa-sign-out icon" style="padding-top: 2px;"></i></a>
+                                </li>
                             }
 				        </ul>
 			        </div>
                 </div>
             </div>
 		</div>
-    </div>
     <div class="container" id="main-wrapper">
 		<div class="main-content">
              @RenderBody()
@@ -129,11 +161,41 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
         _gaq.push(['_setAccount', 'UA-39862825-2']);
         _gaq.push(['_trackPageview']);
 
+        $(document).ready(function () {
+            updateCounter('@notificationCount');
+        });
+
         (function () {
             var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
             ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
             var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
         })();
+
+        function updateCounter(data) {
+            if (parseInt(data) > 0) {
+                $('#notificationCount').css("display", "inline-block");
+                $('#notificationCount').html('' + data);
+            } else {
+                $('#notificationCount').html('');
+                $('#notificationCount').css("display", "none");
+            }
+        }
+       
     </script>
+     @{
+            if (currentUser != null)
+            {
+                <script type="text/javascript">
+                    window.setInterval(function () {
+                        $.ajax({
+                            url: "@Url.Content("~/Ajax/NumeroNotificacoesNaoLidas/" + currentUser.Id)",
+                            success: function (data) {
+                                updateCounter(data);
+                            }
+                        });
+                    }, 30000);
+                </script>
+            }
+        }
 </body>
 </html>

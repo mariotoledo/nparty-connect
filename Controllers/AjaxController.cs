@@ -48,5 +48,28 @@ namespace CampeonatosNParty.Controllers
                 return Json(NPartyDbModel<PokemonFriendSafari>.Select().Where("TypeId", id), JsonRequestBehavior.AllowGet);
             return Json(NPartyDbModel<PokemonFriendSafari>.Select(), JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public ActionResult NumeroNotificacoesNaoLidas(int id)
+        {
+            long success = NPartyDb<Notificacoes>.Instance.Select().Where("PersonId", id).And("FoiLida", false).Count();
+            return Json(success, JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult MarcarLidaNotificacao(string notificationId)
+        {
+            int idN = Int32.Parse(notificationId);
+            Notificacoes n = Notificacoes.WithIdentity(idN);
+            if (n != null)
+            {
+                n.FoiLida = true;
+                NPartyDb<Notificacoes>.Instance.Save(n);
+
+                return Json(NPartyDb<Notificacoes>.Instance.Select().Where("PersonId", n.PersonId).And("FoiLida", false).Count(), JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { success = false });
+        }
     }
 }

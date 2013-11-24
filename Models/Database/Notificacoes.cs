@@ -27,7 +27,7 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         [Required]
-        [MaxLength(4000)]
+        [MinLength(10)]
         public string Corpo { get; set; }
 
         [DatabaseColumn]
@@ -35,5 +35,9 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public DateTime DateSent { get; set; }
+
+        [DatabaseColumn]
+        [Required]
+        public bool FoiLida { get; set; }
     }
 }

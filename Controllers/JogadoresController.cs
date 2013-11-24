@@ -36,7 +36,7 @@ namespace CampeonatosNParty.Controllers
             return View(view);
         }
 
-        [HttpGet]
+        /*[HttpGet]
         public ActionResult AdjustName()
         {
             foreach (Usuarios u in Usuarios.Select().ToList())
@@ -58,7 +58,7 @@ namespace CampeonatosNParty.Controllers
                 NPartyDb<Usuarios>.Instance.Save(u);
             }
             return Redirect("~/Home/Index");
-        }
+        }*/
 
         [HttpGet]
         public ActionResult AdicionarPSN(int? id)
@@ -88,17 +88,39 @@ namespace CampeonatosNParty.Controllers
                         NPartyDb<PersonGamingRelation>.Instance.Update(relation);
                     }
 
-                    CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
-                    emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarContaSocial.xml")));
+                    string fileContents = System.IO.File.ReadAllText(Server.MapPath(Url.Content("~/Static/htmlTemplates/adicionarContaSocial.txt")));
+                    fileContents = fileContents.Replace("[=PersonId]", CurrentUsuario.Id.ToString());
+                    fileContents = fileContents.Replace("[=FriendName]", CurrentUsuario.getFullName());
+                    fileContents = fileContents.Replace("[=AccountName]", "PSN");
+                    fileContents = fileContents.Replace("[=Id]", CurrentUsuario.PsnId);
 
-                    IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+                    Notificacoes notificacao = new Notificacoes()
+                    {
+                        PersonId = id.Value,
+                        Titulo = "Solicitação de amizade na PSN",
+                        Corpo = fileContents,
+                        DateCreated = DateTime.Now,
+                        DateSent = DateTime.Now,
+                        FoiLida = false
+                    };
 
-                    infoChanges.Add("[=PersonName]", usuario.Nome);
-                    infoChanges.Add("[=FriendName]", CurrentUsuario.getFullName());
-                    infoChanges.Add("[=AccountName]", "PSN");
-                    infoChanges.Add("[=Id]", CurrentUsuario.PsnId);
+                    NPartyDb<Notificacoes>.Instance.Insert(notificacao);
 
-                    emailTemplate.Send(infoChanges, "Solicitação de amizade na PSN - N-Party Connect", usuario.Email);
+                    if (usuario.Newsletter)
+                    {
+                        CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                        emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarContaSocial.xml")));
+
+                        IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                        infoChanges.Add("[=PersonId]", CurrentUsuario.Id.ToString());
+                        infoChanges.Add("[=PersonName]", usuario.getFullName());
+                        infoChanges.Add("[=FriendName]", CurrentUsuario.getFullName());
+                        infoChanges.Add("[=AccountName]", "PSN");
+                        infoChanges.Add("[=Id]", CurrentUsuario.PsnId);
+
+                        emailTemplate.Send(infoChanges, "Solicitação de amizade na PSN - N-Party Connect", usuario.Email);
+                    }
 
                     return Redirect("~/Jogadores/Detalhes/" + id.Value);
                 }                
@@ -135,17 +157,39 @@ namespace CampeonatosNParty.Controllers
                         NPartyDb<PersonGamingRelation>.Instance.Update(relation);
                     }
 
-                    CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
-                    emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarContaSocial.xml")));
+                    string fileContents = System.IO.File.ReadAllText(Server.MapPath(Url.Content("~/Static/htmlTemplates/adicionarContaSocial.txt")));
+                    fileContents = fileContents.Replace("[=PersonId]", CurrentUsuario.Id.ToString());
+                    fileContents = fileContents.Replace("[=FriendName]", CurrentUsuario.getFullName());
+                    fileContents = fileContents.Replace("[=AccountName]", "Live");
+                    fileContents = fileContents.Replace("[=Id]", CurrentUsuario.LiveId);
 
-                    IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+                    Notificacoes notificacao = new Notificacoes()
+                    {
+                        PersonId = id.Value,
+                        Titulo = "Solicitação de amizade na Live",
+                        Corpo = fileContents,
+                        DateCreated = DateTime.Now,
+                        DateSent = DateTime.Now,
+                        FoiLida = false
+                    };
 
-                    infoChanges.Add("[=PersonName]", usuario.Nome);
-                    infoChanges.Add("[=FriendName]", CurrentUsuario.getFullName());
-                    infoChanges.Add("[=AccountName]", "Live");
-                    infoChanges.Add("[=Id]", CurrentUsuario.PsnId);
+                    NPartyDb<Notificacoes>.Instance.Insert(notificacao);
 
-                    emailTemplate.Send(infoChanges, "Solicitação de amizade na Live - N-Party Connect", usuario.Email);
+                    if (usuario.Newsletter)
+                    {
+                        CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                        emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarContaSocial.xml")));
+
+                        IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                        infoChanges.Add("[=PersonId]", CurrentUsuario.Id.ToString());
+                        infoChanges.Add("[=PersonName]", usuario.Nome);
+                        infoChanges.Add("[=FriendName]", CurrentUsuario.getFullName());
+                        infoChanges.Add("[=AccountName]", "Live");
+                        infoChanges.Add("[=Id]", CurrentUsuario.LiveId);
+
+                        emailTemplate.Send(infoChanges, "Solicitação de amizade na Live - N-Party Connect", usuario.Email);
+                    }
 
                     return Redirect("~/Jogadores/Detalhes/" + id.Value);
                 }
@@ -182,16 +226,36 @@ namespace CampeonatosNParty.Controllers
                         NPartyDb<PersonGamingRelation>.Instance.Update(relation);
                     }
 
-                    CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
-                    emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarMiiverse.xml")));
+                    string fileContents = System.IO.File.ReadAllText(Server.MapPath(Url.Content("~/Static/htmlTemplates/adicionarMiiverse.txt")));
+                    fileContents = fileContents.Replace("[=PersonId]", CurrentUsuario.Id.ToString());
+                    fileContents = fileContents.Replace("[=FriendName]", CurrentUsuario.getFullName());
+                    fileContents = fileContents.Replace("[=Id]", CurrentUsuario.MiiverseId);
 
-                    IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+                    Notificacoes notificacao = new Notificacoes()
+                    {
+                        PersonId = id.Value,
+                        Titulo = "Solicitação de amizade no Miiverse",
+                        Corpo = fileContents,
+                        DateCreated = DateTime.Now,
+                        DateSent = DateTime.Now,
+                        FoiLida = false
+                    };
 
-                    infoChanges.Add("[=PersonName]", usuario.Nome);
-                    infoChanges.Add("[=FriendName]", CurrentUsuario.getFullName());
-                    infoChanges.Add("[=Id]", CurrentUsuario.MiiverseId);
+                    NPartyDb<Notificacoes>.Instance.Insert(notificacao);
 
-                    emailTemplate.Send(infoChanges, "Solicitação de amizade no Miiverse - N-Party Connect", usuario.Email);
+                    if (usuario.Newsletter)
+                    {
+                        CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                        emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarMiiverse.xml")));
+
+                        IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                        infoChanges.Add("[=PersonName]", usuario.getFullName());
+                        infoChanges.Add("[=FriendName]", CurrentUsuario.getFullName());
+                        infoChanges.Add("[=Id]", CurrentUsuario.MiiverseId);
+
+                        emailTemplate.Send(infoChanges, "Solicitação de amizade no Miiverse - N-Party Connect", usuario.Email);
+                    }
 
                     return Redirect("~/Jogadores/Detalhes/" + id.Value);
                 }
@@ -228,16 +292,36 @@ namespace CampeonatosNParty.Controllers
                         NPartyDb<PersonGamingRelation>.Instance.Update(relation);
                     }
 
-                    CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
-                    emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarFriendCode.xml")));
+                    string fileContents = System.IO.File.ReadAllText(Server.MapPath(Url.Content("~/Static/htmlTemplates/adicionarFriendCode.txt")));
+                    fileContents = fileContents.Replace("[=PersonId]", CurrentUsuario.Id.ToString());
+                    fileContents = fileContents.Replace("[=FriendName]", CurrentUsuario.getFullName());
+                    fileContents = fileContents.Replace("[=Id]", CurrentUsuario.FriendCode);
 
-                    IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+                    Notificacoes notificacao = new Notificacoes()
+                    {
+                        PersonId = id.Value,
+                        Titulo = "Solicitação de amizade no 3DS",
+                        Corpo = fileContents,
+                        DateCreated = DateTime.Now,
+                        DateSent = DateTime.Now,
+                        FoiLida = false
+                    };
 
-                    infoChanges.Add("[=PersonName]", usuario.Nome);
-                    infoChanges.Add("[=FriendName]", CurrentUsuario.getFullName());
-                    infoChanges.Add("[=Id]", CurrentUsuario.FriendCode);
+                    NPartyDb<Notificacoes>.Instance.Insert(notificacao);
 
-                    emailTemplate.Send(infoChanges, "Solicitação de amizade no 3DS - N-Party Connect", usuario.Email);
+                    if (usuario.Newsletter)
+                    {
+                        CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                        emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarFriendCode.xml")));
+
+                        IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                        infoChanges.Add("[=PersonName]", usuario.getFullName());
+                        infoChanges.Add("[=FriendName]", CurrentUsuario.getFullName());
+                        infoChanges.Add("[=Id]", CurrentUsuario.FriendCode);
+
+                        emailTemplate.Send(infoChanges, "Solicitação de amizade no 3DS - N-Party Connect", usuario.Email);
+                    }
 
                     return Redirect("~/Jogadores/Detalhes/" + id.Value);
                 }
@@ -547,12 +631,18 @@ namespace CampeonatosNParty.Controllers
         [AuthenticationRequired]
         public ActionResult Notificacoes()
         {
-            List<Notificacoes> notificacoes = NPartyDb<Notificacoes>.Instance.Select()
+            int page = 0;
+            int.TryParse(Request.QueryString["page"], out page);
+
+            ClassSelect<Notificacoes> notificacoes = NPartyDb<Notificacoes>.Instance.Select()
                                                 .Where("PersonId", CurrentUsuario.Id)
-                                                .Or("PersonId", 0)
-                                                .OrderBy("DateSent", SortDirection.Descending)
-                                                .ToList();
-            return View(notificacoes);
+                                                .OrderBy("DateSent", SortDirection.Descending);
+
+            notificacoes.Page(15, page);
+
+            ClassSelectResult<Notificacoes> result = notificacoes.ToResult();
+
+            return View(result);
         }
 
         [HttpGet]

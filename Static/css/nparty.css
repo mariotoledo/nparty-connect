@@ -61,7 +61,7 @@
             }
 
             #topMenu {
-                margin-top: 50px;
+                margin-top: 20px;
                 font-size: 16px;
             }
 
@@ -295,7 +295,7 @@ ul.notifications{
 
 ul.notifications li{
     list-style: none;
-    padding: 5px;
+    padding: 3px;
     border-bottom: 1px solid #D1D1D1;
 }
 

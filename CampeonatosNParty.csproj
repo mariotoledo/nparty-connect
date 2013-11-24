@@ -154,7 +154,6 @@
     <Compile Include="Models\StructModel\MinhasInformacoes.cs" />
     <Compile Include="Models\StructModel\Login.cs" />
     <Compile Include="Models\ViewModel\CampeonatosDetailView.cs" />
-    <Compile Include="Models\ViewModel\DashboardView.cs" />
     <Compile Include="Models\ViewModel\UsuariosDetailView.cs" />
     <Compile Include="Models\ViewModel\EventosDetailView.cs" />
     <Compile Include="Models\ViewModel\HomeView.cs" />
@@ -201,6 +200,9 @@
     <Content Include="Static\EmailTemplates\esqueciSenhaTemplate.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Static\htmlTemplates\adicionarContaSocial.txt" />
+    <Content Include="Static\htmlTemplates\adicionarMiiverse.txt" />
+    <Content Include="Static\htmlTemplates\adicionarFriendCode.txt" />
     <Content Include="Static\img\badges\default.jpg" />
     <Content Include="Static\img\badges\mk7_1.jpg" />
     <Content Include="Static\img\badges\poke_1.jpg" />
@@ -287,7 +289,6 @@
     <Content Include="Views\Jogadores\Notificacoes.cshtml" />
     <None Include="Properties\PublishProfiles\Mario4.pubxml" />
     <Content Include="Views\Jogadores\AlterarSenha.cshtml" />
-    <Content Include="Views\Home\Dashboard.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\PaginaNaoEncontrada.cshtml" />
     <Content Include="Views\Widgets\Index.cshtml" />
