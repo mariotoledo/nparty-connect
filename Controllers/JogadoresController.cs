@@ -22,7 +22,7 @@ namespace CampeonatosNParty.Controllers
             int page = 0;
             int.TryParse(Request.QueryString["page"], out page);
 
-            ClassSelect<JogadoresItem> search = JogadoresItem.Search(Request.QueryString["filter"]);
+            ClassSelect<JogadoresItem> search = JogadoresItem.Search(Request.QueryString["filter"]).Where("EmailConfirmado", true);
             search.Page(18, page);
             search.OrderBy("NomeUsuario");
 
@@ -629,6 +629,38 @@ namespace CampeonatosNParty.Controllers
 
         [HttpGet]
         [AuthenticationRequired]
+        public ActionResult NotificacoesManeira()
+        {
+            foreach (Usuarios usuario in Usuarios.Select())
+            {
+                Notificacoes notificacao = new Notificacoes()
+                {
+                    PersonId = usuario.Id,
+                    Titulo = "Compareça ao espaço da N-Party no Ressaca Friends 2013",
+                    Corpo = System.IO.File.ReadAllText(Server.MapPath(Url.Content("~/Static/htmlTemplates/ressaca.txt"))),
+                    DateCreated = DateTime.Now,
+                    DateSent = DateTime.Now,
+                    FoiLida = false
+                };
+
+                NPartyDb<Notificacoes>.Instance.Insert(notificacao);
+
+                if (usuario.Newsletter)
+                {
+                    CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                    emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/ressaca.xml")));
+
+                    IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                    emailTemplate.Send(infoChanges, "Compareça ao espaço da N-Party no Ressaca Friends 2013", usuario.Email);
+                }
+            }
+
+            return Redirect("~/");
+        }
+
+        [HttpGet]
+        [AuthenticationRequired]
         public ActionResult Notificacoes()
         {
             int page = 0;
@@ -698,6 +730,15 @@ namespace CampeonatosNParty.Controllers
             }
             
             return View();
+        }
+
+        [AuthenticationRequired]
+        public ActionResult MinhasConexoes()
+        {
+            string pageString = Request.QueryString["page"];
+            MinhasConexoesView view = new MinhasConexoesView(CurrentUsuario, pageString);
+
+            return View(view);
         }
     }
 }

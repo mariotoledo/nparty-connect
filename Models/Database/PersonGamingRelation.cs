@@ -41,10 +41,15 @@ namespace CampeonatosNParty.Models.Database
             if (user1.Id == user2.Id)
                 return null;
 
+            return getPersonGamingRelationsFromId(user1.Id, user2.Id);
+        }
+
+        public static PersonGamingRelation getPersonGamingRelationsFromId(int user1Id, int user2Id)
+        {
             PersonGamingRelation relation = null;
 
             int relationId = Convert.ToInt32(NPartyDb<ClassificacaoPorJogador>.Instance.Database.ExecuteScalarText(
-                    "SELECT ISNULL([dbo].[GetGamingRelationId] (" + user1.Id + "," + user2.Id + "), 0)"));
+                    "SELECT ISNULL([dbo].[GetGamingRelationId] (" + user1Id + "," + user2Id + "), 0)"));
 
             if (relationId > 0)
             {

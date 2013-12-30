@@ -11,16 +11,6 @@
                             .Instance.Select().Where("PersonId", currentUser.Id).And("FoiLida", false).Count();
         
         notificationBadge = notificationCount > 0 ? "style='display: inline-block'" : "style='display: none'";
-        
-        <script>
-            setTimeout(function () {
-                $.ajax({
-                    url: "server/checkStatus", success: function (data) {
-                        // check notification data and react accordingly
-                    }, dataType: "json"
-                });
-            }, 30000);
-        </script>
     }
 }
 <!-- 
@@ -48,7 +38,7 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
      III888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888OOOOOOOOOOOOO88888 
     IIIIIII7OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 
 
-    N-Party Connect v1.0.4b
+    N-Party Connect v1.0.5b
     Copyright N-Party 2013 - Todos os direitos reservados.
 
     Front-end framework: https://github.com/
@@ -107,14 +97,15 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
                             {  
                                 <li>
                                     <a title="Perfil" href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)" style="float: left;">Olá, @currentUser.Nome</a>
-                                    <a title="Notificações" href="~/Jogadores/Notificacoes" style="float: left;">
+                                    <a title="Notificações" href="@Url.Content("~/Jogadores/Notificacoes")" style="float: left;">
                                         <i class="fa fa-bullhorn icon" style="padding-top: 2px;"></i>
                                         <span id="notificationCount" class="badge" @notificationBadge>
                                             @notificationCount
                                         </span>
                                     </a>
-                                    <a title="Editar Informações" href="~/Jogadores/EditarMinhasInformacoes" style="float: left;"><i class="fa fa-cogs icon"  style="padding-top: 2px;"></i></a>
-                                    <a title="Logout" href="~/Home/Logout" style="float: left;"><i class="fa fa-sign-out icon" style="padding-top: 2px;"></i></a>
+                                    <a title="Minhas conexões" href="@Url.Content("~/Jogadores/MinhasConexoes/")" style="float: left;"><i class="fa fa-users icon" style="padding-top: 2px;"></i></a>
+                                    <a title="Editar Informações" href="@Url.Content("~/Configuracoes")" style="float: left;"><i class="fa fa-cogs icon"  style="padding-top: 2px;"></i></a>
+                                    <a title="Logout" href="@Url.Content("~/Home/Logout")" style="float: left;"><i class="fa fa-sign-out icon" style="padding-top: 2px;"></i></a>
                                 </li>
                             }
 				        </ul>

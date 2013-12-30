@@ -1,16 +1,16 @@
 ﻿@using CampeonatosNParty.Models.Database
-@model EixoX.Data.ClassSelectResult<PokemonFriendSafariFinderItem>
+@model CampeonatosNParty.Models.ViewModel.PokemonFinderView
 @{
     ViewBag.Title = "Pokémon Friend Safari Finder - N-Party Connect";
 
     List<PokemonFriendSafariFinderItem> safaris;
-    if (Model == null)
+    if (Model.result == null)
     {
         safaris = NPartyDb<PokemonFriendSafariFinderItem>.Instance.Select().ToList();
     }
     else
     {
-        safaris = Model.ToList();
+        safaris = Model.result.ToList();
     }
 
     List<PokemonFriendSafariType> safarisTypes = PokemonFriendSafariType.Select().OrderBy("TypeName", EixoX.Data.SortDirection.Ascending).ToList();
@@ -30,6 +30,9 @@
     int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
     string isFilteredType = Request.QueryString["Type"] != null ? "Type=" + Request.QueryString["Type"] : "";
     string isFilteredPokemon = Request.QueryString["Pokemon"] != null ? "Pokemon=" + Request.QueryString["Pokemon"] : "";
+
+    isFilteredType = string.IsNullOrEmpty(isFilteredType) ? isFilteredType : "&" + isFilteredType;
+    isFilteredPokemon = string.IsNullOrEmpty(isFilteredPokemon) ? isFilteredPokemon : "&" + isFilteredPokemon;
 }
 
 <ul class="breadcrumb">
@@ -90,7 +93,7 @@
 @{
     if (safaris.Count > 0)
     {
-        foreach (PokemonFriendSafariFinderItem[] safarisArray in safaris.Segment(6))
+        foreach (PokemonFriendSafariFinderItem[] safarisArray in safaris.Segment(3))
         {
             <div class="row">
             @foreach (PokemonFriendSafariFinderItem safari in safarisArray)
@@ -106,8 +109,28 @@
                                 <td colspan="3"><b>Tipo do Safari</b>: @safari.SafariTypeName</td>
                             </tr>
                             <tr>
+                                <td colspan="3"><b>Friend Code</b>: @safari.FriendCode
+                                    @{
+                                        if(!Model.isLoggedIn)
+                                        {
+                                            <a href="#notLogged" role="button" class="btn btn-primary btn-mini" data-toggle="modal" style="margin-left: 10px; height: 18px;">+</a>
+                                        } else {
+                                            if(Model.isButtonActive[safari.PersonId])
+                                            {
+                                                <a href="#addPerson" onclick="showAddModal('@safari.PersonName', '@safari.PersonId');" role="button" class="btn btn-primary btn-mini" data-toggle="modal" style="margin-left: 10px; height: 18px;">+</a>
+                                            } 
+                                            else
+                                            {
+                                                <a role="button" class="btn btn-mini disabled" data-toggle="modal" style="margin-left: 10px; height: 18px;">+</a>
+                                            }
+                                        }
+                                    }
+                                    
+                                </td>
+                            </tr>
+                            <tr>
                                 <td class="pokemon">
-                                    <img width="100" alt="@safari.Pokemon1Name" src="@safari.getImageUrl(safari.Pokemon1DexNumber)" /><br />
+                                    <img width="100" alt="@safari.Pokemon1Name" src="@safari.getImageUrl(safari.Pokemon1DexNumber)"  /><br />
                                     <div>@safari.Pokemon1Name</div>
                                 </td>
                                 <td class="pokemon">
@@ -115,7 +138,7 @@
                                     <div>@safari.Pokemon2Name</div>
                                 </td>
                                 <td class="pokemon">
-                                    <img width="100" alt="@safari.Pokemon3Name" src="@safari.getImageUrl(safari.Pokemon3DexNumber)" /><br />
+                                    <img width="100" alt="@safari.Pokemon3Name" src="@safari.getImageUrl(safari.Pokemon3DexNumber)"  /><br />
                                     <div>@safari.Pokemon3Name</div>
                                 </td>
                             </tr>
@@ -125,24 +148,58 @@
             }
             </div>
         }
-        if(Model.HasPreviousPages || Model.HasMorePages)
+        if (Model.result.HasPreviousPages || Model.result.HasMorePages)
         {
             @Html.Raw("<div class=\"paginationButton\">");
-            isFilteredType = string.IsNullOrEmpty(isFilteredType) ? isFilteredType : "&" + isFilteredType;
-            isFilteredPokemon = string.IsNullOrEmpty(isFilteredPokemon) ? isFilteredPokemon : "&" + isFilteredPokemon;
             
-            if(Model.HasPreviousPages)
+
+            if (Model.result.HasPreviousPages)
             {
                 <a class="pull-left btn btn-primary" href="/Widgets/PokemonFriendSafariFinder/?page=@(currentPage - 1)@isFilteredType@isFilteredPokemon"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
             }
-            if(Model.HasMorePages)
+            if (Model.result.HasMorePages)
             {
                 <a class="pull-right btn btn-primary" href="/Widgets/PokemonFriendSafariFinder/?page=@(currentPage + 1)@isFilteredType@isFilteredPokemon">Próxima página <i class="icon-chevron-right icon-white"></i></a>
             }
             @Html.Raw("</div>");
         }
+        if (!Model.isLoggedIn)
+        {
+            <div id="notLogged" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="miiverseLabel">Atenção: Você não esta logado</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Para solicitar conexão com o jogador, você precisa estar logado no sistema e ter seu Friend Code registrado.</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                    <a href="@Url.Content("~/Home/Login")" class="btn btn-primary">Login ou Registrar</a>
+                </div>
+            </div>
+        } else {
+            <div id="addPerson" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="notificationModalLabel">Solicitar conexão no 3DS</h3>
+                </div>
+                <div class="modal-body">
+                    <p>Deseja solicitar uma conexão com <span id="userName"></span> entre seu Friend Code no 3DS?</p>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                    @{
+                        string concat = "?page=" + currentPage.ToString() + isFilteredType + isFilteredPokemon;
+                        <a id="userAddLink" href="@Url.Content("~/Widgets/AdicionarFriendCodeDoSafari/" + concat)" class="btn btn-primary">Sim, solicitar conexão</a>
+                    }
+                    
+                </div>
+            </div>
+        }
     }
-    else{
+    else
+    {
         <div class="row">
             <div class="span12">
                 <p>Nenhum safari foi encontrado.</p>
@@ -151,6 +208,16 @@
     }
 }
 <script type="text/javascript">
+    function showAddModal(userName, userId) {
+        $('#userName').text(userName);
+        var _href = $("#userAddLink").attr("href");
+        var res = _href.split('?');
+        if (res.length > 0)
+            _href = res[0] + userId + '?' + res[1];
+        else
+            _href = _href + userId;
+        $("#userAddLink").attr("href", _href);
+    }
     function loadPokemonFromType(selectedType) {
         $('#Pokemon').prop('disabled', true);
         $.ajax({

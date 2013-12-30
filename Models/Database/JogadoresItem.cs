@@ -30,5 +30,8 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public string UrlFotoPerfil { get; set; }
+
+        [DatabaseColumn]
+        public bool EmailConfirmado { get; set; }
     }
 }

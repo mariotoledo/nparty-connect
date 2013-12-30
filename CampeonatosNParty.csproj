@@ -104,6 +104,7 @@
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AuthenticationBasedController.cs" />
     <Compile Include="Controllers\CampeonatosController.cs" />
+    <Compile Include="Controllers\ConfiguracoesController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -124,6 +125,9 @@
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
     <Compile Include="Models\Database\Badges.cs" />
+    <Compile Include="Models\Database\UsuarioJogos.cs" />
+    <Compile Include="Models\Database\PersonGame.cs" />
+    <Compile Include="Models\Database\UserConnections.cs" />
     <Compile Include="Models\Database\PokemonFriendSafariFinderItem.cs" />
     <Compile Include="Models\Database\tb_inscricoes.cs" />
     <Compile Include="Models\Database\PersonPokemonFriendSafari.cs" />
@@ -149,11 +153,16 @@
     <Compile Include="Models\Database\NPartyDbModel.cs" />
     <Compile Include="Models\Database\tb_usuarios.cs" />
     <Compile Include="Models\StructModel\Contato.cs" />
+    <Compile Include="Models\StructModel\DadosNintendisticos.cs" />
+    <Compile Include="Models\StructModel\DadosConexao.cs" />
+    <Compile Include="Models\StructModel\DadosBasicos.cs" />
     <Compile Include="Models\StructModel\EditarEvento.cs" />
     <Compile Include="Models\StructModel\EditarUsuario.cs" />
     <Compile Include="Models\StructModel\MinhasInformacoes.cs" />
     <Compile Include="Models\StructModel\Login.cs" />
     <Compile Include="Models\ViewModel\CampeonatosDetailView.cs" />
+    <Compile Include="Models\ViewModel\MinhasConexoesView.cs" />
+    <Compile Include="Models\ViewModel\PokemonFinderView.cs" />
     <Compile Include="Models\ViewModel\UsuariosDetailView.cs" />
     <Compile Include="Models\ViewModel\EventosDetailView.cs" />
     <Compile Include="Models\ViewModel\HomeView.cs" />
@@ -194,6 +203,9 @@
     <Content Include="Static\EmailTemplates\adicionarFriendCode.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Static\EmailTemplates\ressaca.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Static\EmailTemplates\senhaNull.xml">
       <SubType>Designer</SubType>
     </Content>
@@ -203,6 +215,7 @@
     <Content Include="Static\htmlTemplates\adicionarContaSocial.txt" />
     <Content Include="Static\htmlTemplates\adicionarMiiverse.txt" />
     <Content Include="Static\htmlTemplates\adicionarFriendCode.txt" />
+    <Content Include="Static\htmlTemplates\ressaca.txt" />
     <Content Include="Static\img\badges\default.jpg" />
     <Content Include="Static\img\badges\mk7_1.jpg" />
     <Content Include="Static\img\badges\poke_1.jpg" />
@@ -293,6 +306,11 @@
     <Content Include="Views\Error\PaginaNaoEncontrada.cshtml" />
     <Content Include="Views\Widgets\Index.cshtml" />
     <Content Include="Views\Widgets\PokemonFriendSafariFinder.cshtml" />
+    <Content Include="Views\Jogadores\MinhasConexoes.cshtml" />
+    <Content Include="Views\Shared\MenuConfiguracoes.cshtml" />
+    <Content Include="Views\Configuracoes\DadosBasicos.cshtml" />
+    <Content Include="Views\Configuracoes\DadosConexao.cshtml" />
+    <Content Include="Views\Configuracoes\DadosNintendisticos.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-jetfuel\EixoX\EixoX.csproj">

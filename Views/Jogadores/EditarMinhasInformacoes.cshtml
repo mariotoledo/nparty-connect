@@ -247,25 +247,29 @@
     }
 
     function loadCities(selectedCode) {
-        $.ajax({
-            url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
-            success: function (json) {
-                $('#Id_Cidade').prop('disabled', false);
-                var optionArray = [];
-                optionArray.push('<option value="">Selecione</option>');
+        if (selectedCode == 0) {
+            $('#Id_Cidade').prop('disabled', true);
+        } else {
+            $.ajax({
+                url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
+                 success: function (json) {
+                     $('#Id_Cidade').prop('disabled', false);
+                     var optionArray = [];
+                     optionArray.push('<option value="">Selecione</option>');
 
-                $.each(json, function (i, item) {
-                    if (selectedCode == item.CidadeId) {
-                        optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
-                    }
-                    else {
-                        optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
-                    }
-                });
+                     $.each(json, function (i, item) {
+                         if (selectedCode == item.CidadeId) {
+                             optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
+                         }
+                         else {
+                             optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
+                         }
+                     });
 
-                $('#Id_Cidade').html(optionArray.join(''));
-            }
-        });
+                     $('#Id_Cidade').html(optionArray.join(''));
+                 }
+             });
+        }
     }
     function loadPokemonSlot1(selectedType) {
         $.ajax({

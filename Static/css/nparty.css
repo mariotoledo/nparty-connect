@@ -103,13 +103,7 @@
 			}
 			
 			.carousel-control {
-				height: 80px;
-				margin-top: 0;
-				font-size: 50px;
-				text-shadow: 0 1px 1px rgba(0,0,0,.4)!important;
-				background-color: transparent!important;
 				border: 0!important;
-				z-index: 10;
 			}
 			
 			.carousel-caption {
@@ -335,4 +329,35 @@ ul.notifications li:last-child{
 
 .pokemonSafariItem .pokemon{
     text-align: center;
+}
+
+ul.settings{
+     background-color: #EEE;
+    border-radius: 6px;
+    border: 1px solid #D1D1D1;
+    -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+    -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+    box-shadow: 0 1px 5px rgba(0,0,0,0.15);
+    -webkit-border-radius: 6px;
+    padding: 5px;
+    margin-left: 0px;
+}
+
+ul.settings li{
+    list-style: none;
+    padding: 3px;
+    border-bottom: 1px solid #D1D1D1;
+}
+
+ul.settings li h4{
+    margin-bottom: 0px;
+    margin-top: 5px;
+}
+
+ul.settings li p{
+    margin-bottom: 5px;
+}
+
+ul.settings li:last-child{
+    border-bottom: none;
 }

@@ -114,6 +114,14 @@ namespace CampeonatosNParty.Models.Database
         [UISingleline]
         public string Sobrenome { get; set; }
 
+        [DatabaseColumn]
+        [MaxLength(50)]
+        public string FacebookId { get; set; }
+
+        [DatabaseColumn]
+        [MaxLength(50)]
+        public string SteamId { get; set; }
+
         public string getFullName()
         {
             return Nome + " " + Sobrenome;

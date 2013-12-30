@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace CampeonatosNParty.Controllers
 {
-    public class AjaxController : Controller
+    public class AjaxController : AuthenticationBasedController
     {
         //
         // GET: /Ajax/
@@ -67,6 +67,34 @@ namespace CampeonatosNParty.Controllers
                 NPartyDb<Notificacoes>.Instance.Save(n);
 
                 return Json(NPartyDb<Notificacoes>.Instance.Select().Where("PersonId", n.PersonId).And("FoiLida", false).Count(), JsonRequestBehavior.AllowGet);
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpPost]
+        public JsonResult SaveFacebookProfile(string facebookId)
+        {
+            if (CurrentUsuario != null  && facebookId != null)
+            {
+                CurrentUsuario.FacebookId = facebookId;
+                NPartyDb<Usuarios>.Instance.Save(CurrentUsuario);
+
+                return Json(new { success = true });
+            }
+
+            return Json(new { success = false });
+        }
+
+        [HttpPost]
+        public JsonResult NullifyFacebookProfile()
+        {
+            if (CurrentUsuario != null)
+            {
+                CurrentUsuario.FacebookId = null;
+                NPartyDb<Usuarios>.Instance.Save(CurrentUsuario);
+
+                return Json(new { success = true });
             }
 
             return Json(new { success = false });

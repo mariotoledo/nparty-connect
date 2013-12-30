@@ -25,8 +25,6 @@
             <h4>Informações pessoais</h4>
             @{presenter["Nome"].Render(this.Output, Model, validate);}
             @{presenter["Sobrenome"].Render(this.Output, Model, validate);}
-            @{presenter["Apelido"].Render(this.Output, Model, validate);}
-            @{presenter["Telefone"].Render(this.Output, Model, validate);}
             <div class="control-group">
                 <label for="BirthdayDay" class="control-label">Data de Nascimento</label>
                 <div class="controls">
@@ -138,25 +136,29 @@ Você tem o direito de a qualquer momento receber e corrigir, adicionar ou apaga
         $('#Id_Cidade').prop('disabled', true);
     });
     function loadCities(selectedCode) {
-        $.ajax({
-            url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
-            success: function (json) {
-                $('#Id_Cidade').prop('disabled', false);
-                var optionArray = [];
-                optionArray.push('<option value="">Selecione</option>');
+        if (selectedCode == 0) {
+            $('#Id_Cidade').prop('disabled', true);
+        } else {
+            $.ajax({
+                url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
+                success: function (json) {
+                    $('#Id_Cidade').prop('disabled', false);
+                    var optionArray = [];
+                    optionArray.push('<option value="">Selecione</option>');
 
-                $.each(json, function (i, item) {
-                    if (selectedCode == item.CidadeId) {
-                        optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
-                    }
-                    else {
-                        optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
-                    }
-                });
+                    $.each(json, function (i, item) {
+                        if (selectedCode == item.CidadeId) {
+                            optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
+                        }
+                        else {
+                            optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
+                        }
+                    });
 
 
-                $('#Id_Cidade').html(optionArray.join(''));
-            }
-        });
+                    $('#Id_Cidade').html(optionArray.join(''));
+                }
+            });
+        }
     }
 </script>

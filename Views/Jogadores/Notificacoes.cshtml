@@ -20,7 +20,7 @@
                         if (!string.IsNullOrEmpty(notificacao.Titulo) && !string.IsNullOrEmpty(notificacao.Corpo))
                         {
                             string bodyNoHtml = System.Text.RegularExpressions.Regex.Replace(notificacao.Corpo, @"<[^>]*>", String.Empty);
-                            string corpo = bodyNoHtml.Length > 50 ? bodyNoHtml.Substring(0, 50) + "..." : bodyNoHtml;
+                            string corpo = bodyNoHtml.Length > 100 ? bodyNoHtml.Substring(0, 100) + "..." : bodyNoHtml;
                             string id = "icon-" + notificacao.Id;
                             string iconClass = notificacao.FoiLida ? "fa fa-circle-o icon" : "fa fa-circle icon";
                             <li>
@@ -29,7 +29,7 @@
                                     <a href="#notificationModal" data-toggle="modal" role="button" onclick="showHeader(@notificacao.Id, '@notificacao.Titulo', '@notificacao.Corpo');">@notificacao.Titulo</a>
                                 </h4>
                                 <span class="data">@notificacao.DateSent.ToString("dd/MM/yyyy")</span>
-                                <p>@corpo</p>
+                                <p style="font-size: 12px;">@corpo</p>
                             </li>
                         }
                     }
