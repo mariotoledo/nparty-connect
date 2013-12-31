@@ -131,6 +131,7 @@ namespace CampeonatosNParty.Controllers
             dados.FriendCode = CurrentUsuario.FriendCode;
             dados.MiiverseId = CurrentUsuario.MiiverseId;
             dados.Jogos = PersonGame.Select().Where("PersonId", CurrentUsuario.Id).ToList();
+            dados.friendSafari = PersonPokemonFriendSafari.Select().Where("PersonId", CurrentUsuario.Id).SingleResult();
             return View(dados);
         }
 
@@ -150,6 +151,13 @@ namespace CampeonatosNParty.Controllers
                 {
                     ViewData["RegisterError"] = "Por favor, digite um Friend Code válido para o 3DS";
                 }
+                else if (Int32.Parse(form["PokemonType"]) != 0 &&
+                    (String.IsNullOrEmpty(form["PokemonSlot1"]) ||
+                     String.IsNullOrEmpty(form["PokemonSlot2"]) ||
+                     String.IsNullOrEmpty(form["PokemonSlot3"])))
+                {
+                    ViewData["RegisterError"] = "Atenção: para editar seu Friend Safari, você precisa selecionar os campos corretamente.";
+                }
                 else
                 {
                     CurrentUsuario.MiiverseId = model.MiiverseId;
@@ -159,6 +167,68 @@ namespace CampeonatosNParty.Controllers
 
                     NPartyDb<PersonGame>.Instance.Database.ExecuteNonQuery(System.Data.CommandType.Text,
                         "delete from PersonGame where PersonId = " + CurrentUsuario.Id, new object[0]);
+
+                    List<PersonGame> personGameToInsert = new List<PersonGame>();
+
+                    bool foundPokemonXY = false;
+
+                    foreach (string key in form.AllKeys)
+                    {
+                        if(key.StartsWith("gameId-")){
+                            int id = Int32.Parse(key.Substring(7));
+
+                            if (id == 11)
+                                foundPokemonXY = true;
+
+                            PersonGame personGame = new PersonGame();
+                            personGame.GameId = id;
+                            personGame.PersonId = CurrentUsuario.Id;
+                            personGameToInsert.Add(personGame);
+                        }
+                    }
+
+                    NPartyDb<PersonGame>.Instance.Insert(personGameToInsert);
+
+                    if (foundPokemonXY)
+                    {
+                        if (!String.IsNullOrEmpty(form["PokemonType"]) && Int32.Parse(form["PokemonType"]) > 0 &&
+                        !String.IsNullOrEmpty(form["PokemonSlot1"]) && Int32.Parse(form["PokemonSlot1"]) > 0 &&
+                        !String.IsNullOrEmpty(form["PokemonSlot2"]) && Int32.Parse(form["PokemonSlot2"]) > 0 &&
+                        !String.IsNullOrEmpty(form["PokemonSlot3"]) && Int32.Parse(form["PokemonSlot3"]) > 0)
+                        {
+                            PersonPokemonFriendSafari friendSafari = PersonPokemonFriendSafari.Select().Where("PersonId", CurrentUsuario.Id).SingleResult();
+                            if (friendSafari == null)
+                            {
+                                friendSafari = new PersonPokemonFriendSafari()
+                                {
+                                    PersonId = CurrentUsuario.Id,
+                                    PokemonSlot1Id = Int32.Parse(form["PokemonSlot1"]),
+                                    PokemonSlot2Id = Int32.Parse(form["PokemonSlot2"]),
+                                    PokemonSlot3Id = Int32.Parse(form["PokemonSlot3"]),
+                                    PokemonTypeId = Int32.Parse(form["PokemonType"])
+                                };
+                                NPartyDb<PersonPokemonFriendSafari>.Instance.Insert(friendSafari);
+                            }
+                            else
+                            {
+                                friendSafari.PersonId = CurrentUsuario.Id;
+                                friendSafari.PokemonSlot1Id = Int32.Parse(form["PokemonSlot1"]);
+                                friendSafari.PokemonSlot2Id = Int32.Parse(form["PokemonSlot2"]);
+                                friendSafari.PokemonSlot3Id = Int32.Parse(form["PokemonSlot3"]);
+                                friendSafari.PokemonTypeId = Int32.Parse(form["PokemonType"]);
+                                NPartyDb<PersonPokemonFriendSafari>.Instance.Save(friendSafari);
+                            }
+
+                            model.friendSafari = friendSafari;
+                        }
+                    }
+                    else
+                    {
+                        PersonPokemonFriendSafari friendSafari = PersonPokemonFriendSafari.Select().Where("PersonId", CurrentUsuario.Id).SingleResult();
+                        if (friendSafari != null)
+                            NPartyDb<PersonPokemonFriendSafari>.Instance.Database.ExecuteNonQuery(System.Data.CommandType.Text,
+                        "delete from PersonPokemonFriendSafari where PersonId = " + CurrentUsuario.Id, new object[0]);
+                    }
 
                     ViewData["RegisterSuccess"] = "Dados atualizados com sucesso.";
                 }

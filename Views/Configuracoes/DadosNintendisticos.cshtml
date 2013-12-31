@@ -9,6 +9,81 @@
 }
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.maskedinput.min.js")"></script>
 <h2>Configurações <small>Preencha as informações abaixo e clique em "Salvar" para alterar seus dados nintendísticos</small></h2>
+<script>
+    var isPokemonXYSelected = false;
+
+    function gameSelected(gameId) {
+        if ($('#gameId-' + gameId).prop('checked')) {
+            document.getElementById("gameId-" + gameId).checked = false;
+            $('#thumbId-' + gameId).css('border-color', '');
+            if (gameId == 11)
+                $('#PokemonFriendSafari').hide('fast');
+        } else {
+            $('#thumbId-' + gameId).css('border-color', '#0000FF');
+            document.getElementById("gameId-" + gameId).checked = true;
+            if (gameId == '11')
+                $('#PokemonFriendSafari').show('fast');
+        }
+    }
+
+    function loadPokemonSlot1(selectedType, selected) {
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSlot1/")" + selectedType,
+            success: function (json) {
+                $('#PokemonSlot1').prop('disabled', false);
+                var optionArray = [];
+                optionArray.push('<option value="">Selecione</option>');
+
+                $.each(json, function (i, item) {
+                    if (selected == item.Id)
+                        optionArray.push('<option value="' + item.Id + '" selected>' + item.Name + '</option>');
+                    else
+                        optionArray.push('<option value="' + item.Id + '">' + item.Name + '</option>');
+                });
+
+                $('#PokemonSlot1').html(optionArray.join(''));
+            }
+        });
+    }
+    function loadPokemonSlot2(selectedType, selected) {
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSlot2/")" + selectedType,
+            success: function (json) {
+                $('#PokemonSlot2').prop('disabled', false);
+                var optionArray = [];
+                optionArray.push('<option value="">Selecione</option>');
+
+                $.each(json, function (i, item) {
+                    if (selected == item.Id)
+                        optionArray.push('<option value="' + item.Id + '" selected>' + item.Name + '</option>');
+                    else
+                        optionArray.push('<option value="' + item.Id + '">' + item.Name + '</option>');
+                });
+
+                $('#PokemonSlot2').html(optionArray.join(''));
+            }
+        });
+    }
+    function loadPokemonSlot3(selectedType, selected) {
+        $.ajax({
+            url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSlot3/")" + selectedType,
+            success: function (json) {
+                $('#PokemonSlot3').prop('disabled', false);
+                var optionArray = [];
+                optionArray.push('<option value="">Selecione</option>');
+
+                $.each(json, function (i, item) {
+                    if (selected == item.Id)
+                        optionArray.push('<option value="' + item.Id + '" selected>' + item.Name + '</option>');
+                    else
+                        optionArray.push('<option value="' + item.Id + '">' + item.Name + '</option>');
+                });
+
+                $('#PokemonSlot3').html(optionArray.join(''));
+            }
+        });
+    }
+</script>
 <div class="row">
     @{
         Html.RenderPartial("MenuConfiguracoes");
@@ -98,6 +173,12 @@
                                                                                 <li class="span2">
                                                                                     <a href="#" onclick="gameSelected(@jogo.Id)" class="thumbnail" id="@thumbId" style="@thumbBorder">
                                                                                         <input type="checkbox" name="@gameId" id="@gameId" @checkedString style="display: none;" />
+                                                                                        @if (jogo.Id == 11 && checkedString.CompareTo("checked") == 0)
+                                                                                        {
+                                                                                            <script>
+                                                                                                isPokemonXYSelected = true;
+                                                                                            </script>
+                                                                                        }
                                                                                         <img alt="" src="@jogo.getImagemUrl()">
                                                                                         <h5>@jogo.Nome</h5>
                                                                                     </a>
@@ -110,14 +191,81 @@
                                                     </div>  
                                                 </div>
                                             </div>
-                                            active = "";
+                                                                    active = "";
                                         }
                                     }
                                     </div>
                                     <a class="carousel-control left" href="#gamesCarousel" data-slide="prev">&lsaquo;</a>
                                     <a class="carousel-control right" href="#gamesCarousel" data-slide="next">&rsaquo;</a>
                                 </div>
-                            
+                        <div id="PokemonFriendSafari">
+                            <p>Selecione o seu Friend Safari de Pokémon X ou Pokémon Y:</p>
+                            <table class="table table-hover table-striped">
+                                <tr>
+                                    <th style="vertical-align: middle;">
+                                        Tipo do Safari
+                                    </th>
+                                    <th style="vertical-align: middle;">
+                                        Slot 1
+                                    </th>
+                                    <th style="vertical-align: middle;">
+                                        Slot 2
+                                    </th>
+                                    <th style="vertical-align: middle;">
+                                        Slot 3
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <select class="span2" id="PokemonType" name="PokemonType" onchange="loadPokemonSlot1(this.value, 0); loadPokemonSlot2(this.value, 0); loadPokemonSlot3(this.value, 0);">
+                                            <option value="0">Selecione...</option>
+                                            @{
+                                                foreach (CampeonatosNParty.Models.Database.PokemonFriendSafariType pokemonType in
+                                                    CampeonatosNParty.Models.Database.PokemonFriendSafariType.Select())
+                                                {
+                                                    string selected = "";
+                                                    if(Model.friendSafari != null && Model.friendSafari.PokemonTypeId == pokemonType.Id)
+                                                    {
+                                                        selected = "selected";
+                                                        <script>
+                                                            loadPokemonSlot1('@Model.friendSafari.PokemonTypeId', '@Model.friendSafari.PokemonSlot1Id'); 
+                                                            loadPokemonSlot2('@Model.friendSafari.PokemonTypeId', '@Model.friendSafari.PokemonSlot2Id'); 
+                                                            loadPokemonSlot3('@Model.friendSafari.PokemonTypeId', '@Model.friendSafari.PokemonSlot3Id');
+                                                        </script>
+                                                    }
+                                                    <option value="@pokemonType.Id" @selected>@pokemonType.TypeName</option>
+                                                }
+                                            }
+                                            </select>
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <select class="span2" id="PokemonSlot1" name="PokemonSlot1">
+                                            <option value="0">Selecione...</option>
+                                            <script>$('#PokemonSlot1').prop('disabled', true);</script>
+                                        </select>
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <select class="span2" id="PokemonSlot2" name="PokemonSlot2">
+                                            <option value="0">Selecione...</option>
+                                            <script>$('#PokemonSlot2').prop('disabled', true);</script>
+                                        </select>
+                                    </td>
+                                    <td style="vertical-align: middle;">
+                                        <select class="span2" id="PokemonSlot3" name="PokemonSlot3">
+                                            <option value="0">Selecione...</option>
+                                            <script>$('#PokemonSlot3').prop('disabled', true);</script>
+                                        </select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <script>
+                            if (isPokemonXYSelected) {
+                                $('#PokemonFriendSafari').show();
+                            } else {
+                                $('#PokemonFriendSafari').hide();
+                            }
+                        </script>
                     </div>
                 </div>
                 <div class="row">
@@ -132,14 +280,4 @@
     jQuery(function ($) {
         $("#FriendCode").mask("9999-9999-9999");
     });
-
-    function gameSelected(gameId) {
-        if ($('#gameId-' + gameId).prop('checked')) {
-            document.getElementById("gameId-" + gameId).checked = false;
-            $('#thumbId-' + gameId).css('border-color', '');
-        } else {
-            $('#thumbId-' + gameId).css('border-color', '#0000FF');
-            document.getElementById("gameId-" + gameId).checked = true;
-        }
-    }
 </script>

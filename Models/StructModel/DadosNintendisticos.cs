@@ -28,6 +28,6 @@ namespace CampeonatosNParty.Models.StructModel
 
         public List<PersonGame> Jogos { get; set; }
 
-        public bool hasPokemonFriendSafari { get; set; }
+        public PersonPokemonFriendSafari friendSafari { get; set; }
     }
 }
