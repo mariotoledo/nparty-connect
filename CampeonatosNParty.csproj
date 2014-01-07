@@ -294,7 +294,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\Mario.pubxml" />
-    <Content Include="Views\Jogadores\EditarMinhasInformacoes.cshtml" />
     <Content Include="Views\Shared\ErroNotFound.cshtml" />
     <None Include="Properties\PublishProfiles\Mario2.pubxml" />
     <Content Include="Views\Home\Sobre.cshtml" />
@@ -307,7 +306,7 @@
     <Content Include="Views\Home\Ranking.cshtml" />
     <Content Include="Views\Jogadores\Notificacoes.cshtml" />
     <None Include="Properties\PublishProfiles\Mario4.pubxml" />
-    <Content Include="Views\Jogadores\AlterarSenha.cshtml" />
+    <Content Include="Views\Configuracoes\AlterarSenha.cshtml" />
     <Content Include="Views\Error\Index.cshtml" />
     <Content Include="Views\Error\PaginaNaoEncontrada.cshtml" />
     <Content Include="Views\Widgets\Index.cshtml" />

@@ -272,5 +272,60 @@ namespace CampeonatosNParty.Controllers
             ViewData["FotoURL"] = CurrentUsuario.getUrlFotoPerfil();
             return View();
         }
+
+        [HttpGet]
+        [AuthenticationRequired]
+        public ActionResult AlterarSenha()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AuthenticationRequired]
+        public ActionResult AlterarSenha(FormCollection form)
+        {
+            string currentPassword = form["CurrentPassword"];
+            string newPassword = form["NewPassword"];
+            string confirmNewPassword = form["NewPasswordConfirmation"];
+
+            if (String.IsNullOrEmpty(currentPassword))
+            {
+                ViewData["Error"] = "Por favor, digite sua senha atual";
+            }
+            else if (String.IsNullOrEmpty(newPassword))
+            {
+                ViewData["Error"] = "Por favor, digite sua nova senha";
+            }
+            else if (String.IsNullOrEmpty(confirmNewPassword))
+            {
+                ViewData["Error"] = "Por favor, confirme sua nova senha";
+            }
+            else
+            {
+                if (CampeonatosNParty.Helpers.RegisterHelper.CheckValidPassword(CurrentUsuario.Senha, currentPassword))
+                {
+                    if (newPassword.Length < 6 || newPassword.Length > 8)
+                    {
+                        ViewData["Error"] = "Atenção, sua nova senha deve conter 6 a 8 dígitos";
+                    }
+                    else if (newPassword.CompareTo(confirmNewPassword) != 0)
+                    {
+                        ViewData["Error"] = "Por favor, confirme sua nova senha corretamente";
+                    }
+                    else
+                    {
+                        CurrentUsuario.Senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(newPassword);
+                        NPartyDb<Usuarios>.Instance.Update(CurrentUsuario);
+                        ViewData["Success"] = "Senha alterada com sucesso :)";
+                    }
+                }
+                else
+                {
+                    ViewData["Error"] = "Senha atual inválida.";
+                }
+            }
+
+            return View();
+        }
     }
 }
