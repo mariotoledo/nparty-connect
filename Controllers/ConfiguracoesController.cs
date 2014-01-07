@@ -1,4 +1,5 @@
-﻿using CampeonatosNParty.Models.Database;
+﻿using CampeonatosNParty.Helpers;
+using CampeonatosNParty.Models.Database;
 using CampeonatosNParty.Models.StructModel;
 using System;
 using System.Collections.Generic;
@@ -235,6 +236,41 @@ namespace CampeonatosNParty.Controllers
             }
             model.Jogos = PersonGame.Select().Where("PersonId", CurrentUsuario.Id).ToList();
             return View(model);
+        }
+
+        [HttpGet]
+        [AuthenticationRequired]
+        public ActionResult FotoPerfil()
+        {
+            ViewData["FotoURL"] = CurrentUsuario.getUrlFotoPerfil();
+            return View();
+        }
+
+        [HttpPost]
+        [AuthenticationRequired]
+        public ActionResult FotoPerfil(FormCollection form)
+        {
+            HttpFileCollectionBase requestFiles = Request.Files;
+            HttpPostedFileBase profileImage = requestFiles["ProfileImage"];
+
+            if (!ImageHelper.IsImage(profileImage))
+            {
+                ViewData["RegisterError"] = "Por favor, insira uma imagem válida.";
+            }
+            else
+            {
+                AmazonS3Manager manager = new AmazonS3Manager();
+
+                manager.Save(CurrentUsuario.Id.ToString(), ImageHelper.ResizeAndCropStream(500, profileImage.InputStream));
+
+                CurrentUsuario.UrlFotoPerfil = manager.GetUrl(CurrentUsuario.Id.ToString());
+                NPartyDb<Usuarios>.Instance.Save(CurrentUsuario);
+
+                ViewData["RegisterSuccess"] = "Foto atualizada com sucesso.";
+            }
+
+            ViewData["FotoURL"] = CurrentUsuario.getUrlFotoPerfil();
+            return View();
         }
     }
 }

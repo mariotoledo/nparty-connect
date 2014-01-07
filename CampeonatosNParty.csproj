@@ -39,6 +39,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AWSSDK, Version=2.0.4.1, Culture=neutral, PublicKeyToken=9f476d3089b52be3, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\AWSSDK.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -113,8 +117,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\AmazonS3Manager.cs" />
     <Compile Include="Helpers\EmailTemplate.cs" />
     <Compile Include="Helpers\EncryptHelper.cs" />
+    <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Helpers\RegistrationHelper.cs" />
     <Compile Include="Models\Cookie\Cookie.cs" />
     <Compile Include="Models\Cookie\CookieContext.cs" />
@@ -311,6 +317,7 @@
     <Content Include="Views\Configuracoes\DadosBasicos.cshtml" />
     <Content Include="Views\Configuracoes\DadosConexao.cshtml" />
     <Content Include="Views\Configuracoes\DadosNintendisticos.cshtml" />
+    <Content Include="Views\Configuracoes\FotoPerfil.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\csharp-jetfuel\EixoX\EixoX.csproj">
