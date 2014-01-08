@@ -260,10 +260,12 @@ namespace CampeonatosNParty.Controllers
             else
             {
                 AmazonS3Manager manager = new AmazonS3Manager();
+                string key = CurrentUsuario.Id.ToString() + "_" + DateTime.Now.ToString("ddMMyyyyhhmmss");
 
-                manager.Save(CurrentUsuario.Id.ToString(), ImageHelper.ResizeAndCropStream(500, profileImage.InputStream));
+                manager.Delete(CurrentUsuario.getUrlFotoPerfil());
+                manager.Save(key, ImageHelper.ResizeAndCropStream(500, profileImage.InputStream));
 
-                CurrentUsuario.UrlFotoPerfil = manager.GetUrl(CurrentUsuario.Id.ToString());
+                CurrentUsuario.UrlFotoPerfil = manager.GetUrl(key);
                 NPartyDb<Usuarios>.Instance.Save(CurrentUsuario);
 
                 ViewData["RegisterSuccess"] = "Foto atualizada com sucesso.";

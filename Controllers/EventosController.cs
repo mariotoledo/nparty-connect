@@ -23,7 +23,16 @@ namespace CampeonatosNParty.Controllers
             int page = 0;
             int.TryParse(Request.QueryString["page"], out page);
 
-            ClassSelect<Eventos> search = Eventos.Search(Request.QueryString["filter"]);
+            int cidadeId = 0;
+            int.TryParse(Request.QueryString["cidadeId"], out cidadeId);
+
+            ClassSelect<Eventos> search;
+
+            if(cidadeId > 0)
+                search = Eventos.Search(Request.QueryString["filter"]).And("IdCidade", cidadeId);
+            else
+                search = Eventos.Search(Request.QueryString["filter"]);
+
             search.Page(12, page);
             search.OrderBy("DataEventoInicio", SortDirection.Descending);
 

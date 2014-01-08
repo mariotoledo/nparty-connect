@@ -61,11 +61,16 @@ namespace CampeonatosNParty.Helpers
         /// </summary>
         /// <param name="type"></param>
         /// <param name="key"></param>
-        public void Delete(Type type, string key)
+        public void Delete(string photoUrl)
         {
+            string[] splited = photoUrl.Split(new char[] { '/' });
+            string key = "";
+            if (splited.Length > 0)
+                key = splited[splited.Length - 1];
+
             DeleteObjectRequest request = new DeleteObjectRequest()
             {
-                BucketName = type.FullName,
+                BucketName = bucketName,
                 Key = key
             };
 

@@ -131,6 +131,7 @@
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
     <Compile Include="Models\Database\Badges.cs" />
+    <Compile Include="Models\Database\CidadeEventos.cs" />
     <Compile Include="Models\Database\UsuarioJogos.cs" />
     <Compile Include="Models\Database\PersonGame.cs" />
     <Compile Include="Models\Database\UserConnections.cs" />
