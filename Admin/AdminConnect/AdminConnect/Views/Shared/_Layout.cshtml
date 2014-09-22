@@ -1,0 +1,65 @@
+﻿@{
+    CampeonatosNParty.Models.Database.Administrador user = 
+        (CampeonatosNParty.Models.Database.Administrador)Session["CurrentUser"];
+}
+
+<!DOCTYPE html>
+<html lang="en" ng-app="admin">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Admin Connect - @ViewBag.Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="@Url.Content("~/Content/plugins/metisMenu/metisMenu.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet">
+    <script src="@Url.Content("~/Scripts/angular.min.js")"></script>
+</head>
+
+<body>
+    <div class="navbar navbar-nparty navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#"><img src="@Url.Content("~/img/logoGrande.png")" style="max-height: 100%; margin-top: -7px;" /></a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-left">
+                    <li><a href="@Url.Content("~/Eventos/Gerenciar")">Eventos</a></li>
+                    <li><a href="@Url.Content("~/Eventos/Campeonatos")">Campeonatos</a></li>
+                    <li><a href="@Url.Content("~/Eventos/Usuarios")">Usuários</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="#">Olá, @user.Nome</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-12 main">
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/plugins/metisMenu/metisMenu.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/Site.js")"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>

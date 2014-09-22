@@ -1,0 +1,234 @@
+﻿@using CampeonatosNParty.Models.Database
+@model CampeonatosNParty.Models.ViewModel.MinhasConexoesView
+@{
+    ViewBag.Title = "Minhas Conexões";
+
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+
+    int filter = 0;
+    if(!string.IsNullOrEmpty(Request.QueryString["filter"]))
+    {
+        int.TryParse(Request.QueryString["filter"], out filter);
+    }
+
+    string selectedTodos = filter == 0 ? "selected" : "";
+    string selectedEuAdicionei = filter == 1 ? "selected" : "";
+    string selectedMeAdicionaram = filter == 2 ? "selected" : "";
+}
+
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li class="active">Minhas Conexões</li>
+</ul>
+<div class="page-header">
+  <h1>Minhas Conexões <small>Confira todos os jogadores com quem você esta conectado</small></h1>
+</div>
+<div class="row">
+    <div class="span12">
+        <form method="get" class="form-search pull-right">
+            <select name="filter" >
+                <option value="0" @selectedTodos>Todas as conexões</option>
+                <option value="1" @selectedEuAdicionei>Apenas quem eu adicionei</option>
+                <option value="2" @selectedMeAdicionaram>Apenas quem me adicionou</option>
+            </select>
+            <button class="btn btn-primary">
+                Filtrar
+            </button>
+        </form>
+    </div>
+</div>
+@{
+    if (Model.result != null && Model.result.Count > 0)
+    {
+        <div class="row">
+            <div class="span12">
+                   @{
+                        foreach (UserConnections[] connectionArray in Model.result.Segment(3))
+                        {
+                            <ul class="thumbnails">
+                                
+                                    @foreach (UserConnections connection in connectionArray)
+                                    {
+                                        if (connection != null)
+                                        {
+                                            if(connection.PersonId1 != Model.currentUsuario.Id)
+                                            {
+                                                <li class="span4">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 160px; padding-right: 5px; vertical-align: top;">
+                                                                <img src="@Url.Content("~/Static/img/default.png")" class="photoSmall" style="background-image: url('@connection.getUrlFotoPerfil1()')"/>
+                                                            </td>
+                                                            <td style="vertical-align: top;">
+                                                                <h4><a href="@Url.Content("~/Jogadores/Detalhes/" + connection.PersonId1)">@connection.PersonName1</a></h4>
+				                                                <div class="textDescription" style="font-size: 12px;">
+                                                                    @if (connection.isFriendCode && !string.IsNullOrEmpty(connection.FriendCode1))
+                                                                    {
+                                                                        <div><b>Friend Code:</b> @connection.FriendCode1</div>
+                                                                    }
+                                                                    @if (connection.isMiiverse && !string.IsNullOrEmpty(connection.MiiverseId1))
+                                                                    {
+                                                                        <div><b>Miiverse Id:</b> @connection.MiiverseId1</div>
+                                                                    }
+                                                                    @if (connection.isPSN && !string.IsNullOrEmpty(connection.PsnId1))
+                                                                    {
+                                                                        <div><b>PSN Id:</b> @connection.PsnId1</div>
+                                                                    }
+                                                                    @if (connection.isLive && !string.IsNullOrEmpty(connection.LiveId1))
+                                                                    {
+                                                                        <div><b>Live Id:</b> @connection.LiveId1</div>
+                                                                    }
+				                                                </div>
+                                                                <div style="margin-top: 5px;">
+                                                                    @{
+                                                                        if(connection.Person1DidAdd)
+                                                                        {
+                                                                             <p style="font-size: 12px; color: #3d861e">Esta pessoa já lhe adicionou</p>
+                                                                        } else 
+                                                                        {
+                                                                             <p style="font-size: 12px; color: #ae2121">Esta pessoa ainda não lhe adicionou</p>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                                <div style="margin-top: 5px;">
+                                                                    @{
+                                                                        if(connection.Person2DidAdd)
+                                                                        {
+                                                                             <p style="font-size: 12px; color: #3d861e">Você confirmou a adição desta pessoa.</p>
+                                                                        }
+                                                                        else
+                                                                        {
+                                                                            string btnName1 = "btn" + connection.PersonId1;
+                                                                            string divName1 = "div" + connection.PersonId1;
+                                                                            <div id="@divName1"></div>
+                                                                             <a id="@btnName1" class="btn btn-lage btn-block" onclick="confirmPerson2(@connection.PersonId1)">Já adicionei esta pessoa</a>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </li>
+                                            }
+                                            else
+                                            {
+                                                <li class="span4">
+                                                    <table>
+                                                        <tr>
+                                                            <td style="width: 160px; padding-right: 5px; vertical-align: top;">
+                                                                <img src="@Url.Content("~/Static/img/default.png")" class="photoSmall" style="background-image: url('@connection.getUrlFotoPerfil2()')"/>
+                                                            </td>
+                                                            <td style="vertical-align: top;">
+				                                                <h4><a href="@Url.Content("~/Jogadores/Detalhes/" + connection.PersonId2)">@connection.PersonName2</a></h4>
+				                                                <div class="textDescription" style="font-size: 12px;">
+                                                                    @if (connection.isFriendCode && !string.IsNullOrEmpty(connection.FriendCode2))
+                                                                    {
+                                                                        <div><b>Friend Code:</b> @connection.FriendCode2</div>
+                                                                    }
+                                                                    @if (connection.isMiiverse && !string.IsNullOrEmpty(connection.MiiverseId2))
+                                                                    {
+                                                                        <div><b>Miiverse Id:</b> @connection.MiiverseId2</div>
+                                                                    }
+                                                                    @if (connection.isPSN && !string.IsNullOrEmpty(connection.PsnId2))
+                                                                    {
+                                                                        <div><b>PSN Id:</b> @connection.PsnId2</div>
+                                                                    }
+                                                                    @if (connection.isLive && !string.IsNullOrEmpty(connection.LiveId2))
+                                                                    {
+                                                                        <div><b>Live Id:</b> @connection.LiveId2</div>
+                                                                    }
+				                                                </div>
+                                                                <div style="margin-top: 5px;">
+                                                                    @{
+                                                                    if (connection.Person2DidAdd)
+                                                                    {
+                                                                             <p style="font-size: 12px; color: #3d861e">Esta pessoa já lhe adicionou</p>
+                                                                    }
+                                                                    else
+                                                                    {
+                                                                             <p style="font-size: 12px; color: #ae2121">Esta pessoa ainda não lhe adicionou</p>
+                                                                    }
+                                                                    }
+                                                                </div>
+                                                                <div style="margin-top: 5px;">
+                                                                    @{
+                                                                    if (connection.Person1DidAdd)
+                                                                    {
+                                                                             <p style="font-size: 12px; color: #3d861e">Você confirmou a adição desta pessoa.</p>
+                                                                    }
+                                                                    else 
+                                                                        {
+                                                                            string btnName2 = "btn" + connection.PersonId2;
+                                                                            string divName2 = "div" + connection.PersonId2;
+                                                                            <div id="@divName2"></div>
+                                                                             <a id="@btnName2" class="btn btn-lage btn-block" onclick="confirmPerson1(@connection.PersonId2)">Já adicionei esta pessoa</a>
+                                                                        }
+                                                                    }
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </li>
+                                            }
+                                            
+                                        }
+                                    }
+                            </ul>
+                        }
+                    }
+                
+            </div>
+        </div>
+    
+        if (Model.result.HasPreviousPages || Model.result.HasMorePages)
+        {
+            @Html.Raw("<div class=\"paginationButton\">");
+            
+            if(Model.result.HasPreviousPages)
+            {
+                <a class="pull-left btn btn-primary" href="/Jogadores/MinhasConexoes?page=@(currentPage - 1)"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+            }
+            if (Model.result.HasMorePages)
+            {
+                <a class="pull-right btn btn-primary" href="/Jogadores/MinhasConexoes?page=@(currentPage + 1)">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+            }
+            @Html.Raw("</div>");
+        }
+    }
+    else{
+        <div class="row">
+            <div class="span12">
+                <p>Nenhuma conexão foi encontrada.</p>
+            </div>
+        </div>
+    }
+}
+<script type="text/javascript">
+    function confirmPerson1(person2Id) {
+        $('#btn' + person2Id).addClass('disabled');
+        $.ajax({
+            url: '@Url.Content("~/Ajax/ConfirmPerson1Add/")',
+            type: 'POST',
+            data: JSON.stringify({ person2IdString: person2Id }),
+            contentType: 'application/json',
+            success: function (data) {
+                $('#btn' + person2Id).hide();
+                $('#div' + person2Id).html('<p style="font-size: 12px; color: #3d861e">Você já adicionou esta pessoa.</p>');
+            }
+        });
+    }
+
+    function confirmPerson2(person1Id) {
+        $('#btn' + person1Id).addClass('disabled');
+        $.ajax({
+            url: '@Url.Content("~/Ajax/ConfirmPerson2Add/")',
+            type: 'POST',
+            data: JSON.stringify({ person1IdString: person1Id }),
+            contentType: 'application/json',
+            success: function (data) {
+                $('#btn' + person1Id).hide();
+                $('#div' + person1Id).html('<p style="font-size: 12px; color: #3d861e">Você já adicionou esta pessoa.</p>');
+            }
+        });
+    }
+</script>

@@ -1,0 +1,103 @@
+﻿@model CampeonatosNParty.Models.ViewModel.EventosDetailView
+@{
+    if (Model != null && Model.evento != null)
+    {
+        ViewBag.Title = "Detalhes do evento";
+       
+        <ul class="breadcrumb">
+            <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+            <li><a href="@Url.Content("/Eventos")">Eventos</a> <span class="divider">/</span></li>
+            <li class="active">@Model.evento.Nome</li>
+        </ul>
+        <div class="row">
+            <div class="span12">
+                <div class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <img src="@Model.evento.getCoverUrl()" alt="@Model.evento.Nome"/>
+                             <div class="carousel-caption white">
+                                    <h2>@Model.evento.Nome</h2>
+                                    @{
+                                        if (Model.cidade != null && !string.IsNullOrEmpty(Model.cidade.Nome))
+                                        {
+                                            string cidadeSigla = Model.estado != null && !string.IsNullOrEmpty(Model.estado.Sigla) ?
+                                                Model.cidade.Nome + " - " + Model.estado.Sigla :
+                                                Model.cidade.Nome;
+                                                        <div><b>Cidade</b>: @cidadeSigla</div>
+                                        }
+
+                                        if (Model.tipoEvento != null && !string.IsNullOrEmpty(Model.tipoEvento.Nome))
+                                        {
+                                                        <div><b>Tipo</b>: @Model.tipoEvento.Nome</div>
+                                        }
+
+                                        if (!string.IsNullOrEmpty(Model.evento.Local))
+                                        {
+                                                        <div><b>Local</b>: @Model.evento.Local</div>
+                                        }
+
+                                        if (Model.evento.DataEventoInicio != null)
+                                        {
+                                            string dataEvento = Model.evento.DataEventoFim != null && 
+                                                                Model.evento.DataEventoFim != DateTime.MinValue &&
+                                                                Model.evento.DataEventoInicio.CompareTo(Model.evento.DataEventoFim) != 0 ?
+                                                  Model.evento.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + Model.evento.DataEventoFim.ToString("dd/MM/yyyy") :
+                                                  Model.evento.DataEventoInicio.ToString("dd/MM/yyyy");
+                                                  <div><b>Data</b>: @dataEvento</div>
+                                        }
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span12">
+                @{
+                    if (Model.campeonatos != null && Model.campeonatos.Count<CampeonatosNParty.Models.Database.CampeonatoPorEvento[]>() > 0)
+                    {
+                        <h3 id="campeonatosHeader">Campeonatos</h3>
+                        <script type="text/javascript">
+                            var showHeaderCampeonatos = false;
+                        </script>
+                        foreach (CampeonatosNParty.Models.Database.CampeonatoPorEvento[] campeonatosArray in Model.campeonatos)
+                        {
+                            <ul class="thumbnails">
+                                @foreach (CampeonatosNParty.Models.Database.CampeonatoPorEvento campeonato in campeonatosArray)
+                                {
+                                    if (campeonato != null)
+                                    {
+                                        <li class="span3">
+                                            <a class="thumbnail" href="@Url.Content("~/Campeonatos/Detalhes/" + campeonato.IdCampeonato)">
+                                                <img alt="@campeonato.NomeJogo" src="@campeonato.getImagemUrl()" />
+                                                <h4>@campeonato.NomeJogo</h4>
+                                                <div class="textDescription">
+                                                    @if (campeonato.DataCampeonato != null)
+                                                    {
+                                                        <div><b>Data:</b> @campeonato.DataCampeonato.ToString("dd/MM/yyyy")</div>
+                                                    }
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <script type="text/javascript">
+                                            showHeaderCampeonatos = true;
+                                        </script>
+                                    }
+                                }
+                            </ul>
+                        }
+                    }
+                }
+            </div>
+        </div>
+    } else {
+        Html.RenderPartial("ErroNotFound");
+    }
+}
+
+<script type="text/javascript">
+    if (showHeaderCampeonatos == false) {
+        document.getElementById('campeonatosHeader').style.display = 'none';
+    }
+</script>

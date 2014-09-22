@@ -1,4 +1,0 @@
-CampeonatosNParty
-=================
-
-Campeonatos N-Party

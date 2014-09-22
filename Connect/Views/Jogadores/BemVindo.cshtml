@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "BemVindo";
+}
+
+<div class="row">
+    <div class="span12">
+        <h2>Obrigado por se registrar!</h2>
+        <p>Você será redirecionado para a página principal em 5 segundos. Caso isto não aconteça, <a href="@Url.Content("~/Home/")">clique aqui.</a></p>
+    </div>
+</div>
+<script>
+    var delay = 5000;
+    setTimeout(function () { window.location = '@Url.Content("~/Home/")'; }, delay);
+</script>

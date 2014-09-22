@@ -1,0 +1,193 @@
+﻿@{
+    ViewBag.Title = "N-Party Connect (Beta)";
+    int topMenu = Convert.ToInt32(ViewData["TopMenu"]);
+    CampeonatosNParty.Models.Database.Usuarios currentUser = (CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"];
+    long notificationCount = 0;
+    string notificationBadge = "style='display: none'";
+    
+    if (currentUser != null)
+    {
+        notificationCount = CampeonatosNParty.Models.Database.NPartyDb<CampeonatosNParty.Models.Database.Notificacoes>
+                            .Instance.Select().Where("PersonId", currentUser.Id).And("FoiLida", false).Count();
+        
+        notificationBadge = notificationCount > 0 ? "style='display: inline-block'" : "style='display: none'";
+    }
+}
+<!-- 
+    
+        ????????????????????????????????????????????????????????????????????????????????????????????????????????????????
+      IIIIIII++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++II?
+    IIIII:   ,=?III?:                                                                                               =II?
+   III?.  ?I??????????I                                                                                             =II?
+ IIII.  IIIIIIIIIIIIII=                                                                                             =II?
+ II7. ~IIIIIIIIIIIIIII    I~                                                                                        =II?
+777  :IIIIII7IIIIIIII7   ,II7   .777777777777 777777777777?     77777    ~77777777777I.I777777777777=7777+   ~7777  =77I
+77+  7777777~ ,777777=   I777:  .77777777777777777777777777I   .77777:   ~7777777777777I777777777777=7777+   ~7777  =77+
+7$  =7777777    ~777$   ,7777$  .777777777777777777777777777   +77777$   ~77777777777777777777777777+7777+   ~7777  =77.
+$I .$7777777     .+7+   I77777= .7777:   ?777$7777$    $7777  .$777777+  ~7777    +777$    ,777$.   :$777+   ~$777  =$$ 
+$= ,$$$$$$$.       ,    $$$$$$I .$$$$:   ?$$$$$$$$$$$$$$$$$$  I$$$$$$$$  ~$$$$$$$$$$$$$    ,$$$$.   :$$$$$$$$$$$$$  =$$ 
+$? .Z$$$$$?            :$$$$$$? .$$$$:   I$$$$$$$$$$$$$$$$Z   Z$$$:$$$$. ~$$$$.$$$$$$$,    ,$$$Z.   .I$$$$$$$$$$$Z  =$$ 
+ZZ .7ZZZZZ    .O.      $ZZZZZZ, .ZZZZ:   IZZZZZZZZZ......    :ZZZZ $ZZZ$ ~ZZZZ ,ZZZZ~      ,ZZZZ.      ..?ZZZ$..    =ZZ 
+ZZ, :ZZZZO    $ZZ7    :ZZZZZZ$  .ZZZZ:   IZZZZZZZZO         .ZZZZZ =ZZZZ,~ZZZZ  ?ZZZZ      ,ZZZZ.        ?ZZZ$      =ZZ 
+ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ   OZZZO     ,ZZZO.        IZZZZ      =ZZ 
+ ZZ? .OOZ    OOOOOOOO OOOOOO.   .OOOO:   IOOOOOOOOO         OOOOZ ~OOOOOO~OOOO   ,OOOO,    ,OOOO.        IOOOZ      =ZZ 
+ OOOO .I    ,OOOOOOOOOOOOO8                                                                                         =OO 
+  OOO8      OOOOOOOOOOOO8=                                                                                          =OO 
+   OOOO8   .8888888888?.                                                                                            =OO 
+     OOOOOO:   ....                                                                                                 =8O 
+     III888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888888OOOOOOOOOOOOO88888 
+    IIIIIII7OOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO 
+
+    N-Party Connect v1.0.5b
+    Copyright N-Party 2013 - Todos os direitos reservados.
+
+    Front-end framework: https://github.com/
+    Back-end framework: http://eixox.com.br/
+     -->
+<html lang="pt-br" dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr' xmlns:fb='http://ogp.me/ns/fb#'>
+<head>
+    <title>@ViewBag.Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content='Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais.'/>
+    <meta content='nparty, 3DS, Wii U, Friend Code, rede social, Nintendo' name='keywords'/>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
+    <meta content='Mario Toledo e Rafael Farias' name='author'/>
+
+    <link href='http://www.images.nparty.com.br/connect/favco.png' rel='icon' type='image/x-icon'/>
+    <link href='http://connect.nparty.com.br' rel='canonical'/>
+
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+
+    <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap.min.css")" />
+    <link rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap-responsive.min.css")" />
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/nparty.css")" />
+</head>
+<body>
+    <div class="container" style="margin-top: 15px;">
+            <div class="navbar">
+                <div class="navbar-inner">
+                    <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                      <span class="icon-bar"></span>
+                    </button>
+                    <a href="/" class="brand"><img src="@Url.Content("~/Static/img/template/logoNPartyCampeonatosSmall.png")" alt="N-Party Connect"/></a>
+			        <div class="nav-collapse collapse" id="topMenu">
+				        <ul class="nav pull-left">
+					        <li class="@(topMenu == 1 ? "active" : "")">@Html.ActionLink("Eventos", "Index", "Eventos")</li>
+                            <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
+                            <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
+                            <li class="@(topMenu == 4 ? "active" : "")"><a href="@Url.Content("~/Widgets/")">Widgets</a></li>
+                            
+				        </ul>
+                        <ul class="nav pull-right">
+                            @if (currentUser == null)
+                            {
+                                <li><a href="@Url.Content("~/Home/Login")">Login ou Registrar</a></li>
+                            }
+                            else
+                            {  
+                                <li>
+                                    <a title="Perfil" href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)" style="float: left;">Olá, @currentUser.Nome</a>
+                                    <a title="Notificações" href="@Url.Content("~/Jogadores/Notificacoes")" style="float: left;">
+                                        <i class="fa fa-bullhorn icon" style="padding-top: 2px;"></i>
+                                        <span id="notificationCount" class="badge" @notificationBadge>
+                                            @notificationCount
+                                        </span>
+                                    </a>
+                                    <a title="Minhas conexões" href="@Url.Content("~/Jogadores/MinhasConexoes/")" style="float: left;"><i class="fa fa-users icon" style="padding-top: 2px;"></i></a>
+                                    <a title="Editar Informações" href="@Url.Content("~/Configuracoes")" style="float: left;"><i class="fa fa-cogs icon"  style="padding-top: 2px;"></i></a>
+                                    <a title="Logout" href="@Url.Content("~/Home/Logout")" style="float: left;"><i class="fa fa-sign-out icon" style="padding-top: 2px;"></i></a>
+                                </li>
+                            }
+				        </ul>
+			        </div>
+                </div>
+            </div>
+		</div>
+    <div class="container" id="main-wrapper">
+		<div class="main-content">
+             @RenderBody()
+        </div>
+    </div>
+    <div class="container">
+        <footer>
+            <div class="row">
+                <div class="span4">
+                    <p style="float: left;">
+                        © N-Party 2013 - <a href="http://www.nparty.com.br" target="_blank">www.nparty.com.br</a><br /><br />
+                        Desenvolvido e Desenhado por <b><a href="~/Jogadores/Detalhes/180">Mario Toledo</a></b><br/>
+                        Idealizado e Projetado por <b><a href="~/Jogadores/Detalhes/147">Rafael Farias</a></b>
+			        </p>
+                    <br /><br /><br /><br /><br />
+                    <ul>
+                        <li><a href="/Home/Sobre">Sobre</a></li>
+                        <li><a href="/Home/Privacidade">Termos de Privacidade</a></li>
+                        <li><a href="/Home/FAQ">FAQ</a></li>
+                        <li><a href="/Home/Contato">Contato</a></li>
+                    </ul>
+                </div>
+                <div class="span4" style="overflow: hidden;">
+                    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FNParty&amp;width=370&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=141992936007985" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:370px; height:258px;" allowTransparency="true"></iframe>
+                </div>
+                <div class="span4">
+                    <p style="float: right;">
+                        
+                    </p>
+                </div>
+            </div>
+		</footer>
+    </div>
+    <!-- Analytics -->
+    <script type="text/javascript">
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-39862825-2']);
+        _gaq.push(['_trackPageview']);
+
+        $(document).ready(function () {
+            updateCounter('@notificationCount');
+        });
+
+        (function () {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+        function updateCounter(data) {
+            if (parseInt(data) > 0) {
+                $('#notificationCount').css("display", "inline-block");
+                $('#notificationCount').html('' + data);
+            } else {
+                $('#notificationCount').html('');
+                $('#notificationCount').css("display", "none");
+            }
+        }
+       
+    </script>
+     @{
+            if (currentUser != null)
+            {
+                <script type="text/javascript">
+                    window.setInterval(function () {
+                        $.ajax({
+                            url: "@Url.Content("~/Ajax/NumeroNotificacoesNaoLidas/" + currentUser.Id)",
+                            success: function (data) {
+                                updateCounter(data);
+                            }
+                        });
+                    }, 30000);
+                </script>
+            }
+        }
+</body>
+</html>

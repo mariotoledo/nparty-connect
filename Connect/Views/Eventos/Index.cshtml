@@ -1,0 +1,122 @@
+﻿@using CampeonatosNParty.Models.Database
+@using EixoX.Data
+@model EixoX.Data.ClassSelectResult<Eventos>
+@{
+    ViewBag.Title = "Eventos";
+    Dictionary<int, string> eventoTipo = TipoEvento.Select().ToDictionary(g => g.Id, f => f.Nome);
+
+    List<Eventos> eventosList;
+    if(Model == null)
+    {
+        eventosList = NPartyDb<Eventos>.Instance.Select().OrderBy("DataEventoInicio", EixoX.Data.SortDirection.Descending).Page(25, 0).ToList();
+    }
+    else{
+        eventosList = Model.ToList();
+    }
+
+    List<CidadeEventos> cidadeEventos = CidadeEventos.Select().OrderBy("Nome").ToList();
+
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+    string filter = Request.QueryString["filter"] != null ? "filter=" + Request.QueryString["filter"] : "";
+
+    int citySelected = 0;
+    if(!string.IsNullOrEmpty(Request.QueryString["cidadeId"]))
+    {
+        int.TryParse(Request.QueryString["cidadeId"], out citySelected);
+    }
+}
+
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li class="active">Eventos</li>
+</ul>
+<div class="page-header">
+  <h1>Eventos <small>Confira todos os eventos que participamos</small></h1>
+</div>
+<div class="row">
+    <div class="span12">
+        <form method="get" class="form-search pull-right">
+            <div class="input-prepend">
+              <span class="add-on"><i class="icon-search"></i></span>
+               <input type="text" name="filter" placeholder="Procurar por evento" value="@Request.QueryString["filter"]">
+            </div>
+            <select name="cidadeId" >
+                <option value="0">Todas as cidades</option>
+                @foreach (CidadeEventos c in cidadeEventos)
+                {
+                    string selected = citySelected == c.IdCidade ? "selected" : "";
+                    <option value="@c.IdCidade" @selected>@c.Nome</option>
+                }
+            </select>
+            <button class="btn btn-primary">
+                Filtrar
+            </button>
+        </form>
+    </div>
+</div>
+@{
+    if(eventosList.Count > 0){
+        <div class="row">
+            <div class="span12">
+                   @{
+                        foreach (Eventos[] eventosArray in eventosList.Segment(4))
+                        {
+                            <ul class="thumbnails">
+                                @foreach (Eventos evento in eventosArray)
+                                {
+                                    if(evento != null)
+                                    {
+                                        <li class="span3">
+                                            <a class="thumbnail" href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">
+                                                <img data-src="holder.js/300x200" alt="@evento.Nome" src="@evento.getImagemUrl()" />
+				                                <h4>@evento.Nome</h4>
+				                                <div class="textDescription">
+                                                    @if(!string.IsNullOrEmpty(evento.Local))
+                                                    {
+                                                        <div><b>Local:</b> @evento.Local</div>
+                                                    }
+                                                    @if(evento.DataEventoInicio != null && evento.DataEventoInicio != DateTime.MinValue)
+                                                    {
+                                                        <div><b>Data:</b> @evento.DataEventoInicio.ToString("dd/MM/yyyy")
+                                                        @if (evento.DataEventoFim != null && 
+                                                             evento.DataEventoFim != DateTime.MinValue &&
+                                                             evento.DataEventoInicio.CompareTo(evento.DataEventoFim) != 0)
+                                                        {
+                                                            <span>a @evento.DataEventoFim.ToString("dd/MM/yyyy")</span>
+                                                        }
+                                                        </div>
+                                                    }
+				                                </div>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+                            </ul>
+                        }
+                    } 
+            </div>
+        </div>
+        if(Model.HasPreviousPages || Model.HasMorePages)
+        {
+            @Html.Raw("<div class=\"paginationButton\">");
+            filter = string.IsNullOrEmpty(filter) ? filter : "&" + filter;
+            string city = string.IsNullOrEmpty(Request.QueryString["idCidade"]) ? "" : (string.IsNullOrEmpty(filter) ? "" : "&") + "idCidade=" + Request.QueryString["idCidade"];
+            
+            if(Model.HasPreviousPages)
+            {
+                <a class="pull-left btn btn-primary" href="/Eventos/?page=@(currentPage - 1)@filter@city"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+            }
+            if(Model.HasMorePages)
+            {
+                <a class="pull-right btn btn-primary" href="/Eventos/?page=@(currentPage + 1)@filter@city">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+            }
+            @Html.Raw("</div>");
+        }
+    } else {
+        <div class="row">
+            <div class="span12">
+                <p>Nenhum evento foi encontrado.</p>
+            </div>
+        </div>
+    }
+}

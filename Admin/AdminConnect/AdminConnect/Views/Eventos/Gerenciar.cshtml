@@ -1,0 +1,70 @@
+﻿
+@{
+    ViewBag.Title = "Buscar";
+}
+
+<div class="page-header">
+    <h1>Gerenciar Eventos <small>Veja os eventos criados até o momento</small></h1>
+</div>
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
+    <li class="active">Gerenciar Eventos</li>
+</ol>
+
+<div ng-app="EventosLoad">
+    <div class="table-responsive" ng-controller="EventosController">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Busca</span>
+                    <input name="filter" type="text" class="form-control" ng-model="query">
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <a href="@Url.Content("~/Eventos/Novo")" class="btn btn-primary pull-right">Novo evento</a> 
+            </div>
+        </div><br/>
+        <br/>
+        <table class="table table-bordered table-condensed table-hover">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Tipo</th>
+                    <th>Local</th>
+                    <th>Cidade</th>
+                    <th>Estado</th>
+                    <th>Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-show="loading">
+                    <td colspan="6">Carregando...</td>
+                </tr>
+                <tr data-ng-repeat="evento in eventos | filter:query">
+                    <td><a href="@Url.Content("~/Eventos/Detalhes/"){{evento.Id}}">{{evento.Nome}}</td>
+                    <td>{{evento.NomeTipoEvento}}</td>
+                    <td>{{evento.Local}}</td>
+                    <td>{{evento.NomeCidade}}</td>
+                    <td>{{evento.NomeEstado}}</td>
+                    <td>{{evento.DataEventoInicioString}}</td>
+                </tr>
+            </tbody>
+        </table>
+        <div data-pagination="" data-num-pages="numPages()"
+             data-current-page="currentPage" data-max-size="maxSize"
+             data-boundary-links="true"></div>
+    </div>
+</div>
+<script>
+    var EventosLoad = angular.module('admin', []);
+
+    EventosLoad.controller('EventosController', function ($scope, $http) {
+        $scope.loading = true;
+        $http.get('@Url.Content("~/Ajax/GetEventos/")')
+        .then(function (res) {
+            $scope.eventos = res.data;
+            $scope.loading = false;
+        });
+    });
+</script>

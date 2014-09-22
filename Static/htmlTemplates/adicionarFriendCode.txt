@@ -1,1 +1,0 @@
-﻿<p>O usuário <a href="http://www.connect.nparty.com.br/Jogadores/Detalhes/[=PersonId]">[=FriendName]</a> viu que você possui um 3DS, e deseja adiciona-lo como amigo.<br/>Anote seu Friend Code:</p><span style="font-size: 30px; font-color: #ff0000;">[=Id]</span><br/><br/>

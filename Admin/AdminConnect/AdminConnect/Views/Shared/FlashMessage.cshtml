@@ -1,0 +1,11 @@
+﻿@{
+    string flashMessage = (string)TempData["FlashMessage"];
+    string flashMessageType = (string)TempData["FlashMessageType"];
+    if (!string.IsNullOrEmpty(flashMessage))
+    {
+        <div class="alert alert-@flashMessageType alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+            @Html.Raw(Html.Encode(flashMessage).Replace("\r\n", "<br />\r\n"))
+        </div>
+    }
+}

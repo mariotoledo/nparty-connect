@@ -1,0 +1,54 @@
+﻿@model AdminConnect.Models.Struct.Login
+@{
+    Layout = null;
+    ViewBag.Title = "N-Party Connect Admin - Login";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>Admin Connect - @ViewBag.Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet">
+</head>
+
+<body style="background-color: #B60101; ">
+        <div class="container" style="margin-top: 100px; margin-bottom: 100px; ">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <img src="@Url.Content("~/img/logoGrande.png")" class="img-responsive" /><br />
+                <br />
+                @{
+                    Html.RenderPartial("FlashMessage");
+                }
+                <form role="form" method="post">
+                    <div class="form-group">
+                        <label for="login" style="color: #FFF;">Email</label>
+                        <input type="text" class="form-control" id="login" name="login" placeholder="Insira seu email" value="@Model.Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="senha" style="color: #FFF;">Senha</label>
+                        <input type="password" class="form-control" id="senha" name="senha" placeholder="Insira sua senha" value="@Model.Senha">
+                    </div>
+                    <button type="submit" class="btn btn-default btn-lg">Logar</button>
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    <!-- /container -->
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="@Url.Content("~/Scripts/jquery-1.10.2.js")"></script>
+    <script src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+</body>
+</html>
+

@@ -1,0 +1,146 @@
+﻿@using CampeonatosNParty.Models.Database
+@model CampeonatosNParty.Models.ViewModel.HomeView
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="row">
+    <div class="span12">
+        <div id="mainSlider" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/Static/img/template/hero.png" alt="Bem vindo ao N-Party Connect">
+                    <div class="container">
+                        <div class="carousel-caption" style="bottom: 20px;">
+                            <h1>Bem vindo ao N-Party Connect!</h1>
+                              <p class="lead">Esta é a primeira rede online voltada para fãs da Nintendo. Conecte-se ao universo da Big-N, participe de campeonatos, ganhe badges e faça novos amigos!</p><br />
+                              <a class="btn btn-large btn-primary" href="~/Home/Sobre">Quero conhecer melhor o N-Party Connect</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="item">
+                    <img src="/Static/img/widgets/heroPokemonFriendSafariFinder.png" alt="Pokémon Friend Safari Finder">
+                    <div class="container">
+                        <div class="carousel-caption" style="bottom: 20px;">
+                            <h1>Pokémon Friend Safari Finder</h1>
+                            <p class="lead">Encontre os mais diversos Friend Safaris dos usuários cadastrados na N-Party Connect!</p><br />
+                            <a class="btn btn-large btn-primary" href="~/Widgets/PokemonFriendSafariFinder">Procurar por Friend Safaris</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- 
+                <div class="item">
+                    <img src="/Static/img/widgets/heroClassificadosPokemon.png" alt="Classificados de Trocas Pokémon">
+                    <div class="container">
+                        <div class="carousel-caption" style="bottom: 20px;">
+                             <h1>Classificados de Trocas Pokémon</h1>
+                            <p class="lead">Anuncie seus Pokémon da versão X e Y e faça troca com outros jogadores do N-Party Connect.</p><br />
+                            <a class="btn btn-large btn-primary" href="~/Widgets/ClassificadosPokemon">Abrir Classificados</a>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+            <a class="carousel-control left" href="#mainSlider" data-slide="prev">&lsaquo;</a>
+            <a class="carousel-control right" href="#mainSlider" data-slide="next">&rsaquo;</a>
+        </div>
+    </div>
+</div>
+<div class="content-wrap">
+    <div class="row">
+        <div class="span12">
+            @{
+                if (Model.ranking != null && Model.ranking.Count() > 0)
+                {
+                    <h2>Ranking <small>(<a href="~/Home/Ranking">Visualizar lista completa</a>)</small></h2>
+                    <ul class="thumbnails">
+                        @foreach (CampeonatosNParty.Models.Database.Ranking ranking in Model.ranking)
+                        {
+                            if (ranking != null)
+                            {
+                                <li class="span2">
+                                    <a class="thumbnail" href="@Url.Content("~/Jogadores/Detalhes/" + ranking.IdUsuario)">
+                                        <img class="photoSmall" src="@Url.Content("~/Static/img/default.png")" style="background-image: url('@ranking.getUrlFotoPerfil()')" />
+                                        @{
+                                            string apelido = string.IsNullOrEmpty(ranking.ApelidoUsuario) ? "" : "(" + ranking.ApelidoUsuario + ")";
+                                        }
+                                        <h4>@ranking.NomeUsuario <small>@apelido</small></h4>
+                                        <div class="textDescription">
+                                            <div>
+                                                <b>Pontos:</b> @ranking.Pontos pontos
+                                            </div>
+                                        </div>
+                                    </a>
+                                </li>
+                            }
+                        }
+                    </ul>
+                } else {
+                    <h2>Ranking</h2>
+                    <p>Ainda não há nenhum jogador classificado. Que tal ver os <a href="~/Home/Ranking">ranking anteriores</a>, enquanto isto?</p>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="span12">
+            @{
+                if (Model.lastEvent != null)
+                {
+                    if(Model.lastEvent.DataEventoInicio != null && 
+                       Model.lastEvent.DataEventoInicio.CompareTo(DateTime.Now) > 0)
+                    {
+                        <h2>Próximo Evento</h2>
+                    } else {
+                        <h2>Último Evento</h2>
+                    }
+                    
+                    <div class="carousel slide">
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <a href="@Url.Content("~/Eventos/Detalhes/" + Model.lastEvent.Id)"><img src="@Model.lastEvent.getCoverUrl()" alt="@Model.lastEvent.Nome"/></a>
+                                <div class="carousel-caption white">
+                                    <h2>@Model.lastEvent.Nome</h2>
+                                    @{
+                                        if (Model.lastEventCidade != null && !string.IsNullOrEmpty(Model.lastEventCidade.Nome))
+                                        {
+                                            string cidadeSigla = Model.lastEventEstado != null && !string.IsNullOrEmpty(Model.lastEventEstado.Sigla) ?
+                                                Model.lastEventCidade.Nome + " - " + Model.lastEventEstado.Sigla :
+                                                Model.lastEventCidade.Nome;
+                                                                        <div><b>Cidade</b>: @cidadeSigla</div>
+                                        }
+
+                                        if (Model.lastEventType != null && !string.IsNullOrEmpty(Model.lastEventType.Nome))
+                                        {
+                                                                        <div><b>Tipo</b>: @Model.lastEventType.Nome</div>
+                                        }
+
+                                        if (!string.IsNullOrEmpty(Model.lastEvent.Local))
+                                        {
+                                                                        <div><b>Local</b>: @Model.lastEvent.Local</div>
+                                        }
+
+                                        if (Model.lastEvent.DataEventoInicio != null)
+                                        {
+                                            string dataEvento = Model.lastEvent.DataEventoFim != null &&
+                                                                Model.lastEvent.DataEventoFim != DateTime.MinValue &&
+                                                                Model.lastEvent.DataEventoInicio.CompareTo(Model.lastEvent.DataEventoFim) != 0 ?
+                                                  Model.lastEvent.DataEventoInicio.ToString("dd/MM/yyyy") + " a " + Model.lastEvent.DataEventoFim.ToString("dd/MM/yyyy") :
+                                                  Model.lastEvent.DataEventoInicio.ToString("dd/MM/yyyy");
+                                        
+                                                                        <div><b>Data</b>: @dataEvento</div>
+                                        }
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            }
+        </div>
+    </div>
+</div>
+<script>
+    $('#mainSlider').carousel({
+        interval: 7000
+    })
+</script>
