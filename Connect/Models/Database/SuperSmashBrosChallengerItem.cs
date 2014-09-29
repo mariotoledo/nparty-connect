@@ -7,7 +7,7 @@ using System.Web;
 namespace CampeonatosNParty.Models.Database
 {
     [DatabaseTable]
-    public class SuperSmashBrosChallengerItem
+    public class SuperSmashBrosChallengerItem : NPartyDbModel<SuperSmashBrosChallengerItem>
     {
         [DatabaseColumn]
         public long IdUsuario { get; set; }
@@ -38,5 +38,11 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public string NomePersonagem3 { get; set; }
+
+        [DatabaseColumn]
+        public string NomeUsuario { get; set; }
+
+        [DatabaseColumn]
+        public string FriendCode { get; set; }
     }
 }

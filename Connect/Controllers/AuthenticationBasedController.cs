@@ -13,24 +13,14 @@ namespace CampeonatosNParty.Controllers
     {
         private Usuarios _CurrentUser;
 
-        private Cookie _NPartyCookie;
-        public Cookie NPartyCookie
-        {
-            get
-            {
-                return _NPartyCookie ?? (_NPartyCookie = Cookie.EnsureContext(this));
-            }
-        }
-
         protected override void OnAuthorization(AuthorizationContext filterContext)
         {
             if (this._CurrentUser == null)
             {
-                Cookie npartyCookie = this.NPartyCookie;
-                if (npartyCookie.IsLoggedIn && npartyCookie.UserId > 0)
+                Usuarios currentUser = (Usuarios)Session["CurrentUser"];
+                if (currentUser != null && currentUser.Id > 0)
                 {
-                    this._CurrentUser = Usuarios.WithMember("Id", npartyCookie.UserId);
-                    ViewData["CurrentUser"] = this._CurrentUser;
+                    ViewData["CurrentUser"] = currentUser;
                 }
             }
 
@@ -41,7 +31,7 @@ namespace CampeonatosNParty.Controllers
 
         public Usuarios CurrentUsuario
         {
-            get { return this._CurrentUser; }
+            get { return this._CurrentUser == null ? (Usuarios)Session["CurrentUser"] : this._CurrentUser; }
         }
 
         protected HttpCookie NPartyHttpCookie

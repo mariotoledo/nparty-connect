@@ -1,38 +1,26 @@
 ﻿@using CampeonatosNParty.Models.Database
-@model CampeonatosNParty.Models.ViewModel.PokemonFinderView
+@model CampeonatosNParty.Models.ViewModel.SmashBrosChallengerView
 @{
     ViewBag.Title = "Pokémon Friend Safari Finder - N-Party Connect";
 
-    List<PokemonFriendSafariFinderItem> safaris;
+    List<SuperSmashBrosChallengerItem> challengers;
     if (Model.result == null)
     {
-        safaris = NPartyDb<PokemonFriendSafariFinderItem>.Instance.Select().ToList();
+        challengers = NPartyDb<SuperSmashBrosChallengerItem>.Instance.Select().ToList();
     }
     else
     {
-        safaris = Model.result.ToList();
+        challengers = Model.result.ToList();
     }
 
-    List<PokemonFriendSafariType> safarisTypes = PokemonFriendSafariType.Select().OrderBy("TypeName", EixoX.Data.SortDirection.Ascending).ToList();
-    
-    List<PokemonFriendSafari> pokemonList = null;
-    
-    int pokemonSafariTypeFilter = Request.QueryString["Type"] == null ? 0 : Int32.Parse(Request.QueryString["Type"]);
-    int pokemonSafariFilter = Request.QueryString["Pokemon"] == null ? 0 : Int32.Parse(Request.QueryString["Pokemon"]);
+    List<SuperSmashBrosPersonagem> characters = SuperSmashBrosPersonagem.Select().OrderBy("Nome", EixoX.Data.SortDirection.Ascending).ToList();
 
-    if (pokemonSafariTypeFilter > 0)
-    {
-        pokemonList = PokemonFriendSafari.Select().Where("TypeId", pokemonSafariTypeFilter).OrderBy("Name", EixoX.Data.SortDirection.Ascending).ToList();
-    } else {
-        pokemonList = PokemonFriendSafari.Select().OrderBy("Name", EixoX.Data.SortDirection.Ascending).ToList();
-    }
-    
+    int characterFilter = Request.QueryString["cId"] == null ? 0 : Int32.Parse(Request.QueryString["cId"]);
+
     int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
-    string isFilteredType = Request.QueryString["Type"] != null ? "Type=" + Request.QueryString["Type"] : "";
-    string isFilteredPokemon = Request.QueryString["Pokemon"] != null ? "Pokemon=" + Request.QueryString["Pokemon"] : "";
+    string isFilteredCharacter = Request.QueryString["cId"] != null ? "cId=" + Request.QueryString["cId"] : "";
 
-    isFilteredType = string.IsNullOrEmpty(isFilteredType) ? isFilteredType : "&" + isFilteredType;
-    isFilteredPokemon = string.IsNullOrEmpty(isFilteredPokemon) ? isFilteredPokemon : "&" + isFilteredPokemon;
+    isFilteredCharacter = string.IsNullOrEmpty(isFilteredCharacter) ? isFilteredCharacter : "&" + isFilteredCharacter;
 }
 
 <ul class="breadcrumb">
@@ -51,22 +39,22 @@
                         <div class="carousel-caption" style="bottom: 20px;">
                             <h1>Super Smash Bros. Challenger</h1>
                             <p class="lead">
-                                Encontre os mais diversos Friend Safaris dos usuários cadastrados na N-Party Connect!
+                                Mostre os seus personagens principais do Super Smash Bros. para 3DS e desafie outros jogadores para batalhas!
                             </p>
                             @{
-                                if(Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myFriendSafariFinder == null)
+                                if(Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem == null)
                                 {
                                     <br />
-                                    <a href="#addFriendSafari" role="button" data-toggle="modal" class="btn btn-large btn-primary">Registrar Friend Safari</a>
+                                    <a href="#addCharacters" role="button" data-toggle="modal" class="btn btn-large btn-primary">Registrar meus personagens</a>
                                 }
-                                else if (Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myFriendSafariFinder != null)
+                                else if (Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem != null)
                                 {
                                     <br />
-                                    <a href="#myFriendSafari" role="button" data-toggle="modal" class="btn btn-large btn-primary">Meu Friend Safari</a>
+                                    <a href="#myFriendSafari" role="button" data-toggle="modal" class="btn btn-large btn-primary">Meus personagens</a>
                                 }
                                 else
                                 {
-                                    <p style="margin-top: 10px; font-size: 12px;"><i>Para registrar seu Friend Safari, é necessário que você esteja logado no N-Party Connect, e tenha registrado o Friend Code de seu 3DS nas configurações.</i></p>
+                                    <p style="margin-top: 10px; font-size: 12px;"><i>Para registrar seus personagens, é necessário que você esteja logado no N-Party Connect, e tenha registrado o Friend Code de seu 3DS nas configurações.</i></p>
                                 }
                             }
                         </div>
@@ -78,27 +66,19 @@
 </div>
 
 <div class="controls controls-row">
-        <form class="form-inline pull-right">
-            <select name="Type" class="span2" onchange="loadPokemonFromType(this.value)">
-                <option value="0">Qualquer tipo</option>
-                @foreach (PokemonFriendSafariType pokemonType in safarisTypes)
+    <form class="form-inline pull-right">
+        <select name="cId" class="span3" onchange="loadPokemonFromType(this.value)">
+            <option value="0">Qualquer personagem</option>
+            @foreach (SuperSmashBrosPersonagem c in characters)
                 {
-                    string selected = pokemonSafariTypeFilter == pokemonType.Id ? "selected" : "";
-                    <option @selected value="@pokemonType.Id">@pokemonType.TypeName</option>
+                    string selected = characterFilter == c.Id ? "selected" : "";
+                <option @selected value="@c.Id">@c.Nome</option>
                 }
-            </select>
-            <select class="span2" name="Pokemon" id="Pokemon">
-                <option value="0">Qualquer Pokémon</option>
-                @foreach (PokemonFriendSafari pokemonItem in pokemonList)
-                {
-                    string selected = pokemonSafariFilter == pokemonItem.PokedexNumber ? "selected" : "";
-                    <option @selected value="@pokemonItem.PokedexNumber">@pokemonItem.Name</option>
-                }
-            </select>
-            <button class="btn btn-primary span2">
-                Filtrar
-            </button>
-        </form>
+        </select>
+        <button class="btn btn-primary span2">
+            Filtrar
+        </button>
+    </form>
 </div>
 @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterError"]))
 {
@@ -129,57 +109,56 @@
 </div>
 
 @{
-    if (safaris.Count > 0)
+    if (challengers.Count > 0)
     {
-        foreach (PokemonFriendSafariFinderItem[] safarisArray in safaris.Segment(3))
+        foreach (SuperSmashBrosChallengerItem[] challengerArray in challengers.Segment(3))
         {
             <div class="row">
-            @foreach (PokemonFriendSafariFinderItem safari in safarisArray)
+                @foreach (SuperSmashBrosChallengerItem challenger in challengerArray)
             {
-                if (safari != null)
+                if (challenger != null)
                 {
                     <div class="span4">
                         <table class="table table-hover table-striped table-condensed table-bordered pokemonSafariItem">
                             <tr>
-                                <th colspan="3"> <a href="@Url.Content("~/Jogadores/Detalhes/" + safari.PersonId)"><h4>@safari.PersonName</h4></a></th>
+                                <th colspan="3"> <a href="@Url.Content("~/Jogadores/Detalhes/" + challenger.IdUsuario)"><h4>@challenger.NomeUsuario</h4></a></th>
                             </tr>
                             <tr>
-                                <td colspan="3"><b>Tipo do Safari</b>: @safari.SafariTypeName</td>
+                                <td colspan="3"><b>Friend Code</b>: @challenger.FriendCode</td>
                             </tr>
                             <tr>
-                                <td colspan="3"><b>Friend Code</b>: @safari.FriendCode
+                                <td class="pokemon">
+                                    <img width="100" alt="@challenger.NomePersonagem1" src="" /><br />
+                                    <div>@challenger.NomePersonagem1</div>
+                                </td>
+                                <td class="pokemon">
+                                    <img width="100" alt="@challenger.NomePersonagem2" src="" /><br />
+                                    <div>challenger.NomePersonagem2</div>
+                                </td>
+                                <td class="pokemon">
+                                    <img width="100" alt="@challenger.NomePersonagem3" src="" /><br />
+                                    <div>@challenger.NomePersonagem3</div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="3">
                                     @{
                                         if (!Model.isLoggedIn)
                                         {
-                                            <a href="#notLogged" role="button" class="btn btn-primary btn-mini" data-toggle="modal" style="margin-left: 10px; height: 18px;">+</a>
+                                            <a href="#notLogged" role="button" class="btn btn-primary btn-block" data-toggle="modal" style="margin-left: 10px; height: 18px;">Desafiar!</a>
                                         }
                                         else
                                         {
-                                            if (Model.isButtonActive[safari.PersonId])
+                                            if (Model.isButtonActive[(int)challenger.IdUsuario])
                                             {
-                                                <a href="#addPerson" onclick="showAddModal('@safari.PersonName', '@safari.PersonId');" role="button" class="btn btn-primary btn-mini" data-toggle="modal" style="margin-left: 10px; height: 18px;">+</a>
+                                                <a href="#addPerson" onclick="showAddModal('@challenger.NomeUsuario', '@challenger.IdUsuario');" role="button" class="btn btn-primary btn-block" data-toggle="modal" style="margin-left: 10px; height: 18px;">Desafiar!</a>
                                             }
                                             else
                                             {
-                                                <a role="button" class="btn btn-mini disabled" data-toggle="modal" style="margin-left: 10px; height: 18px;">+</a>
+                                                <a role="button" class="btn btn-block disabled" data-toggle="modal" style="margin-left: 10px; height: 18px;">Desafiar!</a>
                                             }
                                         }
                                     }
-                                    
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="pokemon">
-                                    <img width="100" alt="@safari.Pokemon1Name" src="@safari.getImageUrl(safari.Pokemon1DexNumber)"  /><br />
-                                    <div>@safari.Pokemon1Name</div>
-                                </td>
-                                <td class="pokemon">
-                                    <img width="100" alt="@safari.Pokemon2Name" src="@safari.getImageUrl(safari.Pokemon2DexNumber)" /><br />
-                                    <div>@safari.Pokemon2Name</div>
-                                </td>
-                                <td class="pokemon">
-                                    <img width="100" alt="@safari.Pokemon3Name" src="@safari.getImageUrl(safari.Pokemon3DexNumber)"  /><br />
-                                    <div>@safari.Pokemon3Name</div>
                                 </td>
                             </tr>
                         </table>
@@ -188,109 +167,151 @@
             }
             </div>
         }
-        if (Model.result.HasPreviousPages || Model.result.HasMorePages)
-        {
-            @Html.Raw("<div class=\"paginationButton\">");
-
-
-                                                         if (Model.result.HasPreviousPages)
-                                                         {
-                <a class="pull-left btn btn-primary" href="/Widgets/PokemonFriendSafariFinder/?page=@(currentPage - 1)@isFilteredType@isFilteredPokemon"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
-                                                         }
-                                                         if (Model.result.HasMorePages)
-                                                         {
-                <a class="pull-right btn btn-primary" href="/Widgets/PokemonFriendSafariFinder/?page=@(currentPage + 1)@isFilteredType@isFilteredPokemon">Próxima página <i class="icon-chevron-right icon-white"></i></a>
-                                                         }
-            @Html.Raw("</div>");
-        }
-        if (!Model.isLoggedIn)
-        {
-            <div id="notLogged" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="miiverseLabel">Atenção: Você não esta logado</h3>
-                </div>
-                <div class="modal-body">
-                    <p>Para solicitar conexão com o jogador, você precisa estar logado no sistema e ter seu Friend Code registrado.</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                    <a href="@Url.Content("~/Home/Login")" class="btn btn-primary">Login ou Registrar</a>
-                </div>
+    } else
+    {
+        <div class="row">
+            <div class="span12">
+                <p>Nenhum desafiante foi encontrado.</p>
             </div>
+        </div>
+    }
+    if (Model.result.HasPreviousPages || Model.result.HasMorePages)
+    {
+        @Html.Raw("<div class=\"paginationButton\">");
+        if (Model.result.HasPreviousPages)
+        {
+            <a class="pull-left btn btn-primary" href="/Widgets/SuperSmashBrosChallenger/?page=@(currentPage - 1)@isFilteredCharacter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
         }
+        if (Model.result.HasMorePages)
+        {
+            <a class="pull-right btn btn-primary" href="/Widgets/SuperSmashBrosChallenger/?page=@(currentPage + 1)@isFilteredCharacter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+        }
+        @Html.Raw("</div>");
+    }
+    if (!Model.isLoggedIn)
+    {
+        <div id="notLogged" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="miiverseLabel">Atenção: Você não esta logado</h3>
+            </div>
+            <div class="modal-body">
+                <p>Para desafiar o jogador, você precisa estar logado no sistema e ter seu Friend Code registrado.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <a href="@Url.Content("~/Home/Login")" class="btn btn-primary">Login ou Registrar</a>
+            </div>
+        </div>
+    }
         else
         {
-            <div id="addPerson" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="notificationModalLabel">Solicitar conexão no 3DS</h3>
-                </div>
-                <div class="modal-body">
-                    <p>Deseja solicitar uma conexão com <span id="userName"></span> entre seu Friend Code no 3DS?</p>
-                </div>
-                <div class="modal-footer">
-                    <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                    @{
-                        string concat = "?page=" + currentPage.ToString() + isFilteredType + isFilteredPokemon;
-                        <a id="userAddLink" href="@Url.Content("~/Widgets/AdicionarFriendCodeDoSafari/" + concat)" class="btn btn-primary">Sim, solicitar conexão</a>
-                    }
-                    
-                </div>
+        <div id="addPerson" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="notificationModalLabel">Desafiar outro jogador</h3>
             </div>
-           if(!string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myFriendSafariFinder == null)
-           {
-               <div id="addFriendSafari" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addFriendSafariLabel" aria-hidden="true">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="addFriendSafariLabel">Adicionar Friend Safari</h3>
-                </div>
-                <form class="form" method="post">
-                    <div class="modal-body">
-                        <p>Selecione o seu Friend Safari de Pokémon X ou Pokémon Y:</p>
-                        <select id="PokemonType" name="PokemonType" onchange="pokemonTypeSelected(this.value, 0);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
-                            <option value="0">Selecione...</option>
-                            @{
-                                foreach (CampeonatosNParty.Models.Database.PokemonFriendSafariType pokemonType in
-                                         CampeonatosNParty.Models.Database.PokemonFriendSafariType.Select())
-                                {
-                                    <option value="@pokemonType.Id">@pokemonType.TypeName</option>
-                                }
-                            }
-                        </select>
-                        <p>Slot 1:</p>
-                        <select id="PokemonSlot1" name="PokemonSlot1" disabled="disabled" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
-                            <option value="0">Selecione...</option>
-                        </select>
-                        <p>Slot 2:</p>
-                        <select id="PokemonSlot2" name="PokemonSlot2" disabled="disabled" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
-                            <option value="0">Selecione...</option>
-                        </select>
-                        <p>Slot 3:</p>
-                        <select id="PokemonSlot3" name="PokemonSlot3" disabled="disabled" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
-                            <option value="0">Selecione...</option>
-                        </select>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
-                        <button class="btn btn-primary" type="submit">Salvar</button>
-                    </div>
-                </form>
+            <div class="modal-body">
+                <p>Deseja desafiar uma solicitação de desafio para o jogador <span id="userName"></span>?</p>
             </div>
-           }
-           else if (!string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myFriendSafariFinder != null)
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                @{
+                        string concat = "?page=" + currentPage.ToString() + isFilteredCharacter;
+                        <a id="userAddLink" href="@Url.Content("~/Widgets/AdicionarFriendCodeDoSafari/" + concat)" class="btn btn-primary">Sim, desafiar!</a>
+                }
+
+            </div>
+        </div>
+            if (Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem == null)
            {
-               <div id="myFriendSafari" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myFriendSafariLabel" aria-hidden="true">
+                <div id="addCharacters" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addFriendSafariLabel" aria-hidden="true">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <h3 id="myFriendSafariLabel">Meu friend Safari</h3>
+                        <h3 id="addFriendSafariLabel">Adicionar meus personagens</h3>
                     </div>
-                    <div class="modal-body">
-                         <table class="table table-hover table-striped table-condensed table-bordered pokemonSafariItem">
-                            <tr>
-                                <td colspan="3"><b>Tipo do Safari</b>: @Model.myFriendSafariFinder.SafariTypeName</td>
-                            </tr>
-                            <tr>
+                    <form class="form" method="post">
+                        <div class="modal-body">
+                            <div id="step1">
+                                <p>Selecione o personagem com quem você mais joga</p>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td width="100"></td>
+                                        <td>
+                                            <select id="Personagem1" name="Personagem1" onchange="character1Selected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                                                <option value="0">Selecione...</option>
+                                                @{
+                                                   foreach (SuperSmashBrosPersonagem character in characters)
+                                                   {
+                                                        <option value="@character.Id">@character.Nome</option>
+                                                   }
+                                                }
+                                            </select>
+                                            <select id="Personagem1Cor" name="Personagem1Cor" onchange="character1ColorSelected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px; display: none;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="pull-right">
+                                    <button id="next1" type="button" style="display: none;" class="btn btn-primary" onclick="toStep2()">Próximo</button>
+                                </div>
+                                
+                            </div>
+                            <div id="step2" style="display: none;">
+                                <p>Selecione o segundo personagem com quem você mais joga</p>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td width="100"></td>
+                                        <td>
+                                            <select id="Personagem2" name="Personagem2" onchange="character2Selected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                            <select id="Personagem2Cor" name="Personagem2Cor" onchange="character2ColorSelected(this.value);" style="font-size: 24px; font-weight: bold; display: none; width: 100%; height: 50px;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-default" onclick="toStep1()">Voltar</button>
+                                    <button type="button" id="next2" style="display: none;" class="btn btn-primary" onclick="toStep3()">Próximo</button>
+                                </div>
+                            </div>
+                            <div id="step3" style="display: none;">
+                                <p>Selecione o segundo personagem com quem você mais joga</p>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td width="100"></td>
+                                        <td>
+                                            <select id="Personagem3" name="Personagem3" onchange="character3Selected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                            <select id="Personagem3Cor" name="Personagem3Cor" onchange="character3ColorSelected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px; display: none;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-default" onclick="toStep2()">Voltar</button>
+                                    <button id="next3" style="display: none;" class="btn btn-primary" type="submit">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+           }
+           else if (!string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem != null)
+           {
+            <div id="myFriendSafari" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myFriendSafariLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myFriendSafariLabel">Meu friend Safari</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-striped table-condensed table-bordered pokemonSafariItem">
+                        @*<tr>
                                 <td class="pokemon">
                                     <img width="100" alt="@Model.myFriendSafariFinder.Pokemon1Name" src="@Model.myFriendSafariFinder.getImageUrl(Model.myFriendSafariFinder.Pokemon1DexNumber)"  /><br />
                                     <div>@Model.myFriendSafariFinder.Pokemon1Name</div>
@@ -303,30 +324,31 @@
                                     <img width="100" alt="@Model.myFriendSafariFinder.Pokemon3Name" src="@Model.myFriendSafariFinder.getImageUrl(Model.myFriendSafariFinder.Pokemon3DexNumber)"  /><br />
                                     <div>@Model.myFriendSafariFinder.Pokemon3Name</div>
                                 </td>
-                            </tr>
-                        </table>
-                    </div>
-                    <div class="modal-footer">
-                        <a class="btn btn-primary pull-left" href="@Url.Content("~/Widgets/RemoverMeuFriendSafari")">
-                            Remover Friend Safari
-                        </a>
-                        <button class="btn pull-right" data-dismiss="modal" aria-hidden="true">
-                            Fechar
-                        </button>
-                    </div>
+                            </tr>*@
+                    </table>
                 </div>
-           }
-        }
-    }
-    else
-    {
-        <div class="row">
-            <div class="span12">
-                <p>Nenhum safari foi encontrado.</p>
+                <div class="modal-footer">
+                    <a class="btn btn-primary pull-left" href="@Url.Content("~/Widgets/RemoverMeuFriendSafari")">
+                        Remover Friend Safari
+                    </a>
+                    <button class="btn pull-right" data-dismiss="modal" aria-hidden="true">
+                        Fechar
+                    </button>
+                </div>
             </div>
-        </div>
+           }
     }
 }
+<script>
+    var characters = {};
+</script>
+@foreach (SuperSmashBrosPersonagem p in characters)
+{
+    <script>
+        characters["@p.Id"] = { id: @p.Id, nome: "@p.Nome", qtdCores: @p.NumeroRoupas };
+    </script>
+}
+
 <script type="text/javascript">
     function showAddModal(userName, userId) {
         $('#userName').text(userName);
@@ -338,99 +360,103 @@
             _href = _href + userId;
         $("#userAddLink").attr("href", _href);
     }
-    function pokemonTypeSelected(selectedType) {
-        loadPokemonSlot1(selectedType, 0);
-        loadPokemonSlot2(selectedType, 0);
-        loadPokemonSlot3(selectedType, 0);
-        $('#PokemonSlot1').prop('disabled', true);
-        $('#PokemonSlot2').prop('disabled', true);
-        $('#PokemonSlot3').prop('disabled', true);
-    }
-    function loadPokemonFromType(selectedType) {
-        $('#Pokemon').prop('disabled', true);
-        $.ajax({
-            url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSearch/")" + selectedType,
-            success: function (json) {
-                $('#Pokemon').prop('disabled', false);
-                var optionArray = [];
-                optionArray.push('<option value="0">Qualquer Pokémon</option>');
 
-                $.each(json, function (i, item) {
-                    optionArray.push('<option value="' + item.PokedexNumber + '">' + item.Name + '</option>');
-                });
-
-                $('#Pokemon').html(optionArray.join(''));
-                $('#Pokemon').prop('disabled', false);
+    function character1Selected(characterId) {
+        if (characterId > 0) {
+            var qtdRoupas = characters[characterId].qtdCores;
+            $('#Personagem1Cor').html("");
+            for(i = 0; i < qtdRoupas; i++){
+                $('#Personagem1Cor').append('<option value="' + i + '"> Roupa ' + (i + 1) + '</option>');
             }
-        });
-    }
-    function loadPokemonSlot1(selectedType, selected) {
-        if (isNaN(selectedType) || selectedType <= 0 || selectedType > 18) {
-            $('#PokemonSlot1').prop('disabled', true);
+            $('#Personagem1Cor').show();
+            $('#next1').show();
         } else {
-            $.ajax({
-                url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSlot1/")" + selectedType,
-                success: function (json) {
-                    $('#PokemonSlot1').prop('disabled', false);
-                    var optionArray = [];
-                    optionArray.push('<option value="">Selecione</option>');
-
-                    $.each(json, function (i, item) {
-                        if (selected == item.Id)
-                            optionArray.push('<option value="' + item.Id + '" selected>' + item.Name + '</option>');
-                        else
-                            optionArray.push('<option value="' + item.Id + '">' + item.Name + '</option>');
-                    });
-
-                    $('#PokemonSlot1').html(optionArray.join(''));
-                }
-            });
+            $('#next1').hide();
+            $('#Personagem1Cor').hide();
         }
     }
-    function loadPokemonSlot2(selectedType, selected) {
-        if (isNaN(selectedType) || selectedType <= 0 || selectedType > 18) {
-            $('#PokemonSlot2').prop('disabled', true);
+
+    function character2Selected(characterId) {
+        if (characterId > 0) {
+            console.log(characterId);
+            var qtdRoupas = characters[characterId].qtdCores;
+            $('#Personagem2Cor').html("");
+            for(i = 0; i < qtdRoupas; i++){
+                $('#Personagem2Cor').append('<option value="' + i + '"> Roupa ' + (i + 1) + '</option>');
+            }
+            $('#Personagem2Cor').show();
+            $('#next2').show();
         } else {
-            $.ajax({
-                url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSlot2/")" + selectedType,
-                success: function (json) {
-                    $('#PokemonSlot2').prop('disabled', false);
-                    var optionArray = [];
-                    optionArray.push('<option value="">Selecione</option>');
-
-                    $.each(json, function (i, item) {
-                        if (selected == item.Id)
-                            optionArray.push('<option value="' + item.Id + '" selected>' + item.Name + '</option>');
-                        else
-                            optionArray.push('<option value="' + item.Id + '">' + item.Name + '</option>');
-                    });
-
-                    $('#PokemonSlot2').html(optionArray.join(''));
-                }
-            });
+            $('#next2').hide();
+            $('#Personagem2Cor').hide();
         }
     }
-    function loadPokemonSlot3(selectedType, selected) {
-        if (isNaN(selectedType) || selectedType <= 0 || selectedType > 18) {
-            $('#PokemonSlot3').prop('disabled', true);
+
+    function character3Selected(characterId) {
+        if (characterId > 0) {
+            var qtdRoupas = characters[characterId].qtdCores;
+            $('#Personagem3Cor').html("");
+            for(i = 0; i < qtdRoupas; i++){
+                $('#Personagem3Cor').append('<option value="' + i + '"> Roupa ' + (i + 1) + '</option>');
+            }
+            $('#Personagem3Cor').show();
+            $('#next3').show();
         } else {
-            $.ajax({
-                url: "@Url.Content("~/Ajax/CarregarPokemonFriendSafariSlot3/")" + selectedType,
-                success: function (json) {
-                    $('#PokemonSlot3').prop('disabled', false);
-                    var optionArray = [];
-                    optionArray.push('<option value="">Selecione</option>');
-
-                    $.each(json, function (i, item) {
-                        if (selected == item.Id)
-                            optionArray.push('<option value="' + item.Id + '" selected>' + item.Name + '</option>');
-                        else
-                            optionArray.push('<option value="' + item.Id + '">' + item.Name + '</option>');
-                    });
-
-                    $('#PokemonSlot3').html(optionArray.join(''));
-                }
-            });
+            $('#next3').hide();
+            $('#Personagem3Cor').hide();
         }
     }
+
+    function character1ColorSelected(colorId) {
+    }
+
+    function character2ColorSelected(colorId) {
+    }
+
+    function character3ColorSelected(colorId) {
+    }
+
+    function toStep1(){
+        $('#step3').hide();
+        $('#step2').hide();
+        $('#step1').show();
+    }
+
+    function toStep3(){
+        var optionList = '<option value="0">Selecione...</option>';
+        var selectedC1Id = $('#Personagem1').val();
+        var selectedC2Id = $('#Personagem2').val();
+        var selectedC3Id = $('#Personagem3').val();
+        for(key in characters){
+            var selected = (selectedC3Id == key ? 'selected="selected"' : '');
+            if(key != selectedC2Id && key != selectedC1Id){
+                optionList += '<option value="' + characters[key].id + '"' + ' ' + selected + '>' + characters[key].nome + '</option>';
+            }
+        }
+
+        $('#Personagem3').html(optionList);
+
+        $('#step3').show();
+        $('#step2').hide();
+        $('#step1').hide();
+    }
+
+    function toStep2(){
+        var optionList = '<option value="0">Selecione...</option>';
+        var selectedC1Id = $('#Personagem1').val();
+        var selectedC2Id = $('#Personagem2').val();
+        for(key in characters){
+            var selected = (selectedC2Id == key ? 'selected="selected"' : '');
+            if(key != selectedC1Id){
+                optionList += '<option value="' + characters[key].id + '"' + ' ' + selected + '>' + characters[key].nome + '</option>';
+            }
+        }
+
+        $('#Personagem2').html(optionList);
+
+        $('#step3').hide();
+        $('#step2').show();
+        $('#step1').hide();
+    }
+
 </script>

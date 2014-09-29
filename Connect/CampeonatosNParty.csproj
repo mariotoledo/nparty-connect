@@ -145,6 +145,9 @@
     <Compile Include="Models\Database\PokemonTradeOffer.cs" />
     <Compile Include="Models\Database\PokemonTradeOfferItem.cs" />
     <Compile Include="Models\Database\SorteioUsuario.cs" />
+    <Compile Include="Models\Database\SuperSmashBrosChallenger.cs" />
+    <Compile Include="Models\Database\SuperSmashBrosChallengerItem.cs" />
+    <Compile Include="Models\Database\SuperSmashBrosPersonagem.cs" />
     <Compile Include="Models\Database\UsuarioJogos.cs" />
     <Compile Include="Models\Database\PersonGame.cs" />
     <Compile Include="Models\Database\UserConnections.cs" />
@@ -184,6 +187,7 @@
     <Compile Include="Models\ViewModel\ClassificadosPokemonView.cs" />
     <Compile Include="Models\ViewModel\MinhasConexoesView.cs" />
     <Compile Include="Models\ViewModel\PokemonFinderView.cs" />
+    <Compile Include="Models\ViewModel\SmashBrosChallengerView.cs" />
     <Compile Include="Models\ViewModel\UsuariosDetailView.cs" />
     <Compile Include="Models\ViewModel\EventosDetailView.cs" />
     <Compile Include="Models\ViewModel\HomeView.cs" />
@@ -348,6 +352,9 @@
     <Content Include="Views\ClassificadosPokemon\Index.cshtml" />
     <Content Include="Views\ClassificadosPokemon\NovoAnuncio.cshtml" />
     <Content Include="Views\Sorteio\DemoSmash.cshtml" />
+    <Content Include="Views\Widgets\SuperSmashBrosChallenger.cshtml">
+      <SubType>Code</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\csharp-jetfuel\EixoX.Web\EixoX.Web.csproj">

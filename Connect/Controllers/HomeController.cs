@@ -58,9 +58,7 @@ namespace CampeonatosNParty.Controllers
             {
                 if (!u.EmailConfirmado)
                 {
-                    NPartyCookie.UserId = personId;
-                    NPartyCookie.IsLoggedIn = true;
-                    NPartyDb<Cookie>.Instance.Update(NPartyCookie);
+                    Session["CurrentUser"] = u;
 
                     u.EmailConfirmado = true;
                     NPartyDb<Usuarios>.Instance.Update(u);
@@ -186,9 +184,7 @@ namespace CampeonatosNParty.Controllers
                 {
                     if (CampeonatosNParty.Helpers.RegisterHelper.CheckValidPassword(usuario.Senha, model.Senha))
                     {
-                        NPartyCookie.UserId = usuario.Id;
-                        NPartyCookie.IsLoggedIn = true;
-                        NPartyDb<Cookie>.Instance.Save(NPartyCookie);
+                        Session["CurrentUser"] = usuario;
 
                         if(!usuario.EmailConfirmado)
                             return RedirectToAction("ConfirmarEmail", "Jogadores");
@@ -217,8 +213,7 @@ namespace CampeonatosNParty.Controllers
         [HttpGet]
         public ActionResult Logout()
         {
-            this.NPartyCookie.IsLoggedIn = false;
-            NPartyDb<Cookie>.Instance.Save(NPartyCookie);
+            Session["CurrentUser"] = null;
             return Redirect("~/Home/");
         }
 

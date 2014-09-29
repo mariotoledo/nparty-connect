@@ -19,9 +19,13 @@ namespace CampeonatosNParty.Controllers
             return View();
         }
 
+        [HttpGet]
         public ActionResult SuperSmashBrosChallenger()
         {
-            return View();
+            SmashBrosChallengerView view = new SmashBrosChallengerView(CurrentUsuario, 
+                Request.QueryString["page"], 
+                Request.QueryString["cId"] == null ? 0 : Int32.Parse(Request.QueryString["cId"]));
+            return View(view);
         }
 
         [HttpGet]
@@ -31,6 +35,99 @@ namespace CampeonatosNParty.Controllers
                 Request.QueryString["page"],
                 Request.QueryString["Type"] == null ? 0 : Int32.Parse(Request.QueryString["Type"]),
                 Request.QueryString["Pokemon"] == null ? 0 : Int32.Parse(Request.QueryString["Pokemon"]));
+
+            return View(view);
+        }
+
+        [HttpPost]
+        [AuthenticationRequired]
+        public ActionResult SuperSmashBrosChallenger(FormCollection form)
+        {
+            SmashBrosChallengerView view = new SmashBrosChallengerView(CurrentUsuario, 
+                Request.QueryString["page"], 
+                Request.QueryString["cId"] == null ? 0 : Int32.Parse(Request.QueryString["cId"]));
+
+            SuperSmashBrosChallengerItem item = SuperSmashBrosChallengerItem.Select().Where("IdUsuario", CurrentUsuario.Id).SingleResult();
+            if (item != null)
+            {
+                ViewData["RegisterError"] = "Atenção: Você já registrou seus personagens do Smash registrado. Se deseja registrar um novo, remova os antigos.";
+                return View(view);
+            }
+
+            int idPersonagem1 = Int32.Parse(form["Personagem1"]);
+            int idPersonagem2 = Int32.Parse(form["Personagem2"]);
+            int idPersonagem3 = Int32.Parse(form["Personagem3"]);
+
+            if (idPersonagem1 == 0 || idPersonagem2 == 0 || idPersonagem3 == 0)
+            {
+                ViewData["RegisterError"] = "Atenção: Você precisa selecionar todos os personagens.";
+                return View(view);
+            }
+
+            if(idPersonagem1 == idPersonagem2 || idPersonagem1 == idPersonagem3 || idPersonagem2 == idPersonagem3){
+                ViewData["RegisterError"] = "Atenção: Os personagens escolhidos não podem ser iguais";
+                return View(view);
+            }
+
+            //validando personagem1
+            SuperSmashBrosPersonagem personagem1 = SuperSmashBrosPersonagem.WithIdentity(idPersonagem1);
+            if (personagem1 == null)
+            {
+                ViewData["RegisterError"] = "Atenção: Você selecionou um personagem inexistente como primeiro personagem.";
+                return View(view);
+            }
+
+            int corPersonagem1 = Int32.Parse(form["Personagem1Cor"]);
+            if (corPersonagem1 > personagem1.NumeroRoupas)
+            {
+                ViewData["RegisterError"] = "Atenção: Você selecionou uma cor de roupa inexistente para seu primeiro personagem";
+                return View(view);
+            }
+
+            //validando personagem2
+            SuperSmashBrosPersonagem personagem2 = SuperSmashBrosPersonagem.WithIdentity(idPersonagem2);
+            if (personagem2 == null)
+            {
+                ViewData["RegisterError"] = "Atenção: Você selecionou um personagem inexistente como segundo personagem.";
+                return View(view);
+            }
+
+            int corPersonagem2 = Int32.Parse(form["Personagem2Cor"]);
+            if (corPersonagem2 > personagem2.NumeroRoupas)
+            {
+                ViewData["RegisterError"] = "Atenção: Você selecionou uma cor de roupa inexistente para seu segundo personagem";
+                return View(view);
+            }
+
+            //validando personagem3
+            SuperSmashBrosPersonagem personagem3 = SuperSmashBrosPersonagem.WithIdentity(idPersonagem3);
+            if (personagem3 == null)
+            {
+                ViewData["RegisterError"] = "Atenção: Você selecionou um personagem inexistente como terceiro personagem.";
+                return View(view);
+            }
+
+            int corPersonagem3 = Int32.Parse(form["Personagem3Cor"]);
+            if (corPersonagem3 > personagem3.NumeroRoupas)
+            {
+                ViewData["RegisterError"] = "Atenção: Você selecionou uma cor de roupa inexistente para seu terceiro personagem";
+                return View(view);
+            }
+
+            SuperSmashBrosChallenger newChallenger = new SuperSmashBrosChallenger()
+            {
+                IdPersonagem1 = idPersonagem1,
+                IdCorPersonagem1 = corPersonagem1,
+                IdPersonagem2 = idPersonagem2,
+                IdCorPersonagem2 = corPersonagem2,
+                IdPersonagem3 = idPersonagem3,
+                IdCorPersonagem3 = corPersonagem3,
+                IdUsuario = CurrentUsuario.Id
+            };
+
+            NPartyDb<SuperSmashBrosChallenger>.Instance.Insert(newChallenger);
+
+            ViewData["RegisterSuccess"] = "Personagens registrados com sucesso.";
 
             return View(view);
         }
@@ -168,7 +265,6 @@ namespace CampeonatosNParty.Controllers
                 if (!string.IsNullOrEmpty(pokemon))
                     parameters = parameters + "Pokemon=" + pokemon;
             }
-
 
             return Redirect("~/Widgets/PokemonFriendSafariFinder" + parameters);
         }

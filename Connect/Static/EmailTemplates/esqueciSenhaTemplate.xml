@@ -20,7 +20,7 @@
 </head>
 <body>
     <p>Olá, [=PersonName]</p>
-    <p>Conforme solicitado, segue a nova senha para acesso ao Campeonatos N-Party:</p>
+    <p>Conforme solicitado, segue a nova senha para acesso ao N-Party Connect:</p>
     <span style="font-size: 30px; font-color: #ff0000;">[=PersonPassword]</span><br/><br/>
     <p>O que esta esperando? Acesse agora mesmo <a href="http://connect.nparty.com.br">clicando aqui</a><p>
 </body>

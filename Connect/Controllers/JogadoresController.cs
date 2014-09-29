@@ -405,9 +405,7 @@ namespace CampeonatosNParty.Controllers
                         model.EmailConfirmado = false;
                         NPartyDb<Usuarios>.Instance.Insert(model);
 
-                        NPartyCookie.UserId = model.Id;
-                        NPartyCookie.IsLoggedIn = false;
-                        NPartyDb<Cookie>.Instance.Update(NPartyCookie);
+                        Session["CurrentUser"] = null;
 
                         //return View("BemVindo");
                         return RedirectToAction("EnviarEmailConfirmacao");
@@ -478,7 +476,7 @@ namespace CampeonatosNParty.Controllers
         [HttpGet]
         public ActionResult EnviarEmailConfirmacao()
         {
-            int personId = NPartyCookie.UserId;
+            int personId = ((Usuarios)Session["CurrentUser"]).Id;
             Usuarios usuario = Usuarios.WithIdentity(personId);
             if (usuario != null)
             {
