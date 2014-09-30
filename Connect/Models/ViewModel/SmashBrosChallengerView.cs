@@ -43,7 +43,39 @@ namespace CampeonatosNParty.Models.ViewModel
             }
 
             search.Page(18, page);
+            search.OrderBy("NomeUsuario", SortDirection.Ascending);
             result = search.ToResult();
+
+            if (currentUsuario == null)
+            {
+                isLoggedIn = false;
+            }
+            else
+            {
+                isLoggedIn = true;
+                foreach (SuperSmashBrosChallengerItem item in result)
+                {
+                    PersonGamingRelation relation =
+                        PersonGamingRelation.getPersonGamingRelationsFromId(currentUsuario.Id, (int)item.IdUsuario);
+
+                    if (relation == null)
+                    {
+                        try
+                        {
+                            isButtonActive.Add((int)item.IdUsuario, true);
+                        }
+                        catch (Exception e) { }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            isButtonActive.Add((int)item.IdUsuario, !relation.isFriendCode);
+                        }
+                        catch (Exception e) { }
+                    }
+                }
+            }
         }
     }
 }

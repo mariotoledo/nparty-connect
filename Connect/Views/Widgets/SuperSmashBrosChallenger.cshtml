@@ -133,7 +133,7 @@
                                 </td>
                                 <td class="pokemon">
                                     <img width="100" alt="@challenger.NomePersonagem2" src="" /><br />
-                                    <div>challenger.NomePersonagem2</div>
+                                    <div>@challenger.NomePersonagem2</div>
                                 </td>
                                 <td class="pokemon">
                                     <img width="100" alt="@challenger.NomePersonagem3" src="" /><br />
@@ -145,17 +145,17 @@
                                     @{
                                         if (!Model.isLoggedIn)
                                         {
-                                            <a href="#notLogged" role="button" class="btn btn-primary btn-block" data-toggle="modal" style="margin-left: 10px; height: 18px;">Desafiar!</a>
+                                            <a href="#notLogged" role="button" class="btn btn-primary btn-block" data-toggle="modal">Adicionar</a>
                                         }
                                         else
                                         {
-                                            if (Model.isButtonActive[(int)challenger.IdUsuario])
+                                            if (Model.isButtonActive.ContainsKey((int)challenger.IdUsuario) && Model.isButtonActive[(int)challenger.IdUsuario])
                                             {
-                                                <a href="#addPerson" onclick="showAddModal('@challenger.NomeUsuario', '@challenger.IdUsuario');" role="button" class="btn btn-primary btn-block" data-toggle="modal" style="margin-left: 10px; height: 18px;">Desafiar!</a>
+                                                <a href="#addPerson" onclick="showAddModal('@challenger.NomeUsuario', '@challenger.IdUsuario');" role="button" class="btn btn-primary btn-block" data-toggle="modal">Adicionar</a>
                                             }
                                             else
                                             {
-                                                <a role="button" class="btn btn-block disabled" data-toggle="modal" style="margin-left: 10px; height: 18px;">Desafiar!</a>
+                                                <a role="button" class="btn btn-block disabled" data-toggle="modal">Adicionar</a>
                                             }
                                         }
                                     }
@@ -307,29 +307,29 @@
             <div id="myFriendSafari" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myFriendSafariLabel" aria-hidden="true">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                    <h3 id="myFriendSafariLabel">Meu friend Safari</h3>
+                    <h3 id="myFriendSafariLabel">Meus personagens</h3>
                 </div>
                 <div class="modal-body">
                     <table class="table table-hover table-striped table-condensed table-bordered pokemonSafariItem">
-                        @*<tr>
+                        <tr>
                                 <td class="pokemon">
-                                    <img width="100" alt="@Model.myFriendSafariFinder.Pokemon1Name" src="@Model.myFriendSafariFinder.getImageUrl(Model.myFriendSafariFinder.Pokemon1DexNumber)"  /><br />
-                                    <div>@Model.myFriendSafariFinder.Pokemon1Name</div>
+                                    <img width="100" alt="@Model.myChallengerItem.NomePersonagem1" src=""  /><br />
+                                    <div>@Model.myChallengerItem.NomePersonagem1</div>
                                 </td>
                                 <td class="pokemon">
-                                    <img width="100" alt="@Model.myFriendSafariFinder.Pokemon2Name" src="@Model.myFriendSafariFinder.getImageUrl(Model.myFriendSafariFinder.Pokemon2DexNumber)" /><br />
-                                    <div>@Model.myFriendSafariFinder.Pokemon2Name</div>
+                                    <img width="100" alt="@Model.myChallengerItem.NomePersonagem2" src="" /><br />
+                                    <div>@Model.myChallengerItem.NomePersonagem2</div>
                                 </td>
                                 <td class="pokemon">
-                                    <img width="100" alt="@Model.myFriendSafariFinder.Pokemon3Name" src="@Model.myFriendSafariFinder.getImageUrl(Model.myFriendSafariFinder.Pokemon3DexNumber)"  /><br />
-                                    <div>@Model.myFriendSafariFinder.Pokemon3Name</div>
+                                    <img width="100" alt="@Model.myChallengerItem.NomePersonagem3" src=""  /><br />
+                                    <div>@Model.myChallengerItem.NomePersonagem3</div>
                                 </td>
-                            </tr>*@
+                            </tr>
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-primary pull-left" href="@Url.Content("~/Widgets/RemoverMeuFriendSafari")">
-                        Remover Friend Safari
+                    <a class="btn btn-primary pull-left" href="@Url.Content("~/Widgets/RemoverMeusPersonagensSmash")">
+                        Remover meus personagens
                     </a>
                     <button class="btn pull-right" data-dismiss="modal" aria-hidden="true">
                         Fechar

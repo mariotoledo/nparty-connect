@@ -9,7 +9,7 @@ namespace CampeonatosNParty.Models.Database
     [DatabaseTable]
     public class SuperSmashBrosChallenger
     {
-        [DatabaseColumn]
+        [DatabaseColumn(DatabaseColumnKind.PrimaryKey)]
         public long IdUsuario { get; set; }
 
         [DatabaseColumn]

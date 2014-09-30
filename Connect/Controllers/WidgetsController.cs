@@ -187,6 +187,17 @@ namespace CampeonatosNParty.Controllers
         }
 
         [HttpGet]
+        [AuthenticationRequired]
+        public ActionResult RemoverMeusPersonagensSmash()
+        {
+            SuperSmashBrosChallenger item = NPartyDb<SuperSmashBrosChallenger>.Instance.Select().Where("IdUsuario", CurrentUsuario.Id).SingleOrDefault();
+            if (item != null)
+                NPartyDb<SuperSmashBrosChallenger>.Instance.Delete(item);
+
+            return RedirectToAction("SuperSmashBrosChallenger");
+        }
+
+        [HttpGet]
         public ActionResult AdicionarFriendCodeDoSafari(int? id)
         {
             if (id.HasValue)
@@ -270,6 +281,85 @@ namespace CampeonatosNParty.Controllers
         }
 
         [HttpGet]
+        public ActionResult AdicionarFriendCodeSuperSmash(int? id)
+        {
+            if (id.HasValue)
+            {
+                Usuarios usuario = Usuarios.WithIdentity(id.Value);
+                if (usuario != null)
+                {
+                    PersonGamingRelation relation = PersonGamingRelation.getPersonGamingRelations(CurrentUsuario, usuario);
+                    if (relation == null)
+                    {
+                        relation = new PersonGamingRelation()
+                        {
+                            PersonId1 = CurrentUsuario.Id,
+                            PersonId2 = id.Value,
+                            isPSN = false,
+                            isLive = false,
+                            isMiiverse = false,
+                            isFriendCode = true
+                        };
+                        NPartyDb<PersonGamingRelation>.Instance.Insert(relation);
+                    }
+                    else
+                    {
+                        relation.isFriendCode = true;
+                        NPartyDb<PersonGamingRelation>.Instance.Update(relation);
+                    }
+
+                    string fileContents = System.IO.File.ReadAllText(Server.MapPath(Url.Content("~/Static/htmlTemplates/adicionarFriendCode.txt")));
+                    fileContents = fileContents.Replace("[=PersonId]", CurrentUsuario.Id.ToString());
+                    fileContents = fileContents.Replace("[=FriendName]", CurrentUsuario.getFullName());
+                    fileContents = fileContents.Replace("[=Id]", CurrentUsuario.FriendCode);
+
+                    Notificacoes notificacao = new Notificacoes()
+                    {
+                        PersonId = id.Value,
+                        Titulo = "Solicitação de amizade no 3DS",
+                        Corpo = fileContents,
+                        DateCreated = DateTime.Now,
+                        DateSent = DateTime.Now,
+                        FoiLida = false
+                    };
+
+                    NPartyDb<Notificacoes>.Instance.Insert(notificacao);
+
+                    if (usuario.Newsletter)
+                    {
+                        CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
+                        emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/adicionarFriendCode.xml")));
+
+                        IDictionary<string, string> infoChanges = new Dictionary<string, string>();
+
+                        infoChanges.Add("[=PersonName]", usuario.getFullName());
+                        infoChanges.Add("[=FriendName]", CurrentUsuario.getFullName());
+                        infoChanges.Add("[=Id]", CurrentUsuario.FriendCode);
+
+                        emailTemplate.Send(infoChanges, "Solicitação de amizade no 3DS - N-Party Connect", usuario.Email);
+                    }
+                }
+            }
+
+            string page = Request.QueryString["page"];
+            string cId = Request.QueryString["cId"];
+
+            string parameters = "";
+
+            if (!string.IsNullOrEmpty(page) ||
+               !string.IsNullOrEmpty(cId))
+            {
+                parameters = parameters + "?";
+                if (!string.IsNullOrEmpty(page))
+                    parameters = parameters + "page=" + page + "&";
+                if (!string.IsNullOrEmpty(cId))
+                    parameters = parameters + "cId=" + cId;
+            }
+
+            return Redirect("~/Widgets/SuperSmashBrosChallenger" + parameters);
+        }
+
+        [HttpGet]
         public ActionResult ClassificadosPokemon()
         {
             ViewData["usuarioLogado"] = CurrentUsuario != null && CurrentUsuario.Id > 0 ? "logado" : null;
@@ -280,9 +370,7 @@ namespace CampeonatosNParty.Controllers
                 Request.QueryString["NatureFilter"] == null ? 0 : Int32.Parse(Request.QueryString["NatureFilter"]));
 
             return View(view);
-        }
-
-        
+        }        
 
         [HttpPost]
         [AuthenticationRequired]
