@@ -66,5 +66,13 @@ namespace CampeonatosNParty.Helpers
             stream.Position = 0;
             return stream;
         }
+
+        public static string GetSmashCharacterImage(int characterId, int clothId)
+        {
+            string characterIdString = characterId <= 0 || characterId > 49 ? "0" : characterId.ToString();
+            string clothIdString = characterId <= 0 || characterId > 49 ? "0" : clothId.ToString();
+
+            return "~/Static/img/smashBrosIcons/" + characterIdString + "/" + clothIdString + ".png";
+        }
     }
 }

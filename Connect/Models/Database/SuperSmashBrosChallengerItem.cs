@@ -44,5 +44,29 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public string FriendCode { get; set; }
+
+        public string ImagemPersonagem1
+        {
+            get
+            {
+                return CampeonatosNParty.Helpers.ImageHelper.GetSmashCharacterImage((int)IdPersonagem1, (int)IdCorPersonagem1);
+            }
+        }
+
+        public string ImagemPersonagem2
+        {
+            get
+            {
+                return CampeonatosNParty.Helpers.ImageHelper.GetSmashCharacterImage((int)IdPersonagem2, (int)IdCorPersonagem2);
+            }
+        }
+
+        public string ImagemPersonagem3
+        {
+            get
+            {
+                return CampeonatosNParty.Helpers.ImageHelper.GetSmashCharacterImage((int)IdPersonagem3, (int)IdCorPersonagem3);
+            }
+        }
     }
 }

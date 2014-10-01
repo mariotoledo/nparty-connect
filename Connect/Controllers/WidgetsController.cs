@@ -43,11 +43,12 @@ namespace CampeonatosNParty.Controllers
         [AuthenticationRequired]
         public ActionResult SuperSmashBrosChallenger(FormCollection form)
         {
-            SmashBrosChallengerView view = new SmashBrosChallengerView(CurrentUsuario, 
-                Request.QueryString["page"], 
-                Request.QueryString["cId"] == null ? 0 : Int32.Parse(Request.QueryString["cId"]));
-
+            SmashBrosChallengerView view = new SmashBrosChallengerView(CurrentUsuario,
+                            Request.QueryString["page"],
+                            Request.QueryString["cId"] == null ? 0 : Int32.Parse(Request.QueryString["cId"])); 
+            
             SuperSmashBrosChallengerItem item = SuperSmashBrosChallengerItem.Select().Where("IdUsuario", CurrentUsuario.Id).SingleResult();
+            
             if (item != null)
             {
                 ViewData["RegisterError"] = "Atenção: Você já registrou seus personagens do Smash registrado. Se deseja registrar um novo, remova os antigos.";
@@ -129,6 +130,9 @@ namespace CampeonatosNParty.Controllers
 
             ViewData["RegisterSuccess"] = "Personagens registrados com sucesso.";
 
+            view = new SmashBrosChallengerView(CurrentUsuario,
+                            Request.QueryString["page"],
+                            Request.QueryString["cId"] == null ? 0 : Int32.Parse(Request.QueryString["cId"]));
             return View(view);
         }
 

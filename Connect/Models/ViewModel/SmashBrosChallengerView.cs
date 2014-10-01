@@ -58,7 +58,7 @@ namespace CampeonatosNParty.Models.ViewModel
                     PersonGamingRelation relation =
                         PersonGamingRelation.getPersonGamingRelationsFromId(currentUsuario.Id, (int)item.IdUsuario);
 
-                    if (relation == null)
+                    if (item.IdUsuario != currentUsuario.Id && relation == null)
                     {
                         try
                         {
