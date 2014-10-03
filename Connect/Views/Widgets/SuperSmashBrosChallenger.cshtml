@@ -23,6 +23,16 @@
     isFilteredCharacter = string.IsNullOrEmpty(isFilteredCharacter) ? isFilteredCharacter : "&" + isFilteredCharacter;
 }
 
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.connect.nparty.com.br/Static/img/widgets/heroSuperSmashBros.png" />
+    <meta property="og:title" content="Super Smash Bros. Challenger" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="Super Smash Bros. Challenger" />
+    <meta property="og:description" content="Mostre os seus personagens principais do Super Smash Bros. para 3DS e adicione novos jogadores para batalhar!" />
+}
+
 <ul class="breadcrumb">
     <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
     <li><a href="@Url.Content("/Widgets")">Widgets</a> <span class="divider">/</span></li>
@@ -31,7 +41,7 @@
 
 <div class="row">
     <div class="span12">
-        <div id="mainSlider" class="carousel slide">
+        <div id="mainSlider" class="carousel slide" style="margin-left: -10px; margin-right: -10px;">
             <div class="carousel-inner">
                 <div class="item active">
                     <img src="/Static/img/widgets/heroSuperSmashBros.png" alt="Bem vindo ao N-Party Connect">
@@ -42,7 +52,7 @@
                                 Mostre os seus personagens principais do Super Smash Bros. para 3DS e adicione novos jogadores para batalhar!
                             </p>
                             @{
-                                if(Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem == null)
+                                if (Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem == null)
                                 {
                                     <br />
                                     <a href="#addCharacters" role="button" data-toggle="modal" class="btn btn-large btn-primary">Registrar meus personagens</a>
@@ -236,20 +246,21 @@
                                         <td width="100">
                                             <img id="ImagemPersonagem1" src="@Url.Content("~/Static/img/smashBrosIcons/0/0.png")"/>
                                         </td>
-                                        <td>
+                                        <td style="padding-left: 10px;">
                                             <select id="Personagem1" name="Personagem1" onchange="character1Selected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
                                                 <option value="0">Selecione...</option>
                                                 @{
                                                    foreach (SuperSmashBrosPersonagem character in characters)
                                                    {
                                                         <option value="@character.Id">@character.Nome</option>
-                                                   }
+                                                    }
                                                 }
                                             </select>
                                             <select id="Personagem1Cor" name="Personagem1Cor" onchange="character1ColorSelected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px; display: none;">
                                                 <option value="0">Selecione...</option>
                                             </select>
                                         </td>
+
                                     </tr>
                                 </table>
                                 <div class="pull-right">
@@ -264,7 +275,7 @@
                                         <td width="100">
                                             <img id="ImagemPersonagem2" src="@Url.Content("~/Static/img/smashBrosIcons/0/0.png")" />
                                         </td>
-                                        <td>
+                                        <td style="padding-left: 10px;">
                                             <select id="Personagem2" name="Personagem2" onchange="character2Selected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
                                                 <option value="0">Selecione...</option>
                                             </select>
@@ -286,7 +297,7 @@
                                         <td width="100">
                                             <img id="ImagemPersonagem3" src="@Url.Content("~/Static/img/smashBrosIcons/0/0.png")" />
                                         </td>
-                                        <td>
+                                        <td style="padding-left: 10px;">
                                             <select id="Personagem3" name="Personagem3" onchange="character3Selected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
                                                 <option value="0">Selecione...</option>
                                             </select>
@@ -329,7 +340,7 @@
                                 </td>
                             </tr>
                     </table>
-                    <button class="btn btn-primary btn-block" onclick="shareCharacter()">Compartilhar no Facebook</button>
+                    <button class="btn btn-primary btn-block" id="ShareOnFacebook" style="height: 40px; font-size: 20px;" onclick="shareCharacter()">Compartilhar no Facebook</button>
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-primary pull-left" href="@Url.Content("~/Widgets/RemoverMeusPersonagensSmash")">
@@ -343,6 +354,42 @@
            }
     }
 }
+
+
+    <div class="row">
+        <div class="span6">
+            <h4>Acompanhe as notícias de Super Smash Bros. pela N-Party</h4>
+            <table class="table table-condensed table-striped table-bordered table-hover" id="Noticias">
+                <tr>
+                    <td> Carregando...</td>
+                </tr>
+            </table>
+        </div>
+        @{
+    if (Model.campeonatoDetailView != null)
+    {
+        string titulo = Model.campeonatoDetailView.campeonato.DataCampeonato.CompareTo(DateTime.Now) < 0 ?
+            "último" : "próximo";
+            <div class="span6" style="overflow: hidden;">
+                <h4>Nosso @titulo campeonato de Super Smash Bros:</h4>
+                <ul class="thumbnails" id="Noticias">
+                    <li>
+                        <a href="@Url.Content("~/Campeonatos/Detalhes/" + Model.campeonatoDetailView.campeonato.Id)" class="thumbnail">
+                            <img src="@Model.campeonatoDetailView.jogo.getCoverUrl()" />
+                            <h4>@Model.campeonatoDetailView.jogo.Nome</h4>
+                            <div class="textDescription">
+                                <div><b>Evento</b>: @Model.campeonatoDetailView.evento.Nome</div>
+                                <div><b>Data</b>: @Model.campeonatoDetailView.campeonato.DataCampeonato.ToString("dd/MM/yyyy")</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    }
+}
+        
+    </div>
+
 <script>
     var characters = {};
 </script>
@@ -481,7 +528,6 @@
         $('#step2').show();
         $('#step1').hide();
     }
-
 </script>
 @if (Model.myChallengerItem != null)
 {
@@ -505,6 +551,7 @@
     }(document, 'script', 'facebook-jssdk'));
 
     function shareCharacter(){
+        $('#ShareOnFacebook').attr('disabled', true);
         var myCharacterName = '@Model.myChallengerItem.NomePersonagem1';
         var myCharacterId = '@Model.myChallengerItem.IdPersonagem1';
         var myCharacterColorId = '@Model.myChallengerItem.IdCorPersonagem1';
@@ -522,15 +569,8 @@
  
                 FB.api('/me/feed', 'post', opts, function(response)
                 {
-                    if (!response && !response.error)
-                    {
-                        alert('Publicação realizada com sucesso!');
-                    }
-                    else
-                    {
-                        alert('Ocorreu um erro ao tentar publicar em seu feed do Facebook');
-                        console.log('erro: ' + response.error.message);
-                    }
+                        $('#ShareOnFacebook').attr('disabled', false);
+                        console.log('response: ' + response);                    
                 });
             }
             else
@@ -542,3 +582,30 @@
     }
 </script>   
 }
+
+<script>
+    function smashcall(json) {
+        console.log(json);
+        var relatedTitles = new Array();
+        var relatedImages = new Array();
+        var relatedTitlesNum = 0;
+        var relatedUrls = new Array();
+        $('#Noticias').html('');
+        for (var i = 0; i < json.feed.entry.length; i++) {
+            var entry = json.feed.entry[i];
+            for (var k = 0; k < entry.link.length; k++) {
+                if (entry.link[k].rel == 'alternate') {
+                    relatedUrls[relatedTitlesNum] = entry.link[k].href;
+                    console.log(entry.media$thumbnail[k]);
+                    relatedImages[relatedTitlesNum] = entry.media$thumbnail.url;
+                    relatedTitles[relatedTitlesNum] = entry.link[k].title;
+                    relatedTitlesNum++
+                }
+            }
+        }
+        for (var i = 0; i < relatedTitlesNum; i++) {
+            $('#Noticias').append('<tr><td width="50px"><a target="_blank" href="' + relatedUrls[i] + '"><img style="float: left; width: 50px; height: 50px;" src="' + relatedImages[i] + '" /></a></td><td><a target="_blank" href="' + relatedUrls[i] + '">' + relatedTitles[i] + '</a></td><tr/>');
+        }
+    }
+</script>
+<script src='http://nparty.com.br/feeds/posts/default/-/Super Smash Bros.?alt=json-in-script&callback=smashcall&max-results=4' type='text/javascript'></script>

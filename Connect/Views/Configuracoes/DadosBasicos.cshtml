@@ -7,6 +7,17 @@
         new EixoX.Html.Bootstrap2Presenter<CampeonatosNParty.Models.StructModel.DadosBasicos>(1046);
     bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
 }
+
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+}
 <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.maskedinput.min.js")"></script>
 <h2>Configurações <small>Preencha as informações abaixo e clique em "Salvar" para alterar seus dados básicos</small></h2>
 <div class="row">

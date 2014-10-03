@@ -2,6 +2,16 @@
 @{
     if (Model != null)
     {
+        @section FacebookMeta{
+            <meta property="og:image" content="@Model.usuario.getUrlFotoPerfil()" />
+            <meta property="og:title" content="N-Party Connect" />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="http://connect.nparty.com.br" />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta property="og:site_name" content="@Model.usuario.Nome N-Party Connect" />
+            <meta property="og:description" content="Veja o meu perfil no N-Party Connect, uma rede para fãs da Nintendo" />
+        }
+    
         ViewBag.Title = Model.usuario.Nome;
 
         string verListaCampeonatos = Model.campeonatos != null && Model.campeonatos.Count > 3 ? 
@@ -274,6 +284,32 @@
                                                 </a>
                                             </li>
                                        }
+                                   </ul> 
+                        }
+                        
+                        if (Model.myChallengerItem != null)
+                        {
+                            string type = Model.safariType == null ? "" : "(" + Model.safariType.TypeName + ")";
+                                   <h3>Meus personagens mais usados em Super Smash Bros.</h3>
+                                   <ul class="thumbnails">
+                                       <li class="span3">
+                                           <a class="thumbnail" href="@Url.Content("~/Widgets/SuperSmashBrosChallenger/?cId=" + Model.myChallengerItem.IdPersonagem1)">
+                                               <img alt="@Model.myChallengerItem.IdPersonagem1" src="@Url.Content(Model.myChallengerItem.ImagemPersonagem1)" />
+                                               @Model.myChallengerItem.NomePersonagem1
+                                           </a>
+                                       </li>
+                                       <li class="span3">
+                                           <a class="thumbnail" href="@Url.Content("~/Widgets/SuperSmashBrosChallenger/?cId=" + Model.myChallengerItem.IdPersonagem2)">
+                                               <img alt="@Model.myChallengerItem.IdPersonagem2" src="@Url.Content(Model.myChallengerItem.ImagemPersonagem2)" />
+                                               @Model.myChallengerItem.NomePersonagem2
+                                           </a>
+                                       </li>
+                                       <li class="span3">
+                                           <a class="thumbnail" href="@Url.Content("~/Widgets/SuperSmashBrosChallenger/?cId=" + Model.myChallengerItem.IdPersonagem3)">
+                                               <img alt="@Model.myChallengerItem.IdPersonagem3" src="@Url.Content(Model.myChallengerItem.ImagemPersonagem3)" />
+                                               @Model.myChallengerItem.NomePersonagem3
+                                           </a>
+                                       </li>
                                    </ul> 
                         }
                             }

@@ -21,6 +21,7 @@ namespace CampeonatosNParty.Models.ViewModel
         public SocialGamingButtonState LiveButtonState { get; set; }
         public SocialGamingButtonState MiiverseButtonState { get; set; }
         public SocialGamingButtonState FriendCodeButtonState { get; set; }
+        public SuperSmashBrosChallengerItem myChallengerItem;
         public List<UsuarioBadges> badges { get; set; }
         public bool hasGamingConnection;
 
@@ -57,6 +58,8 @@ namespace CampeonatosNParty.Models.ViewModel
             }
 
             personGameItems = PersonGameItem.Select().Where("PersonId", userId).ToList();
+
+            myChallengerItem = SuperSmashBrosChallengerItem.WithMember("IdUsuario", usuario.Id);
         }
 
         public void setPersonGamingRelation(Usuarios CurrentPerson){

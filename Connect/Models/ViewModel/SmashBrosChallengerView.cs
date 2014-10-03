@@ -14,6 +14,7 @@ namespace CampeonatosNParty.Models.ViewModel
         public bool isLoggedIn;
         public SuperSmashBrosChallengerItem myChallengerItem;
         public Dictionary<int, bool> isButtonActive;
+        public CampeonatosDetailView campeonatoDetailView;
 
         public SmashBrosChallengerView(Usuarios currentUsuario, string pageString, int characterId)
         {
@@ -42,8 +43,8 @@ namespace CampeonatosNParty.Models.ViewModel
                     .Or("IdPersonagem3", characterId);
             }
 
-            search.Page(18, page);
-            search.OrderBy("NomeUsuario", SortDirection.Ascending);
+            search.Page(12, page);
+            search.OrderBy("DataCriacao", SortDirection.Descending);
             result = search.ToResult();
 
             if (currentUsuario == null)
@@ -76,6 +77,10 @@ namespace CampeonatosNParty.Models.ViewModel
                     }
                 }
             }
+
+            Campeonatos campeonato = Campeonatos.Select().Where("IdJogo", 1).Or("IdJogo", 6).Or("IdJogo", 49).OrderBy("DataCampeonato", SortDirection.Descending).SingleResult();
+            if(campeonato != null)
+                campeonatoDetailView = new CampeonatosDetailView(campeonato.Id);
         }
     }
 }

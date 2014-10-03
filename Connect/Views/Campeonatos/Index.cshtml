@@ -6,6 +6,17 @@
     int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
     string filter = Request.QueryString["filter"] != null ? "filter=" + Request.QueryString["filter"] : "";
 }
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Veja os principais campeonatos que a N-Party realiza ou realizou" />
+}
+
 <ul class="breadcrumb">
     <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
     <li class="active">Campeonatos</li>

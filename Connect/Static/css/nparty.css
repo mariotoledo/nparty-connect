@@ -1,16 +1,11 @@
 			body {
-                background-color: #AB2B2A;
+                background-color: rgb(223, 223, 223);
 				color: #555;
 				margin: 0;
 			}
 			
 			#main-wrapper{
                 background-color: #FFF;
-				border-radius: 6px;
-                -webkit-box-shadow: 0 1px 5px rgba(0,0,0,0.15);
-                -moz-box-shadow: 0 1px 5px rgba(0,0,0,0.15);
-                box-shadow: 0 1px 5px rgba(0,0,0,0.15);
-                -webkit-border-radius: 6px;
                 padding-top: 15px;
                 padding-bottom: 15px;
 			}			
@@ -19,12 +14,12 @@
                 min-height: 0px;
                 padding-right: 0px;
                 padding-left: 0px;
-                background-color: #AB2B2A;
-                background-image: -moz-linear-gradient(top,AB2B2A,AB2B2A);
-                background-image: -webkit-gradient(linear,0 0,0 100%,from(AB2B2A),to(AB2B2A));
-                background-image: -webkit-linear-gradient(top,AB2B2A,AB2B2A);
-                background-image: -o-linear-gradient(top,AB2B2A,AB2B2A);
-                background-image: linear-gradient(to bottom,AB2B2A,AB2B2A);
+                background-color: #B60101;
+                background-image: -moz-linear-gradient(top,B60101,B60101);
+                background-image: -webkit-gradient(linear,0 0,0 100%,from(B60101),to(B60101));
+                background-image: -webkit-linear-gradient(top,B60101,B60101);
+                background-image: -o-linear-gradient(top,B60101,B60101);
+                background-image: linear-gradient(to bottom,B60101,B60101);
                 background-repeat: repeat-x;
                 border: 0;
                 -webkit-border-radius: 0;
@@ -57,7 +52,7 @@
 
             .navbar .nav li.dropdown.open > .dropdown-toggle, .navbar .nav li.dropdown.active > .dropdown-toggle, .navbar .nav li.dropdown.open.active > .dropdown-toggle {
                 color: #E28989;
-                background-color: #AB2B2A;
+                background-color: #B60101;
             }
 
             #topMenu {
@@ -178,8 +173,8 @@ select, textarea, input[type="text"], input[type="password"], input[type="dateti
 }
 
 footer {
-    margin-top: 10px;
     color: #FFF;
+    background-color: #B60101;
 }
 
 footer ul {

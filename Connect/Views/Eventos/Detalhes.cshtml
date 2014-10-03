@@ -2,6 +2,16 @@
 @{
     if (Model != null && Model.evento != null)
     {
+        @section FacebookMeta{
+            <meta property="og:image" content="@Model.evento.getCoverUrl()" />
+            <meta property="og:title" content="@Model.evento.Nome - N-Party Connect" />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="http://connect.nparty.com.br" />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta property="og:site_name" content="N-Party Connect" />
+            <meta property="og:description" content="Veja os detalhes do @Model.evento.Nome no N-Party Connect" />
+        }
+    
         ViewBag.Title = "Detalhes do evento";
        
         <ul class="breadcrumb">

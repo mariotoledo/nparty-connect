@@ -35,6 +35,16 @@
     isFilteredPokemon = string.IsNullOrEmpty(isFilteredPokemon) ? isFilteredPokemon : "&" + isFilteredPokemon;
 }
 
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.connect.nparty.com.br/Static/img/widgets/heroPokemonFriendSafariFinder.png" />
+    <meta property="og:title" content="Pokémon Friend Safari Finder" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="Pokémon Friend Safari Finder" />
+    <meta property="og:description" content="Encontre os mais diversos Friend Safaris dos usuários cadastrados na N-Party Connect!" />
+}
+
 <ul class="breadcrumb">
     <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
     <li><a href="@Url.Content("/Widgets")">Widgets</a> <span class="divider">/</span></li>
@@ -43,7 +53,7 @@
 
 <div class="row">
     <div class="span12">
-        <div id="mainSlider" class="carousel slide">
+        <div id="mainSlider" class="carousel slide" style="margin-left: -10px; margin-right: -10px;">
             <div class="carousel-inner">
                 <div class="item active">
                     <img src="/Static/img/widgets/heroPokemonFriendSafariFinder.png" alt="Bem vindo ao N-Party Connect">

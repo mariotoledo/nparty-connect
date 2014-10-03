@@ -1,6 +1,17 @@
 ﻿@{
     ViewBag.Title = "EsqueciMinhaSenha";
 }
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+}
+
 @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["Error"]))
 {
 <div class="row">

@@ -51,18 +51,12 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
     <meta content='Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais.'/>
     <meta content='nparty, 3DS, Wii U, Friend Code, rede social, Nintendo' name='keywords'/>
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'/>
-    <meta content='Mario Toledo e Rafael Farias' name='author'/>
+    <meta content='Mario Toledo' name='author'/>
 
     <link href='http://www.images.nparty.com.br/connect/favco.png' rel='icon' type='image/x-icon'/>
     <link href='http://connect.nparty.com.br' rel='canonical'/>
 
-    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
-    <meta property="og:title" content="N-Party Connect" />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://connect.nparty.com.br" />
-    <meta property="og:image:type" content="image/jpeg" />
-    <meta property="og:site_name" content="N-Party Connect" />
-    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+    @RenderSection("FacebookMeta", false)
 
     <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap.min.css")" />
     <link rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap-responsive.min.css")" />
@@ -72,30 +66,31 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
     <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/nparty.css")" />
 </head>
 <body>
-    <div class="container" style="margin-top: 15px;">
-            <div class="navbar">
+    <div style="background-color: #B60101; margin-bottom: 15px;">
+        <div class="container" style="padding: 0;">
+            <div class="navbar" style="margin-bottom: 0">
                 <div class="navbar-inner">
                     <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
-                      <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </button>
-                    <a href="/" class="brand"><img src="@Url.Content("~/Static/img/template/logoNPartyCampeonatosSmall.png")" alt="N-Party Connect"/></a>
-			        <div class="nav-collapse collapse" id="topMenu">
-				        <ul class="nav pull-left">
-					        <li class="@(topMenu == 1 ? "active" : "")">@Html.ActionLink("Eventos", "Index", "Eventos")</li>
+                    <a href="/" class="brand"><img src="@Url.Content("~/Static/img/template/logoNPartyCampeonatosSmall.png")" alt="N-Party Connect" /></a>
+                    <div class="nav-collapse collapse" id="topMenu">
+                        <ul class="nav pull-left">
+                            <li class="@(topMenu == 1 ? "active" : "")">@Html.ActionLink("Eventos", "Index", "Eventos")</li>
                             <li class="@(topMenu == 2 ? "active" : "")"><a href="@Url.Content("~/Campeonatos/")">Campeonatos</a></li>
                             <li class="@(topMenu == 3 ? "active" : "")"><a href="@Url.Content("~/Jogadores/")">Jogadores</a></li>
                             <li class="@(topMenu == 4 ? "active" : "")"><a href="@Url.Content("~/Widgets/")">Widgets</a></li>
-                            
-				        </ul>
+
+                        </ul>
                         <ul class="nav pull-right">
                             @if (currentUser == null)
                             {
                                 <li><a href="@Url.Content("~/Home/Login")">Login ou Registrar</a></li>
                             }
                             else
-                            {  
+                            {
                                 <li>
                                     <a title="Perfil" href="@Url.Content("~/Jogadores/Detalhes/" + currentUser.Id)" style="float: left;">Olá, @currentUser.Nome</a>
                                     <a title="Notificações" href="@Url.Content("~/Jogadores/Notificacoes")" style="float: left;">
@@ -105,47 +100,50 @@ ZZO  ZZZO:   =OZZZZ,  ZZZZZZZ   .ZZZZ:   IZZZOZZZZO         +ZZZO,~ZZZZZO~ZZZZ  
                                         </span>
                                     </a>
                                     <a title="Minhas conexões" href="@Url.Content("~/Jogadores/MinhasConexoes/")" style="float: left;"><i class="fa fa-users icon" style="padding-top: 2px;"></i></a>
-                                    <a title="Editar Informações" href="@Url.Content("~/Configuracoes")" style="float: left;"><i class="fa fa-cogs icon"  style="padding-top: 2px;"></i></a>
+                                    <a title="Editar Informações" href="@Url.Content("~/Configuracoes")" style="float: left;"><i class="fa fa-cogs icon" style="padding-top: 2px;"></i></a>
                                     <a title="Logout" href="@Url.Content("~/Home/Logout")" style="float: left;"><i class="fa fa-sign-out icon" style="padding-top: 2px;"></i></a>
                                 </li>
                             }
-				        </ul>
-			        </div>
+                        </ul>
+                    </div>
                 </div>
             </div>
-		</div>
+        </div>
+    </div>
     <div class="container" id="main-wrapper">
 		<div class="main-content">
              @RenderBody()
         </div>
     </div>
-    <div class="container">
-        <footer>
-            <div class="row">
-                <div class="span4">
-                    <p style="float: left;">
-                        © N-Party 2013 - <a href="http://www.nparty.com.br" target="_blank">www.nparty.com.br</a><br /><br />
-                        Desenvolvido e Desenhado por <b><a href="~/Jogadores/Detalhes/180">Mario Toledo</a></b><br/>
-                        Idealizado e Projetado por <b><a href="~/Jogadores/Detalhes/147">Rafael Farias</a></b>
-			        </p>
-                    <br /><br /><br /><br /><br />
-                    <ul>
-                        <li><a href="/Home/Sobre">Sobre</a></li>
-                        <li><a href="/Home/Privacidade">Termos de Privacidade</a></li>
-                        <li><a href="/Home/FAQ">FAQ</a></li>
-                        <li><a href="/Home/Contato">Contato</a></li>
-                    </ul>
+    <div style="background-color: #B60101; margin-top: 20px;">
+        <div class="container">
+            <footer>
+                <div class="row">
+                    <div class="span4">
+                        <p style="float: left;">
+                            © N-Party 2013 - <a href="http://www.nparty.com.br" target="_blank">www.nparty.com.br</a><br /><br />
+                            Desenvolvido e Desenhado por <b><a href="~/Jogadores/Detalhes/180">Mario Toledo</a></b><br />
+                            Idealizado e Projetado por <b><a href="~/Jogadores/Detalhes/147">Rafael Farias</a></b>
+                        </p>
+                        <br /><br /><br /><br /><br />
+                        <ul>
+                            <li><a href="/Home/Sobre">Sobre</a></li>
+                            <li><a href="/Home/Privacidade">Termos de Privacidade</a></li>
+                            <li><a href="/Home/FAQ">FAQ</a></li>
+                            <li><a href="/Home/Contato">Contato</a></li>
+                        </ul>
+                    </div>
+                    <div class="span4" style="overflow: hidden;">
+                        <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FNParty&amp;width=370&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=141992936007985" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:370px; height:258px;" allowtransparency="true"></iframe>
+                    </div>
+                    <div class="span4">
+                        <p style="float: right;">
+
+                        </p>
+                    </div>
                 </div>
-                <div class="span4" style="overflow: hidden;">
-                    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FNParty&amp;width=370&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=141992936007985" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:370px; height:258px;" allowTransparency="true"></iframe>
-                </div>
-                <div class="span4">
-                    <p style="float: right;">
-                        
-                    </p>
-                </div>
-            </div>
-		</footer>
+            </footer>
+        </div>
     </div>
     <!-- Analytics -->
     <script type="text/javascript">

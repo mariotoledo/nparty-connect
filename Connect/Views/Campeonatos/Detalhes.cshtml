@@ -2,6 +2,15 @@
 @{
     if(Model != null && Model.campeonato != null)
     {
+        @section FacebookMeta{
+            <meta property="og:image" content="@Model.jogo.getCoverUrl()" />
+            <meta property="og:title" content="Campeonato @Model.jogo.Nome - N-Party Connect" />
+            <meta property="og:type" content="website" />
+            <meta property="og:url" content="http://connect.nparty.com.br" />
+            <meta property="og:image:type" content="image/jpeg" />
+            <meta property="og:site_name" content="@Model.jogo.Nome - N-Party Connect" />
+            <meta property="og:description" content="Veja os detalhes do campeonato de @Model.jogo.Nome no N-Party Connect" />
+        }
         ViewBag.Title = "Detalhes do campeonato";
         <ul class="breadcrumb">
             <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>

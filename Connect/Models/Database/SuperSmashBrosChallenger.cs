@@ -29,5 +29,8 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public long IdCorPersonagem3 { get; set; }
+
+        [DatabaseColumn]
+        public DateTime DataCriacao { get; set; }
     }
 }

@@ -123,7 +123,8 @@ namespace CampeonatosNParty.Controllers
                 IdCorPersonagem2 = corPersonagem2,
                 IdPersonagem3 = idPersonagem3,
                 IdCorPersonagem3 = corPersonagem3,
-                IdUsuario = CurrentUsuario.Id
+                IdUsuario = CurrentUsuario.Id,
+                DataCriacao = DateTime.Now
             };
 
             NPartyDb<SuperSmashBrosChallenger>.Instance.Insert(newChallenger);

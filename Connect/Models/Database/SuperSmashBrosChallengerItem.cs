@@ -45,6 +45,9 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn]
         public string FriendCode { get; set; }
 
+        [DatabaseColumn]
+        public DateTime DataCriacao { get; set; }
+
         public string ImagemPersonagem1
         {
             get
