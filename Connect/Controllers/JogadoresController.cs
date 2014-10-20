@@ -405,7 +405,7 @@ namespace CampeonatosNParty.Controllers
                         model.EmailConfirmado = false;
                         NPartyDb<Usuarios>.Instance.Insert(model);
 
-                        Session["CurrentUser"] = null;
+                        Session["CurrentUser"] = model;
 
                         //return View("BemVindo");
                         return RedirectToAction("EnviarEmailConfirmacao");

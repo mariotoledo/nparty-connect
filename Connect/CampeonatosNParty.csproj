@@ -39,9 +39,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="AWSSDK, Version=2.0.4.1, Culture=neutral, PublicKeyToken=9f476d3089b52be3, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\AWSSDK.dll</HintPath>
+    <Reference Include="AWSSDK">
+      <HintPath>..\..\..\..\..\..\Program Files\AWS SDK for .NET\bin\Net45\AWSSDK.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json">
@@ -728,6 +727,7 @@
     <Content Include="Views\Widgets\Web.config" />
     <None Include="Properties\PublishProfiles\Mario.pubxml" />
     <Content Include="Views\Shared\ErroNotFound.cshtml" />
+    <None Include="Properties\PublishProfiles\Mario10.pubxml" />
     <None Include="Properties\PublishProfiles\Mario2.pubxml" />
     <Content Include="Views\Home\Sobre.cshtml" />
     <Content Include="Views\Home\Privacidade.cshtml" />
@@ -758,11 +758,11 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\csharp-jetfuel\EixoX.Web\EixoX.Web.csproj">
+    <ProjectReference Include="..\..\Jetfuel-CSharp\EixoX.Web\EixoX.Web.csproj">
       <Project>{225c6d0e-9867-4f36-90df-30e0521ad865}</Project>
       <Name>EixoX.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\csharp-jetfuel\EixoX\EixoX.csproj">
+    <ProjectReference Include="..\..\Jetfuel-CSharp\EixoX\EixoX.csproj">
       <Project>{0a418683-14d0-433f-ba4d-c4919c8069a7}</Project>
       <Name>EixoX</Name>
     </ProjectReference>

@@ -27,7 +27,6 @@
     <meta property="og:image" content="http://www.connect.nparty.com.br/Static/img/widgets/heroSuperSmashBros.png" />
     <meta property="og:title" content="Super Smash Bros. Challenger" />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="http://connect.nparty.com.br" />
     <meta property="og:image:type" content="image/jpeg" />
     <meta property="og:site_name" content="Super Smash Bros. Challenger" />
     <meta property="og:description" content="Mostre os seus personagens principais do Super Smash Bros. para 3DS e adicione novos jogadores para batalhar!" />
@@ -52,12 +51,17 @@
                                 Mostre os seus personagens principais do Super Smash Bros. para 3DS e adicione novos jogadores para batalhar!
                             </p>
                             @{
-                                if (Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem == null)
+                                if (Model.usuario == null)
+                                {
+                                    <br />
+                                    <a href="#notLogged" role="button" data-toggle="modal" class="btn btn-large btn-primary">Registrar meus personagens</a>
+                                }
+                                if (Model.usuario != null && Model.myChallengerItem == null)
                                 {
                                     <br />
                                     <a href="#addCharacters" role="button" data-toggle="modal" class="btn btn-large btn-primary">Registrar meus personagens</a>
                                 }
-                                else if (Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem != null)
+                                else if (Model.usuario != null && Model.myChallengerItem != null)
                                 {
                                     <br />
                                     <a href="#myFriendSafari" role="button" data-toggle="modal" class="btn btn-large btn-primary">Meus personagens</a>
@@ -76,6 +80,14 @@
 </div>
 
 <div class="controls controls-row">
+    @{
+        if (Model.myChallengerItem != null)
+        {
+            <div class="span6" style="margin-left: 0px;">
+                <button class="btn btn-primary btn-block" id="ShareOnFacebook" style="height: 40px; font-size: 20px;" onclick="shareCharacter()">Compartilhar meus personagens no Facebook</button>
+            </div>
+        }
+    }
     <form class="form-inline pull-right">
         <select name="cId" class="span3" onchange="loadPokemonFromType(this.value)">
             <option value="0">Qualquer personagem</option>
@@ -133,27 +145,33 @@
                             <tr>
                                 <th colspan="3"> <a href="@Url.Content("~/Jogadores/Detalhes/" + challenger.IdUsuario)"><h4>@challenger.NomeUsuario</h4></a></th>
                             </tr>
-                            <tr>
-                                <td colspan="3"><b>Friend Code</b>: @challenger.FriendCode
-                                @{
-                                    if (!Model.isLoggedIn)
-                                    {
-                                        <a style="margin-left: 10px; height: 18px;"  href="#notLogged" role="button" class="btn btn-primary btn-mini" data-toggle="modal">+</a>
-                                    }
-                                    else
-                                    {
-                                        if (Model.isButtonActive.ContainsKey((int)challenger.IdUsuario) && Model.isButtonActive[(int)challenger.IdUsuario])
-                                        {
-                                            <a style="margin-left: 10px; height: 18px;" href="#addPerson" onclick="showAddModal('@challenger.NomeUsuario', '@challenger.IdUsuario');" role="button" class="btn btn-mini btn-primary" data-toggle="modal">+</a>
+                            @{
+                                if (Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode))
+                                {
+                                    <tr>
+                                        <td colspan="3"><b>Friend Code</b>: @challenger.FriendCode
+                                        @{
+                                            if (!Model.isLoggedIn)
+                                            {
+                                                <a style="margin-left: 10px; height: 18px;"  href="#notLogged" role="button" class="btn btn-primary btn-mini" data-toggle="modal">+</a>
+                                            }
+                                            else
+                                            {
+                                                if (Model.isButtonActive.ContainsKey((int)challenger.IdUsuario) && Model.isButtonActive[(int)challenger.IdUsuario])
+                                                {
+                                                    <a style="margin-left: 10px; height: 18px;" href="#addPerson" onclick="showAddModal('@challenger.NomeUsuario', '@challenger.IdUsuario');" role="button" class="btn btn-mini btn-primary" data-toggle="modal">+</a>
+                                                }
+                                                else
+                                                {
+                                                    <a style="margin-left: 10px; height: 18px;" role="button" class="btn btn-mini disabled" data-toggle="modal">+</a>
+                                                }
+                                            }
                                         }
-                                        else
-                                        {
-                                            <a style="margin-left: 10px; height: 18px;" role="button" class="btn btn-mini disabled" data-toggle="modal">+</a>
-                                        }
-                                    }
-}
-                                </td>
-                            </tr>
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            
                             <tr>
                                 <td class="pokemon">
                                     <img width="100" alt="@challenger.NomePersonagem1" src="@Url.Content(challenger.ImagemPersonagem1)" /><br />
@@ -203,7 +221,7 @@
                 <h3 id="miiverseLabel">Atenção: Você não esta logado</h3>
             </div>
             <div class="modal-body">
-                <p>Para desafiar o jogador, você precisa estar logado no sistema e ter seu Friend Code registrado.</p>
+                <p>Para desafiar o jogador, você precisa estar logado no sistema para realizar esta ação.</p>
             </div>
             <div class="modal-footer">
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
@@ -212,6 +230,8 @@
         </div>
     }
         else
+        {
+        if (!string.IsNullOrEmpty(Model.usuario.FriendCode))
         {
         <div id="addPerson" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
             <div class="modal-header">
@@ -225,12 +245,13 @@
                 <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
                 @{
                         string concat = "?page=" + currentPage.ToString() + isFilteredCharacter;
-                        <a id="userAddLink" href="@Url.Content("~/Widgets/AdicionarFriendCodeDoSafari/" + concat)" class="btn btn-primary">Sim, desafiar!</a>
+                        <a id="userAddLink" href="@Url.Content("~/Widgets/AdicionarFriendCodeDoSafari/" + concat)" class="btn btn-primary">Sim, solicitar!</a>
                 }
 
             </div>
         </div>
-            if (Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem == null)
+        }
+            if (Model.usuario != null && Model.myChallengerItem == null)
            {
                 <div id="addCharacters" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addFriendSafariLabel" aria-hidden="true">
                     <div class="modal-header">
@@ -316,7 +337,7 @@
                     </form>
                 </div>
            }
-           else if (!string.IsNullOrEmpty(Model.usuario.FriendCode) && Model.myChallengerItem != null)
+           else if (Model.myChallengerItem != null)
            {
             <div id="myFriendSafari" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myFriendSafariLabel" aria-hidden="true">
                 <div class="modal-header">
@@ -340,7 +361,6 @@
                                 </td>
                             </tr>
                     </table>
-                    <button class="btn btn-primary btn-block" id="ShareOnFacebook" style="height: 40px; font-size: 20px;" onclick="shareCharacter()">Compartilhar no Facebook</button>
                 </div>
                 <div class="modal-footer">
                     <a class="btn btn-primary pull-left" href="@Url.Content("~/Widgets/RemoverMeusPersonagensSmash")">
