@@ -12,6 +12,10 @@
     <li class="active">Gerenciar Eventos</li>
 </ol>
 
+@{
+    Html.RenderPartial("FlashMessage");
+}
+
 <div ng-app="EventosLoad">
     <div class="table-responsive" ng-controller="EventosController">
         <div class="row">
@@ -31,6 +35,7 @@
                 <tr>
                     <th>Nome</th>
                     <th>Tipo</th>
+                    <th>Organizador</th>
                     <th>Local</th>
                     <th>Cidade</th>
                     <th>Estado</th>
@@ -39,15 +44,19 @@
             </thead>
             <tbody>
                 <tr ng-show="loading">
-                    <td colspan="6">Carregando...</td>
+                    <td colspan="7">Carregando...</td>
+                </tr>
+                <tr ng-show="(eventos | filter:query).length == 0">
+                    <td colspan="7">Nenhum evento encontrado</td>
                 </tr>
                 <tr data-ng-repeat="evento in eventos | filter:query">
                     <td><a href="@Url.Content("~/Eventos/Detalhes/"){{evento.Id}}">{{evento.Nome}}</td>
                     <td>{{evento.NomeTipoEvento}}</td>
+                    <td>{{evento.NomeOrganizador}}</td>
                     <td>{{evento.Local}}</td>
                     <td>{{evento.NomeCidade}}</td>
                     <td>{{evento.NomeEstado}}</td>
-                    <td>{{evento.DataEventoInicioString}}</td>
+                    <td>{{evento.getDataEventoAsString}}</td>
                 </tr>
             </tbody>
         </table>

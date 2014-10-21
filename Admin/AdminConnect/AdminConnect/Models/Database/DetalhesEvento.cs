@@ -45,14 +45,14 @@ namespace AdminConnect.Models.Database
             }
         }
 
-        [DatabaseColumn]
-        public DateTime DataEventoFim { get; set; }
+        [DatabaseColumn(true)]
+        public object DataEventoFim { get; set; }
 
         public string DataEventoFimString
         {
             get
             {
-                return DataEventoFim.ToString("dd/MM/yyyy");
+                return DataEventoFim != null ? ((DateTime)DataEventoFim).ToString("dd/MM/yyyy") : "";
             }
         }
 
@@ -76,14 +76,14 @@ namespace AdminConnect.Models.Database
         public string getCoverUrl()
         {
             if (String.IsNullOrEmpty(this.CoverURL))
-                return "/Static/img/eventsLogos/defaultCover.jpg";
+                return "/img/defaultCover.jpg";
             return this.CoverURL;
         }
 
         public string getImagemUrl()
         {
             if (String.IsNullOrEmpty(this.ImagemURL))
-                return "/Static/img/eventsLogos/default.jpg";
+                return "/img/default.jpg";
             return this.ImagemURL;
         }
 
@@ -95,5 +95,18 @@ namespace AdminConnect.Models.Database
 
         [DatabaseColumn]
         public string NomeEstado { get; set; }
+
+        [DatabaseColumn]
+        public string NomeOrganizador { get; set; }
+
+        [DatabaseColumn]
+        public long IdOrganizador { get; set; }
+
+        public string getDataEventoAsString
+        {
+            get{ 
+                return DataEventoFim == null ? DataEventoInicio.ToString("dd/MM/yyyy") : DataEventoInicio.ToString("dd/MM/yyyy") + " até " + ((DateTime)DataEventoFim).ToString("dd/MM/yyyy");
+            }
+        }
     }
 }

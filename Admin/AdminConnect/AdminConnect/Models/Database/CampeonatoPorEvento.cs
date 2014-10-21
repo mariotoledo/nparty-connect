@@ -36,7 +36,7 @@ namespace CampeonatosNParty.Models.Database
         public string getImagemUrl()
         {
             if (String.IsNullOrEmpty(this.ImagemURL))
-                return "/Static/img/gameCovers/default.jpg";
+                return "/img/default.jpg";
             return this.ImagemURL;
         }
     }

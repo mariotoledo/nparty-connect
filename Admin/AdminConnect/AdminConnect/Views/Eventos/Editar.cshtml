@@ -1,6 +1,6 @@
 ﻿@model CampeonatosNParty.Models.Database.Eventos
 @{
-    ViewBag.Title = "Novo";
+    ViewBag.Title = "Editar";
     IEnumerable<CampeonatosNParty.Models.Database.TipoEvento> tipoEvento =
         (IEnumerable<CampeonatosNParty.Models.Database.TipoEvento>)ViewData["TipoEvento"];
     IEnumerable<CampeonatosNParty.Models.Database.Estado> estados =
@@ -11,13 +11,13 @@
 
 
 <div class="page-header">
-    <h1>Novo Evento <small>Complete as informações abaixo, e clique em "Salvar"</small></h1>
+    <h1>Editar Evento <small>Complete as informações abaixo, e clique em "Salvar"</small></h1>
 </div>
 
 <ol class="breadcrumb">
     <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
     <li><a href="@Url.Content("~/Eventos/Gerenciar")">Gerenciar Eventos</a></li>
-    <li class="active">Novo Evento</li>
+    <li class="active">Editar Evento</li>
 </ol>
 
 @{
@@ -89,7 +89,7 @@
                                 @{
                                     string checkedString = Model.DataEventoFim != null && ((DateTime)Model.DataEventoFim).CompareTo(DateTime.MinValue) != 0 ? "checked" : "";
                                 }
-                                <input @checkedString type="checkbox" name="UnoMas" id="UnoMas" onclick="showOrHideEventEnd()"> Evento acontece em mais de 1 dia
+                                <input @checkedString type="checkbox" id="UnoMas" onclick="showOrHideEventEnd()"> Evento acontece em mais de 1 dia
                             </label>
                         </div>
                     </div>
@@ -118,9 +118,15 @@
                         <label for="ImagemURL" class="control-label">Logo do evento</label>
                         <div class="radio">
                             <label>
-                                <input type="radio" name="UsoDeLogo" id="optNewLogo" onclick="enableOrDisablePhotoControl(this.value)" value="1" checked>
+                                <input type="radio" name="UsoDeLogo" id="optNoImage" onclick="enableOrDisablePhotoControl(this.value)" value="4" checked="checked">
+                                Continuar com a logo atual
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="UsoDeLogo" id="optNewLogo" onclick="enableOrDisablePhotoControl(this.value)" value="1">
                                 Subir nova logo <button id="info" type="button" class="btn btn-xs btn-info" data-container="body" data-toggle="popover" data-placement="top" data-content="A imagem precisa ser no formato PNG. A idéia é que seja uma imagem do logo do evento, com transparência, não importa o tamanho."><span class="glyphicon glyphicon-info-sign"></span></button>
-                                <input type="file" class="form-control" id="ImagemURL" name="ImagemURL">
+                                <input type="file" class="form-control" id="ImagemURL" name="ImagemURL" disabled>
                             </label>
                         </div>
                         <div class="radio">
@@ -134,12 +140,6 @@
                                         <option value="@evento.Id">@evento.Nome</option>
                                     }
                                 </select>
-                            </label>
-                        </div>
-                        <div class="radio">
-                            <label>
-                                <input type="radio" name="UsoDeLogo" id="optNoImage" onclick="enableOrDisablePhotoControl(this.value)" value="3">
-                                Não subir nenhuma imagem
                             </label>
                         </div>
                     </div>
@@ -170,6 +170,9 @@
             if ($('#Estado').val()) {
                 onEstadoSelected($('#Estado').val());
             }
+
+            showOrHideEventEnd();
+
         });
 
         function showOrHideEventEnd() {
@@ -188,7 +191,7 @@
             } else if (optionValue == 2) {
                 $('#ImagemURL').prop('disabled', true);
                 $('#Eventos').prop('disabled', false);
-            } else if (optionValue == 3) {
+            } else if (optionValue == 3 || optionValue == 4) {
                 $('#ImagemURL').prop('disabled', true);
                 $('#Eventos').prop('disabled', true);
             }

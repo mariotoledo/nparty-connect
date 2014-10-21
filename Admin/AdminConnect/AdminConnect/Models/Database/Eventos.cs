@@ -52,15 +52,15 @@ namespace CampeonatosNParty.Models.Database
             }
         }
 
-        [DatabaseColumn]
+        [DatabaseColumn(true)]
         [UIDatepicker]
-        public DateTime DataEventoFim { get; set; }
+        public object DataEventoFim { get; set; }
 
         public string DataEventoFimString
         {
             get
             {
-                return DataEventoFim.ToString("dd/MM/yyyy");
+                return DataEventoFim != null ? ((DateTime)DataEventoFim).ToString("dd/MM/yyyy") : "";
             }
         }
 
@@ -89,15 +89,23 @@ namespace CampeonatosNParty.Models.Database
         public string getCoverUrl()
         {
             if (String.IsNullOrEmpty(this.CoverURL))
-                return "/Static/img/eventsLogos/defaultCover.jpg";
+                return "/img/defaultCover.jpg";
             return this.CoverURL;
         }
 
         public string getImagemUrl()
         {
             if (String.IsNullOrEmpty(this.ImagemURL))
-                return "/Static/img/eventsLogos/default.jpg";
+                return "/img/default.jpg";
             return this.ImagemURL;
+        }
+
+        public string getDataEventoAsString
+        {
+            get
+            {
+                return DataEventoFim == null ? DataEventoInicio.ToString("dd/MM/yyyy") : DataEventoInicio.ToString("dd/MM/yyyy") + " até " + ((DateTime)DataEventoFim).ToString("dd/MM/yyyy");
+            }
         }
     }
 }
