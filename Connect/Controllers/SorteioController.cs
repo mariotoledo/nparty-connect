@@ -13,15 +13,15 @@ namespace CampeonatosNParty.Controllers
         //
         // GET: /Sorteio/
 
-        public static DateTime dataSorteio = new DateTime(2014, 9, 14, 23, 0, 0);
+        public static DateTime dataSorteio = new DateTime(2014, 10, 25, 20, 0, 0);
 
         public ActionResult Index()
         {
-            return Redirect("~/Sorteio/DemoSmash");
+            return Redirect("~/Sorteio/DemoPokemon");
         }
 
         [HttpGet]
-        public ActionResult DemoSmash()
+        public ActionResult DemoPokemon()
         {
             ViewData["DataSorteio"] = dataSorteio;
 
@@ -63,7 +63,7 @@ namespace CampeonatosNParty.Controllers
         }
 
         [HttpPost]
-        public ActionResult DemoSmash(FormCollection form, SorteioUsuario user)
+        public ActionResult DemoPokemon(FormCollection form, SorteioUsuario user)
         {
             ViewData["DataSorteio"] = dataSorteio;
 
@@ -125,7 +125,8 @@ namespace CampeonatosNParty.Controllers
 
                 SorteioUsuario sorteioUsuario = NPartyDb<SorteioUsuario>.Instance.Select().Where("Email", user.Email).SingleResult();
 
-                if(sorteioUsuario != null){
+                if (sorteioUsuario != null && sorteioUsuario.IdSorteio == 1)
+                {
                     if (sorteioUsuario.EmailConfirmado)
                     {
                         ViewData["Error"] = "Já existe um usuário registrado com este email.";
@@ -142,6 +143,7 @@ namespace CampeonatosNParty.Controllers
                 user.DataRegistro = DateTime.Now;
                 user.FoiGanhador = false;
                 user.EmailConfirmado = false;
+                user.IdSorteio = 1;
 
                 NPartyDb<SorteioUsuario>.Instance.Insert(user);
 
@@ -167,7 +169,7 @@ namespace CampeonatosNParty.Controllers
             infoChanges.Add("[=PersonName]", user.Nome);
             infoChanges.Add("[=PersonLink]", user.getConfirmationUrl());
 
-            emailTemplate.Send(infoChanges, "Sorteio Smash - Confirmação de email", user.Email);
+            emailTemplate.Send(infoChanges, "Sorteio Pokémon OR/AS - Confirmação de email", user.Email);
         }
     }
 }

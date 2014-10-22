@@ -47,9 +47,12 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn]
         public bool EmailConfirmado { get; set; }
 
+        [DatabaseColumn]
+        public long IdSorteio { get; set; }
+
         public string getConfirmationUrl()
         {
-            return "http://connect.nparty.com.br/Sorteio/DemoSmash?confirmationKey=" + CampeonatosNParty.Helpers.EncryptHelper.Encrypt(this.Id);
+            return "http://connect.nparty.com.br/Sorteio/DemoPokemon?confirmationKey=" + CampeonatosNParty.Helpers.EncryptHelper.Encrypt(this.Id);
         }
     }
 }

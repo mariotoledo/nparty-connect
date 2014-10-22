@@ -5,9 +5,9 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CampeonatosNParty", "CampeonatosNParty.csproj", "{59ACA979-A426-49B0-8DCA-C63183314A39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Web", "..\..\Jetfuel-CSharp\EixoX.Web\EixoX.Web.csproj", "{225C6D0E-9867-4F36-90DF-30E0521AD865}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX.Web", "..\..\csharp-jetfuel\EixoX.Web\EixoX.Web.csproj", "{225C6D0E-9867-4F36-90DF-30E0521AD865}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX", "..\..\Jetfuel-CSharp\EixoX\EixoX.csproj", "{0A418683-14D0-433F-BA4D-C4919C8069A7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EixoX", "..\..\csharp-jetfuel\EixoX\EixoX.csproj", "{0A418683-14D0-433F-BA4D-C4919C8069A7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

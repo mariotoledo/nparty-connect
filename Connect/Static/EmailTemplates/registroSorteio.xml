@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" standalone="yes"?>
 <EmailTemplate>
   <Smtp host="smtp.sendgrid.com" port="587" enableSSL="False" deliveryMethod="Network" username="mtoledo" password="lalala12" />
-  <Subject><![CDATA[Sorteio Demo Super Smash - Confirme seu email!]]></Subject>
+  <Subject><![CDATA[Sorteio Demo Pokémon OR/AS - Confirme seu email!]]></Subject>
   <Sender address="contato@nparty.com.br" displayName="" />
   <From address="contato@nparty.com.br" displayName="" />
   <Body isHtml="True">
