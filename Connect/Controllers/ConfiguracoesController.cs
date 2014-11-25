@@ -31,6 +31,7 @@ namespace CampeonatosNParty.Controllers
             dados.Telefone = CurrentUsuario.Telefone;
             dados.Id_Estado = CurrentUsuario.Id_Estado;
             dados.Id_Cidade = CurrentUsuario.Id_Cidade;
+            dados.Newsletter = CurrentUsuario.Newsletter;
 
             if (CurrentUsuario.Nascimento != null)
             {
@@ -64,6 +65,8 @@ namespace CampeonatosNParty.Controllers
                     CurrentUsuario.Id_Cidade = model.Id_Cidade > 0 ? model.Id_Cidade : CurrentUsuario.Id_Cidade;
 
                     CurrentUsuario.Nascimento = new DateTime(model.BirthdayYear, model.BirthdayMonth, model.BirthdayDay);
+
+                    CurrentUsuario.Newsletter = model.Newsletter;
 
                     NPartyDb<Usuarios>.Instance.Update(CurrentUsuario);
 

@@ -89,7 +89,7 @@
                                 @{
                                     string checkedString = Model.DataEventoFim != null && ((DateTime)Model.DataEventoFim).CompareTo(DateTime.MinValue) != 0 ? "checked" : "";
                                 }
-                                <input @checkedString type="checkbox" id="UnoMas" onclick="showOrHideEventEnd()"> Evento acontece em mais de 1 dia
+                                <input @checkedString type="checkbox" id="UnoMas" name="UnoMas" onclick="showOrHideEventEnd()"> Evento acontece em mais de 1 dia
                             </label>
                         </div>
                     </div>

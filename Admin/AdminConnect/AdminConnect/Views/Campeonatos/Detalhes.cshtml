@@ -1,0 +1,107 @@
+﻿@model AdminConnect.Models.View.DetalhesCampeonato
+@{
+    ViewBag.Title = "Detalhes";
+    CampeonatosNParty.Models.Database.Administrador user =
+        (CampeonatosNParty.Models.Database.Administrador)Session["CurrentUser"];
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
+    <li><a href="@Url.Content("~/Eventos/Gerenciar/")">Gerenciar</a></li>
+    @if (Model != null && Model.evento != null)
+    {
+        <li><a href="@Url.Content("~/Eventos/Detalhes/" + Model.evento.Id)">@Model.evento.Nome</a></li>
+    }
+    @if (Model != null && Model.jogo != null && Model.campeonato != null)
+    {
+        <li class="active">@Model.jogo.Nome (@Model.campeonato.DataCampeonato.ToString("dd/MM/yyyy")</li>
+    }
+    
+</ol>
+
+@{
+    Html.RenderPartial("FlashMessage");
+}
+
+@if (Model != null && Model.campeonato != null && Model.jogo != null)
+{
+    <div class="row">
+        <div class="col-md-8">
+            <h2>@Model.jogo.Nome</h2>
+        </div>
+        <div class="col-md-4">
+            @{
+                if (user.AdminSupremo || (user.PodeEditarCampeonato && user.IdOrganizador == Model.evento.IdOrganizador))
+                {
+                    <div class="btn-group pull-right" style="margin-top: 20px; margin-bottom: 10px;">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            Alterar Status <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="@Url.Content("~/Campeonatos/Cancelar/" + Model.campeonato.Id)">Cancelado</a></li>
+                            <li><a href="@Url.Content("~/Campeonatos/EmAndamento/" + Model.campeonato.Id)">Em Andamento</a></li>
+                            <li><a href="@Url.Content("~/Campeonatos/Finalizar/" + Model.campeonato.Id)">Em Andamento</a></li>
+                        </ul>
+                    </div>
+                }
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <img class="img-responsive" src="@Model.detalhesEvento.getCoverUrl()" width="100%" />
+        </div>
+    </div><br />
+    <div class="row">
+        <div class="col-md-4">
+            <div class="well">
+                <h4>Detalhes</h4>
+                <b>Tipo: </b> @Model.detalhesEvento.NomeTipoEvento<br />
+                <b>Organizador: </b> @Model.detalhesEvento.NomeOrganizador<br />
+                <b>Data: </b> @Model.detalhesEvento.getDataEventoAsString<br />
+                <b>Local: </b>@Model.detalhesEvento.Local<br />
+                <b>Cidade: </b>@Model.detalhesEvento.NomeCidade - @Model.detalhesEvento.NomeEstado
+            </div>
+        </div>
+        <div class="col-md-8">
+            <h4>
+                Campeonatos @{if (user.AdminSupremo || (user.PodeCriarCampeonato && user.IdOrganizador == Model.detalhesEvento.IdOrganizador))
+                {<a href="@Url.Content("~/Eventos/AdicionarCampeonato/" + Model.detalhesEvento.Id)" class="btn btn-primary">Adicionar</a>}
+                }
+            </h4>
+            @{
+    if (Model.campeonatos != null && Model.campeonatos.Count > 0)
+    {
+        <div class="row">
+            @{
+        foreach (CampeonatosNParty.Models.Database.CampeonatoPorEvento c in Model.campeonatos)
+        {
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img class="img-responsive" alt="@c.NomeJogo" src="@c.getImagemUrl()">
+                    <div class="caption">
+                        <h3>@c.NomeJogo</h3>
+                        <p>
+                            <b>Data</b>: @c.DataCampeonato.ToString("dd/MM/yyyy")
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info" role="alert">Nenhum campeonato encontrado</div>
+    }
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="alert alert-info" role="alert">Não existem informações para serem exibidas</div>
+}
+
+

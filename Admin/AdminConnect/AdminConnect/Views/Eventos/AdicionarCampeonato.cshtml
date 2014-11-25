@@ -1,0 +1,65 @@
+﻿@model CampeonatosNParty.Models.Database.Campeonatos
+@{
+    ViewBag.Title = "Adicionar Campeonato";
+    CampeonatosNParty.Models.Database.Eventos evento = (CampeonatosNParty.Models.Database.Eventos)ViewData["Evento"];
+    IEnumerable<CampeonatosNParty.Models.Database.Jogos> jogos = (IEnumerable<CampeonatosNParty.Models.Database.Jogos>)ViewData["Jogos"];
+}
+
+<div class="page-header">
+    <h1>Novo Campeonato <small>Complete as informações abaixo, e clique em "Salvar"</small></h1>
+</div>
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
+    <li><a href="@Url.Content("~/Eventos/Gerenciar")">Gerenciar Eventos</a></li>
+    <li><a href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)">@evento.Nome</a></li>
+    <li class="active">Novo Evento</li>
+</ol>
+
+@{
+    Html.RenderPartial("FlashMessage");
+}
+
+<form class="form" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="IdJogo" class="control-label">Selecione o jogo do campeonato</label>
+        <select name="IdJogo" id="IdJogo" class="form-control input-lg">
+            <option value="0">Selecione</option>
+            @foreach (CampeonatosNParty.Models.Database.Jogos jogo in jogos)
+            {
+                string selected = Model.IdJogo == jogo.Id ? "selected" : "";
+                <option @selected value="@jogo.Id ">@jogo.Nome</option>
+            }
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Data" class="control-label">Data</label>
+        <div class='input-group date' id='dtCampeonato'>
+            @{
+                string dataEvento = evento.DataEventoInicio.CompareTo(DateTime.MinValue) == 0 ? DateTime.Now.ToString("dd/MM/yyyy hh:mm") : evento.DataEventoInicio.ToString("dd/MM/yyyy hh:mm");
+            }
+            <input type='text' class="form-control" value="@dataEvento" id="Data" name="Data" />
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-calendar"></span>
+            </span>
+        </div>
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="@Url.Content("~/Eventos/Detalhes/" + evento.Id)" class="btn btn-default">Cancelar</a>
+    </div>
+</form>
+@section Scripts{
+    <script>
+        $(function () {
+            console.log(moment());
+            $('#dtCampeonato').datetimepicker({
+                language: 'pt-BR',
+                pickTime: true,
+                minDate: moment('@evento.DataEventoInicio.ToString("MM/dd/yyyy")'),
+                maxDate: moment('@(evento.DataEventoFim == null ? evento.DataEventoInicio.ToString("MM/dd/yyyy") :
+                                                          ((DateTime)evento.DataEventoFim).ToString("MM/dd/yyyy"))')
+            });
+        });
+    </script>
+}

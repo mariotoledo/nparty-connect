@@ -20,6 +20,154 @@ namespace CampeonatosNParty.Controllers
         }
 
         [HttpGet]
+        public ActionResult BlackFriday()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult BlackFriday(FormCollection form)
+        {
+            try
+            {
+                if (form["registrar"] != null)
+                {
+                    string nome = form["Nome"];
+                    if (string.IsNullOrEmpty(nome))
+                    {
+                        ViewData["Error"] = "Nome não pode estar vazio";
+                        return View();
+                    }
+
+                    if (nome.Length < 3 || nome.Length > 20)
+                    {
+                        ViewData["Error"] = "Nome possui tamanho inválido";
+                        return View();
+                    }
+
+                    string sobrenome = form["Sobrenome"];
+                    if (string.IsNullOrEmpty(sobrenome))
+                    {
+                        ViewData["Error"] = "Sobrenome não pode estar vazio";
+                    }
+
+                    if (sobrenome.Length < 3 || sobrenome.Length > 20)
+                    {
+                        ViewData["Error"] = "Sobrenome possui tamanho inválido";
+                    }
+
+                    string email = form["Email"];
+                    if (string.IsNullOrEmpty(email))
+                    {
+                        ViewData["Error"] = "Email não pode estar vazio";
+                        return View();
+                    }
+
+                    if (!EixoX.Restrictions.Email.IsEmail(email))
+                    {
+                        ViewData["Error"] = "Email inválido";
+                        return View();
+                    }
+
+                    int idEstado = Int32.Parse(form["IdEstado"]);
+                    if (idEstado == 0)
+                    {
+                        ViewData["Error"] = "Você deve selecionar um estado";
+                        return View();
+                    }
+
+                    int idCidade = Int32.Parse(form["IdCidade"]);
+                    if (idCidade == 0)
+                    {
+                        ViewData["Error"] = "Você deve selecionar uma cidade";
+                        return View();
+                    }
+
+                    string senha = form["Senha"];
+                    if (string.IsNullOrEmpty(senha))
+                    {
+                        ViewData["Error"] = "Senha não pode estar vazia";
+                        return View();
+                    }
+
+                    if (senha.Length < 6)
+                    {
+                        ViewData["Error"] = "Senha não pode ter menos que 6 dígitos";
+                        return View();
+                    }
+
+                    string confirmarSenha = form["ConfirmarSenha"];
+                    if (senha.CompareTo(confirmarSenha) != 0)
+                    {
+                        ViewData["Error"] = "Confirmação de senha é diferente da senha digitada";
+                        return View();
+                    }
+
+                    Usuarios u = new Usuarios()
+                    {
+                        Nome = nome,
+                        Sobrenome = sobrenome,
+                        Email = email,
+                        Id_Estado = idEstado,
+                        Id_Cidade = idCidade,
+                        Data_Cadastro = DateTime.Now,
+                        EmailConfirmado = true,
+                        Senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(senha),
+                        UrlFotoPerfil = "/Static/img/playerPhoto/default.jpg"
+                    };
+
+                    NPartyDb<Usuarios>.Instance.Insert(u);
+
+                    ViewData["Sucesso"] = "Cadastro realizado com sucesso. Seja bem vindo!";
+                    Session["CurrentUser"] = u;
+
+                    return View();
+                }
+
+                if (form["login"] != null)
+                {
+                    string email = form["EmailLogin"];
+                    if (string.IsNullOrEmpty(email))
+                    {
+                        ViewData["Error"] = "Email não pode estar vazio";
+                        return View();
+                    }
+
+                    string senha = form["SenhaLogin"];
+                    if (string.IsNullOrEmpty(senha))
+                    {
+                        ViewData["Error"] = "Senha não pode estar vazia";
+                        return View();
+                    }
+
+                    senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(senha);
+                    Usuarios usuario = Usuarios.Select().Where("Email", email).SingleResult();
+                    if (usuario != null && !string.IsNullOrEmpty(usuario.Senha))
+                    {
+                        if (CampeonatosNParty.Helpers.RegisterHelper.CheckValidPassword(usuario.Senha, senha))
+                        {
+                            Session["CurrentUser"] = usuario;
+                            return View();
+                        }
+                        else
+                        {
+                            ViewData["Error"] = "Usuário ou senha inválidos.";
+                        }
+                    }
+                    else
+                    {
+                        ViewData["Error"] = "Usuário não registrado.";
+                    }                    
+                }
+            }
+            catch (Exception e)
+            {
+                ViewData["Error"] = "Ops, algo de inesperado aconteceu. Por favor, tente novamente mais tarde";
+            }
+            return View();
+        }
+
+        [HttpGet]
         public ActionResult SuperSmashBrosChallenger()
         {
             SmashBrosChallengerView view = new SmashBrosChallengerView(CurrentUsuario, 

@@ -250,6 +250,7 @@
     <Content Include="Static\img\badges\default.jpg" />
     <Content Include="Static\img\badges\mk7_1.jpg" />
     <Content Include="Static\img\badges\poke_1.jpg" />
+    <Content Include="Static\img\bgblackfriday.png" />
     <Content Include="Static\img\bgPoke.png" />
     <Content Include="Static\img\bgSmash.png" />
     <Content Include="Static\img\default.png" />
@@ -755,6 +756,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Sorteio\DemoPokemon.cshtml" />
+    <Content Include="Views\Widgets\BlackFriday.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\csharp-jetfuel\EixoX.Web\EixoX.Web.csproj">

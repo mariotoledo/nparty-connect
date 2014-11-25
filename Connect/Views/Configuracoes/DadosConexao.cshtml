@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Dados de Conexão";
     EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.DadosBasicos> presenter =
-    new EixoX.Html.Bootstrap2Presenter<CampeonatosNParty.Models.StructModel.DadosBasicos>(1046);
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.DadosBasicos>.GetInstance(1046);
     bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
 }
 

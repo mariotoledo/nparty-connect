@@ -4,6 +4,7 @@ using AdminConnect.Models.Database;
 using AdminConnect.Models.View;
 using CampeonatosNParty.Helpers;
 using CampeonatosNParty.Models.Database;
+using EixoX.Data;
 using EixoX.Web.AuthComponent;
 using System;
 using System.Collections.Generic;
@@ -280,7 +281,7 @@ namespace AdminConnect.Controllers
             {
                 if (!id.HasValue)
                 {
-                    FlashMessage("Evento criado com sucesso", MessageType.Success);
+                    FlashMessage("Você precisa selecionar um evento", MessageType.Error);
                     return RedirectToAction("Gerenciar");
                 }
 
@@ -465,6 +466,124 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 return Json("", JsonRequestBehavior.AllowGet);
+            }
+        }
+
+        [HttpGet]
+        [AuthenticationRequired]
+        [AccessRequired(Models.Attributes.AccessType.CanCreateChampionship)]
+        public ActionResult AdicionarCampeonato(int? id)
+        {
+            try
+            {
+                if (!id.HasValue)
+                {
+                    FlashMessage("Você precisa selecionar um evento", MessageType.Error);
+                    return RedirectToAction("Gerenciar");
+                }
+
+                Eventos evento = Eventos.Select().Where("Id", id.Value).SingleResult();
+                if (evento == null)
+                {
+                    FlashMessage("Evento não encontrado", MessageType.Error);
+                    return RedirectToAction("Gerenciar");
+                }
+
+                if (evento.IdOrganizador != CurrentUser.IdOrganizador)
+                {
+                    FlashMessage("Você não pode criar campeonatos para este evento", MessageType.Error);
+                    return RedirectToAction("Gerenciar");
+                }
+
+                ViewData["Evento"] = evento;
+                ViewData["Jogos"] = Jogos.Select().OrderBy("Nome");
+
+                Campeonatos campeonato = new Campeonatos();
+                return View(campeonato);
+            }
+            catch (Exception e)
+            {
+                FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+                return RedirectToAction("Gerenciar");
+            }
+        }
+
+        [HttpPost]
+        [AuthenticationRequired]
+        [AccessRequired(Models.Attributes.AccessType.CanCreateChampionship)]
+        public ActionResult AdicionarCampeonato(int? id, FormCollection form, Campeonatos campeonato)
+        {
+            try
+            {
+                if (!id.HasValue)
+                {
+                    FlashMessage("Você precisa selecionar um evento", MessageType.Error);
+                    return RedirectToAction("Gerenciar");
+                }
+
+                Eventos evento = Eventos.Select().Where("Id", id.Value).SingleResult();
+                if (evento == null)
+                {
+                    FlashMessage("Evento não encontrado", MessageType.Error);
+                    return RedirectToAction("Gerenciar");
+                }
+
+                if (evento.IdOrganizador != CurrentUser.IdOrganizador)
+                {
+                    FlashMessage("Você não pode criar campeonatos para este evento", MessageType.Error);
+                    return RedirectToAction("Gerenciar");
+                }
+
+                ClassSelect<Jogos> jogos = Jogos.Select().OrderBy("Nome");
+
+                ViewData["Evento"] = evento;
+                ViewData["Jogos"] = Jogos.Select().OrderBy("Nome");
+
+                if (campeonato.IdJogo <= 0)
+                {
+                    FlashMessage("Você precisa selecionar um jogo", MessageType.Error);
+                    return RedirectToAction("Gerenciar");
+                }
+
+                DateTime dataCampeonato;
+
+                try
+                {
+                    dataCampeonato = DateTime.ParseExact(form["Data"], "dd/MM/yyyy hh:mm",
+                                       System.Globalization.CultureInfo.InvariantCulture);
+                }
+                catch (Exception e)
+                {
+                    FlashMessage("Ocorreu um erro ao tentar formatar a data do campeonato", MessageType.Error);
+                    return View(campeonato);
+                }
+
+                if (evento.DataEventoInicio.CompareTo(dataCampeonato) > 0)
+                {
+                    FlashMessage("A data do campeonato não pode ser antes da data do evento", MessageType.Error);
+                    return View(campeonato);
+                }
+
+                if (evento.DataEventoFim != null && ((DateTime)evento.DataEventoFim).CompareTo(dataCampeonato) < 0)
+                {
+                    FlashMessage("A data do campeonato não pode ser depois da data do evento", MessageType.Error);
+                    return View(campeonato);
+                }
+
+                campeonato.DataCadastro = DateTime.Now;
+                campeonato.DataCampeonato = dataCampeonato;
+                campeonato.IdStatus = 1;
+                campeonato.IdEvento = evento.Id;
+
+                NPartyDb<Campeonatos>.Instance.Insert(campeonato);
+
+                FlashMessage("Campeonato criado com sucesso", MessageType.Success);
+                return Redirect("~/Eventos/Detalhes/" + evento.Id);
+            }
+            catch (Exception e)
+            {
+                FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+                return RedirectToAction("Gerenciar");
             }
         }
 	}
