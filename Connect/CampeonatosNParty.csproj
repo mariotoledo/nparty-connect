@@ -109,6 +109,9 @@
   <ItemGroup>
     <Compile Include="Controllers\ClassificadosPokemonController.cs" />
     <Compile Include="Controllers\SorteioController.cs" />
+    <Compile Include="Models\Database\BlackFridayAnuncioDetalhes.cs" />
+    <Compile Include="Models\Database\BlackFridayAnuncioVoto.cs" />
+    <Compile Include="Models\Database\BlackFridayAnuncio.cs" />
     <Compile Include="Models\Database\Eventos.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AuthenticationBasedController.cs" />

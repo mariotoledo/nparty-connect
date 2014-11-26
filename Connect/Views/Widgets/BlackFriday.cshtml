@@ -1,4 +1,4 @@
-﻿@model CampeonatosNParty.Models.Database.SorteioUsuario
+﻿@model EixoX.Data.ClassSelectResult<CampeonatosNParty.Models.Database.BlackFridayAnuncioDetalhes>
 @{
     ViewBag.Title = "Fique por dentro dos melhores descontos de games da Black Friday deste ano";
     CampeonatosNParty.Models.Database.Usuarios currentUser = (CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"];
@@ -26,6 +26,8 @@
 
     <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap.min.css")" />
     <link rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap-responsive.min.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
     <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
     <style type="text/css">
         body {
@@ -48,6 +50,10 @@
             margin-top: 20px;
             margin-bottom: 20px;
         }
+
+        .thumbnail a {
+            color: #75010C;
+        }
     </style>
 </head>
 <body>
@@ -63,7 +69,7 @@
                     }
                     else
                     {
-                        <center><p>Olá, @currentUser.Nome. Você pode <a href="#" class="btn btn-default">cadastrar um anúncio</a> ou <a href="#" class="btn btn-default">fazer logoff</a></p></center>
+                        <center><p>Olá, @currentUser.Nome. Você pode <a href="#myModal" role="button" data-toggle="modal" class="btn btn-default">cadastrar um anúncio</a> ou <a href="@Url.Content("~/Widgets/LogoutBlackFriday")" class="btn btn-default">fazer logoff</a></p></center>
                     }
                 }
             </div>
@@ -178,6 +184,48 @@
         </div>
         <div class="container">
             <div class="row">
+                <div class="span12" style="padding-top: 20px; padding-bottom: 20px;">
+                    @if (Model == null || Model.Count == 0)
+                    {
+
+                            <span>Não encontramos nenhum anúncio no momento</span>
+                    }
+                    else
+                    {
+                        foreach (CampeonatosNParty.Models.Database.BlackFridayAnuncioDetalhes[] anuncioSegment in Model.Segment(3))
+                        {
+                            string buttonDisabled = currentUser == null || anuncio.IdUsuario == currentUser.Id ? "disabled" : "";
+                            <ul class="thumbnails">
+                            @foreach (CampeonatosNParty.Models.Database.BlackFridayAnuncioDetalhes anuncio in anuncioSegment)
+                            {
+                                <li class="span3">
+                                    <div class="thumbnail" style="background-color: #FFF; color: #000">
+                                        <a href="@anuncio.UrlAnuncio" target="_blank"><h4>@anuncio.NomeAnuncio</h4></a>
+                                        <div class="textDescription">
+                                            <div>
+                                                <b>Valor:</b> @anuncio.Valor.ToString("C2")<br />
+                                                <small>Por: @anuncio.Nome @anuncio.Sobrenome</small>
+                                            </div>
+                                        </div><br/>
+                                        <div class="progress">
+                                            <div class="bar bar-success" style="width: @anuncio.PorcentagemPositiva()%;"></div>
+                                            <div class="bar bar-danger" style="width: @anuncio.PorcentagemNegativa()%;"></div>
+                                        </div>
+                                        <div>
+                                            <button @buttonDisabled class="btn btn-success" style="width:49%"><i class="fa fa-thumbs-o-up"></i></button>
+                                            <button @buttonDisabled class="btn btn-danger" style="width:49%"><i class="fa fa-thumbs-o-down"></i></button>
+                                        </div>   
+                                    </div>
+                                </li>
+                            }                            
+                            </ul>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
                 <div class="span6">
                     <h4 style="text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">Acompanhe as notícias da Nintendo pela N-Party</h4>
                     <ul class="thumbnails" id="Noticias">
@@ -193,9 +241,31 @@
             </div>
         </div>
     </div>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 style="color: #000;">Criar anúncio</h3>
+        </div>
+        <form class="form" style="color: #000;" method="post">
+            <div class="modal-body">
+                <fieldset>
+                    <label>Título do anúncio</label>
+                    <input type="text" placeholder="Insira o título do anúncio" name="NomeAnuncio" style="width: 100%; height: 30px;">
+                    <label>URL do anúncio</label>
+                    <input type="text" placeholder="Insira a URL do anúncio" name="URLAnuncio" style="width: 100%; height: 30px;">
+                    <label>Valor</label>
+                    <input type="text" placeholder="Insira o valor do produto em reais" name="ValorAnuncio" style="width: 100%; height: 30px;">
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <button type="submit" name="criarAnuncio" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
-<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
+
 <script type="text/javascript">
 
     $(document).ready(function () {
@@ -235,12 +305,12 @@
 
     function loadMenu(menuId) {
         $('.white-container').each(function (index, value) {
-            $(this).hide('slow');
+            $(this).slideUp();
         });
         
         $menu = $('#' + menuId);
         if($menu.is(":visible") == false)
-            $menu.show('slow');
+            $menu.slideDown();
     }
 </script>
 <script>
