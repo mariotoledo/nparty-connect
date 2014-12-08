@@ -33,5 +33,8 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public bool FoiAprovado { get; set; }
+
+        [DatabaseColumn]
+        public DateTime DataCriacao { get; set; }
     }
 }

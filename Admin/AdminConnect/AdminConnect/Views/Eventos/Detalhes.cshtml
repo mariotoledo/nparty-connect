@@ -34,7 +34,7 @@
                           {
                              <li><a href="@Url.Content("~/Eventos/Editar/" + Model.detalhesEvento.Id)">Editar Evento</a></li>
                           }
-                          @if (user.AdminSupremo || user.PodeEditarEventos)
+                          @if (user.AdminSupremo || user.PodeDeletarEventos)
                           {
                               <li><a href="">Deletar Evento</a></li>
                           }
@@ -62,7 +62,7 @@
         </div>
         <div class="col-md-8">
             <h4>Campeonatos @{if (user.AdminSupremo || (user.PodeCriarCampeonato && user.IdOrganizador == Model.detalhesEvento.IdOrganizador))
-                              {<a href="@Url.Content("~/Campeonatos/Novo/" + Model.detalhesEvento.Id)" class="btn btn-primary">Adicionar</a>}
+                              {<a href="@Url.Content("~/Eventos/AdicionarCampeonato/" + Model.detalhesEvento.Id)" class="btn btn-primary">Adicionar</a>}
 }</h4>
             @{
                 if (Model.campeonatos != null && Model.campeonatos.Count > 0)

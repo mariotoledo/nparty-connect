@@ -109,6 +109,9 @@
   <ItemGroup>
     <Compile Include="Controllers\ClassificadosPokemonController.cs" />
     <Compile Include="Controllers\SorteioController.cs" />
+    <Compile Include="Models\Database\BlackFridayAnuncioDetalhes.cs" />
+    <Compile Include="Models\Database\BlackFridayAnuncioVoto.cs" />
+    <Compile Include="Models\Database\BlackFridayAnuncio.cs" />
     <Compile Include="Models\Database\Eventos.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
     <Compile Include="Controllers\AuthenticationBasedController.cs" />
@@ -250,6 +253,7 @@
     <Content Include="Static\img\badges\default.jpg" />
     <Content Include="Static\img\badges\mk7_1.jpg" />
     <Content Include="Static\img\badges\poke_1.jpg" />
+    <Content Include="Static\img\bgblackfriday.png" />
     <Content Include="Static\img\bgPoke.png" />
     <Content Include="Static\img\bgSmash.png" />
     <Content Include="Static\img\default.png" />
@@ -755,6 +759,7 @@
       <SubType>Code</SubType>
     </Content>
     <Content Include="Views\Sorteio\DemoPokemon.cshtml" />
+    <Content Include="Views\Widgets\BlackFriday.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\csharp-jetfuel\EixoX.Web\EixoX.Web.csproj">

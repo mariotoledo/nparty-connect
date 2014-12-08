@@ -41,5 +41,9 @@ namespace CampeonatosNParty.Models.StructModel
         [DigitsOnly]
         [MaxLength(14)]
         public string Telefone { get; set; }
+
+        [DatabaseColumn]
+        [UICheckbox("Desejo receber novidades e anúncios dos eventos da N-Party em meu e-mail")]
+        public bool Newsletter { get; set; }
     }
 }

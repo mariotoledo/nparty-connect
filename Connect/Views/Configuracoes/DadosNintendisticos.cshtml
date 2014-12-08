@@ -5,7 +5,7 @@
 @{
     ViewBag.Title = "Dados Nintendísticos";
     EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.DadosNintendisticos> presenter =
-    new EixoX.Html.Bootstrap2Presenter<CampeonatosNParty.Models.StructModel.DadosNintendisticos>(1046);
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.DadosNintendisticos>.GetInstance(1046);
     bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
 }
 

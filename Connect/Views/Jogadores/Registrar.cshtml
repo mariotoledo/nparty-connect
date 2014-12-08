@@ -4,7 +4,7 @@
 @{
     ViewBag.Title = "Registrar";
     EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios> presenter =
-        new EixoX.Html.Bootstrap2Presenter<CampeonatosNParty.Models.Database.Usuarios>(1046);
+        EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.Database.Usuarios>.GetInstance(1046);
     bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
 }
 

@@ -162,6 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\CampeonatosController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -219,6 +220,7 @@
     <Compile Include="Models\Database\Administrador.cs" />
     <Compile Include="Models\Database\Usuarios.cs" />
     <Compile Include="Models\Struct\Login.cs" />
+    <Compile Include="Models\View\DetalhesCampeonato.cs" />
     <Compile Include="Models\View\DetalhesEventoView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -307,6 +309,8 @@
     <Content Include="Views\Eventos\Detalhes.cshtml" />
     <Content Include="Views\Eventos\Novo.cshtml" />
     <Content Include="Views\Eventos\Editar.cshtml" />
+    <Content Include="Views\Eventos\AdicionarCampeonato.cshtml" />
+    <Content Include="Views\Campeonatos\Detalhes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -320,6 +324,12 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
     <ProjectReference Include="..\..\..\..\csharp-jetfuel\EixoX.Web\EixoX.Web.csproj">
       <Project>{225c6d0e-9867-4f36-90df-30e0521ad865}</Project>
       <Name>EixoX.Web</Name>
@@ -328,12 +338,6 @@
       <Project>{0a418683-14d0-433f-ba4d-c4919c8069a7}</Project>
       <Name>EixoX</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

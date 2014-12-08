@@ -20,6 +20,224 @@ namespace CampeonatosNParty.Controllers
         }
 
         [HttpGet]
+        public ActionResult BlackFriday()
+        {
+            List<BlackFridayAnuncioDetalhes> anuncios = null;
+            try
+            {
+                anuncios = BlackFridayAnuncioDetalhes.Select().ToList();
+            }
+            catch (Exception e)
+            {
+
+            }
+            return View(anuncios);
+        }
+
+        [HttpPost]
+        public ActionResult BlackFriday(FormCollection form)
+        {
+            try
+            {
+                int page = 0;
+                int.TryParse(Request.QueryString["p"], out page);
+
+                ClassSelectResult<BlackFridayAnuncioDetalhes> anuncios = BlackFridayAnuncioDetalhes.Select().Page(15, page).ToResult();
+
+                if (form["registrar"] != null)
+                {
+                    string nome = form["Nome"];
+                    if (string.IsNullOrEmpty(nome))
+                    {
+                        ViewData["Error"] = "Nome não pode estar vazio";
+                        return View(anuncios);
+                    }
+
+                    if (nome.Length < 3 || nome.Length > 20)
+                    {
+                        ViewData["Error"] = "Nome possui tamanho inválido";
+                        return View(anuncios);
+                    }
+
+                    string sobrenome = form["Sobrenome"];
+                    if (string.IsNullOrEmpty(sobrenome))
+                    {
+                        ViewData["Error"] = "Sobrenome não pode estar vazio";
+                    }
+
+                    if (sobrenome.Length < 3 || sobrenome.Length > 20)
+                    {
+                        ViewData["Error"] = "Sobrenome possui tamanho inválido";
+                    }
+
+                    string email = form["Email"];
+                    if (string.IsNullOrEmpty(email))
+                    {
+                        ViewData["Error"] = "Email não pode estar vazio";
+                        return View(anuncios);
+                    }
+
+                    if (!EixoX.Restrictions.Email.IsEmail(email))
+                    {
+                        ViewData["Error"] = "Email inválido";
+                        return View(anuncios);
+                    }
+
+                    int idEstado = Int32.Parse(form["IdEstado"]);
+                    if (idEstado == 0)
+                    {
+                        ViewData["Error"] = "Você deve selecionar um estado";
+                        return View(anuncios);
+                    }
+
+                    int idCidade = Int32.Parse(form["IdCidade"]);
+                    if (idCidade == 0)
+                    {
+                        ViewData["Error"] = "Você deve selecionar uma cidade";
+                        return View(anuncios);
+                    }
+
+                    string senha = form["Senha"];
+                    if (string.IsNullOrEmpty(senha))
+                    {
+                        ViewData["Error"] = "Senha não pode estar vazia";
+                        return View(anuncios);
+                    }
+
+                    if (senha.Length < 6)
+                    {
+                        ViewData["Error"] = "Senha não pode ter menos que 6 dígitos";
+                        return View(anuncios);
+                    }
+
+                    string confirmarSenha = form["ConfirmarSenha"];
+                    if (senha.CompareTo(confirmarSenha) != 0)
+                    {
+                        ViewData["Error"] = "Confirmação de senha é diferente da senha digitada";
+                        return View(anuncios);
+                    }
+
+                    Usuarios u = new Usuarios()
+                    {
+                        Nome = nome,
+                        Sobrenome = sobrenome,
+                        Email = email,
+                        Id_Estado = idEstado,
+                        Id_Cidade = idCidade,
+                        Data_Cadastro = DateTime.Now,
+                        EmailConfirmado = true,
+                        Senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(senha),
+                        UrlFotoPerfil = "/Static/img/playerPhoto/default.jpg"
+                    };
+
+                    NPartyDb<Usuarios>.Instance.Insert(u);
+
+                    ViewData["Sucesso"] = "Cadastro realizado com sucesso. Seja bem vindo!";
+                    Session["CurrentUser"] = u;
+
+                    return View(anuncios);
+                }
+
+                if (form["login"] != null)
+                {
+                    string email = form["EmailLogin"];
+                    if (string.IsNullOrEmpty(email))
+                    {
+                        ViewData["Error"] = "Email não pode estar vazio";
+                        return View(anuncios);
+                    }
+
+                    string senha = form["SenhaLogin"];
+                    if (string.IsNullOrEmpty(senha))
+                    {
+                        ViewData["Error"] = "Senha não pode estar vazia";
+                        return View(anuncios);
+                    }
+
+                    string encsenha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(senha);
+                    Usuarios usuario = Usuarios.Select().Where("Email", email).SingleResult();
+                    if (usuario != null && !string.IsNullOrEmpty(usuario.Senha))
+                    {
+                        if (CampeonatosNParty.Helpers.RegisterHelper.CheckValidPassword(usuario.Senha, senha))
+                        {
+                            Session["CurrentUser"] = usuario;
+                            return Redirect("~/Widgets/BlackFriday");
+                        }
+                        else
+                        {
+                            ViewData["Error"] = "Usuário ou senha inválidos.";
+                        }
+                    }
+                    else
+                    {
+                        ViewData["Error"] = "Usuário não registrado.";
+                    }                    
+                }
+
+                if (form["criarAnuncio"] != null && CurrentUsuario != null)
+                {
+                    string nomeAnuncio = form["NomeAnuncio"];
+                    if (string.IsNullOrEmpty(nomeAnuncio))
+                    {
+                        ViewData["Error"] = "O nome do anúncio não pode estar vazio";
+                        return View(anuncios);
+                    }
+
+                    string urlAnuncio = form["URLAnuncio"];
+                    if (string.IsNullOrEmpty(urlAnuncio))
+                    {
+                        ViewData["Error"] = "A URL do anúncio não pode estar vazia";
+                        return View(anuncios);
+                    }
+
+                    string valorAnuncio = form["ValorAnuncio"];
+                    if (string.IsNullOrEmpty(valorAnuncio))
+                    {
+                        ViewData["Error"] = "O valor do produto não pode estar vazio";
+                        return View(anuncios);
+                    }
+
+                    decimal valorDoAnuncio = 0;
+
+                    try { valorDoAnuncio = Decimal.Parse(valorAnuncio.Replace(',', '.')); }
+                    catch (Exception e)
+                    {
+                        ViewData["Error"] = "Valor do produto é inválido. Por favor, digite um valor numérico, em reais.";
+                        return View(anuncios);
+                    }
+
+                    BlackFridayAnuncio anuncio = new BlackFridayAnuncio()
+                    {
+                        DataCriacao = DateTime.Now,
+                        FoiAprovado = false,
+                        IdUsuario = CurrentUsuario.Id,
+                        NomeAnuncio = nomeAnuncio,
+                        UrlAnuncio = urlAnuncio,
+                        Valor = valorDoAnuncio
+                    };
+
+                    NPartyDb<BlackFridayAnuncio>.Instance.Insert(anuncio);
+
+                    ViewData["Sucesso"] = "Anuncio criado com sucesso! Ele aparecerá na página assim que for aprovado.";
+
+                    return Redirect("~/Widgets/BlackFriday");
+                }
+            }
+            catch (Exception e)
+            {
+                ViewData["Error"] = "Ops, algo de inesperado aconteceu. Por favor, tente novamente mais tarde";
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult LogoutBlackFriday()
+        {
+            Session["CurrentUser"] = null;
+            return Redirect("~/Widgets/BlackFriday");
+        }
+
+        [HttpGet]
         public ActionResult SuperSmashBrosChallenger()
         {
             SmashBrosChallengerView view = new SmashBrosChallengerView(CurrentUsuario, 

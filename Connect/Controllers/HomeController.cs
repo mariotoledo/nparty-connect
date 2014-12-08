@@ -179,7 +179,7 @@ namespace CampeonatosNParty.Controllers
             string senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(model.Senha);
             if (RestrictionAspect<CampeonatosNParty.Models.StructModel.Login>.Instance.Validate(model))
             {
-                Usuarios usuario = Usuarios.Select().Where("Email", model.Email).SingleOrDefault();
+                Usuarios usuario = Usuarios.Select().Where("Email", model.Email).SingleResult();
                 if (usuario != null && !string.IsNullOrEmpty(usuario.Senha))
                 {
                     if (CampeonatosNParty.Helpers.RegisterHelper.CheckValidPassword(usuario.Senha, model.Senha))
