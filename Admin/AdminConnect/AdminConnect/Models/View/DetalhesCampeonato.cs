@@ -1,4 +1,5 @@
 ﻿using CampeonatosNParty.Models.Database;
+using EixoX.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,8 @@ namespace AdminConnect.Models.View
             public Eventos evento { get; set; }
             public Campeonatos campeonato { get; set; }
             public IEnumerable<ClassificacaoCampeonato[]> classificacao { get; set; }
+            public long numeroParticipantes { get; set; }
+            public StatusCampeonato statusCampeonato;
 
             public DetalhesCampeonato(int campeonatoId)
             {
@@ -24,9 +27,13 @@ namespace AdminConnect.Models.View
                     evento = Eventos.WithIdentity(campeonato.IdEvento);
                 }
 
-                classificacao = ClassificacaoCampeonato.Select()
-                                .Where("IdCampeonato", campeonatoId)
-                                .OrderBy("Classificacao", EixoX.Data.SortDirection.Ascending).Segment(6);
+                ClassSelect<ClassificacaoCampeonato> classificacaoCampeonato = ClassificacaoCampeonato.Select().Where("IdCampeonato", campeonatoId);
+                numeroParticipantes = classificacaoCampeonato.Count();
+
+                classificacao = classificacaoCampeonato
+                                .OrderBy("Classificacao", EixoX.Data.SortDirection.Ascending).Segment(4);
+
+                statusCampeonato = StatusCampeonato.WithIdentity(campeonato.IdStatus);
             }
     }
 }

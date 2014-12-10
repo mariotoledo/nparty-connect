@@ -311,6 +311,7 @@
     <Content Include="Views\Eventos\Editar.cshtml" />
     <Content Include="Views\Eventos\AdicionarCampeonato.cshtml" />
     <Content Include="Views\Campeonatos\Detalhes.cshtml" />
+    <Content Include="Views\Shared\CampeonatoStatusChange.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -330,11 +331,11 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\csharp-jetfuel\EixoX.Web\EixoX.Web.csproj">
+    <ProjectReference Include="..\..\..\..\Jetfuel-CSharp\EixoX.Web\EixoX.Web.csproj">
       <Project>{225c6d0e-9867-4f36-90df-30e0521ad865}</Project>
       <Name>EixoX.Web</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\csharp-jetfuel\EixoX\EixoX.csproj">
+    <ProjectReference Include="..\..\..\..\Jetfuel-CSharp\EixoX\EixoX.csproj">
       <Project>{0a418683-14d0-433f-ba4d-c4919c8069a7}</Project>
       <Name>EixoX</Name>
     </ProjectReference>

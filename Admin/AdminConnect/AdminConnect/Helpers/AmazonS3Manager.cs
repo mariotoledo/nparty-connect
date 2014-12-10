@@ -52,7 +52,7 @@ namespace AdminConnect.Helpers
 
         private bool Exists(string bucketName)
         {
-            return Amazon.S3.Util.AmazonS3Util.DoesS3BucketExist(client, bucketName);
+            return Amazon.S3.Util.AmazonS3Util.DoesS3BucketExist(bucketName, client);
         }
 
         /// <summary>

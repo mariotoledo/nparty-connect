@@ -1,0 +1,63 @@
+﻿@model Tuple<CampeonatosNParty.Models.Database.Campeonatos, CampeonatosNParty.Models.Database.Eventos, CampeonatosNParty.Models.Database.Administrador>
+
+@{
+    if (Model.Item1.IdStatus != 3 && (Model.Item3.AdminSupremo || (Model.Item3.PodeEditarCampeonato && Model.Item3.IdOrganizador == Model.Item2.IdOrganizador)))
+    {
+        <div class="btn-group btn-group-sm">
+            <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">
+                Alterar <span class="caret"></span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                @if (Model.Item1.IdStatus == 1)
+                {
+                    <li><button type="button" class="btn btn-default" data-toggle="modal" data-target="#cancelarModal">Cancelado</button></li>
+                }
+                @if (Model.Item1.IdStatus == 1)
+                {
+                    <li><button type="button" class="btn btn-default" data-toggle="modal" data-target="#emAndamentoModal">Em Andamento</button></li>
+                }
+                @if (Model.Item1.IdStatus == 1 || Model.Item1.IdStatus == 2)
+                {
+                    <li><a href="@Url.Content("~/Campeonatos/Finalizar/" + Model.Item2.Id)">Finalizado</a></li>
+                }
+            </ul>
+        </div>
+
+        <div class="modal fade" id="cancelarModal" tabindex="-1" role="dialog" aria-labelledby="cancelarModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+                        <h4 class="modal-title" id="exampleModalLabel">Cancelar campeonato?</h4>
+                    </div>
+                    <div class="modal-body">
+                       <p>Tem certeza que deseja cancelar este campeonato?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Não, abortar</button>
+                        <a role="button" class="btn btn-primary" href="@Url.Content("~/Campeonatos/Cancelar/" + Model.Item2.Id)">Sim, tenho certeza</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="emAndamentoModal" tabindex="-1" role="dialog" aria-labelledby="emAndamentoModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+                        <h4 class="modal-title" id="emAndamentoModalLabel">Iniciar campeonato?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Tem certeza que deseja iniciar este campeonato?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Não, abortar</button>
+                        <a role="button" class="btn btn-primary" href="@Url.Content("~/Campeonatos/Iniciar/" + Model.Item2.Id)">Sim, tenho certeza</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
