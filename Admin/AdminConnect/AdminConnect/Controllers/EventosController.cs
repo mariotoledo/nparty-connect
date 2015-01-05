@@ -81,6 +81,7 @@ namespace AdminConnect.Controllers
                 ViewData["TipoEvento"] = TipoEvento.Select();
                 ViewData["Estados"] = Estado.Select();
                 ViewData["Eventos"] = eventos.OrderBy("Nome");
+                ViewData["Organizadores"] = Organizador.Select().Where("OrganizadorPublico", 1).Or("Id", CurrentUser.IdOrganizador).OrderBy("Nome");
 
                 return View(evento);
             }
@@ -101,6 +102,7 @@ namespace AdminConnect.Controllers
                 ViewData["TipoEvento"] = TipoEvento.Select();
                 ViewData["Estados"] = Estado.Select();
                 ViewData["Eventos"] = Eventos.Select().OrderBy("Nome");
+                ViewData["Organizadores"] = Organizador.Select().Where("OrganizadorPublico", 1).Or("Id", CurrentUser.IdOrganizador).OrderBy("Nome");
             }
             catch (Exception e)
             {
@@ -258,7 +260,6 @@ namespace AdminConnect.Controllers
                 }
 
                 evento.DataCadastro = DateTime.Now;
-                evento.IdOrganizador = CurrentUser.IdOrganizador;
 
                 NPartyDb<Eventos>.Instance.Insert(evento);
 
@@ -443,6 +444,8 @@ namespace AdminConnect.Controllers
                     eventoToUpdate.ImagemURL = null;
                 }
 
+                eventoToUpdate.IdOrganizador = evento.IdOrganizador;
+
                 NPartyDb<Eventos>.Instance.Save(eventoToUpdate);
 
                 FlashMessage("Evento atualizado com sucesso", MessageType.Success);
@@ -574,6 +577,7 @@ namespace AdminConnect.Controllers
                 campeonato.DataCampeonato = dataCampeonato;
                 campeonato.IdStatus = 1;
                 campeonato.IdEvento = evento.Id;
+                campeonato.IdOrganizador = CurrentUser.IdOrganizador;
 
                 NPartyDb<Campeonatos>.Instance.Insert(campeonato);
 

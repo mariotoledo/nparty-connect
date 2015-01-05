@@ -54,5 +54,8 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public string IdOriginalk { get; set; }
+
+        [DatabaseColumn]
+        public long IdOrganizador { get; set; }
     }
 }

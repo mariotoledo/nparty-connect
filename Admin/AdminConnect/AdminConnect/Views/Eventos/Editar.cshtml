@@ -7,6 +7,8 @@
         (IEnumerable<CampeonatosNParty.Models.Database.Estado>)ViewData["Estados"];
     IEnumerable<CampeonatosNParty.Models.Database.Eventos> eventos =
     (IEnumerable<CampeonatosNParty.Models.Database.Eventos>)ViewData["Eventos"];
+    IEnumerable<AdminConnect.Models.Database.Organizador> organizadores =
+    (IEnumerable<AdminConnect.Models.Database.Organizador>)ViewData["Organizadores"];
 }
 
 
@@ -63,6 +65,16 @@
                     <div class="form-group">
                         <label for="Cidade" class="control-label">Cidade</label>
                         <select name="IdCidade" id="Cidade" class="form-control" disabled></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="Organizador" class="control-label">Organizador</label>
+                        <select name="IdOrganizador" id="Organizador" class="form-control">
+                            @foreach (AdminConnect.Models.Database.Organizador organizador in organizadores)
+                            {
+                                string selected = organizador.Id == Model.IdOrganizador ? "selected" : "";
+                                <option @selected value="@organizador.Id">@organizador.Nome</option>
+                            }
+                        </select>
                     </div>
                 </div>
             </div>

@@ -39,8 +39,9 @@
         <div class="col-md-4">
             <div class="well">
                 <h4>Detalhes</h4>
-                <b>Data: </b> @Model.campeonato.DataCampeonato.ToString("dd/MM/yyyy")<br />
-                <div><b>Status</b>: @Model.statusCampeonato.Nome @{Html.RenderPartial("CampeonatoStatusChange", new Tuple<CampeonatosNParty.Models.Database.Campeonatos, CampeonatosNParty.Models.Database.Eventos, CampeonatosNParty.Models.Database.Administrador>(Model.campeonato, Model.evento, user));}</div>
+                <b>Organizador</b>: @Model.organizador.Nome
+                <b>Data</b>: @Model.campeonato.DataCampeonato.ToString("dd/MM/yyyy")<br />
+                <b>Status</b>: @Model.statusCampeonato.Nome
                 <b>Número de inscritos</b>: @Model.numeroParticipantes
             </div>
         </div>

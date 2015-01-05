@@ -1,4 +1,5 @@
-﻿using CampeonatosNParty.Models.Database;
+﻿using AdminConnect.Models.Database;
+using CampeonatosNParty.Models.Database;
 using EixoX.Data;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,7 @@ namespace AdminConnect.Models.View
             public IEnumerable<ClassificacaoCampeonato[]> classificacao { get; set; }
             public long numeroParticipantes { get; set; }
             public StatusCampeonato statusCampeonato;
+            public Organizador organizador { get; set; }
 
             public DetalhesCampeonato(int campeonatoId)
             {
@@ -34,6 +36,8 @@ namespace AdminConnect.Models.View
                                 .OrderBy("Classificacao", EixoX.Data.SortDirection.Ascending).Segment(4);
 
                 statusCampeonato = StatusCampeonato.WithIdentity(campeonato.IdStatus);
+
+                organizador = Organizador.Select().Where("Id", campeonato.IdOrganizador).SingleResult();
             }
     }
 }
