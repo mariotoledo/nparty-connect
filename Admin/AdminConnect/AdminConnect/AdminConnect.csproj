@@ -184,6 +184,7 @@
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
     <Compile Include="Models\Database\Consoles.cs" />
+    <Compile Include="Models\Database\DetalhesCampeonato.cs" />
     <Compile Include="Models\Database\DetalhesEvento.cs" />
     <Compile Include="Models\Database\Estado.cs" />
     <Compile Include="Models\Database\Eventos.cs" />

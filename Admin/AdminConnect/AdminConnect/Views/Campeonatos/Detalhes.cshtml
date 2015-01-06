@@ -5,50 +5,67 @@
         (CampeonatosNParty.Models.Database.Administrador)Session["CurrentUser"];
 }
 
-<ol class="breadcrumb">
-    <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
-    <li><a href="@Url.Content("~/Eventos/Gerenciar/")">Gerenciar</a></li>
-    @if (Model != null && Model.evento != null)
-    {
-        <li><a href="@Url.Content("~/Eventos/Detalhes/" + Model.evento.Id)">@Model.evento.Nome</a></li>
-    }
-    @if (Model != null && Model.jogo != null && Model.campeonato != null)
-    {
-        <li class="active">@Model.jogo.Nome (@Model.campeonato.DataCampeonato.ToString("dd/MM/yyyy"))</li>
-    }
-    
-</ol>
-
 @{
     Html.RenderPartial("FlashMessage");
 }
 
-@if (Model != null && Model.campeonato != null && Model.jogo != null)
+@if (Model != null && Model.detalhesCampeonato != null)
 {
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
+        <li><a href="@Url.Content("~/Eventos/Gerenciar/")">Gerenciar</a></li>
+        <li><a href="@Url.Content("~/Eventos/Detalhes/" + Model.detalhesCampeonato.IdEvento)">@Model.detalhesCampeonato.NomeEvento</a></li>
+        <li class="active">@Model.detalhesCampeonato.NomeJogo (@Model.detalhesCampeonato.DataCampeonato.ToString("dd/MM/yyyy"))</li>
+    </ol>
+    
     <div class="row">
         <div class="col-md-8">
-            <h2>@Model.jogo.Nome</h2>
+            <h2>@Model.detalhesCampeonato.NomeJogo</h2>
         </div>
+        <div class="col-md-4">
+            @{
+                if ((user.AdminSupremo || (user.PodeEditarCampeonato && user.IdOrganizador == Model.detalhesCampeonato.IdOrganizador)) && Model.detalhesCampeonato.IdStatus != 3)
+                {
+                    <div class="btn-group pull-right" style="margin-top: 20px; margin-bottom: 10px;">
+                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                            Alterar status <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            @if (Model.detalhesCampeonato.IdStatus == 1)
+                            {
+                                <li><a href="@Url.Content("~/Campeonatos/EmAndamento/" + Model.detalhesCampeonato.IdCampeonato)">Iniciar</a></li>
+                            }
+                            @if (Model.detalhesCampeonato.IdStatus == 2)
+                            {
+                                <li><a href="">Não Iniciado</a></li>
+                                <li><a href="">Finalizar</a></li>
+                            }
+                        </ul>
+                    </div>
+                }
+            }
+        </div>
+
     </div>
     <div class="row">
         <div class="col-md-12">
-            <img class="img-responsive" src="@Model.jogo.getCoverUrl()" width="100%" />
+            <img class="img-responsive" src="@Model.detalhesCampeonato.getCoverUrl()" width="100%" />
         </div>
     </div><br />
     <div class="row">
         <div class="col-md-4">
             <div class="well">
                 <h4>Detalhes</h4>
-                <b>Organizador</b>: @Model.organizador.Nome
-                <b>Data</b>: @Model.campeonato.DataCampeonato.ToString("dd/MM/yyyy")<br />
-                <b>Status</b>: @Model.statusCampeonato.Nome
+                <b>Organizador</b>: @Model.detalhesCampeonato.NomeOrganizador<br/>
+                <b>Data</b>: @Model.detalhesCampeonato.DataCampeonato.ToString("dd/MM/yyyy")<br />
+                <b>Status</b>: @Model.detalhesCampeonato.NomeStatus<br />
                 <b>Número de inscritos</b>: @Model.numeroParticipantes
             </div>
         </div>
         <div class="col-md-8">
             <h4>
                 Participantes 
-                @if (user.AdminSupremo || (user.PodeEditarCampeonato && user.IdOrganizador == Model.evento.IdOrganizador))
+                @if (user.AdminSupremo || (user.PodeEditarCampeonato && user.IdOrganizador == Model.detalhesCampeonato.IdOrganizador))
                 {
                     <a href="#" class="btn btn-primary">Adicionar</a>
                 }
@@ -68,7 +85,7 @@
                                         <img class="img-responsive" alt="@classificacao.Nome" src="@classificacao.getUrlFotoPerfil()">
                                         <div class="caption">
                                             <h3>@classificacao.Nome</h3>
-                                            @if (Model.campeonato.IdStatus == 3)
+                                            @if (Model.detalhesCampeonato.IdStatus == 3)
                                             {
                                                 <div>
                                                     Classificação: @classificacaoCamp

@@ -1,4 +1,5 @@
 ﻿using AdminConnect.Models.View;
+using CampeonatosNParty.Models.Database;
 using EixoX.Web.AuthComponent;
 using System;
 using System.Collections.Generic;
@@ -42,8 +43,31 @@ namespace AdminConnect.Controllers
 
             try
             {
-                DetalhesCampeonato detalhesCampeonato = new DetalhesCampeonato(id.Value);
-                return View(detalhesCampeonato);
+                Campeonatos c = Campeonatos.Select().Where("Id", id.Value).SingleResult();
+
+                if (c == null)
+                {
+                    FlashMessage("Você precisa selecionar um campeonato", MessageType.Error);
+                    return Redirect("~/Eventos/Gerenciar");
+                }
+
+                if ((CurrentUser.AdminSupremo || (CurrentUser.PodeEditarCampeonato && CurrentUser.IdOrganizador == c.IdOrganizador)) == false)
+                {
+                    FlashMessage("Você não tem permissão para editar este campeonato", MessageType.Error);
+                    return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+                }
+
+                if (c.IdStatus != 1)
+                {
+                    FlashMessage("O campeonato não pode ter sido iniciado para ser alterado.", MessageType.Error);
+                    return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+                }
+
+                c.IdStatus = 2;
+                NPartyDb<Campeonatos>.Instance.Update(c);
+
+                FlashMessage("O status do campeonato foi alterado para 'Em andamento'", MessageType.Success);
+                return Redirect("~/Campeonatos/Detalhes/" + id.Value);
             }
             catch (Exception e)
             {
