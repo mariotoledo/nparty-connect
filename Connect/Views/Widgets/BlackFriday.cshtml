@@ -1,11 +1,19 @@
-﻿@model EixoX.Data.ClassSelectResult<CampeonatosNParty.Models.Database.BlackFridayAnuncioDetalhes>
+﻿@model CampeonatosNParty.Models.ViewModel.BlackFridayModel
 @{
     ViewBag.Title = "Fique por dentro dos melhores descontos de games da Black Friday deste ano";
     CampeonatosNParty.Models.Database.Usuarios currentUser = (CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"];
     Layout = null;
 
+    int currentPage = Request.QueryString["p"] == null ? 0 : Int32.Parse(Request.QueryString["p"]);
+
+    int filter = 0;
+    if (!string.IsNullOrEmpty(Request.QueryString["f"]))
+    {
+        int.TryParse(Request.QueryString["f"], out filter);
+    }
+
     string erro = (string)ViewData["Error"];
-    string sucesso = (string)ViewData["Sucesso"];
+    string sucesso = (string)TempData["Sucesso"];
     string info = (string)ViewData["Info"];
 }
 
@@ -182,48 +190,84 @@
                 </div>
             </div>
         </div>
+        
         <div class="container">
+            <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                <div class="span12">
+                    <form method="get" class="form-search pull-right">
+                        <select name="f">
+                            <option value="0" @(filter == 0 ? "selected" : "")>Mais recentes</option>
+                            <option value="1" @(filter == 1 ? "selected" : "")>Mais antigos</option>
+                            <option value="2" @(filter == 2 ? "selected" : "")>Maior pontuação</option>
+                            <option value="3" @(filter == 3 ? "selected" : "")>Menor pontuação</option>
+                        </select>
+                        <button class="btn btn-primary">
+                            Ordenar
+                        </button>
+                    </form>
+                </div>
+            </div>
             <div class="row">
                 <div class="span12" style="padding-top: 20px; padding-bottom: 20px;">
-                    @if (Model == null || Model.Count == 0)
+                    @if (Model == null || Model.result == null || Model.result.Count == 0)
                     {
 
                             <span>Não encontramos nenhum anúncio no momento</span>
                     }
                     else
                     {
-                        foreach (CampeonatosNParty.Models.Database.BlackFridayAnuncioDetalhes[] anuncioSegment in Model.Segment(3))
+                        int i = 0;
+                        foreach (CampeonatosNParty.Models.Database.BlackFridayAnuncioDetalhes[] anuncioSegment in CampeonatosNParty.Models.Database.NPartyDbExtensions.Segment(Model.result, 3))
                         {
-                            string buttonDisabled = currentUser == null || anuncio.IdUsuario == currentUser.Id ? "disabled" : "";
                             <ul class="thumbnails">
                             @foreach (CampeonatosNParty.Models.Database.BlackFridayAnuncioDetalhes anuncio in anuncioSegment)
                             {
-                                <li class="span3">
-                                    <div class="thumbnail" style="background-color: #FFF; color: #000">
-                                        <a href="@anuncio.UrlAnuncio" target="_blank"><h4>@anuncio.NomeAnuncio</h4></a>
-                                        <div class="textDescription">
-                                            <div>
-                                                <b>Valor:</b> @anuncio.Valor.ToString("C2")<br />
-                                                <small>Por: @anuncio.Nome @anuncio.Sobrenome</small>
+                                if (anuncio != null)
+                                {
+                                    i++;
+                                    string buttonDisabled = currentUser == null || anuncio.IdUsuario == currentUser.Id || (Model.votos != null && Model.votos.ContainsKey(anuncio.Id)) ? "disabled" : "";
+                                    <li class="span4">
+                                        <div class="thumbnail" style="background-color: #FFF; color: #000">
+                                            <a href="@anuncio.UrlAnuncio" target="_blank"><h4>@anuncio.NomeAnuncio</h4></a>
+                                            <div class="textDescription">
+                                                <div>
+                                                    <b>Valor:</b> @anuncio.Valor.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))<br />
+                                                    <small>Por: @anuncio.Nome @anuncio.Sobrenome</small>
+                                                </div>
+                                            </div><br/>
+                                            <div class="progress">
+                                                <div class="bar bar-success" style="width: @anuncio.PorcentagemPositiva()%;"></div>
+                                                <div class="bar bar-danger" style="width: @anuncio.PorcentagemNegativa()%;"></div>
                                             </div>
-                                        </div><br/>
-                                        <div class="progress">
-                                            <div class="bar bar-success" style="width: @anuncio.PorcentagemPositiva()%;"></div>
-                                            <div class="bar bar-danger" style="width: @anuncio.PorcentagemNegativa()%;"></div>
+                                            <p style="font-size: 12px;"><span style="color: #35a730">@anuncio.TotalPositivo</span> positivo@(anuncio.TotalPositivo != 1 ? "s" : ""), <span style="color: #cc2121">@anuncio.TotalNegativo</span> negativo@(anuncio.TotalNegativo != 1 ? "s" : "")</p>
+                                            <div>
+                                                <button @buttonDisabled id="positivo-@i" onclick="vote(@i, '@anuncio.getEncryptedId()', true)" class="btn btn-success" style="width:49%"><i class="fa fa-thumbs-o-up"></i></button>
+                                                <button @buttonDisabled id="negativo-@i" onclick="vote(@i, '@anuncio.getEncryptedId()', false)" class=" btn btn-danger" style="width:49%"><i class="fa fa-thumbs-o-down"></i></button>
+                                            </div>   
                                         </div>
-                                        <div>
-                                            <button @buttonDisabled class="btn btn-success" style="width:49%"><i class="fa fa-thumbs-o-up"></i></button>
-                                            <button @buttonDisabled class="btn btn-danger" style="width:49%"><i class="fa fa-thumbs-o-down"></i></button>
-                                        </div>   
-                                    </div>
-                                </li>
+                                    </li> 
+                                }                                
                             }                            
                             </ul>
+                        }
+                        if (Model.result.HasPreviousPages || Model.result.HasMorePages)
+                        {
+                        @Html.Raw("<div class=\"paginationButton\">");
+                        if(Model.result.HasPreviousPages)
+                        {
+                            <a class="pull-left btn btn-primary" href="@Url.Content("~/Widgets/BlackFriday?p=" + (currentPage - 1) + "&f=" + filter)"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+                        }
+                        if (Model.result.HasMorePages)
+                        {
+                            <a class="pull-right btn btn-primary" href="@Url.Content("~/Widgets/BlackFriday?p=" + (currentPage + 1) + "&f=" + filter)">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+                        }
+                        @Html.Raw("</div>");
                         }
                     }
                 </div>
             </div>
         </div>
+        
         <div class="container">
             <div class="row">
                 <div class="span6">
@@ -250,10 +294,10 @@
             <div class="modal-body">
                 <fieldset>
                     <label>Título do anúncio</label>
-                    <input type="text" placeholder="Insira o título do anúncio" name="NomeAnuncio" style="width: 100%; height: 30px;">
+                    <input type="text" placeholder="Insira o título do anúncio (o nome do jogo ou do produto, por exemplo)" name="NomeAnuncio" style="width: 100%; height: 30px;">
                     <label>URL do anúncio</label>
                     <input type="text" placeholder="Insira a URL do anúncio" name="URLAnuncio" style="width: 100%; height: 30px;">
-                    <label>Valor</label>
+                    <label>Valor (R$)</label>
                     <input type="text" placeholder="Insira o valor do produto em reais" name="ValorAnuncio" style="width: 100%; height: 30px;">
                 </fieldset>
             </div>
@@ -311,6 +355,14 @@
         $menu = $('#' + menuId);
         if($menu.is(":visible") == false)
             $menu.slideDown();
+    }
+
+    function vote(selector, idAnuncio, isPositivo) {
+        $('#positivo-' + selector).prop("disabled", true);
+        $('#negativo-' + selector).prop("disabled", true);
+        $.post("@Url.Content("~/Widgets/CadastrarVoto/")", { idAnuncio: idAnuncio, isPositivo: isPositivo })
+          .done(function (data) {
+          });
     }
 </script>
 <script>

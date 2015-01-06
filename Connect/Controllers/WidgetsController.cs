@@ -22,16 +22,8 @@ namespace CampeonatosNParty.Controllers
         [HttpGet]
         public ActionResult BlackFriday()
         {
-            List<BlackFridayAnuncioDetalhes> anuncios = null;
-            try
-            {
-                anuncios = BlackFridayAnuncioDetalhes.Select().ToList();
-            }
-            catch (Exception e)
-            {
-
-            }
-            return View(anuncios);
+            BlackFridayModel model = new BlackFridayModel(CurrentUsuario == null ? 0 : CurrentUsuario.Id, Request.QueryString["p"], Request.QueryString["f"]);
+            return View(model);
         }
 
         [HttpPost]
@@ -39,24 +31,21 @@ namespace CampeonatosNParty.Controllers
         {
             try
             {
-                int page = 0;
-                int.TryParse(Request.QueryString["p"], out page);
-
-                ClassSelectResult<BlackFridayAnuncioDetalhes> anuncios = BlackFridayAnuncioDetalhes.Select().Page(15, page).ToResult();
-
                 if (form["registrar"] != null)
                 {
+                    BlackFridayModel model = new BlackFridayModel(CurrentUsuario == null ? 0 : CurrentUsuario.Id, Request.QueryString["p"], Request.QueryString["f"]);
+
                     string nome = form["Nome"];
                     if (string.IsNullOrEmpty(nome))
                     {
                         ViewData["Error"] = "Nome não pode estar vazio";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     if (nome.Length < 3 || nome.Length > 20)
                     {
                         ViewData["Error"] = "Nome possui tamanho inválido";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     string sobrenome = form["Sobrenome"];
@@ -74,50 +63,69 @@ namespace CampeonatosNParty.Controllers
                     if (string.IsNullOrEmpty(email))
                     {
                         ViewData["Error"] = "Email não pode estar vazio";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     if (!EixoX.Restrictions.Email.IsEmail(email))
                     {
                         ViewData["Error"] = "Email inválido";
-                        return View(anuncios);
+                        return View(model);
+                    }
+
+                    Usuarios u = Usuarios.Select().Where("Email", email).SingleResult();
+                    if (u != null)
+                    {
+                        ViewData["Error"] = "Usuário já existe";
+                        return View(model);
+                    }
+
+                    if (string.IsNullOrEmpty(form["IdEstado"]))
+                    {
+                        ViewData["Error"] = "Você deve selecionar um estado";
+                        return View(model);
                     }
 
                     int idEstado = Int32.Parse(form["IdEstado"]);
                     if (idEstado == 0)
                     {
                         ViewData["Error"] = "Você deve selecionar um estado";
-                        return View(anuncios);
+                        return View(model);
+                    }
+
+                    if (string.IsNullOrEmpty(form["IdCidade"]))
+                    {
+                        ViewData["Error"] = "Você deve selecionar uma cidade";
+                        return View(model);
                     }
 
                     int idCidade = Int32.Parse(form["IdCidade"]);
                     if (idCidade == 0)
                     {
                         ViewData["Error"] = "Você deve selecionar uma cidade";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     string senha = form["Senha"];
                     if (string.IsNullOrEmpty(senha))
                     {
                         ViewData["Error"] = "Senha não pode estar vazia";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     if (senha.Length < 6)
                     {
                         ViewData["Error"] = "Senha não pode ter menos que 6 dígitos";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     string confirmarSenha = form["ConfirmarSenha"];
                     if (senha.CompareTo(confirmarSenha) != 0)
                     {
                         ViewData["Error"] = "Confirmação de senha é diferente da senha digitada";
-                        return View(anuncios);
+                        return View(model);
                     }
 
-                    Usuarios u = new Usuarios()
+                    Usuarios usu = new Usuarios()
                     {
                         Nome = nome,
                         Sobrenome = sobrenome,
@@ -130,12 +138,12 @@ namespace CampeonatosNParty.Controllers
                         UrlFotoPerfil = "/Static/img/playerPhoto/default.jpg"
                     };
 
-                    NPartyDb<Usuarios>.Instance.Insert(u);
+                    NPartyDb<Usuarios>.Instance.Insert(usu);
 
-                    ViewData["Sucesso"] = "Cadastro realizado com sucesso. Seja bem vindo!";
-                    Session["CurrentUser"] = u;
+                    TempData["Sucesso"] = "Cadastro realizado com sucesso. Seja bem vindo!";
+                    Session["CurrentUser"] = usu;
 
-                    return View(anuncios);
+                    return Redirect("~/Widgets/BlackFriday");
                 }
 
                 if (form["login"] != null)
@@ -143,19 +151,23 @@ namespace CampeonatosNParty.Controllers
                     string email = form["EmailLogin"];
                     if (string.IsNullOrEmpty(email))
                     {
+                        BlackFridayModel model = new BlackFridayModel(CurrentUsuario == null ? 0 : CurrentUsuario.Id, Request.QueryString["p"], Request.QueryString["f"]);
                         ViewData["Error"] = "Email não pode estar vazio";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     string senha = form["SenhaLogin"];
                     if (string.IsNullOrEmpty(senha))
                     {
+                        BlackFridayModel model = new BlackFridayModel(CurrentUsuario == null ? 0 : CurrentUsuario.Id, Request.QueryString["p"], Request.QueryString["f"]);
                         ViewData["Error"] = "Senha não pode estar vazia";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     string encsenha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(senha);
                     Usuarios usuario = Usuarios.Select().Where("Email", email).SingleResult();
+
+
                     if (usuario != null && !string.IsNullOrEmpty(usuario.Senha))
                     {
                         if (CampeonatosNParty.Helpers.RegisterHelper.CheckValidPassword(usuario.Senha, senha))
@@ -166,35 +178,46 @@ namespace CampeonatosNParty.Controllers
                         else
                         {
                             ViewData["Error"] = "Usuário ou senha inválidos.";
+                            BlackFridayModel model = new BlackFridayModel(CurrentUsuario == null ? 0 : CurrentUsuario.Id, Request.QueryString["p"], Request.QueryString["f"]);
+                            return View(model);
                         }
                     }
                     else
                     {
                         ViewData["Error"] = "Usuário não registrado.";
+                        BlackFridayModel model = new BlackFridayModel(CurrentUsuario == null ? 0 : CurrentUsuario.Id, Request.QueryString["p"], Request.QueryString["f"]);
+                        return View(model);
                     }                    
                 }
 
                 if (form["criarAnuncio"] != null && CurrentUsuario != null)
                 {
+                    BlackFridayModel model = new BlackFridayModel(CurrentUsuario == null ? 0 : CurrentUsuario.Id, Request.QueryString["p"], Request.QueryString["f"]);
+
                     string nomeAnuncio = form["NomeAnuncio"];
                     if (string.IsNullOrEmpty(nomeAnuncio))
                     {
                         ViewData["Error"] = "O nome do anúncio não pode estar vazio";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     string urlAnuncio = form["URLAnuncio"];
                     if (string.IsNullOrEmpty(urlAnuncio))
                     {
                         ViewData["Error"] = "A URL do anúncio não pode estar vazia";
-                        return View(anuncios);
+                        return View(model);
+                    }
+
+                    if (!urlAnuncio.StartsWith("http://") && !urlAnuncio.StartsWith("https://"))
+                    {
+                        urlAnuncio = "http://" + urlAnuncio;
                     }
 
                     string valorAnuncio = form["ValorAnuncio"];
                     if (string.IsNullOrEmpty(valorAnuncio))
                     {
                         ViewData["Error"] = "O valor do produto não pode estar vazio";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     decimal valorDoAnuncio = 0;
@@ -203,7 +226,7 @@ namespace CampeonatosNParty.Controllers
                     catch (Exception e)
                     {
                         ViewData["Error"] = "Valor do produto é inválido. Por favor, digite um valor numérico, em reais.";
-                        return View(anuncios);
+                        return View(model);
                     }
 
                     BlackFridayAnuncio anuncio = new BlackFridayAnuncio()
@@ -218,7 +241,7 @@ namespace CampeonatosNParty.Controllers
 
                     NPartyDb<BlackFridayAnuncio>.Instance.Insert(anuncio);
 
-                    ViewData["Sucesso"] = "Anuncio criado com sucesso! Ele aparecerá na página assim que for aprovado.";
+                    TempData["Sucesso"] = "Anuncio criado com sucesso! Ele aparecerá na página assim que for aprovado.";
 
                     return Redirect("~/Widgets/BlackFriday");
                 }
@@ -234,6 +257,32 @@ namespace CampeonatosNParty.Controllers
         public ActionResult LogoutBlackFriday()
         {
             Session["CurrentUser"] = null;
+            return Redirect("~/Widgets/BlackFriday");
+        }
+
+        [HttpGet]
+        [AuthenticationRequired]
+        public ActionResult BlackFridayAdmin()
+        {
+            if(CurrentUsuario.Email.CompareTo("mariotoledo12@gmail.com") == 0){
+                return View();
+            }
+
+            return Redirect("~/Widgets/BlackFriday");
+        }
+
+        [HttpGet]
+        [AuthenticationRequired]
+        public ActionResult ApproveBlackFriday(int? id)
+        {
+            if (CurrentUsuario.Email.CompareTo("mariotoledo12@gmail.com") == 0)
+            {
+                BlackFridayAnuncio a = BlackFridayAnuncio.Select().Where("Id", id.Value).SingleResult();
+                a.FoiAprovado = true;
+                NPartyDb<BlackFridayAnuncio>.Instance.Update(a);
+                return Redirect("~/Widgets/BlackFridayAdmin");
+            }
+
             return Redirect("~/Widgets/BlackFriday");
         }
 
@@ -407,6 +456,29 @@ namespace CampeonatosNParty.Controllers
                 NPartyDb<PersonPokemonFriendSafari>.Instance.Delete(friendSafari);
 
             return RedirectToAction("PokemonFriendSafariFinder");
+        }
+
+        [HttpPost]
+        [AuthenticationRequired]
+        public JsonResult CadastrarVoto(string idAnuncio, bool isPositivo)
+        {
+            try
+            {
+                BlackFridayAnuncioVoto voto = new BlackFridayAnuncioVoto()
+                {
+                    IdBlackFridayAnuncio = CampeonatosNParty.Helpers.EncryptHelper.Decrypt(idAnuncio),
+                    IdUsuario = CurrentUsuario.Id,
+                    Pontuacao = isPositivo ? 1 : -1
+                };
+
+                NPartyDb<BlackFridayAnuncioVoto>.Instance.Insert(voto);
+
+                return Json("", JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json("", JsonRequestBehavior.DenyGet);
+            }
         }
 
         [HttpGet]

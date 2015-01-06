@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "BlackFridayAdmin";
+    IEnumerable<CampeonatosNParty.Models.Database.BlackFridayAnuncio> anuncios =
+        CampeonatosNParty.Models.Database.BlackFridayAnuncio.Select().Where("FoiAprovado", false);
+}
+
+<h2>BlackFridayAdmin</h2>
+<table>
+    <tr>
+        <td>Nome</td>
+        <td>URL</td>
+        <td>Valor</td>
+    </tr>
+    @{
+        foreach (CampeonatosNParty.Models.Database.BlackFridayAnuncio a in anuncios)
+        {
+            <tr>
+                <td>@a.NomeAnuncio</td>
+                <td><a href="@a.UrlAnuncio" target="_blank">@a.UrlAnuncio</a></td>
+                <td width="150px">@a.Valor.ToString("C2")</td>
+                <td><a href="@Url.Content("~/Widgets/ApproveBlackFriday/" + a.Id)" class="btn">APROVAR</a></td>
+            </tr>
+        }
+    }
+</table>

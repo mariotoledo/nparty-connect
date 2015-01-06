@@ -13,10 +13,10 @@ namespace CampeonatosNParty.Models.Database
     [DatabaseTable]
     public class BlackFridayAnuncioVoto : NPartyDbModel<BlackFridayAnuncioVoto>
     {
-        [DatabaseColumn(DatabaseColumnKind.Identity)]
+        [DatabaseColumn(DatabaseColumnKind.PrimaryKey)]
         public long IdBlackFridayAnuncio { get; set; }
 
-        [DatabaseColumn(DatabaseColumnKind.Identity)]
+        [DatabaseColumn(DatabaseColumnKind.PrimaryKey)]
         public long IdUsuario { get; set; }
 
         [DatabaseColumn]

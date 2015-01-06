@@ -44,29 +44,31 @@ namespace CampeonatosNParty.Models.Database
         public string Sobrenome { get; set; }
 
         [DatabaseColumn]
-        public long SomaPositivo { get; set; }
-
-        [DatabaseColumn]
         public long TotalPositivo { get; set; }
-
-        [DatabaseColumn]
-        public long SomaNegativo { get; set; }
 
         [DatabaseColumn]
         public long TotalNegativo { get; set; }
 
+        [DatabaseColumn]
+        public long ProporcaoPontos { get; set; }
+
         public double PorcentagemPositiva()
         {
             if (TotalNegativo + TotalPositivo == 0)
-                return 50;
-            return (TotalNegativo / (TotalNegativo + TotalPositivo)) * 100;
+                return 0;
+            return (TotalPositivo * 100) / (TotalNegativo + TotalPositivo);
         }
 
         public double PorcentagemNegativa()
         {
             if (TotalNegativo + TotalPositivo == 0)
-                return 50;
-            return (TotalNegativo / (TotalNegativo + TotalPositivo)) + 100;
+                return 0;
+            return (TotalNegativo * 100) / (TotalNegativo + TotalPositivo);
+        }
+
+        public string getEncryptedId()
+        {
+            return CampeonatosNParty.Helpers.EncryptHelper.Encrypt((int)Id);
         }
     }
 }
