@@ -202,7 +202,7 @@ namespace CampeonatosNParty.Controllers
         {
             List<Ranking> list = new List<Ranking>();
 
-            foreach(Ranking r in Ranking.Select().OrderBy("Pontos", EixoX.Data.SortDirection.Descending).Where("Ano", DateTime.Now.Year).Take(6)){
+            foreach(Ranking r in Ranking.Select().OrderBy("Pontos", EixoX.Data.SortDirection.Descending).Where("Ano", DateTime.Now.Year).Take(8)){
                 if(r.UrlFotoPerfil.Equals("/Static/img/playerPhoto/default.jpg"))
                     r.UrlFotoPerfil = "http://connect.nparty.com.br/Static/img/playerPhoto/default.jpg";
                 list.Add(r);
