@@ -75,5 +75,49 @@ namespace AdminConnect.Controllers
                 return RedirectToAction("Gerenciar");
             }
         }
+
+        [AuthenticationRequired]
+        public ActionResult NaoIniciado(int? id)
+        {
+            if (!id.HasValue)
+            {
+                FlashMessage("Você precisa selecionar um campeonato", MessageType.Error);
+                return Redirect("~/Eventos/Gerenciar");
+            }
+
+            try
+            {
+                Campeonatos c = Campeonatos.Select().Where("Id", id.Value).SingleResult();
+
+                if (c == null)
+                {
+                    FlashMessage("Você precisa selecionar um campeonato", MessageType.Error);
+                    return Redirect("~/Eventos/Gerenciar");
+                }
+
+                if ((CurrentUser.AdminSupremo || (CurrentUser.PodeEditarCampeonato && CurrentUser.IdOrganizador == c.IdOrganizador)) == false)
+                {
+                    FlashMessage("Você não tem permissão para editar este campeonato", MessageType.Error);
+                    return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+                }
+
+                if (c.IdStatus != 2)
+                {
+                    FlashMessage("O campeonato só pode voltar a não iniciado se ele estiver no estado de 'em andamento'", MessageType.Error);
+                    return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+                }
+
+                c.IdStatus = 1;
+                NPartyDb<Campeonatos>.Instance.Update(c);
+
+                FlashMessage("O status do campeonato foi alterado para 'Não Iniciado'", MessageType.Success);
+                return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+            }
+            catch (Exception e)
+            {
+                FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+                return RedirectToAction("Gerenciar");
+            }
+        }
 	}
 }

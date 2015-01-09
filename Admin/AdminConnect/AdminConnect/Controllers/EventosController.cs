@@ -249,7 +249,7 @@ namespace AdminConnect.Controllers
                 }
                 else if (imageOption == 2)
                 {
-                    Eventos eventoParaImagem = Eventos.Select().Where("Id", form["ImagemDeEvento"]).SingleResult();
+                    Eventos eventoParaImagem = Eventos.Select().Where("Id", form["ImagemDeEvento"]).SingleResult(); 
                     evento.CoverURL = eventoParaImagem.getCoverUrl();
                     evento.ImagemURL = eventoParaImagem.getImagemUrl();
                 }
