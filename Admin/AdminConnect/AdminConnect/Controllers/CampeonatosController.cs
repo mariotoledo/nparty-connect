@@ -1,4 +1,5 @@
-﻿using AdminConnect.Models.View;
+﻿using AdminConnect.Models.Database;
+using AdminConnect.Models.View;
 using CampeonatosNParty.Models.Database;
 using EixoX.Web.AuthComponent;
 using System;
@@ -22,7 +23,7 @@ namespace AdminConnect.Controllers
 
             try
             {
-                DetalhesCampeonato detalhesCampeonato = new DetalhesCampeonato(id.Value);
+                AdminConnect.Models.View.DetalhesCampeonato detalhesCampeonato = new AdminConnect.Models.View.DetalhesCampeonato(id.Value);
                 return View(detalhesCampeonato);
             }
             catch (Exception e)
@@ -118,6 +119,58 @@ namespace AdminConnect.Controllers
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
                 return RedirectToAction("Gerenciar");
             }
+        }
+
+        [AuthenticationRequired]
+        [HttpGet]
+        public ActionResult FinalizarCampeonato(int? id)
+        {
+            if (!id.HasValue)
+            {
+                FlashMessage("Você precisa selecionar um campeonato", MessageType.Error);
+                return Redirect("~/Eventos/Gerenciar");
+            }
+
+            try
+            {
+                Campeonatos c = Campeonatos.Select().Where("Id", id.Value).SingleResult();
+
+                if (c == null)
+                {
+                    FlashMessage("Você precisa selecionar um campeonato", MessageType.Error);
+                    return Redirect("~/Eventos/Gerenciar");
+                }
+
+                if ((CurrentUser.AdminSupremo || (CurrentUser.PodeEditarCampeonato && CurrentUser.IdOrganizador == c.IdOrganizador)) == false)
+                {
+                    FlashMessage("Você não tem permissão para editar este campeonato", MessageType.Error);
+                    return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+                }
+
+                if (c.IdStatus != 2)
+                {
+                    FlashMessage("O campeonato só pode ser finalizado se ele estiver no estado de 'em andamento'", MessageType.Error);
+                    return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+                }
+
+                List<InscricaoUsuario> inscricoes = InscricaoUsuario.Select().Where("IdCampeonato", c.Id).OrderBy("NomeUsuario").ToList();
+                if (inscricoes == null || inscricoes.Count == 0)
+                {
+                    FlashMessage("Não existe nenhum inscrito neste campeonato", MessageType.Error);
+                    return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+                }
+
+                ViewData["Inscricoes"] = inscricoes;
+
+                AdminConnect.Models.View.DetalhesCampeonato detalhesCampeonato = new AdminConnect.Models.View.DetalhesCampeonato(id.Value);
+                return View(detalhesCampeonato);
+            }
+            catch (Exception e)
+            {
+                FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+                return Redirect("~/Eventos/Gerenciar");
+            }
+
         }
 	}
 }

@@ -60,17 +60,11 @@ namespace CampeonatosNParty.Models.Database
         public DateTime Data_Cadastro { get; set; }
 
         [DatabaseColumn]
-        public int Nivel_Permissao { get; set; }
-
-        [DatabaseColumn]
         [MaxLength(255)]
         [MinLength(6)]
         [UIPassword]
         [Required]
         public string Senha { get; set; }
-
-        [DatabaseColumn]
-        public int IdOriginal { get; set; }
 
         [DatabaseColumn]
         [UISingleline]

@@ -181,6 +181,7 @@
     <Compile Include="Models\Database\Campeonatos.cs" />
     <Compile Include="Models\Database\Cidade.cs" />
     <Compile Include="Models\Database\CidadeEventos.cs" />
+    <Compile Include="Models\Database\Classificacao.cs" />
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
     <Compile Include="Models\Database\Consoles.cs" />
@@ -189,6 +190,7 @@
     <Compile Include="Models\Database\Estado.cs" />
     <Compile Include="Models\Database\Eventos.cs" />
     <Compile Include="Models\Database\Inscricao.cs" />
+    <Compile Include="Models\Database\InscricaoUsuario.cs" />
     <Compile Include="Models\Database\JogadoresItem.cs" />
     <Compile Include="Models\Database\Jogos.cs" />
     <Compile Include="Models\Database\Notificacoes.cs" />
@@ -314,6 +316,7 @@
     <Content Include="Views\Eventos\AdicionarCampeonato.cshtml" />
     <Content Include="Views\Campeonatos\Detalhes.cshtml" />
     <Content Include="Views\Shared\CampeonatoStatusChange.cshtml" />
+    <Content Include="Views\Campeonatos\FinalizarCampeonato.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

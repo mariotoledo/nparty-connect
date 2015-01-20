@@ -1,0 +1,55 @@
+﻿@using AdminConnect.Models.Database;
+@model AdminConnect.Models.View.DetalhesCampeonato
+@{
+    ViewBag.Title = "Finalizar Campeonato";
+    CampeonatosNParty.Models.Database.Administrador user =
+        (CampeonatosNParty.Models.Database.Administrador)Session["CurrentUser"];
+    List<InscricaoUsuario> inscritos = (List<InscricaoUsuario>) ViewData["Inscricoes"];
+}
+
+@{
+    Html.RenderPartial("FlashMessage");
+}
+
+@if (Model != null && Model.detalhesCampeonato != null)
+{
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
+        <li><a href="@Url.Content("~/Eventos/Gerenciar/")">Gerenciar</a></li>
+        <li><a href="@Url.Content("~/Eventos/Detalhes/" + Model.detalhesCampeonato.IdEvento)">@Model.detalhesCampeonato.NomeEvento</a></li>
+        <li><a href="@Url.Content("~/Campeonatos/Detalhes/" + Model.detalhesCampeonato.IdCampeonato)">@Model.detalhesCampeonato.NomeJogo (@Model.detalhesCampeonato.DataCampeonato.ToString("dd/MM/yyyy"))</a></li>
+        <li class="active">Finalizar Campeonato</li>
+    </ol>
+
+    <div class="row">
+        <div class="col-md-12">
+            <h2>@Model.detalhesCampeonato.NomeJogo <small>(@Model.detalhesCampeonato.DataCampeonato.ToString("dd/MM/yyyy"))</small></h2><br/>
+            Selecione abaixo a classificação dos inscritos. Marque os colocados que chegaram de 1º a 4º lugar.
+        </div>
+    </div>
+    
+    <form class="form">
+        <div class="form-group">
+            <div class="row">
+                @foreach (InscricaoUsuario insc in inscritos)
+                {
+                    <div class="col-md-4">
+                        <h4>@insc.NomeUsuario</h4>
+                        <input type="radio" name="primeiroLugar" value="@insc.IdUsuario">1º Lugar<br>
+                        <input type="radio" name="segundoLugar" value="@insc.IdUsuario">2º Lugar<br>
+                        <input type="radio" name="terceiroLugar" value="@insc.IdUsuario">3º Lugar<br>
+                        <input type="radio" name="quartoLugar" value="@insc.IdUsuario">4º Lugar<br>
+                    </div>
+                }                
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="@Url.Content("~/Campeonatos/Detalhes/" + Model.detalhesCampeonato.IdCampeonato)" class="btn btn-default">Cancelar</a>
+    </form>
+}
+else
+{
+    <div class="alert alert-info" role="alert">Não existem informações para serem exibidas</div>
+}
+
+

@@ -29,8 +29,5 @@ namespace CampeonatosNParty.Models.Database
 
         [DatabaseColumn]
         public string IdOriginal { get; set; }
-
-        [DatabaseColumn]
-        public int Pontuacao { get; set; }
     }
 }

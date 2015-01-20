@@ -27,7 +27,7 @@
                 if ((user.AdminSupremo || (user.PodeEditarCampeonato && user.IdOrganizador == Model.detalhesCampeonato.IdOrganizador)) && Model.detalhesCampeonato.IdStatus != 3)
                 {
                     <div class="btn-group pull-right" style="margin-top: 20px; margin-bottom: 10px;">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                        <button type="button" class="btn btn-default btn-lg dropdown-toggle" data-toggle="dropdown">
                             Alterar status <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
@@ -37,8 +37,8 @@
                             }
                             @if (Model.detalhesCampeonato.IdStatus == 2)
                             {
-                                <li><a href="">Não Iniciado</a></li>
-                                <li><a href="">Finalizar</a></li>
+                                <li><a href="@Url.Content("~/Campeonatos/NaoIniciado/" + Model.detalhesCampeonato.IdCampeonato)">Não Iniciado</a></li>
+                                <li><a href="@Url.Content("~/Campeonatos/FinalizarCampeonato/" + Model.detalhesCampeonato.IdCampeonato)">Finalizar</a></li>
                             }
                         </ul>
                     </div>
