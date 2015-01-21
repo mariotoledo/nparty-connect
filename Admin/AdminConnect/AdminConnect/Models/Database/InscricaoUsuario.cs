@@ -21,5 +21,15 @@ namespace AdminConnect.Models.Database
 
             [DatabaseColumn]
             public string Apelido { get; set; }
+
+            [DatabaseColumn]
+            public string UrlFotoPerfil { get; set; }
+
+            public string getUrlFotoPerfil()
+            {
+                if (String.IsNullOrEmpty(this.UrlFotoPerfil))
+                    return "/Static/img/playerPhoto/default.jpg";
+                return this.UrlFotoPerfil;
+            }
     }
 }

@@ -40,5 +40,22 @@ namespace CampeonatosNParty.Models.Database
                 return "/Static/img/playerPhoto/default.jpg";
             return this.UrlFotoPerfil;
         }
+
+        public string getPlayerPosition()
+        {
+            switch (Classificacao)
+            {
+                case 1:
+                    return "1º lugar";
+                case 2:
+                    return "2º lugar";
+                case 3:
+                    return "3º lugar";
+                case 4:
+                    return "4º lugar";
+                default:
+                    return " - ";
+            }
+        }
     }
 }

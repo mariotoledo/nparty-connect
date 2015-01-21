@@ -70,33 +70,57 @@
                     <a href="#" class="btn btn-primary">Adicionar</a>
                 }
             </h4>
-            @if (Model.classificacao != null && Model.classificacao.Count() > 0)
+            @if (Model.detalhesCampeonato.IdStatus == 3)
             {
-                foreach (CampeonatosNParty.Models.Database.ClassificacaoCampeonato[] classificacaoArray in Model.classificacao)
+                if (Model.classificacao != null && Model.classificacao.Count() > 0)
                 {
-                    <div class="row">
-                        @foreach (CampeonatosNParty.Models.Database.ClassificacaoCampeonato classificacao in classificacaoArray)
-                        {
-                            if (classificacao != null)
+                    foreach (CampeonatosNParty.Models.Database.ClassificacaoCampeonato[] classificacaoArray in Model.classificacao)
+                    {
+                        <div class="row">
+                            @foreach (CampeonatosNParty.Models.Database.ClassificacaoCampeonato classificacao in classificacaoArray)
                             {
-                                string classificacaoCamp = classificacao.Classificacao == 0 || classificacao.Classificacao > 4 ? " - " : classificacao.Classificacao.ToString() + "º lugar";
-                                <div class="col-md-3">
-                                    <a href="@Url.Content("~/Usuarios/Detalhes/" + classificacao.IdUsuario)" class="thumbnail">
-                                        <img class="img-responsive" alt="@classificacao.Nome" src="@classificacao.getUrlFotoPerfil()">
-                                        <div class="caption">
-                                            <h3>@classificacao.Nome</h3>
-                                            @if (Model.detalhesCampeonato.IdStatus == 3)
-                                            {
+                                if (classificacao != null)
+                                {
+                                    <div class="col-md-3">
+                                        <a href="@Url.Content("~/Usuarios/Detalhes/" + classificacao.IdUsuario)" class="thumbnail">
+                                            <img class="img-responsive" alt="@classificacao.Nome" src="@classificacao.getUrlFotoPerfil()">
+                                            <div class="caption">
+                                                <h3>@classificacao.Nome</h3>
                                                 <div>
-                                                    Classificação: @classificacaoCamp
+                                                    Classificação: @classificacao.getPlayerPosition()
                                                 </div>
-                                            }
-                                        </div>
-                                    </a>
-                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
                             }
-                        }                        
-                    </div>
+                        </div>
+                    }
+                }
+            }
+            else
+            {
+                if (Model.inscricoes != null && Model.inscricoes.Count() > 0)
+                {
+                    foreach (AdminConnect.Models.Database.InscricaoUsuario[] inscricoesArray in Model.inscricoes)
+                    {
+                        <div class="row">
+                            @foreach (AdminConnect.Models.Database.InscricaoUsuario inscricao in inscricoesArray)
+                            {
+                                if (inscricao != null)
+                                {
+                                    <div class="col-md-3">
+                                        <a href="@Url.Content("~/Usuarios/Detalhes/" + inscricao.IdUsuario)" class="thumbnail">
+                                            <img class="img-responsive" alt="@inscricao.NomeUsuario" src="@inscricao.getUrlFotoPerfil()">
+                                            <div class="caption">
+                                                <h3>@inscricao.NomeUsuario</h3>
+                                            </div>
+                                        </a>
+                                    </div>
+                                }
+                            }
+                        </div>
+                    }
                 }
             }
         </div>

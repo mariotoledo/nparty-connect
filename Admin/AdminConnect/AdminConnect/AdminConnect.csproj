@@ -197,6 +197,7 @@
     <Compile Include="Models\Database\NPartyDb.cs" />
     <Compile Include="Models\Database\NPartyDbExtensions.cs" />
     <Compile Include="Models\Database\NPartyDbModel.cs" />
+    <Compile Include="Models\Database\OrganizadorMultiplicadorPontuacao.cs" />
     <Compile Include="Models\Database\Organizador.cs" />
     <Compile Include="Models\Database\PersonBadges.cs" />
     <Compile Include="Models\Database\PersonGame.cs" />
