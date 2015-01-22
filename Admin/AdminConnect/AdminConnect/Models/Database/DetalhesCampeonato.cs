@@ -49,6 +49,9 @@ namespace AdminConnect.Models.Database
         [DatabaseColumn]
         public string NomeOrganizador { get; set; }
 
+        [DatabaseColumn]
+        public decimal ValorInscricao { get; set; }
+
         public string getCoverUrl()
         {
             if (String.IsNullOrEmpty(this.CoverURL))

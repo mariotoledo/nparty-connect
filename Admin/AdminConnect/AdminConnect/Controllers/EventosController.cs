@@ -548,6 +548,17 @@ namespace AdminConnect.Controllers
                     return RedirectToAction("Gerenciar");
                 }
 
+                try
+                {
+                    int valorInscricao = Int32.Parse(form["ValorInscricao"]);
+                    campeonato.ValorInscricao = valorInscricao;
+                }
+                catch (Exception e)
+                {
+                    FlashMessage("Ocorreu um erro ao tentar formatar o valor da inscrição", MessageType.Error);
+                    return View(campeonato);
+                }                
+
                 DateTime dataCampeonato;
 
                 try

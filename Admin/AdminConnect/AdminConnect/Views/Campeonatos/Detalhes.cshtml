@@ -67,7 +67,7 @@
                 Participantes 
                 @if (user.AdminSupremo || (user.PodeEditarCampeonato && user.IdOrganizador == Model.detalhesCampeonato.IdOrganizador))
                 {
-                    <a href="#" class="btn btn-primary">Adicionar</a>
+                    <a href="@Url.Content("~/Campeonatos/AdicionarInscricao/" + Model.detalhesCampeonato.IdCampeonato)" class="btn btn-primary">Adicionar</a>
                 }
             </h4>
             @if (Model.detalhesCampeonato.IdStatus == 3)

@@ -1,0 +1,124 @@
+﻿@model AdminConnect.Models.Database.DetalhesCampeonato
+@{
+    ViewBag.Title = "Adicionar Inscricao";
+}
+
+@{
+    Html.RenderPartial("FlashMessage");
+}
+
+<div class="page-header">
+    <h1>Adicionar Inscrição</h1>
+</div>
+
+@if (Model != null)
+{
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
+        <li><a href="@Url.Content("~/Eventos/Detalhes/" + Model.IdEvento)">@Model.NomeEvento</a></li>
+        <li><a href="@Url.Content("~/Campeonatos/Detalhes/" + Model.IdCampeonato)">@Model.NomeJogo</a></li>
+        <li class="active">Adicionar Inscrição</li>
+    </ol>
+
+    <div ng-app="UsuariosFromChampionshipLoad">
+        <div class="table-responsive" ng-controller="UsuariosFromChampionshipController">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">Busca</span>
+                        <input name="filter" type="text" class="form-control" ng-model="query">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <a href="" class="btn btn-primary pull-right">Novo usuário</a>
+                </div>
+            </div><br />
+            <br />
+            <table class="table table-bordered table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome Completo</th>
+                        <th>Apelido</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="loading">
+                        <td colspan="5">Carregando...</td>
+                    </tr>
+                    <tr ng-show="(usuarios | filter:query).length == 0">
+                        <td colspan="5">Nenhum usuário encontrado</td>
+                    </tr>
+                    <tr data-ng-repeat="usuario in usuarios | filter:query">
+                        <td>{{usuario.Id}}</td>
+                        <td>{{usuario.NomeCompletoString}}</td>
+                        <td>{{usuario.Apelido}}</td>
+                        <td><button class="btn btn-primary" onclick="openConfirmationModal(usuario.Id)"></button></td>
+                    </tr>
+                </tbody>
+            </table>
+            <div data-pagination="" data-num-pages="numPages()"
+                 data-current-page="currentPage" data-max-size="maxSize"
+                 data-boundary-links="true"></div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="confimationModal" tabindex="-1" role="dialog" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="confimationModalLabel">Adicionar usuário ao campeonato?</h4>
+                </div>
+                <form method="post">
+                    @{
+                        if (Model.ValorInscricao > 0)
+                        {
+                            <div class="modal-body">
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="hidden" name="IdUsuario" id="IdUsuario" />
+                                        <input type="hidden" name="IdCampeonato" id="IdCampeonato" />
+                                        <input type="checkbox" name="FoiPago"> A inscrição já foi paga
+                                    </label>
+                                </div>
+                            </div>
+                        }
+                    }
+                    
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                        <button type="submit" class="btn btn-primary">Inscrever jogador</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openConfirmationModal(uId) {
+            $('#IdUsuario').val(uId);
+            $('#IdCampeonato').val(@Model.IdCampeonato);
+            $('#confimationModal').modal('show');
+        }
+
+        var UsuariosFromChampionshipLoad = angular.module('admin', []);
+
+        UsuariosFromChampionshipLoad.controller('UsuariosFromChampionshipController', function ($scope, $http) {
+            $scope.loading = true;
+            $http.get('@Url.Content("~/Ajax/GetUsersNotSubscribedToChampionship/" + Model.IdCampeonato)')
+            .then(function (res) {
+                $scope.usuarios = res.data;
+                $scope.loading = false;
+            });
+        });
+    </script>
+}
+else
+{
+
+}
+
+

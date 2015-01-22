@@ -133,5 +133,11 @@ namespace CampeonatosNParty.Models.Database
         {
             return "http://connect.nparty.com.br/Home/ConfirmarCadastro?confirmationKey=" + EncryptHelper.Encrypt(this.Id);
         }
+
+        public string NomeCompletoString {
+            get{
+                return Nome + " " + (string.IsNullOrEmpty(Sobrenome) ? "" : Sobrenome);
+            }
+        }
     }
 }

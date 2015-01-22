@@ -318,10 +318,10 @@
     <Content Include="Views\Campeonatos\Detalhes.cshtml" />
     <Content Include="Views\Shared\CampeonatoStatusChange.cshtml" />
     <Content Include="Views\Campeonatos\FinalizarCampeonato.cshtml" />
+    <Content Include="Views\Campeonatos\AdicionarInscricao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Ajax\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
