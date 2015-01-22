@@ -286,12 +286,70 @@ namespace AdminConnect.Controllers
                     return Redirect("~/Eventos/Gerenciar");
                 }
 
+                if ((CurrentUser.AdminSupremo || (CurrentUser.PodeEditarCampeonato && CurrentUser.IdOrganizador == detalhesCampeonato.IdOrganizador)) == false)
+                {
+                    FlashMessage("Você não tem permissão para editar este campeonato", MessageType.Error);
+                    return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+                }
+
                 if (detalhesCampeonato.IdStatus != 1)
                 {
                     FlashMessage("Você só pode adicionar uma inscrição se o campeonato estiver como 'Não Iniciado'", MessageType.Error);
                     return Redirect("~/Eventos/Gerenciar");
                 }
 
+                return View(detalhesCampeonato);
+            }
+            catch (Exception e)
+            {
+                FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+                return Redirect("~/Eventos/Gerenciar");
+            }
+        }
+
+        [AuthenticationRequired]
+        [HttpPost]
+        public ActionResult AdicionarInscricao(int? id, FormCollection form)
+        {
+            try
+            {
+                if (!id.HasValue)
+                {
+                    FlashMessage("Você precisa selecionar o campeonato antes de adicionar a inscrição", MessageType.Error);
+                    return Redirect("~/Eventos/Gerenciar");
+                }
+
+                AdminConnect.Models.Database.DetalhesCampeonato detalhesCampeonato =
+                    AdminConnect.Models.Database.DetalhesCampeonato.Select().Where("IdCampeonato", id.Value).SingleResult();
+
+                if (detalhesCampeonato == null)
+                {
+                    FlashMessage("O campeonato selecionado não foi encontrado", MessageType.Error);
+                    return Redirect("~/Eventos/Gerenciar");
+                }
+
+                if ((CurrentUser.AdminSupremo || (CurrentUser.PodeEditarCampeonato && CurrentUser.IdOrganizador == detalhesCampeonato.IdOrganizador)) == false)
+                {
+                    FlashMessage("Você não tem permissão para editar este campeonato", MessageType.Error);
+                    return Redirect("~/Campeonatos/Detalhes/" + id.Value);
+                }
+
+                if (detalhesCampeonato.IdStatus != 1)
+                {
+                    FlashMessage("Você só pode adicionar uma inscrição se o campeonato estiver como 'Não Iniciado'", MessageType.Error);
+                    return Redirect("~/Eventos/Gerenciar");
+                }
+
+                int idUsuario = Int32.Parse(form["IdUsuario"]);
+
+                Inscricao inscricao = new Inscricao()
+                {
+                    IdCampeonato = id.Value,
+                    IdUsuario = idUsuario,
+                    IsPago = form["FoiPago"] != null
+                };
+
+                FlashMessage("Inscrição realizada com sucesso", MessageType.Success);
                 return View(detalhesCampeonato);
             }
             catch (Exception e)

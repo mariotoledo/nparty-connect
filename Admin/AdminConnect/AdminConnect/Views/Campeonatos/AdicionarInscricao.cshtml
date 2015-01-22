@@ -40,7 +40,7 @@
                         <th>Id</th>
                         <th>Nome Completo</th>
                         <th>Apelido</th>
-                        <th></th>
+                        <th>Inscrever</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -54,7 +54,7 @@
                         <td>{{usuario.Id}}</td>
                         <td>{{usuario.NomeCompletoString}}</td>
                         <td>{{usuario.Apelido}}</td>
-                        <td><button class="btn btn-primary" onclick="openConfirmationModal(usuario.Id)"></button></td>
+                        <td><button class="btn btn-primary" ng-click="openConfirmationModal(usuario.id)"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -72,7 +72,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                     <h4 class="modal-title" id="confimationModalLabel">Adicionar usuário ao campeonato?</h4>
                 </div>
-                <form method="post">
+                <form method="post" action="@Url.Content("~/Campeonatos/AdicionarInscricao/" + Model.IdCampeonato)">
                     @{
                         if (Model.ValorInscricao > 0)
                         {
@@ -80,7 +80,6 @@
                                 <div class="checkbox">
                                     <label>
                                         <input type="hidden" name="IdUsuario" id="IdUsuario" />
-                                        <input type="hidden" name="IdCampeonato" id="IdCampeonato" />
                                         <input type="checkbox" name="FoiPago"> A inscrição já foi paga
                                     </label>
                                 </div>
@@ -98,11 +97,7 @@
     </div>
 
     <script>
-        function openConfirmationModal(uId) {
-            $('#IdUsuario').val(uId);
-            $('#IdCampeonato').val(@Model.IdCampeonato);
-            $('#confimationModal').modal('show');
-        }
+        
 
         var UsuariosFromChampionshipLoad = angular.module('admin', []);
 
@@ -113,6 +108,12 @@
                 $scope.usuarios = res.data;
                 $scope.loading = false;
             });
+
+            $scope.openConfirmationModal = function(uId) {
+                $('#IdUsuario').val(uId);
+                $('#confimationModal').modal('show');
+                console.log(uId);
+            }
         });
     </script>
 }
