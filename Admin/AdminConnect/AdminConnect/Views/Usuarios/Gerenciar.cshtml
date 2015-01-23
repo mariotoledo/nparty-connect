@@ -1,0 +1,76 @@
+﻿@{
+    ViewBag.Title = "Gerenciar Usuarios";
+}
+
+@{
+    Html.RenderPartial("FlashMessage");
+}
+
+<div class="page-header">
+    <h1>Gerenciar Usuários</h1>
+</div>
+
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
+        <li class="active">Usuários</li>
+    </ol>
+
+    <div ng-app="UsuariosLoad">
+        <div class="table-responsive" ng-controller="UsuariosController">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="input-group">
+                        <span class="input-group-addon">Busca</span>
+                        <input name="filter" type="text" class="form-control" ng-model="query">
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <a href="" class="btn btn-primary pull-right">Novo usuário</a>
+                </div>
+            </div><br />
+            <br />
+            <table class="table table-bordered table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome Completo</th>
+                        <th>Apelido</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="loading">
+                        <td colspan="5">Carregando...</td>
+                    </tr>
+                    <tr ng-show="(usuarios | filter:query).length == 0">
+                        <td colspan="5">Nenhum usuário encontrado</td>
+                    </tr>
+                    <tr data-ng-repeat="usuario in usuarios | filter:query">
+                        <td>{{usuario.Id}}</td>
+                        <td><a href="@Url.Content("~/Usuarios/Detalhes/"){{usuario.Id}}">{{usuario.NomeCompletoString}}</a></td>
+                        <td>{{usuario.Apelido}}</td>
+                        <td>{{usuario.NomeCidade}}</td>
+                        <td>{{usuario.SiglaEstado}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div data-pagination="" data-num-pages="numPages()"
+                 data-current-page="currentPage" data-max-size="maxSize"
+                 data-boundary-links="true"></div>
+        </div>
+    </div>
+
+    <script>
+        var UsuariosLoad = angular.module('admin', []);
+
+        UsuariosLoad.controller('UsuariosController', function ($scope, $http) {
+            $scope.loading = true;
+            $http.get('@Url.Content("~/Ajax/GetUsuarios/")')
+            .then(function (res) {
+                $scope.usuarios = res.data;
+                $scope.loading = false;
+            });
+        });
+    </script>
+

@@ -54,7 +54,7 @@
                         <td>{{usuario.Id}}</td>
                         <td>{{usuario.NomeCompletoString}}</td>
                         <td>{{usuario.Apelido}}</td>
-                        <td><button class="btn btn-primary" ng-click="openConfirmationModal(usuario.id)"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></button></td>
+                        <td><button class="btn btn-primary" ng-click="openConfirmationModal(usuario.Id)"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></button></td>
                     </tr>
                 </tbody>
             </table>
@@ -79,7 +79,7 @@
                             <div class="modal-body">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="hidden" name="IdUsuario" id="IdUsuario" />
+                                        <input type="hidden" name="IdUsuario" ng-model="IdUsuario" id="IdUsuario" />
                                         <input type="checkbox" name="FoiPago"> A inscrição já foi paga
                                     </label>
                                 </div>
@@ -109,7 +109,7 @@
                 $scope.loading = false;
             });
 
-            $scope.openConfirmationModal = function(uId) {
+            $scope.openConfirmationModal = function (uId) {
                 $('#IdUsuario').val(uId);
                 $('#confimationModal').modal('show');
                 console.log(uId);

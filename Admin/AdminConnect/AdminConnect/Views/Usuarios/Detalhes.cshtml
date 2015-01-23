@@ -1,0 +1,58 @@
+﻿@model CampeonatosNParty.Models.Database.DetalhesUsuario
+@{
+    ViewBag.Title = "Detalhes";
+    List<AdminConnect.Models.Database.InscricaoUsuario> inscricoes = (List<AdminConnect.Models.Database.InscricaoUsuario>)(ViewData["Inscricoes"]);
+}
+
+<div class="page-header">
+    <h1>Detalhes do Usuário</h1>
+</div>
+
+@{
+    Html.RenderPartial("FlashMessage");
+}
+
+@if (Model != null)
+{
+    <ol class="breadcrumb">
+        <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
+        <li><a href="@Url.Content("~/Usuarios/Gerenciar")">Usuarios</a></li>
+        <li class="active">@Model.getFullName()</li>
+    </ol>
+    
+    <div class="row">
+        <div class="col-md-4">
+            <img src="@Model.getUrlFotoPerfil()" class="img-responsive"/>
+            <h4>@Model.getFullName() <small>(@Model.Apelido)</small></h4>
+            <hr/>
+            <b>Cidade: </b>@Model.NomeCidade<br/>
+            <b>Estado: </b>@Model.SiglaEstado
+        </div>
+        <div class="col-md-8">
+            @{
+                if (inscricoes != null && inscricoes.Count > 0)
+                {
+                    <div class="row">
+                        @foreach (AdminConnect.Models.Database.InscricaoUsuario insc in inscricoes)
+                        {
+                            <div class="col-md-3">
+                                <img src="@insc.ImagemURL" class="img-responsive"/>
+                                <a href="@Url.Content("~/Campeonatos/Detalhes/" + insc.IdCampeonato)"><h4 style="margin-bottom: 2px;">@insc.NomeJogo</h4></a>
+                                Data: @insc.DataCampeonato.ToString("dd/MM/yyyy")
+                            </div><br/>
+                            <br/>
+                        }
+                    </div>
+                }
+                else
+                {
+                    <div>Este usuário ainda não participou de nenhum campeonato.</div>
+                }
+            }
+        </div>
+    </div>
+}
+else
+{
+    <span>Não foi possível encontrar informações do usuário</span>
+}

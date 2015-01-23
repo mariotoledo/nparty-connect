@@ -162,6 +162,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AjaxController.cs" />
+    <Compile Include="Controllers\UsuariosController.cs" />
     <Compile Include="Controllers\CampeonatosController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\EventosController.cs" />
@@ -223,6 +224,7 @@
     <Compile Include="Models\Database\UsuarioBadges.cs" />
     <Compile Include="Models\Database\UsuarioJogos.cs" />
     <Compile Include="Models\Database\Administrador.cs" />
+    <Compile Include="Models\Database\DetalhesUsuario.cs" />
     <Compile Include="Models\Database\Usuarios.cs" />
     <Compile Include="Models\Struct\Login.cs" />
     <Compile Include="Models\View\DetalhesCampeonato.cs" />
@@ -319,6 +321,8 @@
     <Content Include="Views\Shared\CampeonatoStatusChange.cshtml" />
     <Content Include="Views\Campeonatos\FinalizarCampeonato.cshtml" />
     <Content Include="Views\Campeonatos\AdicionarInscricao.cshtml" />
+    <Content Include="Views\Usuarios\Gerenciar.cshtml" />
+    <Content Include="Views\Usuarios\Detalhes.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

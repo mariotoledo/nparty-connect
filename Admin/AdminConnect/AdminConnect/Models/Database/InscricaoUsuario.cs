@@ -25,6 +25,18 @@ namespace AdminConnect.Models.Database
             [DatabaseColumn]
             public string UrlFotoPerfil { get; set; }
 
+            [DatabaseColumn]
+            public DateTime DataCampeonato { get; set; }
+
+            [DatabaseColumn]
+            public string NomeJogo { get; set; }
+
+            [DatabaseColumn]
+            public string CoverURL { get; set; }
+
+            [DatabaseColumn]
+            public string ImagemURL { get; set; }
+
             public string getUrlFotoPerfil()
             {
                 if (String.IsNullOrEmpty(this.UrlFotoPerfil))

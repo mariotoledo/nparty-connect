@@ -16,18 +16,15 @@ namespace CampeonatosNParty.Models.Database
         [DatabaseColumn(DatabaseColumnKind.Identity)]
         public int Id { get; set; }
 
-        [DatabaseColumn]
+        [DatabaseColumn(DatabaseColumnKind.PrimaryKey)]
         [Required]
         public int IdCampeonato { get; set; }
 
-        [DatabaseColumn]
+        [DatabaseColumn(DatabaseColumnKind.PrimaryKey)]
         [Required]
         public int IdUsuario { get; set; }
 
         [DatabaseColumn]
         public bool IsPago { get; set; }
-
-        [DatabaseColumn]
-        public string IdOriginal { get; set; }
     }
 }

@@ -342,12 +342,22 @@ namespace AdminConnect.Controllers
 
                 int idUsuario = Int32.Parse(form["IdUsuario"]);
 
-                Inscricao inscricao = new Inscricao()
+                Inscricao inscricao = Inscricao.Select().Where("IdUsuario", idUsuario).And("IdCampeonato", id.Value).SingleResult();
+
+                if (inscricao != null)
+                {
+                    FlashMessage("A inscrição pra este usuário já foi feita", MessageType.Error);
+                    return Redirect("~/Eventos/Gerenciar");
+                }
+
+                inscricao = new Inscricao()
                 {
                     IdCampeonato = id.Value,
                     IdUsuario = idUsuario,
                     IsPago = form["FoiPago"] != null
                 };
+
+                NPartyDb<Inscricao>.Instance.Insert(inscricao);
 
                 FlashMessage("Inscrição realizada com sucesso", MessageType.Success);
                 return View(detalhesCampeonato);
