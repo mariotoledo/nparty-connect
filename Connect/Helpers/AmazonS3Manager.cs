@@ -8,25 +8,17 @@ using System.Web;
 
 namespace CampeonatosNParty.Helpers
 {
-    public class AmazonS3Manager
+    public class AmazonS3Manager : IDisposable
     {
+        private bool disposed = false;
         private AmazonS3Client client;
-
         private static string bucketName = "connectprofileimages";
 
-        /// <summary>
-        /// 
-        /// </summary>
         public AmazonS3Manager()
         {
             this.client = new AmazonS3Client(Amazon.RegionEndpoint.SAEast1);
         }
         
-        /// <summary>
-        /// Checking the bucket existence, submits an file to Amazon S3 database
-        /// </summary>
-        /// <param name="OriginalImage">The original inputStream to submit</param>
-        /// <param name="fileType">the type refered to the file</param>
         public void Save(string key, System.IO.Stream stream)
         {
             // Create a PutObject request
@@ -56,11 +48,6 @@ namespace CampeonatosNParty.Helpers
             return Amazon.S3.Util.AmazonS3Util.DoesS3BucketExist(client, bucketName);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="key"></param>
         public void Delete(string photoUrl)
         {
             string[] splited = photoUrl.Split(new char[] { '/' });
@@ -78,12 +65,6 @@ namespace CampeonatosNParty.Helpers
                 client.DeleteObject(request);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="key"></param>
-        /// <returns></returns>
         public string GetUrl(string key)
         {
             return string.Concat("https://s3-sa-east-1.amazonaws.com/", bucketName, "/", key);
@@ -108,6 +89,32 @@ namespace CampeonatosNParty.Helpers
                 objectsFound.Add(GetUrl(objFound.Key));
 
             return objectsFound.ToArray();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposed)
+            {
+                if (disposing)
+                {
+                    client.Dispose();
+                    client = null;
+                }
+
+                disposed = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);  
+        }
+
+        // Destructor
+        ~AmazonS3Manager()
+        {
+            Dispose(false);
         }
     }
 }
