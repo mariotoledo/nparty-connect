@@ -36,30 +36,6 @@ namespace CampeonatosNParty.Controllers
             return View(view);
         }
 
-        /*[HttpGet]
-        public ActionResult AdjustName()
-        {
-            foreach (Usuarios u in Usuarios.Select().ToList())
-            {
-                string[] nome = u.Nome.Split();
-                u.Nome = nome[0];
-                if (nome.Length > 1)
-                {
-                    u.Sobrenome = nome[1];
-                    if (nome.Length > 2)
-                    {
-                        for (int i = 2; i < nome.Length; i++)
-                        {
-                            u.Sobrenome = u.Sobrenome + " " + nome[i];
-                        }
-                    }
-                }
-
-                NPartyDb<Usuarios>.Instance.Save(u);
-            }
-            return Redirect("~/Home/Index");
-        }*/
-
         [HttpGet]
         public ActionResult AdicionarPSN(int? id)
         {
