@@ -23,28 +23,6 @@ namespace CampeonatosNParty.Controllers
             return View(new HomeView());
         }
 
-        /*public ActionResult SendEmailPraGalera()
-        {
-            List<Usuarios> usuario = Usuarios.Select().Where("Senha", null).ToList();
-            foreach (Usuarios u in usuario)
-            {
-                string senha = CampeonatosNParty.Helpers.RegisterHelper.GetRandWord(6);
-                u.Senha = CampeonatosNParty.Helpers.RegisterHelper.GetEncryptedPassword(senha);
-                NPartyDb<Usuarios>.Instance.Save(u);
-
-                CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
-                emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/senhaNull.xml")));
-
-                IDictionary<string, string> infoChanges = new Dictionary<string, string>();
-
-                infoChanges.Add("[=PersonName]", u.Nome);
-                infoChanges.Add("[=PersonPassword]", senha);
-
-                emailTemplate.Send(infoChanges, "Bem vindo ao N-Party Connect", u.Email);
-            }
-            return Redirect("~/");
-        }*/
-
         public ActionResult ConfirmarCadastro()
         {
             string encryptedPersonId = Request.QueryString["confirmationKey"];
@@ -75,97 +53,6 @@ namespace CampeonatosNParty.Controllers
             return RedirectToAction("ConfirmarEmail", "Jogadores");
         }
 
-       /* public ActionResult MigrateInscription()
-        {
-            List<tb_inscricoes> inscricoes = tb_inscricoes.Select().ToList();
-
-            foreach (tb_inscricoes insc in inscricoes)
-            {
-                Inscricao i = Inscricao.WithMember("IdOriginal", insc.ID_Inscricao);
-                if (i != null)
-                    continue;
-
-                i = new Inscricao();
-
-                Campeonatos camp = Campeonatos.WithMember("idOriginalk", insc.ID_Campeonato);
-                Usuarios u = Usuarios.WithMember("IdOriginal", insc.ID_Usuario);
-
-                i.IdOriginal = insc.ID_Inscricao;
-                i.IdCampeonato = camp.Id;
-                i.IdUsuario = u.Id;
-                i.IsPago = true;
-                i.Pontuacao = insc.NR_Pontos;
-
-                NPartyDb<Inscricao>.Instance.Insert(i);
-            }
-            return Redirect("~/");
-        }
-
-        public ActionResult MigrateUsers()
-        {
-            List<tb_usuarios> usuarios = tb_usuarios.Select().ToList();
-
-            foreach (tb_usuarios user in usuarios)
-            {
-                Usuarios u = Usuarios.WithMember("IdOriginal", user.Id_Usuario);
-                if (u != null)
-                    continue;
-
-                Usuarios ui = Usuarios.WithMember("Email", user.NM_Email);
-                if (ui != null)
-                    continue;
-
-                Usuarios newUser = new Usuarios();
-                newUser.Nome = user.NM_Usuario;
-                newUser.Apelido = user.NM_Apelido;
-                newUser.Email = user.NM_Email;
-
-                int idEstado = string.IsNullOrEmpty(user.NM_Estado) ? 0 : Estado.Search(user.NM_Estado.ToUpper()).FirstOrDefault().EstadoId;
-                newUser.Id_Estado = idEstado;
-
-                int idCidade = string.IsNullOrEmpty(user.NM_Cidade) ? 0 : Cidade.Select().Where("EstadoId", idEstado).And("Nome", EixoX.Data.FilterComparison.Like, RemoveAccents(user.NM_Cidade)).FirstOrDefault().CidadeId;
-                newUser.Id_Cidade = idCidade;
-
-                newUser.Telefone = user.NR_Telefone;
-
-                newUser.Data_Cadastro = user.Dt_Cadastro;
-
-                newUser.Nivel_Permissao = 0;
-
-                newUser.Senha = null;
-
-                string[] nascimentoString = user.Dt_Nascimento == null ? null : user.Dt_Nascimento.Split('/');
-
-                if (nascimentoString != null)
-                {
-                    if (nascimentoString[2].Length == 2)
-                    {
-                        nascimentoString[2] = "19" + nascimentoString[2];
-                    }
-                    newUser.Nascimento = new DateTime(Int32.Parse(nascimentoString[2]), Int32.Parse(nascimentoString[1]), Int32.Parse(nascimentoString[0]));
-                }
-                else
-                {
-                    newUser.Nascimento = DateTime.MaxValue;
-                }
-
-                NPartyDb<Usuarios>.Instance.Insert(newUser);
-            }
-            return View(new HomeView());
-        }*/
-
-        public static string RemoveAccents(string text)
-        {
-            StringBuilder sbReturn = new StringBuilder();
-            var arrayText = text.Normalize(NormalizationForm.FormD).ToCharArray();
-
-            foreach (char letter in arrayText)
-            {
-                if (CharUnicodeInfo.GetUnicodeCategory(letter) != UnicodeCategory.NonSpacingMark)
-                    sbReturn.Append(letter);
-            }
-            return sbReturn.ToString();
-        }
 
         [HttpGet]
         public ActionResult Login()
