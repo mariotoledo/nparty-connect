@@ -470,26 +470,6 @@ namespace CampeonatosNParty.Controllers
             return RedirectToAction("ConfirmarEmail");
         }
 
-        /*[HttpGet]
-        public ActionResult EnviarEmailConfirmacaoUltimate()
-        {
-            foreach(Usuarios u in Usuarios.Select().ToList())
-            if (u.EmailConfirmado == false)
-            {
-                CampeonatosNParty.Helpers.EmailTemplate emailTemplate = new CampeonatosNParty.Helpers.EmailTemplate();
-                emailTemplate.Load(Server.MapPath(Url.Content("~/Static/EmailTemplates/confirmarEmail.xml")));
-
-                IDictionary<string, string> infoChanges = new Dictionary<string, string>();
-
-                infoChanges.Add("[=PersonName]", u.Nome);
-                infoChanges.Add("[=PersonLink]", u.getConfirmationUrl());
-
-                emailTemplate.Send(infoChanges, "N-Party Connect - Confirmação de email", u.Email);
-            }
-
-            return RedirectToAction("ConfirmarEmail");
-        }*/
-
         [HttpGet]
         public ActionResult ConfirmarEmail()
         {
@@ -549,12 +529,10 @@ namespace CampeonatosNParty.Controllers
         [AuthenticationRequired]
         public ActionResult MinhasConexoes()
         {
-            string pageString = Request.QueryString["page"];
-
             int filter = 0;
             int.TryParse(Request.QueryString["filter"], out filter);
 
-            MinhasConexoesView view = new MinhasConexoesView(CurrentUsuario, pageString, filter);
+            MinhasConexoesView view = new MinhasConexoesView(CurrentUsuario, Request.QueryString["page"], filter);
 
             return View(view);
         }
