@@ -26,12 +26,14 @@ namespace CampeonatosNParty.Controllers
         [AuthenticationRequired]
         public ActionResult DadosBasicos()
         {
-            DadosBasicos dados = new DadosBasicos();
-            dados.Apelido = CurrentUsuario.Apelido;
-            dados.Telefone = CurrentUsuario.Telefone;
-            dados.Id_Estado = CurrentUsuario.Id_Estado;
-            dados.Id_Cidade = CurrentUsuario.Id_Cidade;
-            dados.Newsletter = CurrentUsuario.Newsletter;
+            DadosBasicos dados = new DadosBasicos
+            {
+                Apelido = CurrentUsuario.Apelido,
+                Telefone = CurrentUsuario.Telefone,
+                Id_Estado = CurrentUsuario.Id_Estado,
+                Id_Cidade = CurrentUsuario.Id_Cidade,
+                Newsletter = CurrentUsuario.Newsletter
+            };
 
             if (CurrentUsuario.Nascimento != null)
             {
