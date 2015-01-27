@@ -323,6 +323,7 @@
     <Content Include="Views\Campeonatos\AdicionarInscricao.cshtml" />
     <Content Include="Views\Usuarios\Gerenciar.cshtml" />
     <Content Include="Views\Usuarios\Detalhes.cshtml" />
+    <Content Include="Views\Usuarios\Novo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

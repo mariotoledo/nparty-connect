@@ -1,0 +1,107 @@
+﻿@model CampeonatosNParty.Models.Database.Usuarios
+@{
+    ViewBag.Title = "Gerenciar Usuarios";
+
+    IEnumerable<CampeonatosNParty.Models.Database.Estado> estados =
+        (IEnumerable<CampeonatosNParty.Models.Database.Estado>)ViewData["Estados"];
+    CampeonatosNParty.Models.Database.Campeonatos campeonato = 
+        (CampeonatosNParty.Models.Database.Campeonatos) ViewData["Campeonato"];
+}
+
+<div class="page-header">
+    <h1>Cadastrar Usuário <small>Complete as informações abaixo, e clique em "Salvar"</small></h1>
+</div>
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("~/Dashboard/")">Home</a></li>
+    <li><a href="@Url.Content("~/Usuarios/Gerenciar")">Usuarios</a></li>
+    <li class="active">Cadastrar novo usuário</li>
+</ol>
+
+@{
+    Html.RenderPartial("FlashMessage");
+}
+
+<form class="form" method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Nome">Nome</label>
+                <input type="text" class="form-control input-lg" id="Nome" name="Nome" value="@Model.Nome" placeholder="João Vitor">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Sobrenome">Sobrenome</label>
+                <input type="text" class="form-control input-lg" id="Sobrenome" name="Sobrenome" value="@Model.Sobrenome" placeholder="da Silva Santos">
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label for="Email">Email</label>
+        <input type="text" class="form-control input-lg" id="Email" name="Email" value="@Model.Email" placeholder="Email">
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Estado" class="control-label">Estado</label>
+                <select name="Id_Estado" id="Estado" onchange="onEstadoSelected(this.value)" class="form-control">
+                    <option value="0">Selecione</option>
+                    @foreach (CampeonatosNParty.Models.Database.Estado estado in estados)
+                    {
+                        string selected = Model.Id_Estado == estado.EstadoId ? "selected" : "";
+                        <option @selected value="@estado.EstadoId">@estado.Sigla</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Cidade" class="control-label">Cidade</label>
+                <select name="Id_Cidade" id="Cidade" class="form-control" disabled></select>
+            </div>
+        </div>
+    </div>
+    @{
+        if (campeonato != null && campeonato.ValorInscricao > 0)
+        {
+            <span><b>Atenção: </b> este usuário será também registrado no campeonato selecionado. Marque abaixo se sua inscrição já foi paga.</span>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="IsPago"> A inscrição já foi paga
+                </label>
+            </div>
+        }
+    }
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <a href="@Url.Content("~/Eventos/Gerenciar")" class="btn btn-default">Cancelar</a>
+    </div>
+</form>
+
+@section Scripts{
+    <script>
+        function onEstadoSelected(idEstado) {
+            if (idEstado == 0) {
+                $('#Cidade').html('<option value="0"></option>');
+                $('#Cidade').attr('disabled', true);
+                return;
+            }
+
+            $('#Cidade').html('<option value="0">Carregando</option>');
+            $('#Cidade').attr('disabled', true);
+            $.ajax({
+                url: '@Url.Content("~/Eventos/GetCidades?idEstado=")' + idEstado,
+                success: function (data) {
+                    $('#Cidade').html('');
+                    if (data) {
+                        $.each(data, function (index) {
+                            $('#Cidade').append("<option value='" + data[index].CidadeId + "'>" + data[index].Nome + "</option>");
+                        });
+                    }
+                    $('#Cidade').removeAttr('disabled');
+                }
+            });
+        }
+    </script>
+}

@@ -1,5 +1,7 @@
 ﻿@{
     ViewBag.Title = "Gerenciar Usuarios";
+    CampeonatosNParty.Models.Database.Administrador user =
+    (CampeonatosNParty.Models.Database.Administrador)Session["CurrentUser"];
 }
 
 @{
@@ -25,7 +27,10 @@
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <a href="" class="btn btn-primary pull-right">Novo usuário</a>
+                    @if (user.AdminSupremo || (user.PodeInserirUsuario))
+                    {
+                        <a href="@Url.Content("~/Usuarios/Novo")" class="btn btn-primary pull-right">Novo usuário</a>
+                    }                    
                 </div>
             </div><br />
             <br />
@@ -35,6 +40,7 @@
                         <th>Id</th>
                         <th>Nome Completo</th>
                         <th>Apelido</th>
+                        <th>Email</th>
                         <th>Cidade</th>
                         <th>Estado</th>
                     </tr>
@@ -50,6 +56,7 @@
                         <td>{{usuario.Id}}</td>
                         <td><a href="@Url.Content("~/Usuarios/Detalhes/"){{usuario.Id}}">{{usuario.NomeCompletoString}}</a></td>
                         <td>{{usuario.Apelido}}</td>
+                        <td>{{usuario.Email}}</td>
                         <td>{{usuario.NomeCidade}}</td>
                         <td>{{usuario.SiglaEstado}}</td>
                     </tr>

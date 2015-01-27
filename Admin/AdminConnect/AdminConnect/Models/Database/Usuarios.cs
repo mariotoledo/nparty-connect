@@ -15,7 +15,6 @@ namespace CampeonatosNParty.Models.Database
     public class Usuarios : NPartyDbModel<Usuarios>
     {
         [DatabaseColumn(DatabaseColumnKind.Identity)]
-        [UIHidden]
         public int Id { get; set; }
 
         [DatabaseColumn]
@@ -37,9 +36,7 @@ namespace CampeonatosNParty.Models.Database
         [Email]
         public string Email { get; set; }
 
-        [DatabaseColumn]
-        [UISingleline]
-        [Required]
+        [DatabaseColumn(true)]
         public DateTime Nascimento;
 
         [DatabaseColumn]
