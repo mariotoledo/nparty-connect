@@ -54,6 +54,12 @@ namespace AdminConnect.Controllers
         {
             try
             {
+                if ((CurrentUser.AdminSupremo || (CurrentUser.PodeInserirUsuario)) == false)
+                {
+                    FlashMessage("Você não tem permissão para inserir usuários", MessageType.Error);
+                    return Redirect("Gerenciar");
+                }
+
                 ViewData["Estados"] = Estado.Select();
                 if (idCampeonato.HasValue)
                 {
@@ -76,7 +82,7 @@ namespace AdminConnect.Controllers
             {
                 if ((CurrentUser.AdminSupremo || (CurrentUser.PodeInserirUsuario)) == false)
                 {
-                    FlashMessage("Você não tem permissão para editar este campeonato", MessageType.Error);
+                    FlashMessage("Você não tem permissão para inserir usuários", MessageType.Error);
                     return Redirect("Gerenciar");
                 }
 

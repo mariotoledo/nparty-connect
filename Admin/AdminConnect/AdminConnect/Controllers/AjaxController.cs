@@ -55,5 +55,17 @@ namespace AdminConnect.Controllers
                 return Json("", JsonRequestBehavior.DenyGet);
             }
         }
+
+        public JsonResult GetRegras(int idJogo)
+        {
+            try
+            {
+                return Json(NPartyDb<Regras>.Instance.Select().Where("IdJogo", idJogo).OrderBy("Nome", EixoX.Data.SortDirection.Descending), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json("", JsonRequestBehavior.DenyGet);
+            }
+        }
 	}
 }
