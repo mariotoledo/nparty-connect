@@ -25,6 +25,10 @@ namespace CampeonatosNParty.Models.Database
         public string Nome { get; set; }
 
         [DatabaseColumn]
+        [MaxLength(2500)]
+        public string Descricao { get; set; }
+
+        [DatabaseColumn]
         [Required]
         public int TipoEvento { get; set; }
 

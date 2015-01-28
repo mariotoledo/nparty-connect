@@ -259,6 +259,7 @@ namespace AdminConnect.Controllers
                     evento.ImagemURL = null;
                 }
 
+                evento.Descricao = form["Descricao"];
                 evento.DataCadastro = DateTime.Now;
 
                 NPartyDb<Eventos>.Instance.Insert(evento);
@@ -444,6 +445,7 @@ namespace AdminConnect.Controllers
                     eventoToUpdate.ImagemURL = null;
                 }
 
+                eventoToUpdate.Descricao = form["Descricao"];
                 eventoToUpdate.IdOrganizador = evento.IdOrganizador;
 
                 NPartyDb<Eventos>.Instance.Save(eventoToUpdate);

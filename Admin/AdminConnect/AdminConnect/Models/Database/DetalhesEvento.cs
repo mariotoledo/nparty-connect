@@ -102,6 +102,9 @@ namespace AdminConnect.Models.Database
         [DatabaseColumn]
         public long IdOrganizador { get; set; }
 
+        [DatabaseColumn]
+        public string Descricao { get; set; }
+
         public string getDataEventoAsString
         {
             get{ 

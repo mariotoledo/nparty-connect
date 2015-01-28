@@ -50,6 +50,11 @@
         </div>
     </div><br/>
     <div class="row">
+        <div class="col-md-12">
+            @Model.detalhesEvento.Descricao
+        </div>
+    </div><br/>
+    <div class="row">
         <div class="col-md-4">
             <div class="well">
                 <h4>Detalhes</h4>
@@ -79,7 +84,7 @@
                                         <div class="caption">
                                             <h3>@c.NomeJogo</h3>
                                             <p>
-                                                <b>Data</b>: @c.DataCampeonato.ToString("dd/MM/yyyy")
+                                                <b>Data</b>: @c.DataCampeonato.ToString("dd/MM/yyyy") as @c.DataCampeonato.ToString("hh:mm")
                                             </p>
                                         </div>
                                     </a>

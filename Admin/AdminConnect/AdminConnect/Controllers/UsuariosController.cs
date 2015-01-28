@@ -72,7 +72,6 @@ namespace AdminConnect.Controllers
         [HttpPost]
         public ActionResult Novo(int? idCampeonato, FormCollection form, Usuarios usuario)
         {
-            //TODO: inscrição a partir do campeonato
             try
             {
                 if ((CurrentUser.AdminSupremo || (CurrentUser.PodeInserirUsuario)) == false)
