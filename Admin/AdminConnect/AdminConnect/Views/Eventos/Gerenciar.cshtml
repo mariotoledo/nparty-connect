@@ -1,6 +1,7 @@
-﻿
-@{
-    ViewBag.Title = "Buscar";
+﻿@{
+    ViewBag.Title = "Eventos";
+    CampeonatosNParty.Models.Database.Administrador user =
+        (CampeonatosNParty.Models.Database.Administrador)Session["CurrentUser"];
 }
 
 <div class="page-header">
@@ -25,41 +26,49 @@
                     <input name="filter" type="text" class="form-control" ng-model="query">
                 </div>
             </div>
-            <div class="col-lg-6">
-                <a href="@Url.Content("~/Eventos/Novo")" class="btn btn-primary pull-right">Novo evento</a> 
+            <div class="col-lg-4">
+                <br/>
+            </div>
+            <div class="col-lg-2">
+                @if (user.AdminSupremo || user.PodeCriarEventos)
+                {
+                    <a href="@Url.Content("~/Eventos/Novo")" class="btn btn-primary btn-block pull-right">Novo evento</a>
+                }
             </div>
         </div><br/>
         <br/>
-        <table class="table table-bordered table-condensed table-hover">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Tipo</th>
-                    <th>Organizador</th>
-                    <th>Local</th>
-                    <th>Cidade</th>
-                    <th>Estado</th>
-                    <th>Data</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-show="loading">
-                    <td colspan="7">Carregando...</td>
-                </tr>
-                <tr ng-show="(eventos | filter:query).length == 0">
-                    <td colspan="7">Nenhum evento encontrado</td>
-                </tr>
-                <tr data-ng-repeat="evento in eventos | filter:query">
-                    <td><a href="@Url.Content("~/Eventos/Detalhes/"){{evento.Id}}">{{evento.Nome}}</td>
-                    <td>{{evento.NomeTipoEvento}}</td>
-                    <td>{{evento.NomeOrganizador}}</td>
-                    <td>{{evento.Local}}</td>
-                    <td>{{evento.NomeCidade}}</td>
-                    <td>{{evento.NomeEstado}}</td>
-                    <td>{{evento.getDataEventoAsString}}</td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="table-responsive">
+            <table class="table table-bordered table-condensed table-hover">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Tipo</th>
+                        <th>Organizador</th>
+                        <th>Local</th>
+                        <th>Cidade</th>
+                        <th>Estado</th>
+                        <th>Data</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-show="loading">
+                        <td colspan="7">Carregando...</td>
+                    </tr>
+                    <tr ng-show="(eventos | filter:query).length == 0">
+                        <td colspan="7">Nenhum evento encontrado</td>
+                    </tr>
+                    <tr data-ng-repeat="evento in eventos | filter:query">
+                        <td><a href="@Url.Content("~/Eventos/Detalhes/"){{evento.Id}}">{{evento.Nome}}</td>
+                        <td>{{evento.NomeTipoEvento}}</td>
+                        <td>{{evento.NomeOrganizador}}</td>
+                        <td>{{evento.Local}}</td>
+                        <td>{{evento.NomeCidade}}</td>
+                        <td>{{evento.NomeEstado}}</td>
+                        <td>{{evento.getDataEventoAsString}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
         <div data-pagination="" data-num-pages="numPages()"
              data-current-page="currentPage" data-max-size="maxSize"
              data-boundary-links="true"></div>

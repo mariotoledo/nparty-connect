@@ -53,12 +53,23 @@
         </div>
     </div><br />
     <div class="row">
+        <div class="col-md-6">
+            <h4>Regras</h4>
+            @(string.IsNullOrEmpty(Model.detalhesCampeonato.Regras) ? "Não foram definidas as regras para este campeonato" : Model.detalhesCampeonato.Regras)
+        </div>
+        <div class="col-md-6">
+            <h4>Premiação</h4>
+            @(string.IsNullOrEmpty(Model.detalhesCampeonato.Premiacao) ? "Não foi definida a premiação para este campeoanto" : Model.detalhesCampeonato.Premiacao)
+        </div>
+    </div><br />
+    <div class="row">
         <div class="col-md-4">
             <div class="well">
                 <h4>Detalhes</h4>
                 <b>Organizador</b>: @Model.detalhesCampeonato.NomeOrganizador<br/>
                 <b>Data</b>: @Model.detalhesCampeonato.DataCampeonato.ToString("dd/MM/yyyy")<br />
                 <b>Status</b>: @Model.detalhesCampeonato.NomeStatus<br />
+                <b>Valor da Inscrição: </b> @(Model.detalhesCampeonato.ValorInscricao == 0 ? "Gratuito" : Model.detalhesCampeonato.ValorInscricao.ToString("C2"))<br />
                 <b>Número de inscritos</b>: @Model.numeroParticipantes
             </div>
         </div>

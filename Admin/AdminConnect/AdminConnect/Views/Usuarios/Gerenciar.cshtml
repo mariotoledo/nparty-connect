@@ -24,44 +24,49 @@
                     <div class="input-group">
                         <span class="input-group-addon">Busca</span>
                         <input name="filter" type="text" class="form-control" ng-model="query">
-                    </div>
+                    </div>  
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
+                    <br/>
+                </div>
+                <div class="col-lg-2">
                     @if (user.AdminSupremo || (user.PodeInserirUsuario))
                     {
-                        <a href="@Url.Content("~/Usuarios/Novo")" class="btn btn-primary pull-right">Novo usuário</a>
-                    }                    
+                        <a href="@Url.Content("~/Usuarios/Novo")" class="btn btn-primary btn-block pull-right">Novo usuário</a>
+                    }
                 </div>
             </div><br />
             <br />
-            <table class="table table-bordered table-condensed table-hover">
-                <thead>
-                    <tr>
-                        <th>Id</th>
-                        <th>Nome Completo</th>
-                        <th>Apelido</th>
-                        <th>Email</th>
-                        <th>Cidade</th>
-                        <th>Estado</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-show="loading">
-                        <td colspan="5">Carregando...</td>
-                    </tr>
-                    <tr ng-show="(usuarios | filter:query).length == 0">
-                        <td colspan="5">Nenhum usuário encontrado</td>
-                    </tr>
-                    <tr data-ng-repeat="usuario in usuarios | filter:query">
-                        <td>{{usuario.Id}}</td>
-                        <td><a href="@Url.Content("~/Usuarios/Detalhes/"){{usuario.Id}}">{{usuario.NomeCompletoString}}</a></td>
-                        <td>{{usuario.Apelido}}</td>
-                        <td>{{usuario.Email}}</td>
-                        <td>{{usuario.NomeCidade}}</td>
-                        <td>{{usuario.SiglaEstado}}</td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="table-responsive">
+                <table class="table table-bordered table-condensed table-hover">
+                    <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nome Completo</th>
+                            <th>Apelido</th>
+                            <th>Email</th>
+                            <th>Cidade</th>
+                            <th>Estado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-show="loading">
+                            <td colspan="5">Carregando...</td>
+                        </tr>
+                        <tr ng-show="(usuarios | filter:query).length == 0">
+                            <td colspan="5">Nenhum usuário encontrado</td>
+                        </tr>
+                        <tr data-ng-repeat="usuario in usuarios | filter:query">
+                            <td>{{usuario.Id}}</td>
+                            <td><a href="@Url.Content("~/Usuarios/Detalhes/"){{usuario.Id}}">{{usuario.NomeCompletoString}}</a></td>
+                            <td>{{usuario.Apelido}}</td>
+                            <td>{{usuario.Email}}</td>
+                            <td>{{usuario.NomeCidade}}</td>
+                            <td>{{usuario.SiglaEstado}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>            
             <div data-pagination="" data-num-pages="numPages()"
                  data-current-page="currentPage" data-max-size="maxSize"
                  data-boundary-links="true"></div>

@@ -23,7 +23,7 @@
 <form class="form" method="post" enctype="multipart/form-data">
     <div class="form-group">
         <label for="IdJogo" class="control-label">Selecione o jogo do campeonato</label>
-        <select name="IdJogo" id="IdJogo" class="form-control input-lg">
+        <select name="IdJogo" id="IdJogo" class="form-control input-lg" onclick="loadChampionships(this.value)">
             <option value="0">Selecione</option>
             @foreach (CampeonatosNParty.Models.Database.Jogos jogo in jogos)
             {
@@ -31,6 +31,20 @@
                 <option @selected value="@jogo.Id ">@jogo.Nome</option>
             }
         </select>
+    </div>
+    <div class="form-group">
+        <label for="Regras" class="control-label">Regras:</label><br/>
+        <textarea name="Regras" id="Regras" style="width: 100%; height: 300px;"></textarea>
+    </div>
+    <div class="form-group">
+        <label for="RegrasCampeonato" class="control-label">Copiar regras de:</label>
+        <select id="RegrasCampeonato" class="form-control input-lg" disabled>
+            <option value="0"></option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label for="Premiacao" class="control-label">Premiação:</label><br />
+        <textarea name="Premiacao" id="Premiacao" style="width: 100%; height: 200px;"></textarea>
     </div>
     <div class="form-group">
         <label for="ValorInscricao" class="control-label">Valor Inscrição</label>
@@ -60,14 +74,65 @@
 @section Scripts{
     <script>
         $(function () {
-            console.log(moment());
             $('#dtCampeonato').datetimepicker({
                 language: 'pt-BR',
                 pickTime: true,
                 minDate: moment('@evento.DataEventoInicio.ToString("MM/dd/yyyy")'),
                 maxDate: moment('@(evento.DataEventoFim == null ? evento.DataEventoInicio.ToString("MM/dd/yyyy") :
-                                                          ((DateTime)evento.DataEventoFim).ToString("MM/dd/yyyy"))')
+                                                              ((DateTime)evento.DataEventoFim).ToString("MM/dd/yyyy"))')
             });
+
+            if ($('#IdJogo').val()) {
+                loadChampionships($('#IdJogo').val());
+            }
         });
+
+        function loadChampionships(gameId) {
+            if (gameId == 0) {
+                $('#RegrasCampeonato').html('<option value="0"></option>');
+                $('#RegrasCampeonato').attr('disabled', true);
+                return;
+            }
+
+            $('#RegrasCampeonato').html('<option value="0">Carregando</option>');
+            $('#RegrasCampeonato').attr('disabled', true);
+            $.ajax({
+                url: '@Url.Content("~/Ajax/GetCampeonatosByIdJogo?idJogo=")' + gameId,
+                success: function (data) {
+                    $('#RegrasCampeonato').html('');
+                    if (data && data.length > 0) {
+                        $('#RegrasCampeonato').append("<option value='0'>Selecione o campeonato...</option>");
+                        $.each(data, function (index) {
+                            $('#RegrasCampeonato').append("<option value='" + data[index].IdCampeonato + "'>" + data[index].NomeEvento + " (" + data[index].DataCampeonatoString + ")</option>");
+                        });
+                        $('#RegrasCampeonato').removeAttr('disabled');
+                    } else {
+                        $('#RegrasCampeonato').append("<option value='0'>Nenhum campeonato encontrado</option>");
+                    }
+                    
+                }
+            });
+        }
+
+        function loadRules(championshipId) {
+            if (championshipId == 0) {
+                return;
+            }
+
+            $('#Regras').html('Carregando...');
+            $('#Regras').attr('disabled', true);
+            $('#RegrasCampeonato').attr('disabled', true);
+            $.ajax({
+                url: '@Url.Content("~/Ajax/GetRegras?idCampeonato=")' + championshipId,
+                success: function (data) {
+                    if (data) {
+                        $('#Regras').html(data.Regras);
+                    } 
+
+                    $('#Regras').removeAttr('disabled');
+                    $('#RegrasCampeonato').removeAttr('disabled');
+                }
+            });
+        }
     </script>
 }

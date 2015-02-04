@@ -29,7 +29,7 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
-                return RedirectToAction("Gerenciar");
+                return Redirect("~/Eventos/Gerenciar");
             }
         }
 

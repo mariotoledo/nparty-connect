@@ -505,9 +505,7 @@ namespace AdminConnect.Controllers
 
                 Campeonatos campeonato = new Campeonatos();
                 return View(campeonato);
-            }
-            catch (Exception e)
-            {
+            } catch (Exception e) {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
                 return RedirectToAction("Gerenciar");
             }
@@ -552,7 +550,7 @@ namespace AdminConnect.Controllers
 
                 try
                 {
-                    int valorInscricao = Int32.Parse(form["ValorInscricao"]);
+                    int valorInscricao = string.IsNullOrEmpty(form["ValorInscricao"]) ? 0 : Int32.Parse(form["ValorInscricao"]);
                     campeonato.ValorInscricao = valorInscricao;
                 }
                 catch (Exception e)

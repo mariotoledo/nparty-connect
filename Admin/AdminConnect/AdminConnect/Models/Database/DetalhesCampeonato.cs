@@ -52,6 +52,19 @@ namespace AdminConnect.Models.Database
         [DatabaseColumn]
         public decimal ValorInscricao { get; set; }
 
+        [DatabaseColumn]
+        public string Regras { get; set; }
+
+        [DatabaseColumn]
+        public string Premiacao { get; set; }
+
+        public string DataCampeonatoString {
+            get
+            {
+                return DataCampeonato.ToString("dd/MM/yyyy") + " as " + DataCampeonato.ToString("hh:mm");
+            }
+        }
+
         public string getCoverUrl()
         {
             if (String.IsNullOrEmpty(this.CoverURL))

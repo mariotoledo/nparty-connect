@@ -56,11 +56,23 @@ namespace AdminConnect.Controllers
             }
         }
 
-        public JsonResult GetRegras(int idJogo)
+        public JsonResult GetCampeonatosByIdJogo(int idJogo)
         {
             try
             {
-                return Json(NPartyDb<Regras>.Instance.Select().Where("IdJogo", idJogo).OrderBy("Nome", EixoX.Data.SortDirection.Descending), JsonRequestBehavior.AllowGet);
+                return Json(NPartyDb<DetalhesCampeonato>.Instance.Select().Where("IdJogo", idJogo).OrderBy("DataCampeonato", EixoX.Data.SortDirection.Descending), JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception e)
+            {
+                return Json("", JsonRequestBehavior.DenyGet);
+            }
+        }
+
+        public JsonResult GetRegras(int idCampeonato)
+        {
+            try
+            {
+                return Json(NPartyDb<Campeonatos>.Instance.Select().Where("IdCampeonato", idCampeonato).OrderBy("Nome", EixoX.Data.SortDirection.Descending), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
