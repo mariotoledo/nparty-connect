@@ -131,7 +131,7 @@ namespace CampeonatosNParty.Models.Database
         public string getUrlFotoPerfil()
         {
             if (String.IsNullOrEmpty(this.UrlFotoPerfil))
-                return "/Static/img/playerPhoto/default.jpg";
+                return "/img/default.jpg";
             return this.UrlFotoPerfil;
         }
 

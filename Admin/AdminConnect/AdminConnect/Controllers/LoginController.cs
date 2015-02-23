@@ -63,6 +63,7 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ocorreu um erro inesperado. Tente novamente mais tarde.", MessageType.Error);
+
                 return View(model);
             }            
         }

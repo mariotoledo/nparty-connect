@@ -41,6 +41,7 @@
   <ItemGroup>
     <Reference Include="AWSSDK">
       <HintPath>..\..\..\Connect\bin\AWSSDK.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -182,6 +183,7 @@
     <Compile Include="Models\Database\Campeonatos.cs" />
     <Compile Include="Models\Database\Cidade.cs" />
     <Compile Include="Models\Database\CidadeEventos.cs" />
+    <Compile Include="Models\Database\Log.cs" />
     <Compile Include="Models\Database\Classificacao.cs" />
     <Compile Include="Models\Database\ClassificacaoCampeonato.cs" />
     <Compile Include="Models\Database\ClassificacaoPorJogador.cs" />
@@ -324,6 +326,7 @@
     <Content Include="Views\Usuarios\Gerenciar.cshtml" />
     <Content Include="Views\Usuarios\Detalhes.cshtml" />
     <Content Include="Views\Usuarios\Novo.cshtml" />
+    <Content Include="Views\Dashboard\TrocarSenha.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

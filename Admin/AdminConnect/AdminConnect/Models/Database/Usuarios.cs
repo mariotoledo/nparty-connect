@@ -36,7 +36,7 @@ namespace CampeonatosNParty.Models.Database
         [Email]
         public string Email { get; set; }
 
-        [DatabaseColumn(true)]
+        [DatabaseColumn]
         public DateTime Nascimento;
 
         [DatabaseColumn]
@@ -122,7 +122,7 @@ namespace CampeonatosNParty.Models.Database
         public string getUrlFotoPerfil()
         {
             if (String.IsNullOrEmpty(this.UrlFotoPerfil))
-                return "/Static/img/playerPhoto/default.jpg";
+                return "/img/default.jpg";
             return this.UrlFotoPerfil;
         }
 

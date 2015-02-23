@@ -78,13 +78,14 @@
                     <h4 class="modal-title" id="confimationModalLabel">Adicionar usuário ao campeonato?</h4>
                 </div>
                 <form method="post" action="@Url.Content("~/Campeonatos/AdicionarInscricao/" + Model.IdCampeonato)">
+                    <input type="hidden" name="IdUsuario" ng-model="IdUsuario" id="IdUsuario" />
                     @{
                         if (Model.ValorInscricao > 0)
                         {
                             <div class="modal-body">
                                 <div class="checkbox">
                                     <label>
-                                        <input type="hidden" name="IdUsuario" ng-model="IdUsuario" id="IdUsuario" />
+                                        
                                         <input type="checkbox" name="FoiPago"> A inscrição já foi paga
                                     </label>
                                 </div>

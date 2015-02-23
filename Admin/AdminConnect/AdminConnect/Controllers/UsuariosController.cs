@@ -32,6 +32,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar abrir detalhes do usuário",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }
         }
@@ -69,6 +81,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar abrir página para criar usuário",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }
             return View(new Usuarios());
@@ -211,6 +235,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar criar um novo usuario",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }
         }

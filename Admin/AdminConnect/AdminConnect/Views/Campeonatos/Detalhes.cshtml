@@ -76,7 +76,7 @@
         <div class="col-md-8">
             <h4>
                 Participantes 
-                @if (user.AdminSupremo || (user.PodeEditarCampeonato && user.IdOrganizador == Model.detalhesCampeonato.IdOrganizador))
+                @if ((user.AdminSupremo || (user.PodeEditarCampeonato && user.IdOrganizador == Model.detalhesCampeonato.IdOrganizador)) && Model.detalhesCampeonato.IdStatus == 1)
                 {
                     <a href="@Url.Content("~/Campeonatos/AdicionarInscricao/" + Model.detalhesCampeonato.IdCampeonato)" class="btn btn-primary">Adicionar</a>
                 }

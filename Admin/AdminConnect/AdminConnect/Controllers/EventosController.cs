@@ -47,6 +47,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar abrir pagina de detalhes de evento",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }
         }
@@ -88,6 +100,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar abrir pagina de edicao de evento",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }            
         }
@@ -107,6 +131,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar abrir pagina de criacao de evento",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }
 
@@ -127,6 +163,8 @@ namespace AdminConnect.Controllers
                 ViewData["Estados"] = estados;
 
                 ViewData["Eventos"] = Eventos.Select().OrderBy("Nome");
+
+                ViewData["Organizadores"] = Organizador.Select().Where("OrganizadorPublico", 1).Or("Id", CurrentUser.IdOrganizador).OrderBy("Nome");
 
                 if (string.IsNullOrEmpty(evento.Nome))
                 {
@@ -182,12 +220,25 @@ namespace AdminConnect.Controllers
 
                 try
                 {
+                    string teste = form["DataInicioEvento"];
                     dataEventoInicio = DateTime.ParseExact(form["DataInicioEvento"], "dd/MM/yyyy hh:mm",
                                        System.Globalization.CultureInfo.InvariantCulture);
                 }
                 catch (Exception e)
                 {
                     FlashMessage("Ocorreu um erro ao tentar formatar a data de início do evento", MessageType.Error);
+
+                    Log log = new Log()
+                    {
+                        Descricao = e.Message,
+                        IdUsuario = CurrentUser.Id,
+                        Tipo = 1,
+                        Titulo = "Erro ao tentar criar um evento (data de inicio)",
+                        DataCriacao = DateTime.Now
+                    };
+
+                    NPartyDb<Log>.Instance.Insert(log);
+
                     return View(evento);
                 }
 
@@ -211,6 +262,18 @@ namespace AdminConnect.Controllers
                     catch (Exception e)
                     {
                         FlashMessage("Ocorreu um erro ao tentar formatar a data de término do evento", MessageType.Error);
+
+                        Log log = new Log()
+                        {
+                            Descricao = e.Message,
+                            IdUsuario = CurrentUser.Id,
+                            Tipo = 1,
+                            Titulo = "Erro ao tentar criar um evento (data de termino)",
+                            DataCriacao = DateTime.Now
+                        };
+
+                        NPartyDb<Log>.Instance.Insert(log);
+
                         return View(evento);
                     }
 
@@ -270,6 +333,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar criar um evento",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }
         }
@@ -374,6 +449,18 @@ namespace AdminConnect.Controllers
                 catch (Exception e)
                 {
                     FlashMessage("Ocorreu um erro ao tentar formatar a data de início do evento", MessageType.Error);
+
+                    Log log = new Log()
+                    {
+                        Descricao = e.Message,
+                        IdUsuario = CurrentUser.Id,
+                        Tipo = 1,
+                        Titulo = "Erro ao tentar editar um evento (data de inicio)",
+                        DataCriacao = DateTime.Now
+                    };
+
+                    NPartyDb<Log>.Instance.Insert(log);
+
                     return View(evento);
                 }
 
@@ -397,6 +484,18 @@ namespace AdminConnect.Controllers
                     catch (Exception e)
                     {
                         FlashMessage("Ocorreu um erro ao tentar formatar a data de término do evento", MessageType.Error);
+
+                        Log log = new Log()
+                        {
+                            Descricao = e.Message,
+                            IdUsuario = CurrentUser.Id,
+                            Tipo = 1,
+                            Titulo = "Erro ao tentar editar um evento (data de termino)",
+                            DataCriacao = DateTime.Now
+                        };
+
+                        NPartyDb<Log>.Instance.Insert(log);
+
                         return View(evento);
                     }
 
@@ -456,6 +555,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar editar um evento",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }
         }

@@ -29,6 +29,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao acessar Detalhes de Campeonato",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return Redirect("~/Eventos/Gerenciar");
             }
         }
@@ -73,6 +85,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao mudar status do campeonato para Em Andamento",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }
         }
@@ -117,6 +141,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao mudar status do campeonato para Nao Iniciado",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return RedirectToAction("Gerenciar");
             }
         }
@@ -168,6 +204,17 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar acessar pagina de Finalizacao de Campeonato",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return Redirect("~/Eventos/Gerenciar");
             }
         }
@@ -261,6 +308,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao mudar status do campeonato para Finalizado",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return Redirect("~/Eventos/Gerenciar");
             }
         }
@@ -303,6 +362,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao abrir pagina de adicionar inscricao",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return Redirect("~/Eventos/Gerenciar");
             }
         }
@@ -365,6 +436,18 @@ namespace AdminConnect.Controllers
             catch (Exception e)
             {
                 FlashMessage("Ops, ocorreu o seguinte erro: " + e.Message, MessageType.Error);
+
+                Log log = new Log()
+                {
+                    Descricao = e.Message,
+                    IdUsuario = CurrentUser.Id,
+                    Tipo = 1,
+                    Titulo = "Erro ao tentar adicionar inscricao",
+                    DataCriacao = DateTime.Now
+                };
+
+                NPartyDb<Log>.Instance.Insert(log);
+
                 return Redirect("~/Eventos/Gerenciar");
             }
         }

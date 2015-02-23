@@ -68,14 +68,14 @@ namespace AdminConnect.Models.Database
         public string getCoverUrl()
         {
             if (String.IsNullOrEmpty(this.CoverURL))
-                return "/Static/img/gameCovers/defaultCover.jpg";
+                return "/img/defaultCover.jpg";
             return this.CoverURL;
         }
 
         public string getImagemUrl()
         {
             if (String.IsNullOrEmpty(this.ImagemURL))
-                return "/Static/img/gameCovers/default.jpg";
+                return "/img/default.jpg";
             return this.ImagemURL;
         }
     }
