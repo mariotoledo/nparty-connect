@@ -26,7 +26,12 @@
             <h4>@Model.getFullName() <small>@if(!string.IsNullOrEmpty(Model.Apelido)){<span>(@Model.Apelido)</span>}</small></h4>
             <hr/>
             <b>Cidade: </b>@Model.NomeCidade<br/>
-            <b>Estado: </b>@Model.SiglaEstado
+            <b>Estado: </b>@Model.SiglaEstado<br/>
+            <b>Email: </b>@Model.Email<br/>
+            @if (!string.IsNullOrEmpty(Model.Telefone))
+            {
+                <b>Telefone: </b><span>@Model.Telefone</span><br />
+            }
         </div>
         <div class="col-md-8">
             @{
@@ -36,9 +41,9 @@
                         @foreach (AdminConnect.Models.Database.InscricaoUsuario insc in inscricoes)
                         {
                             <div class="col-md-3" style="margin-bottom: 15px;">
-                                <img src="@insc.ImagemURL" class="img-responsive"/>
+                                <img src="@insc.getImagemUrl()" class="img-responsive"/>
                                 <a href="@Url.Content("~/Campeonatos/Detalhes/" + insc.IdCampeonato)"><h4 style="margin-bottom: 2px;">@insc.NomeJogo</h4></a>
-                                Data: @insc.DataCampeonato.ToString("dd/MM/yyyy")
+                                Data: @insc.DataCampeonato.ToString("dd/MM/yyyy")<br/>
                             </div>
                         }
                     </div>

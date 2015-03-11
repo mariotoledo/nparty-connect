@@ -43,5 +43,19 @@ namespace AdminConnect.Models.Database
                     return "/Static/img/playerPhoto/default.jpg";
                 return this.UrlFotoPerfil;
             }
+
+            public string getCoverUrl()
+            {
+                if (String.IsNullOrEmpty(this.CoverURL))
+                    return "/img/defaultCover.jpg";
+                return this.CoverURL;
+            }
+
+            public string getImagemUrl()
+            {
+                if (String.IsNullOrEmpty(this.ImagemURL))
+                    return "/img/default.jpg";
+                return this.ImagemURL;
+            }
     }
 }

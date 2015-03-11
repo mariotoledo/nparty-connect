@@ -34,7 +34,7 @@
                 @foreach (InscricaoUsuario insc in inscritos)
                 {
                     <div class="col-md-4">
-                        <h4>@insc.NomeUsuario</h4>
+                        <h4>@insc.NomeUsuario <small>@insc.Apelido</small></h4>
                         <input type="radio" name="primeiroLugar" value="@insc.IdUsuario"/>1º Lugar<br>
                         <input type="radio" name="segundoLugar" value="@insc.IdUsuario"/>2º Lugar<br>
                         <input type="radio" name="terceiroLugar" value="@insc.IdUsuario"/>3º Lugar<br>

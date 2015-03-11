@@ -45,6 +45,7 @@
                         <th>Id</th>
                         <th>Nome Completo</th>
                         <th>Apelido</th>
+                        <th>Email</th>
                         <th>Inscrever</th>
                     </tr>
                 </thead>
@@ -59,6 +60,7 @@
                         <td>{{usuario.Id}}</td>
                         <td>{{usuario.NomeCompletoString}}</td>
                         <td>{{usuario.Apelido}}</td>
+                        <td>{{usuario.Email}}</td>
                         <td><button class="btn btn-primary" ng-click="openConfirmationModal(usuario.Id)"><span class="glyphicon glyphicon-list-alt" aria-hidden="true"></span></button></td>
                     </tr>
                 </tbody>

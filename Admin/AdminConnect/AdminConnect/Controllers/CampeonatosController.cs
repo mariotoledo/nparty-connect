@@ -258,7 +258,7 @@ namespace AdminConnect.Controllers
                     return Redirect("~/Campeonatos/Detalhes/" + id.Value);
                 }
 
-                OrganizadorMultiplicadorPontuacao multiplicadores = OrganizadorMultiplicadorPontuacao.Select().Where("IdOrganizador", CurrentUser.IdOrganizador).SingleResult();
+                OrganizadorMultiplicadorPontuacao multiplicadores = OrganizadorMultiplicadorPontuacao.Select().Where("IdOrganizador", c.IdOrganizador).SingleResult();
 
                 List<Classificacao> classificacoes = new List<Classificacao>();
 
