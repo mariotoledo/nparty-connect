@@ -32,19 +32,25 @@
             }
         </select>
     </div>
-    <div class="form-group">
-        <label for="Regras" class="control-label">Regras:</label><br/>
-        <textarea name="Regras" id="Regras" style="width: 100%; height: 300px;"></textarea>
-    </div>
-    <div class="form-group">
-        <label for="RegrasCampeonato" class="control-label">Copiar regras de:</label>
-        <select id="RegrasCampeonato" class="form-control input-lg" disabled>
-            <option value="0"></option>
-        </select>
-    </div>
-    <div class="form-group">
-        <label for="Premiacao" class="control-label">Premiação:</label><br />
-        <textarea name="Premiacao" id="Premiacao" style="width: 100%; height: 200px;"></textarea>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Regras" class="control-label">Regras:</label><br />
+                <textarea name="Regras" id="Regras" style="width: 100%; height: 300px;"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="RegrasCampeonato" class="control-label">Copiar regras de:</label>
+                <select id="RegrasCampeonato" class="form-control input-lg" disabled>
+                    <option value="0"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="Premiacao" class="control-label">Premiação:</label><br />
+                <textarea name="Premiacao" id="Premiacao" style="width: 100%; height: 200px;"></textarea>
+            </div>
+        </div>
     </div>
     <div class="form-group">
         <label for="ValorInscricao" class="control-label">Valor Inscrição</label>
@@ -58,7 +64,7 @@
         <label for="Data" class="control-label">Data</label>
         <div class='input-group date' id='dtCampeonato'>
             @{
-                string dataEvento = evento.DataEventoInicio.CompareTo(DateTime.MinValue) == 0 ? DateTime.Now.ToString("dd/MM/yyyy hh:mm") : evento.DataEventoInicio.ToString("dd/MM/yyyy hh:mm");
+                string dataEvento = evento.DataEventoInicio.CompareTo(DateTime.MinValue) == 0 ? DateTime.Now.ToString("dd/MM/yyyy HH:mm") : evento.DataEventoInicio.ToString("dd/MM/yyyy HH:mm");
             }
             <input type='text' class="form-control" value="@dataEvento" id="Data" name="Data" />
             <span class="input-group-addon">
@@ -72,6 +78,7 @@
     </div>
 </form>
 @section Scripts{
+    <script src="@Url.Content("~/Scripts/wysihtml5-0.3.0.js")"></script>
     <script>
         $(function () {
             $('#dtCampeonato').datetimepicker({
@@ -109,7 +116,6 @@
                     } else {
                         $('#RegrasCampeonato').append("<option value='0'>Nenhum campeonato encontrado</option>");
                     }
-                    
                 }
             });
         }
@@ -134,5 +140,15 @@
                 }
             });
         }
+
+        var editor = new wysihtml5.Editor("Regras", {
+            toolbar: "wysihtml5-editor-toolbar",
+            stylesheets: ["http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css", "css/editor.css"]
+        });
+
+        var editor2 = new wysihtml5.Editor("Premiacao", {
+            toolbar: "wysihtml5-editor-toolbar",
+            stylesheets: ["http://yui.yahooapis.com/2.9.0/build/reset/reset-min.css", "css/editor.css"]
+        });
     </script>
 }

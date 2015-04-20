@@ -6,6 +6,7 @@
 
 @{
     Html.RenderPartial("FlashMessage");
+    string limit = Request.QueryString["limit"];
 }
 
 <div class="page-header">
@@ -27,7 +28,15 @@
                     </div>  
                 </div>
                 <div class="col-lg-4">
-                    <br/>
+                    <form method="get" action="@Url.Content("~/Usuarios/Gerenciar")" id="limit" onchange="$('#limit').submit()">
+                        <select name="limit" class="form-control">
+                            <option value="0">Selecione o numero de registros</option>
+                            <option value="50">50 registros</option>
+                            <option value="200">200 registros</option>
+                            <option value="1000">1000 registros</option>
+                            <option value="5000">5000 registros</option>
+                        </select>
+                    </form>                    
                 </div>
                 <div class="col-lg-2">
                     @if (user.AdminSupremo || (user.PodeInserirUsuario))
@@ -78,7 +87,7 @@
 
         UsuariosLoad.controller('UsuariosController', function ($scope, $http) {
             $scope.loading = true;
-            $http.get('@Url.Content("~/Ajax/GetUsuarios/")')
+            $http.get('@Url.Content("~/Ajax/GetUsuarios?limit=" + limit)')
             .then(function (res) {
                 $scope.usuarios = res.data;
                 $scope.loading = false;

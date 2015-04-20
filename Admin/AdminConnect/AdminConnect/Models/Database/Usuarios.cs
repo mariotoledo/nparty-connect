@@ -36,7 +36,7 @@ namespace CampeonatosNParty.Models.Database
         [Email]
         public string Email { get; set; }
 
-        [DatabaseColumn]
+        [DatabaseColumn(true)]
         public DateTime Nascimento;
 
         [DatabaseColumn]

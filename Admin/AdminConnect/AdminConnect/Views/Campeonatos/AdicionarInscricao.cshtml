@@ -3,6 +3,7 @@
     ViewBag.Title = "Adicionar Inscricao";
     CampeonatosNParty.Models.Database.Administrador user =
 (CampeonatosNParty.Models.Database.Administrador)Session["CurrentUser"];
+    string limit = Request.QueryString["limit"];
 }
 
 @{
@@ -31,7 +32,18 @@
                         <input name="filter" type="text" class="form-control" ng-model="query">
                     </div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-4">
+                    <form method="get" id="limit" onchange="$('#limit').submit()">
+                        <select name="limit" class="form-control">
+                            <option value="0">Selecione o numero de registros</option>
+                            <option value="50">50 registros</option>
+                            <option value="200">200 registros</option>
+                            <option value="1000">1000 registros</option>
+                            <option value="5000">5000 registros</option>
+                        </select>
+                    </form>
+                </div>
+                <div class="col-lg-2">
                     @if (user.AdminSupremo || (user.PodeInserirUsuario))
                     {
                         <a href="@Url.Content("~/Usuarios/Novo?idCampeonato=" + Model.IdCampeonato)" class="btn btn-primary pull-right">Novo usuário</a>
@@ -111,7 +123,7 @@
 
         UsuariosFromChampionshipLoad.controller('UsuariosFromChampionshipController', function ($scope, $http) {
             $scope.loading = true;
-            $http.get('@Url.Content("~/Ajax/GetUsersNotSubscribedToChampionship/" + Model.IdCampeonato)')
+            $http.get('@Url.Content("~/Ajax/GetUsersNotSubscribedToChampionship/" + Model.IdCampeonato + "?limit=" + limit)')
             .then(function (res) {
                 $scope.usuarios = res.data;
                 $scope.loading = false;

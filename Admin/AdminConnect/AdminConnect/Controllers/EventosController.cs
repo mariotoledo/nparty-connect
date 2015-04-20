@@ -221,7 +221,7 @@ namespace AdminConnect.Controllers
                 try
                 {
                     string teste = form["DataInicioEvento"];
-                    dataEventoInicio = DateTime.ParseExact(form["DataInicioEvento"], "dd/MM/yyyy hh:mm",
+                    dataEventoInicio = DateTime.ParseExact(form["DataInicioEvento"], "dd/MM/yyyy HH:mm",
                                        System.Globalization.CultureInfo.InvariantCulture);
                 }
                 catch (Exception e)
@@ -250,7 +250,7 @@ namespace AdminConnect.Controllers
 
                     try
                     {
-                        dataEventoFim = DateTime.ParseExact(form["DataFimEvento"], "dd/MM/yyyy hh:mm",
+                        dataEventoFim = DateTime.ParseExact(form["DataFimEvento"], "dd/MM/yyyy HH:mm",
                                            System.Globalization.CultureInfo.InvariantCulture);
 
                         if (dataEventoInicio.CompareTo(dataEventoFim) > 0)
@@ -443,7 +443,7 @@ namespace AdminConnect.Controllers
 
                 try
                 {
-                    dataEventoInicio = DateTime.ParseExact(form["DataInicioEvento"], "dd/MM/yyyy hh:mm",
+                    dataEventoInicio = DateTime.ParseExact(form["DataInicioEvento"], "dd/MM/yyyy HH:mm",
                                        System.Globalization.CultureInfo.InvariantCulture);
                 }
                 catch (Exception e)
@@ -472,7 +472,7 @@ namespace AdminConnect.Controllers
 
                     try
                     {
-                        dataEventoFim = DateTime.ParseExact(form["DataFimEvento"], "dd/MM/yyyy hh:mm",
+                        dataEventoFim = DateTime.ParseExact(form["DataFimEvento"], "dd/MM/yyyy HH:mm",
                                            System.Globalization.CultureInfo.InvariantCulture);
 
                         if (dataEventoInicio.CompareTo(dataEventoFim) > 0)
@@ -605,7 +605,8 @@ namespace AdminConnect.Controllers
                     return RedirectToAction("Gerenciar");
                 }
 
-                if (evento.IdOrganizador != CurrentUser.IdOrganizador)
+                Organizador o = Organizador.Select().Where("Id", evento.IdOrganizador).SingleResult();
+                if (o.OrganizadorPublico == false && evento.IdOrganizador != CurrentUser.IdOrganizador)
                 {
                     FlashMessage("Você não pode criar campeonatos para este evento", MessageType.Error);
                     return RedirectToAction("Gerenciar");
@@ -624,6 +625,7 @@ namespace AdminConnect.Controllers
 
         [HttpPost]
         [AuthenticationRequired]
+        [ValidateInput(false)]
         [AccessRequired(Models.Attributes.AccessType.CanCreateChampionship)]
         public ActionResult AdicionarCampeonato(int? id, FormCollection form, Campeonatos campeonato)
         {
@@ -642,7 +644,8 @@ namespace AdminConnect.Controllers
                     return RedirectToAction("Gerenciar");
                 }
 
-                if (evento.IdOrganizador != CurrentUser.IdOrganizador)
+                Organizador o = Organizador.Select().Where("Id", evento.IdOrganizador).SingleResult();
+                if (o.OrganizadorPublico == false && evento.IdOrganizador != CurrentUser.IdOrganizador)
                 {
                     FlashMessage("Você não pode criar campeonatos para este evento", MessageType.Error);
                     return RedirectToAction("Gerenciar");
@@ -674,8 +677,9 @@ namespace AdminConnect.Controllers
 
                 try
                 {
-                    dataCampeonato = DateTime.ParseExact(form["Data"], "dd/MM/yyyy hh:mm",
-                                       System.Globalization.CultureInfo.InvariantCulture);
+                    string data = form["Data"];
+                    dataCampeonato = DateTime.ParseExact(data, "dd/MM/yyyy HH:mm",
+                                       System.Globalization.CultureInfo.GetCultureInfo(1046));
                 }
                 catch (Exception e)
                 {
@@ -695,11 +699,16 @@ namespace AdminConnect.Controllers
                     return View(campeonato);
                 }
 
+                string regras = form["Regras"];
+                string premiacao = form["Premiacao"];
+
                 campeonato.DataCadastro = DateTime.Now;
                 campeonato.DataCampeonato = dataCampeonato;
                 campeonato.IdStatus = 1;
                 campeonato.IdEvento = evento.Id;
                 campeonato.IdOrganizador = CurrentUser.IdOrganizador;
+                campeonato.Regras = regras;
+                campeonato.Premiacao = premiacao;
 
                 NPartyDb<Campeonatos>.Instance.Insert(campeonato);
 

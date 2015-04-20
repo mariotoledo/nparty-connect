@@ -28,13 +28,15 @@ namespace AdminConnect.Controllers
         {
             try
             {
+                int limit = string.IsNullOrEmpty(Request.QueryString["limit"]) ? 50 : Int32.Parse(Request.QueryString["limit"]);
+
                 List<object> inscritos = NPartyDb<Inscricao>.Instance.SelectMember("IdUsuario").Where("IdCampeonato", id.Value).ToList();
 
                 IEnumerable<Usuarios> usuarios;
                 if(inscritos == null || inscritos.Count == 0){
-                    usuarios = NPartyDb<Usuarios>.Instance.Select().OrderBy("Nome");
+                    usuarios = NPartyDb<Usuarios>.Instance.Select().OrderBy("Nome").Take(limit);
                 } else {
-                    usuarios = NPartyDb<Usuarios>.Instance.Select().Where("Id", EixoX.Data.FilterComparison.NotInCollection, inscritos).OrderBy("Nome");
+                    usuarios = NPartyDb<Usuarios>.Instance.Select().Where("Id", EixoX.Data.FilterComparison.NotInCollection, inscritos).OrderBy("Nome").Take(limit);
                 }
                 return Json(usuarios, JsonRequestBehavior.AllowGet);
             }
@@ -48,7 +50,9 @@ namespace AdminConnect.Controllers
         {
             try
             {
-                return Json(NPartyDb<DetalhesUsuario>.Instance.Select().OrderBy("Data_Cadastro", EixoX.Data.SortDirection.Descending), JsonRequestBehavior.AllowGet);
+                int limit = string.IsNullOrEmpty(Request.QueryString["limit"]) ? 50 : Int32.Parse(Request.QueryString["limit"]);
+
+                return Json(NPartyDb<DetalhesUsuario>.Instance.Select().OrderBy("Data_Cadastro", EixoX.Data.SortDirection.Descending).Take(limit), JsonRequestBehavior.AllowGet);
             }
             catch (Exception e)
             {
