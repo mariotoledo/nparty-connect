@@ -1,0 +1,26 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h1>API do N-Party Connect</h1>
+
+<h2>Eventos</h2>
+
+<div class="row" id="eventos">
+
+</div>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $.getJSON('eventos/index')
+          .done(function (data) {
+              $.each(data, function (key, item) {
+                  var appendable = '<div class="col-sm-6 col-md-4"><a href="#" class="thumbnail"><img class="img-responsive" alt="" src=""><div class="caption"><h3>' + item.Nome + '</h3><p><b>Data</b>:' + item.DataEventoAsString + '</p></div></a></div>'
+                  $('#eventos').append(appendable);
+            });
+          });
+    });
+</script>

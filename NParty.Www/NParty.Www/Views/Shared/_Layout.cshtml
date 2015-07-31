@@ -1,0 +1,61 @@
+﻿<html lang="pt-br">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>N-Party - @ViewBag.Title</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/nparty.css")" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar navbar-default">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">
+                    <img style="height: 100%;" class="img-responsive" alt="N-Party" src="@Url.Content("~/Content/img/logo.png")">
+                </a>
+            </div>
+            <div class="collapse navbar-collapse" id="main-menu">
+                <ul class="nav navbar-nav">
+                    <li class="bordered-left"><a href="#">Capa</a></li>
+                    <li class="bordered-left dropdown">
+                        <a href="#">Nintendo</a>
+                        <div class="dropdown-menu" style="width: 100%;">
+                            <ul class="nav">
+                                <li><a href="#">Teste</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bordered-left"><a href="#">Eventos</a></li>
+                    <li class="bordered-left"><a href="#">E-Sports</a></li>
+                    <li class="bordered-left bordered-right"><a href="#">Sobre</a></li>
+                </ul>
+                <form class="navbar-form navbar-left" role="search">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Buscar por...">
+                        <span class="input-group-btn">
+                            <button style="height:34px;" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                        </span>
+                    </div>
+                </form>
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="bordered-left bordered-right"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    @RenderBody()
+</body>
+</html>
