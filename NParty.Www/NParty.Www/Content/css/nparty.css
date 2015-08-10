@@ -37,21 +37,19 @@ blockquote{
 
 @media (min-width: 992px){
     .navbar-default .navbar-nav li.bordered-left{
-        border-left: 1px solid #EAEAEA;
+        border-left: 1px solid #DDDDDD;
     }
 
     .navbar-default .navbar-nav li.bordered-right{
-        border-right: 1px solid #EAEAEA;
+        border-right: 1px solid #DDDDDD;
     }
 }
 
-@media (max-width: 1200px) {
-    .navbar .navbar-nav {
-        display: inline-block;
-        float: none;
-        vertical-align: top;
-    }
+.dropdown-menu{
+    padding: 0;
 }
+
+
 
 @media (max-width: 1199px) {
     .navbar-header {
@@ -89,8 +87,26 @@ blockquote{
     .collapsing {
         overflow: hidden!important;
     }
+
+    #main-menu .navbar-nav{
+        width: 100%;
+        text-align: center;
+    }
+
+    #main-menu .navbar-form{
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar .navbar-nav {
+        display: inline-block;
+        float: none;
+        vertical-align: top;
+    }
 }
 
+@media (min-width: 1200px) {
+    
 
 .sidebar-nav {
     padding: 9px 0;
@@ -128,15 +144,195 @@ blockquote{
     border-bottom: 6px solid transparent;
     top: 11px;
 }
+}
 
-#menu-nintendo{
+.nintendo-menu:hover {
+    background-color: #C90201;
+    color: #FFF!important;
+}
+
+.nintendo-menu .nav li a {
+    color: #FFF
+}
+
+.nintendo-menu .nav li a:hover {
+    color: #C90201
+}
+
+.nintendo-menu:hover>a, .nintendo-menu:hover>a:hover{
+    color: #FFF!important;
+    -webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+
+.nintendo-menu .dropdown-menu{
     color: #FFF;
-    background-color: #FF0000;
+    background-color: #C90201;
+}
+
+
+.eventos-menu:hover {
+    background-color: #E18700;
+    color: #FFF!important;
+}
+
+.eventos-menu .nav li a {
+    color: #FFF
+}
+
+.eventos-menu .nav li a:hover {
+    color: #E18700;
+}
+
+.eventos-menu:hover>a, .eventos-menu:hover>a:hover{
+    color: #FFF!important;
+    -webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+
+.eventos-menu .dropdown-menu{
+    color: #FFF;
+    background-color: #E18700;
+}
+
+.dropdown-menu{
     -webkit-background-clip: none;
     background-clip: padding-box;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0,0,0,.15);
-    border-radius: 4px;
+    border: none;
+    border: none;
+    border-radius: 0px;
     -webkit-box-shadow: 0 6px 12px rgba(0,0,0,.175);
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+
+.esports-menu:hover {
+    background-color: #54028A;
+    color: #FFF!important;
+}
+
+.esports-menu .nav li a {
+    color: #FFF
+}
+
+.esports-menu .nav li a:hover {
+    color: #54028A;
+}
+
+.esports-menu:hover>a, .esports-menu:hover>a:hover{
+    color: #FFF!important;
+    -webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+
+.esports-menu .dropdown-menu{
+    color: #FFF;
+    background-color: #54028A;
+}
+
+.hilight{
+        display: block;
+        background-size: cover;
+        background-position: top center;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        position: relative;
+        background-position: center;
+        overflow: hidden;
+        min-height: 225px;
+        margin-left: -15px;
+        margin-right: -15px;
+        z-index: -1!important;
+}
+
+.hilight:after{
+    z-index: 1;
+}
+
+@media (min-width: 992px) {
+    .hilight-more {
+        min-height: 450px;
+    }
+}
+
+    .hilights-items:after {
+        content: '';
+        display: block;
+        width: 100%;
+        height: 450px;
+        position: relative;
+        top: 0;
+        left: 0;
+        z-index: 3;
+        filter: alpha(opacity=65);
+        opacity: .65;
+        background-image: -webkit-gradient(linear,0 0,100% 100%,color-stop(0,#C90201),color-stop(39%,#FF6A6A),color-stop(65%,#FF6A6A),color-stop(100%,#7D0000));
+        background-image: -webkit-linear-gradient(left top,#C90201 0,#a5407b 39%,#FF6A6A 65%,#7D0000 100%);
+        background-image: -moz-linear-gradient(left top,#C90201 0,#a5407b 39%,#FF6A6A 65%,#7D0000 100%);
+        background-image: -o-linear-gradient(left top,#C90201 0,#a5407b 39%,#FF6A6A 65%,#7D0000 100%);
+        background-image: linear-gradient(left top,#C90201 0,#a5407b 39%,#FF6A6A 65%,#7D0000 100%);
+    }
+
+    .hilights-items h2{
+       position: absolute;
+        -webkit-box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        box-sizing: border-box;
+        bottom: 0;
+        font-size: 30px;
+        line-height: 1.4;
+        z-index: 26;
+        color: #FFF;
+    }
+
+    .hilights-items a:after{
+        width: 100%;
+        height: 100%;
+    }
+
+@media (max-width: 992px) {
+    .hilights-items:after {
+        min-height: 1125px;
+    }
+}
+
+.hilights-items{
+    z-index: 2;
+}
+
+.hilights-items::after{
+    zoom:1;
+}
+
+.hilight-link{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 26;
+        margin-left: -15px;
+}
+.hilight-link:hover{
+    background-color: rgba(150, 0, 0, 0.2);
+}
+
+.hilight-link h2{
+    margin-left: 15px;
+    font-size: 22px;
+        text-shadow: 1px 1px 1px #000;
+}
+
+    .hilight-link:hover h2 {
+        color: #C90201;
+    }
+
+h1, h2, h3{
+    font-family: "Gotham SSm A","Gotham SSm B",Arial,sans-serif;
+    font-weight: bold;
 }

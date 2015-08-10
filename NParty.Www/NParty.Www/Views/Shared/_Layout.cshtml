@@ -11,13 +11,14 @@
 
     <!-- Bootstrap core CSS -->
     <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
+    <link rel="stylesheet" href="https://cloud.typography.com/706184/753582/css/fonts.css" type="text/css" />
     <link href="@Url.Content("~/Content/css/nparty.css")" rel="stylesheet">
 </head>
 <body>
     <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -29,18 +30,59 @@
             </div>
             <div class="collapse navbar-collapse" id="main-menu">
                 <ul class="nav navbar-nav">
-                    <li class="bordered-left"><a href="#">Capa</a></li>
-                    <li class="bordered-left dropdown">
+                    <li class="bordered-left dropdown nintendo-menu">
                         <a href="#">Nintendo</a>
-                        <div class="dropdown-menu" style="width: 100%;">
+                        <div class="dropdown-menu">
                             <ul class="nav">
-                                <li><a href="#">Teste</a></li>
+                                <li><a href="#">Todos os artigos</a></li>
+                                <li role="separator" class="divider" style="margin: 0;"></li>
+                                <li><a href="#">Prévias</a></li>
+                                <li><a href="#">Análises</a></li>
+                                <li><a href="#">Dicas</a></li>
+                                <li><a href="#">Top 10</a></li>
                             </ul>
                         </div>
                     </li>
-                    <li class="bordered-left"><a href="#">Eventos</a></li>
-                    <li class="bordered-left"><a href="#">E-Sports</a></li>
-                    <li class="bordered-left bordered-right"><a href="#">Sobre</a></li>
+                    <li class="dropdown eventos-menu">
+                        <a href="#">Eventos</a>
+                        <div class="dropdown-menu">
+                            <ul class="nav">
+                                <li><a href="#">Todos os artigos</a></li>
+                                <li role="separator" class="divider" style="margin: 0;"></li>
+                                <li><a href="#">Coberturas</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="dropdown esports-menu">
+                        <a href="#">E-Sports</a>
+                        <div class="dropdown-menu">
+                            <ul class="nav">
+                                <li><a href="#">Todos os artigos</a></li>
+                                <li role="separator" class="divider" style="margin: 0;"></li>
+                                <li><a href="#">League of Legends</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bordered-left dropdown">
+                        <a href="#">Comunidade</a>
+                        <div class="dropdown-menu">
+                            <ul class="nav">
+                                <li><a href="#">Usuários</a></li>
+                                <li><a href="#">Widgets</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="bordered-left bordered-right dropdown">
+                        <a href="#">Sobre</a>
+                        <div class="dropdown-menu">
+                            <ul class="nav">
+                                <li><a href="#">O grupo</a></li>
+                                <li><a href="#">A equipe</a></li>
+                                <li role="separator" class="divider" style="margin: 0;"></li>
+                                <li><a href="#">Contato</a></li>
+                            </ul>
+                        </div>
+                    </li>
                 </ul>
                 <form class="navbar-form navbar-left" role="search">
                     <div class="input-group">
@@ -57,5 +99,7 @@
         </div>
     </nav>
     @RenderBody()
+    <script src='@Url.Content("~/Content/js/jquery-1.11.3.min.js")'></script>
+    <script src='@Url.Content("~/Content/js/bootstrap.min.js")'></script>
 </body>
 </html>
