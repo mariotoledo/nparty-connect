@@ -407,6 +407,31 @@ h1, h2, h3{
     color: #C066FD;
 }
 
+
+
+#eventos-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(240, 240, 240);
+}
+
+#eventos-container .container-header h2
+{
+    color: #E18700;
+}
+
+#eventos-container .container-header h2 .thin{
+    font-weight: normal;
+}
+
+#eventos-container a{
+    color: #E18700;
+}
+
+#eventos-container a:hover{
+    color: #C066FD;
+}
+
 .article-item figure, .hilight-article-item figure{
     width: 100%;
     height: 130px;
@@ -414,7 +439,7 @@ h1, h2, h3{
     margin-bottom: 10px;
     background-size: cover;
     background-position: center center;
-    opacity: 0.9;
+    opacity: 0.85;
     text-decoration: none;
 	-webkit-transition: all 0.2s linear;
 	-moz-transition: all 0.2s linear;
@@ -478,4 +503,20 @@ h1, h2, h3{
         background-size: cover;
         background-position: center center;
         width: 64px; height: 64px;
+        opacity: 0.85;
+        text-decoration: none;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	transition: all 0.2s linear;
     }
+
+
+.thumb-item:hover figure.media-object{
+    opacity: 1;
+}
+
+.thumb-item .time{
+    font-size: 10px;
+    color: #000;
+}
