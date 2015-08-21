@@ -196,6 +196,9 @@ blockquote{
     background-color: #C90201;
 }
 
+.nintendo-menu .divider, .eventos-menu .divider, .esports-menu .divider{
+    background-color: rgba(255, 255, 255, 0.3);
+}
 
 .eventos-menu:hover {
     background-color: #E18700;
@@ -367,9 +370,14 @@ h1, h2, h3{
     background-color: rgb(240, 240, 240);
 }
 
+#nintendo-container .btn{
+    background-color: #FFFFFF;
+}
+
 #nintendo-container .container-header h2
 {
     color: #C90201;
+    margin-bottom: 20px;
 }
 
 #nintendo-container .container-header h2 .thin{
@@ -390,9 +398,14 @@ h1, h2, h3{
     background-color: rgb(255, 255, 255);
 }
 
+#esports-container .btn{
+    background-color: rgb(240, 240, 240);
+}
+
 #esports-container .container-header h2
 {
     color: #54028A;
+    margin-bottom: 20px;
 }
 
 #esports-container .container-header h2 .thin{
@@ -415,9 +428,14 @@ h1, h2, h3{
     background-color: rgb(240, 240, 240);
 }
 
+#eventos-container .btn{
+    background-color: #FFFFFF;
+}
+
 #eventos-container .container-header h2
 {
     color: #E18700;
+    margin-bottom: 20px;
 }
 
 #eventos-container .container-header h2 .thin{
@@ -429,7 +447,7 @@ h1, h2, h3{
 }
 
 #eventos-container a:hover{
-    color: #C066FD;
+    color: #FFC46A;
 }
 
 .article-item figure, .hilight-article-item figure{
@@ -439,7 +457,7 @@ h1, h2, h3{
     margin-bottom: 10px;
     background-size: cover;
     background-position: center center;
-    opacity: 0.85;
+    opacity: 1;
     text-decoration: none;
 	-webkit-transition: all 0.2s linear;
 	-moz-transition: all 0.2s linear;
@@ -451,11 +469,15 @@ h1, h2, h3{
     .hilight-article-item figure{
         height: 286px;
     }
+
+    .hilight-md-article-item figure{
+        height: 143px;
+    }
 }
 
 
 @media(max-width: 440px){
-    .hilight-article-item figure{
+    .hilight-article-item figure, .hilight-md-article-item figure{
         height: 180px;
     }
 }
@@ -466,7 +488,7 @@ h1, h2, h3{
 }
 
 .hilight-article-item:hover figure{
-    opacity: 1;
+    opacity: 0.85;
 }
 
 .hilight-article-item .author{
@@ -503,7 +525,7 @@ h1, h2, h3{
         background-size: cover;
         background-position: center center;
         width: 64px; height: 64px;
-        opacity: 0.85;
+        opacity: 1;
         text-decoration: none;
 	-webkit-transition: all 0.2s linear;
 	-moz-transition: all 0.2s linear;
@@ -513,10 +535,15 @@ h1, h2, h3{
 
 
 .thumb-item:hover figure.media-object{
-    opacity: 1;
+    opacity: 0.85;
 }
 
 .thumb-item .time{
     font-size: 10px;
     color: #000;
+}
+
+#eventos-container hr{
+    margin-top: 10px;
+    border-top: 1px solid #DDDDDD;
 }
