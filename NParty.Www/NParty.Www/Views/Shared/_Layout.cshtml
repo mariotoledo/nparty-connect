@@ -15,7 +15,7 @@
     <link href="@Url.Content("~/Content/css/nparty.css")" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="border: 0">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false" aria-controls="navbar">
@@ -30,38 +30,14 @@
             </div>
             <div class="collapse navbar-collapse" id="main-menu">
                 <ul class="nav navbar-nav">
-                    <li class="bordered-left dropdown nintendo-menu">
+                    <li class="bordered-left nintendo-menu">
                         <a href="#">Nintendo</a>
-                        <div class="dropdown-menu">
-                            <ul class="nav">
-                                <li><a href="#">Todos os artigos</a></li>
-                                <li role="separator" class="divider" style="margin: 0;"></li>
-                                <li><a href="#">Prévias</a></li>
-                                <li><a href="#">Análises</a></li>
-                                <li><a href="#">Dicas</a></li>
-                                <li><a href="#">Top 10</a></li>
-                            </ul>
-                        </div>
                     </li>
-                    <li class="dropdown eventos-menu">
+                    <li class="eventos-menu">
                         <a href="#">Eventos</a>
-                        <div class="dropdown-menu">
-                            <ul class="nav">
-                                <li><a href="#">Todos os artigos</a></li>
-                                <li role="separator" class="divider" style="margin: 0;"></li>
-                                <li><a href="#">Coberturas</a></li>
-                            </ul>
-                        </div>
                     </li>
-                    <li class="dropdown esports-menu">
+                    <li class="esports-menu">
                         <a href="#">E-Sports</a>
-                        <div class="dropdown-menu">
-                            <ul class="nav">
-                                <li><a href="#">Todos os artigos</a></li>
-                                <li role="separator" class="divider" style="margin: 0;"></li>
-                                <li><a href="#">League of Legends</a></li>
-                            </ul>
-                        </div>
                     </li>
                     <li class="bordered-left dropdown">
                         <a href="#">Comunidade</a>
@@ -99,6 +75,76 @@
         </div>
     </nav>
     @RenderBody()
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div>
+                        <button class="btn btn-default navbar-btn" formtarget="_blank" onclick="window.open('http://youtube.com/npartytv')" style="padding: 0; width: 23%" type="button"><img alt="YouTube" src="http://www.nintendoparty.com.br/img/socialIcons/youtube.jpg" title="YouTube" width="100%"></button>
+                        <button class="btn btn-default navbar-btn" formtarget="_blank" onclick="window.open('http://instagram.com/nintendoparty')" style="padding: 0; width: 23%" type="button"><img alt="Instagram" src="http://www.nintendoparty.com.br/img/socialIcons/instagram.jpg" title="Instagram" width="100%"></button>
+                        <button class="btn btn-default navbar-btn" formtarget="_blank" onclick="window.open('https://twitter.com/n_party')" style="padding: 0; width: 23%" type="button"><img alt="Twitter" src="http://www.nintendoparty.com.br/img/socialIcons/twitter.jpg" title="Twitter" width="100%"></button>
+                        <button class="btn btn-default navbar-btn" formtarget="_blank" onclick="window.open('http://www.facebook.com/NParty')" style="padding: 0; width: 23%" type="button"><img alt="Facebook" src="http://www.nintendoparty.com.br/img/socialIcons/facebook.jpg" title="Facebook" width="100%"></button>
+                    </div>
+                    <div class="dropdown">
+                        <b>N-PARTY</b>
+                        <ul>
+                            <li><a href="http://www.nparty.com.br/p/o-grupo.html">O Grupo</a></li>
+                            <li><a href="http://www.nparty.com.br/p/a-equipe.html">A Equipe</a></li>
+                            <li><a href="http://www.nparty.com.br/p/contato.html">Contato</a></li>
+                        </ul>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-sm-4" style="padding-top: 5px;">
+                            <b>NA NINTENDO</b>
+                            <ul>
+                                <li><a href="http://www.nintendo.nparty.com.br/1990_10_08_archive.html">Todos os artigos</a></li>
+                                <li><a href="http://www.nintendo.nparty.com.br/search/label/Preview">Prévias</a></li>
+                                <li><a href="http://www.nintendo.nparty.com.br/search/label/Preview">Prévias</a></li>
+                                <li><a href="http://www.nintendo.nparty.com.br/search/label/Review">Análises</a></li>
+                                <li><a href="http://www.nintendo.nparty.com.br/search/label/Dicas">Dicas</a></li>
+                                <li><a href="http://www.nintendo.nparty.com.br/search/label/Quadrinhos">Quadrinhos</a></li>
+                                <li><a href="http://www.nintendo.nparty.com.br/search/label/Top 10">Top 10</a></li>
+                                <li><a href="http://www.nintendo.nparty.com.br/search/label/Retro">Retrô</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4" style="padding-top: 5px;">
+                            <b>EM ESPORTS</b>
+                            <ul>
+                                <li><a href="http://www.esports.nparty.com.br/1990_10_08_archive.html">Todos os artigos</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-sm-4" style="padding-top: 5px;">
+                            <b>NOS EVENTOS</b>
+                            <ul>
+                                <li><a href="http://www.eventos.nparty.com.br/1990_10_08_archive.html">Todos os artigos</a></li>
+                                <li><a href="http://www.eventos.nparty.com.br/search/label/Cobertura">Coberturas</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                        <div class="col-md-4">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <b>NOSSOS PARCEIROS</b><br>
+                    <button class="btn btn-default navbar-btn" formtarget="_blank" onclick="window.open('http://www.projetoxpodcast.com.br')" style="padding: 0;" type="button"><img alt="Projeto X Podcast" height="50px;" src="http://www.nintendoparty.com.br/img/partners/projetoxpodcast.jpg" title="Projeto X Podcast" width="50px"></button>
+                    <button class="btn btn-default navbar-btn" formtarget="_blank" onclick="window.open('http://www.lop-sp.com.br')" style="padding: 0;" type="button"><img alt="LOP-SP" height="50px;" src="http://www.nintendoparty.com.br/img/partners/lopsp.jpg" title="LOP-SP" width="50px"></button>
+                    <button class="btn btn-default navbar-btn" formtarget="_blank" onclick="window.open('http://www.nintendoblast.com.br')" style="padding: 0;" type="button"><img alt="Nintendo Blast" height="50px;" src="http://www.nintendoparty.com.br/img/partners/nintendoblast.jpg" title="Nintendo Blast" width="50px"></button>
+                    <button class="btn btn-default navbar-btn" formtarget="_blank" onclick="window.open('http://www.castelonerd.com.br')" style="padding: 0;" type="button"><img alt="Castelo Nerd" height="50px;" src="http://www.nintendoparty.com.br/img/partners/castelonerd.jpg" title="Castelo Nerd" width="50px"></button>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div style="background-color: #666">
+        <div class="container" style="padding-top: 10px; padding-bottom: 10px; color: #fff;">
+            COPYRIGHT (C) 2010 - 2015 N-Party <span style="font-size: 10px"> - licenciado sobre a <a href="http://creativecommons.org/licenses/by/3.0/br/" style="color: #FFF;" target="_blank">atribuição 3.0 da Creative Commons</a></span>
+            <div class="pull-right" style="font-size: 12px">Design e desenvolvimento por <b>Mario Toledo</b></div>
+        </div>
+    </div>
     <script src='@Url.Content("~/Content/js/jquery-1.11.3.min.js")'></script>
     <script src='@Url.Content("~/Content/js/bootstrap.min.js")'></script>
 </body>

@@ -370,10 +370,6 @@ h1, h2, h3{
     background-color: rgb(240, 240, 240);
 }
 
-#nintendo-container .btn{
-    background-color: #FFFFFF;
-}
-
 #nintendo-container .container-header h2
 {
     color: #C90201;
@@ -396,10 +392,6 @@ h1, h2, h3{
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgb(255, 255, 255);
-}
-
-#esports-container .btn{
-    background-color: rgb(240, 240, 240);
 }
 
 #esports-container .container-header h2
@@ -426,10 +418,6 @@ h1, h2, h3{
     padding-top: 20px;
     padding-bottom: 20px;
     background-color: rgb(240, 240, 240);
-}
-
-#eventos-container .btn{
-    background-color: #FFFFFF;
 }
 
 #eventos-container .container-header h2
@@ -464,6 +452,47 @@ h1, h2, h3{
 	-o-transition: all 0.2s linear;
 	transition: all 0.2s linear;
 }
+
+
+#copa-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+}
+
+#copa-container .container-header h2
+{
+    color: rgb(117, 18, 18);
+    margin-bottom: 20px;
+}
+
+#copa-container .container-header h2 .thin{
+    font-weight: normal;
+}
+
+#copa-container a{
+    color: rgb(117, 18, 18);
+}
+
+#copa-container a:hover{
+    color: rgb(140, 18, 18);
+}
+
+.article-item figure, .hilight-article-item figure{
+    width: 100%;
+    height: 130px;
+    display: block;
+    margin-bottom: 10px;
+    background-size: cover;
+    background-position: center center;
+    opacity: 1;
+    text-decoration: none;
+	-webkit-transition: all 0.2s linear;
+	-moz-transition: all 0.2s linear;
+	-o-transition: all 0.2s linear;
+	transition: all 0.2s linear;
+}
+
 
 @media(min-width: 441px){
     .hilight-article-item figure{
@@ -568,3 +597,34 @@ h1, h2, h3{
 		min-height: 320px;
 	}
 }
+
+.footer-divider{
+		background-color: #FFFFFF;
+		border-top: 2px solid rgb(204, 204, 204);
+		border-bottom: 2px solid rgb(204, 204, 204);
+		height: 30px;
+	}
+	footer{
+		padding-top: 10px;
+		min-height: 170px;
+		background-color: #AAA;
+		color: #FFFFFF;
+	}
+	
+	footer ul{
+		margin-top: 5px;
+		padding-left: 0px;
+	}
+	
+	footer ul li{
+		list-style-type: none;
+	}
+	
+	footer a{
+		color: #FFF;
+	}
+	
+	footer a:hover, footer a.hover{
+		color: #FFF!important;
+		text-decoration:underline
+	}
