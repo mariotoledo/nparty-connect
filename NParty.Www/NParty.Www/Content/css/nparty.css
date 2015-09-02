@@ -52,6 +52,14 @@ blockquote{
     .navbar-default .navbar-nav li.bordered-right{
         border-right: 1px solid #DDDDDD;
     }
+
+    footer .bordered-left {
+        border-left: 1px solid #AAAAAA;
+    }
+
+    footer .bordered-right {
+        border-right: 1px solid #AAAAAA;
+    }
 }
 
 .dropdown-menu{
@@ -572,11 +580,11 @@ h1, h2, h3{
         width: 64px; height: 64px;
         opacity: 1;
         text-decoration: none;
-	-webkit-transition: all 0.2s linear;
-	-moz-transition: all 0.2s linear;
-	-o-transition: all 0.2s linear;
-	transition: all 0.2s linear;
-    }
+	    -webkit-transition: all 0.2s linear;
+	    -moz-transition: all 0.2s linear;
+	    -o-transition: all 0.2s linear;
+	    transition: all 0.2s linear;
+}
 
 
 .thumb-item:hover figure.media-object{
@@ -664,8 +672,8 @@ h1, h2, h3{
 	footer{
 		padding-top: 10px;
 		min-height: 170px;
-		background-color: #AAA;
-		color: #FFFFFF;
+		background-color: #333;
+		color: #888;
 	}
 	
 	footer ul{
@@ -679,9 +687,52 @@ h1, h2, h3{
 	
 	footer a{
 		color: #FFF;
+        -webkit-transition: all 0.2s linear;
+	    -moz-transition: all 0.2s linear;
+	    -o-transition: all 0.2s linear;
+	    transition: all 0.2s linear;
+        text-decoration: none;
 	}
-	
-	footer a:hover, footer a.hover{
-		color: #FFF!important;
-		text-decoration:underline
-	}
+
+    footer a:hover{
+        color: #AAA;
+    }
+    
+    footer .thumb-item{
+        border-bottom: 1px solid #888;
+        padding-bottom: 10px;
+    }
+
+    footer .thumb-item a{
+        -webkit-transition: all 0.2s linear;
+	    -moz-transition: all 0.2s linear;
+	    -o-transition: all 0.2s linear;
+	    transition: all 0.2s linear;
+        text-decoration: none;
+    }
+
+    footer .thumb-item:hover a{
+        color: #AAA;
+    }
+
+.thumb-item .time{
+    font-size: 10px;
+    color: #888;
+}
+
+.socialIcon{
+    padding: 0; width: 50px; height: 50px; border: 0;
+    -webkit-transition: all 0.1s linear;
+	-moz-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+	transition: all 0.1s linear;
+    margin-top: 0;
+}
+
+.socialIcon img{
+    width: 100%;
+}
+
+.socialIcon:hover{
+    margin-top: -10px;
+}
