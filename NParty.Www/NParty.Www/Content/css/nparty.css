@@ -487,11 +487,13 @@ h1, h2, h3{
 }
 
 #copa-container a:hover{
-    color: rgb(140, 18, 18);
+    color: rgb(170, 88, 88);
 }
 
 #copa-container .sub-header{
-    background-color: rgb(117, 18, 18);
+    color: rgb(117, 18, 18);
+    border-bottom: 2px solid rgb(117, 18, 18);
+    margin: 0;
 }
 
 .article-item figure, .hilight-article-item figure{
@@ -540,7 +542,7 @@ h1, h2, h3{
     height: 130px;
 }
 
-.hilight-article-item:hover figure{
+.hilight-article-item:hover figure, .hilight-article-item:hover img{
     opacity: 0.85;
 }
 
@@ -612,10 +614,6 @@ h1, h2, h3{
     opacity: 1;
 }
 
-.sub-header{
-    padding: 10px;
-}
-
 #eventos-container .event-photos .album-title{
     padding: 10px;
     position: absolute;
@@ -628,7 +626,7 @@ h1, h2, h3{
     background-color: #FFC46A;
 }
 
-.sub-header h3, #eventos-container .event-photos .album-title h3{
+#eventos-container .event-photos .album-title h3{
     color: #FFFFFF;
     margin: 0px;
     font-size: 16px;
