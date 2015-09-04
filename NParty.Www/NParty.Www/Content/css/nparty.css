@@ -29,8 +29,7 @@ blockquote{
 }
 
 .navbar-default{
-    box-shadow: 0px 1px 10px #333333;
-    -webkit-box-shadow: 0px 1px 10px #333333;
+   
 }
 
 .navbar-default .navbar-nav>li>a{
@@ -183,7 +182,7 @@ blockquote{
     }
 }
 
-.nintendo-menu:hover {
+.nintendo-menu:hover, .nintendo-menu-active, .nintendo-menu-active a {
     background-color: #C90201;
     color: #FFF!important;
 }
@@ -733,4 +732,54 @@ h1, h2, h3{
 
 .socialIcon:hover{
     margin-top: -10px;
+}
+
+.content-area-menu{
+    background-color: #DDD;
+    text-transform: uppercase;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.content-area-menu h2{
+    margin-top: 0px;
+}
+
+#nintendo-container .content-area-menu{
+    background-color: #C90201;
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+#nintendo-container .content-area-menu a{
+    color: #FFF;
+}
+
+#nintendo-container .content-area-menu li.active a{
+    background-color: #FFF;
+    color: #C90201;
+}
+
+#nintendo-container .content-area-menu a:hover{
+    color: #C90201;
+}
+
+.content-area-menu .divider-vertical {
+    height: 37px;
+    margin: 0px 5px 0px 5px;
+    border-right: 1px solid #FF3333;
+}
+
+@media (max-width: 767px) {
+.content-area-menu .divider-vertical {
+    display: none;
+  }
+}
+
+.navbar-toggle{
+    background-color: #FFF;
+}
+
+.navbar-toggle .icon-bar{
+    background-color: #AAA;
 }

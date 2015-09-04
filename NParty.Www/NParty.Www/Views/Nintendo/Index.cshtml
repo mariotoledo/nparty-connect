@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Index";
+    ViewData["ActiveMenu"] = 1;
+}
+
+<div id="nintendo-container" style="padding: 0;">
+    @{Html.RenderPartial("SubMenus/Nintendo", 3);}
+    <div class="container" style="padding-top: 30px;">
+        <div class="row">
+            <div class="col-md-8" style="margin-bottom: 20px;">
+                <a class="hilight-article-item" href="#">
+                    <figure style="background-image: url('http://2.bp.blogspot.com/-x-Ti4L2ZHck/VdTg-HmQuGI/AAAAAAAAlok/0WcjrCwpySc/s640/youkai-watch-review.jpg')"></figure>
+                    <h3>Lorem ipsum bla bla bla bla bla</h3>
+                    <div class="author">Por Dave Tach em 26/12/2012</div>
+                    <p class="snippet">Crackdown 3 (finally) proves why Microsoft put Xbox One's head in the cloud By Dave Tach dptach Share Tweet There I am, standing in the middle of a street in a neon-laced city, staring up at bla bla bla bla bla bla bla...</p>
+                </a>
+                <hr/>
+                <a class="hilight-article-item hilight-md-article-item" href="#">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <figure style="background-image: url('http://2.bp.blogspot.com/-x-Ti4L2ZHck/VdTg-HmQuGI/AAAAAAAAlok/0WcjrCwpySc/s640/youkai-watch-review.jpg')"></figure>
+                        </div>
+                        <div class="col-md-6">
+                            <h3>Lorem ipsum bla bla bla bla bla</h3>
+                            <p class="snippet">Crackdown 3 (finally) proves why Microsoft put Xbox One's head in the cloud By Dave Tach dptach Share Tweet There I am...</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

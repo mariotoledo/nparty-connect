@@ -1,4 +1,8 @@
-﻿<html lang="pt-br">
+﻿@{
+    int activeMenuId = ViewData["ActiveMenu"] == null ? 0 : (Int32)ViewData["ActiveMenu"];
+}
+
+<html lang="pt-br">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +19,7 @@
     <link href="@Url.Content("~/Content/css/nparty.css")" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top" style="border: 0">
+    <nav class="navbar navbar-default navbar-fixed-top" @Html.Raw(activeMenuId == 0 ? "style='border-bottom: 1px solid #DDD;'" : "style='border: 0'")>
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false" aria-controls="navbar">
@@ -24,20 +28,20 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="@Url.Content("~/")">
                     <img style="height: 100%;" class="img-responsive" alt="N-Party" src="@Url.Content("~/Content/img/logo.png")">
                 </a>
             </div>
             <div class="collapse navbar-collapse" id="main-menu">
                 <ul class="nav navbar-nav">
-                    <li class="bordered-left nintendo-menu">
-                        <a href="#">Nintendo</a>
+                    <li class="bordered-left nintendo-menu @(activeMenuId == 1 ? "nintendo-menu-active" : "")">
+                        <a href="@Url.Content("~/Nintendo")">Nintendo</a>
                     </li>
                     <li class="eventos-menu">
-                        <a href="#">Eventos</a>
+                        <a href="@Url.Content("~/Eventos")">Eventos</a>
                     </li>
                     <li class="esports-menu">
-                        <a href="#">E-Sports</a>
+                        <a href="@Url.Content("~/ESports")">E-Sports</a>
                     </li>
                     <li class="bordered-left dropdown">
                         <a href="#">Comunidade</a>
@@ -74,7 +78,7 @@
             </div>
         </div>
     </nav>
-    <div style="padding-top: 70px;">
+    <div style="padding-top: 50px;">
         @RenderBody()
     </div>
     <footer>
