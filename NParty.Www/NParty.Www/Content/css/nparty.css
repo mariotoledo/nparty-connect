@@ -287,7 +287,6 @@ blockquote{
         min-height: 225px;
         margin-left: -15px;
         margin-right: -15px;
-        z-index: -1!important;
 }
 
 .hilight:after{
@@ -299,6 +298,9 @@ blockquote{
         min-height: 450px;
     }
 }
+
+
+
 
     .hilights-items:after {
         content: '';
@@ -317,6 +319,18 @@ blockquote{
         background-image: -o-linear-gradient(left top,#C90201 0,#a5407b 39%,#FF6A6A 65%,#7D0000 100%);
         background-image: linear-gradient(left top,#C90201 0,#a5407b 39%,#FF6A6A 65%,#7D0000 100%);
     }
+
+#nintendo-container .hilights-items:after, #eventos-container .hilights-items:after, #esports-container .hilights-items:after{
+    height: 225px;
+}
+
+#nintendo-container .hilights-items:after{
+background-image: -webkit-gradient(linear,0 0,100% 100%,color-stop(0,#C90201),color-stop(39%,#FF6A6A),color-stop(65%,#FF6A6A),color-stop(100%,#7D0000));
+    background-image: -webkit-linear-gradient(left top,#C90201 0,#C90201 39%,#C90201 65%,#C90201 100%);
+    background-image: -moz-linear-gradient(left top,#C90201 0,#C90201 39%,#C90201 65%,#C90201 100%);
+    background-image: -o-linear-gradient(left top,#C90201 0,#C90201 39%,#C90201 65%,#C90201 100%);
+    background-image: linear-gradient(left top,#C90201 0,#C90201 39%,#C90201 65%,#C90201 100%);
+}
 
     .hilights-items h2{
        position: absolute;
@@ -338,6 +352,10 @@ blockquote{
 @media (max-width: 992px) {
     .hilights-items:after {
         min-height: 1125px;
+    }
+
+    #nintendo-container .hilights-items:after {
+        min-height: 675px;
     }
 }
 
@@ -449,6 +467,11 @@ h1, h2, h3{
     color: #FFC46A;
 }
 
+#nintendo-container hr, #eventos-container hr, #esports-container hr{
+    border-color: #CCC;
+    margin-bottom: 30px;
+}
+
 .article-item figure, .hilight-article-item figure{
     width: 100%;
     height: 130px;
@@ -516,14 +539,26 @@ h1, h2, h3{
     }
 }
 
-@media(min-width: 441px){
+@media(min-width: 441px) and (max-width: 960px){
     .hilight-article-item figure{
         height: 286px;
     }
 }
 
-@media(min-width: 961px) {
-    .hilight-md-article-item figure{
+@media(min-width: 961px){
+    .hilight-article-item figure{
+        height: 286px;
+    }
+
+    .inside-section .hilight-article-item figure{
+        height: 360px;
+    }
+
+    .inside-section .hilight-md-article-item figure{
+        height: 180px;
+    }
+
+     .hilight-md-article-item figure{
         height: 143px;
     }
 }
@@ -566,6 +601,10 @@ h1, h2, h3{
 @media(min-width: 1200px) {
     .col-bordered-left {
         border-left: 1px solid #DDDDDD;
+    }
+
+    .col-bordered-right {
+        border-right: 1px solid #DDDDDD;
     }
 }
 
