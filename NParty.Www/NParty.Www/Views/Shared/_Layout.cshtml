@@ -19,7 +19,7 @@
     <link href="@Url.Content("~/Content/css/nparty.css")" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top" @Html.Raw(activeMenuId == 0 ? "style='border-bottom: 1px solid #DDD;'" : "style='border: 0'")>
+    <nav class="navbar navbar-default">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false" aria-controls="navbar">
@@ -78,7 +78,7 @@
             </div>
         </div>
     </nav>
-    <div style="padding-top: 50px;">
+    <div>
         @RenderBody()
     </div>
     <footer>
@@ -183,5 +183,14 @@
     </div>
     <script src='@Url.Content("~/Content/js/jquery-1.11.3.min.js")'></script>
     <script src='@Url.Content("~/Content/js/bootstrap.min.js")'></script>
+    <div id="fb-root"></div>
+    <script>
+    (function (d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.4&appId=1401757976733944";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
 </body>
 </html>

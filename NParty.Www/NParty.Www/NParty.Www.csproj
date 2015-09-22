@@ -125,6 +125,7 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\nparty.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\ad\1.jpg" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -169,6 +170,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\SubMenus\Nintendo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Sidebars\General.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

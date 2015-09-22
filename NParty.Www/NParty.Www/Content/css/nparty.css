@@ -29,7 +29,8 @@ blockquote{
 }
 
 .navbar-default{
-   
+   margin-bottom: 0px;
+   border-bottom: 0px;
 }
 
 .navbar-default .navbar-nav>li>a{
@@ -533,13 +534,17 @@ h1, h2, h3{
 	transition: all 0.2s linear;
 }
 
+@media (max-width: 960px){
+    .sidebar{
+        text-align: center;
+    }
+}
+
 @media(min-width: 441px) and (max-width: 960px) {
     .hilight-md-article-item figure{
         height: 230px;
     }
-}
 
-@media(min-width: 441px) and (max-width: 960px){
     .hilight-article-item figure{
         height: 286px;
     }
@@ -551,11 +556,11 @@ h1, h2, h3{
     }
 
     .inside-section .hilight-article-item figure{
-        height: 360px;
+        height: 406px;
     }
 
     .inside-section .hilight-md-article-item figure{
-        height: 180px;
+        height: 195px;
     }
 
      .hilight-md-article-item figure{
@@ -795,12 +800,14 @@ h1, h2, h3{
 }
 
 #nintendo-container .content-area-menu li.active a{
-    background-color: #FFF;
-    color: #C90201;
+    color: #FFF;
+    background-color: #C90201;
+    font-weight: bolder;
 }
 
-#nintendo-container .content-area-menu a:hover{
-    color: #C90201;
+#nintendo-container .content-area-menu li:hover a{
+   background-color: #C90201;
+   padding-top: 5px;
 }
 
 .content-area-menu .divider-vertical {
@@ -821,4 +828,71 @@ h1, h2, h3{
 
 .navbar-toggle .icon-bar{
     background-color: #AAA;
+}
+
+.sidebar-advertising, .sidebar-follow{
+    overflow-x: hidden;
+}
+
+.sidebar-item{
+    padding-bottom: 20px;
+    border-bottom: 1px solid #DDD;
+    margin-left: -15px;
+    padding-left: 15px;
+    margin-bottom: 20px;
+}
+
+.sidebar-title {
+    margin-left: -15px;
+    background-color: #DDD;
+}
+
+
+.sidebar-title .title{
+    padding: 5px 5px 5px 15px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.sidebar-item .other-posts li{
+    border-bottom: 1px dashed #E0E0E0;
+    padding-bottom: 10px;
+}
+
+.sidebar-item .other-posts li:last-child{
+     border-bottom: 0px;
+     padding-bottom: 0px;
+}
+
+#sidebar-general .other-posts li.esports a{
+    color: #54028A;
+}
+
+#sidebar-general .other-posts li.esports a:hover{
+    color: #C066FD;
+}
+
+#sidebar-general .other-posts li.esports .label{
+    background-color: #54028A;
+    color: #FFF;
+}
+
+
+
+
+
+
+
+#sidebar-general .other-posts li.esports a{
+    color: #54028A;
+}
+
+#sidebar-general .other-posts li.esports a:hover{
+    color: #C066FD;
+}
+
+#sidebar-general .other-posts li.esports .label{
+    background-color: #54028A;
+    color: #FFF;
 }
