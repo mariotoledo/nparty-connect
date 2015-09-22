@@ -31,6 +31,7 @@ blockquote{
 .navbar-default{
    margin-bottom: 0px;
    border-bottom: 0px;
+   border-top: 0px;
 }
 
 .navbar-default .navbar-nav>li>a{
@@ -213,7 +214,7 @@ blockquote{
     background-color: rgba(255, 255, 255, 0.3);
 }
 
-.eventos-menu:hover {
+.eventos-menu:hover, .eventos-menu-active, .eventos-menu-active a {
     background-color: #E18700;
     color: #FFF!important;
 }
@@ -249,7 +250,7 @@ blockquote{
     box-shadow: 0 6px 12px rgba(0,0,0,.175);
 }
 
-.esports-menu:hover {
+.esports-menu:hover, .esports-menu-active, .esports-menu-active a {
     background-color: #54028A;
     color: #FFF!important;
 }
@@ -469,7 +470,7 @@ h1, h2, h3{
 }
 
 #nintendo-container hr, #eventos-container hr, #esports-container hr{
-    border-color: #CCC;
+    border-color: #DDD;
     margin-bottom: 30px;
 }
 
@@ -810,14 +811,42 @@ h1, h2, h3{
    padding-top: 5px;
 }
 
-.content-area-menu .divider-vertical {
+#esports-container .content-area-menu{
+    background-color: #54028A;
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+#esports-container .content-area-menu a{
+    color: #FFF;
+}
+
+#esports-container .content-area-menu li.active a{
+    color: #FFF;
+    background-color: #54028A;
+    font-weight: bolder;
+}
+
+#esports-container .content-area-menu li:hover a{
+   background-color: #54028A;
+   padding-top: 5px;
+}
+
+#nintendo-container .content-area-menu .divider-vertical {
     height: 37px;
     margin: 0px 5px 0px 5px;
     border-right: 1px solid #FF3333;
 }
 
+#esports-container .content-area-menu .divider-vertical {
+    height: 37px;
+    margin: 0px 5px 0px 5px;
+    border-right: 1px solid #7624AC;
+}
+
+
 @media (max-width: 767px) {
-.content-area-menu .divider-vertical {
+#nintendo-container .content-area-menu .divider-vertical {
     display: none;
   }
 }
@@ -878,12 +907,6 @@ h1, h2, h3{
     color: #FFF;
 }
 
-
-
-
-
-
-
 #sidebar-general .other-posts li.esports a{
     color: #54028A;
 }
@@ -894,5 +917,18 @@ h1, h2, h3{
 
 #sidebar-general .other-posts li.esports .label{
     background-color: #54028A;
+    color: #FFF;
+}
+
+#sidebar-general .other-posts li.eventos a{
+    color: #E18700;
+}
+
+#sidebar-general .other-posts li.eventos a:hover{
+    color: #FFC46A;
+}
+
+#sidebar-general .other-posts li.eventos .label {
+    background-color: #E18700;
     color: #FFF;
 }
