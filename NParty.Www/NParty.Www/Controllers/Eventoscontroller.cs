@@ -6,19 +6,15 @@ using System.Web.Mvc;
 
 namespace NParty.Www.Controllers
 {
-    public class NintendoController : Controller
+    public class EventosController : Controller
     {
         //
-        // GET: /Nintendo/
+        // GET: /ESports/
 
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Ler(int id)
-        {
-            return View();
-        }
     }
 }

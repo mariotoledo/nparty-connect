@@ -108,6 +108,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\ESportsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NintendoController.cs" />
@@ -180,6 +181,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\SubMenus\ESports.cshtml" />
+    <Content Include="Views\Nintendo\Ler.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Eventos\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\SubMenus\Eventos.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
