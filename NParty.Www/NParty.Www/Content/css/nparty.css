@@ -947,12 +947,13 @@ h1, h2, h3{
 .sidebar-title {
     margin-left: -15px;
     background-color: #DDD;
-     padding: 5px 5px 5px 15px;
-	    font-size: 16px;
-        margin-bottom: 20px;
-	    text-transform: uppercase;
-	    text-align: center;
-	    margin-top: -20px;
+    padding: 5px 5px 5px 15px;
+	font-size: 16px;
+    margin-bottom: 20px;
+	text-transform: uppercase;
+	text-align: center;
+	margin-top: -20px;
+    font-weight: bold;
 }
 
 
@@ -1060,4 +1061,8 @@ h1, h2, h3{
     padding: 10px;
     margin-left: -25px;
     margin-right: -25px;
+}
+
+.PopularPosts .list-group-item{
+    padding: 0;
 }

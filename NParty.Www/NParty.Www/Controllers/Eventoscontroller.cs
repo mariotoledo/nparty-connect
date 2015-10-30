@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace NParty.Www.Controllers
 {
-    public class EventosController : Controller
+    public class EventosController : NPartyController
     {
         //
         // GET: /ESports/

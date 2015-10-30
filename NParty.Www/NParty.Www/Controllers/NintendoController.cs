@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace NParty.Www.Controllers
 {
-    public class NintendoController : Controller
+    public class NintendoController : NPartyController
     {
         //
         // GET: /Nintendo/
