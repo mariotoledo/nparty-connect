@@ -9,7 +9,7 @@ namespace NParty.Www.Helpers
 {
     public class ArticlesHelper
     {
-        public List<Article> GetArticlesFromBlog(int startIndex, int maxResults, string blogId, string postsLabel)
+        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex, string postsLabel)
         {
             List<Article> articles = new List<Article>();
             try
@@ -35,6 +35,8 @@ namespace NParty.Www.Helpers
                     article.Summary = GetSummaryManually(post.Content.Content, 200);
                     article.Id = GetPostIdManually(post.Id.AbsoluteUri);
                     article.ArticleLink = GetPostLinkManually(post.Links);
+                    article.Labels = GetLabelsArray(post.Categories);
+                    article.GenerateNPartyArtileLink(blogDomain);
 
                     articles.Add(article);
                 };
@@ -47,19 +49,34 @@ namespace NParty.Www.Helpers
             return articles;
         }
 
-        public List<Article> GetArticlesFromBlog(int startIndex, int maxResults, string blogId)
+        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex)
         {
-            return GetArticlesFromBlog(startIndex, maxResults, blogId, "");
+            return GetArticlesFromBlog(blogId, blogDomain, maxResults, startIndex, "");
         }
 
-        public List<Article> GetArticlesFromBlog(int maxResults, string blogId)
+        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults)
         {
-            return GetArticlesFromBlog(0, maxResults, blogId);
+            return GetArticlesFromBlog(blogId, blogDomain, maxResults, 0);
         }
 
-        public List<Article> GetArticlesFromBlog(string blogId)
+        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain)
         {
-            return GetArticlesFromBlog(0, 0, blogId);
+            return GetArticlesFromBlog(blogId, blogDomain, 0, 10);
+        }
+
+        private string[] GetLabelsArray(AtomCategoryCollection postCategories)
+        {
+            if (postCategories != null && postCategories.Count > 0)
+            {
+                string[] labels = new string[postCategories.Count];
+                for (int i = 0; i < postCategories.Count; i++)
+                {
+                    labels[i] = postCategories[i].Term;
+                }
+
+                return labels;
+            } else
+                return new string[] { };
         }
 
         private string GetPostImageManually(AtomEntry feedEntryXml)

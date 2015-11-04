@@ -3,6 +3,7 @@
     List<NParty.Www.Models.Article> hilights = (List<NParty.Www.Models.Article>)ViewData["Hilights"];
     List<NParty.Www.Models.Article> nintendoPosts = (List<NParty.Www.Models.Article>)ViewData["NintendoPosts"];
     List<NParty.Www.Models.Article> eSportsPosts = (List<NParty.Www.Models.Article>)ViewData["ESportsPosts"];
+    List<NParty.Www.Models.Article> eventosPosts = (List<NParty.Www.Models.Article>)ViewData["EventosPosts"];
 }
 
 @if (hilights != null && hilights.Count >= 5)
@@ -11,7 +12,7 @@
         <div class="hilights-items">
             <div style="float: left; width: 100%;">
                 <div class="col-md-4" id="hilight1">
-                    <a class="hilight-link" href="@hilights[0].ArticleLink">
+                    <a class="hilight-link" href="@hilights[0].NPartyArticleLink">
                         <h2>@hilights[0].Title</h2>
                     </a>
                     <div class="hilight hilight-more" style="background-image: url(@hilights[0].CoverImage);"></div>
@@ -19,25 +20,25 @@
                 <div class="col-md-8">
                     <div class="row">
                         <div class="col-md-6" id="hilight2">
-                            <a class="hilight-link" href="@hilights[1].ArticleLink">
+                            <a class="hilight-link" href="@Url.Content("~/" + hilights[1].NPartyArticleLink)">
                                 <h2>@hilights[1].Title</h2>
                             </a>
                             <div class="hilight" style="background-image: url(@hilights[1].CoverImage);"></div>
                         </div>
                         <div class="col-md-6" id="hilight3">
-                            <a class="hilight-link" href="@hilights[2].ArticleLink">
+                            <a class="hilight-link" href="@Url.Content("~/" + hilights[2].NPartyArticleLink)">
                                 <h2>@hilights[2].Title</h2>
                             </a>
                             <div class="hilight" style="background-image: url(@hilights[2].CoverImage);"></div>
                         </div>
                         <div class="col-md-6" id="hilight4">
-                            <a class="hilight-link" href="@hilights[3].ArticleLink">
+                            <a class="hilight-link" href="@Url.Content("~/" + hilights[3].NPartyArticleLink)">
                                 <h2>@hilights[3].Title</h2>
                             </a>
                             <div class="hilight" style="background-image: url(@hilights[3].CoverImage);"></div>
                         </div>
                         <div class="col-md-6" id="hilight5">
-                            <a class="hilight-link" href="@hilights[4].ArticleLink">
+                            <a class="hilight-link" href="@Url.Content("~/" + hilights[4].NPartyArticleLink)">
                                 <h2>@hilights[4].Title</h2>
                             </a>
                             <div class="hilight" style="background-image: url(@hilights[4].CoverImage);"></div>
@@ -57,7 +58,7 @@
                 <h2>
                     <span class="thin">Na</span>
                     <span class="strong">Nintendo</span>
-                </h2>
+                </h2>   
             </div>
             <div class="posts">
                 <div class="row">
@@ -103,24 +104,24 @@
             <div class="posts">
                 <div class="row">
                     <div class="col-md-8" style="margin-bottom: 20px;">
-                        <a class="hilight-article-item" href="http://www.esports.nparty.com.br/2015/10/skt-e-koo-fazer-final-coreana-do.html">
+                        <a class="hilight-article-item" href="@eSportsPosts[0].ArticleLink">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <figure style="background-image: url(http://3.bp.blogspot.com/-U-MBy3WS17o/Vizlh5AvnSI/AAAAAAAAETE/9kIaRH8Ebik/s640/sk%2Bfaker.jpg);"></figure>
+                                    <figure style="background-image: url(@eSportsPosts[0].CoverImage);"></figure>
                                 </div>
                                 <div class="col-md-4">
-                                    <h3>SKT e KOO fazem a final coreana do Mundial de League of Legends</h3>
-                                    <div class="author">Por <span class="authorName">Caio Augusto</span> em <span class="date">25/10/2015</span></div>
-                                    <p class="snippet">Mais uma vez, a final do mundial de League of Legends será entre dois times coreanos, não dando chances para os times europeus!Primeiro finalista: SKTelecom T1Apesar de ter sua serie mais disputada at...</p>
+                                    <h3>@eSportsPosts[0].Title</h3>
+                                    <div class="author">Por <span class="authorName">@eSportsPosts[0].Author</span> em <span class="date">@eSportsPosts[0].DatePublished.ToString("dd/MM/yyyy")</span></div>
+                                    <p class="snippet">@eSportsPosts[0].Summary</p>
                                 </div>
                             </div>
                         </a>
                     </div>
                     <div class="col-md-4 col-bordered-left">
                         <ul class="media-list">
-                            <li class="media thumb-item"><a href="http://www.esports.nparty.com.br/2015/10/a-team-fight-da-edg-vs-fnc-nunca-foi.html"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(http://3.bp.blogspot.com/-a29jsUJegGc/Virz3i07iSI/AAAAAAAAm14/Icq_uj_3P0c/s72-c/fnatic.jpg)"></figure></div><div class="media-body"><h5 class="media-heading">A Team Fight da EDG vs FNC nunca foi tão épica como neste vídeo</h5><div class="time">em 24/10/2015</div></div></a></li>
-                            <li class="media thumb-item"><a href="http://www.esports.nparty.com.br/2015/10/crossfire-intz-disputara-o-mundial-da.html"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(http://1.bp.blogspot.com/-xAi8bvTnCBQ/Vild4wbjoaI/AAAAAAAAESA/Phms0SN8cpk/s72-c/wca.png)"></figure></div><div class="media-body"><h5 class="media-heading">Crossfire: INTZ disputará o Mundial da WCA 2015</h5><div class="time">em 22/10/2015</div></div></a></li>
-                            <li class="media thumb-item"><a href="http://www.esports.nparty.com.br/2015/10/veja-line-up-brasileira-para-o-wildcard.html"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(http://3.bp.blogspot.com/-wFDLf08toFM/Viax_2z5y7I/AAAAAAAAERk/wMLNtbReAy8/s72-c/All-Star-1024x456.jpg)"></figure></div><div class="media-body"><h5 class="media-heading">Veja line-up brasileira para o Wildcard All-Star de League of Legends</h5><div class="time">em 20/10/2015</div></div></a></li>
+                            <li class="media thumb-item"><a href="@eSportsPosts[1].ArticleLink"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(@eSportsPosts[1].CoverImage)"></figure></div><div class="media-body"><h5 class="media-heading">@eSportsPosts[1].Title</h5><div class="time">em @eSportsPosts[1].DatePublished.ToString("dd/MM/yyyy")</div></div></a></li>
+                            <li class="media thumb-item"><a href="@eSportsPosts[2].ArticleLink"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(@eSportsPosts[2].CoverImage)"></figure></div><div class="media-body"><h5 class="media-heading">@eSportsPosts[2].Title</h5><div class="time">em @eSportsPosts[2].DatePublished.ToString("dd/MM/yyyy")</div></div></a></li>
+                            <li class="media thumb-item"><a href="@eSportsPosts[3].ArticleLink"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(@eSportsPosts[3].CoverImage)"></figure></div><div class="media-body"><h5 class="media-heading">@eSportsPosts[3].Title</h5><div class="time">em @eSportsPosts[3].DatePublished.ToString("dd/MM/yyyy")</div></div></a></li>
                         </ul>
                         <a class="btn btn-lg btn-block" href="@Url.Content("~/ESports")" style="text-align: right">TUDO SOBRE <b>ESPORTS <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
                     </div>
@@ -130,74 +131,43 @@
     </div>
 }
 
-<!-- ================================== EVENTOS ================================== -->
-<div id="eventos-container">
-    <div class="container">
-        <div class="container-header">
-            <h2>
-                <span class="thin">Em</span>
-                <span class="strong">Eventos</span>
-            </h2>
+@if (eventosPosts != null && eventosPosts.Count >= 4)
+{
+    <!-- ================================== EVENTOS ================================== -->
+    <div id="eventos-container">
+        <div class="container">
+            <div class="container-header">
+                <h2>
+                    <span class="thin">Em</span>
+                    <span class="strong">Eventos</span>
+                </h2>
+            </div>
+            <div class="message alert" style="text-align: center; display: none;">Carregando...</div>
+            <div class="row posts" style="">
+                @{
+                    foreach (NParty.Www.Models.Article article in eventosPosts)
+                    {
+                        <div class="col-md-6" style="margin-bottom: 20px;">
+                            <a class="hilight-article-item hilight-md-article-item" href="@article.ArticleLink">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <figure style="background-image: url(@article.CoverImage)"></figure>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h4>@article.Title</h4>
+                                        <p class="snippet">@article.Summary</p>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    }
+                }
+            </div>
+            <hr>
+            <a class="btn btn-lg btn-block" href="@Url.Content("~/Eventos")" style="text-align: right">TUDO SOBRE <b>EVENTOS <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
         </div>
-        <div class="message alert" style="text-align: center; display: none;">Carregando...</div>
-        <div class="row posts" style="">
-            <div class="col-md-6" style="margin-bottom: 20px;">
-                <a class="hilight-article-item hilight-md-article-item" href="http://www.eventos.nparty.com.br/2015/10/a-riot-te-convida-para-um-zombi-walk.html">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <figure style="background-image: url(http://3.bp.blogspot.com/-BSch92OmDG4/Vipsvee2KlI/AAAAAAAAm1k/3NZzeJC4R8A/s640/jinxzombie.jpg)"></figure>
-                        </div>
-                        <div class="col-md-6">
-                            <h4>A Riot te convida para um Zombi Walk versão League of Legends</h4>
-                            <p class="snippet">Para quem não conhece, o Zombi Walk é um evento realizado em diferentes cidades ao redor do mundo, o...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6" style="margin-bottom: 20px;">
-                <a class="hilight-article-item hilight-md-article-item" href="http://www.eventos.nparty.com.br/2015/10/compareca-no-meetup-n-party-no-dia-1-de.html">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <figure style="background-image: url(http://4.bp.blogspot.com/-rTGG7yjDXMY/ViRm7BjQLQI/AAAAAAAAmwI/abtQgu-G6eA/s640/meetupnparty.jpg)"></figure>
-                        </div>
-                        <div class="col-md-6">
-                            <h4>Compareça no MeetUp N-Party no dia 1 de novembro, em São Paulo</h4>
-                            <p class="snippet">Saudades dos encontros da galera do 3DS? Nós também. E é por isto que no dia 1 de novembro realizare...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6" style="margin-bottom: 20px;">
-                <a class="hilight-article-item hilight-md-article-item" href="http://www.eventos.nparty.com.br/2015/10/os-acertos-e-os-erros-da-brasil-game.html">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <figure style="background-image: url(http://3.bp.blogspot.com/-rmz1CNfKXhI/ViPWwJm-oLI/AAAAAAAAmtw/mNeezfmd7bs/s640/bgs2015.jpg)"></figure>
-                        </div>
-                        <div class="col-md-6">
-                            <h4>Os acertos e os erros da Brasil Game Show 2015</h4>
-                            <p class="snippet">Desde sua primeira edição em 2009 (e com o nome de Rio Game Show) que a Brasil Game Show vêm crescen...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-md-6" style="margin-bottom: 20px;">
-                <a class="hilight-article-item hilight-md-article-item" href="http://www.eventos.nparty.com.br/2015/10/brasil-game-show-sera-sediada-em-novo.html">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <figure style="background-image: url(http://1.bp.blogspot.com/-mG94EHPG9Og/Vh1mX3fNJyI/AAAAAAAAmpI/j3oAK0C3NxY/s640/gegegegege.jpg)"></figure>
-                        </div>
-                        <div class="col-md-6">
-                            <h4>Brasil Game Show será sediada em novo local em 2016</h4>
-                            <p class="snippet">No último dia 12,&nbsp;Marcelo Tavares, organizador da&nbsp;BGS, anunciou em sua coletiva que em 2016, a feira...</p>
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <hr>
-        <a class="btn btn-lg btn-block" href="@Url.Content("~/Eventos")" style="text-align: right">TUDO SOBRE <b>EVENTOS <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
     </div>
-</div>
+}
 
 <!-- ================================== COPA N-PARTY ================================== -->
 <div id="copa-container">
@@ -211,7 +181,24 @@
         <div class="row">
             <div class="col-md-6">
                 <h3 class="sub-header">Último evento</h3>
-                <div id="lastOrNextEvent"><a class="hilight-article-item hilight-md-article-item" href="http://connect.nparty.com.br/Eventos/Detalhes/2060" target="_blank"><div class="row"><div class="col-md-4"><img class="img-responsive" src="http://www.images.nparty.com.br/connect/eventCover/small/nparty.png"></div><div class="col-md-8" style="padding-top: 15px;"><h4>MeetUp N-Party</h4><p class="snippet"><b>Organizador</b>: N-Party<br><b>Local</b>: Avenida Liberdade, 593<br><b>Tipo</b>: MeetUp<br><b>Data</b>: 01/11/2015<br></p></div></div></a></div>
+                <div id="lastOrNextEvent">
+                    <a class="hilight-article-item hilight-md-article-item" href="http://connect.nparty.com.br/Eventos/Detalhes/2060" target="_blank">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img class="img-responsive" src="http://www.images.nparty.com.br/connect/eventCover/small/nparty.png">
+                            </div>
+                            <div class="col-md-8" style="padding-top: 15px;">
+                                <h4>MeetUp N-Party</h4>
+                                    <p class="snippet">
+                                    <b>Organizador</b>: N-Party<br>
+                                    <b>Local</b>: Avenida Liberdade, 593<br>
+                                    <b>Tipo</b>: MeetUp<br>
+                                    <b>Data</b>: 01/11/2015<br>
+                                </p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
             <div class="col-md-6">
                 <h3 class="sub-header">Ranking de Jogadores</h3>

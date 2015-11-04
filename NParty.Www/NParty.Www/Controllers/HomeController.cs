@@ -16,11 +16,17 @@ namespace NParty.Www.Controllers
 
         public ActionResult Index()
         {
-            NPartyArticlesHelper helper = new NPartyArticlesHelper(NintendoBlogId, ESportsBlogId, EventosBlogId);
-            List<Article> hilights = helper.GetHomeHilights();
-            List<Article> nintendoArticles = helper.GetArticlesFromBlog(4, NintendoBlogId);
-            List<Article> esportsArticles = helper.GetArticlesFromBlog(4, ESportsBlogId);
-            List<Article> eventosArticles = helper.GetArticlesFromBlog(4, EventosBlogId);
+            NPartyArticlesHelper helper = new NPartyArticlesHelper();
+
+            Dictionary<string, string> blogDomains = new Dictionary<string, string>();
+            blogDomains.Add(NintendoBlogId, "Nintendo");
+            blogDomains.Add(ESportsBlogId, "ESports");
+            blogDomains.Add(EventosBlogId, "Eventos");
+
+            List<Article> hilights = helper.GetHomeHilights(blogDomains);
+            List<Article> nintendoArticles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 4);
+            List<Article> esportsArticles = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 4);
+            List<Article> eventosArticles = helper.GetArticlesFromBlog(EventosBlogId, "Eventos", 4);
 
             ViewData["Hilights"] = hilights;
             ViewData["NintendoPosts"] = nintendoArticles;

@@ -8,22 +8,15 @@ namespace NParty.Www.Helpers
 {
     public class NPartyArticlesHelper : ArticlesHelper
     {
-        private string[] blogIds;
-
-        public NPartyArticlesHelper(params string[] blogIds)
-        {
-            this.blogIds = blogIds;
-        }
-
-        public List<Article> GetHomeHilights()
+        public List<Article> GetHomeHilights(Dictionary<string, string> blogDomains)
         {
             List<Article> articles = new List<Article>();
 
             try
             {
-                foreach (string blogId in blogIds)
+                foreach (string blogId in blogDomains.Keys)
                 {
-                    articles.AddRange(GetArticlesFromBlog(0, 5, blogId, "Destaque"));
+                    articles.AddRange(GetArticlesFromBlog(blogId, blogDomains[blogId], 5, 0, "Destaque"));
                 }
 
                articles = (List <Article>)articles.OrderByDescending(c => c.DatePublished).Take(5).ToList();
