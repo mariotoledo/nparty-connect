@@ -29,7 +29,7 @@
                             }
                             if (isSpecialTag)
                             {
-                                <a class="hilight-article-item" href="@Url.Content("~/Nintendo/Ler/" + article.Id)">
+                                <a class="hilight-article-item" href="@Url.Content("~/" + article.NPartyArticleLink)">
                                     <figure style = "background-image: url('@article.CoverImage')" ></figure>
                                     <h3>@article.Title</h3>
                                     <div class="author">Por @article.Author em @article.DatePublished.ToString("dd/MM/yyyy")</div>
@@ -38,7 +38,7 @@
                             }
                             else
                             {
-                                <a class="hilight-article-item hilight-md-article-item" href="@Url.Content("~/Nintendo/Ler/" + article.Id)">
+                                <a class="hilight-article-item hilight-md-article-item" href="@Url.Content("~/" + article.NPartyArticleLink)">
                                     <div class="row">
                                         <div class="col-md-6">
                                             <figure style="background-image: url('@article.CoverImage')"></figure>
@@ -51,27 +51,25 @@
                                     </div>
                                 </a>
                             }
-                            
                             <hr />
                         }
                     }
                 }
                 
                 <div class="row">
-                    <div class="col-md-4">
-                        <a class="btn btn-lg btn-block" href="@Url.Content("~/Nintendo/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                    <div class="col-md-5">
+                        <a class="directionLink" href="@Url.Content("~/Nintendo/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                     </div>
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
+                    <div class="col-md-2"></div>
+                    <div class="col-md-5">
                         @{
                             if (currentPage > 0)
                             {
-                                <a class="btn btn-lg btn-block" href="@Url.Content("~/Nintendo/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                <a class="directionLink" href="@Url.Content("~/Nintendo/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                             }
                         }
                     </div>
                 </div>
-                
             </div>
             <div class="col-md-4">
                 @{Html.RenderPartial("Sidebars/Nintendo");}

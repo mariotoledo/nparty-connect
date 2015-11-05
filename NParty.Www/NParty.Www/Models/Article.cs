@@ -30,7 +30,7 @@ namespace NParty.Www.Models
             {
                 if (Title != null)
                 {
-                    string[] splittedTitle = Title.Normalize().ToLower().RemoveDiacritics().RemoveSpecialCharacters().Split(' ');
+                    string[] splittedTitle = Title.Normalize().ToLower().RemoveSpecialCharacters().RemoveDiacritics().Split(' ');
                     StringBuilder builder = new StringBuilder();
                     for(int i = 0; i < splittedTitle.Length && i < 6; i++)
                     {
@@ -38,7 +38,11 @@ namespace NParty.Www.Models
                         builder.Append('-');
                     }
 
-                    return builder.ToString();
+                    string urlTitle = builder.ToString();
+                    if (urlTitle.EndsWith("-"))
+                        urlTitle = urlTitle.Substring(0, urlTitle.Length - 1);
+
+                    return urlTitle;
                 }
 
                 return "";

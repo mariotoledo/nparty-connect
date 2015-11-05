@@ -1066,3 +1066,7 @@ h1, h2, h3{
 .PopularPosts .list-group-item{
     padding: 0;
 }
+
+.directionLink{
+    font-size: 18px;
+}

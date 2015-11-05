@@ -26,7 +26,7 @@ namespace NParty.Www.Controllers
             return View();
         }
 
-        public ActionResult Ler(int id)
+        public ActionResult Ler(string id)
         {
             return View();
         }
