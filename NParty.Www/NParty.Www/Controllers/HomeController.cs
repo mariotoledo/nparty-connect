@@ -35,6 +35,5 @@ namespace NParty.Www.Controllers
 
             return View();
         }
-
     }
 }

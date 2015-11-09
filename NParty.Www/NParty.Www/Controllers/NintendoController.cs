@@ -28,6 +28,21 @@ namespace NParty.Www.Controllers
 
         public ActionResult Ler(string id)
         {
+            ArticlesHelper helper = new ArticlesHelper(
+                System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
+                System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
+            );
+
+            Article article = helper.GetSingleArticleFromBlog(NintendoBlogId, "5112539739735531179");
+
+            if(article == null)
+            {
+                FlashMessage("Ops, não encontramos o artigo desejado", MessageType.Error);
+                return RedirectToAction("Index");
+            }
+
+            ViewData["article"] = article;
+
             return View();
         }
     }

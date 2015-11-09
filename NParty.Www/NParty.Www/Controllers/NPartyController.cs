@@ -6,8 +6,31 @@ using System.Web.Mvc;
 
 namespace NParty.Www.Controllers
 {
+    public enum MessageType
+    {
+        Success, Info, Error
+    }
+
     public class NPartyController : Controller
     {
+        protected void FlashMessage(string message, MessageType type)
+        {
+            TempData["FlashMessage"] = message;
+
+            switch (type)
+            {
+                case MessageType.Success:
+                    TempData["FlashMessageType"] = "success";
+                    break;
+                case MessageType.Info:
+                    TempData["FlashMessageType"] = "info";
+                    break;
+                case MessageType.Error:
+                    TempData["FlashMessageType"] = "danger";
+                    break;
+            }
+        }
+
         public string NintendoBlogId
         {
             get

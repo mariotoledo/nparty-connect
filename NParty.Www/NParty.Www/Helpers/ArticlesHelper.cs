@@ -1,14 +1,69 @@
 ﻿using System;
 using System.Collections.Generic;
+using Google.Apis.Blogger.v3;
 using Google.GData.Client;
 using NParty.Www.Models;
 using System.Xml;
 using System.Text.RegularExpressions;
+using Google.Apis.Blogger.v3.Data;
 
 namespace NParty.Www.Helpers
 {
     public class ArticlesHelper
     {
+        private string applicationName;
+        private string apiKey;
+
+        public ArticlesHelper() { }
+
+        public ArticlesHelper(string applicationName, string apiKey)
+        {
+            this.applicationName = applicationName;
+            this.apiKey = apiKey;
+        }
+
+        public Article GetSingleArticleFromBlog(string blogId, string postId)
+        {
+            Article article = null;
+            try
+            {
+                BloggerService service = new BloggerService(new Google.Apis.Services.BaseClientService.Initializer()
+                {
+                    ApiKey = this.apiKey,
+                    ApplicationName = this.applicationName
+                });
+
+                PostsResource.GetRequest resource = service.Posts.Get(blogId, postId);
+                resource.FetchImages = true;
+
+                Post post = resource.Execute();
+
+                article = new Article();
+                article.Id = postId;
+                article.Title = post.Title;
+                article.Author = post.Author != null ? post.Author.DisplayName : "";
+                article.Content = post.Content;
+                article.CoverImage = post.Images != null && post.Images.Count > 0 ? post.Images[0].Url : null;
+                article.DatePublished = post.Published.HasValue ? article.DatePublished : DateTime.MinValue;
+                article.GenerateNPartyArtileLink(blogId);
+
+                if (post.Labels != null && post.Labels.Count > 0)
+                {
+                    article.Labels = new string[post.Labels.Count];
+                    for (int i = 0; i < post.Labels.Count; i++)
+                    {
+                        article.Labels[i] = post.Labels[i];
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return article;
+        }
+
         public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex, string postsLabel)
         {
             List<Article> articles = new List<Article>();
@@ -21,10 +76,10 @@ namespace NParty.Www.Helpers
 
                 AtomFeed feed = service.Query(new FeedQuery()
                 {
-                    Uri = new Uri("http://www.blogger.com/feeds/" + blogId + "/posts/default" + labelAppend  + "?start-index=" + startIndex + maxResultAppend)
+                    Uri = new Uri("http://www.blogger.com/feeds/" + blogId + "/posts/default" + labelAppend + "?start-index=" + startIndex + maxResultAppend)
                 });
 
-                foreach(var post in feed.Entries)
+                foreach (var post in feed.Entries)
                 {
                     Article article = new Article();
                     article.Title = post.Title.Text;
@@ -75,7 +130,8 @@ namespace NParty.Www.Helpers
                 }
 
                 return labels;
-            } else
+            }
+            else
                 return new string[] { };
         }
 
@@ -102,9 +158,9 @@ namespace NParty.Www.Helpers
 
         private string GetPostLinkManually(AtomLinkCollection links)
         {
-            foreach(AtomLink link in links)
+            foreach (AtomLink link in links)
             {
-                if(link.Rel.CompareTo("alternate") == 0)
+                if (link.Rel.CompareTo("alternate") == 0)
                     return link.HRef.Content;
             }
 
@@ -114,10 +170,10 @@ namespace NParty.Www.Helpers
         private string GetSummaryManually(string htmlContent, int maxLength)
         {
             string result = Regex.Replace(htmlContent, @"<[^>]*>", String.Empty);
-            if(result != null)
+            if (result != null)
             {
                 result = result.Trim();
-                if(result.Length > maxLength)
+                if (result.Length > maxLength)
                 {
                     result = result.Substring(0, maxLength);
                 }

@@ -1,6 +1,8 @@
 ﻿@{
     ViewBag.Title = "Ler";
     ViewData["ActiveMenu"] = 1;
+
+    NParty.Www.Models.Article article = (NParty.Www.Models.Article)ViewData["article"];
 }
 <div id="nintendo-container" style="padding: 0;">
     @{Html.RenderPartial("SubMenus/Nintendo", 3);}
@@ -13,7 +15,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="header">
-                                    <img src="http://4.bp.blogspot.com/-WZTEAQdfjfA/VjDPgzYlnMI/AAAAAAAAm6A/19uN0S1YCjk/s1600/triforce.jpg" style="width: 100%;">
+                                    <img src="@article.CoverImage" style="width: 100%;">
                                 </div>
                             </div>
                         </div>
@@ -22,18 +24,21 @@
                                 <div class="col-lg-12" style="margin-top: -50px; padding: 10px; padding-bottom: 0px; background-color: #FFF;">
                                     <div class="article-title">
                                         <h3 class="post-title entry-title" itemprop="name">
-                                            No Japão: Zelda: Tri Force Heroes é o jogo mais vendido da semana
+                                            @article.Title
                                         </h3>
                                         <div class="subtitulo" itemprop="description">
                                             Apesar dos números não serem tão surpreendentes assim
                                         </div>
                                         <div class="author" style="margin-top: 10px;">
-                                            Por
-                                            <span itemprop="name">Mario Toledo</span>
-
-                                            em
-
-                                            28 de outubro de 2015
+                                            @if (!string.IsNullOrEmpty(article.Author))
+                                            {
+                                                <div>
+                                                    Por
+                                                    <span itemprop="name">@article.Author</span>
+                                                    em
+                                                    @article.DatePublished.Day de @article.DatePublished.ToString("MMMM") de @article.DatePublished.Year
+                                                </div>
+                                            }
                                         </div><br>
                                         <div style="margin-left: 0px; margin-bottom: 0px; margin-bottom: 20px;">
                                             <div class="socialShare">
@@ -50,77 +55,7 @@
                                         </div>
                                     </div>
                                     <div class="content" id="article-content">
-                                        <div class="post-body entry-content" id="post-body-4588136738158367851" itemprop="articleBody">
-                                            A Media Create divulgou hoje a lista dos jogos mais vendidos no Japão entre os dias 19 e 25 de outubro, o que inclui o período do lançamento de The Legend of Zelda: Tri Force Heroes. O jogo se saiu suficientemente bem a ponto de alcançar o topo do ranking, com 54 mil unidades vendidas. Só é curioso que este não é um número surpreendente para a franquia, que já alcançou números maiores no console na região (A Link Between Worlds chegou a 225 mil em seus 4 primeiros dias, e até os remakes 3D obtiveram em torno de 200 mil unidades em seu lançamento).<br>
-                                            <br>
-                                            <div>
-                                                1. [3DS] Zelda: Tri Force Heroes – 54.394 / NOVO
-                                            </div>
-                                            <div>
-                                                2. [3DS] PriPara Mezase! Idol * Grand Prix No.1! – 34.035 / NOVO
-                                            </div>
-                                            <div>
-                                                3. [3DS] Yo-kai Watch Busters – 20.824 / 1.674.995
-                                            </div>
-                                            <div>
-                                                4. [WIU] Super Mario Maker – 15.817 / 337.039
-                                            </div>
-                                            <div>
-                                                5. [3DS] 7th Dragon III – 13.299 / 85.776
-                                            </div>
-                                            <div>
-                                                6. [WIU] Splatoon – 13.159 / 737.478
-                                            </div>
-                                            <div>
-                                                7. [3DS] Animal Crossing: Happy Home Designer – 8.625 / 1.098.904
-                                            </div>
-                                            <div>
-                                                8. [PSV] Minecraft: PlayStation Vita Edition – 7.547 / 375.264
-                                            </div>
-                                            <div>
-                                                9. [PS3] World Soccer Winning Eleven 2016 – 6.442 / 82.413
-                                            </div>
-                                            <div>
-                                                10. [3DS] Pokemon Super Mystery Dungeon – 6.402 / 243.494
-                                            </div>
-                                            <div>
-                                                11. [3DS] Picross 3D – 5.905 / 58.147
-                                            </div>
-                                            <div>
-                                                12. [3DS] Pro Yakyuu Famista Returns – 5.894 / 38.421
-                                            </div>
-                                            <div>
-                                                13. [PS4] Metal Gear Solid V: The Phantom Pain – 4.944 / 411.720
-                                            </div>
-                                            <div>
-                                                14. [PSV] Tokyo Xanadu – 4.793 / 116.835
-                                            </div>
-                                            <div>
-                                                15. [PS4] World Soccer Winning Eleven 2016 – 4.528 / 63.769
-                                            </div>
-                                            <div>
-                                                16. [PS4] Uncharted Collection – 4.439 / 37.049
-                                            </div>
-                                            <div>
-                                                17. [3DS] Dragon Quest VIII – 4.208 / 801.043
-                                            </div>
-                                            <div>
-                                                18. [PS4] GTA V (4.990 yen Edition) – 3.673 / 10.875
-                                            </div>
-                                            <div>
-                                                19. [3DS] Chibi-Robo!: Zip-Lahs – 3.647 / 25.083
-                                            </div>
-                                            <div>
-                                                20. [PS3] Metal Gear Solid V: The Phantom Pain – 3.614 / 190.093
-                                            </div>
-                                            <div>
-                                                <br>
-                                            </div>
-                                            <div>
-                                                <a href="http://m.create.com/" target="_blank">Fonte</a>
-                                            </div>
-                                            <div style="clear: both;"></div>
-                                        </div>
+                                        @Html.Raw(article.Content)
                                     </div>
                                     <div class="author-box" id="authorBox">
                                         <div class="row">
@@ -129,7 +64,7 @@
                                             </div>
                                             <div class="col-sm-10" id="authorDescription"><b>Mario Toledo</b> possui cabelo em pé e barba pra fazer por causa da N-Party. Seu 3DS está com a tela quebrada de tanto uso, e sua Jynx se chama "Preta Gil".</div>
                                             <script>
-																			renderAuthorArea("Mario Toledo");
+											    renderAuthorArea("Mario Toledo");
                                             </script>
                                         </div>
                                     </div>

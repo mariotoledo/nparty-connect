@@ -79,6 +79,18 @@
         </div>
     </nav>
     <div>
+        @{
+            string flashMessage = (string)TempData["FlashMessage"];
+            string flashMessageType = (string)TempData["FlashMessageType"];
+            if (!string.IsNullOrEmpty(flashMessage))
+            {
+                <div class="alert-bar">
+                    <div class="@flashMessageType">
+                        @Html.Raw(Html.Encode(flashMessage).Replace("\r\n", "<br />\r\n"))
+                    </div>
+                </div>
+            }
+        }
         @RenderBody()
     </div>
     <footer>
