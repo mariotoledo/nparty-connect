@@ -19,8 +19,10 @@ namespace NParty.Www.Controllers
 
             NPartyArticlesHelper helper = new NPartyArticlesHelper();
             List<Article> nintendoArticles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", MaxPosts, (MaxPosts * pageValue) + 1);
+            List<Article> hilights = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque");
 
             ViewData["articles"] = nintendoArticles;
+            ViewData["hilights"] = hilights;
             ViewData["currentPage"] = pageValue;
 
             return View();
@@ -33,7 +35,12 @@ namespace NParty.Www.Controllers
                 System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
             );
 
-            Article article = helper.GetSingleArticleFromBlog(NintendoBlogId, "5112539739735531179");
+            if (string.IsNullOrEmpty(id))
+            {
+                return RedirectToAction("Index");
+            }
+
+            Article article = helper.GetSingleArticleFromBlog(NintendoBlogId, id);
 
             if(article == null)
             {
@@ -42,6 +49,9 @@ namespace NParty.Www.Controllers
             }
 
             ViewData["article"] = article;
+
+            List<Article> hilights = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque");
+            ViewData["hilights"] = hilights;
 
             return View();
         }

@@ -1,4 +1,7 @@
-﻿<div id="sidebar-general" class="sidebar">
+﻿@{ 
+    List<NParty.Www.Models.Article> hilights = (List<NParty.Www.Models.Article>)ViewData["hilights"];
+}
+<div id="sidebar-general" class="sidebar">
     <div class="sidebar-item">
         <div class="sidebar-advertising ">
             <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
@@ -12,10 +15,25 @@
             </script>
         </div>
     </div>
-    <div class="sidebar-item" style="text-align: left;">
-        <h4 class="sidebar-title">DESTAQUES</h4>
-        <ul class="media-list other-posts" id="sidebar-hilights-posts"><li class="media"><a href="http://www.nintendo.nparty.com.br/2015/10/preview-yo-kai-watch.html"><div class="media-left"><img width="45" class="media-object" src="http://2.bp.blogspot.com/-8iYNDPOB-LA/Vi2Ub7SJFPI/AAAAAAAAm3k/Yd4UR2VRuCI/s72-c/yokai2.jpg" alt="..."></div><div class="media-body">Preview: Yo-kai Watch</div></a></li><li class="media"><a href="http://www.nintendo.nparty.com.br/2015/10/retrospectiva-semanal-1810-2410.html"><div class="media-left"><img width="45" class="media-object" src="http://4.bp.blogspot.com/-o0zbXMvbUv8/VizwHEiSZhI/AAAAAAAAm2s/CLPjbuv-U-w/s72-c/retrospectiva7.jpg" alt="..."></div><div class="media-body">Retrospectiva Semanal: 18/10 a 24/10</div></a></li><li class="media"><a href="http://www.nintendo.nparty.com.br/2015/10/retrospectiva-semanal-1110-1710.html"><div class="media-left"><img width="45" class="media-object" src="http://2.bp.blogspot.com/-41GDBPHEQVo/ViPEn0qyKEI/AAAAAAAAmtg/BPXprq43nPQ/s72-c/retrospectivasemanal6.jpg" alt="..."></div><div class="media-body">Retrospectiva Semanal: 11/10 a 17/10</div></a></li><li class="media"><a href="http://www.nintendo.nparty.com.br/2015/10/preview-legend-of-zelda-tri-force-heroes.html"><div class="media-left"><img width="45" class="media-object" src="http://2.bp.blogspot.com/-rmBwm2UxtrI/Vhs9RKuZIDI/AAAAAAAAmlU/EHbMsLtN6rs/s72-c/zeldaTriForce.jpg" alt="..."></div><div class="media-body">Preview: The Legend of Zelda: Tri Force Heroes</div></a></li><li class="media"><a href="http://www.nintendo.nparty.com.br/2015/10/retrospectiva-semanal-0410-1010.html"><div class="media-left"><img width="45" class="media-object" src="http://1.bp.blogspot.com/--55-s7pz2Vo/VhqIr0wl5uI/AAAAAAAAmkY/t-eSBh7hbcU/s72-c/retrospectiva5.jpg" alt="..."></div><div class="media-body">Retrospectiva Semanal: 04/10 a 10/10</div></a></li></ul>
-    </div>
+    @if (hilights != null && hilights.Count > 0)
+    {
+        <div class="sidebar-item" style="text-align: left;">
+            <h4 class="sidebar-title">DESTAQUES</h4>
+            <ul class="media-list other-posts" id="sidebar-hilights-posts">
+                @foreach (NParty.Www.Models.Article hilight in hilights)
+                {
+                    <li class="media">
+                        <a href="@hilight.ArticleLink">
+                            <div class="media-left">
+                                <div width="45" class="media-object media-object-img-sm" style="background-image: url('@hilight.CoverImage')" alt="@hilight.Title"></div>
+                            </div>
+                            <div class="media-body">@hilight.Title</div>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
     <div class="sidebar-follow sidebar-item">
         <div class="fb-page" data-href="https://www.facebook.com/nparty" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/nparty"><a href="https://www.facebook.com/nparty">N-Party</a></blockquote></div></div>
     </div>

@@ -6,6 +6,8 @@ using NParty.Www.Models;
 using System.Xml;
 using System.Text.RegularExpressions;
 using Google.Apis.Blogger.v3.Data;
+using Newtonsoft.Json;
+using System.Web;
 
 namespace NParty.Www.Helpers
 {
@@ -41,10 +43,13 @@ namespace NParty.Www.Helpers
                 article = new Article();
                 article.Id = postId;
                 article.Title = post.Title;
-                article.Author = post.Author != null ? post.Author.DisplayName : "";
+
+                if (post.Author != null)
+                    article.Author = GetAuthorFromJson(post.Author.Id);
+
                 article.Content = post.Content;
                 article.CoverImage = post.Images != null && post.Images.Count > 0 ? post.Images[0].Url : null;
-                article.DatePublished = post.Published.HasValue ? article.DatePublished : DateTime.MinValue;
+                article.DatePublished = post.Published.HasValue ? post.Published.Value : DateTime.MinValue;
                 article.GenerateNPartyArtileLink(blogId);
 
                 if (post.Labels != null && post.Labels.Count > 0)
@@ -62,6 +67,24 @@ namespace NParty.Www.Helpers
             }
 
             return article;
+        }
+
+        public Author GetAuthorFromJson(string id)
+        {
+            Author author = new Author();
+
+            string json = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Content/json/authors.json"));
+            Dictionary<string, Dictionary<string, string>> values = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(json);
+
+            if(values != null && values.ContainsKey(id))
+            {
+                author.Id = id;
+                author.Name = values[id]["name"];
+                author.Description = values[id]["description"];
+                author.ImageUrl = values[id]["imageUrl"];
+            }
+
+            return author;
         }
 
         public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex, string postsLabel)
@@ -84,7 +107,10 @@ namespace NParty.Www.Helpers
                     Article article = new Article();
                     article.Title = post.Title.Text;
                     article.Content = post.Content.Content;
-                    article.Author = post.Authors[0].Name;
+
+                    article.Author = new Author();
+                    article.Author.Name = post.Authors[0].Name;
+
                     article.DatePublished = post.Published;
                     article.CoverImage = GetPostImageManually(post);
                     article.Summary = GetSummaryManually(post.Content.Content, 200);

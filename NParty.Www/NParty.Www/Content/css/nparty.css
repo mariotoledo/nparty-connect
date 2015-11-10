@@ -1070,3 +1070,10 @@ h1, h2, h3{
 .directionLink{
     font-size: 18px;
 }
+
+.media-object-img-sm{
+    width: 45px;
+    height: 45px;
+    background-size: cover;
+    background-position: center center;
+}

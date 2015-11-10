@@ -70,7 +70,10 @@
                                 </div>
                                 <div class="col-md-4">
                                     <h3>@nintendoPosts[0].Title</h3>
-                                    <div class="author">Por <span class="authorName">@nintendoPosts[0].Author</span> em <span class="date">@nintendoPosts[0].DatePublished.ToString("dd/MM/yyyy")</span></div>
+                                    @if (nintendoPosts[0].Author != null && !string.IsNullOrEmpty(nintendoPosts[0].Author.Name))
+                                    {
+                                        <div class="author">Por <span class="authorName">@nintendoPosts[0].Author.Name</span> em <span class="date">@nintendoPosts[0].DatePublished.ToString("dd/MM/yyyy")</span></div>
+                                    }
                                     <p class="snippet">@nintendoPosts[0].Summary</p>
                                 </div>
                             </div>
@@ -78,9 +81,22 @@
                     </div>
                     <div class="col-md-4 col-bordered-left">
                         <ul class="media-list">
-                            <li class="media thumb-item"><a href="@Url.Content("~/" + nintendoPosts[1].NPartyArticleLink)"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(@nintendoPosts[1].CoverImage)"></figure></div><div class="media-body"><h5 class="media-heading">@nintendoPosts[1].Title</h5><div class="time">em @nintendoPosts[1].DatePublished.ToString("dd/MM/yyyy")</div></div></a></li>
-                            <li class="media thumb-item"><a href="@Url.Content("~/" + nintendoPosts[2].NPartyArticleLink)"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(@nintendoPosts[2].CoverImage)"></figure></div><div class="media-body"><h5 class="media-heading">@nintendoPosts[2].Title</h5><div class="time">em @nintendoPosts[2].DatePublished.ToString("dd/MM/yyyy")</div></div></a></li>
-                            <li class="media thumb-item"><a href="@Url.Content("~/" + nintendoPosts[3].NPartyArticleLink)"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(@nintendoPosts[3].CoverImage)"></figure></div><div class="media-body"><h5 class="media-heading">@nintendoPosts[3].Title</h5><div class="time">em @nintendoPosts[3].DatePublished.ToString("dd/MM/yyyy")</div></div></a></li>
+                            @{
+                                for (int i = 1; i < 4; i++)
+                                {
+                                    <li class="media thumb-item">
+                                        <a href="@Url.Content("~/" + nintendoPosts[i].NPartyArticleLink)">
+                                            <div class="media-left media-middle">
+                                                <figure class="media-object" style="background-image: url(@nintendoPosts[i].CoverImage)"></figure>
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">@nintendoPosts[i].Title</h5>
+                                                <div class="time">em @nintendoPosts[i].DatePublished.ToString("dd/MM/yyyy")</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            }
                         </ul>
                         <a class="btn btn-lg btn-block" href="@Url.Content("~/Nintendo")" style="text-align: right">TUDO SOBRE <b>NINTENDO <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
                     </div>
@@ -111,7 +127,10 @@
                                 </div>
                                 <div class="col-md-4">
                                     <h3>@eSportsPosts[0].Title</h3>
-                                    <div class="author">Por <span class="authorName">@eSportsPosts[0].Author</span> em <span class="date">@eSportsPosts[0].DatePublished.ToString("dd/MM/yyyy")</span></div>
+                                    @if (eSportsPosts[0].Author != null && !string.IsNullOrEmpty(eSportsPosts[0].Author.Name))
+                                    {
+                                        <div class="author">Por <span class="authorName">@eSportsPosts[0].Author.Name</span> em <span class="date">@eSportsPosts[0].DatePublished.ToString("dd/MM/yyyy")</span></div>
+                                    }
                                     <p class="snippet">@eSportsPosts[0].Summary</p>
                                 </div>
                             </div>
@@ -119,9 +138,22 @@
                     </div>
                     <div class="col-md-4 col-bordered-left">
                         <ul class="media-list">
-                            <li class="media thumb-item"><a href="@Url.Content("~/" + eSportsPosts[1].NPartyArticleLink)"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(@eSportsPosts[1].CoverImage)"></figure></div><div class="media-body"><h5 class="media-heading">@eSportsPosts[1].Title</h5><div class="time">em @eSportsPosts[1].DatePublished.ToString("dd/MM/yyyy")</div></div></a></li>
-                            <li class="media thumb-item"><a href="@Url.Content("~/" + eSportsPosts[2].NPartyArticleLink)"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(@eSportsPosts[2].CoverImage)"></figure></div><div class="media-body"><h5 class="media-heading">@eSportsPosts[2].Title</h5><div class="time">em @eSportsPosts[2].DatePublished.ToString("dd/MM/yyyy")</div></div></a></li>
-                            <li class="media thumb-item"><a href="@Url.Content("~/" + eSportsPosts[3].NPartyArticleLink)"><div class="media-left media-middle"><figure class="media-object" style="background-image: url(@eSportsPosts[3].CoverImage)"></figure></div><div class="media-body"><h5 class="media-heading">@eSportsPosts[3].Title</h5><div class="time">em @eSportsPosts[3].DatePublished.ToString("dd/MM/yyyy")</div></div></a></li>
+                            @{
+                                for (int i = 1; i < 4; i++)
+                                {
+                                    <li class="media thumb-item">
+                                        <a href="@Url.Content("~/" + eSportsPosts[i].NPartyArticleLink)">
+                                            <div class="media-left media-middle">
+                                                <figure class="media-object" style="background-image: url(@eSportsPosts[i].CoverImage)"></figure>
+                                            </div>
+                                            <div class="media-body">
+                                                <h5 class="media-heading">@eSportsPosts[i].Title</h5>
+                                                <div class="time">em @eSportsPosts[i].DatePublished.ToString("dd/MM/yyyy")</div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                }
+                            }
                         </ul>
                         <a class="btn btn-lg btn-block" href="@Url.Content("~/ESports")" style="text-align: right">TUDO SOBRE <b>ESPORTS <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
                     </div>

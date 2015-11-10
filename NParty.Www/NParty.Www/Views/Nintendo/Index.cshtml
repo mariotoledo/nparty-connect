@@ -32,7 +32,10 @@
                                 <a class="hilight-article-item" href="@Url.Content("~/" + article.NPartyArticleLink)">
                                     <figure style = "background-image: url('@article.CoverImage')" ></figure>
                                     <h3>@article.Title</h3>
-                                    <div class="author">Por @article.Author em @article.DatePublished.ToString("dd/MM/yyyy")</div>
+                                    @if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
+                                    {
+                                        <div class="author">Por @article.Author.Name em @article.DatePublished.ToString("dd/MM/yyyy")</div>
+                                    }
                                     <p class="snippet">@article.Summary</p>
                                 </a>
                             }
@@ -45,7 +48,10 @@
                                         </div>
                                         <div class="col-md-6">
                                             <h3>@article.Title</h3>
-                                            <div class="author">Por @article.Author em @article.DatePublished.ToString("dd/MM/yyyy")</div>
+                                            @if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
+                                            {
+                                                <div class="author">Por @article.Author.Name em @article.DatePublished.ToString("dd/MM/yyyy")</div>
+                                            }
                                             <p class="snippet">@article.Summary</p>
                                         </div>
                                     </div>

@@ -29,7 +29,7 @@ namespace System
 
         public static string RemoveSpecialCharacters(this string text)
         {
-            return Regex.Replace(text, "[\\~#%&*{}/:<>?|\"-]", "");
+            return Regex.Replace(text, "[\\~#%&*{}/:<>?|\"-,]", "");
         }
     }
 }
