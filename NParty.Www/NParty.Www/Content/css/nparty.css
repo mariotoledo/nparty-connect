@@ -1074,6 +1074,14 @@ h1, h2, h3{
 .media-object-img-sm{
     width: 45px;
     height: 45px;
+}
+
+.media-object-img-sm, .media-object-img-md{
     background-size: cover;
     background-position: center center;
+}
+
+.media-object-img-md{
+    width: 75px;
+    height: 75px;
 }

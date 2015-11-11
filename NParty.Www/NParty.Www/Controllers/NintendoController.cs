@@ -55,5 +55,11 @@ namespace NParty.Www.Controllers
 
             return View();
         }
+
+        public JsonResult GetRelatedPosts(string label)
+        {
+            ArticlesHelper helper = new ArticlesHelper();
+            return Json(helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 3, 0, label), JsonRequestBehavior.AllowGet);
+        }
     }
 }

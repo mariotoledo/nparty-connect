@@ -2,6 +2,8 @@
     ViewBag.Title = "Ler";
     ViewData["ActiveMenu"] = 1;
 
+    //TODO: ADICIONAR META CONTENT
+
     NParty.Www.Models.Article article = (NParty.Www.Models.Article)ViewData["article"];
 }
 <div id="nintendo-container" style="padding: 0;">
@@ -9,7 +11,6 @@
     <div class=" container" style="margin-top: 20px; margin-bottom: 20px;">
         <div class="row">
             <div class="col-lg-8 col-bordered-right" id="no-scrolable" style="margin-bottom: 20px;">
-                <meta content="Mario Toledo" name="author">
                 <div class="post hentry" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
                     <div class="article">
                         <div class="row">
@@ -74,7 +75,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="panel panel-default" style="margin-top: 30px;"><div class="panel-heading"><b>Leia também</b></div><div class="list-group PopularPosts "><li class="list-group-item"><a href="http://www.nintendo.nparty.com.br/2015/10/video-mostra-como-diferentes-roupas.html"></a><div class="item-thumbnail-only"><a href="http://www.nintendo.nparty.com.br/2015/10/video-mostra-como-diferentes-roupas.html"><div class="item-thumbnail" style="margin-bottom: 0px;"><img alt="Vídeo mostra como diferentes roupas interferem em Zelda: Tri Force Heroes" border="0" height="75" src="http://3.bp.blogspot.com/-bzeh3PWWa74/ViEKbCef9SI/AAAAAAAAmsE/tEmoXwfX4xQ/s72-c/zeldaroupas.jpg" width="75"></div><div style="padding-top: 20px; padding-bottom: 20px;">Vídeo mostra como diferentes roupas interferem em Zelda: Tri Force Heroes</div><div style="clear: both;"></div></a></div></li><li class="list-group-item"><a href="http://www.nintendo.nparty.com.br/2015/10/preview-legend-of-zelda-tri-force-heroes.html"></a><div class="item-thumbnail-only"><a href="http://www.nintendo.nparty.com.br/2015/10/preview-legend-of-zelda-tri-force-heroes.html"><div class="item-thumbnail" style="margin-bottom: 0px;"><img alt="Preview: The Legend of Zelda: Tri Force Heroes" border="0" height="75" src="http://2.bp.blogspot.com/-rmBwm2UxtrI/Vhs9RKuZIDI/AAAAAAAAmlU/EHbMsLtN6rs/s72-c/zeldaTriForce.jpg" width="75"></div><div style="padding-top: 20px; padding-bottom: 20px;">Preview: The Legend of Zelda: Tri Force Heroes</div><div style="clear: both;"></div></a></div></li><li class="list-group-item"><a href="http://www.nintendo.nparty.com.br/2015/09/europa-pre-venda-de-zelda-tri-force.html"></a><div class="item-thumbnail-only"><a href="http://www.nintendo.nparty.com.br/2015/09/europa-pre-venda-de-zelda-tri-force.html"><div class="item-thumbnail" style="margin-bottom: 0px;"><img alt="Europa: Pré-Venda de Zelda: Tri Force Heroes garante brinde exclusivo aos consumidores" border="0" height="75" src="http://2.bp.blogspot.com/-2CIyucM5JJQ/Vfx_WpWrqGI/AAAAAAAAMQI/ej7Urq2wINk/s72-c/noticias_tri-force-heroes-links-252_edited.jpg" width="75"></div><div style="padding-top: 20px; padding-bottom: 20px;">Europa: Pré-Venda de Zelda: Tri Force Heroes garante brinde exclusivo aos consumidores</div><div style="clear: both;"></div></a></div></li></div></div>
+                    <div class="panel panel-default" style="margin-top: 30px;">
+                        <div class="panel-heading">
+                            <b>Leia também</b>
+                        </div>
+                        <div class="row" id="related-posts">
+                            <div class="col-md-12">
+                                Carregado...
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-4">
@@ -83,3 +93,22 @@
         </div>
     </div>
 </div>
+@section Scripts{
+    <script type="text/javascript">
+        var labels = [];
+    </script type="text/javascript">
+    @{ 
+        if(article != null && article.Labels != null)
+        {
+            foreach(string label in article.Labels)
+            {
+                <script>
+                    labels.push('@label');
+                </script>
+            }
+        }
+    }
+    <script type="text/javascript">
+        printRelatedPostsByLabels('@article.Id', labels, 'related-posts');
+    </script>
+}
