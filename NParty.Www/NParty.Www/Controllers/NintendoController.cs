@@ -42,12 +42,6 @@ namespace NParty.Www.Controllers
 
             Article article = helper.GetSingleArticleFromBlog(NintendoBlogId, id);
 
-            if(article == null)
-            {
-                FlashMessage("Ops, não encontramos o artigo desejado", MessageType.Error);
-                return RedirectToAction("Index");
-            }
-
             ViewData["article"] = article;
 
             List<Article> hilights = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque");

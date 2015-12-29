@@ -9,94 +9,109 @@
 <div id="nintendo-container" style="padding: 0;">
     @{Html.RenderPartial("SubMenus/Nintendo", 3);}
     <div class=" container" style="margin-top: 20px; margin-bottom: 20px;">
-        <div class="row">
-            <div class="col-lg-8 col-bordered-right" id="no-scrolable" style="margin-bottom: 20px;">
-                <div class="post hentry" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
-                    <div class="article">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="header">
-                                    <img src="@article.CoverImage" style="width: 100%;">
-                                </div>
-                            </div>
-                        </div>
-                        <div style="margin-top: -50px;  background-color: #FFF; padding: 30px; padding-bottom: 0px;">
+        @if (article != null)
+        {
+            <div class="row">
+                <div class="col-lg-8 col-bordered-right" style="margin-bottom: 20px;">
+                    <div class="post hentry" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+                        <div class="article">
                             <div class="row">
-                                <div class="col-lg-12" style="margin-top: -50px; padding: 10px; padding-bottom: 0px; background-color: #FFF;">
-                                    <div class="article-title">
-                                        <h3 class="post-title entry-title" itemprop="name">
-                                            @article.Title
-                                        </h3>
-                                        <div class="subtitulo" itemprop="description">
-                                            Apesar dos números não serem tão surpreendentes assim
-                                        </div>
-                                        @if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
-                                        {
-                                            <div class="author" style="margin-top: 10px;">
-                                                <div>
-                                                    Por
-                                                    <span itemprop="name">@article.Author.Name</span>
-                                                    em
-                                                    @article.DatePublished.Day de @article.DatePublished.ToString("MMMM") de @article.DatePublished.Year
-                                                </div>
-                                            </div><br>
-                                        }
-                                        <div style="margin-left: 0px; margin-bottom: 0px; margin-bottom: 20px;">
-                                            <div class="socialShare">
-                                                <div class="fb-like" data-action="like" data-layout="button_count" data-share="false" data-show-faces="false" data-width="70"></div>
-                                            </div>
-                                            <div class="socialShare">
-                                                <a class="twitter-share-button" data-count="horizontal" data-via="n_party" href="http://twitter.com/share">Tweet</a>
-                                                <script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script>
-                                            </div>
-                                            <div class="socialShare">
-                                                <script src="https://apis.google.com/js/plusone.js" type="text/javascript" gapi_processed="true"></script>
-                                                <g:plusone></g:plusone><br>
-                                            </div>
-                                        </div>
+                                <div class="col-lg-12">
+                                    <div class="header">
+                                        <img src="@article.CoverImage" style="width: 100%;">
                                     </div>
-                                    <div class="content" id="article-content">
-                                        @Html.Raw(article.Content)
-                                    </div>
-                                    @{
-                                        if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
-                                        {
-                                            <div class="author-box" id="authorBox">
-                                                <div class="row">
-                                                    <div class="col-sm-2">
-                                                        <img class="authorPhoto img-rounded img-responsive" id="authorPhoto" src="@article.Author.ImageUrl">
+                                </div>
+                            </div>
+                            <div style="margin-top: -50px;  background-color: #FFF; padding: 30px; padding-bottom: 0px;">
+                                <div class="row">
+                                    <div class="col-lg-12" style="margin-top: -50px; padding: 10px; padding-bottom: 0px; background-color: #FFF;">
+                                        <div class="article-title">
+                                            <h3 class="post-title entry-title" itemprop="name">
+                                                @article.Title
+                                            </h3>
+                                            <!--<div class="subtitulo" itemprop="description">
+                                                Apesar dos números não serem tão surpreendentes assim
+                                            </div>-->
+                                            @if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
+                                            {
+                                                <div class="author" style="margin-top: 10px;">
+                                                    <div>
+                                                        Por
+                                                        <span itemprop="name">@article.Author.Name</span>
+                                                        em
+                                                        @article.DatePublished.Day de @article.DatePublished.ToString("MMMM") de @article.DatePublished.Year
                                                     </div>
-                                                    <div class="col-sm-10" id="authorDescription"><b>@article.Author.Name</b> @article.Author.Description</div>
                                                 </div>
+                                            }
+                                            <div class="share-icons">
+                                                <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=@(article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                                                <a title="Compartilhe no Twitter" href="https://twitter.com/intent/tweet?source=n_party&related=n_party&via=n_party&url=@(article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                                                <a title="Compartilhe no LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=@(article.NPartyArticleLink)" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/linkedin_32.png")')" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                                                <a title="Compartilhe no Google+" href="https://plus.google.com/share?url=@(article.NPartyArticleLink)" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/googleplus_32.png")')" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
                                             </div>
+                                        </div>
+                                        <div id="loading-content">
+                                            Carregando...
+                                        </div>
+                                        <div class="content" id="article-content">
+                                            @Html.Raw(article.Content)
+                                        </div>
+                                        @{
+                                            if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
+                                            {
+                                                <div class="author-box" id="authorBox">
+                                                    <div class="row">
+                                                        <div class="col-sm-2">
+                                                            <img class="authorPhoto img-rounded img-responsive" id="authorPhoto" src="@article.Author.ImageUrl">
+                                                        </div>
+                                                        <div class="col-sm-10" id="authorDescription"><b>@article.Author.Name</b> @article.Author.Description</div>
+                                                    </div>
+                                                </div>
+                                            }
                                         }
-                                    }
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="panel panel-default" style="margin-top: 30px;">
-                        <div class="panel-heading">
-                            <b>Leia também</b>
-                        </div>
-                        <div class="row" id="related-posts">
-                            <div class="col-md-12">
-                                Carregado...
+                        <div id="related-posts-wrapper">
+                            <h3>Leia também</h3>
+                            <div class="row" id="related-posts">
+                                <div class="col-md-12">
+                                    Carregado...
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="col-lg-4">
+                    @{Html.RenderPartial("Sidebars/Nintendo");}
+                </div>
             </div>
-            <div class="col-lg-4">
-                @{Html.RenderPartial("Sidebars/Nintendo");}
-            </div>
-        </div>
+        }
+        else
+        {
+            <div style="padding: 50px; text-align: center;">Não foi possível encontrar a publicação desejada.</div>
+        }
     </div>
 </div>
 @section Scripts{
     <script type="text/javascript">
         var labels = [];
-    </script type="text/javascript">
+
+        $(document).ready(function () {
+            adjustArticleImages();
+            adjustTables();
+            adjustArticleIframes();
+            adjustArticleSubtitles();
+
+            $('#loading-content').hide();
+            $('#article-content').show();
+        });
+    </script>
     @{ 
         if(article != null && article.Labels != null)
         {
@@ -108,7 +123,10 @@
             }
         }
     }
-    <script type="text/javascript">
-        printRelatedPostsByLabels('@article.Id', labels, 'related-posts');
-    </script>
+    @if (article != null)
+    {
+        <script type="text/javascript">
+            printRelatedPostsByLabels('@article.Id', labels, 'related-posts');
+        </script>
+    }
 }

@@ -6,51 +6,89 @@
     List<NParty.Www.Models.Article> eventosPosts = (List<NParty.Www.Models.Article>)ViewData["EventosPosts"];
 }
 
-@if (hilights != null && hilights.Count >= 5)
-{
-    <div class="hilights">
-        <div class="hilights-items">
-            <div style="float: left; width: 100%;">
-                <div class="col-md-4" id="hilight1">
-                    <a class="hilight-link" href="@hilights[0].NPartyArticleLink">
-                        <h2>@hilights[0].Title</h2>
-                    </a>
-                    <div class="hilight hilight-more" style="background-image: url(@hilights[0].CoverImage);"></div>
-                </div>
-                <div class="col-md-8">
-                    <div class="row">
-                        <div class="col-md-6" id="hilight2">
-                            <a class="hilight-link" href="@Url.Content("~/" + hilights[1].NPartyArticleLink)">
-                                <h2>@hilights[1].Title</h2>
+    
+        <div class="hilights">
+            <div class="hilights-items">
+                <div style="float: left; width: 100%;">
+                    @if (hilights != null && hilights.Count >= 5)
+                    {
+                        <div class="col-md-4" id="hilight1">
+                            <a class="hilight-link" href="@hilights[0].NPartyArticleLink">
+                                <h2>@hilights[0].Title</h2>
                             </a>
-                            <div class="hilight" style="background-image: url(@hilights[1].CoverImage);"></div>
+                            <div class="hilight hilight-more" style="background-image: url(@hilights[0].CoverImage);"></div>
                         </div>
-                        <div class="col-md-6" id="hilight3">
-                            <a class="hilight-link" href="@Url.Content("~/" + hilights[2].NPartyArticleLink)">
-                                <h2>@hilights[2].Title</h2>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6" id="hilight2">
+                                    <a class="hilight-link" href="@Url.Content("~/" + hilights[1].NPartyArticleLink)">
+                                        <h2>@hilights[1].Title</h2>
+                                    </a>
+                                    <div class="hilight" style="background-image: url(@hilights[1].CoverImage);"></div>
+                                </div>
+                                <div class="col-md-6" id="hilight3">
+                                    <a class="hilight-link" href="@Url.Content("~/" + hilights[2].NPartyArticleLink)">
+                                        <h2>@hilights[2].Title</h2>
+                                    </a>
+                                    <div class="hilight" style="background-image: url(@hilights[2].CoverImage);"></div>
+                                </div>
+                                <div class="col-md-6" id="hilight4">
+                                    <a class="hilight-link" href="@Url.Content("~/" + hilights[3].NPartyArticleLink)">
+                                        <h2>@hilights[3].Title</h2>
+                                    </a>
+                                    <div class="hilight" style="background-image: url(@hilights[3].CoverImage);"></div>
+                                </div>
+                                <div class="col-md-6" id="hilight5">
+                                    <a class="hilight-link" href="@Url.Content("~/" + hilights[4].NPartyArticleLink)">
+                                        <h2>@hilights[4].Title</h2>
+                                    </a>
+                                    <div class="hilight" style="background-image: url(@hilights[4].CoverImage);"></div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="col-md-4" id="hilight1">
+                            <a class="hilight-link" href="">
+                                <h2></h2>
                             </a>
-                            <div class="hilight" style="background-image: url(@hilights[2].CoverImage);"></div>
+                            <div class="hilight hilight-more" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
                         </div>
-                        <div class="col-md-6" id="hilight4">
-                            <a class="hilight-link" href="@Url.Content("~/" + hilights[3].NPartyArticleLink)">
-                                <h2>@hilights[3].Title</h2>
-                            </a>
-                            <div class="hilight" style="background-image: url(@hilights[3].CoverImage);"></div>
+                        <div class="col-md-8">
+                            <div class="row">
+                                <div class="col-md-6" id="hilight2">
+                                    <a class="hilight-link" href="">
+                                        <h2></h2>
+                                    </a>
+                                    <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
+                                </div>
+                                <div class="col-md-6" id="hilight3">
+                                    <a class="hilight-link" href="">
+                                        <h2></h2>
+                                    </a>
+                                    <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
+                                </div>
+                                <div class="col-md-6" id="hilight4">
+                                    <a class="hilight-link" href="">
+                                        <h2></h2>
+                                    </a>
+                                    <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
+                                </div>
+                                <div class="col-md-6" id="hilight5">
+                                    <a class="hilight-link" href="">
+                                        <h2></h2>
+                                    </a>
+                                    <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-6" id="hilight5">
-                            <a class="hilight-link" href="@Url.Content("~/" + hilights[4].NPartyArticleLink)">
-                                <h2>@hilights[4].Title</h2>
-                            </a>
-                            <div class="hilight" style="background-image: url(@hilights[4].CoverImage);"></div>
-                        </div>
-                    </div>
+                    }
                 </div>
             </div>
         </div>
-    </div>
-}
+    
 
-@if(nintendoPosts != null && nintendoPosts.Count >= 4) {
     <!-- ================================== NINTENDO ================================== -->
     <div id="nintendo-container">
         <div class="container">
@@ -61,6 +99,8 @@
                 </h2>   
             </div>
             <div class="posts">
+            @if (nintendoPosts != null && nintendoPosts.Count >= 4)
+            {
                 <div class="row">
                     <div class="col-md-8" style="margin-bottom: 20px;">
                         <a class="hilight-article-item" href="@Url.Content("~/" + nintendoPosts[0].NPartyArticleLink)">
@@ -101,13 +141,14 @@
                         <a class="btn btn-lg btn-block" href="@Url.Content("~/Nintendo")" style="text-align: right">TUDO SOBRE <b>NINTENDO <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
                     </div>
                 </div>
+            } else
+            {
+                <div style="padding: 50px; text-align: center;">Não foi possível encontrar publicãções no momento. Por favor, tente novamente mais tarde.</div>
+            }
             </div>
         </div>
     </div>
-}
 
-@if (eSportsPosts != null && eSportsPosts.Count >= 4)
-{
     <!-- ================================== ESPORTS ================================== -->
     <div id="esports-container">
         <div class="container">
@@ -118,6 +159,8 @@
                 </h2>
             </div>
             <div class="posts">
+            @if (eSportsPosts != null && eSportsPosts.Count >= 4)
+            {
                 <div class="row">
                     <div class="col-md-8" style="margin-bottom: 20px;">
                         <a class="hilight-article-item" href="@Url.Content("~/" + eSportsPosts[0].NPartyArticleLink)">
@@ -158,13 +201,17 @@
                         <a class="btn btn-lg btn-block" href="@Url.Content("~/ESports")" style="text-align: right">TUDO SOBRE <b>ESPORTS <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
                     </div>
                 </div>
+            }
+            else
+            {
+                <div style="padding: 50px; text-align: center;">Não foi possível encontrar publicãções no momento. Por favor, tente novamente mais tarde.</div>
+            }
             </div>
         </div>
     </div>
-}
 
-@if (eventosPosts != null && eventosPosts.Count >= 4)
-{
+
+
     <!-- ================================== EVENTOS ================================== -->
     <div id="eventos-container">
         <div class="container">
@@ -174,7 +221,8 @@
                     <span class="strong">Eventos</span>
                 </h2>
             </div>
-            <div class="message alert" style="text-align: center; display: none;">Carregando...</div>
+            @if (eventosPosts != null && eventosPosts.Count >= 4)
+            {
             <div class="row posts" style="">
                 <div class="col-md-6" style="margin-bottom: 20px;">
                     <a class="hilight-article-item hilight-md-article-item" href="@Url.Content("~/" + eventosPosts[0].NPartyArticleLink)">
@@ -223,7 +271,7 @@
                             <div class="col-md-6">
                                 <figure style="background-image: url(@eventosPosts[3].CoverImage)"></figure>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6">  
                                 <h4>@eventosPosts[3].Title</h4>
                                 <p class="snippet">@eventosPosts[3].Summary</p>
                             </div>
@@ -231,11 +279,16 @@
                     </a>
                 </div>
             </div>
+            }
+            else
+            {
+                <div style="padding: 50px; text-align: center;">Não foi possível encontrar publicãções no momento. Por favor, tente novamente mais tarde.</div>
+            }
             <hr>
             <a class="btn btn-lg btn-block" href="@Url.Content("~/Eventos")" style="text-align: right">TUDO SOBRE <b>EVENTOS <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
         </div>
     </div>
-}
+
 
 <!-- ================================== COPA N-PARTY ================================== -->
 <div id="copa-container">

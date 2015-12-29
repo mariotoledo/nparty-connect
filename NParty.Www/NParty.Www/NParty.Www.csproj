@@ -200,7 +200,21 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\nparty.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Content\img\ad\1.jpg" />
+    <Content Include="Content\img\icons\article-share\email_32.png" />
+    <Content Include="Content\img\icons\article-share\facebook_32.png" />
+    <Content Include="Content\img\icons\article-share\googleplus_32.png" />
+    <Content Include="Content\img\icons\article-share\linkedin_32.png" />
+    <Content Include="Content\img\icons\article-share\pinterest_32.png" />
+    <Content Include="Content\img\icons\article-share\twitter_32.png" />
+    <Content Include="Content\img\icons\partners\castelonerd.jpg" />
+    <Content Include="Content\img\icons\partners\lopsp.jpg" />
+    <Content Include="Content\img\icons\partners\nintendoblast.jpg" />
+    <Content Include="Content\img\icons\partners\projetoxpodcast.jpg" />
+    <Content Include="Content\img\icons\social\facebook.jpg" />
+    <Content Include="Content\img\icons\social\instagram.jpg" />
+    <Content Include="Content\img\icons\social\twitter.jpg" />
+    <Content Include="Content\img\icons\social\youtube.jpg" />
+    <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
@@ -227,6 +241,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\img\ad\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

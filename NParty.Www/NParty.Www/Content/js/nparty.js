@@ -27,19 +27,27 @@ function removeDuplicatedPostsFromRelated(currentArticleId, relatedPosts) {
     var uniquePosts = [];
     $.each(relatedPosts, function (i, relatedEl) {
         var found = false;
-        $.each(uniquePosts, function (i, uniqueEl) {
-            if (uniqueEl.Id === relatedEl.Id && currentArticleId != relatedEl.id)
-                found = true;
-        });
+
+        console.log("comparando " + currentArticleId + " com " + relatedEl.Id + " = " + (currentArticleId == relatedEl.id));
+
+        if (currentArticleId == relatedEl.Id)
+        {
+            found = true;
+        }
+        else
+            $.each(uniquePosts, function (i, uniqueEl) {
+                if (uniqueEl.Id === relatedEl.Id)
+                    found = true;
+            });
 
         if(found == false)
             uniquePosts.push(relatedEl);
     });
 
-    console.log(uniquePosts)
+    console.log(uniquePosts);
 
     return uniquePosts;
-} 
+}
 
 function shuffleArray(array) {
     for (var j, x, i = array.length; i; j = Math.floor(Math.random() * i), x = array[--i], array[i] = array[j], array[j] = x);
@@ -51,16 +59,113 @@ function printRelatedArticles(articles, listId) {
 
     $listEl.html('');
 
+    if (!articles || articles.length == 0) {
+        $listEl.parent().hide(); 
+        return;
+    }
+
     $.each(articles, function (i, article) {
-        var appendable = '<li class="list-group-item">' +
-                         '<a href="' + article.ArticleLink + '"></a>' +
-                         '<div class="item-thumbnail-only">' +
+        if (i > 2)
+            return;
+
+        var appendable = '<div class="col-md-4 hilight-md-article-item" style="margin-bottom: 20px;">' +
                          '<a href="' + article.ArticleLink + '">' +
-                         '<div class="item-thumbnail" style="margin-bottom: 0px; margin-right: 10px;">' +
-                         '<div class="media-object-img-md" style="background-image: url(' + article.CoverImage + ')"></div>' +
-                         '</div>' +
-                         '<div style="padding-top: 20px; padding-bottom: 20px;">' + article.Title + '</div>' +
-                         '<div style="clear: both;"></div></a></div></li>';
+                         '<div><figure style="background-image: url(' + article.CoverImage + ')"></figure></div>' +
+                         '<div><h5>' + article.Title + '</h5></div>'
+                         '</a></div>';
         $listEl.append(appendable);
     });
+}
+
+/* ARTICLE ADJUSTMENT */
+function adjustArticleImages() {
+    if ($(".content img").length > 0) {
+        $(".content img").each(
+			function (i, obj) {
+			    $this = $(this);
+			    if (i == 0) {
+			        $this.css("display", "none");
+			        if ($this.parent().parent().next().is("br")) {
+			            $this.parent().parent().next().css("display", "none");
+			        }
+			    } else {
+			        if ($this.attr("width") >= 515 || $this.attr("height") == 640) {
+			            $this.attr("width", "920");
+			            var height = (920 * $this.attr("height"))
+								/ $this.attr("width");
+			            $this.attr("height", height);
+			            $this.css("margin-left", "auto");
+			            $this.css("margin-right", "auto");
+			        } else if ($this.attr("width") == 250 ||
+							   $this.attr("width") == 320 ||
+							   $this.attr("height") == 320) {
+			            $this.css("float", "left");
+			            $this.css("width", "50%");
+			            $this.parent().css("margin-left", "0px");
+			            $this.parent().css("margin-right", "0px");
+			            $this.css("margin-bottom", "20px");
+			        }
+			        else if ($this.attr("width") == 162 ||
+							 $this.attr("width") == 200 ||
+							 $this.attr("height") == 200) {
+			            $this.css("float", "left");
+			            $this.css("width", "33%");
+			            $this.parent().css("margin-left", "0px");
+			            $this.parent().css("margin-right", "0px");
+			            $this.css("margin-bottom", "20px");
+			        }
+
+			        if ($(this).parent().css('float') == 'right') {
+			            $(this).parent().css("margin-bottom", "0.5em");
+			            $(this).parent().css("margin-top", "0.5em");
+			            $(this).parent().css("margin-left", "0");
+			            $(this).parent().css("margin-right", "0");
+			        }
+
+			        $(this).addClass("img-responsive");
+			    }
+			});
+    } else {
+        $('.header').css("height", 0);
+        $('#articleSocialLinks').hide();
+    }
+}
+
+function adjustTables(){
+    $(".content table").each(function(i, obj) {
+        $(this).addClass("table");
+        $(this).wrap("<div class='table-responsive'/>");
+    });
+}
+
+function adjustArticleIframes() {
+    $(".content iframe").each(function(i, obj) {
+        if($(this).attr("src").indexOf("?")	> -1){
+            $(this).attr("src", $(this).attr("src") + '&html5=1');
+        } else {
+            $(this).attr("src", $(this).attr("src") + '?html5=1');
+        }
+		
+        $(this).wrap("<div class='articleIframe'/>");
+        $(this).wrap("<div/>");
+    });
+}
+	
+function adjustArticleSubtitles(){
+    $(".content span").each(
+		function(i, obj) {
+		    if($(this).css('font-size') == '24px'){
+		        if($(this).hasClass( "pagina-titulo" ) == false){
+		            $(this).addClass("pagina-titulo");
+		        }
+		    }
+		}			
+	);
+}
+
+function resizeFacebookComments() {
+    var src = $('.fb-comments iframe').attr('src').split('width='),
+	width = $('#comentFacebook').width();
+    $('.fb-comments iframe').attr('src', src[0] + 'width=' + width);
+    $('.fbFeedbackContent').css('min-height', '0');
 }

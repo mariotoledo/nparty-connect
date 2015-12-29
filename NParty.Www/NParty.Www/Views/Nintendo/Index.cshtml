@@ -11,18 +11,20 @@
 <div id="nintendo-container" style="padding: 0;">
     @{Html.RenderPartial("SubMenus/Nintendo", 3);}
     <div class="container" style="padding-top: 30px;">
-        <div class="row">
-            <div class="col-md-8 inside-section col-bordered-right" style="margin-bottom: 20px;">
-                @{
-                    if (articles != null)
-                    {
-                        foreach (NParty.Www.Models.Article article in articles)
+        @{
+            if (articles != null && articles.Count > 0)
+            {
+                <div class="row">
+                    <div class="col-md-8 inside-section col-bordered-right" style="margin-bottom: 20px;">
+
+                        @foreach (NParty.Www.Models.Article article in articles)
                         {
                             bool isSpecialTag = false;
 
-                            foreach(string label in article.Labels)
+                            foreach (string label in article.Labels)
                             {
-                                if (nintendoSpecialTags.Contains(label)){
+                                if (nintendoSpecialTags.Contains(label))
+                                {
                                     isSpecialTag = true;
                                     break;
                                 }
@@ -30,7 +32,7 @@
                             if (isSpecialTag)
                             {
                                 <a class="hilight-article-item" href="@Url.Content("~/" + article.NPartyArticleLink)">
-                                    <figure style = "background-image: url('@article.CoverImage')" ></figure>
+                                    <figure style="background-image: url('@article.CoverImage')"></figure>
                                     <h3>@article.Title</h3>
                                     @if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
                                     {
@@ -59,27 +61,31 @@
                             }
                             <hr />
                         }
-                    }
-                }
-                
-                <div class="row">
-                    <div class="col-md-5">
-                        <a class="directionLink" href="@Url.Content("~/Nintendo/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                        
+                        <div class="row">
+                            <div class="col-md-5">
+                                <a class="directionLink" href="@Url.Content("~/Nintendo/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                            </div>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-5">
+                                @{
+                                    if (currentPage > 0)
+                                    {
+                                        <a class="directionLink" href="@Url.Content("~/Nintendo/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                    }
+                                }
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-5">
-                        @{
-                            if (currentPage > 0)
-                            {
-                                <a class="directionLink" href="@Url.Content("~/Nintendo/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
-                            }
-                        }
+                    <div class="col-md-4">
+                        @{Html.RenderPartial("Sidebars/Nintendo");}
                     </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                @{Html.RenderPartial("Sidebars/Nintendo");}
-            </div>
-        </div>
+            }
+            else
+            {
+                <div style="padding: 50px; text-align: center;"> Não foi possível encontrar publicãções no momento. Por favor, tente novamente mais tarde.</div>
+            }
+        }
     </div>
 </div>
