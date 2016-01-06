@@ -8,11 +8,11 @@
 }
 <div id="nintendo-container" style="padding: 0;">
     @{Html.RenderPartial("SubMenus/Nintendo", 3);}
-    <div class=" container" style="margin-top: 20px; margin-bottom: 20px;">
+    <div class=" container" style="padding-top: 20px; padding-bottom: 20px;">
         @if (article != null)
         {
             <div class="row">
-                <div class="col-lg-8 col-bordered-right" style="margin-bottom: 20px;">
+                <div class="col-lg-8 col-bordered-right">
                     <div class="post hentry" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
                         <div class="article">
                             <div class="row">
@@ -34,7 +34,7 @@
                                             </div>-->
                                             @if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
                                             {
-                                                <div class="author" style="margin-top: 10px;">
+                                                <div class="author">
                                                     <div>
                                                         Por
                                                         <span itemprop="name">@article.Author.Name</span>
@@ -44,13 +44,13 @@
                                                 </div>
                                             }
                                             <div class="share-icons">
-                                                <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=@(article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
+                                                <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.nparty.com.br/@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
-                                                <a title="Compartilhe no Twitter" href="https://twitter.com/intent/tweet?source=n_party&related=n_party&via=n_party&url=@(article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')" onclick="javascript:window.open(this.href,
+                                                <a title="Compartilhe no Twitter" href="https://twitter.com/intent/tweet?source=n_party&related=n_party&via=n_party&url=http://www.nparty.com.br/@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
-                                                <a title="Compartilhe no LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=@(article.NPartyArticleLink)" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/linkedin_32.png")')" onclick="javascript:window.open(this.href,
+                                                <a title="Compartilhe no LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=http://www.nparty.com.br/@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/linkedin_32.png")')" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
-                                                <a title="Compartilhe no Google+" href="https://plus.google.com/share?url=@(article.NPartyArticleLink)" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/googleplus_32.png")')" onclick="javascript:window.open(this.href,
+                                                <a title="Compartilhe no Google+" href="https://plus.google.com/share?url=http://www.nparty.com.br/@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/googleplus_32.png")')" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
                                             </div>
                                         </div>
@@ -85,6 +85,7 @@
                                 </div>
                             </div>
                         </div>
+                        @{Html.RenderPartial("Comments/Disqus");}
                     </div>
                 </div>
                 <div class="col-lg-4">

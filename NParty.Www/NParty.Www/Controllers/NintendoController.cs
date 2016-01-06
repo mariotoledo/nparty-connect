@@ -28,6 +28,31 @@ namespace NParty.Www.Controllers
             return View();
         }
 
+        public ActionResult NintendoWiiU(int? page) { return OpenPageByLabel("Nintendo Wii U", page); }
+        public ActionResult Nintendo3DS(int? page) { return OpenPageByLabel("Nintendo 3DS", page); }
+        public ActionResult Previews(int? page) { return OpenPageByLabel("Preview", page); }
+        public ActionResult Reviews(int? page){ return OpenPageByLabel("Review", page); }
+        public ActionResult Retro(int? page) { return OpenPageByLabel("Retrô", page); }
+        public ActionResult Top10(int? page) { return OpenPageByLabel("Top 10", page); }
+        public ActionResult Mario(int? page) { return OpenPageByLabel("Mario", page); }
+        public ActionResult Pokemon(int? page){ return OpenPageByLabel("Pokémon", page); }
+        public ActionResult TheLegendOfZelda(int? page){ return OpenPageByLabel("The Legend of Zelda", page); }
+
+        private ActionResult OpenPageByLabel(string label, int? page)
+        {
+            int pageValue = page.HasValue && page.Value > 0 ? page.Value : 0;
+
+            NPartyArticlesHelper helper = new NPartyArticlesHelper();
+            List<Article> articles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", MaxPosts, (MaxPosts * pageValue) + 1, label);
+            List<Article> hilights = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque");
+
+            ViewData["articles"] = articles;
+            ViewData["hilights"] = hilights;
+            ViewData["currentPage"] = pageValue;
+
+            return View();
+        }
+
         public ActionResult Ler(string id)
         {
             ArticlesHelper helper = new ArticlesHelper(
@@ -40,7 +65,7 @@ namespace NParty.Www.Controllers
                 return RedirectToAction("Index");
             }
 
-            Article article = helper.GetSingleArticleFromBlog(NintendoBlogId, id);
+            Article article = helper.GetSingleArticleFromBlog(NintendoBlogId, "Nintendo", id);
 
             ViewData["article"] = article;
 

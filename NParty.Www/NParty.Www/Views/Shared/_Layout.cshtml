@@ -64,11 +64,11 @@
                         </div>
                     </li>
                 </ul>
-                <form class="navbar-form navbar-left" role="search">
+                <form class="navbar-form navbar-left" role="search" action="@Url.Content("~/Home/Busca")" method="get">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Buscar por...">
+                        <input type="text" class="form-control" name="q" placeholder="Buscar por..." value="@ViewData["query"]">
                         <span class="input-group-btn">
-                            <button style="height:34px;" class="btn btn-default" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                            <button style="height:34px;" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                         </span>
                     </div>
                 </form>

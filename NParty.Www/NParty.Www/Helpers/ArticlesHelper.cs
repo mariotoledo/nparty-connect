@@ -24,7 +24,48 @@ namespace NParty.Www.Helpers
             this.apiKey = apiKey;
         }
 
-        public Article GetSingleArticleFromBlog(string blogId, string postId)
+        public List<Article> SearchArticlesInBlog(string blogId, string blogDomain, int maxResults, int startIndex, string query)
+        {
+            List<Article> articles = new List<Article>();
+            try
+            {
+                Service service = new Service("blogger", "n-party");
+                string maxResultAppend = maxResults > 0 ? "&max-results=" + maxResults : "";
+
+                AtomFeed feed = service.Query(new FeedQuery()
+                {
+                    Uri = new Uri("http://www.blogger.com/feeds/" + blogId + "/posts/default?q=" + query + "?start-index=" + startIndex + maxResultAppend)
+                });
+
+                foreach (var post in feed.Entries)
+                {
+                    Article article = new Article();
+                    article.Title = post.Title.Text;
+                    article.Content = post.Content.Content;
+
+                    article.Author = new Author();
+                    article.Author.Name = post.Authors[0].Name;
+
+                    article.DatePublished = post.Published;
+                    article.CoverImage = GetPostImageManually(post);
+                    article.Summary = GetSummaryManually(post.Content.Content, 200);
+                    article.Id = GetPostIdManually(post.Id.AbsoluteUri);
+                    article.ArticleLink = GetPostLinkManually(post.Links);
+                    article.Labels = GetLabelsArray(post.Categories);
+                    article.GenerateNPartyArtileLink(blogDomain);
+
+                    articles.Add(article);
+                };
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return articles;
+        }
+
+        public Article GetSingleArticleFromBlog(string blogId, string blogDomain, string postId)
         {
             Article article = null;
             try
@@ -50,7 +91,7 @@ namespace NParty.Www.Helpers
                 article.Content = post.Content;
                 article.CoverImage = post.Images != null && post.Images.Count > 0 ? post.Images[0].Url : null;
                 article.DatePublished = post.Published.HasValue ? post.Published.Value : DateTime.MinValue;
-                article.GenerateNPartyArtileLink(blogId);
+                article.GenerateNPartyArtileLink(blogDomain);
 
                 if (post.Labels != null && post.Labels.Count > 0)
                 {

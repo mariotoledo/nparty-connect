@@ -915,10 +915,26 @@ h1, h2, h3{
     border-right: 1px solid #F29811;
 }
 
+.prevPage,{
+    text-align: left;
+}
+
+.nextPage{
+    text-align: right;
+}
+
+@media (max-width: 991px) {
+    .prevPage, .nextPage{
+    text-align: center;
+}
+}
+
 @media (max-width: 767px) {
 #nintendo-container .content-area-menu .divider-vertical, #esports-container .content-area-menu .divider-vertical, #eventos-container .content-area-menu .divider-vertical {
     display: none;
   }
+
+
 }
 
 .navbar-brand{
@@ -944,12 +960,15 @@ h1, h2, h3{
     padding-bottom: 20px;
     border-bottom: 1px solid #CCCCCC;
     margin-left: -15px;
+    margin-right: -15px;
     padding-left: 15px;
+    padding-right: 15px;
     margin-bottom: 20px;
 }
 
 .sidebar-title {
     margin-left: -15px;
+    margin-right: -15px;
     background-color: #CCCCCC;
     padding: 5px 5px 5px 15px;
 	font-size: 16px;
@@ -1027,7 +1046,7 @@ h1, h2, h3{
 }
 
 .article .share-icons{
-    margin: 20px auto 0px auto;
+    margin: 25px auto 0px auto;
     text-align: center;
 }
 
@@ -1047,14 +1066,14 @@ h1, h2, h3{
 
 .article-title h3 {
     margin-top: 0px;
-    margin-bottom: 0px;
+    margin-bottom: 10px;
     font-size: 30px;
 }
 
 @media (max-width: 420px){
 		.article-title h3{
 			margin-top: 0px;
-			margin-bottom: 0px;
+			margin-bottom: 10px;
 			font-size: 20px;
 		}
 	}

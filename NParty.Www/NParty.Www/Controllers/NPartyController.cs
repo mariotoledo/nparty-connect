@@ -96,6 +96,7 @@ namespace NParty.Www.Controllers
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             ViewData["NintendoSpecialTags"] = this.NintendoSpecialTags;
+            ViewData["MaxPosts"] = MaxPosts;
 
             base.OnActionExecuting(filterContext);
         }

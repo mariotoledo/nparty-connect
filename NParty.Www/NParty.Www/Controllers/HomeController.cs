@@ -35,5 +35,19 @@ namespace NParty.Www.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public ActionResult Busca(string q, int? page)
+        {
+            ArticlesHelper helper = new ArticlesHelper();
+
+            int pageValue = page.HasValue && page.Value > 0 ? page.Value : 0;
+
+            ViewData["query"] = q;
+            ViewData["currentPage"] = pageValue;
+            ViewData["SearchResults"] = helper.SearchArticlesInBlog(NintendoBlogId, "Nintendo", MaxPosts, (MaxPosts * pageValue) + 1, q);
+
+            return View();
+        }
     }
 }

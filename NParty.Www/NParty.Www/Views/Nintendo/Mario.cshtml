@@ -10,7 +10,7 @@
 }
 
 <div id="nintendo-container" style="padding: 0;">
-    @{Html.RenderPartial("SubMenus/Nintendo", 3);}
+    @{Html.RenderPartial("SubMenus/Nintendo", 8);}
     <div class="container" style="padding-top: 30px;">
         @{
             if (articles != null && articles.Count > 0)
@@ -68,16 +68,17 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a class="directionLink" href="@Url.Content("~/Nintendo/Mario?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
+                                
                             </div>
                             <div class="col-md-2"></div>
                             <div class="col-md-5 nextPage">
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a class="directionLink" href="@Url.Content("~/Nintendo/Mario?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>
