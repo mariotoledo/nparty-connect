@@ -510,7 +510,7 @@ h1, h2, h3{
     color: #FFC46A;
 }
 
-#nintendo-container hr, #eventos-container hr, #esports-container hr{
+#nintendo-container hr, #eventos-container hr, #esports-container hr, .default-container hr{
     border-color: #CCCCCC;
     margin-bottom: 30px;
 }

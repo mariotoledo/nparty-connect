@@ -1,5 +1,6 @@
 ﻿@{
     int activeMenuId = ViewData["ActiveMenu"] == null ? 0 : (Int32)ViewData["ActiveMenu"];
+    bool menuhasBorderBottom = true.Equals(ViewData["MenuHasBorderBottom"]);
 }
 
 <html lang="pt-br">
@@ -19,7 +20,7 @@
     <link href="@Url.Content("~/Content/css/nparty.css")" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" style="@(menuhasBorderBottom ? "border-bottom: 1px solid #CCCCCC;" : "")">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false" aria-controls="navbar">
