@@ -452,11 +452,11 @@ h1, h2, h3{
     font-weight: normal;
 }
 
-#nintendo-container a{
+#nintendo-container a, .domainLink-Nintendo{
     color: #C90201;
 }
 
-#nintendo-container a:hover{
+#nintendo-container a:hover, .domainLink-Nintendo:hover{
     color: #FE5050;
 }
 
@@ -476,11 +476,11 @@ h1, h2, h3{
     font-weight: normal;
 }
 
-#esports-container a{
+#esports-container a, .domainLink-eSports{
     color: #54028A;
 }
 
-#esports-container a:hover{
+#esports-container a:hover, .domainLink-eSports:hover{
     color: #C066FD;
 }
 
@@ -502,11 +502,11 @@ h1, h2, h3{
     font-weight: normal;
 }
 
-#eventos-container a{
+#eventos-container a, .domainLink-Eventos{
     color: #E18700;
 }
 
-#eventos-container a:hover{
+#eventos-container a:hover, .domainLink-Eventos:hover{
     color: #FFC46A;
 }
 
@@ -995,6 +995,36 @@ h1, h2, h3{
 .sidebar-item .other-posts li:last-child{
      border-bottom: 0px;
      padding-bottom: 0px;
+}
+
+#sidebar-general .other-posts li .label{
+    margin-right: 5px;
+}
+
+#sidebar-general .other-posts li.nintendo a{
+    color: #C90201;
+}
+
+#sidebar-general .other-posts li.nintendo a:hover{
+    color: #FE5050;
+}
+
+#sidebar-general .other-posts li.nintendo .label{
+    background-color: #C90201;
+    color: #FFF;
+}
+
+#sidebar-general .other-posts li.nintendo a{
+    color: #C90201;
+}
+
+#sidebar-general .other-posts li.nintendo a:hover{
+    color: #FE5050;
+}
+
+#sidebar-general .other-posts li.nintendo .label{
+    background-color: #C90201;
+    color: #FFF;
 }
 
 #sidebar-general .other-posts li.esports a{

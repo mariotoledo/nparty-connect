@@ -16,7 +16,7 @@
                     <div class="col-md-8 inside-section col-bordered-right" style="margin-bottom: 20px;">
                         @foreach (NParty.Www.Models.Article article in articles)
                         {
-                            <a class="hilight-article-item hilight-md-article-item" href="@Url.Content("~/" + article.NPartyArticleLink)">
+                            <a class="hilight-article-item hilight-md-article-item domainLink-@article.Domain" href="@Url.Content("~/" + article.NPartyArticleLink)">
                                 <div class="row">
                                     <div class="col-md-6">
                                         <figure style="background-image: url('@article.CoverImage')"></figure>
@@ -39,7 +39,7 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a class="directionLink domainLink-Nintendo" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
                             </div>
@@ -48,11 +48,14 @@
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a class="directionLink domainLink-Nintendo" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>
                         </div>
+                    </div>
+                    <div class="col-md-4">
+                        @{Html.RenderPartial("Sidebars/General");}
                     </div>
                 </div>
             }
@@ -63,3 +66,29 @@
    
     }
 </div>
+@section Scripts{
+<script>
+        $(document).ready(function () {
+            var $hilights = $('#general-hilights');
+
+            $.ajax('@Url.Content("~/Home/GetHilightItems/")').done(function (data) {
+                if (!data || data.length == 0) {
+                    $hilights.html('<li>Não foi possível carregar os destaques. Tente novamente mais tarde.</li>');
+                    return;
+                }
+
+                var appendable = '';
+
+                $.each(data, function (index) {
+                    appendable += '<li class="media ' + data[index].Domain.toLowerCase() + '">' +
+                                   '<a href="#"><div class="media-left"><div style="width: 45px; height: 45px; background-image: url(' + data[index].CoverImage + '); background-size: cover; background-position: center center;" class="media-object"></div></div>' +
+                                   '<div class="media-body"><span class="label label-default">' + data[index].Domain + '</span>' + data[index].Title + '</div></a></li>'
+                });
+
+                $hilights.html(appendable);
+            }).fail(function () {
+                $hilights.html('<li>Não foi possível carregar os destaques. Tente novamente mais tarde.</li>');
+            });
+        });
+</script>
+}

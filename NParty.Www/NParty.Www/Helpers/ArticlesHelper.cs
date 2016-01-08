@@ -54,6 +54,8 @@ namespace NParty.Www.Helpers
                     article.Labels = GetLabelsArray(post.Categories);
                     article.GenerateNPartyArtileLink(blogDomain);
 
+                    article.Domain = blogDomain;
+
                     articles.Add(article);
                 };
             }
@@ -63,6 +65,52 @@ namespace NParty.Www.Helpers
             }
 
             return articles;
+        }
+
+        public Article GetSingleArticleFromBlogByPath(string blogId, string blogDomain, string path)
+        {
+            Article article = null;
+            try
+            {
+                BloggerService service = new BloggerService(new Google.Apis.Services.BaseClientService.Initializer()
+                {
+                    ApiKey = this.apiKey,
+                    ApplicationName = this.applicationName
+                });
+
+                PostsResource.GetByPathRequest resource = service.Posts.GetByPath(blogId, path);
+
+                Post post = resource.Execute();
+
+                article = new Article();
+                article.Id = post.Id;
+                article.Title = post.Title;
+
+                if (post.Author != null)
+                    article.Author = GetAuthorFromJson(post.Author.Id);
+
+                article.Content = post.Content;
+                article.CoverImage = post.Images != null && post.Images.Count > 0 ? post.Images[0].Url : null;
+                article.DatePublished = post.Published.HasValue ? post.Published.Value : DateTime.MinValue;
+
+                article.Domain = blogDomain;
+                article.GenerateNPartyArtileLink(blogDomain);
+
+                if (post.Labels != null && post.Labels.Count > 0)
+                {
+                    article.Labels = new string[post.Labels.Count];
+                    for (int i = 0; i < post.Labels.Count; i++)
+                    {
+                        article.Labels[i] = post.Labels[i];
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            return article;
         }
 
         public Article GetSingleArticleFromBlog(string blogId, string blogDomain, string postId)
@@ -91,6 +139,8 @@ namespace NParty.Www.Helpers
                 article.Content = post.Content;
                 article.CoverImage = post.Images != null && post.Images.Count > 0 ? post.Images[0].Url : null;
                 article.DatePublished = post.Published.HasValue ? post.Published.Value : DateTime.MinValue;
+
+                article.Domain = blogDomain;
                 article.GenerateNPartyArtileLink(blogDomain);
 
                 if (post.Labels != null && post.Labels.Count > 0)
@@ -158,6 +208,8 @@ namespace NParty.Www.Helpers
                     article.Id = GetPostIdManually(post.Id.AbsoluteUri);
                     article.ArticleLink = GetPostLinkManually(post.Links);
                     article.Labels = GetLabelsArray(post.Categories);
+
+                    article.Domain = blogDomain;
                     article.GenerateNPartyArtileLink(blogDomain);
 
                     articles.Add(article);

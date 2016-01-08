@@ -45,9 +45,44 @@ namespace NParty.Www.Controllers
 
             ViewData["query"] = q;
             ViewData["currentPage"] = pageValue;
-            ViewData["SearchResults"] = helper.SearchArticlesInBlog(NintendoBlogId, "Nintendo", MaxPosts, (MaxPosts * pageValue) + 1, q);
+            
+            List<Article> nintendoArticles = helper.SearchArticlesInBlog(NintendoBlogId, "Nintendo", 50, (50 * pageValue) + 1, q);
+            List<Article> eSportsArticles = helper.SearchArticlesInBlog(ESportsBlogId, "eSports", 50, (50 * pageValue) + 1, q);
+            List<Article> eventosArticles = helper.SearchArticlesInBlog(EventosBlogId, "Eventos", 50, (50 * pageValue) + 1, q);
+
+            List<Article> allArticles = new List<Article>();
+            allArticles.AddRange(nintendoArticles);
+            allArticles.AddRange(eSportsArticles);
+            allArticles.AddRange(eventosArticles);
+
+            ViewData["SearchResults"] = allArticles.OrderByDescending(t => t.DatePublished).ToList();
 
             return View();
+        }
+
+        public ActionResult Ler(string year, string month, string path)
+        {
+            ArticlesHelper helper = new ArticlesHelper(
+                System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
+                System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
+            );
+            Article article = helper.GetSingleArticleFromBlogByPath(NintendoBlogId, "Nintendo", "/" + year + "/" + month + "/" + path + ".html");
+
+            ViewData["article"] = article;
+
+            return View();
+        }
+
+        public JsonResult GetHilightItems()
+        {
+            NPartyArticlesHelper helper = new NPartyArticlesHelper();
+
+            Dictionary<string, string> blogDomains = new Dictionary<string, string>();
+            blogDomains.Add(NintendoBlogId, "Nintendo");
+            blogDomains.Add(ESportsBlogId, "ESports");
+            blogDomains.Add(EventosBlogId, "Eventos");
+
+            return Json(helper.GetGeneralHilights(blogDomains, 3), JsonRequestBehavior.AllowGet);
         }
     }
 }

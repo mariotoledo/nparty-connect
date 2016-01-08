@@ -4,44 +4,13 @@
 <div id="sidebar-general" class="sidebar">
     <div class="sidebar-item">
         <div class="sidebar-advertising ">
-            <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-            <!-- Sidebar2 -->
-            <ins class="adsbygoogle"
-                 style="display:inline-block;width:300px;height:250px"
-                 data-ad-client="ca-pub-9215189312585693"
-                 data-ad-slot="6717599330"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+            @{Html.RenderPartial("Advertisement/ad1_sidebar");}
         </div>
     </div>
     @if (hilights != null && hilights.Count > 0)
     {
         <div class="sidebar-item" style="text-align: left;">
             <h4 class="sidebar-title">DESTAQUES</h4>
-            @*<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                <div class="carousel-inner" role="listbox">
-                @for (int i = 0; i < hilights.Count; i++)
-                {
-                    <a href="@hilights[i].ArticleLink" class="item @(i == 0 ? "active" : "")">
-                        <img src="@hilights[i].CoverImage" alt="...">
-                        <div class="carousel-caption">
-                            @hilights[i].Title
-                        </div>
-                    </a>
-                }
-                </div>
-
-                <!-- Controls -->
-                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                    <span class="sr-only">Previous</span>
-                </a>
-                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                    <span class="sr-only">Next</span>
-                </a>
-            </div>*@
             <ul class="media-list other-posts" id="sidebar-hilights-posts">
                 @foreach (NParty.Www.Models.Article hilight in hilights)
                 {

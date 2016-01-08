@@ -16,6 +16,7 @@ namespace NParty.Www.Models
         public DateTime DatePublished { get; set; }
         public string ArticleLink { get; set; }
         public string NPartyArticleLink { get; set; }
+        public string Domain { get; set; }
         public string Id { get; set; }
         public string[] Labels { get; set; }
 
