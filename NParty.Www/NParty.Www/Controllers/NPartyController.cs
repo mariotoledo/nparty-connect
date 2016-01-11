@@ -93,9 +93,26 @@ namespace NParty.Www.Controllers
             }
         }
 
+        public string[] ESportsSpecialTags
+        {
+            get
+            {
+                try
+                {
+                    string unsplitedSpecialTags = System.Configuration.ConfigurationManager.AppSettings["ESportsSpecialTags"];
+                    return unsplitedSpecialTags.Split(',').Select(p => p.Trim()).ToArray();
+                }
+                catch (Exception)
+                {
+                    return new string[] { };
+                }
+            }
+        }
+
         protected override void OnActionExecuting(ActionExecutingContext filterContext)
         {
             ViewData["NintendoSpecialTags"] = this.NintendoSpecialTags;
+            ViewData["ESportsSpecialTags"] = this.ESportsSpecialTags;
             ViewData["MaxPosts"] = MaxPosts;
 
             base.OnActionExecuting(filterContext);

@@ -866,6 +866,11 @@ h1, h2, h3{
     color: #FFF;
 }
 
+#esports-container .content-area-menu li a{
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+}
+
 #esports-container .content-area-menu li.active a{
     color: #FFF;
     background-color: #54028A;
@@ -873,8 +878,7 @@ h1, h2, h3{
 }
 
 #esports-container .content-area-menu li:hover a{
-   background-color: #54028A;
-   padding-top: 7px;
+   background-color: #C066FD;
 }
 
 #eventos-container .content-area-menu{
@@ -1203,4 +1207,24 @@ h1, h2, h3{
     #related-posts figure{
         height: 360px;
     }
+}
+
+.pagina-titulo, #nintendo-container .pagina-titulo {
+	font-weight: bold;
+	font-size: 26px;
+	line-height: 32px;
+	font-weight: bold;
+	color: #CD2B2B;
+	text-align: left;
+    border-bottom: 3px solid #CD2B2B;
+}
+
+#esports-container .pagina-titulo{
+    color: #54028A;
+    border-color: #54028A;
+}
+
+#eventos-container .pagina-titulo{
+    color: #E18700;
+    border-color: #E18700;
 }

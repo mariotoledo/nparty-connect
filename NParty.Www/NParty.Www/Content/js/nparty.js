@@ -156,7 +156,7 @@ function adjustArticleSubtitles(){
 		    var $this = $(this);
 		    if ($this.css('font-size') == '24px') {
 		        if ($this.hasClass("pagina-titulo") == false) {
-		            $this.addClass("pagina-titulo");
+		            $this.replaceWith('<div class="pagina-titulo">' + $this.text() + '</div>');
 		        }
 		    }
 		}			
