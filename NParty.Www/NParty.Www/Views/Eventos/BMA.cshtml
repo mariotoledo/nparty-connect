@@ -1,16 +1,16 @@
 ﻿@{
-    ViewBag.Title = "ESports";
-    ViewData["ActiveMenu"] = 2;
+    ViewBag.Title = "Eventos";
+    ViewData["ActiveMenu"] = 3;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
 
-    string[] esportsSpecialTags = (string[])ViewData["ESportsSpecialTags"];
+    string[] eventosSpecialTags = (string[])ViewData["EventosSpecialTags"];
 }
 
-<div id="esports-container" style="padding: 0;">
-    @{Html.RenderPartial("SubMenus/ESports", 1);}
+<div id="eventos-container" style="padding: 0;">
+    @{Html.RenderPartial("SubMenus/Eventos", 5);}
     <div class="container" style="padding-top: 30px;">
         @{
             if (articles != null && articles.Count > 0)
@@ -23,7 +23,7 @@
 
                             foreach (string label in article.Labels)
                             {
-                                if (esportsSpecialTags.Contains(label))
+                                if (eventosSpecialTags.Contains(label))
                                 {
                                     isSpecialTag = true;
                                     break;
@@ -67,7 +67,7 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/ESports/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a class="directionLink" href="@Url.Content("~/Eventos/BMA?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
                             </div>
@@ -76,14 +76,14 @@
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/ESports/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a class="directionLink" href="@Url.Content("~/Eventos/BMA?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>
                         </div>
                     </div>
                     <div class="col-md-4">
-                        @{Html.RenderPartial("Sidebars/ESports");}
+                        @{Html.RenderPartial("Sidebars/Eventos");}
                     </div>
                 </div>
             }

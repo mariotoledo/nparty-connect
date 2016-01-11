@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "ESports";
+    ViewBag.Title = "Index";
     ViewData["ActiveMenu"] = 2;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
@@ -10,13 +10,14 @@
 }
 
 <div id="esports-container" style="padding: 0;">
-    @{Html.RenderPartial("SubMenus/ESports", 1);}
+    @{Html.RenderPartial("SubMenus/ESports", 4);}
     <div class="container" style="padding-top: 30px;">
         @{
             if (articles != null && articles.Count > 0)
             {
                 <div class="row">
                     <div class="col-md-8 inside-section col-bordered-right" style="margin-bottom: 20px;">
+
                         @foreach (NParty.Www.Models.Article article in articles)
                         {
                             bool isSpecialTag = false;
@@ -67,7 +68,7 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/ESports/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a class="directionLink" href="@Url.Content("~/ESports/CounterStriker?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
                             </div>
@@ -76,7 +77,7 @@
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/ESports/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a class="directionLink" href="@Url.Content("~/ESports/CounterStriker?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>

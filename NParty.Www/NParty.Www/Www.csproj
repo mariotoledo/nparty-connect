@@ -339,6 +339,33 @@
   <ItemGroup>
     <Content Include="Views\ESports\Ler.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ESports\Dicas.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ESports\LeagueOfLegends.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\ESports\CounterStrike.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Sidebars\Eventos.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Eventos\Coberturas.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Eventos\AnimeFriends.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Eventos\BGS.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Eventos\BMA.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Eventos\Ler.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

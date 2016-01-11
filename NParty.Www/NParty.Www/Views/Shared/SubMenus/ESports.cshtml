@@ -1,7 +1,4 @@
 ﻿@model int
-@{
-    ViewBag.Title = "Nintendo";
-}
 
 <div class="content-area-menu">
     <nav class="navbar" style="min-height: initial; margin-bottom: 0px;">
@@ -17,12 +14,12 @@
             </div>
             <div class="collapse navbar-collapse" id="subMenu-ESports">
                 <ul class="nav nav-pills">
-                    <li role="presentation" class="@(Model == 1 ? "active" : "")"><a href="#">Home</a></li>
+                    <li role="presentation" class="@(Model == 1 ? "active" : "")"><a href="@Url.Content("~/ESports")">Home</a></li>
                     <li class="divider-vertical"></li>
-                    <li role="presentation" class="@(Model == 2 ? "active" : "")"><a href="#">Dicas</a></li>
+                    <li role="presentation" class="@(Model == 2 ? "active" : "")"><a href="@Url.Content("~/ESports/Dicas")">Dicas</a></li>
                     <li class="divider-vertical"></li>
-                    <li role="presentation" class="@(Model == 3 ? "active" : "")"><a href="#">League of Legends</a></li>
-                    <li role="presentation" class="@(Model == 4 ? "active" : "")"><a href="#">Counter Strike: GO</a></li>
+                    <li role="presentation" class="@(Model == 3 ? "active" : "")"><a href="@Url.Content("~/ESports/LeagueOfLegends")">League of Legends</a></li>
+                    <li role="presentation" class="@(Model == 4 ? "active" : "")"><a href="@Url.Content("~/ESports/CounterStrike")">Counter Strike</a></li>
                 </ul>
             </div>
         </div>

@@ -1,7 +1,4 @@
 ﻿@model int
-@{
-    ViewBag.Title = "Eventos";
-}
 
 <div class="content-area-menu">
     <nav class="navbar" style="min-height: initial; margin-bottom: 0px;">
@@ -15,15 +12,15 @@
                 </button>
                 <h3 style="margin-top: 12px; text-align: center;" class="hidden-lg">Eventos</h3>
             </div>
-            <div class="collapse navbar-collapse" id="subMenu-ESports">
+            <div class="collapse navbar-collapse" id="subMenu-Eventos">
                 <ul class="nav nav-pills">
-                    <li role="presentation" class="@(Model == 1 ? "active" : "")"><a href="#">Home</a></li>
+                    <li role="presentation" class="@(Model == 1 ? "active" : "")"><a href="@Url.Content("~/Eventos")">Home</a></li>
                     <li class="divider-vertical"></li>
-                    <li role="presentation" class="@(Model == 2 ? "active" : "")"><a href="#">Coberturas</a></li>
+                    <li role="presentation" class="@(Model == 2 ? "active" : "")"><a href="@Url.Content("~/Eventos/Coberturas")">Coberturas</a></li>
                     <li class="divider-vertical"></li>
-                    <li role="presentation" class="@(Model == 3 ? "active" : "")"><a href="#">Anime Friends</a></li>
-                    <li role="presentation" class="@(Model == 4 ? "active" : "")"><a href="#">Brasil Game Arena</a></li>
-                    <li role="presentation" class="@(Model == 5 ? "active" : "")"><a href="#">BRasil Game Show</a></li>
+                    <li role="presentation" class="@(Model == 3 ? "active" : "")"><a href="@Url.Content("~/Eventos/AnimeFriends")">Anime Friends</a></li>
+                    <li role="presentation" class="@(Model == 5 ? "active" : "")"><a href="@Url.Content("~/Eventos/BGS")">Brasil Game Show</a></li>
+                    <li role="presentation" class="@(Model == 4 ? "active" : "")"><a href="@Url.Content("~/Eventos/BMA")">Brasil Mega Arena</a></li>
                 </ul>
             </div>
         </div>

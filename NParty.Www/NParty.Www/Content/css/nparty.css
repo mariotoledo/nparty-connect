@@ -891,6 +891,11 @@ h1, h2, h3{
     color: #FFF;
 }
 
+#eventos-container .content-area-menu li a{
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+}
+
 #eventos-container .content-area-menu li.active a{
     color: #FFF;
     background-color: #E18700;
@@ -898,8 +903,7 @@ h1, h2, h3{
 }
 
 #eventos-container .content-area-menu li:hover a{
-   background-color: #E18700;
-   padding-top: 7px;
+   background-color: #FFC46A;
 }
 
 #nintendo-container .content-area-menu .divider-vertical {

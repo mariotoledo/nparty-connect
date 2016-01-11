@@ -67,7 +67,7 @@ namespace NParty.Www.Controllers
 
         public ActionResult Dicas(int? page) { return OpenPageByLabel("Dicas", page); }
         public ActionResult LeagueOfLegends(int? page) { return OpenPageByLabel("League of Legends", page); }
-        public ActionResult CounterStrikerGo(int? page) { return OpenPageByLabel("Counter Strike: GO", page); }
+        public ActionResult CounterStrike(int? page) { return OpenPageByLabel("Counter Strike", page); }
 
         public JsonResult GetRelatedPosts(string label)
         {
