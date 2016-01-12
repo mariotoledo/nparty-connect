@@ -3,6 +3,18 @@
     ViewData["MenuHasBorderBottom"] = true;
 }
 
+<style>
+    #team-menu li a{
+        border-bottom-color: #CD2B2B;
+        border-radius: 0px;
+    }
+
+    #team-menu li.active a{
+        background-color: #CD2B2B;
+        color: #FFFFFF;
+        border-radius: 0px;
+    }
+</style>
 <div class="container" style="padding-top: 30px; padding-bottom: 30px;">
     <div class="row">
         <div class="col-lg-8 col-bordered-right">
@@ -84,7 +96,33 @@
             <p>Nossa missão é entreter e informar o nosso público, contando com valores como imparcialidade, estética, diversidade de escrita, comprometimento com o leitor e casualidade.</p>
         </div>
         <div class="col-lg-4">
-            
+            <div class="pagina-titulo">Nossa equipe</div>
+                <ul class="nav nav-pills nav-justified" id="team-menu">
+                <li role="presentation" class="active"><a href="#site" aria-controls="site" role="tab" data-toggle="tab">Site</a></li>
+                <li role="presentation"><a href="#eventos" aria-controls="eventos" role="tab" data-toggle="tab">Eventos</a></li>
+                <li role="presentation"><a href="#adm" aria-controls="adm" role="tab" data-toggle="tab">Administrativo</a></li>
+            </ul>
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="site">
+                    <div class="thumbnail">
+                        <img alt="Mario Toledo" class="img-circle" src="http://www.nintendoparty.com.br/img/authorsImages/mariotoledo.jpg" style="margin: auto;" width="100"> <br>
+                        <div class="caption">
+                            <h3>
+                                Mario Toledo
+                            </h3>
+                            Possui cabelo em pé e barba pra fazer por causa da N-Party. Seu 3DS está com a tela quebrada de tanto uso, e sua Jynx se chama "Preta Gil".<br>
+                            <br>
+                            <a class="btn btn-default" href="https://www.facebook.com/mariotoledo12" role="button" target="_blank">Facebook</a>        <a class="btn btn-default" href="http://www.twitter.com/mario_toledo" role="button" target="_blank">Twitter</a>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="eventos">
+
+                </div>
+                <div role="tabpanel" class="tab-pane" id="adm">
+
+                </div>
+            </div>
         </div>
     </div>
 </div>
