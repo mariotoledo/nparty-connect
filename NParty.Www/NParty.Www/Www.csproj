@@ -177,6 +177,7 @@
   <ItemGroup>
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\ESportsController.cs" />
+    <Compile Include="Controllers\SobreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NintendoController.cs" />
     <Compile Include="Controllers\NPartyController.cs" />
@@ -216,6 +217,18 @@
     <Content Include="Content\img\icons\social\youtube.jpg" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\sobre1.jpg" />
+    <Content Include="Content\img\sobre10.jpg" />
+    <Content Include="Content\img\sobre11.jpg" />
+    <Content Include="Content\img\sobre12.jpg" />
+    <Content Include="Content\img\sobre2.jpg" />
+    <Content Include="Content\img\sobre3.jpg" />
+    <Content Include="Content\img\sobre4.jpg" />
+    <Content Include="Content\img\sobre5.jpg" />
+    <Content Include="Content\img\sobre6.jpg" />
+    <Content Include="Content\img\sobre7.jpg" />
+    <Content Include="Content\img\sobre8.jpg" />
+    <Content Include="Content\img\sobre9.jpg" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery-1.11.3.min.js" />
@@ -367,7 +380,7 @@
     <Content Include="Views\Eventos\Ler.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Home\Sobre.cshtml" />
+    <Content Include="Views\Sobre\QuemSomos.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

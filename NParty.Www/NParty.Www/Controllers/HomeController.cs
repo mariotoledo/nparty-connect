@@ -73,8 +73,6 @@ namespace NParty.Www.Controllers
             return View();
         }
 
-        public ActionResult Sobre() { return View(); }
-
         public JsonResult GetHilightItems()
         {
             NPartyArticlesHelper helper = new NPartyArticlesHelper();
