@@ -201,6 +201,13 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\nparty.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\authors\fabricioluz.jpg" />
+    <Content Include="Content\img\authors\lucasalves.jpg" />
+    <Content Include="Content\img\authors\mariotoledo.jpg" />
+    <Content Include="Content\img\authors\rafaelfarias.jpg" />
+    <Content Include="Content\img\authors\ruicelso.jpg" />
+    <Content Include="Content\img\authors\victorsouza.jpg" />
+    <Content Include="Content\img\authors\vitorbertani.jpg" />
     <Content Include="Content\img\icons\article-share\email_32.png" />
     <Content Include="Content\img\icons\article-share\facebook_32.png" />
     <Content Include="Content\img\icons\article-share\googleplus_32.png" />
