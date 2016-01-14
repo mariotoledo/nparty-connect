@@ -81,7 +81,7 @@
 
                 $.each(data, function (index) {
                     appendable += '<li class="media ' + data[index].Domain.toLowerCase() + '">' +
-                                   '<a href="#"><div class="media-left"><div style="width: 45px; height: 45px; background-image: url(' + data[index].CoverImage + '); background-size: cover; background-position: center center;" class="media-object"></div></div>' +
+                                   '<a href="' + data[index].NPartyArticleLink + '"><div class="media-left"><div style="width: 45px; height: 45px; background-image: url(' + data[index].CoverImage + '); background-size: cover; background-position: center center;" class="media-object"></div></div>' +
                                    '<div class="media-body"><span class="label label-default">' + data[index].Domain + '</span>' + data[index].Title + '</div></a></li>'
                 });
 

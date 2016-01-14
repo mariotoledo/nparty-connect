@@ -99,62 +99,29 @@
             <div class="row">
                 <div class="col-md-4" style="margin-bottom: 20px;">
                     <h4>Destaques</h4>
-                    <ul class="media-list">
-                        <li class="media thumb-item">
-                            <a href="#">
-                                <div class="media-left media-middle">
-                                    <figure class="media-object" style="background-image: url('http://2.bp.blogspot.com/-x-Ti4L2ZHck/VdTg-HmQuGI/AAAAAAAAlok/0WcjrCwpySc/s640/youkai-watch-review.jpg')"></figure>
-                                </div>
-                                <div class="media-body">
-                                    <h5 class="media-heading">Youkai Watch ganha data oficial de lançamento na América do Norte</h5>
-                                    <div class="time">em 26/12/2012</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="media thumb-item">
-                            <a href="#">
-                                <div class="media-left media-middle">
-                                    <figure class="media-object" style="background-image: url('http://2.bp.blogspot.com/-AW0uerYbYzU/VdM-dFDWPbI/AAAAAAAAlnI/xooI6fTtZks/s640/amiiqo.jpg')"></figure>
-                                </div>
-                                <div class="media-body">
-                                    <h5 class="media-heading">Conheça o "Amiiqo", um periférico não autorizado para enganar o Wii U com amiibos</h5>
-                                    <div class="time">em 26/12/2012</div>
-                                </div>
-                            </a>
-                        </li>
-                        <li class="media thumb-item" style="border: 0">
-                            <a href="#">
-                                <div class="media-left media-middle">
-                                    <figure class="media-object" style="background-image: url('http://2.bp.blogspot.com/-x-Ti4L2ZHck/VdTg-HmQuGI/AAAAAAAAlok/0WcjrCwpySc/s640/youkai-watch-review.jpg')"></figure>
-
-                                </div>
-                                <div class="media-body">
-                                    <h5 class="media-heading">Youkai Watch ganha data oficial de lançamento na América do Norte</h5>
-                                    <div class="time">em 26/12/2012</div>
-                                </div>
-                            </a>
-                        </li>
+                    <ul class="media-list" id="footer-hilights">
+                        <li>Carregando...</li>
                     </ul>
                 </div>
                 <div class="col-md-4" style="margin-bottom: 20px;">
                     @*<h4>Último Evento</h4>
-    <div class="media thumb-item" style="border: 0">
-        <a href="#">
-            <div class="media-left media-middle">
-                <figure class="media-object" style="width: 80px; height: 80px; background-image: url('http://www.images.nparty.com.br/connect/eventCover/small/animefriends.png')"></figure>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">Anime Friends 2015</h4>
-                <div class="time">
-                    <div>Organizador: Yamato</div>
-                    <div>Tipo: Evento de Anime</div>
-                    <div>Local: Campo de Marte (Sao Paulo - SP)</div>
-                    <div>Data: 20/05/2015 à 22/05/2015</div>
-                </div>
-            </div>
-        </a>
-    </div>
-    <br />*@
+                        <div class="media thumb-item" style="border: 0">
+                            <a href="#">
+                                <div class="media-left media-middle">
+                                    <figure class="media-object" style="width: 80px; height: 80px; background-image: url('http://www.images.nparty.com.br/connect/eventCover/small/animefriends.png')"></figure>
+                                </div>
+                                <div class="media-body">
+                                    <h4 class="media-heading">Anime Friends 2015</h4>
+                                    <div class="time">
+                                        <div>Organizador: Yamato</div>
+                                        <div>Tipo: Evento de Anime</div>
+                                        <div>Local: Campo de Marte (Sao Paulo - SP)</div>
+                                        <div>Data: 20/05/2015 à 22/05/2015</div>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                        <br />*@
                         <h4 style="margin-bottom: 2px;">Se inscreva em nossa newsletter</h4>
                         <p style="font-size: 12px; color: #FFF;">Receba em seu email um resumo de todas as novidades de nosso site e nossos eventos</p>
                         <form>
@@ -195,6 +162,39 @@
     <script src='@Url.Content("~/Content/js/jquery-1.11.3.min.js")'></script>
     <script src='@Url.Content("~/Content/js/bootstrap.min.js")'></script>
     <script src='@Url.Content("~/Content/js/nparty.js")'></script>
+    <script>
+        $(document).ready(function () {
+            var $hilights = $('#footer-hilights');
+
+            $.ajax('@Url.Content("~/Home/GetHilightItems/")').done(function (data) {
+                if (!data || data.length == 0) {
+                    $hilights.html('<li>Não foi possível carregar os destaques. Tente novamente mais tarde.</li>');
+                    return;
+                }
+
+                var appendable = '';
+
+                var i = 0;
+
+                $.each(data, function (index) {
+                    appendable +=   '<li class="media thumb-item">' +
+                                    '<a href="' + data[index].NPartyArticleLink + '">' +
+                                    '<div class="media-left media-middle">' +
+                                    '<figure class="media-object" style="background-image: url(' + data[index].CoverImage + ')"></figure>' + 
+                                    '</div><div class="media-body">' +
+                                    '<h5 style="margin-bottom: 5px;" class="media-heading">' + data[index].Title + '</h5>' +
+                                    '<span class="label label-default">' + data[index].Domain + '</span></div></a></li>';
+
+                    if (index > 1)
+                        return false;
+                });
+
+                $hilights.html(appendable);
+            }).fail(function () {
+                $hilights.html('<li>Não foi possível carregar os destaques. Tente novamente mais tarde.</li>');
+            });
+        });
+    </script>
     @RenderSection("Scripts", false)
     <div id="fb-root"></div>
     <script>
