@@ -12,5 +12,6 @@ namespace NParty.Www.Controllers
     public class SobreController : NPartyController
     {
         public ActionResult QuemSomos() { return View(); }
+        public ActionResult Contato() { return View(); }
     }
 }

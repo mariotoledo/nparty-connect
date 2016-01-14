@@ -201,6 +201,7 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\nparty.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\authors\caiocardoso.jpg" />
     <Content Include="Content\img\authors\fabricioluz.jpg" />
     <Content Include="Content\img\authors\lucasalves.jpg" />
     <Content Include="Content\img\authors\mariotoledo.jpg" />
@@ -388,6 +389,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Sobre\QuemSomos.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Sobre\Contato.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
