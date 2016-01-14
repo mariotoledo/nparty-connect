@@ -177,6 +177,7 @@
   <ItemGroup>
     <Compile Include="Controllers\EventosController.cs" />
     <Compile Include="Controllers\ESportsController.cs" />
+    <Compile Include="Controllers\OpsController.cs" />
     <Compile Include="Controllers\SobreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\NintendoController.cs" />
@@ -225,6 +226,8 @@
     <Content Include="Content\img\icons\social\youtube.jpg" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\missing_no.png" />
+    <Content Include="Content\img\sad_pikachu.png" />
     <Content Include="Content\img\sobre1.jpg" />
     <Content Include="Content\img\sobre10.jpg" />
     <Content Include="Content\img\sobre11.jpg" />
@@ -392,6 +395,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Sobre\Contato.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ops\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Ops\NaoEncontrado.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

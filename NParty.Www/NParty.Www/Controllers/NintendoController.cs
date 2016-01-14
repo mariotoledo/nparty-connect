@@ -67,6 +67,9 @@ namespace NParty.Www.Controllers
 
             Article article = helper.GetSingleArticleFromBlog(NintendoBlogId, "Nintendo", id);
 
+            if (article == null)
+                return Redirect("~/Ops/NaoEncontrado");
+
             ViewData["article"] = article;
 
             List<Article> hilights = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque");

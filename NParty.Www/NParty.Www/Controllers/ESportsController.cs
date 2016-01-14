@@ -57,6 +57,9 @@ namespace NParty.Www.Controllers
 
             Article article = helper.GetSingleArticleFromBlog(ESportsBlogId, "ESports", id);
 
+            if (article == null)
+                return Redirect("~/Ops/NaoEncontrado");
+
             ViewData["article"] = article;
 
             List<Article> hilights = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 5, 0, "Destaque");

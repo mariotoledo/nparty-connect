@@ -44,15 +44,16 @@
                     <li class="eventos-menu @(activeMenuId ==3 ? "eventos-menu-active" : "")">
                         <a href="@Url.Content("~/Eventos")"> Eventos</a>
                     </li>
-                    <li class="bordered-left dropdown">
-                        <a href="#">Comunidade</a>
-                        <div class="dropdown-menu">
-                            <ul class="nav">
-                                <li><a href="#">Usuários</a></li>
-                                <li><a href="#">Widgets</a></li>
-                            </ul>
-                        </div>
-                    </li>
+                                        @*<li class="bordered-left dropdown">
+            <a href="#">Comunidade</a>
+            <div class="dropdown-menu">
+                <ul class="nav">
+                    <li><a href="#">Usuários</a></li>
+                            <li><a href="#">Ranking</a></li>
+                    <li><a href="#">Widgets</a></li>
+                </ul>
+            </div>
+        </li>*@
                     <li class="bordered-left bordered-right dropdown">
                         <a href="#">Sobre</a>
                         <div class="dropdown-menu">
@@ -72,9 +73,9 @@
                         </span>
                     </div>
                 </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="bordered-left bordered-right"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
-                </ul>
+                @*<ul class="nav navbar-nav navbar-right">
+        <li class="bordered-left bordered-right"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
+    </ul>*@
             </div>
         </div>
     </nav>
@@ -136,25 +137,24 @@
                     </ul>
                 </div>
                 <div class="col-md-4" style="margin-bottom: 20px;">
-                    <h4>Último Evento</h4>
-                    <div>
-                        <div class="media thumb-item" style="border: 0">
-                            <a href="#">
-                                <div class="media-left media-middle">
-                                    <figure class="media-object" style="width: 80px; height: 80px; background-image: url('http://www.images.nparty.com.br/connect/eventCover/small/animefriends.png')"></figure>
-                                </div>
-                                <div class="media-body">
-                                    <h4 class="media-heading">Anime Friends 2015</h4>
-                                    <div class="time">
-                                        <div>Organizador: Yamato</div>
-                                        <div>Tipo: Evento de Anime</div>
-                                        <div>Local: Campo de Marte (Sao Paulo - SP)</div>
-                                        <div>Data: 20/05/2015 à 22/05/2015</div>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
-                        <br />
+                    @*<h4>Último Evento</h4>
+    <div class="media thumb-item" style="border: 0">
+        <a href="#">
+            <div class="media-left media-middle">
+                <figure class="media-object" style="width: 80px; height: 80px; background-image: url('http://www.images.nparty.com.br/connect/eventCover/small/animefriends.png')"></figure>
+            </div>
+            <div class="media-body">
+                <h4 class="media-heading">Anime Friends 2015</h4>
+                <div class="time">
+                    <div>Organizador: Yamato</div>
+                    <div>Tipo: Evento de Anime</div>
+                    <div>Local: Campo de Marte (Sao Paulo - SP)</div>
+                    <div>Data: 20/05/2015 à 22/05/2015</div>
+                </div>
+            </div>
+        </a>
+    </div>
+    <br />*@
                         <h4 style="margin-bottom: 2px;">Se inscreva em nossa newsletter</h4>
                         <p style="font-size: 12px; color: #FFF;">Receba em seu email um resumo de todas as novidades de nosso site e nossos eventos</p>
                         <form>
@@ -165,7 +165,6 @@
                                 </span>
                             </div>
                         </form>
-                    </div>
                 </div>
                 <div class="col-md-4">
                     <h4>Siga-nos!</h4>
@@ -189,7 +188,7 @@
     </footer>
     <div style="background-color: #000">
         <div class="container" style="padding-top: 10px; padding-bottom: 10px; color: #fff;">
-            COPYRIGHT (C) 2010 - 2015 N-Party <span style="font-size: 10px"> - licenciado sobre a <a href="http://creativecommons.org/licenses/by/3.0/br/" style="color: #FFF;" target="_blank">atribuição 3.0 da Creative Commons</a></span>
+            COPYRIGHT (C) 2010 - 2016 N-Party <span style="font-size: 10px"> - licenciado sobre a <a href="http://creativecommons.org/licenses/by/3.0/br/" style="color: #FFF;" target="_blank">atribuição 3.0 da Creative Commons</a></span>
             <div class="pull-right" style="font-size: 12px">Design e desenvolvimento por <b>Mario Toledo</b></div>
         </div>
     </div>

@@ -66,7 +66,11 @@ namespace NParty.Www.Controllers
                 System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
                 System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
             );
+
             Article article = helper.GetSingleArticleFromBlogByPath(NintendoBlogId, "Nintendo", "/" + year + "/" + month + "/" + path + ".html");
+
+            if (article == null)
+                return Redirect("~/Ops/NaoEncontrado");
 
             ViewData["article"] = article;
 
