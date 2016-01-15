@@ -128,7 +128,7 @@
                             <div class="input-group">
                                 <input type="text" class="form-control" placeholder="digite seu email">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">Cadastrar</button>
+                                    <button id="btnSubscribe" data-loading-text="Carregando..." class="btn btn-default" type="button">Cadastrar</button>
                                 </span>
                             </div>
                         </form>
@@ -194,6 +194,15 @@
                 $hilights.html('<li>Não foi possível carregar os destaques. Tente novamente mais tarde.</li>');
             });
         });
+
+        function subscribeEmailToNewsletter(email) {
+            var $btnSubscribe = $('#btnSubscribe');
+
+            $btnSubscribe.button("loading");
+
+            $.ajax('@Url.Content("~/Home/GetHilightItems/")').done(function (data) {
+            });
+        }
     </script>
     @RenderSection("Scripts", false)
     <div id="fb-root"></div>

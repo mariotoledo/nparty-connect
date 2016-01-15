@@ -1,9 +1,12 @@
 ﻿using Google.GData.Client;
 using NParty.Www.Helpers;
 using NParty.Www.Models;
+using RestSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net;
 using System.Web;
 using System.Web.Mvc;
 
@@ -87,6 +90,44 @@ namespace NParty.Www.Controllers
             blogDomains.Add(EventosBlogId, "Eventos");
 
             return Json(helper.GetGeneralHilights(blogDomains, 3), JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        public JsonResult SubscribeEmailToNewsletter(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                return Json(new { status = "error", message = "Você precisa digitar um email para cadastro" }, JsonRequestBehavior.AllowGet);
+
+            try
+            {
+                var request = (HttpWebRequest)WebRequest.Create("https://us9.api.mailchimp.com/2.0/lists/subscribe.json?apikey=5f0566af2a617830f1f4980003f755be-us9&id=1c5d2516eb&email[email]=" + email + "&double_optin=true&send_welcome=false");
+
+                var response = (HttpWebResponse)request.GetResponse();
+
+                var responseString = new StreamReader(response.GetResponseStream()).ReadToEnd();
+
+                JsonObject contentObject = (JsonObject)SimpleJson.DeserializeObject(responseString);
+
+                string status = (string)contentObject["status"];
+                string name = (string)contentObject["name"];
+                int code = (int)contentObject["code"];
+
+                if(status == "error")
+                {
+                    if (code == -99)
+                        return Json(new { status = "error", message = "Você precisa digitar um email válido" }, JsonRequestBehavior.AllowGet);
+                    else if(name == "List_AlreadySubscribed")
+                        return Json(new { status = "error", message = "Seu email já está cadastrado" }, JsonRequestBehavior.AllowGet);
+                    else
+                        return Json(new { status = "error", message = "Ocorreu um erro ao tentar realizar seu registro. Por favor, tente novamente mais tarde." }, JsonRequestBehavior.AllowGet);
+                } else
+                {
+                    return Json (new { status = "ok", message = "Você precisa digitar um email válido" }, JsonRequestBehavior.AllowGet);
+                }
+            } catch (Exception)
+            {
+                return Json(new { status = "error", message = "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde." }, JsonRequestBehavior.AllowGet);
+            }
         }
     }
 }
