@@ -126,28 +126,30 @@
                         <p style="font-size: 12px; color: #FFF;">Receba em seu email um resumo de todas as novidades de nosso site e nossos eventos</p>
                         <form>
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="digite seu email">
+                                <input id="suscriptionEmail" type="text" class="form-control" placeholder="digite seu email">
                                 <span class="input-group-btn">
-                                    <button id="btnSubscribe" data-loading-text="Carregando..." class="btn btn-default" type="button">Cadastrar</button>
+                                    <button onclick="subscribeEmailToNewsletter()" id="btnSubscribe" data-loading-text="Carregando..." class="btn btn-default" type="button">Cadastrar</button>
                                 </span>
                             </div>
                         </form>
+                        <div class="alert alert-danger" id="subscribeErrorMessage" style="display: none;"></div>
+                        <div class="alert alert-success" id="subscribeSuccessMessage" style="display: none;"></div>
                 </div>
                 <div class="col-md-4">
                     <h4>Siga-nos!</h4>
                     <div style="height: 60px;">
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://youtube.com/npartytv')" type="button"><img alt="YouTube" src="http://www.nintendoparty.com.br/img/socialIcons/youtube.jpg" title="YouTube" ></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://instagram.com/nintendoparty')" type="button"><img alt="Instagram" src="http://www.nintendoparty.com.br/img/socialIcons/instagram.jpg" title="Instagram" ></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('https://twitter.com/n_party')" type="button"><img alt="Twitter" src="http://www.nintendoparty.com.br/img/socialIcons/twitter.jpg" title="Twitter" ></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.facebook.com/NParty')" type="button"><img alt="Facebook" src="http://www.nintendoparty.com.br/img/socialIcons/facebook.jpg" title="Facebook" ></button>
+                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://youtube.com/npartytv')" type="button"><img alt="YouTube" src="@Url.Content("~/Content/img/socialIcons/youtube.jpg")" title="YouTube" ></button>
+                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://instagram.com/nintendoparty')" type="button"><img alt="Instagram" src="@Url.Content("~/Content/img/socialIcons/instagram.jpg")" title="Instagram" >></button>
+                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('https://twitter.com/n_party')" type="button"><img alt="Twitter" src="@Url.Content("~/Content/img/socialIcons/twitter.jpg")" title="Twitter" >></button>
+                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.facebook.com/NParty')" type="button"><img alt="Facebook" src="@Url.Content("~/Content/img/socialIcons/facebook.jpg")" title="Facebook" >></button>
                     </div>
                     <br/>
                     <h4>Nossos Parceiros</h4>
                     <div style="height: 60px;">
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.projetoxpodcast.com.br')" style="padding: 0;" type="button"><img alt="Projeto X Podcast" src="http://www.nintendoparty.com.br/img/partners/projetoxpodcast.jpg" title="Projeto X Podcast" ></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.lop-sp.com.br')" style="padding: 0;" type="button"><img alt="LOP-SP" src="http://www.nintendoparty.com.br/img/partners/lopsp.jpg" title="LOP-SP"></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.nintendoblast.com.br')" style="padding: 0;" type="button"><img alt="Nintendo Blast" src="http://www.nintendoparty.com.br/img/partners/nintendoblast.jpg" title="Nintendo Blast"></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.castelonerd.com.br')" style="padding: 0;" type="button"><img alt="Castelo Nerd" src="http://www.nintendoparty.com.br/img/partners/castelonerd.jpg" title="Castelo Nerd"></button>
+                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.projetoxpodcast.com.br')" style="padding: 0;" type="button"><img alt="Projeto X Podcast" src="@Url.Content("~/Content/img/partners/projetoxpodcast.jpg")" title="Projeto X Podcast" >></button>
+                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.lop-sp.com.br')" style="padding: 0;" type="button"><img alt="LOP-SP" src="@Url.Content("~/Content/img/partners/lopsp.jpg")" title="LOP-SP">></button>
+                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.nintendoblast.com.br')" style="padding: 0;" type="button"><img alt="Nintendo Blast" src="@Url.Content("~/Content/img/partners/nintendoblast.jpg")" title="Nintendo Blast">></button>
+                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.castelonerd.com.br')" style="padding: 0;" type="button"><img alt="Castelo Nerd" src="@Url.Content("~/Content/img/partners/castelonerd.jpg")" title="Castelo Nerd">></button>
                     </div>
                 </div>
             </div>
@@ -195,12 +197,30 @@
             });
         });
 
-        function subscribeEmailToNewsletter(email) {
+        function subscribeEmailToNewsletter() {
+            var $suscriptionEmail = $('#suscriptionEmail');
             var $btnSubscribe = $('#btnSubscribe');
+            var $errorMessage = $('#subscribeErrorMessage');
+            var $successMessage = $('#subscribeSuccessMessage');
 
             $btnSubscribe.button("loading");
+            $errorMessage.hide();
+            $successMessage.hide();
 
-            $.ajax('@Url.Content("~/Home/GetHilightItems/")').done(function (data) {
+            $.post('@Url.Content("~/Home/SubscribeEmailToNewsletter/")', { email: $suscriptionEmail.val()}).done(function (data) {
+                if (data) {
+                    if (data.status == 'success') {
+                        $successMessage.html(data.message);
+                        $successMessage.show();
+                    } else {
+                        $errorMessage.html(data.message);
+                        $errorMessage.show();
+                    }
+                } else {
+                    $errorMessage.html('Ocorreu um erro inesperado. Por favor, tente novamente mais tarde');
+                }
+
+                $btnSubscribe.button("reset");
             });
         }
     </script>

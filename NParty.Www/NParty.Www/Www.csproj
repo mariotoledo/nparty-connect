@@ -231,6 +231,10 @@
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\missing_no.png" />
+    <Content Include="Content\img\partners\castelonerd.jpg" />
+    <Content Include="Content\img\partners\lopsp.jpg" />
+    <Content Include="Content\img\partners\nintendoblast.jpg" />
+    <Content Include="Content\img\partners\projetoxpodcast.jpg" />
     <Content Include="Content\img\sad_pikachu.png" />
     <Content Include="Content\img\sobre1.jpg" />
     <Content Include="Content\img\sobre10.jpg" />
@@ -244,6 +248,10 @@
     <Content Include="Content\img\sobre7.jpg" />
     <Content Include="Content\img\sobre8.jpg" />
     <Content Include="Content\img\sobre9.jpg" />
+    <Content Include="Content\img\socialIcons\facebook.jpg" />
+    <Content Include="Content\img\socialIcons\instagram.jpg" />
+    <Content Include="Content\img\socialIcons\twitter.jpg" />
+    <Content Include="Content\img\socialIcons\youtube.jpg" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery-1.11.3.min.js" />

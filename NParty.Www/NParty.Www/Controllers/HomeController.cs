@@ -108,23 +108,27 @@ namespace NParty.Www.Controllers
 
                 JsonObject contentObject = (JsonObject)SimpleJson.DeserializeObject(responseString);
 
-                string status = (string)contentObject["status"];
-                string name = (string)contentObject["name"];
-                int code = (int)contentObject["code"];
-
-                if(status == "error")
+                if (contentObject.ContainsKey("status") && contentObject["status"] == "error")
                 {
+                    string name = (string)contentObject["name"];
+                    int code = (int)contentObject["code"];
+
                     if (code == -99)
                         return Json(new { status = "error", message = "Você precisa digitar um email válido" }, JsonRequestBehavior.AllowGet);
                     else if(name == "List_AlreadySubscribed")
                         return Json(new { status = "error", message = "Seu email já está cadastrado" }, JsonRequestBehavior.AllowGet);
                     else
                         return Json(new { status = "error", message = "Ocorreu um erro ao tentar realizar seu registro. Por favor, tente novamente mais tarde." }, JsonRequestBehavior.AllowGet);
-                } else
-                {
-                    return Json (new { status = "ok", message = "Você precisa digitar um email válido" }, JsonRequestBehavior.AllowGet);
                 }
-            } catch (Exception)
+                else if (contentObject.ContainsKey("euid"))
+                {
+                    return Json (new { status = "success", message = "Email cadastrado com sucesso!" }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    return Json(new { status = "error", message = "Ocorreu um erro ao tentar realizar seu registro. Por favor, tente novamente mais tarde." }, JsonRequestBehavior.AllowGet);
+                }
+            } catch (Exception e)
             {
                 return Json(new { status = "error", message = "Ocorreu um erro inesperado. Por favor, tente novamente mais tarde." }, JsonRequestBehavior.AllowGet);
             }
