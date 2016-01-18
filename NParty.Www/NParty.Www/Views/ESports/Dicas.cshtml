@@ -1,10 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Dicas";
     ViewData["ActiveMenu"] = 2;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
+
+    ViewData["title"] = "Dicas";
+    ViewData["metaDescription"] = "As melhores dicas do competitivo de League of Legends, Counter Strike e mais!";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/dicaseSports.jpg");
+    ViewData["metaUrl"] = Url.Content("~/ESports/Dicas");
+    ViewData["metaKeywords"] = new List<string>() { "Counter Strike", "Counter Strike: GO", "League of Legends", "Dicas" };
 
     string[] esportsSpecialTags = (string[])ViewData["ESportsSpecialTags"];
 }

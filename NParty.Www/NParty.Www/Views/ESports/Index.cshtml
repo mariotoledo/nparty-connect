@@ -6,6 +6,12 @@
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
 
+    ViewData["title"] = "eSports";
+    ViewData["metaDescription"] = "O melhor do eSports com a N-Party! League of Legends, Counter Strike e mais!";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/eSports.jpg");
+    ViewData["metaUrl"] = Url.Content("~/ESports/");
+    ViewData["metaKeywords"] = new List<string>() { "Counter Strike", "Counter Strike: GO", "League of Legends", "eSports" };
+
     string[] esportsSpecialTags = (string[])ViewData["ESportsSpecialTags"];
 }
 

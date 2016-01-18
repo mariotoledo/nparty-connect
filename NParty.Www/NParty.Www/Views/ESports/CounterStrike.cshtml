@@ -1,6 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "N-Party - Counter Strike";
     ViewData["ActiveMenu"] = 2;
+
+    ViewData["title"] = "Counter Strike";
+    ViewData["metaDescription"] = "O melhor do cenário competitivo de Counter Strike";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/counterstrike.jpg");
+    ViewData["metaUrl"] = Url.Content("~/ESports/CounterStrike");
+    ViewData["metaKeywords"] = new List<string>() { "Counter Strike", "Counter Strike: GO" };
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];

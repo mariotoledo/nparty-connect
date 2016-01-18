@@ -214,6 +214,7 @@
     <Content Include="Content\img\authors\ruicelso.jpg" />
     <Content Include="Content\img\authors\victorsouza.jpg" />
     <Content Include="Content\img\authors\vitorbertani.jpg" />
+    <Content Include="Content\img\favicon.png" />
     <Content Include="Content\img\icons\article-share\email_32.png" />
     <Content Include="Content\img\icons\article-share\facebook_32.png" />
     <Content Include="Content\img\icons\article-share\googleplus_32.png" />
@@ -230,6 +231,7 @@
     <Content Include="Content\img\icons\social\youtube.jpg" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\metaImages\sharer.jpg" />
     <Content Include="Content\img\missing_no.png" />
     <Content Include="Content\img\partners\castelonerd.jpg" />
     <Content Include="Content\img\partners\lopsp.jpg" />

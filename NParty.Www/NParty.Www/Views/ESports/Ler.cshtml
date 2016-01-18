@@ -5,6 +5,25 @@
     //TODO: ADICIONAR META CONTENT
 
     NParty.Www.Models.Article article = (NParty.Www.Models.Article)ViewData["article"];
+
+    if (article != null)
+    {
+        ViewData["title"] = article.Title;
+        ViewData["metaDescription"] = article.Summary;
+        ViewData["metaImage"] = article.CoverImage;
+        ViewData["metaUrl"] = article.NPartyArticleLink;
+
+        if(article.Labels != null){
+            List<string> keywords = new List<string>();
+            
+            foreach (string tag in article.Labels)
+            {
+                keywords.Add(tag);
+            }
+
+            ViewData["metaKeywords"] = keywords;
+        }
+    }
 }
 <div id="esports-container" style="padding: 0;">
     @{Html.RenderPartial("SubMenus/ESports", 0);}

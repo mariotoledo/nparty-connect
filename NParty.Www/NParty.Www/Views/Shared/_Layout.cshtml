@@ -1,18 +1,96 @@
 ﻿@{
     int activeMenuId = ViewData["ActiveMenu"] == null ? 0 : (Int32)ViewData["ActiveMenu"];
     bool menuhasBorderBottom = true.Equals(ViewData["MenuHasBorderBottom"]);
+
+    string metaDescription = string.IsNullOrEmpty((string)ViewData["metaDescription"]) ?
+        "O melhor do universo da Nintendo, eSports e Eventos! Wii U, 3DS, Pokémon, Mario, League of Legends, Counter Strike, campeonatos e mais!" : (string)ViewData["metaDescription"];
+
+    string metaAuthor = string.IsNullOrEmpty((string)ViewData["metaAuthor"]) ?
+        "" : (string)ViewData["metaAuthor"];
+
+    List<string> metaKeywords = ViewData["metaKeywords"] == null ?
+        new List<string>() { "Nintendo", "eSports", "Eventos", "Wii U", "3DS", "Pokémon", "Mario", "Zelda", "League of Legends", "Counter Strike", "Campeonatos" }
+     : (List<string>)ViewData["metaKeywords"];
+
+    string itemType = string.IsNullOrEmpty((string)ViewData["itemType"]) ?
+    "" : "itemscope itemtype=\"" + (string)ViewData["itemType"] + "\"";
+
+    string title = string.IsNullOrEmpty((string)ViewData["title"]) ?
+        "N-Party" : "N-Party - "+ (string)ViewData["title"];
+
+    string metaUrl = string.IsNullOrEmpty((string)ViewData["metaUrl"]) ?
+        "http://www.nparty.com.br" : "http://www.nparty.com.br" + (string)ViewData["metaUrl"];
+
+    string metaImage = string.IsNullOrEmpty((string)ViewData["metaImage"]) ?
+        Url.Content("~/Content/img/metaImages/sharer.jpg") : (string)ViewData["metaImage"];
+
+    string metaTwitterAuthor = string.IsNullOrEmpty((string)ViewData["metaTwitterAuthor"]) ?
+    "@n_party" : (string)ViewData["metaTwitterAuthor"];
+
+    string metaFacebookAuthor = string.IsNullOrEmpty((string)ViewData["metaFacebookAuthor"]) ?
+    "" : (string)ViewData["metaFacebookAuthor"];
 }
 
-<html lang="pt-br">
+<html lang="pt-br" @itemType>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="../../favicon.ico">
 
-    <title>N-Party - @ViewBag.Title</title>
+    <meta content='243433449077247' property='fb:app_id' />
+    <meta content='100000198134068' property='fb:admins' />
+
+    <meta name="description" content="@metaDescription">
+    <meta name="author" content="@metaAuthor">
+
+    @if (metaKeywords != null)
+    {
+        string keywords = "";
+        foreach (string keyword in metaKeywords)
+        {
+            keywords += keyword + ",";
+        }
+
+        <meta name="keywords" content="@keywords" />
+    }
+    
+
+    <!-- Schema.org markup for Google+ -->
+    <meta itemprop="name" content="@title">
+    <meta itemprop="description" content="@metaDescription">
+    <meta itemprop="image" content="@metaImage">
+
+    <!-- Twitter Card data -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@("n_party")">
+    <meta name="twitter:title" content="@title">
+    <meta name="twitter:description" content="@metaDescription">
+    <meta name="twitter:creator" content="@metaTwitterAuthor">
+    <meta name="twitter:image:src" content="@metaImage">
+
+    <!-- Open Graph data -->
+    <meta property="og:title" content="@title" />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="@metaUrl" />
+    <meta property="og:image" content="@metaImage" />
+    <meta property="og:description" content="@metaDescription" />
+    <meta property="og:site_name" content="N-Party" />
+
+    @if (metaKeywords != null)
+    {
+        foreach (string keyword in metaKeywords)
+        {
+            <meta property="article:tag" content="@keyword" />
+        }
+    }
+    
+    <meta property="article:author" content="@metaFacebookAuthor" />
+
+    <link href='@Url.Content("~/Content/img/favicon.png")' rel='icon' type='image/x-icon' />
+    <link href='@Url.Content("~/Content/img/favicon.png")' rel='shortcut icon' />
+    <link href='@Url.Content("~/Content/img/favicon.png")' rel='apple-touch-icon' />
+
+    <title>@title</title>
 
     <!-- Bootstrap core CSS -->
     <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
