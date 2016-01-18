@@ -43,8 +43,7 @@ namespace NParty.Www.Helpers
                     article.Title = post.Title.Text;
                     article.Content = post.Content.Content;
 
-                    article.Author = new Author();
-                    article.Author.Name = post.Authors[0].Name;
+                    article.AuthorName = post.Authors[0].Name;
 
                     article.DatePublished = post.Published;
                     article.CoverImage = GetPostImageManually(post);
@@ -87,7 +86,10 @@ namespace NParty.Www.Helpers
                 article.Title = post.Title;
 
                 if (post.Author != null)
-                    article.Author = GetAuthorFromJson(post.Author.Id);
+                {
+                    article.AuthorData = GetAuthorFromJson(post.Author);
+                    article.AuthorName = post.Author.DisplayName;
+                }
 
                 article.Content = post.Content;
                 article.CoverImage = post.Images != null && post.Images.Count > 0 ? post.Images[0].Url : null;
@@ -134,7 +136,10 @@ namespace NParty.Www.Helpers
                 article.Title = post.Title;
 
                 if (post.Author != null)
-                    article.Author = GetAuthorFromJson(post.Author.Id);
+                {
+                    article.AuthorData = GetAuthorFromJson(post.Author);
+                    article.AuthorName = post.Author.DisplayName;
+                }
 
                 article.Content = post.Content;
                 article.CoverImage = post.Images != null && post.Images.Count > 0 ? post.Images[0].Url : null;
@@ -160,22 +165,28 @@ namespace NParty.Www.Helpers
             return article;
         }
 
-        public Author GetAuthorFromJson(string id)
+        public Author GetAuthorFromJson(Post.AuthorData authorData)
         {
-            Author author = new Author();
-
             string json = System.IO.File.ReadAllText(HttpContext.Current.Server.MapPath("~/Content/json/authors.json"));
             Dictionary<string, Dictionary<string, string>> values = JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, string>>>(json);
 
-            if(values != null && values.ContainsKey(id))
+            string id = authorData.Id;
+
+            if (values != null && values.ContainsKey(id))
             {
+                Author author = new Author();
+
                 author.Id = id;
                 author.Name = values[id]["name"];
                 author.Description = values[id]["description"];
                 author.ImageUrl = values[id]["imageUrl"];
+                author.FacebookProfileUrl = values[id]["facebookUrl"];
+                author.TwitterAccount = values[id]["twitterAccount"];
+
+                return author;
             }
 
-            return author;
+            return null;
         }
 
         public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex, string postsLabel)
@@ -199,8 +210,7 @@ namespace NParty.Www.Helpers
                     article.Title = post.Title.Text;
                     article.Content = post.Content.Content;
 
-                    article.Author = new Author();
-                    article.Author.Name = post.Authors[0].Name;
+                    article.AuthorName = post.Authors[0].Name;
 
                     article.DatePublished = post.Published;
                     article.CoverImage = GetPostImageManually(post);

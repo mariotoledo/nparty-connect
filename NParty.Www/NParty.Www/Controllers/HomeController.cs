@@ -108,7 +108,7 @@ namespace NParty.Www.Controllers
 
                 JsonObject contentObject = (JsonObject)SimpleJson.DeserializeObject(responseString);
 
-                if (contentObject.ContainsKey("status") && contentObject["status"] == "error")
+                if (contentObject.ContainsKey("status") && (string)contentObject["status"] == "error")
                 {
                     string name = (string)contentObject["name"];
                     int code = (int)contentObject["code"];

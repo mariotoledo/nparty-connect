@@ -1,6 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Eventos";
+    ViewBag.Title = "Anime Friends";
     ViewData["ActiveMenu"] = 3;
+
+    ViewData["title"] = "Anime Friends";
+    ViewData["metaDescription"] = "Cobertura, fotos e mais do Anime Friends com a N-Party";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/animefriends.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Eventos/AnimeFriends");
+    ViewData["metaKeywords"] = new List<string>() { "Anime Friends", "Yamato" };
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
@@ -34,9 +40,9 @@
                                 <a class="hilight-article-item" href="@Url.Content("~/" + article.NPartyArticleLink)">
                                     <figure style="background-image: url('@article.CoverImage')"></figure>
                                     <h3>@article.Title</h3>
-                                    @if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
+                                    @if (!string.IsNullOrEmpty(article.AuthorName))
                                     {
-                                        <div class="author">Por @article.Author.Name em @article.DatePublished.ToString("dd/MM/yyyy")</div>
+                                        <div class="author">Por @article.AuthorName em @article.DatePublished.ToString("dd/MM/yyyy")</div>
                                     }
                                     <p class="snippet">@article.Summary</p>
                                 </a>
@@ -50,9 +56,9 @@
                                         </div>
                                         <div class="col-md-6">
                                             <h3>@article.Title</h3>
-                                            @if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
+                                            @if (!string.IsNullOrEmpty(article.AuthorName))
                                             {
-                                                <div class="author">Por @article.Author.Name em @article.DatePublished.ToString("dd/MM/yyyy")</div>
+                                                <div class="author">Por @article.AuthorName em @article.DatePublished.ToString("dd/MM/yyyy")</div>
                                             }
                                             <p class="snippet">@article.Summary</p>
                                         </div>

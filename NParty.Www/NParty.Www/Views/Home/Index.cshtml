@@ -110,9 +110,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <h3>@nintendoPosts[0].Title</h3>
-                                    @if (nintendoPosts[0].Author != null && !string.IsNullOrEmpty(nintendoPosts[0].Author.Name))
+                                    @if (!string.IsNullOrEmpty(nintendoPosts[0].AuthorName))
                                     {
-                                        <div class="author">Por <span class="authorName">@nintendoPosts[0].Author.Name</span> em <span class="date">@nintendoPosts[0].DatePublished.ToString("dd/MM/yyyy")</span></div>
+                                        <div class="author">Por <span class="authorName">@nintendoPosts[0].AuthorName</span> em <span class="date">@nintendoPosts[0].DatePublished.ToString("dd/MM/yyyy")</span></div>
                                     }
                                     <p class="snippet">@nintendoPosts[0].Summary</p>
                                 </div>
@@ -170,9 +170,9 @@
                                 </div>
                                 <div class="col-md-4">
                                     <h3>@eSportsPosts[0].Title</h3>
-                                    @if (eSportsPosts[0].Author != null && !string.IsNullOrEmpty(eSportsPosts[0].Author.Name))
+                                    @if (!string.IsNullOrEmpty(eSportsPosts[0].AuthorName))
                                     {
-                                        <div class="author">Por <span class="authorName">@eSportsPosts[0].Author.Name</span> em <span class="date">@eSportsPosts[0].DatePublished.ToString("dd/MM/yyyy")</span></div>
+                                        <div class="author">Por <span class="authorName">@eSportsPosts[0].AuthorName</span> em <span class="date">@eSportsPosts[0].DatePublished.ToString("dd/MM/yyyy")</span></div>
                                     }
                                     <p class="snippet">@eSportsPosts[0].Summary</p>
                                 </div>

@@ -12,9 +12,6 @@
         new List<string>() { "Nintendo", "eSports", "Eventos", "Wii U", "3DS", "Pokémon", "Mario", "Zelda", "League of Legends", "Counter Strike", "Campeonatos" }
      : (List<string>)ViewData["metaKeywords"];
 
-    string itemType = string.IsNullOrEmpty((string)ViewData["itemType"]) ?
-    "" : "itemscope itemtype=\"" + (string)ViewData["itemType"] + "\"";
-
     string title = string.IsNullOrEmpty((string)ViewData["title"]) ?
         "N-Party" : "N-Party - "+ (string)ViewData["title"];
 
@@ -31,7 +28,7 @@
     "" : (string)ViewData["metaFacebookAuthor"];
 }
 
-<html lang="pt-br" @itemType>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">

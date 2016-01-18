@@ -30,12 +30,12 @@
                                         <!--<div class="subtitulo" itemprop="description">
                                             Apesar dos números não serem tão surpreendentes assim
                                         </div>-->
-                                        @if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
+                                        @if (!string.IsNullOrEmpty(article.AuthorName))
                                         {
                                             <div class="author">
                                                 <div>
                                                     Por
-                                                    <span itemprop="name">@article.Author.Name</span>
+                                                    <span itemprop="name">@article.AuthorName</span>
                                                     em
                                                     @article.DatePublished.Day de @article.DatePublished.ToString("MMMM") de @article.DatePublished.Year
                                                 </div>
@@ -59,14 +59,14 @@
                                         @Html.Raw(article.Content)
                                     </div>
                                     @{
-                                        if (article.Author != null && !string.IsNullOrEmpty(article.Author.Name))
+                                        if (article.AuthorData != null)
                                         {
                                             <div class="author-box" id="authorBox">
                                                 <div class="row">
                                                     <div class="col-sm-2">
-                                                        <img class="authorPhoto img-rounded img-responsive" id="authorPhoto" src="@article.Author.ImageUrl">
+                                                        <img class="authorPhoto img-rounded img-responsive" id="authorPhoto" src="@article.AuthorData.ImageUrl">
                                                     </div>
-                                                    <div class="col-sm-10" id="authorDescription"><b>@article.Author.Name</b> @article.Author.Description</div>
+                                                    <div class="col-sm-10" id="authorDescription"><b>@article.AuthorData.Name</b> @article.AuthorData.Description</div>
                                                 </div>
                                             </div>
                                         }

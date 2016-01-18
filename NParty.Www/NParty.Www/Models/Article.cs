@@ -9,7 +9,8 @@ namespace NParty.Www.Models
     public class Article
     {
         public string Title { get; set; }
-        public Author Author { get; set; }
+        public string AuthorName { get; set; }
+        public Author AuthorData { get; set; }
         public string Content { get; set; }
         public string CoverImage { get; set; }
         public string Summary { get; set; }
