@@ -1,6 +1,12 @@
 ﻿@{
     ViewBag.Title = "Contato";
     ViewData["MenuHasBorderBottom"] = true;
+
+    ViewData["title"] = "Contato";
+    ViewData["metaDescription"] = "Entre em contato conosco!";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/contato.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Sobre/Contato");
+    ViewData["metaKeywords"] = new List<string>() { "Contato" };
 }
 
 <div class="container" style="padding-top: 20px; padding-bottom: 20px; background-color: #FFF; margin-top: 20px; margin-bottom: 20px;">

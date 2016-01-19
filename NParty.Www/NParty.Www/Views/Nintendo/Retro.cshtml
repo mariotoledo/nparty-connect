@@ -1,11 +1,17 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Retrô";
     ViewData["ActiveMenu"] = 1;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
 
     int maxPosts = (int)ViewData["MaxPosts"];
+
+    ViewData["title"] = "Retrô";
+    ViewData["metaDescription"] = "Relembre dos jogos mais clássicos da Nintendo com a N-Party";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/retro.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Nintendo/Retro");
+    ViewData["metaKeywords"] = new List<string>() { "Retrô", "Retro", "Nintendo", "Super Nintendo", "Game Boy", "Game Cube"};
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
 }

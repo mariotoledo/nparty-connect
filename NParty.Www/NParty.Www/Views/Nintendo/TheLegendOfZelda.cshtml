@@ -1,10 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "The Legend of Zelda";
     ViewData["ActiveMenu"] = 1;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
+
+    ViewData["title"] = "The Legend of Zelda";
+    ViewData["metaDescription"] = "HEEEYAA HEYA HEEEEYA HEY HEEEEYA!!";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/thelegendofzelda.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Nintendo/TheLegendOfZelda");
+    ViewData["metaKeywords"] = new List<string>() { "Zelda", "The Legend of Zelda", "Nintendo", "Link" };
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
 }

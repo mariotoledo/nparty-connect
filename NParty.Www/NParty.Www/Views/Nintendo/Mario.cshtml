@@ -1,10 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Mario";
     ViewData["ActiveMenu"] = 1;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
+
+    ViewData["title"] = "Mario";
+    ViewData["metaDescription"] = "Tudo sobre o bigodudo da Nintendo com a N-Party";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/mario.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Nintendo/Mario");
+    ViewData["metaKeywords"] = new List<string>() { "Mario", "Nintendo" };
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
 }

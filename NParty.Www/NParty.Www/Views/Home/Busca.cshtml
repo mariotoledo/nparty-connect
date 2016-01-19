@@ -1,6 +1,14 @@
-﻿@{
-    ViewBag.Title = "Busca";
+﻿@{]
+    string query = (string)ViewData["query"];
+    ViewBag.Title = "Resultados da busca por: " + query;
+
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["SearchResults"];
+
+    ViewData["title"] = "Resultados da busca por: " + query;
+    ViewData["metaDescription"] = "Resultados da busca por: " + query;
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/busca.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Home/Busca");
+    ViewData["metaKeywords"] = new List<string>() { "Eventos", "Nintendo", "Wii U", "3DS", "eSports", "League of Legends", "Counter Strike", query };
 
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];

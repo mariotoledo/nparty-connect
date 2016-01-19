@@ -4,6 +4,33 @@
     ViewData["MenuHasBorderBottom"] = true;
 
     NParty.Www.Models.Article article = (NParty.Www.Models.Article)ViewData["article"];
+
+    if (article != null)
+    {
+        ViewData["title"] = article.Title;
+        ViewData["metaDescription"] = article.Summary;
+        ViewData["metaImage"] = article.CoverImage;
+        ViewData["metaUrl"] = article.NPartyArticleLink;
+        ViewData["metaAuthor"] = article.AuthorName;
+
+        if (article.Labels != null)
+        {
+            List<string> keywords = new List<string>();
+
+            foreach (string tag in article.Labels)
+            {
+                keywords.Add(tag);
+            }
+
+            ViewData["metaKeywords"] = keywords;
+        }
+
+        if (article.AuthorData != null)
+        {
+            ViewData["metaTwitterAuthor"] = article.AuthorData.TwitterAccount;
+            ViewData["metaFacebookAuthor"] = article.AuthorData.FacebookProfileUrl;
+        }
+    }
 }
 
 <div class="container default-container" style="padding-top: 30px;">

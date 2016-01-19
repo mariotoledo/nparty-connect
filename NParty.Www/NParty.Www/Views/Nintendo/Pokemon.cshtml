@@ -1,11 +1,17 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Pokémon";
     ViewData["ActiveMenu"] = 1;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
 
     int maxPosts = (int)ViewData["MaxPosts"];
+
+    ViewData["title"] = "Pokémon";
+    ViewData["metaDescription"] = "Tudo sobre Pokémon com a N-Party";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/pokemon.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Nintendo/Pokemon");
+    ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Pikachu" };
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
 }

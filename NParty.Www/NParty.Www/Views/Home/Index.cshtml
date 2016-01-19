@@ -4,90 +4,94 @@
     List<NParty.Www.Models.Article> nintendoPosts = (List<NParty.Www.Models.Article>)ViewData["NintendoPosts"];
     List<NParty.Www.Models.Article> eSportsPosts = (List<NParty.Www.Models.Article>)ViewData["ESportsPosts"];
     List<NParty.Www.Models.Article> eventosPosts = (List<NParty.Www.Models.Article>)ViewData["EventosPosts"];
+
+    ViewData["title"] = "O melhor da Nintendo, eSports e Eventos - Wii U, 3DS, League of Legends, Counter Strike e mais";
+    ViewData["metaDescription"] = "O melhor da Nintendo, eSports e Eventos - Wii U, 3DS, League of Legends, Counter Strike e mais";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/sharer.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Home/Index");
+    ViewData["metaKeywords"] = new List<string>() { "Eventos", "Nintendo", "Wii U", "3DS", "eSports", "League of Legends", "Counter Strike" };
 }
 
-    
-        <div class="hilights">
-            <div class="hilights-items">
-                <div style="float: left; width: 100%;">
-                    @if (hilights != null && hilights.Count >= 5)
-                    {
-                        <div class="col-md-4" id="hilight1">
-                            <a class="hilight-link" href="@hilights[0].NPartyArticleLink">
-                                <h2>@hilights[0].Title</h2>
-                            </a>
-                            <div class="hilight hilight-more" style="background-image: url(@hilights[0].CoverImage);"></div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-6" id="hilight2">
-                                    <a class="hilight-link" href="@Url.Content("~/" + hilights[1].NPartyArticleLink)">
-                                        <h2>@hilights[1].Title</h2>
-                                    </a>
-                                    <div class="hilight" style="background-image: url(@hilights[1].CoverImage);"></div>
-                                </div>
-                                <div class="col-md-6" id="hilight3">
-                                    <a class="hilight-link" href="@Url.Content("~/" + hilights[2].NPartyArticleLink)">
-                                        <h2>@hilights[2].Title</h2>
-                                    </a>
-                                    <div class="hilight" style="background-image: url(@hilights[2].CoverImage);"></div>
-                                </div>
-                                <div class="col-md-6" id="hilight4">
-                                    <a class="hilight-link" href="@Url.Content("~/" + hilights[3].NPartyArticleLink)">
-                                        <h2>@hilights[3].Title</h2>
-                                    </a>
-                                    <div class="hilight" style="background-image: url(@hilights[3].CoverImage);"></div>
-                                </div>
-                                <div class="col-md-6" id="hilight5">
-                                    <a class="hilight-link" href="@Url.Content("~/" + hilights[4].NPartyArticleLink)">
-                                        <h2>@hilights[4].Title</h2>
-                                    </a>
-                                    <div class="hilight" style="background-image: url(@hilights[4].CoverImage);"></div>
-                                </div>
+    <div class="hilights">
+        <div class="hilights-items">
+            <div style="float: left; width: 100%;">
+                @if (hilights != null && hilights.Count >= 5)
+                {
+                    <div class="col-md-4" id="hilight1">
+                        <a class="hilight-link" href="@hilights[0].NPartyArticleLink">
+                            <h2>@hilights[0].Title</h2>
+                        </a>
+                        <div class="hilight hilight-more" style="background-image: url(@hilights[0].CoverImage);"></div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6" id="hilight2">
+                                <a class="hilight-link" href="@Url.Content("~/" + hilights[1].NPartyArticleLink)">
+                                    <h2>@hilights[1].Title</h2>
+                                </a>
+                                <div class="hilight" style="background-image: url(@hilights[1].CoverImage);"></div>
+                            </div>
+                            <div class="col-md-6" id="hilight3">
+                                <a class="hilight-link" href="@Url.Content("~/" + hilights[2].NPartyArticleLink)">
+                                    <h2>@hilights[2].Title</h2>
+                                </a>
+                                <div class="hilight" style="background-image: url(@hilights[2].CoverImage);"></div>
+                            </div>
+                            <div class="col-md-6" id="hilight4">
+                                <a class="hilight-link" href="@Url.Content("~/" + hilights[3].NPartyArticleLink)">
+                                    <h2>@hilights[3].Title</h2>
+                                </a>
+                                <div class="hilight" style="background-image: url(@hilights[3].CoverImage);"></div>
+                            </div>
+                            <div class="col-md-6" id="hilight5">
+                                <a class="hilight-link" href="@Url.Content("~/" + hilights[4].NPartyArticleLink)">
+                                    <h2>@hilights[4].Title</h2>
+                                </a>
+                                <div class="hilight" style="background-image: url(@hilights[4].CoverImage);"></div>
                             </div>
                         </div>
-                    }
-                    else
-                    {
-                        <div class="col-md-4" id="hilight1">
-                            <a class="hilight-link" href="">
-                                <h2></h2>
-                            </a>
-                            <div class="hilight hilight-more" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
-                        </div>
-                        <div class="col-md-8">
-                            <div class="row">
-                                <div class="col-md-6" id="hilight2">
-                                    <a class="hilight-link" href="">
-                                        <h2></h2>
-                                    </a>
-                                    <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
-                                </div>
-                                <div class="col-md-6" id="hilight3">
-                                    <a class="hilight-link" href="">
-                                        <h2></h2>
-                                    </a>
-                                    <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
-                                </div>
-                                <div class="col-md-6" id="hilight4">
-                                    <a class="hilight-link" href="">
-                                        <h2></h2>
-                                    </a>
-                                    <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
-                                </div>
-                                <div class="col-md-6" id="hilight5">
-                                    <a class="hilight-link" href="">
-                                        <h2></h2>
-                                    </a>
-                                    <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
-                                </div>
+                    </div>
+                }
+                else
+                {
+                    <div class="col-md-4" id="hilight1">
+                        <a class="hilight-link" href="">
+                            <h2></h2>
+                        </a>
+                        <div class="hilight hilight-more" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
+                    </div>
+                    <div class="col-md-8">
+                        <div class="row">
+                            <div class="col-md-6" id="hilight2">
+                                <a class="hilight-link" href="">
+                                    <h2></h2>
+                                </a>
+                                <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
+                            </div>
+                            <div class="col-md-6" id="hilight3">
+                                <a class="hilight-link" href="">
+                                    <h2></h2>
+                                </a>
+                                <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
+                            </div>
+                            <div class="col-md-6" id="hilight4">
+                                <a class="hilight-link" href="">
+                                    <h2></h2>
+                                </a>
+                                <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
+                            </div>
+                            <div class="col-md-6" id="hilight5">
+                                <a class="hilight-link" href="">
+                                    <h2></h2>
+                                </a>
+                                <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
                             </div>
                         </div>
-                    }
-                </div>
+                    </div>
+                }
             </div>
         </div>
-    
+    </div>
 
     <!-- ================================== NINTENDO ================================== -->
     <div id="nintendo-container">

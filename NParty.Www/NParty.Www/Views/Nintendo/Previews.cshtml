@@ -1,10 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Previews";
     ViewData["ActiveMenu"] = 1;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
+
+    ViewData["title"] = "Previews";
+    ViewData["metaDescription"] = "Fique ligado no que esta por vir nos consoles da Nintendo";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/previews.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Nintendo/Previews");
+    ViewData["metaKeywords"] = new List<string>() { "Previews", "Prévias", "Nintendo", "Nintendo 3DS", "Nintendo Wii U" };
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
 }

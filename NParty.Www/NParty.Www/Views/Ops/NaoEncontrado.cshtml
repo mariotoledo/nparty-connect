@@ -1,6 +1,12 @@
 ﻿@{
     ViewBag.Title = "Ops";
     ViewData["MenuHasBorderBottom"] = true;
+
+    ViewData["title"] = "Não Encontrado";
+    ViewData["metaDescription"] = "Ops: não encontramos a página desejada";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/naoencontrado.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Ops/NaoEncontrado");
+    ViewData["metaKeywords"] = new List<string>() { "Not Found" };
 }
 
 <div class="container">

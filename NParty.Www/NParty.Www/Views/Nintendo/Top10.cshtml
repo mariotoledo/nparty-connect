@@ -1,10 +1,16 @@
 ﻿@{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Top 10";
     ViewData["ActiveMenu"] = 1;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
+
+    ViewData["title"] = "Top 10";
+    ViewData["metaDescription"] = "Listas e mais listas de diversos assuntos envolvendo a Nintendo";
+    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/top10.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Nintendo/Top10");
+    ViewData["metaKeywords"] = new List<string>() { "Top 10", "Listas","Nintendo"};
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
 }
