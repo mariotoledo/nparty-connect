@@ -10,7 +10,8 @@
         ViewData["title"] = article.Title;
         ViewData["metaDescription"] = article.Summary;
         ViewData["metaImage"] = article.CoverImage;
-        ViewData["metaUrl"] = article.NPartyArticleLink;
+        ViewData["metaImageUrlIsExternal"] = true;
+        ViewData["metaUrl"] = "/" + article.NPartyArticleLink;
         ViewData["metaAuthor"] = article.AuthorName;
 
         if (article.Labels != null)
@@ -81,14 +82,14 @@
                                             </div>
                                         }
                                         <div class="share-icons">
-                                            <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=http://www.nparty.com.br/@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
+                                            <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=@(System.Configuration.ConfigurationManager.AppSettings["SiteUrl"])@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
-                                            <a title="Compartilhe no Twitter" href="https://twitter.com/intent/tweet?source=n_party&related=n_party&via=n_party&url=http://www.nparty.com.br/@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')" onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
-                                            <a title="Compartilhe no LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=http://www.nparty.com.br/@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/linkedin_32.png")')" onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
-                                            <a title="Compartilhe no Google+" href="https://plus.google.com/share?url=http://www.nparty.com.br/@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/googleplus_32.png")')" onclick="javascript:window.open(this.href,
-  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                                            <a title="Compartilhe no Twitter" href="https://twitter.com/intent/tweet?source=n_party&related=n_party&via=n_party&url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')" onclick="javascript:window.open(this.href,
+                                            '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                                            <a title="Compartilhe no LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/linkedin_32.png")')" onclick="javascript:window.open(this.href,
+                                            '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                                            <a title="Compartilhe no Google+" href="https://plus.google.com/share?url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/" + article.NPartyArticleLink))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/googleplus_32.png")')" onclick="javascript:window.open(this.href,
+                                            '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
                                         </div>
                                     </div>
                                     <div id="loading-content">

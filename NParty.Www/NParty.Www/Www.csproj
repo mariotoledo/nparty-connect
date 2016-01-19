@@ -231,7 +231,31 @@
     <Content Include="Content\img\icons\social\youtube.jpg" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\metaImages\animefriends.jpg" />
+    <Content Include="Content\img\metaImages\bgs.jpg" />
+    <Content Include="Content\img\metaImages\bma.jpg" />
+    <Content Include="Content\img\metaImages\busca.jpg" />
+    <Content Include="Content\img\metaImages\coberturas.jpg" />
+    <Content Include="Content\img\metaImages\contato.jpg" />
+    <Content Include="Content\img\metaImages\counterstrike.jpg" />
+    <Content Include="Content\img\metaImages\dicaseSports.jpg" />
+    <Content Include="Content\img\metaImages\eSports.jpg" />
+    <Content Include="Content\img\metaImages\eventos.jpg" />
+    <Content Include="Content\img\metaImages\leagueOfLegends.jpg" />
+    <Content Include="Content\img\metaImages\mario.jpg" />
+    <Content Include="Content\img\metaImages\naoencontrado.jpg" />
+    <Content Include="Content\img\metaImages\nintendo.jpg" />
+    <Content Include="Content\img\metaImages\nintendo3ds.jpg" />
+    <Content Include="Content\img\metaImages\nintendowiiu.jpg" />
+    <Content Include="Content\img\metaImages\ops.jpg" />
+    <Content Include="Content\img\metaImages\pokemon.jpg" />
+    <Content Include="Content\img\metaImages\previews.jpg" />
+    <Content Include="Content\img\metaImages\quemsomos.jpg" />
+    <Content Include="Content\img\metaImages\retro.jpg" />
+    <Content Include="Content\img\metaImages\reviews.jpg" />
     <Content Include="Content\img\metaImages\sharer.jpg" />
+    <Content Include="Content\img\metaImages\thelegendofzelda.jpg" />
+    <Content Include="Content\img\metaImages\top10.jpg" />
     <Content Include="Content\img\missing_no.png" />
     <Content Include="Content\img\partners\castelonerd.jpg" />
     <Content Include="Content\img\partners\lopsp.jpg" />
@@ -415,6 +439,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Ops\NaoEncontrado.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

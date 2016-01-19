@@ -128,6 +128,7 @@ namespace NParty.Www.Helpers
 
                 PostsResource.GetRequest resource = service.Posts.Get(blogId, postId);
                 resource.FetchImages = true;
+                resource.FetchBody = true;
 
                 Post post = resource.Execute();
 

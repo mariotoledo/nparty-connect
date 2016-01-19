@@ -16,16 +16,20 @@
         "N-Party" : "N-Party - "+ (string)ViewData["title"];
 
     string metaUrl = string.IsNullOrEmpty((string)ViewData["metaUrl"]) ?
-        "http://www.nparty.com.br" : "http://www.nparty.com.br" + (string)ViewData["metaUrl"];
+        System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] : System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + (string)ViewData["metaUrl"];
+
+    bool metaImageIsExternal = true.Equals(ViewData["metaImageUrlIsExternal"]);
 
     string metaImage = string.IsNullOrEmpty((string)ViewData["metaImage"]) ?
-        Url.Content("~/Content/img/metaImages/sharer.jpg") : (string)ViewData["metaImage"];
+System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("~/Content/img/metaImages/sharer.jpg") : (metaImageIsExternal ? "" : System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]) + (string)ViewData["metaImage"];
 
     string metaTwitterAuthor = string.IsNullOrEmpty((string)ViewData["metaTwitterAuthor"]) ?
     "@n_party" : (string)ViewData["metaTwitterAuthor"];
 
     string metaFacebookAuthor = string.IsNullOrEmpty((string)ViewData["metaFacebookAuthor"]) ?
     "" : (string)ViewData["metaFacebookAuthor"];
+
+
 }
 
 <html lang="pt-br">
@@ -107,7 +111,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a itemprop="url" class="navbar-brand" href="http://www.nparty.com.br">
+                <a itemprop="url" class="navbar-brand" href="@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]">
                     <img itemprop="logo" style="height: 100%;" class="img-responsive" alt="N-Party" src="@Url.Content("~/Content/img/logo.png")">
                 </a>
             </div>
@@ -143,7 +147,7 @@
                         </div>
                     </li>
                 </ul>
-                <meta itemprop="url" content="http://www.nparty.com.br" />
+                <meta itemprop="url" content="@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]" />
                 <form class="navbar-form navbar-left" role="search" action="@Url.Content("~/Home/Busca")" method="get" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
                     <div class="input-group">
                         <meta itemprop="target" content="@Url.Content("~/Home/Busca")={search_term}" />
@@ -218,7 +222,7 @@
                 <div class="col-md-4" itemscope itemtype="http://schema.org/Organization">
                     <meta itemprop="name" content="N-Party"> 
                     <h4>Siga-nos!</h4>
-                    <link itemprop="url" href="http://www.nparty.com.br" rel="alternate"> 
+                    <link itemprop="url" href="@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]" rel="alternate"> 
                     <div style="height: 60px;">
                         <a itemprop="sameAs" target="_blank" class="btn btn-default navbar-btn socialIcon" href="http://youtube.com/npartytv" type="button"><img alt="YouTube" src="@Url.Content("~/Content/img/socialIcons/youtube.jpg")" title="YouTube" ></a>
                         <a itemprop="sameAs" class="btn btn-default navbar-btn socialIcon" href="http://instagram.com/nintendoparty" type="button"><img alt="Instagram" src="@Url.Content("~/Content/img/socialIcons/instagram.jpg")" title="Instagram" ></a>

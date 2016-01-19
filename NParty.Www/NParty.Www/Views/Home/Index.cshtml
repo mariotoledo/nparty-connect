@@ -5,9 +5,8 @@
     List<NParty.Www.Models.Article> eSportsPosts = (List<NParty.Www.Models.Article>)ViewData["ESportsPosts"];
     List<NParty.Www.Models.Article> eventosPosts = (List<NParty.Www.Models.Article>)ViewData["EventosPosts"];
 
-    ViewData["title"] = "O melhor da Nintendo, eSports e Eventos - Wii U, 3DS, League of Legends, Counter Strike e mais";
     ViewData["metaDescription"] = "O melhor da Nintendo, eSports e Eventos - Wii U, 3DS, League of Legends, Counter Strike e mais";
-    ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/sharer.jpg");
+    ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/sharer.jpg");
     ViewData["metaUrl"] = Url.Content("~/Home/Index");
     ViewData["metaKeywords"] = new List<string>() { "Eventos", "Nintendo", "Wii U", "3DS", "eSports", "League of Legends", "Counter Strike" };
 }

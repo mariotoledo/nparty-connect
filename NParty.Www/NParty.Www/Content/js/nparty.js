@@ -1,10 +1,12 @@
-﻿function printRelatedPostsByLabels(currentArticleId, labels, listId) {
-    console.log(labels);
+﻿function printRelatedPostsByLabels(currentArticleId, labels, listId, domain) {
+    if (!domain)
+        domain = "Nintendo";
+
     if (labels) {
         var doneCount = 0;
         var articles = [];
         for(var i = 0; i < labels.length; i++){
-            $.get('/Nintendo/GetRelatedPosts/?label=' + labels[i], function (data) {
+            $.get('/' + domain + '/GetRelatedPosts/?label=' + labels[i], function (data) {
                 if (data) {
                     $.each(data, function (j) {
                         articles.push(data[j]);
@@ -69,7 +71,7 @@ function printRelatedArticles(articles, listId) {
             return;
 
         var appendable = '<div class="col-md-4 hilight-md-article-item" style="margin-bottom: 20px;">' +
-                         '<a href="' + article.ArticleLink + '">' +
+                         '<a href="/' + article.NPartyArticleLink + '">' +
                          '<div><figure style="background-image: url(' + article.CoverImage + ')"></figure></div>' +
                          '<div><h5>' + article.Title + '</h5></div>'
                          '</a></div>';
