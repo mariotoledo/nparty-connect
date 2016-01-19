@@ -36,14 +36,26 @@
     <div class=" container" style="padding-top: 20px; padding-bottom: 20px;">
         @if (article != null)
         {
-            <div class="row">
+            string keywordsSchema = "";
+
+            foreach (string keyword in article.Labels)
+            {
+                keywordsSchema += keyword + ",";
+            }
+
+            <div class="row" itemscope itemtype="http://schema.org/Article">
+                <span itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+                    <span itemprop="name" content="N-Party"></span>
+                </span>
+                <span itemprop="articleSection" content="News"></span>
+                <span itemprop="keywords" content="@keywordsSchema Eventos"></span>
                 <div class="col-lg-8 col-bordered-right">
-                    <div class="post hentry" itemprop="blogPost" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+                    <div class="post hentry">
                         <div class="article">
                             <div class="row">
                                 <div class="col-lg-12">
                                     <div class="header">
-                                        <img src="@article.CoverImage" style="width: 100%;">
+                                        <img itemprop="image" src="@article.CoverImage" style="width: 100%;">
                                     </div>
                                 </div>
                             </div>
@@ -51,7 +63,7 @@
                                 <div class="row">
                                     <div class="col-lg-12" style="margin-top: -50px; padding: 10px; padding-bottom: 0px; background-color: #FFF;">
                                         <div class="article-title">
-                                            <h3 class="post-title entry-title" itemprop="name">
+                                            <h3 class="post-title entry-title" itemprop="headline">
                                                 @article.Title
                                             </h3>
                                             <!--<div class="subtitulo" itemprop="description">
@@ -62,9 +74,9 @@
                                                 <div class="author">
                                                     <div>
                                                         Por
-                                                        <span itemprop="name">@article.AuthorName</span>
+                                                        <span>@article.AuthorName</span>
                                                         em
-                                                        @article.DatePublished.Day de @article.DatePublished.ToString("MMMM") de @article.DatePublished.Year
+                                                        <span itemprop="datePublished" content="@article.DatePublished.ToString("yyyy-MM-dd")">@article.DatePublished.Day de @article.DatePublished.ToString("MMMM") de @article.DatePublished.Year</span>
                                                     </div>
                                                 </div>
                                             }
@@ -82,18 +94,18 @@
                                         <div id="loading-content">
                                             Carregando...
                                         </div>
-                                        <div class="content" id="article-content">
+                                        <div class="content" id="article-content" itemprop="articleBody">
                                             @Html.Raw(article.Content)
                                         </div>
                                         @{
                                             if (article.AuthorData != null)
                                             {
-                                                <div class="author-box" id="authorBox">
+                                                <div class="author-box" id="authorBox" itemprop="author" itemscope itemtype="http://schema.org/Person">
                                                     <div class="row">
                                                         <div class="col-sm-2">
-                                                            <img class="authorPhoto img-rounded img-responsive" id="authorPhoto" src="@article.AuthorData.ImageUrl">
+                                                            <img itemprop="image" class="authorPhoto img-rounded img-responsive" id="authorPhoto" src="@article.AuthorData.ImageUrl">
                                                         </div>
-                                                        <div class="col-sm-10" id="authorDescription"><b>@article.AuthorData.Name</b> @article.AuthorData.Description</div>
+                                                        <div class="col-sm-10" id="authorDescription"><b itemprop="name">@article.AuthorData.Name</b> <span itemprop="description">@article.AuthorData.Description</span></div>
                                                     </div>
                                                 </div>
                                             }

@@ -1,4 +1,4 @@
-﻿@{]
+﻿@{
     string query = (string)ViewData["query"];
     ViewBag.Title = "Resultados da busca por: " + query;
 
@@ -14,6 +14,17 @@
     int maxPosts = (int)ViewData["MaxPosts"];
 
     ViewData["MenuHasBorderBottom"] = true;
+
+    @section Head{
+        @if (articles.Count >= maxPosts)
+        {
+            <link rel="next" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage + 1))">
+        }
+        @if (currentPage > 0)
+        {
+            <link rel="prev" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage - 1))">
+        }
+    }
 }
 
 <div class="container default-container" style="padding-top: 30px;">
@@ -47,7 +58,7 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a class="directionLink domainLink-Nintendo" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a rel="next" class="directionLink domainLink-Nintendo" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
                             </div>
@@ -56,7 +67,7 @@
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a class="directionLink domainLink-Nintendo" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a rel="prev" class="directionLink domainLink-Nintendo" href="@Url.Content("~/Home/Busca?q=" + ViewData["query"] + "&page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>

@@ -13,6 +13,17 @@
     ViewData["metaKeywords"] = new List<string>() { "Counter Strike", "Counter Strike: GO", "League of Legends", "eSports" };
 
     string[] esportsSpecialTags = (string[])ViewData["ESportsSpecialTags"];
+
+    @section Head{
+        @if (articles.Count >= maxPosts)
+        {
+            <link rel="next" href="@Url.Content("~/ESports/LeagueOfLegends?page=" + (currentPage + 1))">
+        }
+        @if (currentPage > 0)
+        {
+            <link rel="prev" href="@Url.Content("~/ESports/LeagueOfLegends?page=" + (currentPage - 1))">
+        }
+    }
 }
 
 <div id="esports-container" style="padding: 0;">
@@ -72,19 +83,19 @@
                         <div class="row">
                             <div class="col-md-5 prevPage">
                                 @{
-                if (articles.Count >= maxPosts)
-                {
-                    <a class="directionLink" href="@Url.Content("~/ESports/LeagueOfLegends?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
-                }
+                                    if (articles.Count >= maxPosts)
+                                    {
+                                        <a rel="next" class="directionLink" href="@Url.Content("~/ESports/LeagueOfLegends?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                    }
                                 }
                             </div>
                             <div class="col-md-2"></div>
                             <div class="col-md-5 nextPage">
                                 @{
-                if (currentPage > 0)
-                {
-                    <a class="directionLink" href="@Url.Content("~/ESports/LeagueOfLegends?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
-                }
+                                    if (currentPage > 0)
+                                    {
+                                        <a rel="prev" class="directionLink" href="@Url.Content("~/ESports/LeagueOfLegends?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                    }
                                 }
                             </div>
                         </div>

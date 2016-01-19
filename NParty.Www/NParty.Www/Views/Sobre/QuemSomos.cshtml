@@ -55,11 +55,12 @@
         margin-top: 15px;
     }
 </style>
-<div class="container" style="padding-top: 30px; padding-bottom: 30px;">
+<div class="container" style="padding-top: 30px; padding-bottom: 30px;" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="N-Party"> 
     <div class="row">
         <div class="col-lg-8 col-bordered-right">
             <div class="pagina-titulo">De fã para fã</div><br/>
-            <p>O N-Party é um grupo que busca promover atividades e entretenimento para qualquer tipo de pessoa que se relacione com video-games. Através de espaços temáticos em eventos, organização de encontros e uma forte influência na internet, o grupo conta com um público engajado, que busca participar de atividades coletivas e se divertir enquanto se relaciona com pessoas que compartilham dos mesmos gostos.</p>
+            <p itemprop="description">O N-Party é um grupo que busca promover atividades e entretenimento para qualquer tipo de pessoa que se relacione com video-games. Através de espaços temáticos em eventos, organização de encontros e uma forte influência na internet, o grupo conta com um público engajado, que busca participar de atividades coletivas e se divertir enquanto se relaciona com pessoas que compartilham dos mesmos gostos.</p>
             <p>Acima de tudo, somos fãs de jogos eletrônicos, e buscamos contribuir com ações que beneficiem o mercado brasileiro, sejam elas privadas ou voluntárias.</p>
             <div class="pagina-titulo">Nossos eventos</div><br/>
             <p>Há mais de 6 anos que o N-Party organiza ambientes em eventos próprios ou de organizações terceiras, com foco no público da cultura nerd e pop. Nestes espaços, buscamos promover a interação social entre os participantes através de jogos eletrônicos com foco na <b>Nintendo</b>, organizando partidas livres, campeonatos, desafios e muitas outras atividades.</p>
@@ -144,17 +145,17 @@
             </ul>
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="site">
-                    <div class="team-member">
+                    <div class="team-member" itemprop="founder" itemscope itemtype="http://schema.org/Person">
                         <div class="row">
                             <div class="col-xs-4" style="text-align: center;">
-                                <img alt="Mario Toledo" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/mariotoledo.jpg")" style="margin: auto;" width="100"> <br>
+                                <img itemprop="image" alt="Mario Toledo" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/mariotoledo.jpg")" style="margin: auto;" width="100"> <br>
                                 <div class="share-icons">
                                     <a href="https://www.facebook.com/mariotoledo12" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')"></a>
                                     <a href="https://www.twitter.com/mario_toledo" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')"></a>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h3>
+                                <h3 itemprop="name">
                                     Mario Toledo
                                 </h3>
                                 Possui cabelo em pé e barba pra fazer por causa da N-Party. Seu 3DS está com a tela quebrada de tanto uso, e sua Jynx se chama "Preta Gil".<br><br>
@@ -162,16 +163,16 @@
                         </div>
                     </div>
                     <h4 class="sidebar-title">E-SPORTS</h4>
-                    <div class="team-member">
+                    <div class="team-member" itemprop="member" itemscope itemtype="http://schema.org/Person">
                         <div class="row">
                             <div class="col-xs-4" style="text-align: center;">
-                                <img alt="Caio Cardoso" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/caiocardoso.jpg")" style="margin: auto;" width="100"> <br>
+                                <img itemprop="image" alt="Caio Cardoso" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/caiocardoso.jpg")" style="margin: auto;" width="100"> <br>
                                 <div class="share-icons">
                                     <a href="https://www.facebook.com/caioaugusto.bressancardoso?fref=ts" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')"></a>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h3>
+                                <h3 itemprop="name">
                                     Caio Cardoso
                                 </h3>
                                 Adora dormir e aprecia este momento. Quando não está dormindo, está trabalhando, jogando ou comendo.
@@ -184,49 +185,49 @@
                         <a href="https://docs.google.com/forms/d/1OsqZ-1V1mSkDRXee8fu73ZLNH6cIe88cb8DGZ1Iztwk/viewform" target="_blank" class="btn btn-lg btn-block">Se inscreva!</a>
                     </div>
                     <h4 class="sidebar-title">NINTENDO</h4>
-                    <div class="team-member">
+                    <div class="team-member" itemprop="member" itemscope itemtype="http://schema.org/Person">
                         <div class="row">
                             <div class="col-xs-4" style="text-align: center;">
-                                <img alt="Victor Souza" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/victorsouza.jpg")" style="margin: auto;" width="100"> <br>
+                                <img itemprop="image" alt="Victor Souza" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/victorsouza.jpg")" style="margin: auto;" width="100"> <br>
                                 <div class="share-icons">
-                                    <a href="hhttps://www.facebook.com/victor.f.desouza" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')"></a>
+                                    <a href="https://www.facebook.com/victor.f.desouza" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')"></a>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h3>
+                                <h3 itemprop="name">
                                     Victor Souza
                                 </h3>
                                 Estudante de jornalismo e excessivamente otimista quanto ao mundo em que vive. Ele acredita que qualquer situação de conflito pode ser resolvida com uma partida de Super Smash Bros.
                             </div>
                         </div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member" itemprop="member" itemscope itemtype="http://schema.org/Person">
                         <div class="row">
                             <div class="col-xs-4" style="text-align: center;">
-                                <img alt="Rui Celso" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/ruicelso.jpg")" style="margin: auto;" width="100"> <br>
+                                <img itemprop="image" alt="Rui Celso" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/ruicelso.jpg")" style="margin: auto;" width="100"> <br>
                                 <div class="share-icons">
                                     <a href="https://www.facebook.com/rui.celso.9" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')"></a>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h3>
+                                <h3 itemprop="name">
                                     Rui Celso
                                 </h3>
                                 Seu perfeccionismo o faz limpar seu guarda-roupas todos os dias esperando encontrar a passagem para Nárnia.
                             </div>
                         </div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member" itemprop="member" itemscope itemtype="http://schema.org/Person">
                         <div class="row">
                             <div class="col-xs-4" style="text-align: center;">
-                                <img alt="Fabrício Luz" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/fabricioluz.jpg")" style="margin: auto;" width="100"> <br>
+                                <img itemprop="image" alt="Fabrício Luz" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/fabricioluz.jpg")" style="margin: auto;" width="100"> <br>
                                 <div class="share-icons">
                                     <a href="https://www.facebook.com/LuzFabricio" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')"></a>
                                     <a href="https://twitter.com/fabriciosays" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')"></a>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h3>
+                                <h3 itemprop="name">
                                     Fabrício Luz
                                 </h3>
                                 Jornalista movido a música e fanático pela série Kingdom Hearts.
@@ -257,16 +258,16 @@
                             </div>
                         </div>
                     </div>
-                    <div class="team-member">
+                    <div class="team-member" itemprop="founder" itemscope itemtype="http://schema.org/Person">
                         <div class="row">
                             <div class="col-xs-4" style="text-align: center;">
-                                <img alt="Rafael Farias" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/rafaelfarias.jpg")" style="margin: auto;" width="100"> <br>
+                                <img itemprop="image" alt="Rafael Farias" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/rafaelfarias.jpg")" style="margin: auto;" width="100"> <br>
                                 <div class="share-icons">
                                     <a href="https://www.facebook.com/rafael.fariasfialho" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')"></a>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h3>
+                                <h3 itemprop="name">
                                     Rafael Farias
                                 </h3>
                                 Pseudo-colecionador de games buscando e guardando apenas os bons jogos e não os raros. Fã das séries Tales of, Kingdom Hearts, Smash Bros e nas horas vagas, otaku
@@ -274,16 +275,16 @@
                         </div>
                     </div>
 
-                    <div class="team-member">
+                    <div class="team-member" itemprop="member" itemscope itemtype="http://schema.org/Person">
                         <div class="row">
                             <div class="col-xs-4" style="text-align: center;">
-                                <img alt="Lucas Alves" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/lucasalves.jpg")" style="margin: auto;" width="100"> <br>
+                                <img itemprop="image" alt="Lucas Alves" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/lucasalves.jpg")" style="margin: auto;" width="100"> <br>
                                 <div class="share-icons">
                                     <a href="https://www.facebook.com/profile.php?id=100002962066167" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')"></a>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h3>
+                                <h3 itemprop="name">
                                     Lucas Alves
                                 </h3>
                                 É fanático pelas séries principais da Nintendo, principalmente Mario. Procura participar de todos os torneios de games Nintendo possíveis. Joga de Lucario no Smash e sempre aceita um duelo.
@@ -291,16 +292,16 @@
                         </div>
                     </div>
 
-                    <div class="team-member">
+                    <div class="team-member" itemprop="member" itemscope itemtype="http://schema.org/Person">
                         <div class="row">
                             <div class="col-xs-4" style="text-align: center;">
-                                <img alt="Vitor Bertani" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/vitorbertani.jpg")" style="margin: auto;" width="100"> <br>
+                                <img itemprop="image" alt="Vitor Bertani" class="img-thumbnail" src="@Url.Content("~/Content/img/authors/vitorbertani.jpg")" style="margin: auto;" width="100"> <br>
                                 <div class="share-icons">
                                     <a href="https://www.facebook.com/vitor.b.dasilva.77" target="_blank" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')"></a>
                                 </div>
                             </div>
                             <div class="col-md-8">
-                                <h3>
+                                <h3 itemprop="name">
                                     Vitor Bertani
                                 </h3>
                                 É um mega fone ambulante dos eventos e cozinheiro nas horas vagas. Em um game o que chama sua atenção é a jogabilidade, soundtrack, história/enredo.

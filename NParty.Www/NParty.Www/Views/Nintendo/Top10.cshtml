@@ -10,9 +10,20 @@
     ViewData["metaDescription"] = "Listas e mais listas de diversos assuntos envolvendo a Nintendo";
     ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/top10.jpg");
     ViewData["metaUrl"] = Url.Content("~/Nintendo/Top10");
-    ViewData["metaKeywords"] = new List<string>() { "Top 10", "Listas","Nintendo"};
+    ViewData["metaKeywords"] = new List<string>() { "Top 10", "Listas", "Nintendo" };
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
+
+    @section Head{
+        @if (articles.Count >= maxPosts)
+        {
+            <link rel="next" href="@Url.Content("~/Nintendo/Top10?page=" + (currentPage + 1))">
+        }
+        @if (currentPage > 0)
+        {
+            <link rel="prev" href="@Url.Content("~/Nintendo/Top10?page=" + (currentPage - 1))">
+        }
+    }
 }
 
 <div id="nintendo-container" style="padding: 0;">
@@ -74,7 +85,7 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Nintendo/Top10?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a rel="next" class="directionLink" href="@Url.Content("~/Nintendo/Top10?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
                             </div>
@@ -83,7 +94,7 @@
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Nintendo/Top10?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a rel="prev" class="directionLink" href="@Url.Content("~/Nintendo/Top10?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>

@@ -13,6 +13,17 @@
     ViewData["metaKeywords"] = new List<string>() { "Counter Strike", "Counter Strike: GO", "League of Legends", "eSports" };
 
     string[] esportsSpecialTags = (string[])ViewData["ESportsSpecialTags"];
+
+    @section Head{
+        @if (articles.Count >= maxPosts)
+        {
+            <link rel="next" href="@Url.Content("~/ESports/Index?page=" + (currentPage + 1))">
+        }
+        @if (currentPage > 0)
+        {
+            <link rel="prev" href="@Url.Content("~/ESports/Index?page=" + (currentPage - 1))">
+        }
+    }
 }
 
 <div id="esports-container" style="padding: 0;">
@@ -73,7 +84,7 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/ESports/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a rel="next" class="directionLink" href="@Url.Content("~/ESports/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
                             </div>
@@ -82,7 +93,7 @@
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/ESports/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a rel="prev" class="directionLink" href="@Url.Content("~/ESports/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>

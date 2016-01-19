@@ -4,6 +4,31 @@
     "imageUrl": "/Content/img/authors/mariotoledo.jpg",
     "description": "possui cabelo em pé e barba pra fazer por causa da N-Party. Seu 3DS está com a tela quebrada de tanto uso, e sua Jynx se chama \"Preta Gil\".",
     "facebookUrl": "https://www.facebook.com/mariotoledo12",
-    "twitterAccount":  "@mario_toledo"
+    "twitterAccount": "@mario_toledo"
+  }, 
+  "g118400155411960410729": {
+    "name": "Rui Celso",
+    "imageUrl": "/Content/img/authors/ruicelso.jpg",
+    "description": "é perfeccionista a ponto de limpar seu guarda-roupas todos os dias esperando encontrar a passagem para Nárnia",
+    "facebookUrl": "https://www.facebook.com/rui.celso.9"
+  },
+  "g106840289532363291991": {
+    "name": "Victor Souza",
+    "imageUrl": "/Content/img/authors/victorsouza.jpg",
+    "description": "é estudante de jornalismo e excessivamente otimista quanto ao mundo em que vive. Ele acredita que qualquer situação de conflito pode ser resolvida com uma partida de Super Smash Bros.",
+    "facebookUrl": "https://www.facebook.com/victor.f.desouza"
+  },
+  "13417680814599216707": {
+    "name": "Fabrício Luz",
+    "imageUrl": "/Content/img/authors/fabricioluz.jpg",
+    "description": "é um jornalista movido a música e fanático pela série Kingdom Hearts.",
+    "facebookUrl": "https://www.facebook.com/LuzFabricio",
+    "twitterAccount": "@fabriciosays"
+  },
+   "00467737276121476381": {
+    "name": "Caio Cardoso",
+    "imageUrl": "/Content/img/authors/caiocardoso.jpg",
+    "description": "adora dormir e aprecia este momento. Quando não está dormindo, está trabalhando, jogando ou comendo.",
+    "facebookUrl": "https://www.facebook.com/caioaugusto.bressancardoso"
   }
 }

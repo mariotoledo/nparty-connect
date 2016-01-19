@@ -13,6 +13,17 @@
     int maxPosts = (int)ViewData["MaxPosts"];
 
     string[] eventosSpecialTags = (string[])ViewData["EventosSpecialTags"];
+
+    @section Head{
+        @if (articles.Count >= maxPosts)
+        {
+            <link rel="next" href="@Url.Content("~/Eventos/Index?page=" + (currentPage + 1))">
+        }
+        @if (currentPage > 0)
+        {
+            <link rel="prev" href="@Url.Content("~/Eventos/Index?page=" + (currentPage - 1))">
+        }
+    }
 }
 
 <div id="eventos-container" style="padding: 0;">
@@ -73,7 +84,7 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Eventos/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a rel="next" class="directionLink" href="@Url.Content("~/Eventos/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
                             </div>
@@ -82,7 +93,7 @@
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Eventos/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a rel="prev" class="directionLink" href="@Url.Content("~/Eventos/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>
@@ -92,11 +103,11 @@
                         @{Html.RenderPartial("Sidebars/Eventos");}
                     </div>
                 </div>
-                            }
-                            else
-                            {
-                                <div style="padding: 50px; text-align: center;"> Não foi possível encontrar publicãções no momento. Por favor, tente novamente mais tarde.</div>
-                            }
+            }
+            else
+            {
+                <div style="padding: 50px; text-align: center;"> Não foi possível encontrar publicãções no momento. Por favor, tente novamente mais tarde.</div>
+            }
         }
     </div>
 </div>

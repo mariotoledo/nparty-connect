@@ -180,8 +180,8 @@ namespace NParty.Www.Helpers
                 author.Name = values[id]["name"];
                 author.Description = values[id]["description"];
                 author.ImageUrl = values[id]["imageUrl"];
-                author.FacebookProfileUrl = values[id]["facebookUrl"];
-                author.TwitterAccount = values[id]["twitterAccount"];
+                author.FacebookProfileUrl = values[id].ContainsKey("facebookUrl") ? values[id]["facebookUrl"] : null;
+                author.TwitterAccount = values[id].ContainsKey("twitterAccount") ? values[id]["twitterAccount"] : null;
 
                 return author;
             }

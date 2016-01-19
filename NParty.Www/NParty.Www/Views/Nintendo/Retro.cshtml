@@ -11,9 +11,20 @@
     ViewData["metaDescription"] = "Relembre dos jogos mais clássicos da Nintendo com a N-Party";
     ViewData["metaImage"] = "http://www.nparty.com.br/" + Url.Content("~/Content/img/metaImages/retro.jpg");
     ViewData["metaUrl"] = Url.Content("~/Nintendo/Retro");
-    ViewData["metaKeywords"] = new List<string>() { "Retrô", "Retro", "Nintendo", "Super Nintendo", "Game Boy", "Game Cube"};
+    ViewData["metaKeywords"] = new List<string>() { "Retrô", "Retro", "Nintendo", "Super Nintendo", "Game Boy", "Game Cube" };
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
+
+    @section Head{
+        @if (articles.Count >= maxPosts)
+        {
+            <link rel="next" href="@Url.Content("~/Nintendo/Retro?page=" + (currentPage + 1))">
+        }
+        @if (currentPage > 0)
+        {
+            <link rel="prev" href="@Url.Content("~/Nintendo/Retro?page=" + (currentPage - 1))">
+        }
+    }
 }
 
 <div id="nintendo-container" style="padding: 0;">
@@ -75,7 +86,7 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Nintendo/Retro?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a rel="next" class="directionLink" href="@Url.Content("~/Nintendo/Retro?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
                             </div>
@@ -84,7 +95,7 @@
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a class="directionLink" href="@Url.Content("~/Nintendo/Retro?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a rel="prev" class="directionLink" href="@Url.Content("~/Nintendo/Retro?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>

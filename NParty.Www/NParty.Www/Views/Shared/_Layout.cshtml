@@ -37,8 +37,8 @@
     <meta content='243433449077247' property='fb:app_id' />
     <meta content='100000198134068' property='fb:admins' />
 
-    <meta name="description" content="@metaDescription">
-    <meta name="author" content="@metaAuthor">
+    <meta name="description" content="@HttpUtility.HtmlDecode(metaDescription)">
+    <meta name="author" content="@HttpUtility.HtmlDecode(metaAuthor)">
 
     @if (metaKeywords != null)
     {
@@ -53,15 +53,15 @@
     
 
     <!-- Schema.org markup for Google+ -->
-    <meta itemprop="name" content="@title">
-    <meta itemprop="description" content="@metaDescription">
+    <meta itemprop="name" content="@HttpUtility.HtmlDecode(title)">
+    <meta itemprop="description" content="@HttpUtility.HtmlDecode(metaDescription)">
     <meta itemprop="image" content="@metaImage">
 
     <!-- Twitter Card data -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@("n_party")">
     <meta name="twitter:title" content="@title">
-    <meta name="twitter:description" content="@metaDescription">
+    <meta name="twitter:description" content="@WebUtility.HtmlDecode(metaDescription)">
     <meta name="twitter:creator" content="@metaTwitterAuthor">
     <meta name="twitter:image:src" content="@metaImage">
 
@@ -70,14 +70,14 @@
     <meta property="og:type" content="article" />
     <meta property="og:url" content="@metaUrl" />
     <meta property="og:image" content="@metaImage" />
-    <meta property="og:description" content="@metaDescription" />
+    <meta property="og:description" content="@WebUtility.HtmlDecode(metaDescription)" />
     <meta property="og:site_name" content="N-Party" />
 
     @if (metaKeywords != null)
     {
         foreach (string keyword in metaKeywords)
         {
-            <meta property="article:tag" content="@keyword" />
+            <meta property="article:tag" content="@WebUtility.HtmlDecode(keyword)" />
         }
     }
     
@@ -87,28 +87,31 @@
     <link href='@Url.Content("~/Content/img/favicon.png")' rel='shortcut icon' />
     <link href='@Url.Content("~/Content/img/favicon.png")' rel='apple-touch-icon' />
 
-    <title>@title</title>
+    <title>@HttpUtility.HtmlDecode(title)</title>
 
     <!-- Bootstrap core CSS -->
     <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
     <link rel="stylesheet" href="https://cloud.typography.com/706184/753582/css/fonts.css" type="text/css" />
     <link href="@Url.Content("~/Content/css/nparty.css")" rel="stylesheet">
+
+    @RenderSection("Head", false)
 </head>
 <body>
     <nav class="navbar navbar-default" style="@(menuhasBorderBottom ? "border-bottom: 1px solid #CCCCCC;" : "")">
         <div class="container">
-            <div class="navbar-header">
+            <div class="navbar-header" itemscope itemtype="http://schema.org/Organization">
+                <meta itemprop="name" content="N-Party"> 
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="@Url.Content("~/")">
-                    <img style="height: 100%;" class="img-responsive" alt="N-Party" src="@Url.Content("~/Content/img/logo.png")">
+                <a itemprop="url" class="navbar-brand" href="http://www.nparty.com.br">
+                    <img itemprop="logo" style="height: 100%;" class="img-responsive" alt="N-Party" src="@Url.Content("~/Content/img/logo.png")">
                 </a>
             </div>
-            <div class="collapse navbar-collapse" id="main-menu">
+            <div class="collapse navbar-collapse" id="main-menu" itemscope itemtype="http://schema.org/WebSite">
                 <ul class="nav navbar-nav">
                     <li class="bordered-left nintendo-menu @(activeMenuId == 1 ? "nintendo-menu-active" : "")">
                         <a href="@Url.Content("~/Nintendo")">Nintendo</a>
@@ -135,14 +138,16 @@
                             <ul class="nav">
                                 <li><a href="@Url.Content("~/Sobre/QuemSomos")">Quem Somos</a></li>
                                 <li role="separator" class="divider" style="margin: 0;"></li>
-                                <li><a href="#">Contato</a></li>
+                                <li><a href="@Url.Content("~/Sobre/Contato")">Contato</a></li>
                             </ul>
                         </div>
                     </li>
                 </ul>
-                <form class="navbar-form navbar-left" role="search" action="@Url.Content("~/Home/Busca")" method="get">
+                <meta itemprop="url" content="http://www.nparty.com.br" />
+                <form class="navbar-form navbar-left" role="search" action="@Url.Content("~/Home/Busca")" method="get" itemprop="potentialAction" itemscope itemtype="http://schema.org/SearchAction">
                     <div class="input-group">
-                        <input type="text" class="form-control" name="q" placeholder="Buscar por..." value="@ViewData["query"]">
+                        <meta itemprop="target" content="@Url.Content("~/Home/Busca")={search_term}" />
+                        <input itemprop="query-input" type="text" class="form-control" name="q" placeholder="Buscar por..." value="@ViewData["query"]">
                         <span class="input-group-btn">
                             <button style="height:34px;" class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
                         </span>
@@ -210,21 +215,23 @@
                         <div class="alert alert-danger" id="subscribeErrorMessage" style="display: none;"></div>
                         <div class="alert alert-success" id="subscribeSuccessMessage" style="display: none;"></div>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" itemscope itemtype="http://schema.org/Organization">
+                    <meta itemprop="name" content="N-Party"> 
                     <h4>Siga-nos!</h4>
+                    <link itemprop="url" href="http://www.nparty.com.br" rel="alternate"> 
                     <div style="height: 60px;">
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://youtube.com/npartytv')" type="button"><img alt="YouTube" src="@Url.Content("~/Content/img/socialIcons/youtube.jpg")" title="YouTube" ></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://instagram.com/nintendoparty')" type="button"><img alt="Instagram" src="@Url.Content("~/Content/img/socialIcons/instagram.jpg")" title="Instagram" >></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('https://twitter.com/n_party')" type="button"><img alt="Twitter" src="@Url.Content("~/Content/img/socialIcons/twitter.jpg")" title="Twitter" >></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.facebook.com/NParty')" type="button"><img alt="Facebook" src="@Url.Content("~/Content/img/socialIcons/facebook.jpg")" title="Facebook" >></button>
+                        <a itemprop="sameAs" target="_blank" class="btn btn-default navbar-btn socialIcon" href="http://youtube.com/npartytv" type="button"><img alt="YouTube" src="@Url.Content("~/Content/img/socialIcons/youtube.jpg")" title="YouTube" ></a>
+                        <a itemprop="sameAs" class="btn btn-default navbar-btn socialIcon" href="http://instagram.com/nintendoparty" type="button"><img alt="Instagram" src="@Url.Content("~/Content/img/socialIcons/instagram.jpg")" title="Instagram" ></a>
+                        <a itemprop="sameAs" class="btn btn-default navbar-btn socialIcon" href="https://twitter.com/n_party" type="button"><img alt="Twitter" src="@Url.Content("~/Content/img/socialIcons/twitter.jpg")" title="Twitter" ></a>
+                        <a itemprop="sameAs" class="btn btn-default navbar-btn socialIcon" href="http://www.facebook.com/NParty" type="button"><img alt="Facebook" src="@Url.Content("~/Content/img/socialIcons/facebook.jpg")" title="Facebook" ></a>
                     </div>
                     <br/>
                     <h4>Nossos Parceiros</h4>
                     <div style="height: 60px;">
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.projetoxpodcast.com.br')" style="padding: 0;" type="button"><img alt="Projeto X Podcast" src="@Url.Content("~/Content/img/partners/projetoxpodcast.jpg")" title="Projeto X Podcast" >></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.lop-sp.com.br')" style="padding: 0;" type="button"><img alt="LOP-SP" src="@Url.Content("~/Content/img/partners/lopsp.jpg")" title="LOP-SP">></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.nintendoblast.com.br')" style="padding: 0;" type="button"><img alt="Nintendo Blast" src="@Url.Content("~/Content/img/partners/nintendoblast.jpg")" title="Nintendo Blast">></button>
-                        <button class="btn btn-default navbar-btn socialIcon" formtarget="_blank" onclick="window.open('http://www.castelonerd.com.br')" style="padding: 0;" type="button"><img alt="Castelo Nerd" src="@Url.Content("~/Content/img/partners/castelonerd.jpg")" title="Castelo Nerd">></button>
+                        <a rel="nofollow" class="btn btn-default navbar-btn socialIcon" target="_blank" href="http://www.projetoxpodcast.com.br" style="padding: 0;" type="button"><img alt="Projeto X Podcast" src="@Url.Content("~/Content/img/partners/projetoxpodcast.jpg")" title="Projeto X Podcast" >></a>
+                        <a rel="nofollow" class="btn btn-default navbar-btn socialIcon" target="_blank" href="http://www.lop-sp.com.br" style="padding: 0;" type="button"><img alt="LOP-SP" src="@Url.Content("~/Content/img/partners/lopsp.jpg")" title="LOP-SP">></a>
+                        <a rel="nofollow" class="btn btn-default navbar-btn socialIcon" target="_blank" href="http://www.nintendoblast.com.br" style="padding: 0;" type="button"><img alt="Nintendo Blast" src="@Url.Content("~/Content/img/partners/nintendoblast.jpg")" title="Nintendo Blast">></a>
+                        <a rel="nofollow" class="btn btn-default navbar-btn socialIcon" target="_blank" href="http://www.castelonerd.com.br" style="padding: 0;" type="button"><img alt="Castelo Nerd" src="@Url.Content("~/Content/img/partners/castelonerd.jpg")" title="Castelo Nerd">></a>
                     </div>
                 </div>
             </div>
