@@ -123,7 +123,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                     <li class="esports-menu  @(activeMenuId == 2 ? "esports-menu-active" : "")">
                         <a href="@Url.Content("~/ESports")">E-Sports</a>
                     </li>
-                    <li class="eventos-menu @(activeMenuId ==3 ? "eventos-menu-active" : "")">
+                    <li class="eventos-menu @(activeMenuId == 3 ? "eventos-menu-active" : "")">
                         <a href="@Url.Content("~/Eventos")"> Eventos</a>
                     </li>
                                         @*<li class="bordered-left dropdown">
@@ -137,7 +137,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
             </div>
         </li>*@
                     <li class="bordered-left bordered-right dropdown">
-                        <a href="#">Sobre</a>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sobre <span class="caret"></span></a>
                         <div class="dropdown-menu">
                             <ul class="nav">
                                 <li><a href="@Url.Content("~/Sobre/QuemSomos")">Quem Somos</a></li>

@@ -149,6 +149,16 @@ blockquote{
     }
 }
 
+.navbar-collapse{
+    padding: 0;
+}
+
+@media (max-width: 1000px) {
+    .navbar-collapse .navbar-form .input-group {
+        margin-left: 20px;
+    }
+}
+
 @media (min-width: 1200px) {
     .sidebar-nav {
         padding: 9px 0;
@@ -848,11 +858,11 @@ h1, h2, h3{
 
 #nintendo-container .content-area-menu li.active a{
     color: #FFF;
-    background-color: #C90201;
+    background-color: #A60201;
     font-weight: bolder;
 }
 
-#nintendo-container .content-area-menu li:hover a{
+#nintendo-container .content-area-menu li:hover a, #nintendo-container .content-area-menu li a:focus{
    background-color: #FF3333;
 }
 
@@ -873,11 +883,11 @@ h1, h2, h3{
 
 #esports-container .content-area-menu li.active a{
     color: #FFF;
-    background-color: #54028A;
+    background-color: #350057;
     font-weight: bolder;
 }
 
-#esports-container .content-area-menu li:hover a{
+#esports-container .content-area-menu li:hover a, #esports-container .content-area-menu li a:focus{
    background-color: #C066FD;
 }
 
@@ -898,12 +908,12 @@ h1, h2, h3{
 
 #eventos-container .content-area-menu li.active a{
     color: #FFF;
-    background-color: #E18700;
+    background-color: #c17400;
     font-weight: bolder;
 }
 
-#eventos-container .content-area-menu li:hover a{
-   background-color: #FFC46A;
+#eventos-container .content-area-menu li:hover a, #eventos-container .content-area-menu li a:focus{
+   background-color: #ffa827;
 }
 
 #nintendo-container .content-area-menu .divider-vertical {
