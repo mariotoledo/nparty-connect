@@ -36,6 +36,7 @@ namespace NParty.Www.Controllers
         public ActionResult Top10(int? page) { return OpenPageByLabel("Top 10", page); }
         public ActionResult Mario(int? page) { return OpenPageByLabel("Mario", page); }
         public ActionResult Pokemon(int? page){ return OpenPageByLabel("Pokémon", page); }
+        public ActionResult Pokemon20Anos(int? page) { return OpenPageByLabel("Pokémon", page); }
         public ActionResult TheLegendOfZelda(int? page){ return OpenPageByLabel("The Legend of Zelda", page); }
 
         private ActionResult OpenPageByLabel(string label, int? page)
