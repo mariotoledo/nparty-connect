@@ -27,8 +27,23 @@
     }
 }
 
-<div id="nintendo-container" style="padding: 0;">
+<div id="nintendo-container" class="pokemon20th" style="padding: 0;">
     @{Html.RenderPartial("SubMenus/Nintendo", 9);}
+    <section class="content-section video-section">
+        <div class="pattern-overlay">
+            <video autoplay loop muted poster="@Url.Content("~/Content/img/pokemon20thbg.jpg")">
+                <source src="@Url.Content("~/Content/video/pokemonrgb.mp4")" type="video/mp4">
+            </video>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo"><img class="img-responsive" alt="20 anos de Pokémon" src="@Url.Content("~/Content/img/20anospokemon.png")" /></div>
+                        <h3>Comemore o aniversário de Pokémon com a N-Party!</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <div class="container" style="padding-top: 30px;">
         @{
             if (articles != null && articles.Count > 0)

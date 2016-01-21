@@ -206,6 +206,7 @@
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\nparty.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\img\20anospokemon.png" />
     <Content Include="Content\img\authors\caiocardoso.jpg" />
     <Content Include="Content\img\authors\fabricioluz.jpg" />
     <Content Include="Content\img\authors\lucasalves.jpg" />
@@ -261,6 +262,7 @@
     <Content Include="Content\img\partners\lopsp.jpg" />
     <Content Include="Content\img\partners\nintendoblast.jpg" />
     <Content Include="Content\img\partners\projetoxpodcast.jpg" />
+    <Content Include="Content\img\pokemon20thbg.jpg" />
     <Content Include="Content\img\sad_pikachu.png" />
     <Content Include="Content\img\sobre1.jpg" />
     <Content Include="Content\img\sobre10.jpg" />
@@ -283,6 +285,9 @@
     <Content Include="Content\js\jquery-1.11.3.min.js" />
     <Content Include="Content\js\nparty.js" />
     <Content Include="Content\js\npm.js" />
+    <Content Include="Content\video\pokemonrgb.mp4">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Global.asax" />
     <Content Include="Libraries\Google.GData.Blogger.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
@@ -442,6 +447,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
+    <Content Include="Views\Nintendo\Pokemon20anos.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
