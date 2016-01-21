@@ -205,6 +205,7 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\nparty.css" />
+    <Content Include="Content\css\pokemon20th.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\20anospokemon.png" />
     <Content Include="Content\img\authors\caiocardoso.jpg" />
@@ -262,6 +263,7 @@
     <Content Include="Content\img\partners\lopsp.jpg" />
     <Content Include="Content\img\partners\nintendoblast.jpg" />
     <Content Include="Content\img\partners\projetoxpodcast.jpg" />
+    <Content Include="Content\img\poke1.jpg" />
     <Content Include="Content\img\pokemon20thbg.jpg" />
     <Content Include="Content\img\sad_pikachu.png" />
     <Content Include="Content\img\sobre1.jpg" />
