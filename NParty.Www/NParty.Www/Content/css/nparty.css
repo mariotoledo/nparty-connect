@@ -353,17 +353,17 @@ blockquote{
 	    }
 	    
 	@media (min-width: 1700px) {
-	        .hilight{
-	                min-height: 275px;
-	        }
+	    .hilight{
+	            min-height: 275px;
+	    }
 	
-	        .hilight-more {
-	                min-height: 550px;
-	        }
+	    .hilight-more {
+	            min-height: 550px;
+	    }
 	            
-	        .hilights-items:after, .hilights-items::after{
-	                height: 551px;
-	        }
+	    .hilights-items:after, .hilights-items::after{
+	            height: 551px;
+	    }
 	}
 
 #nintendo-container .hilights-items:after, #eventos-container .hilights-items:after, #esports-container .hilights-items:after,
@@ -1297,5 +1297,98 @@ text-shadow: 1px 1px 1px #000;
 -webkit-text-shadow: 1px 1px 1px #000;
 -moz-text-shadow: 1px 1px 1px #000;
 }
-.pokemon20th.video-section .buttonBar{display:none;}
-.pokemon20th.player {font-size: 1px;}
+
+.pokemon20th .animate {
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+.pokemon20th .info-card {
+	width: 100%;
+	position: relative;
+	font-family: 'Lato', sans-serif;
+	margin-bottom: 20px;
+	overflow: hidden;
+}
+.pokemon20th .info-card > img {
+	width: 100px;
+	margin-bottom: 60px;
+}
+.pokemon20th .info-card .info-card-details,
+.pokemon20th .info-card .info-card-details .info-card-header  {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	bottom: -100%;
+	left: 0;
+	padding: 0 15px;
+	background: rgb(255, 255, 255);
+	text-align: center;
+}
+.pokemon20th .info-card .info-card-details::-webkit-scrollbar {
+	width: 8px;
+}
+.pokemon20th .info-card .info-card-details::-webkit-scrollbar-button {
+	width: 8px;
+	height: 0px;
+}
+.pokemon20th .info-card .info-card-details::-webkit-scrollbar-track {
+	background: transparent;
+}
+.pokemon20th .info-card .info-card-details::-webkit-scrollbar-thumb {
+	background: rgb(160, 160, 160);
+}
+.pokemon20th .info-card .info-card-details::-webkit-scrollbar-thumb:hover {
+	background: rgb(130, 130, 130);
+}           
+
+.pokemon20th .info-card .info-card-details .info-card-header {
+	height: auto;		
+	bottom: 100%;
+	padding: 10px 5px;
+}
+.pokemon20th .info-card:hover .info-card-details {
+	bottom: 0px;
+	overflow: auto;
+	padding-bottom: 25px;
+}
+.pokemon20th .info-card:hover .info-card-details .info-card-header {
+	position: relative;
+	bottom: 0px;
+	padding-top: 45px;
+	padding-bottom: 25px;
+}
+.pokemon20th .info-card .info-card-details .info-card-header h1,	
+.pokemon20th .info-card .info-card-details .info-card-header h3 {
+	color: #C90201;
+	font-size: 22px;
+	font-weight: 900;
+	text-transform: uppercase;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+.pokemon20th .info-card .info-card-details .info-card-header h3 {
+	color: #000;
+	font-size: 15px;
+	font-weight: 400;
+	margin-top: 5px;
+}
+.pokemon20th .info-card .info-card-details .info-card-detail .social {
+	list-style: none;
+	padding: 0px;
+	margin-top: 25px;
+	text-align: center;
+}
+.pokemon20th .info-card .info-card-details .info-card-detail .social a {
+	position: relative;
+	display: inline-block;
+	min-width: 40px;
+	padding: 10px 0px;
+	margin: 0px 5px;
+	overflow: hidden;
+	text-align: center;
+	background-color: rgb(215, 215, 215);
+	border-radius: 40px;
+}

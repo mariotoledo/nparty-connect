@@ -285,9 +285,6 @@
     <Content Include="Content\js\jquery-1.11.3.min.js" />
     <Content Include="Content\js\nparty.js" />
     <Content Include="Content\js\npm.js" />
-    <Content Include="Content\video\pokemonrgb.mp4">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Global.asax" />
     <Content Include="Libraries\Google.GData.Blogger.dll">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
