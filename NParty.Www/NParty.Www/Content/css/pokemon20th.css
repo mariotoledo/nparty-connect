@@ -73,11 +73,11 @@
 
 @media (max-width: 480px){
     .pokemon20th .menu a{
-        font-size: 14px;
+        font-size: 12px;
     }
 
     #pokemon20th-navbar{
-        min-height: 40px;
+        min-height: 37px;
     }
 }
 
