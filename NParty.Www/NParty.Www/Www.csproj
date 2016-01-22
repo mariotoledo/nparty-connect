@@ -398,6 +398,7 @@
     <Content Include="Content\pokemontimeline\Graphics\Tilesets\tileset.png" />
     <Content Include="Content\pokemontimeline\Graphics\Titles\picture11.jpg" />
     <Content Include="Content\pokemontimeline\Graphics\Windowskins\window.png" />
+    <Content Include="Content\pokemontimeline\index.html" />
     <Content Include="Content\pokemontimeline\rpgjs\rpgjs-latest.min.js" />
     <Content Include="Content\pokemontimeline\samples\Audio\BGM\Iwan Gabovitch - Dark Ambience Loop.mp3" />
     <Content Include="Content\pokemontimeline\samples\dev.html" />
