@@ -1,5 +1,33 @@
 ﻿
 
+.pokemon20th .menu{
+    margin-top: 50px;
+    text-align: center;
+}
+
+.pokemon20th .menu>li{
+    display: inline-block;
+    float: none;
+}
+
+.pokemon20th .menu a{
+    color: #FFF!important;
+    font-size: 20px;
+    text-shadow: 1px 1px 1px #000;
+-webkit-text-shadow: 1px 1px 1px #000;
+-moz-text-shadow: 1px 1px 1px #000;
+}
+
+@media (max-width: 480px){
+.pokemon20th .menu a{
+    font-size: 14px;
+}
+}
+
+.pokemon20th .menu a:hover{
+    color: #FECD04!important;
+}
+
 .pokemon20th .video-section .pattern-overlay {
 background-color: rgba(71, 71, 71, 0.59);
 padding: 70px 0 70px;
@@ -71,9 +99,13 @@ text-shadow: 1px 1px 1px #000;
 	bottom: -100%;
 	left: 0;
 	padding: 0 15px;
-	background: rgba(230, 230, 230, 0.8);
 	text-align: center;
 }
+
+.pokemon20th .info-card .info-card-details{
+    background: rgba(230, 230, 230, 0.8);
+}
+
 .pokemon20th .info-card .info-card-details::-webkit-scrollbar {
 	width: 8px;
 }
@@ -220,13 +252,17 @@ text-shadow: 1px 1px 1px #000;
 /*-----------------*/
 
 .pokemon20th figure.effect-goliath {
-	background: #C90201;
+	background: #FECD04;
 }
 
 .pokemon20th figure.effect-goliath img,
 .pokemon20th figure.effect-goliath h2 {
 	-webkit-transition: -webkit-transform 0.35s;
 	transition: transform 0.35s;
+}
+
+.pokemon20th figure.effect-goliath h2{
+    font-size: 40px;
 }
 
 .pokemon20th figure.effect-goliath img {
@@ -250,6 +286,7 @@ text-shadow: 1px 1px 1px #000;
 	transition: opacity 0.35s, transform 0.35s;
 	-webkit-transform: translate3d(0,30px,0);
 	transform: translate3d(0,30px,0);
+    padding-bottom: 24px;
 }
 
 .pokemon20th figure.effect-goliath:hover img {
