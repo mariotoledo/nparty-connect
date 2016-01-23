@@ -1,0 +1,48 @@
+﻿@{
+    ViewBag.Title = "Pokémon";
+    ViewData["ActiveMenu"] = 1;
+
+    ViewData["title"] = "Pokémon";
+    ViewData["metaDescription"] = "Tudo sobre Pokémon com a N-Party";
+    ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/pokemon.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Nintendo/Pokemon");
+    ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Pikachu" };
+
+    @section Head{
+        <link rel="stylesheet" href="@Url.Content("~/Content/css/pokemon20th.css")"/>
+    }
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="nintendo-container" class="pokemon20th" style="padding: 0;">
+    @{Html.RenderPartial("SubMenus/Nintendo", 9);}
+    <section class="content-section video-section">
+        <div class="pattern-overlay" style="background: url('@Url.Content("~/Content/img/pokemon20thbg.jpg")') center center; background-size: cover;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo"><img class="img-responsive" alt="20 anos de Pokémon" src="@Url.Content("~/Content/img/20anospokemon.png")" /></div>
+                        <h3>Comemore o aniversário de Pokémon com a N-Party!</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <nav class="navbar navbar-default" id="pokemon20th-navbar">
+        <div class="container">
+            <ul class="nav nav-pills menu">
+                <li role="presentation"><a href="#">Home</a></li>
+                <li role="presentation" class="active"><a href="#">Timeline Interativa</a></li>
+                <li role="presentation"><a href="#">Poké Party Day</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="container" style="margin-top: 20px;">
+        <div style="text-align: center; ">
+            <iframe style="width: 540px; height: 520px; padding: 0; margin: auto;" frameborder="0" src="@Url.Content("~/Content/pokemontimeline/index.html")"></iframe>
+        </div>
+    </div>
+</div>
+

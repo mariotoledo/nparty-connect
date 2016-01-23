@@ -23,7 +23,7 @@ namespace NParty.Www.Models
 
         public void GenerateNPartyArtileLink(string domain)
         {
-            this.NPartyArticleLink = domain + "/Ler/" + Id + "/" + GetTitleForUrl();
+            this.NPartyArticleLink = domain + "/Artigos/Ler/" + Id + "/" + GetTitleForUrl();
         }
 
         public string GetTitleForUrl()

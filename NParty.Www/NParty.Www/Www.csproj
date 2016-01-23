@@ -179,12 +179,37 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controllers\EventosController.cs" />
-    <Compile Include="Controllers\ESportsController.cs" />
+    <Compile Include="Areas\ESports\Controllers\ArtigosController.cs" />
+    <Compile Include="Areas\ESports\Controllers\CounterStrikeController.cs" />
+    <Compile Include="Areas\ESports\Controllers\DicasController.cs" />
+    <Compile Include="Areas\ESports\Controllers\ESportsController.cs" />
+    <Compile Include="Areas\ESports\Controllers\HomeController.cs" />
+    <Compile Include="Areas\ESports\Controllers\LeagueOfLegendsController.cs" />
+    <Compile Include="Areas\ESports\ESportsAreaRegistration.cs" />
+    <Compile Include="Areas\Eventos\Controllers\ArtigosController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\AnimeFriendsController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\BMAController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\BGSController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\CoberturasController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\EventosController.cs" />
+    <Compile Include="Areas\Eventos\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Eventos\EventosAreaRegistration.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\ArtigosController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\TheLegendOfZeldaController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\MarioController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\Top10Controller.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\RetroController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\ReviewsController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\PreviewsController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\NintendoController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\Nintendo3DSController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\NintendoWiiUController.cs" />
+    <Compile Include="Areas\Nintendo\Controllers\PokemonController.cs" />
+    <Compile Include="Areas\Nintendo\NintendoAreaRegistration.cs" />
     <Compile Include="Controllers\OpsController.cs" />
     <Compile Include="Controllers\SobreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\NintendoController.cs" />
     <Compile Include="Controllers\NPartyController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -479,6 +504,12 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\ESports\Models\" />
+    <Folder Include="Areas\ESports\Views\Shared\" />
+    <Folder Include="Areas\Eventos\Models\" />
+    <Folder Include="Areas\Eventos\Views\Shared\" />
+    <Folder Include="Areas\Nintendo\Models\" />
+    <Folder Include="Areas\Nintendo\Views\Shared\" />
     <Folder Include="Content\img\ad\" />
     <Folder Include="Content\pokemontimeline\Data\Events\MAP-1\" />
   </ItemGroup>
@@ -668,9 +699,33 @@
     <Content Include="Content\pokemontimeline\samples\Graphics\Fonts\Philosopher-Regular.ttf" />
     <Content Include="Content\pokemontimeline\samples\tiled\Map-1.tmx" />
     <Content Include="Content\pokemontimeline\tiled\Map-1.tmx" />
+    <Content Include="Areas\Nintendo\Views\Web.config" />
+    <Content Include="Areas\Nintendo\Views\Pokemon\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Pokemon\Timeline.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Artigos\Ler.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Mario\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Nintendo3DS\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\NintendoWiiU\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Previews\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Retro\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Reviews\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\TheLegendOfZelda\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Top10\Index.cshtml" />
+    <Content Include="Areas\ESports\Views\Web.config" />
+    <Content Include="Areas\ESports\Views\Artigos\Ler.cshtml" />
+    <Content Include="Areas\ESports\Views\CounterStrike\Index.cshtml" />
+    <Content Include="Areas\ESports\Views\Dicas\Index.cshtml" />
+    <Content Include="Areas\ESports\Views\Home\Index.cshtml" />
+    <Content Include="Areas\ESports\Views\LeagueOfLegends\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\Web.config" />
+    <Content Include="Areas\Eventos\Views\AnimeFriends\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\Artigos\Ler.cshtml" />
+    <Content Include="Areas\Eventos\Views\BGS\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\BMA\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\Coberturas\Index.cshtml" />
+    <Content Include="Areas\Eventos\Views\Home\Index.cshtml" />
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
-    <Content Include="Views\Nintendo\Pokemon.cshtml" />
-    <Content Include="Views\Nintendo\PokemonTimeline.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -6,7 +6,7 @@
         var doneCount = 0;
         var articles = [];
         for(var i = 0; i < labels.length; i++){
-            $.get('/' + domain + '/GetRelatedPosts/?label=' + labels[i], function (data) {
+            $.get('/' + domain + '/Artigos/GetRelatedPosts/?label=' + labels[i], function (data) {
                 if (data) {
                     $.each(data, function (j) {
                         articles.push(data[j]);
@@ -30,8 +30,6 @@ function removeDuplicatedPostsFromRelated(currentArticleId, relatedPosts) {
     $.each(relatedPosts, function (i, relatedEl) {
         var found = false;
 
-        console.log("comparando " + currentArticleId + " com " + relatedEl.Id + " = " + (currentArticleId == relatedEl.id));
-
         if (currentArticleId == relatedEl.Id)
         {
             found = true;
@@ -45,8 +43,6 @@ function removeDuplicatedPostsFromRelated(currentArticleId, relatedPosts) {
         if(found == false)
             uniquePosts.push(relatedEl);
     });
-
-    console.log(uniquePosts);
 
     return uniquePosts;
 }
