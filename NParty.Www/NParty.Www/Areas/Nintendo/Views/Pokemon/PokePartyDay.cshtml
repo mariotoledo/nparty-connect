@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Pokémon";
+    ViewData["ActiveMenu"] = 1;
+
+    ViewData["title"] = "Pokémon";
+    ViewData["metaDescription"] = "Tudo sobre Pokémon com a N-Party";
+    ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/pokemon.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Nintendo/Pokemon");
+    ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Pikachu" };
+
+    @section Head{
+        <link rel="stylesheet" href="@Url.Content("~/Content/css/pokemon20th.css")"/>
+    }
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="nintendo-container" class="pokemon20th" style="padding: 0;">
+    @{Html.RenderPartial("SubMenus/Nintendo", 9);}
+    <section class="content-section video-section">
+        <div style="background: url('@Url.Content("~/Content/img/marquee_bg.jpg")') center center; background-size: cover;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo"><img class="img-responsive" alt="20 anos de Pokémon" src="@Url.Content("~/Content/img/pokeEventoLogo.png")" /></div>
+                        <h3 class="subTitle">Um evento gratuito comemorativo dos 20 anos de Pokémon, com freeplays, campeonatos, palestras, cosplays e muito mais!</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-2 col-lg-offset-5" style="padding: 10px; text-align: center;">
+                        <b>Realização:</b>
+                        <img src="@Url.Content("~/Content/img/logo.png")" class="img-responsive" style="max-width: 170px; margin: 10px auto;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <nav class="navbar navbar-default" id="pokemon20th-navbar">
+        <div class="container">
+            <ul class="nav nav-pills menu">
+                <li role="presentation"><a href="#">Home</a></li>
+                <li role="presentation" ><a href="#">Timeline Interativa</a></li>
+                <li role="presentation" class="active"><a href="#">Poké Party Day</a></li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar navbar-default" id="pokemon20th-subnavbar">
+        <div class="container">
+            <ul class="nav nav-pills menu">
+                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('oQueE')">O que é</a></li>
+                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('localEData')">Local e Data</a></li>
+                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('videoGames')">Video-Game</a></li>
+                <li role="presentation"><a style="cursor: pointer">TCG</a></li>
+                <li role="presentation"><a style="cursor: pointer">Palestras</a></li>
+                <li role="presentation"><a style="cursor: pointer">Cosplay</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div style="padding: 50px; text-align: center;" id="oQueE">
+        <div class="container">
+            <h1>Vivencie o melhor de Pokémon em seu aniversário de 20 anos</h1>
+            <p>Nós amamos Pokémon, e com a chegada do 20º. aniversário da franquia, o grupo <b>N-Party</b> organizará um evento gratuito para os fãs da série aproveitarem o que há de melhor da franquia em diversas atividades e muita diversão.</p>
+            <h3 style="font-weight: normal"><b>Não fique de fora dessa!</b> Compartilhe, chame seus amigos e marque sua presença!</h3>
+        </div>
+    </div>
+    <div style="padding: 50px; text-align: center; background-color: #FFF;" id="localEData">
+        <div class="container">
+            <h1>Uma ótima localização</h1>
+            <p>O <i>Poké Party Day</i> será realizado no dia <b>27 de fevereiro</b>, das <b>11h às 20h</b>, na <i>Associação Aichi do Brasil</i> (Rua Santa Luzia, 74 - Liberdade, São Paulo - SP).<br/>O local fica a apenas 5 minutos a pé da estação de metrô Liberdade, então não há desculpas para você não ir! </p>
+            <div class="row" style="margin-top: 20px;">
+                <div class="col-md-6 col-lg-offset-3">
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="https://www.google.com/maps/embed?pb=!1m28!1m12!1m3!1d1828.6861281208987!2d-46.635280641973445!3d-23.555070237452295!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m13!3e6!4m5!1s0x94ce59a93e375647%3A0x1c6bd73cda3c9095!2sLiberdade+-+Pra%C3%A7a+da+Liberdade%2C+133+-+Liberdade%2C+S%C3%A3p+Paulo+-+SP%2C+01503-010!3m2!1d-23.5551229!2d-46.6359711!4m5!1s0x94ce59a9d2cc547b%3A0x41ef8b2b7cc559fd!2sR.+Santa+Luzia%2C+74+-+S%C3%A9%2C+S%C3%A3o+Paulo+-+SP%2C+01513-030!3m2!1d-23.554634099999998!2d-46.6323711!5e0!3m2!1spt-BR!2sbr!4v1453607086222" width="640" height="360" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 50px; text-align: center;" id="videoGames">
+        <div class="container">
+            <h1>Não vai faltar video-games...</h1>
+            <p>Pokémon nasceu nos video-games, e é claro que não deixaremos de ter atividades para a galera dos consoles e dos portáteis.</p>
+            <div class="row">
+                <div class="col-md-6">
+
+                </div>
+                <div class="col-md-6">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script>
+        function goToSection(sectionId) {
+            $('html, body').animate({
+                scrollTop: $('#' + sectionId).offset().top
+            }, 1000);
+
+            return false;
+        }
+    </script>
+}
+

@@ -258,6 +258,7 @@
     <Content Include="Content\img\icons\social\youtube.jpg" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\marquee_bg.jpg" />
     <Content Include="Content\img\metaImages\animefriends.jpg" />
     <Content Include="Content\img\metaImages\bgs.jpg" />
     <Content Include="Content\img\metaImages\bma.jpg" />
@@ -291,6 +292,7 @@
     <Content Include="Content\img\poke20th_bgHome.jpg" />
     <Content Include="Content\img\poke20th_timeline.png" />
     <Content Include="Content\img\pokeEventoBg.png" />
+    <Content Include="Content\img\pokeEventoLogo.png" />
     <Content Include="Content\img\pokePartyDay.jpg" />
     <Content Include="Content\img\sad_pikachu.png" />
     <Content Include="Content\img\sobre1.jpg" />
@@ -534,23 +536,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Nintendo\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\SubMenus\Nintendo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\Sidebars\General.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ESports\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\SubMenus\ESports.cshtml" />
-    <Content Include="Views\Nintendo\Ler.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Eventos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Shared\SubMenus\Eventos.cshtml" />
@@ -568,30 +560,6 @@
     <Content Include="Views\Shared\Comments\Disqus.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Nintendo\NintendoWiiU.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Nintendo\Nintendo3DS.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Nintendo\Previews.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Nintendo\Reviews.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Nintendo\Top10.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Nintendo\Retro.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Nintendo\Mario.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Nintendo\TheLegendOfZelda.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Home\Busca.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -604,34 +572,7 @@
     <Content Include="Views\Shared\Sidebars\ESports.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\ESports\Ler.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ESports\Dicas.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ESports\LeagueOfLegends.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\ESports\CounterStrike.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Shared\Sidebars\Eventos.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Eventos\Coberturas.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Eventos\AnimeFriends.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Eventos\BGS.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Eventos\BMA.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Eventos\Ler.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Sobre\QuemSomos.cshtml" />
@@ -725,6 +666,7 @@
     <Content Include="Areas\Eventos\Views\BMA\Index.cshtml" />
     <Content Include="Areas\Eventos\Views\Coberturas\Index.cshtml" />
     <Content Include="Areas\Eventos\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Nintendo\Views\Pokemon\PokePartyDay.cshtml" />
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
   </ItemGroup>
   <PropertyGroup>

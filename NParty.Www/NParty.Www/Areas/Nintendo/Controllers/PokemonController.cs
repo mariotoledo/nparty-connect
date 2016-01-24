@@ -22,6 +22,8 @@ namespace NParty.Www.Areas.Nintendo.Controllers
 
         public ActionResult Timeline() { return View(); }
 
+        public ActionResult PokePartyDay() { return View(); }
+
         private Dictionary<int, string> GetDailyPokemonMusic()
         {
             Dictionary<int, string> youtubeVideoIdByDay = new Dictionary<int, string>();
