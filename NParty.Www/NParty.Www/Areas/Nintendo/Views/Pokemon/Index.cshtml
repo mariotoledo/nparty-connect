@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Pokémon";
+    ViewBag.Title = "20 anos de Pokémon";
     ViewData["ActiveMenu"] = 1;
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
@@ -7,11 +7,11 @@
 
     int maxPosts = (int)ViewData["MaxPosts"];
 
-    ViewData["title"] = "Pokémon";
-    ViewData["metaDescription"] = "Tudo sobre Pokémon com a N-Party";
-    ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/pokemon.jpg");
+    ViewData["title"] = "20 anos de Pokémon";
+    ViewData["metaDescription"] = "Comemore o aniversário de Pokémon com a N-Party!";
+    ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/metaPokemon20th.jpg");
     ViewData["metaUrl"] = Url.Content("~/Nintendo/Pokemon");
-    ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Pikachu" };
+    ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Pikachu", "20 anos", "20 anos Pokémon" };
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
 
@@ -53,9 +53,9 @@
     <nav class="navbar navbar-default" id="pokemon20th-navbar">
         <div class="container">
             <ul class="nav nav-pills menu">
-                <li role="presentation" class="active"><a href="#">Home</a></li>
-                <li role="presentation"><a href="#">Timeline Interativa</a></li>
-                <li role="presentation"><a href="#">Poké Party Day</a></li>
+                <li role="presentation" class="active"><a href="@Url.Content("~/Nintendo/Pokemon/")">Home</a></li>
+                <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/Timeline")">Timeline Interativa</a></li>
+                <li role="presentation" ><a href="@Url.Content("~/Nintendo/Pokemon/PokePartyDay")">Poké Party Day</a></li>
             </ul>
         </div>
     </nav>
@@ -69,7 +69,7 @@
         <!-- Wrapper for slides -->
         <div class="carousel-inner" role="listbox" style="background: url('@Url.Content("~/Content/img/marquee_bg.jpg")') center center; background-size: cover;">
             <div class="item active">
-                <a href="#">
+                <a href="@Url.Content("~/Nintendo/Pokemon/Timeline")">
                     <div class="item-inner" style="text-align: center;">
                         <img style="margin: auto;" class="img-responsive" src="@Url.Content("~/Content/img/poke20th_timeline.png")" alt="Timeline" />
                     </div>
@@ -80,7 +80,7 @@
                 </a>
             </div>
             <div class="item">
-                <a href="#">
+                <a href="@Url.Content("~/Nintendo/Pokemon/PokePartyDay")">
                     <div class="item-inner" style="text-align: center;">
                         <img style="margin: auto;" class="img-responsive" src="@Url.Content("~/Content/img/pokeEventoBg.png")" alt="Timeline" />
                     </div>

@@ -1,12 +1,12 @@
 ﻿@{
-    ViewBag.Title = "Pokémon";
+    ViewBag.Title = "Poké Party Day";
     ViewData["ActiveMenu"] = 1;
 
-    ViewData["title"] = "Pokémon";
-    ViewData["metaDescription"] = "Tudo sobre Pokémon com a N-Party";
-    ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/pokemon.jpg");
-    ViewData["metaUrl"] = Url.Content("~/Nintendo/Pokemon");
-    ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Pikachu" };
+    ViewData["title"] = "Poké Party Day";
+    ViewData["metaDescription"] = "Um evento gratuito comemorativo dos 20 anos de Pokémon, com freeplays, campeonatos, palestras, cosplays e muito mais!";
+    ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/metaPokePartyDay.jpg");
+    ViewData["metaUrl"] = Url.Content("~/Nintendo/Pokemon/PokePartyDay");
+    ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Campeonato", "VGC", "Cosplay", "Evento" };
 
     @section Head{
         <link rel="stylesheet" href="@Url.Content("~/Content/css/pokemon20th.css")"/>
@@ -38,9 +38,9 @@
     <nav class="navbar navbar-default" id="pokemon20th-navbar">
         <div class="container">
             <ul class="nav nav-pills menu">
-                <li role="presentation"><a href="#">Home</a></li>
-                <li role="presentation" ><a href="#">Timeline Interativa</a></li>
-                <li role="presentation" class="active"><a href="#">Poké Party Day</a></li>
+                <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/")">Home</a></li>
+                <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/Timeline")">Timeline Interativa</a></li>
+                <li role="presentation" class="active"><a href="@Url.Content("~/Nintendo/Pokemon/PokePartyDay")">Poké Party Day</a></li>
             </ul>
         </div>
     </nav>
@@ -50,9 +50,11 @@
                 <li role="presentation"><a style="cursor: pointer" onclick="goToSection('oQueE')">O que é</a></li>
                 <li role="presentation"><a style="cursor: pointer" onclick="goToSection('localEData')">Local e Data</a></li>
                 <li role="presentation"><a style="cursor: pointer" onclick="goToSection('videoGames')">Video-Game</a></li>
-                <li role="presentation"><a style="cursor: pointer">TCG</a></li>
-                <li role="presentation"><a style="cursor: pointer">Palestras</a></li>
-                <li role="presentation"><a style="cursor: pointer">Cosplay</a></li>
+                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('tcg')">TCG</a></li>
+                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('palestras')">Palestras</a></li>
+                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('cosplay')">Cosplay</a></li>
+                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('estandistas')">Estandistas</a></li>
+                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('contato')">Contato</a></li>
             </ul>
         </div>
     </nav>
@@ -67,7 +69,7 @@
     <div style="padding: 50px; text-align: center; background-color: #FFF;" id="localEData">
         <div class="container">
             <h1>Uma ótima localização</h1>
-            <p>O <i>Poké Party Day</i> será realizado no dia <b>27 de fevereiro</b>, das <b>11h às 20h</b>, na <i>Associação Aichi do Brasil</i> (Rua Santa Luzia, 74 - Liberdade, São Paulo - SP).<br/>O local fica a apenas 5 minutos a pé da estação de metrô Liberdade, então não há desculpas para você não ir! </p>
+            <p>O <i>Poké Party Day</i> será realizado no dia <b>27 de fevereiro</b>, das <b>11h às 20h</b>, na <i>Associação Aichi do Brasil</i> (Rua Santa Luzia, 74 - Liberdade, São Paulo - SP).<br />O local fica a apenas 5 minutos a pé da estação de metrô Liberdade, então não há desculpas para você não ir! </p>
             <div class="row" style="margin-top: 20px;">
                 <div class="col-md-6 col-lg-offset-3">
                     <div class="embed-responsive embed-responsive-16by9">
@@ -82,12 +84,237 @@
             <h1>Não vai faltar video-games...</h1>
             <p>Pokémon nasceu nos video-games, e é claro que não deixaremos de ter atividades para a galera dos consoles e dos portáteis.</p>
             <div class="row">
+                <div class="col-md-4">
+                    <div class="hovereffect">
+                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/meetup.jpg")" alt="MeetUp 3DS">
+                        <div class="overlay">
+                            <h2>Praça <span>Street Pass</span></h2>
+                            <p>
+                                Traga seu 3DS, faça novos encontros, troque Pokémon, batalhe e jogue em multiplayer com outros jogadores. Teremos um espaço dedicado para o portátil da Nintendo.
+                            </p>
+                        </div>
+                    </div><br />
+                    <br />
+                    <div class="hovereffect">
+                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/jogosclassicos.jpg")" alt="Festival de Jogos Clássicos">
+                        <div class="overlay">
+                            <h2>Festival de <span>Jogos Clássicos</span></h2>
+                            <p>
+                                Pokémon Stadium, Pokémon Puzzle League, Pokémon Snap... teremos diversos pontos de freeplay de jogos clássicos da série Pokémon para o público se divertir!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="hovereffect">
+                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/vgc.jpg")" alt="">
+                        <div class="overlay">
+                            <h2>Campeonato <span>VGC</span> com a LOP-SP</h2>
+                            <p>
+                                A LOP-SP realizará um Premiere Challenge no evento, valendo Play Points para classificação para o Worlds Championships deste ano.<br />
+                                <br />
+                                <button class="btn btn-lg btn-pokemon20th" data-toggle="modal" data-target="#lopVgcModal">VEJA AS REGRAS</button><br />
+                                <br />
+                                Realização:<br />
+                                <a href="http://www.lop-sp.com.br/" target="_blank"><img src="@Url.Content("~/Content/img/pokepartyday/logoLopSp.png")" /></a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 50px; text-align: center; background-color: #FFF;" id="tcg">
+        <div class="container">
+            <h1>...nem muito menos TCG</h1>
+            <p>O TCG (trading card game) é tão antigo quanto os video-games de Pokémon, e possuem uma grande massa de fãs no Brasil e no mundo. No Poké Party Day, teremos um espaço dedicado apenas ao jogo de cartas de Pokémon, com áreas livres para jogo e aprendizado, além de um campeonato oficial.</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="hovereffect">
+                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/tcgFree.jpg")" alt="Espaço Freeplay TCG">
+                        <div class="overlay">
+                            <h2>Espaço <span>Freeplay</span></h2>
+                            <p>
+                                Traga seu deck, participe de partidas livres, faça trocas, etc.
+                            </p>
+                        </div>
+                    </div><br />
+                    <br />
+                    <div class="hovereffect">
+                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/tcgLearn.jpg")" alt="Aprenda a jogar o TCG">
+                        <div class="overlay">
+                            <h2>Aprenda a jogar</h2>
+                            <p>
+                                Não sabe jogar o TCG de Pokémon? Não se preocupe: teremos um espaço de dedicado para você. Apenas converse com um de nossos staffs, e teremos o prazer de lhe ensinar o básico do jogo.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8">
+                    <div class="hovereffect">
+                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/tcgChampionship.jpg")" alt="">
+                        <div class="overlay">
+                            <h2>Campeonato</h2>
+                            <p>
+                                Em breve
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 50px; text-align: center; background: url('@Url.Content("~/Content/img/pokepartyday/palestras.jpg")') center center; background-size: cover;" id="palestras">
+        <div class="row">
+            <div class="col-md-8" style="padding: 50px;"></div>
+            <div class="col-md-4" style="padding: 20px; background-color: rgba(0, 0, 0, 0.5); color: #FFF;">
+                <h1>Palestras de quem entende de Pokémon</h1>
+                <p>
+                    Teremos palestras e outras atividades interativas com quem entende do assunto, discutindo temas diversos sobre o universo Pokémon<br />
+                    <br /><b>Em breve, traremos a programação completa!</b>
+                </p>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 50px; text-align: center; background-color: #FFF;" id="cosplay">
+        <div class="container">
+            <h1>Venha de cosplay!</h1>
+            <p>Nós adoramos a cultura cosplay, e por isto teremos uma área de dedicada à sessões de fotos, organizada pela <b>Otaku Company</b>, e um desfile exclusivo valendo prêmios especiais!</p>
+            <div class="row">
                 <div class="col-md-6">
-
+                    <div class="hovereffect">
+                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/oc.jpg")" alt="">
+                        <div class="overlay">
+                            <h2>Sessões de fotos com a Otaku Company</h2>
+                            <p>
+                                Nossos amigos da <b>Otaku Company</b> estarão no local com seu estúdio dedicado a fotos de cosplayers. Então traga seu traje mais bonito, e venha tirar algumas fotos!<br />
+                                <br />
+                                Realização:<br />
+                                <a href="http://www.otakucompany.com.br/" target="_blank"><img src="@Url.Content("~/Content/img/pokepartyday/otakucompany.png")" /></a>
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-6">
-
+                    <div class="hovereffect">
+                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/desfilePokemon.jpg")" alt="">
+                        <div class="overlay">
+                            <h2>Desfile especial Pokémon</h2>
+                            <p>
+                                Em breve
+                            </p>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 50px; text-align: center;" id="estandistas">
+        <h1>Estandistas</h1>
+        <p>Haverão diferentes estandistas no evento com os mais diferentes produtos para o fã de Pokémon.</p>
+        <p>Quer ter sua estande no evento? Entre em contato conosco através do email <a href="mailto:contato@nparty.com.br">contato@nparty.com.br</a></p>
+    </div>
+    <div style="padding: 50px; background-color: #FFF; text-align: center;" id="contato">
+        <h1>Entre em contato</h1>
+        <p>Possui alguma dúvida? Quer apoiar o evento? Então entre em contato conosco através do email <a href="mailto:contato@nparty.com.br">contato@nparty.com.br</a></p>
+    </div>
+</div>
+
+<!-- Lop VGC Modal -->
+<div class="modal fade" id="lopVgcModal" tabindex="-1" role="dialog" aria-labelledby="lopVgcModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Premiere Challenge #4 - Regras</h4>
+            </div>
+            <div class="modal-body">
+                <p>VGC é o conjunto de regras oficiais da Nintendo. A LOP-SP se usa dessas regras regularmente em seus torneios. Esta página descreve a versão dessas regras usada em 2016.</p>
+                <p>As inscrições para o campeonato no Poké Party Day começarão às 12h, e o torneio começará às 14h, valendo Play Points para a classificação no Worlds Championships. Veja todas as regras logo abaixo:</p>
+                <h2>Regras padrão</h2>
+                <ul>
+                    <li>Todos os jogadores deverão usar&nbsp;as versões <em>Pokémon Omega Ruby</em> ou <em>Pokémon Alpha Sapphire</em>.</li>
+                    <li>Todas as batalhas serão <em>Double Battle</em> com&nbsp;<em>Normal Rules.</em></li>
+                    <li>Regra do pentágono: Todos os Pokémon usados devem possuir o pentágono azul em seus stats indicando que foi capturado ou recebido como presente nas versões X, Y, Omega Ruby ou Alpha Sapphire.</li>
+                    <li>Um Pokémon não pode possuir um apelido considerado ofensivo (pelos juízes ou outros jogadores) nem <em>parecido com o nome de outra espécie de Pokémon</em>. Por exemplo, você não pode usar um Raichu chamado Pikachu, P1k4chu, nem nada do tipo. Será necessário trocar o apelido do Pokémon, se possível, ou tirá-lo do time e jogar com apenas 5 Pokémon.</li>
+                    <li>Cada jogador leva&nbsp;6 pokémon e escolhe&nbsp;4 deles durante o <em>Team Preview</em>.</li>
+                    <li>Todos os pokémon acima do lv50 terão seus níveis baixados temporariamente para lv50. Pokémon abaixo desse nível continuarão com seus níveis originais.</li>
+                    <li><em>Species Clause</em>: Não pode haver dois pokémon com o mesmo número na Pokédex.</li>
+                    <li><em>Item Clause</em>: Não se pode equipar dois itens iguais.</li>
+                    <li>O item <em>Soul Dew</em> é banido.</li>
+                    <li>
+                        Os seguintes Pokémon estão banidos, em todas as suas formas:
+                        <ul>
+                            <li>Mew</li>
+                            <li>Celebi</li>
+                            <li>Jirachi</li>
+                            <li>Deoxys</li>
+                            <li>Phione</li>
+                            <li>Manaphy</li>
+                            <li>Darkrai</li>
+                            <li>Shaymin</li>
+                            <li>Arceus</li>
+                            <li>Victini</li>
+                            <li>Keldeo</li>
+                            <li>Meloetta</li>
+                            <li>Genesect</li>
+                            <li>Diancie</li>
+                            <li>Hoopa</li>
+                        </ul>
+                    </li>
+                    <li>
+                        Os times podem ter no máximo dois dentre os seguintes Pokémon:
+                        <ul>
+                            <li>Mewtwo</li>
+                            <li>Lugia</li>
+                            <li>Ho-Oh</li>
+                            <li>Kyogre</li>
+                            <li>Groudon</li>
+                            <li>Rayquaza</li>
+                            <li>Dialga</li>
+                            <li>Palkia</li>
+                            <li>Giratina</li>
+                            <li>Reshiram</li>
+                            <li>Zekrom</li>
+                            <li>Kyurem</li>
+                            <li>Xerneas</li>
+                            <li>Yveltal</li>
+                            <li>Zygarde</li>
+                        </ul>
+                    </li>
+                    <li>O uso de dispositivos externos para modificar ou criar itens ou Pokémon&nbsp;no jogo de um jogador é proibido.&nbsp;Quem for pego com pokémon alterados será desclassificado imediatamente, independente deles terem sido obtidos através de trocas.</li>
+                </ul>
+                <p>O site oficial de Pokémon tem uma página contando um pouco sobre os stats e os principais golpes de cada um dos lendários que&nbsp;podem ser usados no VGC 2016. Dê uma olhada no <a target="_blank" href="http://www.pokemon.com/us/strategy/vgc-2016-championship-series-preview/">2016 Pokémon Video Game Championship Series Preview</a>.</p>
+                <h2>Suíço com top</h2>
+                <p>Todos os torneios VGC, sejam eles apenas sancionados, <em>Premier Challenges</em>, ou outras modalidades, seguirão o mesmo formato em duas partes: a primeira consiste de um suíço com várias rodadas, a segunda, de um torneio por eliminação simples com os melhores colocados no suíço.</p>
+                <p>Um torneio suíço funciona&nbsp;por rodadas, da seguinte maneira: na primeira, as partidas são aleatórias; na segunda, os&nbsp;vencedores da rodada anterior jogam entre si e os perdedores fazem o mesmo; e assim por diante, tentando manter&nbsp;as batalhas “pareadas” entre pessoas com números de vitórias/derrotas semelhantes. Isso ocorre até que consigamos separar os 4 ou 8&nbsp;jogadores melhor colocados para fazermos o <em>top</em>.&nbsp;A Wikipedia tem um artigo sobre o assunto: <a target="_blank" href="https://pt.wikipedia.org/wiki/Sistema_su%C3%AD%C3%A7o">Sistema suíço</a>.</p>
+                <h2>Quantas batalhas por partida?</h2>
+                <p>A primeira parte dos torneios VGC, o suíço, vai ser realizada como “melhor de um”&nbsp;(<em>best of one</em>, ou <em>bo1</em>), cada partida terá somente uma batalha com tempo limite de 20 minutos. Na segunda parte, o <em>top cut</em>, as partidas serão feitas no melhor de três&nbsp;(<em>best of three</em>, ou <em>bo3</em>), onde o vencedor será aquele que ganhar 2 das 3 batalhas.</p>
+                <p>Caso tenhamos torneios com mais de um dia de duração, como os Midseason Showdowns, as partidas do suíço também poderão ser&nbsp;melhor de três. Não&nbsp;podemos confirmar que teremos um torneio desse tipo, mas avisaremos com antecedência caso ocorra.</p>
+                <h2>Resolução de batalhas</h2>
+                <ul>
+                    <li>Se o último pokémon de um jogador usar&nbsp;&nbsp;Selfdestruct, Explosion, Destiny Bond, ou Final Gambit e ambos os pokémon desmaiarem, aquele que usou o golpe perde a batalha.</li>
+                    <li>Se o último pokémon de um jogador usar&nbsp; Double‐Edge, Volt Tackle, Flare Blitz, Take Down, Submission, Brave Bird, Wood Hammer, Head Smash, Struggle, Head Charge, ou Wild Charge, ou estava segurando o item&nbsp;Life Orb, e ambos os pokémon desmaiarem, aquele que usou o golpe vence a batalha.</li>
+                    <li>Se os últimos pokémon de cada jogador desmaiarem graças aos efeitos de clima, como Hail ou Sandstorm, o jogador cujo pokémon desmaiar por último vence o jogo. Isso inclui o efeito de Perish Song.</li>
+                    <li>Se a ability de um pokémon (como Rough Skin, Aftermath, Liquid Ooze, ou Iron Barbs) ou item (como Rocky Helmet) resultar em ambos os pokémon desmaiarem, o jogador com a ability ou com o item vence a batalha.</li>
+                </ul>
+                <h2>Critérios de desempate</h2>
+                <p>Todas as batalhas terão tempo limite de 15 a&nbsp;20 minutos. Caso o tempo de batalha acabe antes de o último pokémon de um jogador desmaiar, o vencedor é&nbsp;determinado de acordo com os seguintes critérios, em ordem crescente:</p>
+                <ol>
+                    <li>O jogador que tiver mais pokémon sobrando vence;</li>
+                    <li>O jogador que tiver a maior porcentagem média de HP vence;</li>
+                    <li>O jogador que possuir a maior quantidade total de HP vence.</li>
+                </ol>
+                <p>Como&nbsp;o único tipo de torneio que existe no Brasil por enquanto é o&nbsp;Premier Challenge, onde não podemos travar a Battle Box e reforçar o limite de tempo por batalha automaticamente, os responsáveis&nbsp;por isso serão os organizadores da LOP-SP presentes no local.</p>
+                <h2>Regras&nbsp;adicionais</h2>
+                <h3>Anotações</h3>
+                <p>Você <strong>pode</strong> levar uma folha de papel branco para fazer anotações durante as batalhas. Entretanto, se houver a confirmação de que um jogador recebeu as anotações de outro para se beneficiar em batalhas, este será removido do torneio. Você <strong>não pode</strong>&nbsp;usar um caderno durante as batalhas. Cada partida precisa que você use uma folha em branco nova.</p>
+                <h3>Headphones</h3>
+                <p>Você <strong>pode</strong> usar fones de ouvido enquanto joga desde que&nbsp;o modelo do fone use cabos e esteja conectado no seu 3DS. O cabo precisa ficar visível o tempo todo.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
