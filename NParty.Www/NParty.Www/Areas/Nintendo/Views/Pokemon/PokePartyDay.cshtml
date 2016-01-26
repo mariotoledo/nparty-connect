@@ -9,9 +9,9 @@
     ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Campeonato", "VGC", "Cosplay", "Evento" };
 
     @section Head{
-        <link rel="stylesheet" href="@Url.Content("~/Content/css/pokemon20th.css")"/>
+        <link rel="stylesheet" href="@Url.Content("~/Content/css/pokemon20th.css")" />
     }
-    
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -37,26 +37,49 @@
     </section>
     <nav class="navbar navbar-default" id="pokemon20th-navbar">
         <div class="container">
-            <ul class="nav nav-pills menu">
-                <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/")">Home</a></li>
-                <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/Timeline")">Timeline Interativa</a></li>
-                <li role="presentation" class="active"><a href="@Url.Content("~/Nintendo/Pokemon/PokePartyDay")">Poké Party Day</a></li>
-            </ul>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-pokeParty" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h3 style="margin-top: 12px; text-align: center; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,.6);" class="hidden-lg">Poké Party Day</h3>
+            </div>
+            <div class="collapse navbar-collapse" id="menu-pokeParty">
+                <ul class="nav nav-pills menu">
+                    <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/")">Home</a></li>
+                    <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/Timeline")">Timeline Interativa</a></li>
+                    <li role="presentation" class="active"><a href="@Url.Content("~/Nintendo/Pokemon/PokePartyDay")">Poké Party Day</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
-    <nav class="navbar navbar-default" id="pokemon20th-subnavbar">
-        <div class="container">
-            <ul class="nav nav-pills menu">
-                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('oQueE')">O que é</a></li>
-                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('localEData')">Local e Data</a></li>
-                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('videoGames')">Video-Game</a></li>
-                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('tcg')">TCG</a></li>
-                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('palestras')">Palestras</a></li>
-                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('cosplay')">Cosplay</a></li>
-                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('estandistas')">Estandistas</a></li>
-                <li role="presentation"><a style="cursor: pointer" onclick="goToSection('contato')">Contato</a></li>
-            </ul>
-        </div>
+    <nav class="navbar" id="pokemon20th-subnavbar">
+        
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subMenu-pokeParty" aria-expanded="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h3 style="margin-top: 12px; text-align: center; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,.6);" class="hidden-lg">Menu</h3>
+                </div>
+                <div class="collapse navbar-collapse" id="subMenu-pokeParty">
+                    <ul class="nav nav-pills menu" >
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('oQueE')">O que é</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('localEData')">Local e Data</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('videoGames')">Video-Game</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('tcg')">TCG</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('palestras')">Palestras</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('cosplay')">Cosplay</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('estandistas')">Estandistas</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('contato')">Contato</a></li>
+                    </ul>
+                </div>
+            </div>
     </nav>
 
     <div class="activity-area" id="oQueE">
@@ -85,39 +108,45 @@
             <p>Pokémon nasceu nos video-games, e é claro que não deixaremos de ter atividades para a galera dos consoles e dos portáteis.</p>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="hovereffect">
-                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/meetup.jpg")" alt="MeetUp 3DS">
-                        <div class="overlay">
-                            <h2>Praça <span>Street Pass</span></h2>
-                            <p>
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/meetup.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1> Praça <span>Street Pass</span> </h1>
+                            </div>
+                            <div class="[ info-card-detail ]">
                                 Traga seu 3DS, faça novos encontros, troque Pokémon, batalhe e jogue em multiplayer com outros jogadores. Teremos um espaço dedicado para o portátil da Nintendo.
-                            </p>
+                            </div>
                         </div>
-                    </div><br />
-                    <br />
-                    <div class="hovereffect">
-                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/jogosclassicos.jpg")" alt="Festival de Jogos Clássicos">
-                        <div class="overlay">
-                            <h2>Festival de <span>Jogos Clássicos</span></h2>
-                            <p>
+                    </div>
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/jogosclassicos.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1> Festival de <span>Jogos Clássicos</span> </h1>
+                            </div>
+                            <div class="[ info-card-detail ]">
                                 Pokémon Stadium, Pokémon Puzzle League, Pokémon Snap... teremos diversos pontos de freeplay de jogos clássicos da série Pokémon para o público se divertir!
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="hovereffect">
-                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/vgc.jpg")" alt="">
-                        <div class="overlay">
-                            <h2>Campeonato <span>VGC</span> com a LOP-SP</h2>
-                            <p>
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/vgc.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1> Campeonato <span>VGC</span></h1>
+                                <h3>Com a LOP-SP</h3>
+                            </div>
+                            <div class="[ info-card-detail ]">
                                 A LOP-SP realizará um Premiere Challenge no evento, valendo Play Points para classificação para o Worlds Championships deste ano.<br />
                                 <br />
                                 <button class="btn btn-lg btn-pokemon20th" data-toggle="modal" data-target="#lopVgcModal">VEJA AS REGRAS</button><br />
                                 <br />
                                 Realização:<br />
                                 <a href="http://www.lop-sp.com.br/" target="_blank"><img src="@Url.Content("~/Content/img/pokepartyday/logoLopSp.png")" /></a>
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -130,34 +159,39 @@
             <p>O TCG (trading card game) é tão antigo quanto os video-games de Pokémon, e possuem uma grande massa de fãs no Brasil e no mundo. No Poké Party Day, teremos um espaço dedicado apenas ao jogo de cartas de Pokémon, com áreas livres para jogo e aprendizado, além de um campeonato oficial.</p>
             <div class="row">
                 <div class="col-md-4">
-                    <div class="hovereffect">
-                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/tcgFree.jpg")" alt="Espaço Freeplay TCG">
-                        <div class="overlay">
-                            <h2>Espaço <span>Freeplay</span></h2>
-                            <p>
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/tcgFree.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1>Espaço <span>Freeplay</span></h1>
+                            </div>
+                            <div class="[ info-card-detail ]">
                                 Traga seu deck, participe de partidas livres, faça trocas, etc.
-                            </p>
+                            </div>
                         </div>
-                    </div><br />
-                    <br />
-                    <div class="hovereffect">
-                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/tcgLearn.jpg")" alt="Aprenda a jogar o TCG">
-                        <div class="overlay">
-                            <h2>Aprenda a jogar</h2>
-                            <p>
+                    </div>
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/tcgLearn.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1>Aprenda a jogar</h1>
+                            </div>
+                            <div class="[ info-card-detail ]">
                                 Não sabe jogar o TCG de Pokémon? Não se preocupe: teremos um espaço de dedicado para você. Apenas converse com um de nossos staffs, e teremos o prazer de lhe ensinar o básico do jogo.
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-8">
-                    <div class="hovereffect">
-                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/tcgChampionship.jpg")" alt="">
-                        <div class="overlay">
-                            <h2>Campeonato</h2>
-                            <p>
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/tcgChampionship.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1>Campeonato</h1>
+                            </div>
+                            <div class="[ info-card-detail ]">
                                 Em breve
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -182,27 +216,32 @@
             <p>Nós adoramos a cultura cosplay, e por isto teremos uma área de dedicada à sessões de fotos, organizada pela <b>Otaku Company</b>, e um desfile exclusivo valendo prêmios especiais!</p>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="hovereffect">
-                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/oc.jpg")" alt="">
-                        <div class="overlay">
-                            <h2>Sessões de fotos com a Otaku Company</h2>
-                            <p>
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/oc.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1>Sessões de fotos</h1>
+                                <h3>Com a Otaku Company</h3>
+                            </div>
+                            <div class="[ info-card-detail ]">
                                 Nossos amigos da <b>Otaku Company</b> estarão no local com seu estúdio dedicado a fotos de cosplayers. Então traga seu traje mais bonito, e venha tirar algumas fotos!<br />
                                 <br />
                                 Realização:<br />
                                 <a href="http://www.otakucompany.com.br/" target="_blank"><img src="@Url.Content("~/Content/img/pokepartyday/otakucompany.png")" /></a>
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="hovereffect">
-                        <img class="img-responsive background" src="@Url.Content("~/Content/img/pokepartyday/desfilePokemon.jpg")" alt="">
-                        <div class="overlay">
-                            <h2>Desfile especial Pokémon</h2>
-                            <p>
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/desfilePokemon.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1>Desfile especial Pokémon</h1>
+                            </div>
+                            <div class="[ info-card-detail ]">
                                 Em breve
-                            </p>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -214,7 +253,7 @@
         <p>Haverão diferentes estandistas no evento com os mais diferentes produtos para o fã de Pokémon.</p>
         <p>Quer ter sua estande no evento? Entre em contato conosco através do email <a href="mailto:contato@nparty.com.br">contato@nparty.com.br</a></p>
     </div>
-    <div class="activity-area"  style="background-color: #FFF;" id="contato">
+    <div class="activity-area" style="background-color: #FFF;" id="contato">
         <h1>Entre em contato</h1>
         <p>Possui alguma dúvida? Quer apoiar o evento? Então entre em contato conosco através do email <a href="mailto:contato@nparty.com.br">contato@nparty.com.br</a></p>
     </div>

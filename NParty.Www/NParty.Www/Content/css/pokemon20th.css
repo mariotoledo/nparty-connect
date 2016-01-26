@@ -89,16 +89,9 @@
 }
 
 @media (max-width: 480px){
-    .pokemon20th .menu a, #pokemon20th-subnavbar a{
-        font-size: 12px;
-    }
 
     #pokemon20th-navbar{
         min-height: 37px;
-    }
-
-    .pokemon20th h3.subTitle{
-        font-size: 14px!important;
     }
 }
 
@@ -339,16 +332,142 @@ padding: 20px 0px;
 }
 
 .btn-pokemon20th{
+    border-radius: 0px;
     color: #FFF;
-    background-color: #FECC04;
+    background-color: #337ab7;
 }
 
 .btn-pokemon20th:hover{
     color: #FFF;
-    background-color: #c29c04;
+    background-color: #429ce9;
 }
 
 .hovereffect a:hover{
     color: #c29c04;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+.animate {
+		-webkit-transition: all 0.3s ease-in-out;
+		-moz-transition: all 0.3s ease-in-out;
+		-o-transition: all 0.3s ease-in-out;
+		-ms-transition: all 0.3s ease-in-out;
+		transition: all 0.3s ease-in-out;
+	}
+
+	.info-card {
+		width: 100%;
+		border: 1px solid rgb(215, 215, 215);
+		position: relative;
+		margin-bottom: 20px;
+		overflow: hidden;
+	}
+	.info-card > img {
+		width: 100px;
+	}
+	.info-card .info-card-details,
+	.info-card .info-card-details .info-card-header  {
+		width: 100%;
+		height: 100%;
+		position: absolute;
+		bottom: -100%;
+		left: 0;
+		padding: 0 15px;
+		background: rgb(255, 255, 255);
+		text-align: center;
+	}
+	.info-card .info-card-details::-webkit-scrollbar {
+		width: 8px;
+	}
+	.info-card .info-card-details::-webkit-scrollbar-button {
+		width: 8px;
+		height: 0px;
+	}
+	.info-card .info-card-details::-webkit-scrollbar-track {
+		background: transparent;
+	}
+	.info-card .info-card-details::-webkit-scrollbar-thumb {
+		background: rgb(160, 160, 160);
+	}
+	.info-card .info-card-details::-webkit-scrollbar-thumb:hover {
+		background: rgb(130, 130, 130);
+	}           
+
+	.info-card .info-card-details .info-card-header {
+		height: auto;		
+		bottom: 100%;
+		padding: 10px 5px;
+	}
+	.info-card:hover .info-card-details {
+		bottom: 0px;
+		overflow: auto;
+		padding-bottom: 25px;
+	}
+	.info-card:hover .info-card-details .info-card-header {
+		position: relative;
+		bottom: 0px;
+		padding-top: 45px;
+		padding-bottom: 25px;
+	}
+	.info-card .info-card-details .info-card-header h1,	
+	.info-card .info-card-details .info-card-header h3 {
+		color: rgb(62, 62, 62);
+		font-size: 22px;
+		font-weight: 900;
+		text-transform: uppercase;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+	.info-card .info-card-details .info-card-header h3 {
+		color: #337ab7;
+		font-size: 15px;
+		font-weight: 400;
+		margin-top: 5px;
+	}
+	.info-card .info-card-details .info-card-detail .social {
+		list-style: none;
+		padding: 0px;
+		margin-top: 25px;
+		text-align: center;
+	}
+	.info-card .info-card-details .info-card-detail .social a {
+		position: relative;
+		display: inline-block;
+		min-width: 40px;
+		padding: 10px 0px;
+		margin: 0px 5px;
+		overflow: hidden;
+		text-align: center;
+		background-color: rgb(215, 215, 215);
+		border-radius: 40px;
+	}
+
+    @media(min-width: 500px){
+    .col-md-8 .info-card .info-card-details .info-card-header h1{
+        font-size: 42px;
+    }
+
+    .col-md-8 .info-card .info-card-details .info-card-header h3{
+        font-size: 30px;
+    }
+
+    .col-md-6 .info-card .info-card-details .info-card-header h1{
+        font-size: 36px;
+    }
+
+    .col-md-6 .info-card .info-card-details .info-card-header h3{
+        font-size: 20px;
+    }
+}
