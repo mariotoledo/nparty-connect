@@ -626,9 +626,7 @@
     <Content Include="Content\pokemontimeline\canvasengine\package.json" />
     <Content Include="Content\pokemontimeline\canvasengine\readme.md" />
     <Content Include="Content\pokemontimeline\Data\Database.json" />
-    <Content Include="Content\pokemontimeline\Data\Maps\MAP-1.json" />
     <Content Include="Content\pokemontimeline\Data\Maps\MAP-2.json" />
-    <Content Include="Content\pokemontimeline\Data\Maps\MAP-3.json" />
     <Content Include="Content\pokemontimeline\Data\Materials.json" />
     <Content Include="Content\pokemontimeline\Graphics\Fonts\AUBREY1__.TTF" />
     <Content Include="Content\pokemontimeline\Graphics\Fonts\Elementary_Gothic_Bookhand.otf" />
