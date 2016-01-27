@@ -26,6 +26,16 @@
                         <h3 class="subTitle">Um evento gratuito comemorativo dos 20 anos de Pokémon, com freeplays, campeonatos, palestras, cosplays e muito mais!</h3>
                     </div>
                 </div>
+                <div class="share-icons">
+                    <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/Nintendo/Pokemon/PokePartyDay"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                    <a title="Compartilhe no Twitter" href="https://twitter.com/intent/tweet?source=n_party&related=n_party&via=n_party&url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/Nintendo/Pokemon/PokePartyDay"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')" onclick="javascript:window.open(this.href,
+                                                '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                    <a title="Compartilhe no LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/Nintendo/Pokemon/PokePartyDay"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/linkedin_32.png")')" onclick="javascript:window.open(this.href,
+                                                '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                    <a title="Compartilhe no Google+" href="https://plus.google.com/share?url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/Nintendo/Pokemon/PokePartyDay"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/googleplus_32.png")')" onclick="javascript:window.open(this.href,
+                                                '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                </div>
                 <div class="row">
                     <div class="col-md-2 col-lg-offset-5" style="padding: 10px; text-align: center;">
                         <b>Realização:</b>
@@ -47,7 +57,7 @@
                 <h3 style="margin-top: 12px; text-align: center; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,.6);" class="hidden-lg">Poké Party Day</h3>
             </div>
             <div class="collapse navbar-collapse" id="menu-pokeParty">
-                <ul class="nav nav-pills menu">
+                <ul class="nav nav-pills  menu">
                     <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/")">Home</a></li>
                     <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/Timeline")">Timeline Interativa</a></li>
                     <li role="presentation" class="active"><a href="@Url.Content("~/Nintendo/Pokemon/PokePartyDay")">Poké Party Day</a></li>
@@ -84,7 +94,7 @@
 
     <div class="activity-area" id="oQueE">
         <div class="container">
-            <h1>Vivencie o melhor de Pokémon em seu aniversário de 20 anos</h1>
+            <h1 class="activity-area-title">Vivencie o melhor de Pokémon em seu aniversário de 20 anos</h1>
             <p>Nós amamos Pokémon, e com a chegada do 20º. aniversário da franquia, o grupo <b>N-Party</b> organizará um evento gratuito para os fãs da série aproveitarem o que há de melhor da franquia em diversas atividades e muita diversão.</p>
             <h3 style="font-weight: normal"><b>Não fique de fora dessa!</b> Compartilhe, chame seus amigos e marque sua presença!</h3>
         </div>
@@ -104,7 +114,7 @@
     </div>
     <div class="activity-area" id="videoGames">
         <div class="container">
-            <h1>Não vai faltar video-games...</h1>
+            <h1 class="activity-area-title">Não vai faltar video-games...</h1>
             <p>Pokémon nasceu nos video-games, e é claro que não deixaremos de ter atividades para a galera dos consoles e dos portáteis.</p>
             <div class="row">
                 <div class="col-md-4">
@@ -155,7 +165,7 @@
     </div>
     <div class="activity-area" style="background-color: #FFF;" id="tcg">
         <div class="container">
-            <h1>...nem muito menos TCG</h1>
+            <h1 class="activity-area-title">...nem muito menos TCG</h1>
             <p>O TCG (trading card game) é tão antigo quanto os video-games de Pokémon, e possuem uma grande massa de fãs no Brasil e no mundo. No Poké Party Day, teremos um espaço dedicado apenas ao jogo de cartas de Pokémon, com áreas livres para jogo e aprendizado, além de um campeonato oficial.</p>
             <div class="row">
                 <div class="col-md-4">
@@ -202,7 +212,7 @@
         <div class="row">
             <div class="col-md-8" style="padding: 50px;"></div>
             <div class="col-md-4" style="padding: 20px; background-color: rgba(0, 0, 0, 0.5); color: #FFF;">
-                <h1>Palestras de quem entende de Pokémon</h1>
+                <h1 class="activity-area-title">Palestras de quem entende de Pokémon</h1>
                 <p>
                     Teremos palestras e outras atividades interativas com quem entende do assunto, discutindo temas diversos sobre o universo Pokémon<br />
                     <br /><b>Em breve, traremos a programação completa!</b>
@@ -212,7 +222,7 @@
     </div>
     <div class="activity-area" style="background-color: #FFF;" id="cosplay">
         <div class="container">
-            <h1>Venha de cosplay!</h1>
+            <h1 class="activity-area-title">Venha de cosplay!</h1>
             <p>Nós adoramos a cultura cosplay, e por isto teremos uma área de dedicada à sessões de fotos, organizada pela <b>Otaku Company</b>, e um desfile exclusivo valendo prêmios especiais!</p>
             <div class="row">
                 <div class="col-md-6">
@@ -224,7 +234,13 @@
                                 <h3>Com a Otaku Company</h3>
                             </div>
                             <div class="[ info-card-detail ]">
-                                Nossos amigos da <b>Otaku Company</b> estarão no local com seu estúdio dedicado a fotos de cosplayers. Então traga seu traje mais bonito, e venha tirar algumas fotos!<br />
+                                O grupo OtakuCompany foi desenvolvido para trazer o melhor da cultura japonesa. Onde o visitante pode se informar sobre as novidades referentes à cultura japonesa.<br />
+                                <br />
+                                E como uma imagem vale mais do que mil palavras a OtakuCompany vem cobrindo eventos desde 2007, trazendo até você o que ocorre nos pequenos, médios e grandes eventos que ocorrem pelo Brasil.<br />
+                                <br />
+                                Com uma crescente no número de audiência, o site vem passando por melhorias constantes e por consequência número de parceiros também. Nosso método de divulgação massiva atingindo o público dos seguintes canais: site, instagram, worldcosplay e facebook. Trabalho sério, dedicação e qualidade são as bases do grupo OtakuCompany.<br />
+                                <br />
+                                A OtakuCompany chega ao primeiro Poké Party Day com uma equipe formada por fotógrafos profissionais, com um mega espaço temático onde, além de você poder tirar fotos para sua recordação, poderá ficar ligado nas dicas do momento do mundo cosplay e bater aquele papo com uma equipe que está nos melhores eventos do Brasil<br/>
                                 <br />
                                 Realização:<br />
                                 <a href="http://www.otakucompany.com.br/" target="_blank"><img src="@Url.Content("~/Content/img/pokepartyday/otakucompany.png")" /></a>
@@ -249,12 +265,12 @@
         </div>
     </div>
     <div class="activity-area" id="estandistas">
-        <h1>Estandistas</h1>
+        <h1 class="activity-area-title">Estandistas</h1>
         <p>Haverão diferentes estandistas no evento com os mais diferentes produtos para o fã de Pokémon.</p>
         <p>Quer ter sua estande no evento? Entre em contato conosco através do email <a href="mailto:contato@nparty.com.br">contato@nparty.com.br</a></p>
     </div>
     <div class="activity-area" style="background-color: #FFF;" id="contato">
-        <h1>Entre em contato</h1>
+        <h1 class="activity-area-title">Entre em contato</h1>
         <p>Possui alguma dúvida? Quer apoiar o evento? Então entre em contato conosco através do email <a href="mailto:contato@nparty.com.br">contato@nparty.com.br</a></p>
     </div>
 </div>

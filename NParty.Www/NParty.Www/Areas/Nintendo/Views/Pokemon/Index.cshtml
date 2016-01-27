@@ -2,6 +2,8 @@
     ViewBag.Title = "20 anos de Pokémon";
     ViewData["ActiveMenu"] = 1;
 
+    ViewData["dontShowPokemonBanner"] = true;
+
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
 
@@ -37,14 +39,25 @@
     @{Html.RenderPartial("SubMenus/Nintendo", 9);}
     <section class="content-section video-section">
         <div class="pattern-overlay">
-            <video autoplay loop muted poster="@Url.Content("~/Content/img/poke20th_bgHome.jpg")">
+            <video class="hidden-sm hidden-xs" autoplay loop muted poster="@Url.Content("~/Content/img/poke20th_bgHome.jpg")">
                 <source src="http://nintendoparty.com.br/videos/pokevideo.mp4" type="video/mp4">
             </video>
+            <img class="img-cover hidden-md hidden-lg" src="@Url.Content("~/Content/img/poke20th_bgHome.jpg")" style="width: 100%;"/>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="logo"><img class="img-responsive" alt="20 anos de Pokémon" src="@Url.Content("~/Content/img/20anospokemon.png")" /></div>
                         <h3>Comemore o aniversário de Pokémon com a N-Party!</h3>
+                        <div class="share-icons">
+                            <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/Nintendo/Pokemon"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                            <a title="Compartilhe no Twitter" href="https://twitter.com/intent/tweet?source=n_party&related=n_party&via=n_party&url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/Nintendo/Pokemon"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')" onclick="javascript:window.open(this.href,
+                                                '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                            <a title="Compartilhe no LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/Nintendo/Pokemon"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/linkedin_32.png")')" onclick="javascript:window.open(this.href,
+                                                '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                            <a title="Compartilhe no Google+" href="https://plus.google.com/share?url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/Nintendo/Pokemon"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/googleplus_32.png")')" onclick="javascript:window.open(this.href,
+                                                '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,11 +65,22 @@
     </section>
     <nav class="navbar navbar-default" id="pokemon20th-navbar">
         <div class="container">
-            <ul class="nav nav-pills menu">
-                <li role="presentation" class="active"><a href="@Url.Content("~/Nintendo/Pokemon/")">Home</a></li>
-                <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/Timeline")">Timeline Interativa</a></li>
-                <li role="presentation" ><a href="@Url.Content("~/Nintendo/Pokemon/PokePartyDay")">Poké Party Day</a></li>
-            </ul>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#menu-pokeParty" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h3 style="margin-top: 12px; text-align: center; color: #FFF; text-shadow: 0 1px 2px rgba(0,0,0,.6);" class="hidden-lg">20 anos de Pokémon</h3>
+            </div>
+            <div class="collapse navbar-collapse" id="menu-pokeParty">
+                <ul class="nav nav-pills  menu">
+                    <li role="presentation" class="active"><a href="@Url.Content("~/Nintendo/Pokemon/")">Home</a></li>
+                    <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/Timeline")">Timeline Interativa</a></li>
+                    <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/PokePartyDay")">Poké Party Day</a></li>
+                </ul>
+            </div>
         </div>
     </nav>
     <div id="carousel-pokemon20th" class="carousel slide" data-ride="carousel">
