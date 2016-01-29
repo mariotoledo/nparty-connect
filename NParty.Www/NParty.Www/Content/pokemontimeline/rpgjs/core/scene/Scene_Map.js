@@ -26,6 +26,9 @@ THE SOFTWARE.
 @doc scene_map
 @class Scene_Map Scene of the current map
 */
+
+var canPressKey = true;
+
 RPGJS_Canvas.Scene.New({
 	name: "Scene_Map",
 	data: {},
@@ -126,7 +129,6 @@ RPGJS_Canvas.Scene.New({
 
         text.font = '15px Arial';
         text.fillStyle = 'white';
-       
 
         bar_empty.x = _canvas.width / 2 - bar_empty.width / 2;
         bar_empty.y = _canvas.height / 2 - bar_empty.height / 2;
@@ -143,7 +145,7 @@ RPGJS_Canvas.Scene.New({
         	pourcent += Math.round(100 / total);
         	bar_full.width = width_init * (pourcent / 100);
            // bar_full.fillRect("#428bca");
-            text.fillText("Loading " + pourcent + "%", 100, 15);
+            text.fillText("Carregando " + pourcent + "%", 100, 15);
         }
 
         function finish() {
@@ -180,18 +182,16 @@ RPGJS_Canvas.Scene.New({
 			});
 		});
 		
-		RPGJS_Canvas.Input.press([Input.Enter, Input.Space], function() {
+		RPGJS_Canvas.Input.press([Input.Enter, Input.Space], function () {
+		    if (canPressKey) {
 			RPGJS.Plugin.call("Sprite", "pressAction", [self]);
 			global.game_map.execEvent();
+			canPressKey = false;
+		    }
 		});
 		
 		RPGJS_Canvas.Input.press([Input.Esc], function() {
-			self.pause(true);
-			RPGJS.Plugin.call("Sprite", "pressEsc", [self]);
-			var menu = RPGJS.scene.call("Scene_Menu", {
-				overlay: true
-			});
-			//menu.zIndex(1); // after scene map
+			
 		});
 		
 		function _action(action, id) {
@@ -310,6 +310,7 @@ RPGJS_Canvas.Scene.New({
 	pictures: function(method, params) {
 		var s = this.getSpriteset();
 		s[method + "Picture"].apply(s, params);
+		canPressKey = true;
 	},
 	
 	updateEvents: function() {
@@ -332,35 +333,40 @@ RPGJS_Canvas.Scene.New({
 	stopEvent: function(id) {
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
-			spriteset.stopEvent(id);
+		    spriteset.stopEvent(id);
+		    canPressKey = true;
 		}
 	},
 	
 	moveEvent: function(id, value, dir, nbDir, params) {
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
-			spriteset.moveEvent(id, value, dir, nbDir, params);
+		    spriteset.moveEvent(id, value, dir, nbDir, params);
+		    canPressKey = true;
 		}
 	},
 	
 	setParameterEvent: function(id, name, val) {
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
-			spriteset.setParameterEvent(id, name, val);
+		    spriteset.setParameterEvent(id, name, val);
+		    canPressKey = true;
 		}
 	},
 	
 	turnEvent: function(id, dir) {
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
-			spriteset.turnEvent(id, dir);
+		    spriteset.turnEvent(id, dir);
+		    canPressKey = true;
 		}
 	},
 	
 	jumpEvent: function(id, x_plus, y_plus, high, callback) {
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
-			this.getSpriteset().getEvent(id).jumpCharacter(x_plus, y_plus, high, callback);
+		    this.getSpriteset().getEvent(id).jumpCharacter(x_plus, y_plus, high, callback);
+		    canPressKey = true;
 		}
 		
 		
@@ -369,7 +375,8 @@ RPGJS_Canvas.Scene.New({
 	setEventPosition: function(id, x, y) {
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
-			this.getSpriteset().getEvent(id).setPosition(x, y);
+		    this.getSpriteset().getEvent(id).setPosition(x, y);
+		    canPressKey = true;
 		}
 	},
 	
@@ -378,6 +385,7 @@ RPGJS_Canvas.Scene.New({
 		if (event) {
 			event = event.getSprite();
 			RPGJS_Canvas.Effect.new(this, event).blink(duration, frequence, finish);
+			canPressKey = true;
 		}
 	},
 	

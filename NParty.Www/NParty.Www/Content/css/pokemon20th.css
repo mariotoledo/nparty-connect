@@ -112,7 +112,7 @@
 
 @media (max-width: 991px){
     .pokemon20th .video-section .pattern-overlay{
-        background-image: url('/Content/img/pikachu.jpg');
+        background-image: url('/Content/img/pokemonGbBg.jpg');
         background-size: cover;
         background-position: center center;
     }

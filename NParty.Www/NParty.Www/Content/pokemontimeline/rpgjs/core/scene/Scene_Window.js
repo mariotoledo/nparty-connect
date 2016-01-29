@@ -18,9 +18,8 @@ RPGJS_Canvas.Scene.New({
 	
 		var self = this;
 		
-		
 		this.window = RPGJS_Canvas.Window.New(this, 500, 200, "window");
-		this.window.setBackground("white", 6, .7);
+		this.window.setBackground("white", 6, 1);
 		
 		this.window.position("bottom");
 		this.window.open(this.stage);
@@ -43,7 +42,7 @@ RPGJS_Canvas.Scene.New({
 		function determineSizeBox() {
 			var max_width = 0, width;
 			for (var i=0 ; i < array.length ; i++) {
-				 width = _canvas.measureText(array[i], "18px").width;
+				 width = _canvas.measureText(array[i], "12px").width;
 				 if (width > max_width) {
 					max_width = width;
 				 }
@@ -55,7 +54,7 @@ RPGJS_Canvas.Scene.New({
 			height = array.length * 35 + 25;
 			
 		var box = RPGJS_Canvas.Window.New(this, width, height, "window");
-		box.setBackground("red", 6, .7);
+		box.setBackground("white", 6, .7);
 		// var box = RPGJS_Canvas.Window.new(this, width, height);
 			
 		box.position("top");
@@ -66,7 +65,7 @@ RPGJS_Canvas.Scene.New({
 			el.attr('index', i);
 			text = RPGJS_Canvas.Text.New(this, array[i]);
 			text.style({
-				size: "14px",
+				size: "12px",
 				color: "white",
 				family: 'Pokemon'
 			}).draw(el, 0, 10);
@@ -78,7 +77,7 @@ RPGJS_Canvas.Scene.New({
 		var cursor = this.createElement();
 		cursor.fillStyle = "white";
 		cursor.fillRect(-10, -10, width-30, 30);
-		cursor.opacity = .5;
+		cursor.opacity = 1;
 
 		box.cursor.init(cursor, array_el, {
 			enter: [Input.Enter, Input.Space]
@@ -97,17 +96,17 @@ RPGJS_Canvas.Scene.New({
 	},
 	
 	text: function(_text) {
-		var content = this.window.getContent();
+	    var content = this.window.getContent();
 		content.empty();
-		var text = RPGJS_Canvas.Text.New(this, _text);
+		var text = RPGJS_Canvas.Text.New(this, _text + '                                                           ');
 			text.style({
-				size: "14px",
-				lineWidth: 400,
+				size: "12px",
+				lineWidth: 450,
 				color: "black",
 				family: 'Pokemon'
-			}).draw(content, 20, 20, {
+			}).draw(content, 10, 10, {
 				line: {
-					frames: 20,
+					frames: 10,
 					onFinish: function() {
 						
 					}

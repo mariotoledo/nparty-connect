@@ -7,8 +7,8 @@ RPGJS_Canvas.Scene.New({
 // 			cursor_on: "../materials/Graphics/Pictures/Mn_Sel.png",
 // 			cursor_off: "../materials/Graphics/Pictures/Mn_Sel_Off.png"
  background: "Graphics/Titles/picture11.jpg",
- cursor_on: "Graphics/Pictures/Mn_Sel.png",
- cursor_off: "Graphics/Pictures/Mn_Sel_Off.png"
+ cursor_on: "",
+ cursor_off: ""
 // 			
 
 		}
@@ -25,7 +25,7 @@ RPGJS_Canvas.Scene.New({
 		box.open(stage);
 		
 		var choice = {
-			new_game: "Pressione a tecla espaço"
+			new_game: ""
 		},
 			btns_set = this.createElement(),
 			btn, text,
@@ -36,7 +36,7 @@ RPGJS_Canvas.Scene.New({
 			self = this;
 		
 		for (var id in choice) {
-			btn = this.createElement(300, 70);
+			btn = this.createElement(100, 300);
 			cursor = this.createElement("cursor");
 			
 			var text = RPGJS_Canvas.Text.New(this, choice[id]);
@@ -52,15 +52,7 @@ RPGJS_Canvas.Scene.New({
 			btn.attr('index', i);
 			btn.attr('id', id);
 			
-			if (id == "load_game" && !this.existSaves()) {
-				btn.opacity = 0.4;
-				btn.attr('enable', false);
-			}
-			else {
-				btn.attr('enable', true);
-			}
-			
-			cursor.drawImage("cursor_off", -75, 10);
+			cursor.drawImage("", -75, 10);
 			btn.append(cursor);
 			cursors.push(cursor);
 			
@@ -90,10 +82,19 @@ RPGJS_Canvas.Scene.New({
 		box.cursor.change(function(el) {
 			var index = el.attr('index');
 			for (var i=0 ; i < cursors.length ; i++) {
-				cursors[i].drawImage("cursor_off", -75, 10);
+				cursors[i].drawImage("", -75, 10);
 			}
-			cursors[index].drawImage("cursor_on", -75, 10);
+			cursors[index].drawImage("", -75, 10);
 			// global.game_system.sePlay("cursor");
+		});
+
+		RPGJS_Canvas.Input.press([Input.Enter, Input.Space], function () {
+		    if (CE.io) {
+		        RPGJS.scene.call("Scene_Map");
+		    }
+		    else {
+		        RPGJS.scene.call("Scene_Map").load();
+		    }
 		});
 		
 		box.cursor.enable(true);

@@ -17,7 +17,7 @@
 		padding: 0;
 		margin: 0;
 		overflow: hidden;
-		background: red;
+		background-image: url('/Content/pokemontimeline/Graphics/Pictures/aguarde.jpg');
 		font-family: "RPG"!important;
 	}
 
@@ -68,6 +68,15 @@
   <body style="font-family: 'RPG'">
 	<div id="game"><canvas id="canvas" width="640" height="480" autofocus="autofocus"></canvas></div>
 	<script>
+
+
+        window.onkeydown = function (e) {
+            if (e.keyCode == 32 && e.target == document.body) {
+                e.preventDefault();
+                return false;
+            }
+        };
+
         window.addEventListener("keydown", function (e) {
             // space and arrow keys
             if ([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
