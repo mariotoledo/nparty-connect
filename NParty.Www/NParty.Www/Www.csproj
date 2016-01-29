@@ -350,6 +350,7 @@
     <Content Include="Content\pokemontimeline\Graphics\Characters\pc3.png" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\placa2.png" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\RocetGrunt.png" />
+    <Content Include="Content\pokemontimeline\Graphics\Characters\Trainer01.png" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\Velinho.png" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\woman1.png" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\woman2.png" />
@@ -372,6 +373,7 @@
     <Content Include="Content\pokemontimeline\Graphics\Characters\_thumbs_\woman2.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\10years.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\2000.png" />
+    <Content Include="Content\pokemontimeline\Graphics\Pictures\3000.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\aguarde.jpg" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\AnimeBrasil.jpg" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\animeBrasil.png" />
@@ -413,14 +415,14 @@
     <Content Include="Content\pokemontimeline\Graphics\Pictures\HGSSTSC.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\imgPoke1.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\imgPoke2.png" />
-    <Content Include="Content\pokemontimeline\Graphics\Pictures\Layer00.png" />
+    <Content Include="Content\pokemontimeline\Graphics\Pictures\Latiken.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\MagmaAquaEX.png" />
+    <Content Include="Content\pokemontimeline\Graphics\Pictures\MarilRosa.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\Mew.jpg" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\mew.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\mewvsmewtwo.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\misterydungeongatesinfinity.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\misterydungeonredblue.png" />
-    <Content Include="Content\pokemontimeline\Graphics\Pictures\Mn_Sel_Off.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\neodestiny.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\neogenesis.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\neorevelation.png" />
@@ -464,6 +466,7 @@
     <Content Include="Content\pokemontimeline\Graphics\Pictures\RangerShadowOfAlmia.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\Rangersigns.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\RedBlueYellow3DS.png" />
+    <Content Include="Content\pokemontimeline\Graphics\Pictures\RedGyarados.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\RubySapphire.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\RubySapphirePinball.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\Rumble.png" />
@@ -482,6 +485,7 @@
     <Content Include="Content\pokemontimeline\Graphics\Pictures\SuperMisteryDungeon.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\TCGXY.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\TeamRocketTXG.png" />
+    <Content Include="Content\pokemontimeline\Graphics\Pictures\Torchic.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\TradeCardGameOnline.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\Trozei.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\Unleashed.png" />

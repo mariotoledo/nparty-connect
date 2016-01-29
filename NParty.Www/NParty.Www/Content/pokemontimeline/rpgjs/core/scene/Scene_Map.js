@@ -27,7 +27,10 @@ THE SOFTWARE.
 @class Scene_Map Scene of the current map
 */
 
-var canPressKey = true;
+var blockAddImage = false;
+
+var image = [];
+var paramst = [];
 
 RPGJS_Canvas.Scene.New({
 	name: "Scene_Map",
@@ -183,11 +186,15 @@ RPGJS_Canvas.Scene.New({
 		});
 		
 		RPGJS_Canvas.Input.press([Input.Enter, Input.Space], function () {
-		    if (canPressKey) {
+		    for (var i = 0; i < image.length; i++) {
+		        (image[i])["erasePicture"].apply(image[i], paramst[i]);
+		    }
+
+		    image = [];
+		    paramst = [];
+
 			RPGJS.Plugin.call("Sprite", "pressAction", [self]);
 			global.game_map.execEvent();
-			canPressKey = false;
-		    }
 		});
 		
 		RPGJS_Canvas.Input.press([Input.Esc], function() {
@@ -307,10 +314,33 @@ RPGJS_Canvas.Scene.New({
 		this.getSpriteset().effect(name, params, finish);
 	},
 	
-	pictures: function(method, params) {
-		var s = this.getSpriteset();
-		s[method + "Picture"].apply(s, params);
-		canPressKey = true;
+	pictures: function (method, params) {   
+	    var s = this.getSpriteset();
+
+	    if (method == 'add') {
+	        image.push(s);
+	        paramst.push(params);
+
+	        if (!blockAddImage) {
+	            blockAddImage = true;
+
+	            s[method + "Picture"].apply(s, params);
+	            console.log("entrando no pictures");
+	        }
+	    }
+
+	    if (method == 'erase') {
+	        blockAddImage = false;
+	        s[method + "Picture"].apply(s, params);
+	        console.log("entrando no pictures");
+
+	    }
+
+		    
+
+		    console.log(s);
+		    console.log(method);
+		    console.log(params);
 	},
 	
 	updateEvents: function() {
@@ -334,7 +364,6 @@ RPGJS_Canvas.Scene.New({
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
 		    spriteset.stopEvent(id);
-		    canPressKey = true;
 		}
 	},
 	
@@ -342,7 +371,9 @@ RPGJS_Canvas.Scene.New({
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
 		    spriteset.moveEvent(id, value, dir, nbDir, params);
-		    canPressKey = true;
+
+		    
+
 		}
 	},
 	
@@ -350,7 +381,6 @@ RPGJS_Canvas.Scene.New({
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
 		    spriteset.setParameterEvent(id, name, val);
-		    canPressKey = true;
 		}
 	},
 	
@@ -358,7 +388,6 @@ RPGJS_Canvas.Scene.New({
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
 		    spriteset.turnEvent(id, dir);
-		    canPressKey = true;
 		}
 	},
 	
@@ -366,7 +395,6 @@ RPGJS_Canvas.Scene.New({
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
 		    this.getSpriteset().getEvent(id).jumpCharacter(x_plus, y_plus, high, callback);
-		    canPressKey = true;
 		}
 		
 		
@@ -376,7 +404,6 @@ RPGJS_Canvas.Scene.New({
 		var spriteset = this.getSpriteset();
 		if (spriteset) {
 		    this.getSpriteset().getEvent(id).setPosition(x, y);
-		    canPressKey = true;
 		}
 	},
 	
@@ -385,7 +412,6 @@ RPGJS_Canvas.Scene.New({
 		if (event) {
 			event = event.getSprite();
 			RPGJS_Canvas.Effect.new(this, event).blink(duration, frequence, finish);
-			canPressKey = true;
 		}
 	},
 	
