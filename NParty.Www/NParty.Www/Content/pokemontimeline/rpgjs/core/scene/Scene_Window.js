@@ -42,7 +42,7 @@ RPGJS_Canvas.Scene.New({
 		function determineSizeBox() {
 			var max_width = 0, width;
 			for (var i=0 ; i < array.length ; i++) {
-				 width = _canvas.measureText(array[i], "12px").width;
+				 width = _canvas.measureText(array[i], "16px").width;
 				 if (width > max_width) {
 					max_width = width;
 				 }
@@ -76,7 +76,7 @@ RPGJS_Canvas.Scene.New({
 	
 		var cursor = this.createElement();
 		cursor.fillStyle = "blue";
-		cursor.fillRect(-10, -10, width-30, 30);
+		cursor.fillRect(-10, -10, width-20, 30);
 		cursor.opacity = 0.3;
 
 		box.cursor.init(cursor, array_el, {

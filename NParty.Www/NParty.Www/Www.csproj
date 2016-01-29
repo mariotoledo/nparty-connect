@@ -338,6 +338,7 @@
     <Content Include="Content\pokemontimeline\css\chat.css" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\Chick.png" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\Doutorrandom.png" />
+    <Content Include="Content\pokemontimeline\Graphics\Characters\Fisherman.png" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\fortinho.png" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\Gordinho.png" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\hero.png" />
