@@ -1,0 +1,1 @@
+[{"id":47,"x":"43","y":"11","name":"EV-47"},[{"trigger":"action_button","frequence":2,"type":"fixed","speed":4,"switch_1":0,"switch_2":0,"switch_3":0,"commands":["SHOW_TEXT: {'text': 'Old but gold.'}"],"graphic":"140","graphic-params":{"uniqid":1454075463590,"path":"public\/game\/1829-2410\/Graphics\/Characters\/Doutorrandom.png"}}]]
