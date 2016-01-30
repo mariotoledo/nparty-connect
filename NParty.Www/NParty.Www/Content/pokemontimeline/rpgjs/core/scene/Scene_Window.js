@@ -42,7 +42,7 @@ RPGJS_Canvas.Scene.New({
 		function determineSizeBox() {
 			var max_width = 0, width;
 			for (var i=0 ; i < array.length ; i++) {
-				 width = _canvas.measureText(array[i], "16px").width;
+				 width = _canvas.measureText(array[i], "26px").width;
 				 if (width > max_width) {
 					max_width = width;
 				 }

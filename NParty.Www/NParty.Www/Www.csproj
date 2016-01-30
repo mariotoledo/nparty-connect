@@ -428,6 +428,7 @@
     <Content Include="Content\pokemontimeline\Graphics\Pictures\neogenesis.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\neorevelation.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\nextdestinies.png" />
+    <Content Include="Content\pokemontimeline\Graphics\Pictures\oak.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\ORAS.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\origins.png" />
     <Content Include="Content\pokemontimeline\Graphics\Pictures\piccross.png" />
