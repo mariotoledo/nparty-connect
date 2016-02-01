@@ -73,7 +73,19 @@ namespace NParty.Www.Controllers
             Article article = helper.GetSingleArticleFromBlogByPath(NintendoBlogId, "Nintendo", "/" + year + "/" + month + "/" + path + ".html");
 
             if (article == null)
-                return Redirect("~/Ops/NaoEncontrado");
+            {
+                article = helper.GetSingleArticleFromBlogByPath(EventosBlogId, "Eventos", "/" + year + "/" + month + "/" + path + ".html");
+
+                if(article == null)
+                {
+                    article = helper.GetSingleArticleFromBlogByPath(ESportsBlogId, "ESports", "/" + year + "/" + month + "/" + path + ".html");
+
+                    if(article == null)
+                    {
+                        return Redirect("~/Ops/NaoEncontrado");
+                    }
+                }                
+            }
 
             ViewData["article"] = article;
 

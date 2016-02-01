@@ -30,14 +30,14 @@ namespace NParty.Www
             routes.MapRoute(
                 name: "Read_2014",
                 url: "2014/{month}/{path}.html",
-                defaults: new { controller = "Home", action = "Ler", year = "2014", path = UrlParameter.Optional },
+                defaults: new { controller = "Home", action = "Ler", year = "2014", month = UrlParameter.Optional, path = UrlParameter.Optional },
                 namespaces: new[] { "NParty.Www.Controllers" }
             );
 
             routes.MapRoute(
                 name: "Read_2013",
                 url: "2013/{month}/{path}.html",
-                defaults: new { controller = "Home", action = "Ler", year = "2013", path = UrlParameter.Optional },
+                defaults: new { controller = "Home", action = "Ler", year = "2013", month = UrlParameter.Optional, path = UrlParameter.Optional },
                 namespaces: new[] { "NParty.Www.Controllers" }
             );
 
