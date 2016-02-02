@@ -276,6 +276,7 @@
     <Content Include="Content\img\metaImages\metaPokemon20th.jpg" />
     <Content Include="Content\img\metaImages\metaPokemonTimeline.jpg" />
     <Content Include="Content\img\metaImages\metaPokePartyDay.jpg" />
+    <Content Include="Content\img\metaImages\metaSorteioPokemon.jpg" />
     <Content Include="Content\img\metaImages\naoencontrado.jpg" />
     <Content Include="Content\img\metaImages\nintendo.jpg" />
     <Content Include="Content\img\metaImages\nintendo3ds.jpg" />
@@ -295,6 +296,7 @@
     <Content Include="Content\img\partners\nintendoblast.jpg" />
     <Content Include="Content\img\partners\projetoxpodcast.jpg" />
     <Content Include="Content\img\poke20th_bgHome.jpg" />
+    <Content Include="Content\img\poke20th_sorteioDragonite.png" />
     <Content Include="Content\img\poke20th_timeline.png" />
     <Content Include="Content\img\poke20th_timelineLogo.png" />
     <Content Include="Content\img\pokeEventoBg.png" />
@@ -304,6 +306,7 @@
     <Content Include="Content\img\pokepartyday\desfilePokemon.jpg" />
     <Content Include="Content\img\pokepartyday\jogosclassicos.jpg" />
     <Content Include="Content\img\pokepartyday\logoLopSp.png" />
+    <Content Include="Content\img\pokepartyday\logo_dungeonStore.png" />
     <Content Include="Content\img\pokepartyday\meetup.jpg" />
     <Content Include="Content\img\pokepartyday\oc.jpg" />
     <Content Include="Content\img\pokepartyday\otakucompany.png" />
@@ -1001,6 +1004,7 @@
     <Content Include="Content\pokemontimeline\Data\Events\MAP-2\EV-47.json" />
     <Content Include="Content\pokemontimeline\Data\Events\MAP-2\EV-48.json" />
     <Content Include="Content\pokemontimeline\Data\Events\MAP-2\EV-49.json" />
+    <Content Include="Areas\Nintendo\Views\Pokemon\Sorteio.cshtml" />
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
   </ItemGroup>
   <PropertyGroup>
