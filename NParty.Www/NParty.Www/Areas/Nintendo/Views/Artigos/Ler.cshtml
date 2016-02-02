@@ -42,9 +42,14 @@
         {
             string keywordsSchema = "";
 
+            if (article.Labels != null)
+            {
+                
+            
             foreach(string keyword in article.Labels)
             {
                 keywordsSchema += keyword + ",";
+            }
             }
 
             <div class="row" itemscope itemtype="http://schema.org/Article">

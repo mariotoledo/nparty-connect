@@ -233,7 +233,7 @@
     <Content Include="Content\css\pokemon20th.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\20anospokemon.png" />
-    <Content Include="Content\img\20anospokemon_small.png" />
+    <Content Include="Content\img\20anospokemon_small.jpg" />
     <Content Include="Content\img\authors\caiocardoso.jpg" />
     <Content Include="Content\img\authors\fabricioluz.jpg" />
     <Content Include="Content\img\authors\lucasalves.jpg" />
