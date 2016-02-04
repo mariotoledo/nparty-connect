@@ -257,6 +257,7 @@
     <Content Include="Content\img\icons\social\instagram.jpg" />
     <Content Include="Content\img\icons\social\twitter.jpg" />
     <Content Include="Content\img\icons\social\youtube.jpg" />
+    <Content Include="Content\img\lhama.jpg" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\logo.png" />
     <Content Include="Content\img\logo_copag.png" />
@@ -1006,6 +1007,7 @@
     <Content Include="Content\pokemontimeline\Data\Events\MAP-2\EV-49.json" />
     <Content Include="Areas\Nintendo\Views\Pokemon\Sorteio.cshtml" />
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
+    <Content Include="Views\Home\UrlInvalida.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

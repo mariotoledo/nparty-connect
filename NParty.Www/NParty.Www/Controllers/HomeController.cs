@@ -65,7 +65,7 @@ namespace NParty.Www.Controllers
 
         public ActionResult Ler(string year, string month, string path)
         {
-            ArticlesHelper helper = new ArticlesHelper(
+            /*ArticlesHelper helper = new ArticlesHelper(
                 System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
                 System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
             );
@@ -89,6 +89,13 @@ namespace NParty.Www.Controllers
 
             ViewData["article"] = article;
 
+            return View();*/
+
+            return Redirect("~/Home/UrlInvalida");
+        }
+
+        public ActionResult UrlInvalida()
+        {
             return View();
         }
 
