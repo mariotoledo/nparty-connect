@@ -94,6 +94,27 @@ namespace NParty.Www.Controllers
             return Redirect("~/Home/UrlInvalida");
         }
 
+        [HttpGet]
+        public ActionResult GenerateUrl()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public JsonResult GenerateUrl(string domain, string postId, string title)
+        {
+            Article a = new Article()
+            {
+                Domain = domain,
+                Id = postId,
+                Title = title
+            };
+
+            a.GenerateNPartyArtileLink(domain);
+
+            return Json("http://www.nparty.com.br/" + a.NPartyArticleLink, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult UrlInvalida()
         {
             return View();
