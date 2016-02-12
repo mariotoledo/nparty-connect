@@ -102,9 +102,8 @@
             <h1 class="activity-area-title">Vivencie o melhor de Pokémon em seu aniversário de 20 anos</h1>
             <p>Nós amamos Pokémon, e com a chegada do 20º. aniversário da franquia, o grupo <b>N-Party</b> organizará um evento gratuito para os fãs da série aproveitarem o que há de melhor da franquia em diversas atividades e muita diversão.</p>
             <div class="alert alert-info"><b>Atenção: </b> nós estamos muito felizes com a repercussão do evento, e esperamos ver todos lá! Mas devido a limitação do espaço, distribuiremos um número limitado de fitas na entrada do evento conforme a chegada do público, e em caso de lotação, teremos que restringir o acesso daqueles que não tiverem recebido a fim de garantir a integridade do público e do evento.</div>
-            <h3 style="font-weight: normal"><b>Não fique de fora dessa!</b> Compartilhe, chame seus amigos e marque sua presença!</h3>
-            <div class="" style="margin-top: 20px"><div id="fb-root"></div>
-<script>(function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (d.getElementById(id)) return; js = d.createElement(s); js.id = id; js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.3"; fjs.parentNode.insertBefore(js, fjs); }(document, 'script', 'facebook-jssdk'));</script><div class="fb-post" data-href="https://www.facebook.com/NParty/posts/962106707177600" data-width="500"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/NParty/posts/962106707177600">Posted by <a href="https://www.facebook.com/NParty/">N-Party</a> on&nbsp;<a href="https://www.facebook.com/NParty/posts/962106707177600">Sunday, January 31, 2016</a></blockquote></div></div></div>
+            <h3 style="font-weight: normal"><b>Não fique de fora dessa!</b> Compartilhe, chame seus amigos e venha se divertir!</h3>
+            <a style="margin-top: 15px; color: #FFF;" href="https://www.facebook.com/events/976009085819308/" target="_blank" class="btn btn-lg btn-pokemon20th">Marque sua presença</a>
         </div>
     </div>
     <div class="activity-area" style="background-color: #FFF;" id="localEData">
@@ -193,9 +192,13 @@
                         <div class="[ info-card-details ] animate">
                             <div class="[ info-card-header ]">
                                 <h1>Aprenda a jogar</h1>
+                                <h3>Com a Dungeon Store</h3>
                             </div>
                             <div class="[ info-card-detail ]">
-                                Não sabe jogar o TCG de Pokémon? Não se preocupe: teremos um espaço de dedicado para você. Apenas converse com um de nossos staffs, e teremos o prazer de lhe ensinar o básico do jogo.
+                                Não sabe jogar o TCG de Pokémon? Não se preocupe: teremos um espaço de dedicado para você. Apenas converse com um de nossos staffs, e teremos o prazer de lhe ensinar o básico do jogo.<br/>
+                                <br/>
+                                Realização:<br />
+                                <a href="http://dungeon-store.com" target="_blank"><img src="@Url.Content("~/Content/img/pokepartyday/logo_dungeonStore.png")" style="width: 130px;"/></a>
                             </div>
                         </div>
                     </div>
@@ -205,7 +208,8 @@
                         <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/tcgChampionship.jpg")" />
                         <div class="[ info-card-details ] animate">
                             <div class="[ info-card-header ]">
-                                <h1>Campeonato</h1>
+                                <h1>Campeonato TCG</h1>
+                                <h3>Com a Mad Slayers</h3>
                             </div>
                             <div class="[ info-card-detail ]">
                                 Em breve
@@ -216,60 +220,79 @@
             </div>
         </div>
     </div>
-    <div class="activity-area" style="background: url('@Url.Content("~/Content/img/pokepartyday/palestras.jpg")') center center; background-size: cover; padding: 50px;" id="palestras">
+    <div class="activity-area" id="palestras">
+        <div class="container">
+            <h1 class="activity-area-title">No palco</h1>
+            <p>Teremos diversas atividades no palco, indo desde palestras com pessoas que entendem de Pokémon a gincanas, desafios de captura de Pokémon e desfiles cosplay</p>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/tcgLearn.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1>Captura de Pokémon</h1>
+                            </div>
+                            <div class="[ info-card-detail ]">
+                                Fique ligado, pois entre os intervalos das atividades, anunciaremos Pokémon a captura. Eles estarão espalhados pelo evento, e cabe a você encontrá-los!
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="[ info-card ]">
+                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/tcgLearn.jpg")" />
+                        <div class="[ info-card-details ] animate">
+                            <div class="[ info-card-header ]">
+                                <h1>Desafios de perguntas e respostas</h1>
+                                <h3>às 14:00</h3>
+                            </div>
+                            <div class="[ info-card-detail ]">
+                                Você se considera um expert no universo Pokémon? Então se prepare, pois traremos uma gincana de perguntas e respostas que apenas os Mestres Pokémon serão campeões
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <a style="cursor: pointer" onclick="goToSection('desfileCosplay')">
+                        <div class="[ info-card ]">
+                            <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/desfilePokemon.jpg")" />
+                            <div class="[ info-card-details ] animate">
+                                <div class="[ info-card-header ]">
+                                    <h1>Desfile cosplay</h1>
+                                    <h3>às 15:30</h3>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="activity-area" id="cosplay" style="padding: 50px; background: url('@Url.Content("~/Content/img/pokepartyday/oc.jpg")') center center; background-size: cover">
         <div class="row">
-            <div class="col-md-8" style="padding: 50px;"></div>
-            <div class="col-md-4" style="padding: 20px; background-color: rgba(0, 0, 0, 0.5); color: #FFF;">
-                <h1 class="activity-area-title">Palestras de quem entende de Pokémon</h1>
+            <div class="col-md-6" style="padding: 20px; background-color: rgba(0, 0, 0, 0.5); color: #FFF;">
+                <h1 class="activity-area-title">Sessões de fotos com a Otaku Company</h1>
                 <p>
-                    Teremos palestras e outras atividades interativas com quem entende do assunto, discutindo temas diversos sobre o universo Pokémon<br />
-                    <br /><b>Em breve, traremos a programação completa!</b>
+                    O grupo OtakuCompany foi desenvolvido para trazer o melhor da cultura japonesa. Onde o visitante pode se informar sobre as novidades referentes à cultura japonesa.<br />
+                    <br />
+                    E como uma imagem vale mais do que mil palavras a OtakuCompany vem cobrindo eventos desde 2007, trazendo até você o que ocorre nos pequenos, médios e grandes eventos que ocorrem pelo Brasil.<br />
+                    <br />
+                    Com uma crescente no número de audiência, o site vem passando por melhorias constantes e por consequência número de parceiros também. Nosso método de divulgação massiva atingindo o público dos seguintes canais: site, instagram, worldcosplay e facebook. Trabalho sério, dedicação e qualidade são as bases do grupo OtakuCompany.<br />
+                    <br />
+                    A OtakuCompany chega ao primeiro Poké Party Day com uma equipe formada por fotógrafos profissionais, com um mega espaço temático onde, além de você poder tirar fotos para sua recordação, poderá ficar ligado nas dicas do momento do mundo cosplay e bater aquele papo com uma equipe que está nos melhores eventos do Brasil<br /><br />
+                    Realização:<br />
+                    <a href="http://www.otakucompany.com.br/" target="_blank"><img src="@Url.Content("~/Content/img/pokepartyday/otakucompany.png")" /></a>
                 </p>
             </div>
+            <div class="col-md-8" style="padding: 50px;"></div>
         </div>
     </div>
-    <div class="activity-area" style="background-color: #FFF;" id="cosplay">
+    <div class="activity-area" style="background-color: #FFF;" id="desfileCosplay">
         <div class="container">
             <h1 class="activity-area-title">Venha de cosplay!</h1>
-            <p>Nós adoramos a cultura cosplay, e por isto teremos uma área de dedicada à sessões de fotos, organizada pela <b>Otaku Company</b>, e um desfile exclusivo valendo prêmios especiais!</p>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="[ info-card ]">
-                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/oc.jpg")" />
-                        <div class="[ info-card-details ] animate">
-                            <div class="[ info-card-header ]">
-                                <h1>Sessões de fotos</h1>
-                                <h3>Com a Otaku Company</h3>
-                            </div>
-                            <div class="[ info-card-detail ]">
-                                O grupo OtakuCompany foi desenvolvido para trazer o melhor da cultura japonesa. Onde o visitante pode se informar sobre as novidades referentes à cultura japonesa.<br />
-                                <br />
-                                E como uma imagem vale mais do que mil palavras a OtakuCompany vem cobrindo eventos desde 2007, trazendo até você o que ocorre nos pequenos, médios e grandes eventos que ocorrem pelo Brasil.<br />
-                                <br />
-                                Com uma crescente no número de audiência, o site vem passando por melhorias constantes e por consequência número de parceiros também. Nosso método de divulgação massiva atingindo o público dos seguintes canais: site, instagram, worldcosplay e facebook. Trabalho sério, dedicação e qualidade são as bases do grupo OtakuCompany.<br />
-                                <br />
-                                A OtakuCompany chega ao primeiro Poké Party Day com uma equipe formada por fotógrafos profissionais, com um mega espaço temático onde, além de você poder tirar fotos para sua recordação, poderá ficar ligado nas dicas do momento do mundo cosplay e bater aquele papo com uma equipe que está nos melhores eventos do Brasil<br/>
-                                <br />
-                                Realização:<br />
-                                <a href="http://www.otakucompany.com.br/" target="_blank"><img src="@Url.Content("~/Content/img/pokepartyday/otakucompany.png")" /></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="[ info-card ]">
-                        <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/desfilePokemon.jpg")" />
-                        <div class="[ info-card-details ] animate">
-                            <div class="[ info-card-header ]">
-                                <h1>Desfile especial Pokémon</h1>
-                            </div>
-                            <div class="[ info-card-detail ]">
-                                Em breve
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p>Nós adoramos a cultura cosplay, e por isto teremos um desfile exclusivo, assistido por jurados que entendem do assunto. O desfile começará às 15:30, e contará com 2 </p>
+            
         </div>
     </div>
     <div class="activity-area" id="estandistas">
@@ -300,7 +323,6 @@
                 </a>
             </div>
         </div>
-        <p>Quer ter sua estande no evento? Entre em contato conosco através do email <a href="mailto:contato@nparty.com.br">contato@nparty.com.br</a></p>
     </div>
     <div class="activity-area" style="background-color: #FFF;" id="contato">
         <h1 class="activity-area-title">Entre em contato</h1>
