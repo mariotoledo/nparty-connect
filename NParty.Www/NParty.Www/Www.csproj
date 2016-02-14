@@ -304,12 +304,16 @@
     <Content Include="Content\img\pokeEventoLogo.png" />
     <Content Include="Content\img\pokemonGbBg.jpg" />
     <Content Include="Content\img\pokePartyDay.jpg" />
+    <Content Include="Content\img\pokepartyday\cosplay_aline.jpg" />
+    <Content Include="Content\img\pokepartyday\cosplay_amanda.jpg" />
+    <Content Include="Content\img\pokepartyday\cosplay_vini.jpg" />
     <Content Include="Content\img\pokepartyday\desfilePokemon.jpg" />
     <Content Include="Content\img\pokepartyday\estande_dungeonstore.jpg" />
     <Content Include="Content\img\pokepartyday\estande_multiplayer.jpg" />
     <Content Include="Content\img\pokepartyday\estande_ohmypudin.jpg" />
     <Content Include="Content\img\pokepartyday\jogosclassicos.jpg" />
     <Content Include="Content\img\pokepartyday\logoLopSp.png" />
+    <Content Include="Content\img\pokepartyday\logoMadSlayersSmall.png" />
     <Content Include="Content\img\pokepartyday\logo_dungeonStore.png" />
     <Content Include="Content\img\pokepartyday\meetup.jpg" />
     <Content Include="Content\img\pokepartyday\oc.jpg" />
