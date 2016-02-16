@@ -146,6 +146,7 @@
     </div>
 </div>
 @section Scripts{
+    <script src="http://nparty.com.br/Content/js/audioplayer.min.js"></script>
     <script type="text/javascript">
         var labels = [];
 
@@ -154,6 +155,10 @@
             adjustTables();
             adjustArticleIframes();
             adjustArticleSubtitles();
+            
+            try {
+                $('audio').audioPlayer();
+            } catch (err) { }
 
             $('#loading-content').hide();
             $('#article-content').show();

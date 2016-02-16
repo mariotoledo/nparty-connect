@@ -295,6 +295,40 @@
     </div>
 
 
+
+
+<!-- ================================== PODCAST ================================== -->
+<div id="podcast-container">
+    <div class="container">
+        <div class="container-header">
+            <h2>
+                <span class="strong">Podcasts</span>
+            </h2>
+        </div>
+        <div class="posts">
+            <div style="padding: 50px; text-align: center;" class="loadingMessage">Carregando...</div>
+            <div style="padding: 50px; text-align: center; display: none;" class="errorMessage">Não foi possível encontrar publicãções no momento. Por favor, tente novamente mais tarde.</div>
+
+            <div class="row podcasts" style="display: none;">
+                <div class="col-md-8 firstItem" style="margin-bottom: 20px;">
+                    
+                </div>
+                <div class="col-md-4 col-bordered-left">
+                    <ul class="media-list otherItens">
+                        
+                    </ul>
+                    <a class="btn btn-lg btn-block" href="@Url.Content("~/Podcasts")" style="text-align: right">MAIS <b>PODCASTS <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
+
+
+
+
+
 <!-- ================================== COPA N-PARTY ================================== -->
 @*<div id="copa-container">
     <div class="container">
@@ -345,3 +379,54 @@
         </div>
     </div>
 </div>*@
+
+@section Scripts{
+    <script type="text/javascript">
+        function loadPodcasts() {
+            $podcastsContainer = $('#podcast-container');
+            $loadingMessage = $podcastsContainer.find('.loadingMessage');
+            $errorMessage = $podcastsContainer.find('.errorMessage');
+            $podcasts = $podcastsContainer.find('.podcasts');
+
+            $.get('/Home/PodcastFeedOnHome/', function (data) {
+                if (data) {
+                    console.log(data);
+
+                    $podcastsContainer.find('.firstItem').html(
+                        '<a class="hilight-article-item" href="/' + data[0].NPartyArticleLink + '">' +
+                        '<div class="row">' +
+                        '<div class="col-md-8">' +
+                        '<figure style="background-image: url(' + data[0].CoverImage + ');"></figure>' +
+                        '</div>' +
+                        '<div class="col-md-4">' +
+                        '<h3>' + data[0].Title + '</h3>' +
+                        '<p class="snippet">' + data[0].Summary + '</p></div></div></a>'
+                        );
+
+                    var appendable = '';
+
+                    for (var i = 1; i < 4; i++) {
+                        appendable += '<li class="media thumb-item">' + 
+                                      '<a href="' + data[i].NPartyArticleLink + '">' + 
+                                      '<div class="media-left media-middle">' + 
+                                      '<figure class="media-object" style="background-image: url(' + data[i].CoverImage + ')"></figure>' + 
+                                      '</div><div class="media-body">' +
+                                      '<h5 class="media-heading">' + data[i].Title + '</h5>' +
+                                      '</div></a></li>';
+                    }
+
+                    $podcastsContainer.find('.otherItens').html(appendable);
+                    $loadingMessage.hide();
+                    $podcasts.show();
+                } else {
+                    $loadingMessage.hide();
+                    $errorMessage.show();
+                }
+            });
+        }
+
+        $(document).ready(function () {
+            loadPodcasts();
+        });
+    </script>
+}

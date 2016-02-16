@@ -93,6 +93,22 @@ namespace NParty.Www.Controllers
             }
         }
 
+        public string[] PodcastsSpecialTags
+        {
+            get
+            {
+                try
+                {
+                    string unsplitedSpecialTags = System.Configuration.ConfigurationManager.AppSettings["PodcastsSpecialTags"];
+                    return unsplitedSpecialTags.Split(',').Select(p => p.Trim()).ToArray();
+                }
+                catch (Exception)
+                {
+                    return new string[] { };
+                }
+            }
+        }
+
         public string[] ESportsSpecialTags
         {
             get
@@ -130,6 +146,7 @@ namespace NParty.Www.Controllers
             ViewData["NintendoSpecialTags"] = this.NintendoSpecialTags;
             ViewData["ESportsSpecialTags"] = this.ESportsSpecialTags;
             ViewData["EventosSpecialTags"] = this.EventosSpecialTags;
+            ViewData["PodcastsSpecialTags"] = this.PodcastsSpecialTags;
             ViewData["MaxPosts"] = MaxPosts;
 
             base.OnActionExecuting(filterContext);
