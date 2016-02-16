@@ -207,6 +207,10 @@
     <Compile Include="Areas\Nintendo\Controllers\NintendoWiiUController.cs" />
     <Compile Include="Areas\Nintendo\Controllers\PokemonController.cs" />
     <Compile Include="Areas\Nintendo\NintendoAreaRegistration.cs" />
+    <Compile Include="Areas\Podcasts\Controllers\ArtigosController.cs" />
+    <Compile Include="Areas\Podcasts\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Podcasts\Controllers\PodcastsController.cs" />
+    <Compile Include="Areas\Podcasts\PodcastsAreaRegistration.cs" />
     <Compile Include="Controllers\OpsController.cs" />
     <Compile Include="Controllers\SobreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -225,6 +229,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\audioplayer.css" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
@@ -283,6 +288,7 @@
     <Content Include="Content\img\metaImages\nintendo3ds.jpg" />
     <Content Include="Content\img\metaImages\nintendowiiu.jpg" />
     <Content Include="Content\img\metaImages\ops.jpg" />
+    <Content Include="Content\img\metaImages\podcast.jpg" />
     <Content Include="Content\img\metaImages\pokemon.jpg" />
     <Content Include="Content\img\metaImages\previews.jpg" />
     <Content Include="Content\img\metaImages\quemsomos.jpg" />
@@ -307,6 +313,8 @@
     <Content Include="Content\img\pokepartyday\cosplay_aline.jpg" />
     <Content Include="Content\img\pokepartyday\cosplay_amanda.jpg" />
     <Content Include="Content\img\pokepartyday\cosplay_vini.jpg" />
+    <Content Include="Content\img\pokepartyday\desafiocaptura.jpg" />
+    <Content Include="Content\img\pokepartyday\desafioperguntas.jpg" />
     <Content Include="Content\img\pokepartyday\desfilePokemon.jpg" />
     <Content Include="Content\img\pokepartyday\estande_dungeonstore.jpg" />
     <Content Include="Content\img\pokepartyday\estande_multiplayer.jpg" />
@@ -319,6 +327,7 @@
     <Content Include="Content\img\pokepartyday\oc.jpg" />
     <Content Include="Content\img\pokepartyday\otakucompany.png" />
     <Content Include="Content\img\pokepartyday\palestras.jpg" />
+    <Content Include="Content\img\pokepartyday\segredinho.jpg" />
     <Content Include="Content\img\pokepartyday\tcgChampionship.jpg" />
     <Content Include="Content\img\pokepartyday\tcgFree.jpg" />
     <Content Include="Content\img\pokepartyday\tcgLearn.jpg" />
@@ -340,6 +349,7 @@
     <Content Include="Content\img\socialIcons\instagram.jpg" />
     <Content Include="Content\img\socialIcons\twitter.jpg" />
     <Content Include="Content\img\socialIcons\youtube.jpg" />
+    <Content Include="Content\js\audioplayer.min.js" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery-1.11.3.min.js" />
@@ -675,6 +685,8 @@
     <Folder Include="Areas\Eventos\Views\Shared\" />
     <Folder Include="Areas\Nintendo\Models\" />
     <Folder Include="Areas\Nintendo\Views\Shared\" />
+    <Folder Include="Areas\Podcasts\Models\" />
+    <Folder Include="Areas\Podcasts\Views\Shared\" />
     <Folder Include="Content\img\ad\" />
     <Folder Include="Content\pokemontimeline\Audio\BGM\" />
     <Folder Include="Content\pokemontimeline\Audio\BGS\" />
@@ -1013,9 +1025,13 @@
     <Content Include="Content\pokemontimeline\Data\Events\MAP-2\EV-48.json" />
     <Content Include="Content\pokemontimeline\Data\Events\MAP-2\EV-49.json" />
     <Content Include="Areas\Nintendo\Views\Pokemon\Sorteio.cshtml" />
+    <Content Include="Areas\Podcasts\Views\Web.config" />
+    <Content Include="Areas\Podcasts\Views\Home\Index.cshtml" />
+    <Content Include="Areas\Podcasts\Views\Artigos\Ler.cshtml" />
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
     <Content Include="Views\Home\UrlInvalida.cshtml" />
     <Content Include="Views\Home\GenerateUrl.cshtml" />
+    <Content Include="Views\Shared\SubMenus\Podcasts.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

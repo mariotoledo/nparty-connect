@@ -371,8 +371,8 @@ blockquote{
 	    }
 	}
 
-#nintendo-container .hilights-items:after, #eventos-container .hilights-items:after, #esports-container .hilights-items:after,
-	#nintendo-container .hilights-items::after, #eventos-container .hilights-items::after, #esports-container .hilights-items::after{
+#nintendo-container .hilights-items:after, #eventos-container .hilights-items:after, #esports-container .hilights-items:after, #podcast-container .hilights-items:after,
+	#nintendo-container .hilights-items::after, #eventos-container .hilights-items::after, #esports-container .hilights-items::after, #podcast-container .hilights-items::after{
     height: 225px;
 }
 
@@ -525,10 +525,37 @@ h1, h2, h3{
     color: #FFC46A;
 }
 
-#nintendo-container hr, #eventos-container hr, #esports-container hr, .default-container hr{
+
+#podcast-container{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background-color: rgb(255, 255, 255);
+}
+
+#podcast-container .container-header h2
+{
+    color: #97cd41;
+    margin-bottom: 20px;
+}
+
+#podcast-container .container-header h2 .thin{
+    font-weight: normal;
+}
+
+#podcast-container a, .domainLink-Podcast{
+    color: #97cd41;
+}
+
+#podcast-container a:hover, .domainLink-Podcast:hover{
+    color: #C8E498;
+}
+
+
+#nintendo-container hr, #eventos-container hr, #esports-container hr, #podcast-container hr, .default-container hr{
     border-color: #CCCCCC;
     margin-bottom: 30px;
 }
+
 
 .article-item figure, .hilight-article-item figure{
     width: 100%;

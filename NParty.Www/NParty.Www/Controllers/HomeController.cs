@@ -63,6 +63,24 @@ namespace NParty.Www.Controllers
             return View();
         }
 
+        public JsonResult PodcastFeedOnHome()
+        {
+            NPartyArticlesHelper helper = new NPartyArticlesHelper();
+
+            Dictionary<string, string> blogDomains = new Dictionary<string, string>();
+            blogDomains.Add(NintendoBlogId, "Nintendo");
+            blogDomains.Add(ESportsBlogId, "NParty");
+
+            List<Article> nintendoPodcasts = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 4, 0, "Podcast");
+            List<Article> npartyPodcasts = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", 4, 0, "Podcast");
+
+            List<Article> podcastFeed = new List<Article>();
+            podcastFeed.AddRange(nintendoPodcasts);
+            podcastFeed.AddRange(npartyPodcasts);
+
+            return Json(podcastFeed.OrderByDescending(t => t.DatePublished).Take(4).ToList(), JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Ler(string year, string month, string path)
         {
             /*ArticlesHelper helper = new ArticlesHelper(

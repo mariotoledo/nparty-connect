@@ -3,6 +3,8 @@
 
     ViewData["MenuHasBorderBottom"] = true;
 
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
     NParty.Www.Models.Article article = (NParty.Www.Models.Article)ViewData["article"];
 
     if (article != null)
@@ -34,7 +36,7 @@
     }
 }
 
-<div class="container default-container" style="padding-top: 30px;">
+<div class="container podcast-container" style="padding-top: 30px;">
     @if (article != null)
     {
         string keywordsSchema = "";
@@ -116,7 +118,7 @@
                         </div>
                     </div>
                     <div id="related-posts-wrapper">
-                        <h3>Leia também</h3>
+                        <h3>Escute também</h3>
                         <div class="row" id="related-posts">
                             <div class="col-md-12">
                                 Carregado...
