@@ -317,6 +317,7 @@
     <Content Include="Content\img\pokepartyday\desafiocaptura.jpg" />
     <Content Include="Content\img\pokepartyday\desafioperguntas.jpg" />
     <Content Include="Content\img\pokepartyday\desfilePokemon.jpg" />
+    <Content Include="Content\img\pokepartyday\estande_aline.jpg" />
     <Content Include="Content\img\pokepartyday\estande_arigato.jpg" />
     <Content Include="Content\img\pokepartyday\estande_dungeonstore.jpg" />
     <Content Include="Content\img\pokepartyday\estande_multiplayer.jpg" />
