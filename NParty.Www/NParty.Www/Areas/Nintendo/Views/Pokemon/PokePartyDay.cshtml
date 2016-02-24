@@ -89,7 +89,7 @@
                         <li role="presentation"><a style="cursor: pointer" onclick="goToSection('localEData')">Local e Data</a></li>
                         <li role="presentation"><a style="cursor: pointer" onclick="goToSection('videoGames')">Video-Game</a></li>
                         <li role="presentation"><a style="cursor: pointer" onclick="goToSection('tcg')">TCG</a></li>
-                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('palestras')">Palestras</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('palestras')">No Palco</a></li>
                         <li role="presentation"><a style="cursor: pointer" onclick="goToSection('desfileCosplay')">Cosplay</a></li>
                         <li role="presentation"><a style="cursor: pointer" onclick="goToSection('estandistas')">Estandistas</a></li>
                         <li role="presentation"><a style="cursor: pointer" onclick="goToSection('contato')">Contato</a></li>
@@ -228,28 +228,46 @@
         <div class="container">
             <h1 class="activity-area-title">No palco</h1>
             <p>Teremos diversas atividades no palco, indo desde palestras com pessoas que entendem de Pokémon a gincanas, desafios de captura de Pokémon e desfiles cosplay</p>
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="[ info-card ]">
-                        <img style="width: 100%; margin-bottom: 45px;" src="@Url.Content("~/Content/img/pokepartyday/palestras.jpg")"/>
-                        <div class="[ info-card-details ] animate">
-                            <div class="[ info-card-header ]">
-                                <h2>Bate-papo "Os 20 anos de Pokémon"</h2>
-                                <h3>às 12h30</h3>
-                            </div>
-                            <div class="[ info-card-detail ]">
-                                Teremos um bate-papo informal com jornalistas e outras personalidades de quem realmente entende de Pokémon
-                            </div>
-                        </div>
+            <div style="margin: 40px 0px; padding: 10px; background-color: #FFF;">
+                <h3>
+                    Bate-Papo com o público sobre Pokémon
+                </h3>
+                <h4>às 13h</h4><br/>
+                <p>Participe com perguntas de um bate-papo envolvendo especialistas e entendedores da franquia Pokémon, entre jornalistas, jogadores e podcasters. Conheça os integrantes:</p><br/>
+                <div class="row">
+                    <div class="col-md-3">
+                        <img src="@Url.Content("~/Content/img/pokepartyday/palestra_igor.jpg")" alt="Igor Andrade" class="img-circle">
+                        <h4>Igor Andrade</h4>
+                        <h5>Editor da Nintendo World</h5>
                     </div>
-                </div>
-                <div class="col-md-3">
+                    <div class="col-md-3">
+                        <img src="@Url.Content("~/Content/img/pokepartyday/palestra_ricardo.jpg")" alt="Ricardo Syozi" class="img-circle">
+                        <h4>Ricardo Syozi</h4>
+                        <h5>Colaborador da Nintendo World</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <img src="@Url.Content("~/Content/img/pokepartyday/palestra_mugi.jpg")" alt="Ivaldo Junior" class="img-circle">
+                        <h4>Ivaldo Junior</h4>
+                        <h5>Projeto X Podcast</h5>
+                    </div>
+                    <div class="col-md-3">
+                        <img src="@Url.Content("~/Content/img/pokepartyday/palestra_braz.jpg")" alt="Gustavo Braz" class="img-circle">
+                        <h4>Gustavo Braz</h4>
+                        <h5>Campeão Ranking Brasil VGC 2015</h5>
+                    </div>
+                </div><br/>
+                <br/>
+                <p>O debate vai envolver perguntas que você realizar. Quer vê-los debater um tema de sua escolha?</p>
+                <a href="https://docs.google.com/forms/d/18-sls4nAOxIkCjh_Fjfnzh-XkBAwGuA3KI0AkEwSdIg/viewform" target="_blank" class="btn btn-lg btn-pokemon20th" style="color: #FFF;">Clique aqui e faça sua pergunta!</a>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
                     <div class="[ info-card ]">
                         <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/desafiocaptura.jpg")" />
                         <div class="[ info-card-details ] animate">
                             <div class="[ info-card-header ]">
                                 <h2>Captura de Pokémon</h2>
-                                <h3>às 12h / 13h30 / 15h / 16h30 / 18h</h3>
+                                <h3>às 12:30h / 14h / 15:30h / 17h / 18:30h</h3>
                             </div>
                             <div class="[ info-card-detail ]">
                                 Fique ligado, pois entre os intervalos das atividades, anunciaremos Pokémon a captura. Eles estarão espalhados pelo evento, e cabe a você encontrá-los!
@@ -257,13 +275,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="[ info-card ]">
                         <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/desafioperguntas.jpg")" />
                         <div class="[ info-card-details ] animate">
                             <div class="[ info-card-header ]">
                                 <h2>Desafios de perguntas e respostas</h2>
-                                <h3>às 14h</h3>
+                                <h3>às 14:30h</h3>
                             </div>
                             <div class="[ info-card-detail ]">
                                 Você se considera um expert no universo Pokémon? Então se prepare, pois traremos uma gincana de perguntas e respostas que apenas os Mestres Pokémon serão campeões
@@ -271,14 +289,14 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <a style="cursor: pointer" onclick="goToSection('desfileCosplay')">
                         <div class="[ info-card ]">
                             <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/desfilePokemon.jpg")" />
                             <div class="[ info-card-details ] animate">
                                 <div class="[ info-card-header ]">
                                     <h2>Desfile cosplay</h2>
-                                    <h3>às 15h30</h3>
+                                    <h3>às 16h</h3>
                                 </div>
                             </div>
                         </div>
@@ -442,10 +460,10 @@
                 </a>
             </div>
             <div class="col-sm-2">
-                <a href="http://cargocollective.com/aline_barbosa/" target="_blank" class="thumbnail">
-                    <img src="@Url.Content("~/Content/img/pokepartyday/estande_aline.jpg")" class="img-responsive" alt="Aline Barbosa">
+                <a href="https://www.facebook.com/Alia-Gym-606735572807973/?fref=ts" target="_blank" class="thumbnail">
+                    <img src="@Url.Content("~/Content/img/pokepartyday/estande_aliagym.jpg")" class="img-responsive" alt="Alia Gym">
                     <div class="caption">
-                        <h3>Aline Barbosa</h3>
+                        <h3>Alia Gym</h3>
                     </div>
                 </a>
             </div>

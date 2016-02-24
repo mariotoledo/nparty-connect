@@ -318,6 +318,7 @@
     <Content Include="Content\img\pokepartyday\desafiocaptura.jpg" />
     <Content Include="Content\img\pokepartyday\desafioperguntas.jpg" />
     <Content Include="Content\img\pokepartyday\desfilePokemon.jpg" />
+    <Content Include="Content\img\pokepartyday\estande_aliagym.jpg" />
     <Content Include="Content\img\pokepartyday\estande_aline.jpg" />
     <Content Include="Content\img\pokepartyday\estande_arigato.jpg" />
     <Content Include="Content\img\pokepartyday\estande_dungeonstore.jpg" />
@@ -331,6 +332,10 @@
     <Content Include="Content\img\pokepartyday\oc.jpg" />
     <Content Include="Content\img\pokepartyday\otakucompany.png" />
     <Content Include="Content\img\pokepartyday\palestras.jpg" />
+    <Content Include="Content\img\pokepartyday\palestra_braz.jpg" />
+    <Content Include="Content\img\pokepartyday\palestra_igor.jpg" />
+    <Content Include="Content\img\pokepartyday\palestra_mugi.jpg" />
+    <Content Include="Content\img\pokepartyday\palestra_ricardo.jpg" />
     <Content Include="Content\img\pokepartyday\segredinho.jpg" />
     <Content Include="Content\img\pokepartyday\tcgChampionship.jpg" />
     <Content Include="Content\img\pokepartyday\tcgFree.jpg" />
