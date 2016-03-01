@@ -2,18 +2,16 @@
     ViewBag.Title = "20 anos de Pokémon";
     ViewData["ActiveMenu"] = 1;
 
-    ViewData["dontShowPokemonBanner"] = true;
-
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
 
     int maxPosts = (int)ViewData["MaxPosts"];
 
-    ViewData["title"] = "20 anos de Pokémon";
-    ViewData["metaDescription"] = "Comemore o aniversário de Pokémon com a N-Party!";
+    ViewData["title"] = "Pokémon";
+    ViewData["metaDescription"] = "Tudo sobre os monstrinhos de bolso mais adorados do mundo";
     ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/metaPokemon20th.jpg");
     ViewData["metaUrl"] = Url.Content("~/Nintendo/Pokemon");
-    ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Pikachu", "20 anos", "20 anos Pokémon" };
+    ViewData["metaKeywords"] = new List<string>() { "Pokémon", "Pokemon", "Nintendo", "Pikachu", "Moon", "Sun", "X" };
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
 
@@ -31,8 +29,6 @@
             <link rel="prev" href="@Url.Content("~/Nintendo/Pokemon?page=" + (currentPage - 1))">
         }
     }
-
-    string dailyMusicVideoId = (string)ViewData["DailyMusicVideoId"];
 }
 
 <div id="nintendo-container" class="pokemon20th" style="padding: 0;">
@@ -46,7 +42,7 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="logo"><img class="img-responsive" alt="20 anos de Pokémon" src="@Url.Content("~/Content/img/20anospokemon.png")" /></div>
-                        <h3>Comemore o aniversário de Pokémon com a N-Party!</h3>
+                        <h3>O melhor dos monstrinhos de bolso mais adorados do mundo com a N-Party!</h3>
                         <div class="share-icons">
                             <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/Nintendo/Pokemon"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
   '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
@@ -78,7 +74,6 @@
                     <li role="presentation" class="active"><a href="@Url.Content("~/Nintendo/Pokemon/")">Home</a></li>
                     <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/Timeline")">Timeline Interativa</a></li>
                     <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/PokePartyDay")">Poké Party Day</a></li>
-                    <li role="presentation"><a href="@Url.Content("~/Nintendo/Pokemon/Sorteio")">Sorteio</a></li>
                 </ul>
             </div>
         </div>
@@ -110,7 +105,7 @@
                     </div>
                     <div class="carousel-caption">
                         <span class="title">Poké Party Day</span>
-                        <p>Um evento comemorativo dos 20 anos de Pokémon, com freeplays, campeonatos, palestras, cosplays e muito mais!</p>
+                        <p>Veja como foi o nosso evento comemorativo dos 20 anos de Pokémon, com freeplays, campeonatos, palestras, cosplays e muito mais!</p>
                     </div>
                 </a>
             </div>
@@ -199,18 +194,6 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        @if (!string.IsNullOrEmpty(dailyMusicVideoId))
-                        {
-                            <div id="sidebar-general-pokemon" class="sidebar">
-                                <div class="sidebar-item">
-                                    <h4 class="sidebar-title">Música do dia</h4>
-                                    <div class="embed-responsive embed-responsive-16by9">
-                                        <iframe width="560" height="315" src="https://www.youtube.com/embed/@dailyMusicVideoId" frameborder="0" allowfullscreen></iframe>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-
                         @{Html.RenderPartial("Sidebars/Nintendo");}
                     </div>
                 </div>

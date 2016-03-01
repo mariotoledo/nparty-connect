@@ -5,14 +5,13 @@
     List<NParty.Www.Models.Article> eSportsPosts = (List<NParty.Www.Models.Article>)ViewData["ESportsPosts"];
     List<NParty.Www.Models.Article> eventosPosts = (List<NParty.Www.Models.Article>)ViewData["EventosPosts"];
 
+    ViewData["MenuHasBorderBottom"] = true;
+
     ViewData["metaDescription"] = "Wii U, 3DS, Pokémon, Mario, Zelda, League of Legends, Counter Strike e mais";
     ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/sharer.jpg");
     ViewData["metaUrl"] = Url.Content("~/Home/Index");
     ViewData["metaKeywords"] = new List<string>() { "Eventos", "Nintendo", "Wii U", "3DS", "eSports", "League of Legends", "Counter Strike" };
 }
-<a href="@Url.Content("~/Nintendo/Pokemon")" style="display: block; padding: 15px 20px; font-weight: bold; color: #fff; text-align: center; background-color: #337ab7;">
-    <img src="@Url.Content("~/Content/img/20anospokemon_small.jpg")" alt="20 anos de Pokémon" /><br/>Comemore o aniversário de Pokémon com a N-Party!
-</a>
     <div class="hilights">
         <div class="hilights-items">
             <div style="float: left; width: 100%;">

@@ -1033,7 +1033,6 @@
     <Content Include="Content\pokemontimeline\Data\Events\MAP-2\EV-47.json" />
     <Content Include="Content\pokemontimeline\Data\Events\MAP-2\EV-48.json" />
     <Content Include="Content\pokemontimeline\Data\Events\MAP-2\EV-49.json" />
-    <Content Include="Areas\Nintendo\Views\Pokemon\Sorteio.cshtml" />
     <Content Include="Areas\Podcasts\Views\Web.config" />
     <Content Include="Areas\Podcasts\Views\Home\Index.cshtml" />
     <Content Include="Areas\Podcasts\Views\Artigos\Ler.cshtml" />
