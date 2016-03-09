@@ -110,7 +110,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
     <!-- Bootstrap core CSS -->
     <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
     <link rel="stylesheet" href="https://cloud.typography.com/706184/753582/css/fonts.css" type="text/css" />
-    <link href="@Url.Content("~/Content/css/nparty.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/nparty.css")?date=@DateTime.Now.ToString("ddMMyyyy")" rel="stylesheet">
     <link href="http://nparty.com.br/Content/css/audioplayer.css" rel="stylesheet" type="text/css" />
 
     @RenderSection("Head", false)
@@ -156,6 +156,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                         <div class="dropdown-menu">
                             <ul class="nav">
                                 <li><a href="@Url.Content("~/Sobre/QuemSomos")">Quem Somos</a></li>
+                                <li><a href="@Url.Content("~/Sobre/FacaParte")">Faça Parte</a></li>
                                 <li role="separator" class="divider" style="margin: 0;"></li>
                                 <li><a href="@Url.Content("~/Sobre/Contato")">Contato</a></li>
                             </ul>

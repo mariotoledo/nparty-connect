@@ -13,5 +13,6 @@ namespace NParty.Www.Controllers
     {
         public ActionResult QuemSomos() { return View(); }
         public ActionResult Contato() { return View(); }
+        public ActionResult FacaParte() { return View(); }
     }
 }

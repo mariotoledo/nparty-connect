@@ -1040,6 +1040,7 @@
     <Content Include="Views\Home\UrlInvalida.cshtml" />
     <Content Include="Views\Home\GenerateUrl.cshtml" />
     <Content Include="Views\Shared\SubMenus\Podcasts.cshtml" />
+    <Content Include="Views\Sobre\FacaParte.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
