@@ -89,7 +89,7 @@ namespace NParty.Www.Controllers
             );
 
             Article article = helper.GetSingleArticleFromBlogByPath(NintendoBlogId, "Nintendo", "/" + year + "/" + month + "/" + path + ".html");
-
+                
             if (article == null)
             {
                 article = helper.GetSingleArticleFromBlogByPath(EventosBlogId, "Eventos", "/" + year + "/" + month + "/" + path + ".html");

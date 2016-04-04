@@ -221,6 +221,7 @@
     <Compile Include="Helpers\ArticlesHelper.cs" />
     <Compile Include="Helpers\NPartyArticlesHelper.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
+    <Compile Include="Models\Podcast.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -240,6 +241,7 @@
     <Content Include="Content\img\20anospokemon.png" />
     <Content Include="Content\img\20anospokemon_small.jpg" />
     <Content Include="Content\img\authors\caiocardoso.jpg" />
+    <Content Include="Content\img\authors\camilaingles.jpg" />
     <Content Include="Content\img\authors\fabricioluz.jpg" />
     <Content Include="Content\img\authors\lucasalves.jpg" />
     <Content Include="Content\img\authors\mariotoledo.jpg" />
