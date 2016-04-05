@@ -4,7 +4,7 @@
     <nav class="navbar" style="min-height: initial; margin-bottom: 0px;">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subMenu-Nintendo" aria-expanded="false">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#subMenu-Podcast" aria-expanded="false">
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -12,11 +12,12 @@
                 </button>
                 <h3 style="margin-top: 12px; text-align: center;" class="hidden-lg">Podcasts</h3>
             </div>
-            <div class="collapse navbar-collapse" id="subMenu-Nintendo">
+            <div class="collapse navbar-collapse" id="subMenu-Podcast">
                 <ul class="nav nav-pills">
-                    <li role="presentation" class="@(Model == 1 ? "active" : "")"><a href="@Url.Content("~/Podcasts/")">Home</a></li>
+                    <li role="presentation" class="@(Model == 0 ? "active" : "")"><a href="@Url.Content("~/Podcasts/")">Home</a></li>
                     <li class="divider-vertical"></li>
-                    <li role="presentation" class="@(Model == 4 ? "active" : "")"><a href="@Url.Content("~/Podcast/CostaACosta")">N-Party Costa a Costa</a></li>
+                    <li role="presentation" class="@(Model == 1 ? "active" : "")"><a href="@Url.Content("~/Podcast/NPartyCostaACosta")">N-Party Costa a Costa</a></li>
+                    <li role="presentation" class="@(Model == 2 ? "active" : "")"><a href="@Url.Content("~/Podcast/NintendoA3")">Nintendo a 3</a></li>
                 </ul>
             </div>
         </div>

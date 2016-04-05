@@ -16,7 +16,7 @@ namespace NParty.Www.Helpers
             {
                 foreach (string blogId in blogDomains.Keys)
                 {
-                    articles.AddRange(GetArticlesFromBlog(blogId, blogDomains[blogId], 5, 0, "Destaque"));
+                    articles.AddRange(GetArticlesFromBlog(blogId, blogDomains[blogId], 5, 0, "Destaque", "/Artigos/Ler/"));
                 }
 
                articles = (List <Article>)articles.OrderByDescending(c => c.DatePublished).Take(5).ToList();
@@ -36,7 +36,7 @@ namespace NParty.Www.Helpers
             {
                 foreach (string blogId in blogDomains.Keys)
                 {
-                    articles.AddRange(GetArticlesFromBlog(blogId, blogDomains[blogId], maxArticles, 0, "Destaque"));
+                    articles.AddRange(GetArticlesFromBlog(blogId, blogDomains[blogId], maxArticles, 0, "Destaque", "/Artigos/Ler/"));
                 }
 
                 articles = (List<Article>)articles.OrderByDescending(c => c.DatePublished).ToList();

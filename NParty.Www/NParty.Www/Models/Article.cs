@@ -21,9 +21,9 @@ namespace NParty.Www.Models
         public string Id { get; set; }
         public string[] Labels { get; set; }
 
-        public virtual void GenerateNPartyArtileLink(string domain)
+        public virtual void GenerateNPartyArticleLink(string domain, string readActionUrl)
         {
-            this.NPartyArticleLink = domain + "/Artigos/Ler/" + Id + "/" + GetTitleForUrl();
+            this.NPartyArticleLink = domain + readActionUrl + Id + "/" + GetTitleForUrl();
         }
 
         public string GetTitleForUrl()

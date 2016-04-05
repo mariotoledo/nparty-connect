@@ -209,6 +209,8 @@
     <Compile Include="Areas\Nintendo\NintendoAreaRegistration.cs" />
     <Compile Include="Areas\Podcasts\Controllers\ArtigosController.cs" />
     <Compile Include="Areas\Podcasts\Controllers\HomeController.cs" />
+    <Compile Include="Areas\Podcasts\Controllers\NintendoA3Controller.cs" />
+    <Compile Include="Areas\Podcasts\Controllers\NPartyCostaACostaController.cs" />
     <Compile Include="Areas\Podcasts\Controllers\PodcastsController.cs" />
     <Compile Include="Areas\Podcasts\PodcastsAreaRegistration.cs" />
     <Compile Include="Controllers\OpsController.cs" />
@@ -221,7 +223,6 @@
     <Compile Include="Helpers\ArticlesHelper.cs" />
     <Compile Include="Helpers\NPartyArticlesHelper.cs" />
     <Compile Include="Helpers\StringExtensions.cs" />
-    <Compile Include="Models\Podcast.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Author.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -1038,6 +1039,10 @@
     <Content Include="Areas\Podcasts\Views\Web.config" />
     <Content Include="Areas\Podcasts\Views\Home\Index.cshtml" />
     <Content Include="Areas\Podcasts\Views\Artigos\Ler.cshtml" />
+    <Content Include="Areas\Podcasts\Views\NintendoA3\Ouvir.cshtml" />
+    <Content Include="Areas\Podcasts\Views\NPartyCostaACosta\Ouvir.cshtml" />
+    <Content Include="Areas\Podcasts\Views\NintendoA3\Index.cshtml" />
+    <Content Include="Areas\Podcasts\Views\NPartyCostaACosta\Index.cshtml" />
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
     <Content Include="Views\Home\UrlInvalida.cshtml" />
     <Content Include="Views\Home\GenerateUrl.cshtml" />

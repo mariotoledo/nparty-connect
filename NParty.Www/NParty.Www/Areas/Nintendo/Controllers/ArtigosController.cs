@@ -32,7 +32,7 @@ namespace NParty.Www.Areas.Nintendo.Controllers
 
             ViewData["article"] = article;
 
-            List<Article> hilights = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque");
+            List<Article> hilights = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque", "/Artigos/Ler/");
             ViewData["hilights"] = hilights;
 
             return View();
@@ -41,7 +41,7 @@ namespace NParty.Www.Areas.Nintendo.Controllers
         public JsonResult GetRelatedPosts(string label)
         {
             ArticlesHelper helper = new ArticlesHelper();
-            return Json(helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 3, 0, label), JsonRequestBehavior.AllowGet);
+            return Json(helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 3, 0, label, "/Artigos/Ler/"), JsonRequestBehavior.AllowGet);
         } 
 
     }

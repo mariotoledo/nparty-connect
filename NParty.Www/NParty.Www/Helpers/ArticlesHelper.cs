@@ -51,7 +51,7 @@ namespace NParty.Www.Helpers
                     article.Id = GetPostIdManually(post.Id.AbsoluteUri);
                     article.ArticleLink = GetPostLinkManually(post.Links);
                     article.Labels = GetLabelsArray(post.Categories);
-                    article.GenerateNPartyArtileLink(blogDomain);
+                    article.GenerateNPartyArticleLink(blogDomain, "/Artigos/Ler/");
 
                     article.Domain = blogDomain;
 
@@ -64,6 +64,11 @@ namespace NParty.Www.Helpers
             }
 
             return articles;
+        }
+
+        internal Article GetSingleArticleFromBlog(object mainBlogId, string v, string id)
+        {
+            throw new NotImplementedException();
         }
 
         public Article GetSingleArticleFromBlogByPath(string blogId, string blogDomain, string path)
@@ -96,7 +101,7 @@ namespace NParty.Www.Helpers
                 article.DatePublished = post.Published.HasValue ? post.Published.Value : DateTime.MinValue;
 
                 article.Domain = blogDomain;
-                article.GenerateNPartyArtileLink(blogDomain);
+                article.GenerateNPartyArticleLink(blogDomain, "/Artigos/Ler/");
 
                 if (post.Labels != null && post.Labels.Count > 0)
                 {
@@ -147,7 +152,7 @@ namespace NParty.Www.Helpers
                 article.DatePublished = post.Published.HasValue ? post.Published.Value : DateTime.MinValue;
 
                 article.Domain = blogDomain;
-                article.GenerateNPartyArtileLink(blogDomain);
+                article.GenerateNPartyArticleLink(blogDomain, "/Artigos/Ler/");
 
                 if (post.Labels != null && post.Labels.Count > 0)
                 {
@@ -190,7 +195,7 @@ namespace NParty.Www.Helpers
             return null;
         }
 
-        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex, string postsLabel)
+        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex, string postsLabel, string readActionUrl)
         {
             List<Article> articles = new List<Article>();
             try
@@ -221,7 +226,7 @@ namespace NParty.Www.Helpers
                     article.Labels = GetLabelsArray(post.Categories);
 
                     article.Domain = blogDomain;
-                    article.GenerateNPartyArtileLink(blogDomain);
+                    article.GenerateNPartyArticleLink(blogDomain, readActionUrl);
 
                     articles.Add(article);
                 };
@@ -234,19 +239,19 @@ namespace NParty.Www.Helpers
             return articles;
         }
 
-        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex)
+        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex, string readActionUrl)
         {
-            return GetArticlesFromBlog(blogId, blogDomain, maxResults, startIndex, "");
+            return GetArticlesFromBlog(blogId, blogDomain, maxResults, startIndex, "", readActionUrl);
         }
 
-        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults)
+        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, string readActionUrl)
         {
-            return GetArticlesFromBlog(blogId, blogDomain, maxResults, 0);
+            return GetArticlesFromBlog(blogId, blogDomain, maxResults, 0, readActionUrl);
         }
 
-        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain)
+        public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, string readActionUrl)
         {
-            return GetArticlesFromBlog(blogId, blogDomain, 0, 10);
+            return GetArticlesFromBlog(blogId, blogDomain, 0, 10, readActionUrl);
         }
 
         private string[] GetLabelsArray(AtomCategoryCollection postCategories)

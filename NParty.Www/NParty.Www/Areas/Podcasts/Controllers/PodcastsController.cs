@@ -19,13 +19,12 @@ namespace NParty.Www.Areas.Podcasts.Controllers
             int pageValue = page.HasValue && page.Value > 0 ? page.Value : 0;
 
             NPartyArticlesHelper helper = new NPartyArticlesHelper();
-            List<Article> articles = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", MaxPosts, (MaxPosts * pageValue) + 1, label);
+            List<Article> articles = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", MaxPosts, (MaxPosts * pageValue) + 1, label, "/Ouvir/");
 
             ViewData["articles"] = articles;
             ViewData["currentPage"] = pageValue;
 
             return View();
         }
-
     }
 }

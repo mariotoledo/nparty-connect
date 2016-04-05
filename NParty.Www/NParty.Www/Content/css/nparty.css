@@ -11,10 +11,6 @@ body {
 a {
 	color: #C90201;
 	text-decoration: none;
-	-webkit-transition: all 0.2s linear;
-	-moz-transition: all 0.2s linear;
-	-o-transition: all 0.2s linear;
-	transition: all 0.2s linear;
 }
 
 a:hover{
@@ -229,7 +225,7 @@ blockquote{
     background-color: #C90201;
 }
 
-.nintendo-menu .divider, .eventos-menu .divider, .esports-menu .divider{
+.nintendo-menu .divider, .eventos-menu .divider, .esports-menu .divider, .podcast-menu .divider,{
     background-color: rgba(255, 255, 255, 0.3);
 }
 
@@ -258,6 +254,34 @@ blockquote{
     color: #FFF;
     background-color: #E18700;
 }
+
+.podcasts-menu:hover, .podcasts-menu-active, .podcasts-menu-active a {
+    background-color: #519603;
+    color: #FFF!important;
+}
+
+.podcasts-menu .nav li a {
+    color: #FFF
+}
+
+.podcasts-menu .nav li a:hover {
+    color: #519603;
+}
+
+.podcasts-menu:hover>a, .podcasts-menu:hover>a:hover{
+    color: #FFF!important;
+    -webkit-transition: none;
+	-moz-transition: none;
+	-o-transition: none;
+	transition: none;
+}
+
+.podcasts-menu .dropdown-menu{
+    color: #FFF;
+    background-color: #519603;
+}
+
+
 
 .dropdown-menu{
     -webkit-background-clip: none;
@@ -534,7 +558,7 @@ h1, h2, h3{
 
 #podcast-container .container-header h2
 {
-    color: #97cd41;
+    color: #519603;
     margin-bottom: 20px;
 }
 
@@ -543,11 +567,11 @@ h1, h2, h3{
 }
 
 #podcast-container a, .domainLink-Podcast{
-    color: #97cd41;
+    color: #519603;
 }
 
 #podcast-container a:hover, .domainLink-Podcast:hover{
-    color: #C8E498;
+    color: #6bc306;
 }
 
 
@@ -566,10 +590,15 @@ h1, h2, h3{
     background-position: center center;
     opacity:1;-ms-filter:"alpha(opacity=100)";filter:alpha(opacity=100);
     text-decoration: none;
-	-webkit-transition: all 0.2s linear;
-	-moz-transition: all 0.2s linear;
-	-o-transition: all 0.2s linear;
-	transition: all 0.2s linear;
+}
+
+@media(min-width: 961px){
+    .article-item figure, .hilight-article-item figure, .article-item figure, .hilight-article-item figure, .thumb-item figure.media-object, footer a, footer .thumb-item a, #related-posts a:hover figure, a {
+        -webkit-transition: all 0.2s linear;
+        -moz-transition: all 0.2s linear;
+        -o-transition: all 0.2s linear;
+        transition: all 0.2s linear;
+    }
 }
 
 
@@ -612,10 +641,6 @@ h1, h2, h3{
     background-position: center center;
     opacity:1;-ms-filter:"alpha(opacity=100)";filter:alpha(opacity=100);
     text-decoration: none;
-	-webkit-transition: all 0.2s linear;
-	-moz-transition: all 0.2s linear;
-	-o-transition: all 0.2s linear;
-	transition: all 0.2s linear;
 }
 
 @media (max-width: 960px){
@@ -709,10 +734,6 @@ h1, h2, h3{
         width: 64px; height: 64px;
         opacity:1;-ms-filter:"alpha(opacity=100)";filter:alpha(opacity=100);
         text-decoration: none;
-	    -webkit-transition: all 0.2s linear;
-	    -moz-transition: all 0.2s linear;
-	    -o-transition: all 0.2s linear;
-	    transition: all 0.2s linear;
 }
 
 
@@ -812,10 +833,6 @@ h1, h2, h3{
 	
 	footer a{
 		color: #FFF;
-        -webkit-transition: all 0.2s linear;
-	    -moz-transition: all 0.2s linear;
-	    -o-transition: all 0.2s linear;
-	    transition: all 0.2s linear;
         text-decoration: none;
 	}
 
@@ -829,10 +846,6 @@ h1, h2, h3{
     }
 
     footer .thumb-item a{
-        -webkit-transition: all 0.2s linear;
-	    -moz-transition: all 0.2s linear;
-	    -o-transition: all 0.2s linear;
-	    transition: all 0.2s linear;
         text-decoration: none;
     }
 
@@ -963,6 +976,53 @@ h1, h2, h3{
     height: 37px;
     margin: 0px 5px 0px 5px;
     border-right: 1px solid #F29811;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#podcast-container .content-area-menu{
+    background-color: #519603;
+    color: #FFFFFF;
+    font-size: 12px;
+}
+
+#podcast-container .content-area-menu a{
+    color: #FFF;
+}
+
+#podcast-container .content-area-menu li a{
+    border-radius: 1px;
+    -moz-border-radius: 1px;
+}
+
+#podcast-container .content-area-menu li.active a{
+    color: #FFF;
+    background-color: #3c6d03;
+    font-weight: bolder;
+}
+
+#podcast-container .content-area-menu li:hover a, #podcast-container .content-area-menu li a:focus{
+   background-color: #66bd05;
+}
+
+#podcast-container .content-area-menu .divider-vertical {
+    height: 37px;
+    margin: 0px 5px 0px 5px;
+    border-right: 1px solid #63b606;
 }
 
 .prevPage,{
@@ -1225,10 +1285,6 @@ h1, h2, h3{
 
 #related-posts a:hover figure{
     opacity:1;-ms-filter:"alpha(opacity=100)";filter:alpha(opacity=100);
-    -webkit-transition: all 0.2s linear;
-	-moz-transition: all 0.2s linear;
-	-o-transition: all 0.2s linear;
-	transition: all 0.2s linear;
 }
 
 #article-content{

@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.Title = "Podcasts";
+    ViewBag.Title = "Nintendo a 3";
 
     ViewData["ActiveMenu"] = 4;
 
@@ -7,11 +7,11 @@
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = 20;//(int)ViewData["MaxPosts"];
 
-    ViewData["title"] = "Podcasts";
+    ViewData["title"] = "N-Party Costa a Costa";
     ViewData["metaDescription"] = "Coloque seus fones de ouvidos e escute uma galera falando o que pensa sobre games e outras coisas";
     ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/podcasts.jpg");
-    ViewData["metaUrl"] = Url.Content("~/Podcasts/Index");
-    ViewData["metaKeywords"] = new List<string>() { "Podcast", "N-Party", "Costa a Costa", "Games" };
+    ViewData["metaUrl"] = Url.Content("~/Podcasts/NPartyCostaACosta");
+    ViewData["metaKeywords"] = new List<string>() { "Podcast", "N-Party", "Nintendo", "Games"};
 
     string[] podcastSpecialTags = (string[])ViewData["PodcastsSpecialTags"];
 
@@ -30,7 +30,7 @@
 }
 
 <div id="podcast-container" style="padding: 0;">
-    @{Html.RenderPartial("SubMenus/Podcasts", 0);}
+    @{Html.RenderPartial("SubMenus/Podcasts", 2);}
     <div class="container" style="padding-top: 30px;">
         @{
             if (articles != null && articles.Count > 0)
@@ -88,7 +88,7 @@
                                 @{
                                     if (articles.Count >= maxPosts)
                                     {
-                                        <a rel="next" class="directionLink" href="@Url.Content("~/Podcasts/Home/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
+                                        <a rel="next" class="directionLink" href="@Url.Content("~/Podcasts/NPartyCostaACosta/Index?page=" + (currentPage + 1))" style="text-align: left"><span aria-hidden="true" class="glyphicon glyphicon-chevron-left"></span> ARTIGOS MAIS <b>ANTIGOS</b> </a>
                                     }
                                 }
                             </div>
@@ -97,7 +97,7 @@
                                 @{
                                     if (currentPage > 0)
                                     {
-                                        <a rel="prev" class="directionLink" href="@Url.Content("~/Podcasts/Home/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
+                                        <a rel="prev" class="directionLink" href="@Url.Content("~/Podcasts/NPartyCostaACosta/Index?page=" + (currentPage - 1))" style="text-align: right;"> ARTIGOS MAIS <b>RECENTES</b> <span aria-hidden="true" class="glyphicon glyphicon-chevron-right"></span></a>
                                     }
                                 }
                             </div>
@@ -107,11 +107,11 @@
                         @{Html.RenderPartial("Sidebars/General");}
                     </div>
                 </div>
-                            }
-                            else
-                            {
-                                <div style="padding: 50px; text-align: center;"> Não foi possível encontrar publicãções no momento. Por favor, tente novamente mais tarde.</div>
-                            }
+            }
+            else
+            {
+                <div style="padding: 50px; text-align: center;"> Não foi possível encontrar publicãções no momento. Por favor, tente novamente mais tarde.</div>
+            }
         }
     </div>
 </div>

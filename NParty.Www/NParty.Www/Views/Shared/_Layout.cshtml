@@ -141,7 +141,10 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                     <li class="eventos-menu @(activeMenuId == 3 ? "eventos-menu-active" : "")">
                         <a href="@Url.Content("~/Eventos")"> Eventos</a>
                     </li>
-                                        @*<li class="bordered-left dropdown">
+                    <li class="bordered-left podcasts-menu @(activeMenuId == 4 ? "podcasts-menu-active" : "")">
+                        <a href="@Url.Content("~/Podcasts")"> Podcasts</a>
+                    </li>
+                                     @*<li class="bordered-left dropdown">
             <a href="#">Comunidade</a>
             <div class="dropdown-menu">
                 <ul class="nav">

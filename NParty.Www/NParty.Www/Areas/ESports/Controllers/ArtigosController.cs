@@ -32,7 +32,7 @@ namespace NParty.Www.Areas.ESports.Controllers
 
             ViewData["article"] = article;
 
-            List<Article> hilights = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 5, 0, "Destaque");
+            List<Article> hilights = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 5, 0, "Destaque", "/Artigos/Ler/");
             ViewData["hilights"] = hilights;
 
             return View();
@@ -41,7 +41,7 @@ namespace NParty.Www.Areas.ESports.Controllers
         public JsonResult GetRelatedPosts(string label)
         {
             ArticlesHelper helper = new ArticlesHelper();
-            return Json(helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 3, 0, label), JsonRequestBehavior.AllowGet);
+            return Json(helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 3, 0, label, "/Artigos/Ler/"), JsonRequestBehavior.AllowGet);
         }
 
     }

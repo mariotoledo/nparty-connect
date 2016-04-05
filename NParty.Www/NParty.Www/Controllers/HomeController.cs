@@ -27,9 +27,9 @@ namespace NParty.Www.Controllers
             blogDomains.Add(EventosBlogId, "Eventos");
 
             List<Article> hilights = helper.GetHomeHilights(blogDomains);
-            List<Article> nintendoArticles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 4);
-            List<Article> esportsArticles = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 4);
-            List<Article> eventosArticles = helper.GetArticlesFromBlog(EventosBlogId, "Eventos", 4);
+            List<Article> nintendoArticles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 4, "/Artigos/Ler/");
+            List<Article> esportsArticles = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 4, "/Artigos/Ler/");
+            List<Article> eventosArticles = helper.GetArticlesFromBlog(EventosBlogId, "Eventos", 4, "/Artigos/Ler/");
 
             ViewData["Hilights"] = hilights;
             ViewData["NintendoPosts"] = nintendoArticles;
@@ -71,8 +71,8 @@ namespace NParty.Www.Controllers
             blogDomains.Add(NintendoBlogId, "Nintendo");
             blogDomains.Add(ESportsBlogId, "NParty");
 
-            List<Article> nintendoPodcasts = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 4, 0, "Podcast");
-            List<Article> npartyPodcasts = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", 4, 0, "Podcast");
+            List<Article> nintendoPodcasts = helper.GetArticlesFromBlog(NintendoBlogId, "Podcasts", 4, 0, "Nintendo a 3", "/NintendoA3/Ouvir/");
+            List<Article> npartyPodcasts = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", 4, 0, "N-Party Costa a Costa", "/NPartyCostaACosta/Ouvir/");
 
             List<Article> podcastFeed = new List<Article>();
             podcastFeed.AddRange(nintendoPodcasts);
@@ -128,7 +128,7 @@ namespace NParty.Www.Controllers
                 Title = title
             };
 
-            a.GenerateNPartyArtileLink(domain);
+            a.GenerateNPartyArticleLink(domain, "/Artigos/Ler/");
 
             return Json("http://www.nparty.com.br/" + a.NPartyArticleLink, JsonRequestBehavior.AllowGet);
         }

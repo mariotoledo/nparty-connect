@@ -19,8 +19,8 @@ namespace NParty.Www.Areas.ESports.Controllers
             int pageValue = page.HasValue && page.Value > 0 ? page.Value : 0;
 
             NPartyArticlesHelper helper = new NPartyArticlesHelper();
-            List<Article> articles = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", MaxPosts, (MaxPosts * pageValue) + 1, label);
-            List<Article> hilights = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 5, 0, "Destaque");
+            List<Article> articles = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", MaxPosts, (MaxPosts * pageValue) + 1, label, "/Artigos/Ler/");
+            List<Article> hilights = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 5, 0, "Destaque", "/Artigos/Ler/");
 
             ViewData["articles"] = articles;
             ViewData["hilights"] = hilights;
