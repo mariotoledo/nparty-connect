@@ -4,6 +4,8 @@
 
     NParty.Www.Models.Article article = (NParty.Www.Models.Article)ViewData["article"];
 
+    ViewData["feedUrl"] = "http://feeds.feedburner.com/EventosN-party";
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     if (article != null)

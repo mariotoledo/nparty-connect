@@ -6,6 +6,8 @@
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
 
+    ViewData["feedUrl"] = "http://feeds.feedburner.com/NintendoN-party";
+
     ViewData["title"] = "Nintendo";
     ViewData["metaDescription"] = "O melhor do universo da Nintendo com a N-Party. Wii U, 3DS, Previews, Reviews e mais!";
     ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/nintendo.jpg");
@@ -13,7 +15,7 @@
     ViewData["metaKeywords"] = new List<string>() { "Nintendo", "3DS", "Wii U", "Pokémon", "Mario", "The Legend of Zelda" };
 
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
-    
+
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     @section Head{

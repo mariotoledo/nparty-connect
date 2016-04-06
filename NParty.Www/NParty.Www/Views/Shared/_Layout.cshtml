@@ -29,6 +29,9 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
     string metaFacebookAuthor = string.IsNullOrEmpty((string)ViewData["metaFacebookAuthor"]) ?
     "" : (string)ViewData["metaFacebookAuthor"];
 
+    string feedUrl = string.IsNullOrEmpty((string)ViewData["feedUrl"]) ? "http://feeds.feedburner.com/all-n-party" :
+        (string)ViewData["feedUrl"];
+
 
 }
 
@@ -109,9 +112,11 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
 
     <!-- Bootstrap core CSS -->
     <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
-    <link rel="stylesheet" href="https://cloud.typography.com/706184/753582/css/fonts.css" type="text/css" />
-    <link href="@Url.Content("~/Content/css/nparty.css")?date=@DateTime.Now.ToString("ddMMyyyy")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/nparty.css")?date=@DateTime.Now.ToString("ddMMyyyyhhmm")" rel="stylesheet">
     <link href="http://nparty.com.br/Content/css/audioplayer.css" rel="stylesheet" type="text/css" />
+
+    <link rel="alternate" type="application/atom+xml" title="N-Party - Atom" href="@feedUrl" />
+    <link rel="alternate" type="application/rss+xml" title="N-Party - RSS" href="@feedUrl?alt=rss" />
 
     @RenderSection("Head", false)
 </head>
@@ -144,16 +149,16 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                     <li class="bordered-left podcasts-menu @(activeMenuId == 4 ? "podcasts-menu-active" : "")">
                         <a href="@Url.Content("~/Podcasts")"> Podcasts</a>
                     </li>
-                                     @*<li class="bordered-left dropdown">
-            <a href="#">Comunidade</a>
-            <div class="dropdown-menu">
-                <ul class="nav">
-                    <li><a href="#">Usuários</a></li>
-                            <li><a href="#">Ranking</a></li>
-                    <li><a href="#">Widgets</a></li>
-                </ul>
-            </div>
-        </li>*@
+                    @*<li class="bordered-left dropdown">
+                        <a href="#">Comunidade</a>
+                        <div class="dropdown-menu">
+                            <ul class="nav">
+                                <li><a href="#">Usuários</a></li>
+                                        <li><a href="#">Ranking</a></li>
+                                <li><a href="#">Widgets</a></li>
+                            </ul>
+                        </div>
+                    </li>*@
                     <li class="bordered-left bordered-right dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sobre <span class="caret"></span></a>
                         <div class="dropdown-menu">
@@ -242,11 +247,13 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                     <meta itemprop="name" content="N-Party"> 
                     <h4>Siga-nos!</h4>
                     <link itemprop="url" href="@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]" rel="alternate"> 
-                    <div style="height: 60px;">
+                    <div style="min-height: 60px;">
+                        <a itemprop="sameAs" target="_blank" class="btn btn-default navbar-btn socialIcon" href="http://www.facebook.com/NParty" type="button"><img alt="Facebook" src="@Url.Content("~/Content/img/socialIcons/facebook.jpg")" title="Facebook"></a>
+                        <a itemprop="sameAs" target="_blank" class="btn btn-default navbar-btn socialIcon" href="https://twitter.com/n_party" type="button"><img alt="Twitter" src="@Url.Content("~/Content/img/socialIcons/twitter.jpg")" title="Twitter"></a>
+                        <a itemprop="sameAs" target="_blank" class="btn btn-default navbar-btn socialIcon" href="https://plus.google.com/101582759847063966924" type="button"><img alt="Google Plus" src="@Url.Content("~/Content/img/socialIcons/gplus.jpg")" title="Google Plus"></a>
                         <a itemprop="sameAs" target="_blank" class="btn btn-default navbar-btn socialIcon" href="http://youtube.com/npartytv" type="button"><img alt="YouTube" src="@Url.Content("~/Content/img/socialIcons/youtube.jpg")" title="YouTube" ></a>
-                        <a itemprop="sameAs" class="btn btn-default navbar-btn socialIcon" href="http://instagram.com/nintendoparty" type="button"><img alt="Instagram" src="@Url.Content("~/Content/img/socialIcons/instagram.jpg")" title="Instagram" ></a>
-                        <a itemprop="sameAs" class="btn btn-default navbar-btn socialIcon" href="https://twitter.com/n_party" type="button"><img alt="Twitter" src="@Url.Content("~/Content/img/socialIcons/twitter.jpg")" title="Twitter" ></a>
-                        <a itemprop="sameAs" class="btn btn-default navbar-btn socialIcon" href="http://www.facebook.com/NParty" type="button"><img alt="Facebook" src="@Url.Content("~/Content/img/socialIcons/facebook.jpg")" title="Facebook" ></a>
+                        <a itemprop="sameAs" target="_blank" class="btn btn-default navbar-btn socialIcon" href="http://instagram.com/nintendoparty" type="button"><img alt="Instagram" src="@Url.Content("~/Content/img/socialIcons/instagram.jpg")" title="Instagram" ></a>
+                        <a itemprop="sameAs" target="_blank" class="btn btn-default navbar-btn socialIcon" href="http://feeds.feedburner.com/all-n-party" type="button"><img alt="Rss" src="@Url.Content("~/Content/img/socialIcons/rss.jpg")" title="RSS"></a>                        
                     </div>
                     <br/>
                     <h4>Nossos Parceiros</h4>

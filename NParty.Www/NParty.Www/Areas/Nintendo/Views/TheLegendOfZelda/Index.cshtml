@@ -6,6 +6,8 @@
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
 
+    ViewData["feedUrl"] = "http://feeds.feedburner.com/NintendoN-party";
+
     ViewData["title"] = "The Legend of Zelda";
     ViewData["metaDescription"] = "HEEEYAA HEYA HEEEEYA HEY HEEEEYA!!";
     ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/thelegendofzelda.jpg");

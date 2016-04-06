@@ -6,6 +6,8 @@
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
 
+    ViewData["feedUrl"] = "http://feeds.feedburner.com/NintendoN-party";
+
     ViewData["title"] = "Top 10";
     ViewData["metaDescription"] = "Listas e mais listas de diversos assuntos envolvendo a Nintendo";
     ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/top10.jpg");
@@ -15,7 +17,7 @@
     string[] nintendoSpecialTags = (string[])ViewData["NintendoSpecialTags"];
 
     Layout = "~/Views/Shared/_Layout.cshtml";
-    
+
     @section Head{
         @if (articles.Count >= maxPosts)
         {

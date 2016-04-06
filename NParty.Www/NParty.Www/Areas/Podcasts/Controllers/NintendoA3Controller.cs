@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace NParty.Www.Areas.Podcasts.Controllers
 {
-    public class NintendoA3Controller : NPartyController
+    public class NintendoA3Controller : PodcastsController
     {
         //
         // GET: /Podcasts/NintendoA3/

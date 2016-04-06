@@ -3,6 +3,8 @@
 
     ViewData["ActiveMenu"] = 4;
 
+    ViewData["feedUrl"] = "http://feeds.feedburner.com/PodcastN-party";
+
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = 20;//(int)ViewData["MaxPosts"];
@@ -30,7 +32,7 @@
 }
 
 <div id="podcast-container" style="padding: 0;">
-    @{Html.RenderPartial("SubMenus/Podcasts", 2);}
+    @{Html.RenderPartial("SubMenus/Podcasts", 1);}
     <div class="container" style="padding-top: 30px;">
         @{
             if (articles != null && articles.Count > 0)

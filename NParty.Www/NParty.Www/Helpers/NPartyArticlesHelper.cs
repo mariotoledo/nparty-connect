@@ -8,7 +8,7 @@ namespace NParty.Www.Helpers
 {
     public class NPartyArticlesHelper : ArticlesHelper
     {
-        public List<Article> GetHomeHilights(Dictionary<string, string> blogDomains)
+        public List<Article> GetHomeHilights(Dictionary<string, string> blogDomains, string mainBlogId)
         {
             List<Article> articles = new List<Article>();
 
@@ -18,6 +18,8 @@ namespace NParty.Www.Helpers
                 {
                     articles.AddRange(GetArticlesFromBlog(blogId, blogDomains[blogId], 5, 0, "Destaque", "/Artigos/Ler/"));
                 }
+
+                articles.AddRange(GetArticlesFromBlog(mainBlogId, "Podcasts", 4, "/Ouvir/"));
 
                articles = (List <Article>)articles.OrderByDescending(c => c.DatePublished).Take(5).ToList();
             } catch (Exception e)

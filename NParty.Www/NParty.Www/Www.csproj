@@ -113,6 +113,7 @@
       <HintPath>..\packages\Microsoft.Net.Http.2.2.29\lib\net45\System.Net.Http.Primitives.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -213,6 +214,7 @@
     <Compile Include="Areas\Podcasts\Controllers\NPartyCostaACostaController.cs" />
     <Compile Include="Areas\Podcasts\Controllers\PodcastsController.cs" />
     <Compile Include="Areas\Podcasts\PodcastsAreaRegistration.cs" />
+    <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\OpsController.cs" />
     <Compile Include="Controllers\SobreController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -225,6 +227,7 @@
     <Compile Include="Helpers\StringExtensions.cs" />
     <Compile Include="Models\Article.cs" />
     <Compile Include="Models\Author.cs" />
+    <Compile Include="Models\RSSActionResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -262,7 +265,9 @@
     <Content Include="Content\img\icons\partners\nintendoblast.jpg" />
     <Content Include="Content\img\icons\partners\projetoxpodcast.jpg" />
     <Content Include="Content\img\icons\social\facebook.jpg" />
+    <Content Include="Content\img\icons\social\gplus.jpg" />
     <Content Include="Content\img\icons\social\instagram.jpg" />
+    <Content Include="Content\img\icons\social\rss.jpg" />
     <Content Include="Content\img\icons\social\twitter.jpg" />
     <Content Include="Content\img\icons\social\youtube.jpg" />
     <Content Include="Content\img\lhama.jpg" />
@@ -358,7 +363,9 @@
     <Content Include="Content\img\sobre8.jpg" />
     <Content Include="Content\img\sobre9.jpg" />
     <Content Include="Content\img\socialIcons\facebook.jpg" />
+    <Content Include="Content\img\socialIcons\gplus.jpg" />
     <Content Include="Content\img\socialIcons\instagram.jpg" />
+    <Content Include="Content\img\socialIcons\rss.jpg" />
     <Content Include="Content\img\socialIcons\twitter.jpg" />
     <Content Include="Content\img\socialIcons\youtube.jpg" />
     <Content Include="Content\js\audioplayer.min.js" />
@@ -1048,6 +1055,7 @@
     <Content Include="Views\Home\GenerateUrl.cshtml" />
     <Content Include="Views\Shared\SubMenus\Podcasts.cshtml" />
     <Content Include="Views\Sobre\FacaParte.cshtml" />
+    <Content Include="Views\Feed\RSS.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

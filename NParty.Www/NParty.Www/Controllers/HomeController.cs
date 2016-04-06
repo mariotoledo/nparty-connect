@@ -26,7 +26,7 @@ namespace NParty.Www.Controllers
             blogDomains.Add(ESportsBlogId, "ESports");
             blogDomains.Add(EventosBlogId, "Eventos");
 
-            List<Article> hilights = helper.GetHomeHilights(blogDomains);
+            List<Article> hilights = helper.GetHomeHilights(blogDomains, MainBlogId);
             List<Article> nintendoArticles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 4, "/Artigos/Ler/");
             List<Article> esportsArticles = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 4, "/Artigos/Ler/");
             List<Article> eventosArticles = helper.GetArticlesFromBlog(EventosBlogId, "Eventos", 4, "/Artigos/Ler/");
@@ -86,7 +86,7 @@ namespace NParty.Www.Controllers
             /*ArticlesHelper helper = new ArticlesHelper(
                 System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
                 System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
-            );
+            );  
 
             Article article = helper.GetSingleArticleFromBlogByPath(NintendoBlogId, "Nintendo", "/" + year + "/" + month + "/" + path + ".html");
                 

@@ -6,6 +6,8 @@
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];
 
+    ViewData["feedUrl"] = "http://feeds.feedburner.com/NintendoN-party";
+
     ViewData["title"] = "Previews";
     ViewData["metaDescription"] = "Fique ligado no que esta por vir nos consoles da Nintendo";
     ViewData["metaImage"] = Url.Content("~/Content/img/metaImages/previews.jpg");

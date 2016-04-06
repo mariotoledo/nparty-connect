@@ -4,6 +4,8 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+    ViewData["feedUrl"] = "http://feeds.feedburner.com/EsportsN-party";
+
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
     int currentPage = (int)ViewData["currentPage"];
     int maxPosts = (int)ViewData["MaxPosts"];

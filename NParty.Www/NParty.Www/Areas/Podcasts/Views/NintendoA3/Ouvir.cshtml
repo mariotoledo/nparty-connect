@@ -5,6 +5,8 @@
 
     Layout = "~/Views/Shared/_Layout.cshtml";
 
+    ViewData["feedUrl"] = "http://feeds.feedburner.com/PodcastN-party";
+
     NParty.Www.Models.Article article = (NParty.Www.Models.Article)ViewData["article"];
 
     if (article != null)

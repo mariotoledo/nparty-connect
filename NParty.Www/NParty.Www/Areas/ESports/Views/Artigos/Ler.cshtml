@@ -7,6 +7,8 @@
 
     NParty.Www.Models.Article article = (NParty.Www.Models.Article)ViewData["article"];
 
+    ViewData["feedUrl"] = "http://feeds.feedburner.com/EsportsN-party";
+
     if (article != null)
     {
         ViewData["title"] = article.Title;

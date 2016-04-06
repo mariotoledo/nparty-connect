@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace NParty.Www.Areas.Podcasts.Controllers
 {
-    public class NPartyCostaACostaController : NPartyController
+    public class NPartyCostaACostaController : PodcastsController
     {
         //
         // GET: /Podcasts/NPartyCostaACosta/
