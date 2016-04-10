@@ -273,6 +273,7 @@
     <Content Include="Content\img\lhama.jpg" />
     <Content Include="Content\img\loading.gif" />
     <Content Include="Content\img\logo.png" />
+    <Content Include="Content\img\logoNParty.png" />
     <Content Include="Content\img\logo_copag.png" />
     <Content Include="Content\img\marquee_bg.jpg" />
     <Content Include="Content\img\metaImages\animefriends.jpg" />

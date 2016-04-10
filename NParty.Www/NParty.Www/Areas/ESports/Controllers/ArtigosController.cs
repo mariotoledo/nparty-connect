@@ -16,8 +16,8 @@ namespace NParty.Www.Areas.ESports.Controllers
         public ActionResult Ler(string id)
         {
             ArticlesHelper helper = new ArticlesHelper(
-                System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
-                System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
+                System.Configuration.ConfigurationManager.AppSettings["ESportsGoogleAppName"],
+                System.Configuration.ConfigurationManager.AppSettings["ESportsBloggerApiKey"]
             );
 
             if (string.IsNullOrEmpty(id))

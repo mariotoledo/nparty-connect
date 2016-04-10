@@ -43,7 +43,7 @@ namespace NParty.Www.Controllers
                         article.Summary, 
                         new Uri("http://nparty.com.br/" +  article.NPartyArticleLink), 
                         article.Id, 
-                        article.DatePublished.ToUniversalTime()
+                        article.DatePublished
                     ));
                 }
 
@@ -77,7 +77,7 @@ namespace NParty.Www.Controllers
                         article.Summary,
                         new Uri("http://nparty.com.br/" + article.NPartyArticleLink),
                         article.Id,
-                        article.DatePublished.ToUniversalTime()
+                        article.DatePublished
                     ));
                 }
 
@@ -111,7 +111,7 @@ namespace NParty.Www.Controllers
                         article.Summary,
                         new Uri("http://nparty.com.br/" + article.NPartyArticleLink),
                         article.Id,
-                        article.DatePublished.ToUniversalTime()
+                        article.DatePublished
                     ));
                 }
 
@@ -145,7 +145,7 @@ namespace NParty.Www.Controllers
                         article.Summary,
                         new Uri("http://nparty.com.br/" + article.NPartyArticleLink),
                         article.Id,
-                        article.DatePublished.ToUniversalTime()
+                        article.DatePublished
                     ));
                 }
 
@@ -169,22 +169,33 @@ namespace NParty.Www.Controllers
                 List<Article> npartyPodcasts = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", totalItems, 0, "N-Party Costa a Costa", "/NPartyCostaACosta/Ouvir/");
                 List<Article> nintendoa3Articles = helper.GetArticlesFromBlog(NintendoBlogId, "Podcasts", totalItems, 0, "Nintendo a 3", "/NintendoA3/Ouvir/");
 
+                List<Article> articles = new List<Article>();
+                articles.AddRange(npartyPodcasts);
+                articles.AddRange(nintendoa3Articles);
+
+                List<Article> orderedArticles = articles.OrderByDescending(t => t.DatePublished).ToList();
+
                 var items = new List<SyndicationItem>();
 
-                var feed = new SyndicationFeed("Podcast N-Party", "Coloque seus fones de ouvidos e escute uma galera falando o que pensa sobre games e outras coisas", new Uri("http://nparty.com.br/Feed/PodcastsFeed"));
+                var feed = new SyndicationFeed("N-Party", "Coloque seus fones de ouvidos e escute uma galera falando o que pensa sobre games e tudo mais!", new Uri("http://nparty.com.br/Feed/PodcastsFeed"));
 
-                foreach (Article article in npartyPodcasts)
+                foreach (Article article in orderedArticles)
                 {
-                    items.Add(new SyndicationItem(
+                    SyndicationItem item = new SyndicationItem(
                         article.Title,
-                        article.Summary,
+                        article.Content,
                         new Uri("http://nparty.com.br/" + article.NPartyArticleLink),
                         article.Id,
-                        article.DatePublished.ToUniversalTime()
-                    ));
+                        article.DatePublished);
+
+
+                    item.PublishDate = article.DatePublished;
+
+                    items.Add(item);
                 }
 
                 feed.Items = items;
+                feed.Language = "pt-br";
 
                 return new RssActionResult() { Feed = feed };
             }

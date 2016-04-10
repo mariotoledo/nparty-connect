@@ -115,6 +115,8 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
     <link href="@Url.Content("~/Content/css/nparty.css")?date=@DateTime.Now.ToString("ddMMyyyyhhmm")" rel="stylesheet">
     <link href="http://nparty.com.br/Content/css/audioplayer.css" rel="stylesheet" type="text/css" />
 
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
     <link rel="alternate" type="application/atom+xml" title="N-Party - Atom" href="@feedUrl" />
     <link rel="alternate" type="application/rss+xml" title="N-Party - RSS" href="@feedUrl?alt=rss" />
 
@@ -181,6 +183,14 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                         </span>
                     </div>
                 </form>
+                <div class="top-bar-social">
+                    <a title="Facebook" itemprop="sameAs" target="_blank" class="socialIcon" href="http://www.facebook.com/NParty" style="font-size: 30px"><i class="fa fa-facebook-square"></i></a>
+                    <a title="Twitter" itemprop="sameAs" target="_blank" class="socialIcon" href="https://twitter.com/n_party" style="font-size: 30px"><i class="fa fa-twitter-square"></i></a>
+                    <a title="Google +" itemprop="sameAs" target="_blank" class="navbar-btn socialIcon" href="https://plus.google.com/101582759847063966924" style="font-size: 30px"><i class="fa fa-google-plus-square"></i></a>
+                    <a title="YouTube" itemprop="sameAs" target="_blank" class="navbar-btn socialIcon" href="http://youtube.com/npartytv" style="font-size: 30px"><i class="fa fa-youtube-square"></i></a>
+                    <a title="Instagram" itemprop="sameAs" target="_blank" class="navbar-btn socialIcon" href="http://instagram.com/nintendoparty" style="font-size: 30px"><i class="fa fa-instagram"></i></a>
+                    <a title="RSS" itemprop="sameAs" target="_blank" class="navbar-btn socialIcon" href="http://feeds.feedburner.com/all-n-party" style="font-size: 30px"><i class="fa fa-rss-square"></i></a>
+                </div>
                 @*<ul class="nav navbar-nav navbar-right">
         <li class="bordered-left bordered-right"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
     </ul>*@

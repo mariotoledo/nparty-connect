@@ -16,8 +16,8 @@ namespace NParty.Www.Areas.Nintendo.Controllers
         public ActionResult Ler(string id)
         {
             ArticlesHelper helper = new ArticlesHelper(
-                System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
-                System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
+                System.Configuration.ConfigurationManager.AppSettings["NintendoGoogleAppName"],
+                System.Configuration.ConfigurationManager.AppSettings["NintendoBloggerApiKey"]
             );
 
             if (string.IsNullOrEmpty(id))
