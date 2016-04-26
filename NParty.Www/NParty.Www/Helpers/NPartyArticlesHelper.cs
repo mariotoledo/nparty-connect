@@ -19,7 +19,7 @@ namespace NParty.Www.Helpers
                     articles.AddRange(GetArticlesFromBlog(blogId, blogDomains[blogId], 5, 0, "Destaque", "/Artigos/Ler/"));
                 }
 
-                articles.AddRange(GetArticlesFromBlog(mainBlogId, "Podcasts", 4, "/Ouvir/"));
+                articles.AddRange(GetArticlesFromBlog(mainBlogId, "Podcasts", 4, "/NPartyCostaACosta/Ouvir/"));
 
                articles = (List <Article>)articles.OrderByDescending(c => c.DatePublished).Take(5).ToList();
             } catch (Exception e)
