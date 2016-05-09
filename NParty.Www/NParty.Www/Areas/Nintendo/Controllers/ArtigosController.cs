@@ -20,7 +20,14 @@ namespace NParty.Www.Areas.Nintendo.Controllers
                 return RedirectToAction("Index");
             }
 
-            Article article = article = Helper.GetSingleArticleFromBlog(NintendoBlogId, "Nintendo", id);
+            Article article = null;
+            
+            for(int i = 0; i < 3 && article == null; i++){
+                article = Helper.GetSingleArticleFromBlog(NintendoBlogId, "Nintendo", id);
+
+                if (article == null)
+                    RotateApiKey();
+            }
 
             if (article == null)
                 return Redirect("~/Ops/NaoEncontrado");

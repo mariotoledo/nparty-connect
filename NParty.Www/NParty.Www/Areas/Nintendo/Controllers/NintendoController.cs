@@ -26,8 +26,25 @@ namespace NParty.Www.Areas.Nintendo.Controllers
             return View();
         }
 
-        private static string apiKey = System.Configuration.ConfigurationManager.AppSettings["NintendoBloggerApiKey2"];
-        private static string appName = System.Configuration.ConfigurationManager.AppSettings["NintendoGoogleAppName2"];
+        private static string[] apiKey = new string[] { "NintendoBloggerApiKey2", "NintendoBloggerApiKey", "NintendoBloggerApiKey3" };
+        private static string[] appName = new string[] { "NintendoGoogleAppName2", "NintendoGoogleAppName", "NintendoGoogleAppName3" };
+
+        private static int keyIndex = 0;
+
+        public static void RotateApiKey()
+        {
+            if (keyIndex < apiKey.Length - 1)
+            {
+                keyIndex++;
+            }
+            else
+            {
+                keyIndex = 0;
+            }
+
+            _service = null;
+            _helper = null;
+        }
 
         private static volatile BloggerService _service;
 
@@ -39,8 +56,8 @@ namespace NParty.Www.Areas.Nintendo.Controllers
                 {
                     _service = new BloggerService(new Google.Apis.Services.BaseClientService.Initializer()
                     {
-                        ApiKey = apiKey,
-                        ApplicationName = appName
+                        ApiKey = System.Configuration.ConfigurationManager.AppSettings[apiKey[keyIndex]],
+                        ApplicationName = System.Configuration.ConfigurationManager.AppSettings[appName[keyIndex]]
                     });
                 }
 
@@ -56,7 +73,10 @@ namespace NParty.Www.Areas.Nintendo.Controllers
             {
                 if (_helper == null)
                 {
-                    _helper = new ArticlesHelper(apiKey, appName, Service);
+                    _helper = new ArticlesHelper(
+                        System.Configuration.ConfigurationManager.AppSettings[apiKey[keyIndex]], 
+                        System.Configuration.ConfigurationManager.AppSettings[appName[keyIndex]],
+                        Service);
                 }
 
                 return _helper;
