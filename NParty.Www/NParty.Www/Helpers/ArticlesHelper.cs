@@ -16,12 +16,15 @@ namespace NParty.Www.Helpers
         private string applicationName;
         private string apiKey;
 
+        private BloggerService service;
+
         public ArticlesHelper() { }
 
-        public ArticlesHelper(string applicationName, string apiKey)
+        public ArticlesHelper(string applicationName, string apiKey, BloggerService service)
         {
             this.applicationName = applicationName;
             this.apiKey = apiKey;
+            this.service = service;
         }
 
         public List<Article> SearchArticlesInBlog(string blogId, string blogDomain, int maxResults, int startIndex, string query)
@@ -125,12 +128,6 @@ namespace NParty.Www.Helpers
             Article article = null;
             try
             {
-                BloggerService service = new BloggerService(new Google.Apis.Services.BaseClientService.Initializer()
-                {
-                    ApiKey = this.apiKey,
-                    ApplicationName = this.applicationName
-                });
-
                 PostsResource.GetRequest resource = service.Posts.Get(blogId, postId);
                 resource.FetchImages = true;
                 resource.FetchBody = true;
@@ -200,12 +197,12 @@ namespace NParty.Www.Helpers
             List<Article> articles = new List<Article>();
             try
             {
-                Service service = new Service("blogger", "n-party");
+                Service bloggerService = new Service("blogger", "n-party");
 
                 string labelAppend = string.IsNullOrEmpty(postsLabel) ? "" : "/-/" + postsLabel;
                 string maxResultAppend = maxResults > 0 ? "&max-results=" + maxResults : "";
 
-                AtomFeed feed = service.Query(new FeedQuery()
+                AtomFeed feed = bloggerService.Query(new FeedQuery()
                 {
                     Uri = new Uri("http://www.blogger.com/feeds/" + blogId + "/posts/default" + labelAppend + "?start-index=" + startIndex + maxResultAppend)
                 });

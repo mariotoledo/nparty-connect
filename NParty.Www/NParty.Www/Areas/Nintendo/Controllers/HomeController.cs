@@ -17,9 +17,8 @@ namespace NParty.Www.Areas.Nintendo.Controllers
         {
             int pageValue = page.HasValue && page.Value > 0 ? page.Value : 0;
 
-            NPartyArticlesHelper helper = new NPartyArticlesHelper();
-            List<Article> nintendoArticles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", MaxPosts, (MaxPosts * pageValue) + 1, "/Artigos/Ler/");
-            List<Article> hilights = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque", "/Artigos/Ler/");
+            List<Article> nintendoArticles = Helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", MaxPosts, (MaxPosts * pageValue) + 1, "/Artigos/Ler/");
+            List<Article> hilights = Helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque", "/Artigos/Ler/");
 
             ViewData["articles"] = nintendoArticles;
             ViewData["hilights"] = hilights;

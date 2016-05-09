@@ -16,17 +16,12 @@ namespace NParty.Www.Areas.Podcasts.Controllers
 
         public ActionResult Ouvir(string id)
         {
-            ArticlesHelper helper = new ArticlesHelper(
-                System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
-                System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
-            );
-
             if (string.IsNullOrEmpty(id))
             {
                 return Redirect("~/Podcasts/Home/Index");
             }
 
-            Article article = helper.GetSingleArticleFromBlog(NintendoBlogId, "Podcasts", id);
+            Article article = Helper.GetSingleArticleFromBlog(NintendoBlogId, "Podcasts", id);
 
             if (article == null)
                 return Redirect("~/Ops/NaoEncontrado");
@@ -40,8 +35,7 @@ namespace NParty.Www.Areas.Podcasts.Controllers
         {
             int pageValue = page.HasValue && page.Value > 0 ? page.Value : 0;
 
-            NPartyArticlesHelper helper = new NPartyArticlesHelper();
-            List<Article> nintendoa3Articles = helper.GetArticlesFromBlog(NintendoBlogId, "Podcasts", 20, (20 * pageValue) + 1, "Nintendo a 3", "/NintendoA3/Ouvir/");
+            List<Article> nintendoa3Articles = Helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 20, (20 * pageValue) + 1, "Nintendo a 3", "/Artigos/Ler/");
 
             ViewData["articles"] = nintendoa3Articles;
             ViewData["currentPage"] = pageValue;

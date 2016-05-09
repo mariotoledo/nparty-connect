@@ -167,7 +167,7 @@ namespace NParty.Www.Controllers
                 NPartyArticlesHelper helper = new NPartyArticlesHelper();
 
                 List<Article> npartyPodcasts = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", totalItems, 0, "N-Party Costa a Costa", "/NPartyCostaACosta/Ouvir/");
-                List<Article> nintendoa3Articles = helper.GetArticlesFromBlog(NintendoBlogId, "Podcasts", totalItems, 0, "Nintendo a 3", "/NintendoA3/Ouvir/");
+                List<Article> nintendoa3Articles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", totalItems, 0, "Nintendo a 3", "/Artigos/Ler/");
 
                 List<Article> articles = new List<Article>();
                 articles.AddRange(npartyPodcasts);

@@ -17,9 +17,8 @@ namespace NParty.Www.Areas.Podcasts.Controllers
         {
             int pageValue = page.HasValue && page.Value > 0 ? page.Value : 0;
 
-            NPartyArticlesHelper helper = new NPartyArticlesHelper();
-            List<Article> nintendoa3Articles = helper.GetArticlesFromBlog(NintendoBlogId, "Podcasts", 20, (20 * pageValue) + 1, "Nintendo a 3", "/NintendoA3/Ouvir/");
-            List<Article> costaACostaArticles = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", 20, (20 * pageValue) + 1, "N-Party Costa a Costa", "/NPartyCostaACosta/Ouvir/");
+            List<Article> nintendoa3Articles = Helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 20, (20 * pageValue) + 1, "Nintendo a 3", "/Artigos/Ler/");
+            List<Article> costaACostaArticles = Helper.GetArticlesFromBlog(MainBlogId, "Podcasts", 20, (20 * pageValue) + 1, "N-Party Costa a Costa", "/NPartyCostaACosta/Ouvir/");
 
             List<Article> podcasts = new List<Article>();
             podcasts.AddRange(nintendoa3Articles);

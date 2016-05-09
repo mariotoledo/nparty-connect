@@ -15,24 +15,19 @@ namespace NParty.Www.Areas.Nintendo.Controllers
 
         public ActionResult Ler(string id)
         {
-            ArticlesHelper helper = new ArticlesHelper(
-                System.Configuration.ConfigurationManager.AppSettings["NintendoGoogleAppName"],
-                System.Configuration.ConfigurationManager.AppSettings["NintendoBloggerApiKey"]
-            );
-
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Index");
             }
 
-            Article article = helper.GetSingleArticleFromBlog(NintendoBlogId, "Nintendo", id);
+            Article article = article = Helper.GetSingleArticleFromBlog(NintendoBlogId, "Nintendo", id);
 
             if (article == null)
                 return Redirect("~/Ops/NaoEncontrado");
 
             ViewData["article"] = article;
 
-            List<Article> hilights = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque", "/Artigos/Ler/");
+            List<Article> hilights = Helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 5, 0, "Destaque", "/Artigos/Ler/");
             ViewData["hilights"] = hilights;
 
             return View();

@@ -16,17 +16,12 @@ namespace NParty.Www.Areas.Podcasts.Controllers
 
         public ActionResult Ouvir(string id)
         {
-            ArticlesHelper helper = new ArticlesHelper(
-                System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
-                System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
-            );
-
             if (string.IsNullOrEmpty(id))
             {
                 return Redirect("~/Podcasts/Home/Index");
             }
 
-            Article article = helper.GetSingleArticleFromBlog(MainBlogId, "Podcasts", id);
+            Article article = Helper.GetSingleArticleFromBlog(MainBlogId, "Podcasts", id);
 
             if (article == null)
                 return Redirect("~/Ops/NaoEncontrado");
@@ -40,8 +35,7 @@ namespace NParty.Www.Areas.Podcasts.Controllers
         {
             int pageValue = page.HasValue && page.Value > 0 ? page.Value : 0;
 
-            NPartyArticlesHelper helper = new NPartyArticlesHelper();
-            List<Article> costaACostaArticles = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", 20, (20 * pageValue) + 1, "N-Party Costa a Costa", "/NPartyCostaACosta/Ouvir/");
+            List<Article> costaACostaArticles = Helper.GetArticlesFromBlog(MainBlogId, "Podcasts", 20, (20 * pageValue) + 1, "N-Party Costa a Costa", "/NPartyCostaACosta/Ouvir/");
 
             ViewData["articles"] = costaACostaArticles;
             ViewData["currentPage"] = pageValue;

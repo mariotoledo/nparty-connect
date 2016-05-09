@@ -15,24 +15,19 @@ namespace NParty.Www.Areas.Eventos.Controllers
 
         public ActionResult Ler(string id)
         {
-            ArticlesHelper helper = new ArticlesHelper(
-                System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
-                System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
-            );
-
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Index");
             }
 
-            Article article = helper.GetSingleArticleFromBlog(EventosBlogId, "Eventos", id);
+            Article article = Helper.GetSingleArticleFromBlog(EventosBlogId, "Eventos", id);
 
             if (article == null)
                 return Redirect("~/Ops/NaoEncontrado");
 
             ViewData["article"] = article;
 
-            List<Article> hilights = helper.GetArticlesFromBlog(EventosBlogId, "Eventos", 5, 0, "Destaque", "/Artigos/Ler/");
+            List<Article> hilights = Helper.GetArticlesFromBlog(EventosBlogId, "Eventos", 5, 0, "Destaque", "/Artigos/Ler/");
             ViewData["hilights"] = hilights;
 
             return View();

@@ -15,24 +15,19 @@ namespace NParty.Www.Areas.ESports.Controllers
 
         public ActionResult Ler(string id)
         {
-            ArticlesHelper helper = new ArticlesHelper(
-                System.Configuration.ConfigurationManager.AppSettings["ESportsGoogleAppName"],
-                System.Configuration.ConfigurationManager.AppSettings["ESportsBloggerApiKey"]
-            );
-
             if (string.IsNullOrEmpty(id))
             {
                 return RedirectToAction("Index");
             }
 
-            Article article = helper.GetSingleArticleFromBlog(ESportsBlogId, "ESports", id);
+            Article article = Helper.GetSingleArticleFromBlog(ESportsBlogId, "ESports", id);
 
             if (article == null)
                 return Redirect("~/Ops/NaoEncontrado");
 
             ViewData["article"] = article;
 
-            List<Article> hilights = helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 5, 0, "Destaque", "/Artigos/Ler/");
+            List<Article> hilights = Helper.GetArticlesFromBlog(ESportsBlogId, "ESports", 5, 0, "Destaque", "/Artigos/Ler/");
             ViewData["hilights"] = hilights;
 
             return View();

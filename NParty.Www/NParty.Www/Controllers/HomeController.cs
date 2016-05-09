@@ -71,7 +71,7 @@ namespace NParty.Www.Controllers
             blogDomains.Add(NintendoBlogId, "Nintendo");
             blogDomains.Add(ESportsBlogId, "NParty");
 
-            List<Article> nintendoPodcasts = helper.GetArticlesFromBlog(NintendoBlogId, "Podcasts", 4, 0, "Nintendo a 3", "/NintendoA3/Ouvir/");
+            List<Article> nintendoPodcasts = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 4, 0, "Nintendo a 3", "/Artigos/Ler/");
             List<Article> npartyPodcasts = helper.GetArticlesFromBlog(MainBlogId, "Podcasts", 4, 0, "N-Party Costa a Costa", "/NPartyCostaACosta/Ouvir/");
 
             List<Article> podcastFeed = new List<Article>();

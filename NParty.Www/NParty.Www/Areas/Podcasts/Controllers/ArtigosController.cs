@@ -15,17 +15,12 @@ namespace NParty.Www.Areas.Podcasts.Controllers
 
         public ActionResult Ler(string id)
         {
-            ArticlesHelper helper = new ArticlesHelper(
-                System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
-                System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
-            );
-
             if (string.IsNullOrEmpty(id))
             {
                 return Redirect("~/Podcasts/Home/Index");
             }
 
-            Article article = helper.GetSingleArticleFromBlog(MainBlogId, "Podcasts", id);
+            Article article = Helper.GetSingleArticleFromBlog(MainBlogId, "Podcasts", id);
 
             if (article == null)
                 return Redirect("~/Ops/NaoEncontrado");
