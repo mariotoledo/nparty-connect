@@ -1,4 +1,5 @@
-﻿using Google.GData.Client;
+﻿using Google.Apis.Blogger.v3;
+using Google.GData.Client;
 using NParty.Www.Helpers;
 using NParty.Www.Models;
 using RestSharp;
@@ -83,9 +84,19 @@ namespace NParty.Www.Controllers
 
         public ActionResult Ler(string year, string month, string path)
         {
-            /*ArticlesHelper helper = new ArticlesHelper(
-                System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"],
-                System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"]
+            string appName = System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"];
+            string apiKey = System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"];
+
+            BloggerService service = new BloggerService(new Google.Apis.Services.BaseClientService.Initializer()
+            {
+                ApiKey = apiKey,
+                ApplicationName = appName
+            });
+
+            ArticlesHelper helper = new ArticlesHelper(
+                appName,
+                apiKey,
+                service
             );  
 
             Article article = helper.GetSingleArticleFromBlogByPath(NintendoBlogId, "Nintendo", "/" + year + "/" + month + "/" + path + ".html");
@@ -107,9 +118,7 @@ namespace NParty.Www.Controllers
 
             ViewData["article"] = article;
 
-            return View();*/
-
-            return Redirect("~/Home/UrlInvalida");
+            return View();
         }
 
         [HttpGet]
