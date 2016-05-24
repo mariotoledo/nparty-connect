@@ -13,7 +13,7 @@
      : (List<string>)ViewData["metaKeywords"];
 
     string title = string.IsNullOrEmpty((string)ViewData["title"]) ?
-        "N-Party" : "N-Party - "+ (string)ViewData["title"];
+        "N-Party" : (string)ViewData["title"];
 
     string metaUrl = string.IsNullOrEmpty((string)ViewData["metaUrl"]) ?
         System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] : System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + (string)ViewData["metaUrl"];

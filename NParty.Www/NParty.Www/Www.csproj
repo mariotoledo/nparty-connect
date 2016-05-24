@@ -38,6 +38,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -214,6 +215,7 @@
     <Compile Include="Areas\Podcasts\Controllers\NPartyCostaACostaController.cs" />
     <Compile Include="Areas\Podcasts\Controllers\PodcastsController.cs" />
     <Compile Include="Areas\Podcasts\PodcastsAreaRegistration.cs" />
+    <Compile Include="Controllers\E3Controller.cs" />
     <Compile Include="Controllers\FeedController.cs" />
     <Compile Include="Controllers\OpsController.cs" />
     <Compile Include="Controllers\SobreController.cs" />
@@ -1058,6 +1060,7 @@
     <Content Include="Views\Shared\SubMenus\Podcasts.cshtml" />
     <Content Include="Views\Sobre\FacaParte.cshtml" />
     <Content Include="Views\Feed\RSS.cshtml" />
+    <Content Include="Views\E3\Index.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
