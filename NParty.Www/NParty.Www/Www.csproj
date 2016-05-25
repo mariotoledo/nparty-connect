@@ -242,6 +242,7 @@
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\nparty.css" />
+    <Content Include="Content\css\e3.css" />
     <Content Include="Content\css\pokemon20th.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Content\img\20anospokemon.png" />
@@ -256,6 +257,11 @@
     <Content Include="Content\img\authors\ruicelso.jpg" />
     <Content Include="Content\img\authors\victorsouza.jpg" />
     <Content Include="Content\img\authors\vitorbertani.jpg" />
+    <Content Include="Content\img\e3\e3-logo.png" />
+    <Content Include="Content\img\e3\e3_1.jpg" />
+    <Content Include="Content\img\e3\e3_2.jpg" />
+    <Content Include="Content\img\e3\e3_3.jpg" />
+    <Content Include="Content\img\e3\e3_4.jpg" />
     <Content Include="Content\img\favicon.png" />
     <Content Include="Content\img\icons\article-share\email_32.png" />
     <Content Include="Content\img\icons\article-share\facebook_32.png" />
@@ -376,6 +382,7 @@
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
     <Content Include="Content\js\jquery-1.11.3.min.js" />
+    <Content Include="Content\js\jquery.bgswitcher.js" />
     <Content Include="Content\js\nparty.js" />
     <Content Include="Content\js\npm.js" />
     <Content Include="Content\pokemontimeline\css\arpg.css" />

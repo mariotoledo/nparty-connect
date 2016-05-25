@@ -2,4 +2,43 @@
     ViewBag.Title = "E3 - Eletronic Enterteinment Expo";
 }
 
-aaaaa
+@section Head{
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/e3.css")" />
+}
+
+<div class="e3">
+    <section class="content-section video-section">
+        <div class="pattern-overlay">
+            <div class="bg" style="background-image: url(@Url.Content("~/Content/img/e3/e3_1.jpg"))">
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="logo"><img class="img-responsive" alt="20 anos de Pokémon" src="@Url.Content("~/Content/img/e3/e3-logo.png")" /></div>
+                        <h3>Todas as novidades da <b>E3 2016</b>, a maior feira de jogos eletrônicos do mundo</h3>
+                        <div class="share-icons">
+                            <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/E3"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
+  '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                            <a title="Compartilhe no Twitter" href="https://twitter.com/intent/tweet?source=n_party&related=n_party&via=n_party&url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/E3"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/twitter_32.png")')" onclick="javascript:window.open(this.href,
+                                                '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                            <a title="Compartilhe no LinkedIn" href="https://www.linkedin.com/shareArticle?mini=true&url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/E3"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/linkedin_32.png")')" onclick="javascript:window.open(this.href,
+                                                '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                            <a title="Compartilhe no Google+" href="https://plus.google.com/share?url=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/E3"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/googleplus_32.png")')" onclick="javascript:window.open(this.href,
+                                                '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+@section Scripts{
+    <script src="@Url.Content("~/Content/js/jquery.bgswitcher.js")"></script>
+    <script>
+    $(".bg").bgswitcher({
+        images: ["@Url.Content("~/Content/img/e3/e3_1.jpg")", "@Url.Content("~/Content/img/e3/e3_2.jpg")", "@Url.Content("~/Content/img/e3/e3_3.jpg")", "@Url.Content("~/Content/img/e3/e3_4.jpg")"],
+        interval: 2500
+        });
+    </script>
+}
