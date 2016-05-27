@@ -10,13 +10,11 @@
     <link rel="stylesheet" href="@Url.Content("~/Content/css/e3.css")" />
     <style>
         .conferences{
-            border-bottom: 5px solid #CCCCCC;
-            margin-bottom: 30px;
         }
         .col-conference{
-            min-height: 120px;
+            min-height: 140px;
             border-bottom: 1px solid #CCCCCC;
-            padding: 10px;
+            padding: 5px;
             background-color: #FFFFFF;
             text-align: center;
         }
@@ -27,6 +25,17 @@
 
         .col-conference a{
             font-size: 12px;
+            cursor: pointer;
+        }
+
+        .col-conference:hover{
+            background-color: #DDDDDD;
+            color: #000;
+        }
+
+        .col-conference a:hover{
+            color: #000;
+            background-color: #DDDDDD;
         }
 
         .conference-title{
@@ -34,7 +43,26 @@
         }
 
         .conference-title h2{
-            margin-top: 10px;
+            margin-top: 20px;
+        }
+
+        .conference-name{
+            height: 35px;
+        }
+
+        .video-area{
+            padding: 30px 0px 30px 0px;
+            background-color: #777;
+            color: #FFF;
+        }
+
+        #video-title{
+            margin-top: 40px;
+        }
+
+        #video-description{
+            max-height: 300px;
+            overflow-y: auto;
         }
     </style>
 }
@@ -66,45 +94,123 @@
     </section>
     <div>
         <div class="row-fluid conferences"> 
-            <div class="col-md-4 col-bordered-right col-conference conference-title">
+            <div class="col-lg-4 col-bordered-right col-conference conference-title" style="background-color: #FFF;">
                 <h2>Conferências</h2>
-                <p>Horário de Brasília</p>
+                <p>Fique ligado nas datas e horários das conferências da E3<div style="font-size: 10px; font-style: italic;">(todas as conferências estão no horário de Brasília)</div></p>
             </div>
-            <div class="col-md-1 col-bordered-right col-conference">
-                <a><img src="@Url.Content("~/Content/img/e3/ea_logo.png")" class="img-responsive" alt="Eletronic Arts" title="Eletronic Arts" />
-                    <div>Electronic Arts</div></a>
+            <div class="col-lg-1 col-bordered-right col-conference">
+                <a>
+                    <img src="@Url.Content("~/Content/img/e3/ea_logo.png")" class="img-responsive" alt="Eletronic Arts" title="Eletronic Arts" />
+                    <div class="conference-name">Electronic Arts</div>
+                    <div style="margin-top: 5px;">
+                        <span class="label label-default label-info"><span class="glyphicon glyphicon-calendar"></span> 12/06</span>
+                        <span class="label label-default label-default"><span class="glyphicon glyphicon-time"></span> 17h00</span>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-1 col-bordered-right col-conference">
-                <img src="@Url.Content("~/Content/img/e3/bethesda_logo.png")" class="img-responsive" alt="Bethesda" title="Bethesda" />
-                <a>Bethesda</a>
+            <div class="col-lg-1 col-bordered-right col-conference">
+                <a>
+                    <img src="@Url.Content("~/Content/img/e3/bethesda_logo.png")" class="img-responsive" alt="Bethesda" title="Bethesda" />
+                    <div class="conference-name">Bethesda</div>
+                    <div style="margin-top: 5px;">
+                        <span class="label label-default label-info"><span class="glyphicon glyphicon-calendar"></span> 12/06</span>
+                        <span class="label label-default label-default"><span class="glyphicon glyphicon-time"></span> 23h00</span>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-1 col-bordered-right col-conference">
-                <img src="@Url.Content("~/Content/img/e3/kawadoka_logo.png")" class="img-responsive" alt="Kadokawa Games" title="Kadokawa Games" />
-                <a>Kadokawa Games</a>
+            <div class="col-lg-1 col-bordered-right col-conference">
+                <a>
+                    <img src="@Url.Content("~/Content/img/e3/kawadoka_logo.png")" class="img-responsive" alt="Kadokawa Games" title="Kadokawa Games" />
+                    <div class="conference-name">Kadokawa Games</div>
+                    <div style="margin-top: 5px;">
+                        <span class="label label-default label-info"><span class="glyphicon glyphicon-calendar"></span> 13/06</span>
+                        <span class="label label-default label-default"><span class="glyphicon glyphicon-time"></span> 01h30</span>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-1 col-bordered-right col-conference">
-                <img src="@Url.Content("~/Content/img/e3/xbox_logo.png")" class="img-responsive" alt="Microsoft" title="Microsoft" />
-                <a>Microsoft</a>
+            <div class="col-lg-1 col-bordered-right col-conference">
+                <a>
+                    <img src="@Url.Content("~/Content/img/e3/xbox_logo.png")" cla class="img-responsive" alt="Microsoft" title="Microsoft" />
+                    <div class="conference-name">Microsoft</div>
+                    <div style="margin-top: 5px;">
+                        <span class="label label-default label-info"><span class="glyphicon glyphicon-calendar"></span> 13/06</span>
+                        <span class="label label-default label-default"><span class="glyphicon glyphicon-time"></span> 13h30</span>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-1 col-bordered-right col-conference">
-                <img src="@Url.Content("~/Content/img/e3/pct_logo.png")" class="img-responsive" alt="PC Gaming Show" title="PC Gaming Show" />
-                <a>PC Gaming Show</a>
+            <div class="col-lg-1 col-bordered-right col-conference">
+                <a>
+                    <img src="@Url.Content("~/Content/img/e3/pct_logo.png")" cla class="img-responsive" alt="PC Gaming Show" title="PC Gaming Show" />
+                    <div class="conference-name">PC Gaming Show</div>
+                    <div style="margin-top: 5px;">
+                        <span class="label label-default label-info"><span class="glyphicon glyphicon-calendar"></span> 13/06</span>
+                        <span class="label label-default label-default"><span class="glyphicon glyphicon-time"></span> 15h30</span>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-1 col-bordered-right col-conference">
-                <img src="@Url.Content("~/Content/img/e3/ubisoft_logo.png")" class="img-responsive" alt="Ubisoft" title="Ubisoft" />
-                <a>Ubisoft</a>
+            <div class="col-lg-1 col-bordered-right col-conference">
+                <a>
+                    <img src="@Url.Content("~/Content/img/e3/ubisoft_logo.png")" cla class="img-responsive" alt="Ubisoft" title="Ubisoft" />
+                    <div class="conference-name">Ubisoft</div>
+                    <div style="margin-top: 5px;">
+                        <span class="label label-default label-info"><span class="glyphicon glyphicon-calendar"></span> 13/06</span>
+                        <span class="label label-default label-default"><span class="glyphicon glyphicon-time"></span> 17h00</span>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-1 col-bordered-right col-conference">
-                <img src="@Url.Content("~/Content/img/e3/sony_logo.png")" class="img-responsive" alt="Sony" title="Sony" />
-                <a>Sony</a>
+            <div class="col-lg-1 col-bordered-right col-conference">
+                <a>
+                    <img src="@Url.Content("~/Content/img/e3/sony_logo.png")" cla class="img-responsive" alt="Sony" title="Sony" />
+                    <div class="conference-name">Sony</div>
+                    <div style="margin-top: 5px;">
+                        <span class="label label-default label-info"><span class="glyphicon glyphicon-calendar"></span> 13/06</span>
+                        <span class="label label-default label-default"><span class="glyphicon glyphicon-time"></span> 22h00</span>
+                    </div>
+                </a>
             </div>
-            <div class="col-md-1 col-conference">
-                <img src="@Url.Content("~/Content/img/e3/ninteno_logo.png")" class="img-responsive" alt="Nintendo" title="Nintendo" />
-                <a>Nintendo</a>
+            <div class="col-lg-1 col-bordered-right col-conference">
+                <a>
+                    <img src="@Url.Content("~/Content/img/e3/ninteno_logo.png")" cla class="img-responsive" alt="Nintendo" title="Nintendo" />
+                    <div class="conference-name">Nintendo</div>
+                    <div style="margin-top: 5px;">
+                        <span class="label label-default label-info" style="margin-bottom: 10px;"><span class="glyphicon glyphicon-calendar"></span> 14/06</span>
+                        <span class="label label-default label-default"><span class="glyphicon glyphicon-time"></span> 13h00</span>
+                    </div>
+                </a>
             </div>
         </div>
     </div>
     <div class="clearfix"></div>
+    <div class="video-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active"><a href="#youtube" aria-controls="youtube" role="tab" data-toggle="tab">Youtube Live</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="youtube">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/lpXgJGGfeqs?rel=0" allowfullscreen></iframe>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <h2 id="video-title">Lorem ipsum dolor sit amet</h2>
+                    <div id="video-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget arcu libero. Vivamus cursus varius tincidunt. Morbi ultrices interdum sapien at malesuada. Donec nec ornare odio, sed cursus turpis. Pellentesque erat tortor, fermentum vitae sapien et, malesuada congue velit. Nullam pretium lectus elit. Nulla facilisi.
+
+Aenean fermentum urna orci, quis malesuada sapien ultricies sit amet. Quisque ultricies diam vitae turpis consequat aliquam. Sed sit amet tristique felis. Morbi accumsan, metus ut tempor aliquet, sapien turpis commodo nisl, fringilla tincidunt diam nibh eget tellus. Nunc condimentum varius lectus vel maximus. Suspendisse non faucibus felis. Proin urna nibh, bibendum laoreet nisl sit amet, eleifend fermentum ante. Suspendisse porta mollis rhoncus. Cras consectetur tortor sit amet arcu placerat, a efficitur libero sodales. Ut lorem nisl, sagittis ac ullamcorper a, efficitur vitae massa. Etiam nec elementum massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean ultricies faucibus dapibus. Donec tortor sem, mattis sed viverra sit amet, ultrices eget tortor.
+
+Nulla vestibulum porttitor urna, ac blandit ligula pretium quis. Aliquam erat volutpat. Nunc at placerat felis. Donec molestie feugiat interdum. Donec ornare auctor dui, a aliquam velit tincidunt sit amet. Aenean finibus dictum sagittis. Morbi ac nunc lacinia, porta urna eget, porttitor tortor.
+
+Ut sed auctor velit. Sed tincidunt nulla sit amet iaculis imperdiet. Vivamus blandit, nisl in venenatis pellentesque, ante quam porttitor mi, vitae fermentum nulla lacus quis lectus. Nam nec est egestas, varius metus sed, auctor neque. Maecenas tempus erat eget nisi tincidunt, a feugiat orci fringilla. Fusce felis tellus, iaculis id nisl eget, cursus eleifend sapien. Nullam sed felis arcu. Nulla facilisi.
+
+Curabitur dignissim, sapien eget suscipit aliquam, lectus diam tincidunt nibh, ut hendrerit risus quam vel nisi. Proin suscipit sem rhoncus nulla interdum ullamcorper. Vestibulum elementum nulla ipsum, non tristique ante tristique et. Sed augue nisi, congue eget leo eget, auctor aliquet dui. Vivamus sollicitudin feugiat sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed consectetur, magna eu viverra blandit, felis velit convallis libero, quis rutrum tellus felis et ligula. Proin et massa at ipsum egestas semper. Curabitur sem neque, vehicula ut pharetra sed, laoreet et tortor.</div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="container" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-8 inside-section" style="margin-bottom: 20px;">
