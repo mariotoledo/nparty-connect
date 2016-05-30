@@ -137,14 +137,14 @@
                 </div>
                 <div class="collapse navbar-collapse" id="subMenu-pokeParty">
                     <ul class="nav nav-pills menu" >
-                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('oQueE')">O que é</a></li>
-                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('localEData')">Local e Data</a></li>
-                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('videoGames')">Video-Game</a></li>
-                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('tcg')">TCG</a></li>
-                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('palestras')">No Palco</a></li>
-                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('desfileCosplay')">Cosplay</a></li>
-                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('estandistas')">Estandistas</a></li>
-                        <li role="presentation"><a style="cursor: pointer" onclick="goToSection('contato')">Contato</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSectionFromId('oQueE')">O que é</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSectionFromId('localEData')">Local e Data</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSectionFromId('videoGames')">Video-Game</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSectionFromId('tcg')">TCG</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSectionFromId('palestras')">No Palco</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSectionFromId('desfileCosplay')">Cosplay</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSectionFromId('estandistas')">Estandistas</a></li>
+                        <li role="presentation"><a style="cursor: pointer" onclick="goToSectionFromId('contato')">Contato</a></li>
                     </ul>
                 </div>
             </div>
@@ -504,7 +504,7 @@
                         </div>
                     </div>
                     <div class="col-md-4">
-                        <a style="cursor: pointer" onclick="goToSection('desfileCosplay')">
+                        <a style="cursor: pointer" onclick="goToSectionFromId('desfileCosplay')">
                             <div class="[ info-card ]">
                                 <img style="width: 100%" src="@Url.Content("~/Content/img/pokepartyday/desfilePokemon.jpg")" />
                                 <div class="[ info-card-details ] animate">
@@ -887,14 +887,6 @@
 
 @section Scripts{
     <script>
-        function goToSection(sectionId) {
-            $('html, body').animate({
-                scrollTop: $('#' + sectionId).offset().top
-            }, 1000);
-
-            return false;
-        }
-
         function openEventSite() {
             $('#eventSite').slideDown();
         }

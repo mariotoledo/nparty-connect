@@ -1076,6 +1076,8 @@
     <Content Include="Views\Sobre\FacaParte.cshtml" />
     <Content Include="Views\Feed\RSS.cshtml" />
     <Content Include="Views\E3\Index.cshtml" />
+    <Content Include="Views\E3\Streams\EA.cshtml" />
+    <Content Include="Views\E3\Streams\General.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

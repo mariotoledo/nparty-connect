@@ -161,6 +161,22 @@ function adjustArticleSubtitles(){
 	);
 }
 
+function goToSectionFromId(sectionId) {
+    $('html, body').animate({
+        scrollTop: $('#' + sectionId).offset().top
+    }, 1000);
+
+    return false;
+}
+
+function goToSectionFromEl(el) {
+    $('html, body').animate({
+        scrollTop: el.offset().top
+    }, 1000);
+
+    return false;
+}
+
 $.fn.scrollTo = function (target, options, callback) {
     if (typeof options == 'function' && arguments.length == 2) { callback = options; options = target; }
     var settings = $.extend({
