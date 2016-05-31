@@ -4,6 +4,8 @@
     ViewData["metaImage"] = Url.Content("~/Content/img/e3/e3_3.jpg");
     ViewData["metaUrl"] = Url.Content("~/E3");
     ViewData["metaKeywords"] = new List<string>() { "E3", "Eletronic Enterteinment Expo", "Nintendo", "Sony", "Microsoft", "Zelda", "Noticias" };
+
+    List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
 }
 
 @section Head{
@@ -68,6 +70,10 @@
             max-height: 300px;
             overflow-y: auto;
         }
+
+        .btn-close{
+            color: #FFF;
+        }
     </style>
 }
 
@@ -97,7 +103,7 @@
         </div>
     </section>
     <div class="row-fluid conferences" id="streams-menu"> 
-        <div class="col-lg-4 col-bordered-right col-conference conference-title" style="background-color: #FFF;">
+        <div class="col-lg-5 col-bordered-right col-conference conference-title" style="background-color: #FFF;">
             <h2>Conferências</h2>
             <p>Fique ligado nas datas e horários das conferências da E3<span style="font-size: 10px; font-style: italic;"> (horário de Brasília)</span></p>
             <button class="btn" onclick="openStream('e3')"><span class="glyphicon glyphicon glyphicon-menu-down"></span></button>
@@ -123,16 +129,6 @@
             </a>
         </div>
         <div class="col-lg-1 col-bordered-right col-conference">
-            <a onclick="openStream('kawadoka')">
-                <img src="@Url.Content("~/Content/img/e3/kawadoka_logo.png")" class="img-responsive" alt="Kadokawa Games" title="Kadokawa Games" />
-                <div class="conference-name">Kadokawa Games</div>
-                <div style="margin-top: 5px;">
-                    <span class="label label-default label-info"><span class="glyphicon glyphicon-calendar"></span> 13/06</span>
-                    <span class="label label-default label-default"><span class="glyphicon glyphicon-time"></span> 01h30</span>
-                </div>
-            </a>
-        </div>
-        <div class="col-lg-1 col-bordered-right col-conference">
             <a onclick="openStream('xbox')">
                 <img src="@Url.Content("~/Content/img/e3/xbox_logo.png")" cla class="img-responsive" alt="Microsoft" title="Microsoft" />
                 <div class="conference-name">Microsoft</div>
@@ -143,7 +139,7 @@
             </a>
         </div>
         <div class="col-lg-1 col-bordered-right col-conference">
-            <a onclick="openStream('pgs')">
+            <a onclick="openStream('pc')">
                 <img src="@Url.Content("~/Content/img/e3/pct_logo.png")" cla class="img-responsive" alt="PC Gaming Show" title="PC Gaming Show" />
                 <div class="conference-name">PC Gaming Show</div>
                 <div style="margin-top: 5px;">
@@ -186,55 +182,81 @@
     <div class="clearfix"></div>
     <div class="video-area" id="stream">
         <div class="container">
-            <a onclick="closeStream()" class="btn btn-lg pull-right" style="margin-bottom: 15px; cursor: pointer; font-size: 36px"><span class="glyphicon glyphicon-remove-circle"></span></a>
+            <a onclick="closeStream()" class="btn btn-lg pull-right btn-close" style="margin-bottom: 15px; cursor: pointer; font-size: 36px"><span class="glyphicon glyphicon-remove-circle"></span></a>
             <div class="clearfix"></div>
             
             @{
                 Html.RenderPartial("Streams/General");
                 Html.RenderPartial("Streams/EA");
+                Html.RenderPartial("Streams/Bethesda");
+                Html.RenderPartial("Streams/Microsoft");
+                Html.RenderPartial("Streams/Pc");
+                Html.RenderPartial("Streams/Ubisoft");
+                Html.RenderPartial("Streams/Sony");
+                Html.RenderPartial("Streams/Nintendo");
             }
-
-            <div class="row e3-stream">
-                <div class="col-md-8">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active"><a href="#youtube" aria-controls="youtube" role="tab" data-toggle="tab">Youtube Live</a></li>
-                    </ul>
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active" id="youtube">
-                            <div class="embed-responsive embed-responsive-16by9">
-                                <iframe class="embed-responsive-item" src="//www.youtube.com/embed/lpXgJGGfeqs?rel=0" allowfullscreen></iframe>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <h2 id="video-title">Lorem ipsum dolor sit amet</h2>
-                    <div id="video-description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam eget arcu libero. Vivamus cursus varius tincidunt. Morbi ultrices interdum sapien at malesuada. Donec nec ornare odio, sed cursus turpis. Pellentesque erat tortor, fermentum vitae sapien et, malesuada congue velit. Nullam pretium lectus elit. Nulla facilisi.
-
-                        Aenean fermentum urna orci, quis malesuada sapien ultricies sit amet. Quisque ultricies diam vitae turpis consequat aliquam. Sed sit amet tristique felis. Morbi accumsan, metus ut tempor aliquet, sapien turpis commodo nisl, fringilla tincidunt diam nibh eget tellus. Nunc condimentum varius lectus vel maximus. Suspendisse non faucibus felis. Proin urna nibh, bibendum laoreet nisl sit amet, eleifend fermentum ante. Suspendisse porta mollis rhoncus. Cras consectetur tortor sit amet arcu placerat, a efficitur libero sodales. Ut lorem nisl, sagittis ac ullamcorper a, efficitur vitae massa. Etiam nec elementum massa. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aenean ultricies faucibus dapibus. Donec tortor sem, mattis sed viverra sit amet, ultrices eget tortor.
-
-                        Nulla vestibulum porttitor urna, ac blandit ligula pretium quis. Aliquam erat volutpat. Nunc at placerat felis. Donec molestie feugiat interdum. Donec ornare auctor dui, a aliquam velit tincidunt sit amet. Aenean finibus dictum sagittis. Morbi ac nunc lacinia, porta urna eget, porttitor tortor.
-
-                        Ut sed auctor velit. Sed tincidunt nulla sit amet iaculis imperdiet. Vivamus blandit, nisl in venenatis pellentesque, ante quam porttitor mi, vitae fermentum nulla lacus quis lectus. Nam nec est egestas, varius metus sed, auctor neque. Maecenas tempus erat eget nisi tincidunt, a feugiat orci fringilla. Fusce felis tellus, iaculis id nisl eget, cursus eleifend sapien. Nullam sed felis arcu. Nulla facilisi.
-
-                        Curabitur dignissim, sapien eget suscipit aliquam, lectus diam tincidunt nibh, ut hendrerit risus quam vel nisi. Proin suscipit sem rhoncus nulla interdum ullamcorper. Vestibulum elementum nulla ipsum, non tristique ante tristique et. Sed augue nisi, congue eget leo eget, auctor aliquet dui. Vivamus sollicitudin feugiat sagittis. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Sed consectetur, magna eu viverra blandit, felis velit convallis libero, quis rutrum tellus felis et ligula. Proin et massa at ipsum egestas semper. Curabitur sem neque, vehicula ut pharetra sed, laoreet et tortor.
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
     <div class="container" style="margin-top: 30px;">
         <div class="row">
             <div class="col-md-8 inside-section" style="margin-bottom: 20px;">
+                @if (articles != null && articles.Count > 0)
+                {
+                    foreach (NParty.Www.Models.Article article in articles)
+                    {
+                        bool isSpecialTag = false;
 
+                        foreach (string label in article.Labels)
+                        {
+                            if ("Destaque".Equals(label))
+                            {
+                                isSpecialTag = true;
+                                break;
+                            }
+                        }
+                        if (isSpecialTag)
+                        {
+                            <a class="hilight-article-item" href="@Url.Content("~/" + article.NPartyArticleLink)">
+                                <figure style="background-image: url('@article.CoverImage')"></figure>
+                                <h3>@article.Title</h3>
+                                @if (!string.IsNullOrEmpty(article.AuthorName))
+                                {
+                                    <div class="author">Por @article.AuthorName em @article.DatePublished.ToString("dd/MM/yyyy")</div>
+                                }
+                                <p class="snippet">@article.Summary</p>
+                            </a>
+                        }
+                        else
+                        {
+                            <a class="hilight-article-item hilight-md-article-item" href="@Url.Content("~/" + article.NPartyArticleLink)">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <figure style="background-image: url('@article.CoverImage')"></figure>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <h3>@article.Title</h3>
+                                        @if (!string.IsNullOrEmpty(article.AuthorName))
+                                        {
+                                            <div class="author">Por @article.AuthorName em @article.DatePublished.ToString("dd/MM/yyyy")</div>
+                                        }
+                                        <p class="snippet">@article.Summary</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                        <hr />
+                    }
+                }
             </div>
             <div class="col-md-4 col-bordered-left">
                 <div class="sidebar">
-                    <div class="sidebar-item">
-                        <div class="sidebar-advertising ">
-                            @{Html.RenderPartial("Advertisement/ad1_sidebar");}
-                        </div>
+                    <div class="sidebar-item" style="text-align: center;">
+                        <a class="twitter-timeline" href="https://twitter.com/n_party" data-widget-id="737509597708058625"></a>
+                        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+                        @*
+                        <a class="twitter-timeline" href="https://twitter.com/search?q=%40n_party%20%23E3" data-widget-id="737508416076144641"></a>
+                        <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+                            *@
                     </div>
                     <div class="sidebar-follow sidebar-item">
                         <div class="fb-page" data-href="https://www.facebook.com/nparty" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true" data-show-posts="false"><div class="fb-xfbml-parse-ignore"><blockquote cite="https://www.facebook.com/nparty"><a href="https://www.facebook.com/nparty">N-Party</a></blockquote></div></div>
@@ -257,19 +279,23 @@
         $streamsMenu = $('#streams-menu');
 
         function openStream(descriptionId) {
-            if (!$($stream).is(":visible")) {
-                $stream.slideDown();
-            }
 
-            $('.e3-stream').fadeOut();
-            $('#e3-stream-' + descriptionId).fadeIn();
+            if (!$($stream).is(":visible")) {
+                $('#e3-stream-' + descriptionId).show();
+                $stream.slideDown();
+            } else {
+                $('.e3-stream').fadeOut();
+                $('#e3-stream-' + descriptionId).fadeIn();
+            }            
 
             goToSectionFromEl($stream);
         }
 
         function closeStream() {
             if ($($stream).is(":visible")) {
-                $stream.slideUp();
+                $stream.slideUp(
+                    function () { $('.e3-stream').hide(); }
+                );
             }
 
             goToSectionFromEl($streamsMenu);

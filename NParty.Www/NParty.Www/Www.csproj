@@ -1078,6 +1078,12 @@
     <Content Include="Views\E3\Index.cshtml" />
     <Content Include="Views\E3\Streams\EA.cshtml" />
     <Content Include="Views\E3\Streams\General.cshtml" />
+    <Content Include="Views\E3\Streams\Bethesda.cshtml" />
+    <Content Include="Views\E3\Streams\Microsoft.cshtml" />
+    <Content Include="Views\E3\Streams\Pc.cshtml" />
+    <Content Include="Views\E3\Streams\Ubisoft.cshtml" />
+    <Content Include="Views\E3\Streams\Sony.cshtml" />
+    <Content Include="Views\E3\Streams\Nintendo.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
