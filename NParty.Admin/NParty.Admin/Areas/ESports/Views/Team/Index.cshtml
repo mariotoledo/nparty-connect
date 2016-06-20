@@ -1,0 +1,19 @@
+﻿@using NParty.Database.ESports
+@{
+    ViewBag.Title = "Index";
+    List<ESportsTeam> teams = (List<ESportsTeam>)ViewData["teams"];
+}
+
+<h2>Gerenciar Times</h2>
+
+@if (teams == null || teams.Count == 0)
+{
+    <div class="alert alert-info">
+        Não existe nenhum time cadastrado para ser exibido
+    </div>
+}
+else
+{
+    
+}
+

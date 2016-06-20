@@ -3,10 +3,13 @@
 }
 <div id="sidebar-general" class="sidebar">
     <div class="sidebar-item">
+        @{Html.RenderPartial("Special_Area_Sidebar");}
+    </div>
+    @*<div class="sidebar-item">
         <div class="sidebar-advertising ">
             @{Html.RenderPartial("Advertisement/ad1_sidebar");}
         </div>
-    </div>
+    </div>*@
     @if (hilights != null && hilights.Count > 0)
     {
         <div class="sidebar-item" style="text-align: left;">

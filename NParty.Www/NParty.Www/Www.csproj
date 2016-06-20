@@ -196,6 +196,9 @@
     <Compile Include="Areas\Eventos\Controllers\EventosController.cs" />
     <Compile Include="Areas\Eventos\Controllers\HomeController.cs" />
     <Compile Include="Areas\Eventos\EventosAreaRegistration.cs" />
+    <Compile Include="Areas\Multi\Controllers\ArtigosController.cs" />
+    <Compile Include="Areas\Multi\Controllers\MultiController.cs" />
+    <Compile Include="Areas\Multi\MultiAreaRegistration.cs" />
     <Compile Include="Areas\Nintendo\Controllers\ArtigosController.cs" />
     <Compile Include="Areas\Nintendo\Controllers\HomeController.cs" />
     <Compile Include="Areas\Nintendo\Controllers\TheLegendOfZeldaController.cs" />
@@ -250,6 +253,7 @@
     <Content Include="Content\img\authors\caiocardoso.jpg" />
     <Content Include="Content\img\authors\camilaingles.jpg" />
     <Content Include="Content\img\authors\fabricioluz.jpg" />
+    <Content Include="Content\img\authors\fernandagrillo.jpg" />
     <Content Include="Content\img\authors\heitorramos.jpg" />
     <Content Include="Content\img\authors\lucasalves.jpg" />
     <Content Include="Content\img\authors\mariotoledo.jpg" />
@@ -263,6 +267,7 @@
     <Content Include="Content\img\e3\e3_2.jpg" />
     <Content Include="Content\img\e3\e3_3.jpg" />
     <Content Include="Content\img\e3\e3_4.jpg" />
+    <Content Include="Content\img\e3\e3_media.jpg" />
     <Content Include="Content\img\e3\ea_logo.png" />
     <Content Include="Content\img\e3\kawadoka_logo.png" />
     <Content Include="Content\img\e3\ninteno_logo.png" />
@@ -721,6 +726,8 @@
     <Folder Include="Areas\ESports\Views\Shared\" />
     <Folder Include="Areas\Eventos\Models\" />
     <Folder Include="Areas\Eventos\Views\Shared\" />
+    <Folder Include="Areas\Multi\Models\" />
+    <Folder Include="Areas\Multi\Views\Shared\" />
     <Folder Include="Areas\Nintendo\Models\" />
     <Folder Include="Areas\Nintendo\Views\Shared\" />
     <Folder Include="Areas\Podcasts\Models\" />
@@ -1069,6 +1076,8 @@
     <Content Include="Areas\Podcasts\Views\NPartyCostaACosta\Ouvir.cshtml" />
     <Content Include="Areas\Podcasts\Views\NintendoA3\Index.cshtml" />
     <Content Include="Areas\Podcasts\Views\NPartyCostaACosta\Index.cshtml" />
+    <Content Include="Areas\Multi\Views\Web.config" />
+    <Content Include="Areas\Multi\Views\Artigos\Ler.cshtml" />
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
     <Content Include="Views\Home\UrlInvalida.cshtml" />
     <Content Include="Views\Home\GenerateUrl.cshtml" />
@@ -1084,6 +1093,8 @@
     <Content Include="Views\E3\Streams\Ubisoft.cshtml" />
     <Content Include="Views\E3\Streams\Sony.cshtml" />
     <Content Include="Views\E3\Streams\Nintendo.cshtml" />
+    <Content Include="Views\Shared\Special_Area_Top.cshtml" />
+    <Content Include="Views\Shared\Special_Area_Sidebar.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

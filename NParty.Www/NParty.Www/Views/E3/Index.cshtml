@@ -1,11 +1,13 @@
 ﻿@{
     ViewBag.Title = "E3 2016 - Eletronic Enterteinment Expo";
-    ViewData["metaDescription"] = "Todas as novidades da E3 2016, a maior feira de jogos eletrônicos do mundo";
-    ViewData["metaImage"] = Url.Content("~/Content/img/e3/e3_3.jpg");
+    ViewData["metaDescription"] = "Todas as novidades maior feira de jogos eletrônicos do mundo";
+    ViewData["metaImage"] = Url.Content("~/Content/img/e3/e3_media.jpg");
     ViewData["metaUrl"] = Url.Content("~/E3");
     ViewData["metaKeywords"] = new List<string>() { "E3", "Eletronic Enterteinment Expo", "Nintendo", "Sony", "Microsoft", "Zelda", "Noticias" };
 
     List<NParty.Www.Models.Article> articles = (List<NParty.Www.Models.Article>)ViewData["articles"];
+
+    string selectedId = Request.Params["stream"];
 }
 
 @section Head{
@@ -74,18 +76,30 @@
         .btn-close{
             color: #FFF;
         }
+
+        hr{
+            border-color: #CCCCCC;
+        }
+
+        .articles-container a:hover{
+            color:#FE5050;
+        }
+
+        .e3-stream a{
+            color: #FFFFFF;
+        }
     </style>
 }
 
 <div class="e3">
     <section class="content-section video-section">
         <div class="pattern-overlay">
-            <div class="bg" style="background-image: url(@Url.Content("~/Content/img/e3/e3_1.jpg"))">
+            <div class="bg" style="background-image: url(@Url.Content("~/Content/img/e3/e3_media.jpg"))">
             </div>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-12">
-                        <div class="logo"><img class="img-responsive" alt="20 anos de Pokémon" src="@Url.Content("~/Content/img/e3/e3-logo.png")" /></div>
+                        <div class="logo"><img class="img-responsive" alt="E3 2016" src="@Url.Content("~/Content/img/e3/e3-logo.png")" /></div>
                         <h3>Todas as novidades da <b>E3 2016</b>, a maior feira de jogos eletrônicos do mundo</h3>
                         <div class="share-icons">
                             <a title="Compartilhe no Facebook" href="https://www.facebook.com/sharer/sharer.php?u=@System.Configuration.ConfigurationManager.AppSettings["SiteUrl"]@(Url.Content("~/E3"))" class="share-icon" style="background-image: url('@Url.Content("~/Content/img/icons/article-share/facebook_32.png")')" onclick="javascript:window.open(this.href,
@@ -197,9 +211,9 @@
             }
         </div>
     </div>
-    <div class="container" style="margin-top: 30px;">
+    <div class="container articles-container" style="margin-top: 30px;">
         <div class="row">
-            <div class="col-md-8 inside-section" style="margin-bottom: 20px;">
+            <div class="col-md-8 inside-section col-bordered-right" style="margin-bottom: 20px;">
                 @if (articles != null && articles.Count > 0)
                 {
                     foreach (NParty.Www.Models.Article article in articles)
@@ -248,11 +262,13 @@
                     }
                 }
             </div>
-            <div class="col-md-4 col-bordered-left">
+            <div class="col-md-4">
                 <div class="sidebar">
                     <div class="sidebar-item" style="text-align: center;">
-                        <a class="twitter-timeline" href="https://twitter.com/n_party" data-widget-id="737509597708058625"></a>
+                        <a class="twitter-timeline" href="https://twitter.com/search?q=%40n_party%20%23E3" data-chrome="transparent" data-widget-id="737508416076144641"></a>
                         <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
+                        @*<a class="twitter-timeline" href="https://twitter.com/n_party" data-chrome="transparent" data-widget-id="737509597708058625"></@*a>
+    <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>*@
                         @*
                         <a class="twitter-timeline" href="https://twitter.com/search?q=%40n_party%20%23E3" data-widget-id="737508416076144641"></a>
                         <script>!function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0], p = /^http:/.test(d.location) ? 'http' : 'https'; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = p + "://platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } }(document, "script", "twitter-wjs");</script>
@@ -268,6 +284,7 @@
 </div>
 
 @section Scripts{
+
     <script src="@Url.Content("~/Content/js/jquery.bgswitcher.js")"></script>
     <script>
         $(".bg").bgswitcher({
@@ -277,6 +294,11 @@
 
         $stream = $('#stream');
         $streamsMenu = $('#streams-menu');
+
+        $('.choose-stream-tabs a').click(function (e) {
+            e.preventDefault()
+            $(this).tab('show')
+        })
 
         function openStream(descriptionId) {
 
@@ -301,4 +323,14 @@
             goToSectionFromEl($streamsMenu);
         }
     </script>
+
+    @if (!string.IsNullOrEmpty(selectedId))
+    {
+        <script>
+            if ($("#e3-stream-@selectedId").length)
+                openStream('@selectedId');
+        </script>
+    }
+    
+
 }

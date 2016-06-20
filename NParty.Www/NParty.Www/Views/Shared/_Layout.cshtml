@@ -31,8 +31,6 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
 
     string feedUrl = string.IsNullOrEmpty((string)ViewData["feedUrl"]) ? "http://feeds.feedburner.com/all-n-party" :
         (string)ViewData["feedUrl"];
-
-
 }
 
 <!--
@@ -210,6 +208,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                 </div>
             }
         }
+
         @RenderBody()
     </div>
     <footer>

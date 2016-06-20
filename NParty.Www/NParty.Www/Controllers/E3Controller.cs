@@ -16,8 +16,8 @@ namespace NParty.Www.Controllers
 
         public ActionResult Index()
         {
-            string apiKey = System.Configuration.ConfigurationManager.AppSettings["PodcastBloggerApiKey"];
-            string appName = System.Configuration.ConfigurationManager.AppSettings["PodcastGoogleAppName"];
+            string apiKey = System.Configuration.ConfigurationManager.AppSettings["BloggerApiKey"];
+            string appName = System.Configuration.ConfigurationManager.AppSettings["GoogleAppName"];
 
             BloggerService service = new BloggerService(new Google.Apis.Services.BaseClientService.Initializer()
             {
@@ -27,14 +27,14 @@ namespace NParty.Www.Controllers
 
             ArticlesHelper helper = new ArticlesHelper(apiKey, appName, service);
 
-            List<Article> nintendoa3Articles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 100, 1, "E3", "/Artigos/Ler/");
-            List<Article> costaACostaArticles = helper.GetArticlesFromBlog(MainBlogId, "Home", 100, 1, "E3", "/NPartyCostaACosta/Ouvir/");
+            List<Article> nintendoArticles = helper.GetArticlesFromBlog(NintendoBlogId, "Nintendo", 100, 1, "E3 2016", "/Artigos/Ler/");
+            List<Article> generalArticles = helper.GetArticlesFromBlog(MainBlogId, "Multi", 100, 1, "E3 2016", "/Artigos/Ler/");
 
-            List<Article> podcasts = new List<Article>();
-            podcasts.AddRange(nintendoa3Articles);
-            podcasts.AddRange(costaACostaArticles);
+            List<Article> articles = new List<Article>();
+            articles.AddRange(nintendoArticles);
+            articles.AddRange(generalArticles);
 
-            ViewData["articles"] = podcasts.OrderByDescending(t => t.DatePublished).ToList();
+            ViewData["articles"] = articles.OrderByDescending(t => t.DatePublished).ToList();
 
             return View();
         }

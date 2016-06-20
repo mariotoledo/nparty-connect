@@ -1,0 +1,28 @@
+﻿@using NParty.Admin.Usecases
+@model GameCreator
+@{
+    ViewBag.Title = "Novo jogo competitivo";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a></li>
+    <li><a href="@Url.Content("/ESports")">ESports</a></li>
+    <li><a href="@Url.Content("/ESports/Game/")">Gerenciar Jogos competitivos</a></li>
+    <li class="active">Novo Jogo competitivo</li>
+</ol>
+
+<h2>Novo jogo competitivo</h2>
+
+<form class="form" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="GameName">Nome do jogo *</label>
+        <input class="form-control input-lg" name="GameName" value="@Model.GameName" />
+    </div>
+
+    <div class="form-group">
+        <label for="GameLogoUrl">Imagem do jogo</label>
+        <input class="form-control" type="file" name="GameLogoUrl" />
+    </div>
+    <a class="btn btn-default" href="@Url.Content("~/ESports/Game")">Cancelar</a>
+    <button class="btn btn-primary" type="submit">Enviar</button>
+</form>

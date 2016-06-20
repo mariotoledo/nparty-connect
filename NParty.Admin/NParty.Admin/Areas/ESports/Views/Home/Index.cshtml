@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@section Head{
+    <style>
+        .btn-option{
+            margin-bottom: 15px;
+        }
+    </style>
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a></li>
+    <li class="active">ESports</li>
+</ol>
+
+<h2>eSports<small> Gerencie as informações de competições, times e jogadores no site</small></h2>
+<div class="row">
+    <div class="col-md-4">
+        <a href="@Url.Content("~/ESports/Championship")" class="btn btn-lg btn-block btn-primary btn-option">Gerenciar Competições</a>
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.Content("~/ESports/Team")" class="btn btn-lg btn-block btn-primary btn-option">Gerenciar Times</a>
+    </div>
+    <div class="col-md-4">
+        <a href="#" class="btn btn-lg btn-block btn-primary btn-option">Gerenciar Jogadores</a>
+    </div>
+    <div class="col-md-4">
+        <a href="@Url.Content("~/ESports/Game")" class="btn btn-lg btn-block btn-primary btn-option">Gerenciar Jogos</a>
+    </div>
+</div>
+
+
