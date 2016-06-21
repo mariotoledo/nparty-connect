@@ -1,45 +1,47 @@
-﻿@using NParty.Database.ESports
+﻿@using NParty.Admin.Models
 @{
-    ViewBag.Title = "Gerenciar Jogos competitivos";
-    List<ESportsGame> games = (List<ESportsGame>)ViewData["games"];
+    ViewBag.Title = "Gerenciar regras de jogos competitivos";
+    ESportsGameRuleData ruleData = (ESportsGameRuleData)ViewData["gameRuleData"];
 }
 
 <ol class="breadcrumb">
     <li><a href="@Url.Content("/")">Home</a></li>
     <li><a href="@Url.Content("/ESports")">ESports</a></li>
-    <li class="active">Gerenciar Jogos competitivos</li>
+    <li><a href="@Url.Content("/ESports/Game")">Gerenciar Jogos competitivos</a></li>
+    @if (ruleData != null && ruleData.ESportsGame != null)
+    {
+        <li>@ruleData.ESportsGame.ESportsGameName</li>
+    }
+    <li class="active">Regras</li>
 </ol>
 
-<h2>Gerenciar Jogos competitivos <a class="btn btn-primary" href="@Url.Content("~/ESports/Game/New")">Novo</a></h2>
-
-@if (games == null || games.Count == 0)
+@if(ruleData == null || ruleData.ESportsGame == null)
 {
-    <div class="alert alert-info">
-        Não encontramos nenhum jogo competitivo cadastrado
-    </div>
+    <div class="alert alert-info">Não foi possível encontrar o jogo desejado. Será que você não digitou o id errado?</div>
 }
 else
 {
-    <div class="table-responsive">
-        <table class="table table-bordered table-condensed table-hover table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Nome</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (ESportsGame game in games)
-                {
-                    <tr>
-                        <td style="width: 50px;"><img src="@(string.IsNullOrEmpty(game.ESportsGameLogoURL) ? Url.Content("~/Content/img/esports-default.jpg") : game.ESportsGameLogoURL)" style="width: 50px; height: 50px;" /></td>
-                        <td style="vertical-align: middle;"><a href="@Url.Content("~/ESports/Game/Detail/" + game.ESportsGameId)">@game.ESportsGameName</a></td>
-                        <td style="vertical-align: middle;"><a href="@Url.Content("~/ESports/Game/Edit/" + game.ESportsGameId)" class="btn btn-primary">Editar</a><a href="#" class="btn btn-default">Gerenciar Regras</a></td>
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
+    <h2>Gerenciar regras para @ruleData.ESportsGame.ESportsGameName <a class="btn btn-primary" href="@Url.Content("~/ESports/GameRule/New/" + ruleData.ESportsGame.ESportsGameId)">Novo</a></h2>
 
+    if (ruleData.ESportsGameRules == null || ruleData.ESportsGameRules.Count == 0)
+    {
+        <div class="alert alert-info">
+            Não encontramos nenhuma regra cadastrada
+        </div>
+    } else
+    {
+        <div class="row">
+            @foreach (NParty.Database.ESports.ESportsGameRule gameRule in ruleData.ESportsGameRules)
+            {
+                <div class="col-md-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">@gameRule.ESportsGameRuleName <a style="margin-top: -5px;" class="btn btn-primary btn-sm pull-right" href="@Url.Content("~/ESports/GameRule/Edit/" + gameRule.ESportsGameId)">Editar</a></div>
+                        <div class="panel-body">
+                            @gameRule.ESportsGameRuleDescription
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+}

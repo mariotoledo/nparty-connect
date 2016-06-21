@@ -20,26 +20,22 @@
 }
 else
 {
-    <div class="table-responsive">
-        <table class="table table-bordered table-condensed table-hover table-striped">
-            <thead>
-                <tr>
-                    <th></th>
-                    <th>Nome</th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (ESportsGame game in games)
-                {
-                    <tr>
-                        <td style="width: 50px;"><img src="@(string.IsNullOrEmpty(game.ESportsGameLogoURL) ? Url.Content("~/Content/img/esports-default.jpg") : game.ESportsGameLogoURL)" style="width: 50px; height: 50px;"/></td>
-                        <td style="vertical-align: middle;"><a href="@Url.Content("~/ESports/Game/Detail/" + game.ESportsGameId)">@game.ESportsGameName</a></td>
-                        <td style="vertical-align: middle;"><a href="@Url.Content("~/ESports/Game/Edit/" + game.ESportsGameId)" class="btn btn-primary">Editar</a><a href="#" class="btn btn-default">Gerenciar Regras</a></td>
-                    </tr>
-                }
-            </tbody>
-        </table> 
+    <div class="row">
+        @foreach (ESportsGame game in games)
+        {
+            <div class="col-sm-6 col-md-4">
+                <div class="thumbnail">
+                    <img src="@(string.IsNullOrEmpty(game.ESportsGameLogoURL) ? Url.Content("~/Content/img/esports-default.jpg") : game.ESportsGameLogoURL)" alt="@game.ESportsGameName" />
+                    <div class="caption">
+                        <h3>@game.ESportsGameName</h3>
+                        <p style="margin-top: 10px;">
+                            <a href="@Url.Content("~/ESports/Game/Edit/" + game.ESportsGameId)" class="btn btn-primary btn-block" role="button">Editar</a>
+                            <a href="@Url.Content("~/ESports/GameRule/Index/" + game.ESportsGameId)" class="btn btn-default btn-block" role="button">Gerenciar Regras</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 }
 

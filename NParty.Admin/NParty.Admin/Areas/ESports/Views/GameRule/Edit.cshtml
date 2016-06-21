@@ -1,0 +1,41 @@
+﻿@using NParty.Admin.Usecases
+@model GameRuleEditor
+@{
+    ViewBag.Title = "Editar regra para jogo competitivo";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a></li>
+    <li><a href="@Url.Content("/ESports")">ESports</a></li>
+    <li><a href="@Url.Content("/ESports/Game")">Gerenciar Jogos competitivos</a></li>
+    @if (Model != null && Model.Game != null)
+    {
+        <li>@Model.Game.ESportsGameName</li>
+        <li><a href="@Url.Content("/ESports/GameRule/Index/" + Model.Game.ESportsGameId)">Regras</a></li>
+        <li class="active">Editar regra "@Model.GameRule.ESportsGameRuleName"</li>
+    }
+</ol>
+
+@if (Model != null && Model.Game == null)
+{
+    <div class="alert alert-info">Não foi possível encontrar o jogo desejado. Será que você não digitou o id errado?</div>
+}
+else
+{
+    <h2>Nova regra para @Model.Game.ESportsGameName</h2>
+
+    <form class="form" method="post" enctype="multipart/form-data" action="@Url.Content("~/ESports/GameRule/Edit/" + Model.GameRule.ESportsGameRuleId)">
+        <div class="form-group">
+            <label for="ESportsGameRuleName">Nome da regra *</label>
+            <input class="form-control input-lg" name="ESportsGameRuleName" value="@Model.GameRule.ESportsGameRuleName" />
+        </div>
+
+        <div class="form-group">
+            <label for="ESportsGameRuleDescription">Descrição da regra *</label>
+            <textarea class="form-control input-lg" name="ESportsGameRuleDescription">@Model.GameRule.ESportsGameRuleDescription</textarea>
+        </div>
+
+        <a class="btn btn-default" href="@Url.Content("~/ESports/GameRule/Index/" + Model.Game.ESportsGameId)">Cancelar</a>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>
+}

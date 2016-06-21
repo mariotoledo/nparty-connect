@@ -1,4 +1,5 @@
 ﻿using EixoX;
+using NParty.Admin.Models;
 using NParty.Database.ESports;
 using System;
 using System.Collections.Generic;
@@ -9,11 +10,15 @@ namespace NParty.Admin.Usecases
 {
     public class GameRuleLister
     {
-        public List<ESportsGameRule> AllFromGameId(int gameId, Viewee viewee)
+        public ESportsGameRuleData AllFromGameId(int gameId, Viewee viewee)
         {
             try
             {
-                return ESportsGameRule.Select().Where("ESportsGameId", gameId).OrderBy("ESportsGameRuleName").ToList();
+                ESportsGameRuleData model = new ESportsGameRuleData();
+                model.ESportsGame = ESportsGame.WithIdentity(gameId);
+                model.ESportsGameRules = ESportsGameRule.Select().Where("ESportsGameId", gameId).OrderBy("ESportsGameRuleName").ToList();
+
+                return model;
             }
             catch (Exception e)
             {
