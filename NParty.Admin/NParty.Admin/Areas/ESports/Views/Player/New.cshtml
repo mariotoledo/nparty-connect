@@ -1,0 +1,35 @@
+﻿@using NParty.Admin.Usecases
+@model PlayerCreator
+@{
+    ViewBag.Title = "Novo jogador competitivo";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a></li>
+    <li><a href="@Url.Content("/ESports")">ESports</a></li>
+    <li><a href="@Url.Content("/ESports/Player/")">Gerenciar jogadores</a></li>
+    <li class="active">Novo jogador</li>
+</ol>
+
+<h2>Novo jogador</h2>
+
+<form class="form" method="post" enctype="multipart/form-data">
+    <div class="form-group">
+        <label for="PlayerFirstName">Primeiro nome do jogador *</label>
+        <input class="form-control input-lg" name="PlayerFirstName" value="@Model.PlayerFirstName" />
+    </div>
+    <div class="form-group">
+        <label for="PlayerLastName">Sobrenome do jogador *</label>
+        <input class="form-control input-lg" name="PlayerLastName" value="@Model.PlayerLastName" />
+    </div>
+    <div class="form-group">
+        <label for="PlayerNickname">Nick do jogador *</label>
+        <input class="form-control input-lg" name="PlayerNickname" value="@Model.PlayerNickname" />
+    </div>
+    <div class="form-group">
+        <label for="PlayerPhotoUrl">Imagem do jogador</label>
+        <input class="form-control" type="file" name="PlayerPhotoUrl" />
+    </div>
+    <a class="btn btn-default" href="@Url.Content("~/ESports/Player")">Cancelar</a>
+    <button class="btn btn-primary" type="submit">Enviar</button>
+</form>

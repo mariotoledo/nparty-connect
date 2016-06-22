@@ -1,0 +1,40 @@
+﻿@using NParty.Database.ESports
+@{
+    ViewBag.Title = "Gerenciar jogadores";
+    List<ESportsPlayer> players = (List<ESportsPlayer>)ViewData["players"];
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a></li>
+    <li><a href="@Url.Content("/ESports")">ESports</a></li>
+    <li class="active">Gerenciar jogadores</li>
+</ol>
+
+<h2>Gerenciar jogadores <a class="btn btn-primary" href="@Url.Content("~/ESports/Player/New")">Novo</a></h2>
+
+@if (players == null || players.Count == 0)
+{
+    <div class="alert alert-info">
+        Não encontramos nenhum jogador cadastrado
+    </div>
+}
+else
+{
+    <div class="row">
+        @foreach (ESportsPlayer player in players)
+        {
+            <div class="col-sm-4 col-md-2">
+                <div class="thumbnail">
+                    <img src="@(string.IsNullOrEmpty(player.ESportsPlayerPhotoURL) ? Url.Content("~/Content/img/esports-default.jpg") : player.ESportsPlayerPhotoURL)" alt="@player.GetFullNameAndNickname()" />
+                    <div class="caption">
+                        <h4>@player.ESportsPlayerFirstName <b>"@player.ESportsPlayerNickname"</b> @player.ESportsPlayerLastName</h4>
+                        <p style="margin-top: 10px;">
+                            <a href="@Url.Content("~/ESports/Player/Edit/" + player.ESportsPlayerId)" class="btn btn-primary btn-block" role="button">Editar</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
+

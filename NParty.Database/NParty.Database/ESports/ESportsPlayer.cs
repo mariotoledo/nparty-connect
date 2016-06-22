@@ -10,16 +10,24 @@ namespace NParty.Database.ESports
     [DatabaseTable]
     public class ESportsPlayer : ESportsDbModel<ESportsPlayer>
     {
-        [DatabaseColumn]
+        [DatabaseColumn(DatabaseColumnKind.Identity)]
         public int ESportsPlayerId { get; set; }
 
         [DatabaseColumn]
-        public string ESportsPlayerName { get; set; }
+        public string ESportsPlayerFirstName { get; set; }
+
+        [DatabaseColumn]
+        public string ESportsPlayerLastName { get; set; }
 
         [DatabaseColumn]
         public string ESportsPlayerNickname { get; set; }
 
         [DatabaseColumn]
         public string ESportsPlayerPhotoURL { get; set; }
+
+        public string GetFullNameAndNickname()
+        {
+            return ESportsPlayerFirstName + " \"" + ESportsPlayerNickname + "\" " + ESportsPlayerLastName;
+        }
     }
 }

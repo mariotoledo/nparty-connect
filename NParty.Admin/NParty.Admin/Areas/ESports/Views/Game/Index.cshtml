@@ -1,13 +1,13 @@
 ﻿@using NParty.Database.ESports
 @{
-    ViewBag.Title = "Gerenciar Jogos competitivos";
+    ViewBag.Title = "Gerenciar jogos competitivos";
     List<ESportsGame> games = (List<ESportsGame>)ViewData["games"];
 }
 
 <ol class="breadcrumb">
     <li><a href="@Url.Content("/")">Home</a></li>
     <li><a href="@Url.Content("/ESports")">ESports</a></li>
-    <li class="active">Gerenciar Jogos competitivos</li>
+    <li class="active">Gerenciar jogos competitivos</li>
 </ol>
 
 <h2>Gerenciar Jogos competitivos <a class="btn btn-primary" href="@Url.Content("~/ESports/Game/New")">Novo</a></h2>

@@ -132,6 +132,9 @@
     <Content Include="Areas\ESports\Views\GameRule\Index.cshtml" />
     <Content Include="Areas\ESports\Views\GameRule\New.cshtml" />
     <Content Include="Areas\ESports\Views\GameRule\Edit.cshtml" />
+    <Content Include="Areas\ESports\Views\Player\Index.cshtml" />
+    <Content Include="Areas\ESports\Views\Player\New.cshtml" />
+    <Content Include="Areas\ESports\Views\Player\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -146,6 +149,7 @@
     <Compile Include="Areas\ESports\Controllers\GameRuleController.cs" />
     <Compile Include="Areas\ESports\Controllers\HomeController.cs" />
     <Compile Include="Areas\ESports\Controllers\NPartyController.cs" />
+    <Compile Include="Areas\ESports\Controllers\PlayerController.cs" />
     <Compile Include="Areas\ESports\Controllers\TeamController.cs" />
     <Compile Include="Areas\ESports\ESportsAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -156,6 +160,9 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Models\ESportsGameRuleData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usecases\PlayerEditor.cs" />
+    <Compile Include="Usecases\PlayerCreator.cs" />
+    <Compile Include="Usecases\PlayerLister.cs" />
     <Compile Include="Usecases\GameRuleEditor.cs" />
     <Compile Include="Usecases\GameRuleCreator.cs" />
     <Compile Include="Usecases\GameEditor.cs" />
@@ -163,6 +170,8 @@
     <Compile Include="Usecases\GameLister.cs" />
     <Compile Include="Usecases\GameRuleLister.cs" />
     <Compile Include="Usecases\TeamLister.cs" />
+    <Compile Include="Viewees\PlayerEditorViewee.cs" />
+    <Compile Include="Viewees\PlayerCreatorViewee.cs" />
     <Compile Include="Viewees\GameRuleEditorViewee.cs" />
     <Compile Include="Viewees\GameRuleCreatorViewee.cs" />
     <Compile Include="Viewees\GameEditorViewee.cs" />
