@@ -21,5 +21,18 @@ namespace NParty.Admin.Usecases
                 return null;
             }
         }
+
+        public ESportsTeam Single(int id, Viewee viewee)
+        {
+            try
+            {
+                return ESportsTeam.Select().Where("ESportsTeamId", id).SingleResult();
+            }
+            catch (Exception e)
+            {
+                viewee.OnException(e);
+                return null;
+            }
+        }
     }
 }

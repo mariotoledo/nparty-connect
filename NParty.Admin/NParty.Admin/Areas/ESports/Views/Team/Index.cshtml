@@ -4,7 +4,7 @@
     List<ESportsTeam> teams = (List<ESportsTeam>)ViewData["teams"];
 }
 
-<h2>Gerenciar Times</h2>
+<h2>Gerenciar Times <a class="btn btn-primary" href="@Url.Content("~/ESports/Team/New")">Novo</a></h2>
 
 @if (teams == null || teams.Count == 0)
 {
@@ -14,6 +14,22 @@
 }
 else
 {
-    
+    <div class="row">
+        @foreach (ESportsTeam team in teams)
+        {
+            <div class="col-sm-4 col-md-2">
+                <div class="thumbnail">
+                    <img src="@(string.IsNullOrEmpty(team.ESportsTeamLogoURL) ? Url.Content("~/Content/img/esports-default.jpg") : team.ESportsTeamLogoURL)" alt="@team.ESportsTeamName" />
+                    <div class="caption">
+                        <h4>@team.ESportsTeamName</h4>
+                        <p style="margin-top: 10px;">
+                            <a href="@Url.Content("~/ESports/TeamFormation/Index/" + team.ESportsTeamId)" class="btn btn-default btn-block">Gerenciar formações</a>
+                            <a href="@Url.Content("~/ESports/Team/Edit/" + team.ESportsTeamId)" class="btn btn-primary btn-block" role="button">Editar</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 }
 

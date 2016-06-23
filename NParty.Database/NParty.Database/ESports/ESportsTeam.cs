@@ -10,7 +10,7 @@ namespace NParty.Database.ESports
     [DatabaseTable]
     public class ESportsTeam : ESportsDbModel<ESportsTeam>
     {
-        [DatabaseColumn]
+        [DatabaseColumn(DatabaseColumnKind.Identity)]
         public int ESportsTeamId { get; set; }
 
         [DatabaseColumn]

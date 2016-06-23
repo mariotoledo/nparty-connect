@@ -1,0 +1,35 @@
+﻿@using NParty.Database.ESports
+@model ESportsTeam
+@{
+    ViewBag.Title = "Editar time";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a></li>
+    <li><a href="@Url.Content("/ESports")">ESports</a></li>
+    <li><a href="@Url.Content("/ESports/Team/")">Gerenciar Times</a></li>
+    <li class="active">Editar Time</li>
+</ol>
+
+<h2>Editar time</h2>
+
+@if (Model == null)
+{
+    <div class="alert alert-info">Nenhum time com este id foi encontrado</div>
+}
+else
+{
+    <form class="form" method="post" enctype="multipart/form-data">
+        <div class="form-group">
+            <label for="TeamName">Nome do time *</label>
+            <input class="form-control input-lg" name="TeamName" value="@Model.ESportsTeamName" />
+        </div>
+
+        <div class="form-group">
+            <label for="TeamLogoUrl">Imagem do jogo</label>
+            <input class="form-control" type="file" name="TeamLogoUrl" />
+        </div>
+        <a class="btn btn-default" href="@Url.Content("~/ESports/Team")">Cancelar</a>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>
+}

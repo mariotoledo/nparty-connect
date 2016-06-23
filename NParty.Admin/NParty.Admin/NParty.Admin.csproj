@@ -135,6 +135,8 @@
     <Content Include="Areas\ESports\Views\Player\Index.cshtml" />
     <Content Include="Areas\ESports\Views\Player\New.cshtml" />
     <Content Include="Areas\ESports\Views\Player\Edit.cshtml" />
+    <Content Include="Areas\ESports\Views\Team\New.cshtml" />
+    <Content Include="Areas\ESports\Views\Team\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -146,11 +148,13 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Areas\ESports\Controllers\ChampionshipController.cs" />
     <Compile Include="Areas\ESports\Controllers\GameController.cs" />
+    <Compile Include="Areas\ESports\Controllers\GamePlayerPositionController.cs" />
     <Compile Include="Areas\ESports\Controllers\GameRuleController.cs" />
     <Compile Include="Areas\ESports\Controllers\HomeController.cs" />
     <Compile Include="Areas\ESports\Controllers\NPartyController.cs" />
     <Compile Include="Areas\ESports\Controllers\PlayerController.cs" />
     <Compile Include="Areas\ESports\Controllers\TeamController.cs" />
+    <Compile Include="Areas\ESports\Controllers\TeamFormationController.cs" />
     <Compile Include="Areas\ESports\ESportsAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
@@ -160,6 +164,8 @@
     <Compile Include="Helpers\ImageHelper.cs" />
     <Compile Include="Models\ESportsGameRuleData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usecases\TeamEditor.cs" />
+    <Compile Include="Usecases\TeamCreator.cs" />
     <Compile Include="Usecases\PlayerEditor.cs" />
     <Compile Include="Usecases\PlayerCreator.cs" />
     <Compile Include="Usecases\PlayerLister.cs" />
@@ -170,6 +176,8 @@
     <Compile Include="Usecases\GameLister.cs" />
     <Compile Include="Usecases\GameRuleLister.cs" />
     <Compile Include="Usecases\TeamLister.cs" />
+    <Compile Include="Viewees\TeamEditorViewee.cs" />
+    <Compile Include="Viewees\TeamCreatorViewee.cs" />
     <Compile Include="Viewees\PlayerEditorViewee.cs" />
     <Compile Include="Viewees\PlayerCreatorViewee.cs" />
     <Compile Include="Viewees\GameRuleEditorViewee.cs" />
@@ -196,8 +204,10 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\ESports\Models\" />
+    <Folder Include="Areas\ESports\Views\GamePlayerPosition\" />
     <Folder Include="Areas\ESports\Views\NParty\" />
     <Folder Include="Areas\ESports\Views\Shared\" />
+    <Folder Include="Areas\ESports\Views\TeamFormation\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Jetfuel-CSharp\EixoX\EixoX.csproj">
