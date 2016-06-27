@@ -55,7 +55,7 @@ namespace NParty.Admin.Areas.ESports.Controllers
             if (usecase.Execute(id, form, this))
             {
                 FlashMessage("Regra editada com sucesso", MessageType.Success);
-                return Redirect("~/ESports/GameRule/Index/" + id);
+                return Redirect("~/ESports/GameRule/Index/" + usecase.Game.ESportsGameId);
             }
 
             return View(usecase);

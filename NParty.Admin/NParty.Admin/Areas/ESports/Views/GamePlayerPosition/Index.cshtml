@@ -1,0 +1,43 @@
+﻿@using NParty.Admin.Models
+@{
+    ViewBag.Title = "Gerenciar posições no jogo";
+    ESportsGamePlayerPositionData ruleData = (ESportsGamePlayerPositionData)ViewData["gamePlayerPositionData"];
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a></li>
+    <li><a href="@Url.Content("/ESports")">ESports</a></li>
+    <li><a href="@Url.Content("/ESports/Game")">Gerenciar jogos competitivos</a></li>
+    @if (ruleData != null && ruleData.ESportsGame != null)
+    {
+        <li>@ruleData.ESportsGame.ESportsGameName</li>
+    }
+    <li class="active">Posições no jogo</li>
+</ol>
+
+@if (ruleData == null || ruleData.ESportsGame == null)
+{
+    <div class="alert alert-info">Não foi possível encontrar o jogo desejado. Será que você não digitou o id errado?</div>
+}
+else
+{
+    <h2>Gerenciar posições para @ruleData.ESportsGame.ESportsGameName <a class="btn btn-primary" href="@Url.Content("~/ESports/GamePlayerPosition/New/" + ruleData.ESportsGame.ESportsGameId)">Novo</a></h2>
+
+    if (ruleData.ESportsGamePlayerPositions == null || ruleData.ESportsGamePlayerPositions.Count == 0)
+    {
+        <div class="alert alert-info">
+            Não encontramos nenhuma posição cadastrada
+        </div>
+    }
+    else
+    {
+        <ul>
+            @foreach (NParty.Database.ESports.ESportsGamePlayerPosition gamePlayerPosition in ruleData.ESportsGamePlayerPositions)
+            {
+                <li style="font-weight: @(gamePlayerPosition.IsRequired ? "bold" : "normal")">
+                    @gamePlayerPosition.ESportsGamePositionName (<a href="@Url.Content("~/ESports/GamePlayerPosition/Edit/" + gamePlayerPosition.ESportsGamePlayerPositionId)">Editar</a>)
+                </li>
+            }
+        </ul>
+    }
+}

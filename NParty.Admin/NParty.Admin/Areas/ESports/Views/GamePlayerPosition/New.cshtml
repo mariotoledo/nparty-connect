@@ -1,0 +1,44 @@
+﻿@using NParty.Admin.Usecases
+@model GamePlayerPositionCreator
+@{
+    ViewBag.Title = "Nova posição para jogo competitivo";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a></li>
+    <li><a href="@Url.Content("/ESports")">ESports</a></li>
+    <li><a href="@Url.Content("/ESports/Game")">Gerenciar Jogos competitivos</a></li>
+    @if (Model != null && Model.Game != null)
+    {
+        <li>@Model.Game.ESportsGameName</li>
+        <li><a href="@Url.Content("/ESports/GamePlayerPosition/Index/" + Model.Game.ESportsGameId)">Regras</a></li>
+    }
+    <li class="active">Nova posição</li>
+</ol>
+
+@if (Model != null && Model.Game == null)
+{
+    <div class="alert alert-info">Não foi possível encontrar o jogo desejado. Será que você não digitou o id errado?</div>
+}
+else
+{
+    <h2>Nova regra para @Model.Game.ESportsGameName</h2>
+
+    <form class="form" method="post" enctype="multipart/form-data" action="@Url.Content("~/ESports/GamePlayerPosition/New/" + Model.Game.ESportsGameId)">
+        <div class="form-group">
+            <label for="ESportsGameRuleName">Nome da posição *</label>
+            <input class="form-control input-lg" name="ESportsGamePlayerPositionName" value="@Model.GamePlayerPositionName" />
+        </div>
+        <div class="form-group">
+            <label for="ESportsGameRuleName">Ordem da posição *</label>
+            <input class="form-control" style="width: 50px;" name="ESportsGamePlayerPositionOrder" value="@Model.GamePlayerPositionOrder" />
+        </div>
+        <div class="checkbox">
+            <label>
+                <input checked="@(Model.IsRequired ? "checked" : "")" type="checkbox" name="IsRequired"> Esta posição é obrigatória?
+            </label>
+        </div>
+        <a class="btn btn-default" href="@Url.Content("~/ESports/GamePlayerPosition/Index/" + Model.Game.ESportsGameId)">Cancelar</a>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>
+}

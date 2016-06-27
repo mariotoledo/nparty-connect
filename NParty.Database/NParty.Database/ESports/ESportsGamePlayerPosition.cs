@@ -20,7 +20,7 @@ namespace NParty.Database.ESports
         public string ESportsGamePositionName { get; set; }
 
         [DatabaseColumn]
-        public bool IsVisibleInMatch { get; set; }
+        public bool IsRequired { get; set; }
 
         [DatabaseColumn]
         public int Order { get; set; }

@@ -1,0 +1,45 @@
+﻿@using NParty.Admin.Usecases
+@model GamePlayerPositionEditor
+@{
+    ViewBag.Title = "Editar regra para jogo competitivo";
+}
+
+<ol class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a></li>
+    <li><a href="@Url.Content("/ESports")">ESports</a></li>
+    <li><a href="@Url.Content("/ESports/Game")">Gerenciar Jogos competitivos</a></li>
+    @if (Model != null && Model.Game != null)
+    {
+        <li>@Model.Game.ESportsGameName</li>
+        <li><a href="@Url.Content("/ESports/GamePlayerPosition/Index/" + Model.Game.ESportsGameId)">Posições do jogo</a></li>
+        <li class="active">Editar posição "@Model.GamePlayerPosition.ESportsGamePositionName"</li>
+    }
+</ol>
+
+@if (Model != null && Model.Game == null)
+{
+    <div class="alert alert-info">Não foi possível encontrar o jogo desejado. Será que você não digitou o id errado?</div>
+}
+else
+{
+    <h2>Editar posição de @Model.Game.ESportsGameName</h2>
+
+    <form class="form" method="post" enctype="multipart/form-data" action="@Url.Content("~/ESports/GamePlayerPosition/Edit/" + Model.GamePlayerPosition.ESportsGamePlayerPositionId)">
+        <div class="form-group">
+            <label for="ESportsGameRuleName">Nome da posição *</label>
+            <input class="form-control input-lg" name="ESportsGamePlayerPositionName" value="@Model.GamePlayerPosition.ESportsGamePositionName" />
+        </div>
+        <div class="form-group">
+            <label for="ESportsGamePlayerPositionOrder">Ordem da posição *</label>
+            <input class="form-control" style="width: 50px;" name="ESportsGamePlayerPositionOrder" value="@Model.GamePlayerPosition.Order" />
+        </div>
+        <div class="checkbox">
+            <label>
+                <input checked="@(Model.GamePlayerPosition.IsRequired ? "checked" : "")" type="checkbox" name="IsRequired"> Esta posição é obrigatória?
+            </label>
+        </div>
+
+        <a class="btn btn-default" href="@Url.Content("~/ESports/GamePlayerPosition/Index/" + Model.Game.ESportsGameId)">Cancelar</a>
+        <button class="btn btn-primary" type="submit">Enviar</button>
+    </form>
+}

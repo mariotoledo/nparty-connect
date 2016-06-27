@@ -137,6 +137,9 @@
     <Content Include="Areas\ESports\Views\Player\Edit.cshtml" />
     <Content Include="Areas\ESports\Views\Team\New.cshtml" />
     <Content Include="Areas\ESports\Views\Team\Edit.cshtml" />
+    <Content Include="Areas\ESports\Views\GamePlayerPosition\Index.cshtml" />
+    <Content Include="Areas\ESports\Views\GamePlayerPosition\New.cshtml" />
+    <Content Include="Areas\ESports\Views\GamePlayerPosition\Edit.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -162,8 +165,12 @@
     </Compile>
     <Compile Include="Helpers\BlobHelper.cs" />
     <Compile Include="Helpers\ImageHelper.cs" />
+    <Compile Include="Models\ESportsGamePlayerPositionData.cs" />
     <Compile Include="Models\ESportsGameRuleData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Usecases\GamePlayerPositionLister.cs" />
+    <Compile Include="Usecases\GamePlayerPositionCreator.cs" />
+    <Compile Include="Usecases\GamePlayerPositionEditor.cs" />
     <Compile Include="Usecases\TeamEditor.cs" />
     <Compile Include="Usecases\TeamCreator.cs" />
     <Compile Include="Usecases\PlayerEditor.cs" />
@@ -176,6 +183,8 @@
     <Compile Include="Usecases\GameLister.cs" />
     <Compile Include="Usecases\GameRuleLister.cs" />
     <Compile Include="Usecases\TeamLister.cs" />
+    <Compile Include="Viewees\GamePlayerPositionCreatorViewee.cs" />
+    <Compile Include="Viewees\GamePlayerPositionEditorViewee.cs" />
     <Compile Include="Viewees\TeamEditorViewee.cs" />
     <Compile Include="Viewees\TeamCreatorViewee.cs" />
     <Compile Include="Viewees\PlayerEditorViewee.cs" />
@@ -204,7 +213,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\ESports\Models\" />
-    <Folder Include="Areas\ESports\Views\GamePlayerPosition\" />
     <Folder Include="Areas\ESports\Views\NParty\" />
     <Folder Include="Areas\ESports\Views\Shared\" />
     <Folder Include="Areas\ESports\Views\TeamFormation\" />

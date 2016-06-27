@@ -43,6 +43,7 @@
     <Compile Include="ESports\ESportsChampionship.cs" />
     <Compile Include="ESports\ESportsDb.cs" />
     <Compile Include="ESports\ESportsDbModel.cs" />
+    <Compile Include="ESports\ESportsGamePlayerPosition.cs" />
     <Compile Include="ESports\ESportsPlayer.cs" />
     <Compile Include="ESports\ESportsChampionshipMatch.cs" />
     <Compile Include="ESports\ESportsGameRule.cs" />
