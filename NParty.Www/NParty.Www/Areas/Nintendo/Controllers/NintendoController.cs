@@ -26,8 +26,8 @@ namespace NParty.Www.Areas.Nintendo.Controllers
             return View();
         }
 
-        private static string[] apiKey = new string[] { "NintendoBloggerApiKey2", "NintendoBloggerApiKey", "NintendoBloggerApiKey3" };
-        private static string[] appName = new string[] { "NintendoGoogleAppName2", "NintendoGoogleAppName", "NintendoGoogleAppName3" };
+        private static string[] apiKey = new string[] { "NintendoBloggerApiKey2", "NintendoBloggerApiKey", "NintendoBloggerApiKey3", "NintendoBloggerApiKey4", "NintendoBloggerApiKey5", "NintendoBloggerApiKey6" };
+        private static string[] appName = new string[] { "NintendoGoogleAppName2", "NintendoGoogleAppName", "NintendoGoogleAppName3", "NintendoGoogleAppName4", "NintendoGoogleAppName5", "NintendoGoogleAppName6" };
 
         private static int keyIndex = 0;
 

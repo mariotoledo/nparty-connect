@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace NParty.Admin.Areas.ESports.Controllers
 {
-    public class TeamFormationController : Controller
+    public class TeamFormationController : NPartyController
     {
         // GET: ESports/TeamFormation
         public ActionResult Index()
