@@ -185,6 +185,7 @@
     <Compile Include="Areas\ESports\Controllers\CounterStrikeController.cs" />
     <Compile Include="Areas\ESports\Controllers\DicasController.cs" />
     <Compile Include="Areas\ESports\Controllers\ESportsController.cs" />
+    <Compile Include="Areas\ESports\Controllers\EVOController.cs" />
     <Compile Include="Areas\ESports\Controllers\HomeController.cs" />
     <Compile Include="Areas\ESports\Controllers\LeagueOfLegendsController.cs" />
     <Compile Include="Areas\ESports\ESportsAreaRegistration.cs" />
@@ -244,6 +245,7 @@
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
+    <Content Include="Content\css\evo.css" />
     <Content Include="Content\css\nparty.css" />
     <Content Include="Content\css\e3.css" />
     <Content Include="Content\css\pokemon20th.css" />
@@ -275,6 +277,21 @@
     <Content Include="Content\img\e3\sony_logo.png" />
     <Content Include="Content\img\e3\ubisoft_logo.png" />
     <Content Include="Content\img\e3\xbox_logo.png" />
+    <Content Include="Content\img\evo\evo_1.jpg" />
+    <Content Include="Content\img\evo\evo_2.jpg" />
+    <Content Include="Content\img\evo\evo_3.jpg" />
+    <Content Include="Content\img\evo\evo_4.jpg" />
+    <Content Include="Content\img\evo\evo_logo.png" />
+    <Content Include="Content\img\evo\evo_media.jpg" />
+    <Content Include="Content\img\evo\gg_thumb.png" />
+    <Content Include="Content\img\evo\ki.png" />
+    <Content Include="Content\img\evo\marvel3.png" />
+    <Content Include="Content\img\evo\mortalkx.png" />
+    <Content Include="Content\img\evo\pokken_thumb.png" />
+    <Content Include="Content\img\evo\sfv_thumb.png" />
+    <Content Include="Content\img\evo\smash.png" />
+    <Content Include="Content\img\evo\smash_wii.png" />
+    <Content Include="Content\img\evo\t7_thumb.png" />
     <Content Include="Content\img\favicon.png" />
     <Content Include="Content\img\icons\article-share\email_32.png" />
     <Content Include="Content\img\icons\article-share\facebook_32.png" />
@@ -1078,6 +1095,7 @@
     <Content Include="Areas\Podcasts\Views\NPartyCostaACosta\Index.cshtml" />
     <Content Include="Areas\Multi\Views\Web.config" />
     <Content Include="Areas\Multi\Views\Artigos\Ler.cshtml" />
+    <Content Include="Areas\ESports\Views\EVO\Index.cshtml" />
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
     <Content Include="Views\Home\UrlInvalida.cshtml" />
     <Content Include="Views\Home\GenerateUrl.cshtml" />
