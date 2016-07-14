@@ -140,6 +140,7 @@
     <Content Include="Areas\ESports\Views\GamePlayerPosition\Index.cshtml" />
     <Content Include="Areas\ESports\Views\GamePlayerPosition\New.cshtml" />
     <Content Include="Areas\ESports\Views\GamePlayerPosition\Edit.cshtml" />
+    <Content Include="Areas\ESports\Views\TeamFormation\Index.cshtml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -215,7 +216,6 @@
     <Folder Include="Areas\ESports\Models\" />
     <Folder Include="Areas\ESports\Views\NParty\" />
     <Folder Include="Areas\ESports\Views\Shared\" />
-    <Folder Include="Areas\ESports\Views\TeamFormation\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Jetfuel-CSharp\EixoX\EixoX.csproj">
