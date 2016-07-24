@@ -8,8 +8,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net;
+using System.ServiceModel.Syndication;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml;
 
 namespace NParty.Www.Controllers
 {
@@ -157,6 +159,32 @@ namespace NParty.Www.Controllers
             blogDomains.Add(EventosBlogId, "Eventos");
 
             return Json(helper.GetGeneralHilights(blogDomains, 3), JsonRequestBehavior.AllowGet);
+        }
+
+        public ActionResult SitesFeed()
+        {
+            string url = "http://nintendoeverything.com/feed/";
+            XmlReader reader = XmlReader.Create(url);
+            SyndicationFeed feed = SyndicationFeed.Load(reader);
+            reader.Close();
+
+            ViewData["everything"] = feed.Items;
+
+            string url2 = "http://feedpress.me/gonintendo";
+            XmlReader reader2 = XmlReader.Create(url2);
+            SyndicationFeed feed2 = SyndicationFeed.Load(reader2);
+            reader2.Close();
+
+            ViewData["go"] = feed2.Items;
+
+            string url3 = "https://mynintendonews.com/feed/";
+            XmlReader reader3 = XmlReader.Create(url3);
+            SyndicationFeed feed3 = SyndicationFeed.Load(reader3);
+            reader2.Close();
+
+            ViewData["my"] = feed3.Items;
+
+            return View();
         }
 
         [HttpPost]

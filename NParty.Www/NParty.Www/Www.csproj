@@ -1113,6 +1113,7 @@
     <Content Include="Views\E3\Streams\Nintendo.cshtml" />
     <Content Include="Views\Shared\Special_Area_Top.cshtml" />
     <Content Include="Views\Shared\Special_Area_Sidebar.cshtml" />
+    <Content Include="Views\Home\SitesFeed.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
