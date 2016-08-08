@@ -11,86 +11,59 @@
     ViewData["metaKeywords"] = new List<string>() { "Eventos", "Nintendo", "Wii U", "3DS", "eSports", "League of Legends", "Counter Strike" };
 }
     @{Html.RenderPartial("Special_Area_Top");}
-    <div class="hilights">
-        <div class="hilights-items">
-            <div style="float: left; width: 100%;">
-                @if (hilights != null && hilights.Count >= 5)
-                {
-                    <div class="col-md-4" id="hilight1">
-                        <a class="hilight-link" href="@hilights[0].NPartyArticleLink">
-                            <h2>@hilights[0].Title</h2>
-                        </a>
-                        <div class="hilight hilight-more" style="background-image: url(@hilights[0].CoverImage);"></div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-6" id="hilight2">
-                                <a class="hilight-link" href="@Url.Content("~/" + hilights[1].NPartyArticleLink)">
-                                    <h2>@hilights[1].Title</h2>
-                                </a>
-                                <div class="hilight" style="background-image: url(@hilights[1].CoverImage);"></div>
-                            </div>
-                            <div class="col-md-6" id="hilight3">
-                                <a class="hilight-link" href="@Url.Content("~/" + hilights[2].NPartyArticleLink)">
-                                    <h2>@hilights[2].Title</h2>
-                                </a>
-                                <div class="hilight" style="background-image: url(@hilights[2].CoverImage);"></div>
-                            </div>
-                            <div class="col-md-6" id="hilight4">
-                                <a class="hilight-link" href="@Url.Content("~/" + hilights[3].NPartyArticleLink)">
-                                    <h2>@hilights[3].Title</h2>
-                                </a>
-                                <div class="hilight" style="background-image: url(@hilights[3].CoverImage);"></div>
-                            </div>
-                            <div class="col-md-6" id="hilight5">
-                                <a class="hilight-link" href="@Url.Content("~/" + hilights[4].NPartyArticleLink)">
-                                    <h2>@hilights[4].Title</h2>
-                                </a>
-                                <div class="hilight" style="background-image: url(@hilights[4].CoverImage);"></div>
+
+@if (hilights != null && hilights.Count >= 3)
+    <div class="container" style="margin-top: 30px;">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="hilight">
+                    <a href="@Url.Content("~/" + hilights[0].NPartyArticleLink)">
+                        <div class="hilight-img hilight-img-big" style="background-image: url('@hilights[0].CoverImage')"></div>
+
+                        <div class="hilight-caption">
+                            <div class="hilight-caption-inner">
+                                <div class="clearfix">
+                                    <span href="@Url.Content("~/" + hilights[0].Domain)" class="domain-box domain-box-@hilights[0].Domain">@hilights[0].Domain</span>
+                                </div>
+                                <div href="@Url.Content("~/" + hilights[0].NPartyArticleLink)"><h2>@hilights[0].Title</h2></div>
                             </div>
                         </div>
-                    </div>
-                }
-                else
-                {
-                    <div class="col-md-4" id="hilight1">
-                        <a class="hilight-link" href="">
-                            <h2></h2>
-                        </a>
-                        <div class="hilight hilight-more" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
-                    </div>
-                    <div class="col-md-8">
-                        <div class="row">
-                            <div class="col-md-6" id="hilight2">
-                                <a class="hilight-link" href="">
-                                    <h2></h2>
-                                </a>
-                                <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
-                            </div>
-                            <div class="col-md-6" id="hilight3">
-                                <a class="hilight-link" href="">
-                                    <h2></h2>
-                                </a>
-                                <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
-                            </div>
-                            <div class="col-md-6" id="hilight4">
-                                <a class="hilight-link" href="">
-                                    <h2></h2>
-                                </a>
-                                <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
-                            </div>
-                            <div class="col-md-6" id="hilight5">
-                                <a class="hilight-link" href="">
-                                    <h2></h2>
-                                </a>
-                                <div class="hilight" style="background-image: url('@Url.Content("~/Content/img/loading.gif")');"></div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="hilight">
+                    <a href="@Url.Content("~/" + hilights[1].NPartyArticleLink)">
+                        <div class="hilight-img hilight-img-med" style="background-image: url('@hilights[1].CoverImage')"></div>
+
+                        <div class="hilight-caption">
+                            <div class="hilight-caption-inner">
+                                <div class="clearfix">
+                                    <span href="@Url.Content("~/" + hilights[1].Domain)" class="domain-box domain-box-@hilights[1].Domain">@hilights[1].Domain</span>
+                                </div>
+                                <div href="@Url.Content("~/" + hilights[1].NPartyArticleLink)"><h3>@hilights[1].Title</h3></div>
                             </div>
                         </div>
-                    </div>
-                }
+                    </a>
+                </div>
+                <div class="hilight" style="margin-top: 10px;">
+                    <a href="@Url.Content("~/" + hilights[2].NPartyArticleLink)">
+                        <div class="hilight-img hilight-img-med" style="background-image: url('@hilights[2].CoverImage')"></div>
+
+                        <div class="hilight-caption">
+                            <div class="hilight-caption-inner">
+                                <div class="clearfix">
+                                    <span href="@Url.Content("~/" + hilights[2].Domain)" class="domain-box domain-box-@hilights[2].Domain">@hilights[2].Domain</span>
+                                </div>
+                                <div href="@Url.Content("~/" + hilights[2].NPartyArticleLink)"><h3>@hilights[2].Title</h3></div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
             </div>
         </div>
     </div>
+}
 
     <!-- ================================== NINTENDO ================================== -->
     <div id="nintendo-container">
@@ -99,7 +72,7 @@
                 <h2>
                     <span class="thin">Na</span>
                     <span class="strong">Nintendo</span>
-                </h2>   
+                </h2>
             </div>
             <div class="posts">
             @if (nintendoPosts != null && nintendoPosts.Count >= 4)
@@ -274,7 +247,7 @@
                             <div class="col-md-6">
                                 <figure style="background-image: url(@eventosPosts[3].CoverImage)"></figure>
                             </div>
-                            <div class="col-md-6">  
+                            <div class="col-md-6">
                                 <h4>@eventosPosts[3].Title</h4>
                                 <p class="snippet">@eventosPosts[3].Summary</p>
                             </div>
@@ -310,16 +283,16 @@
 
             <div class="row podcasts" style="display: none;">
                 <div class="col-md-8 firstItem" style="margin-bottom: 20px;">
-                    
+
                 </div>
                 <div class="col-md-4 col-bordered-left">
                     <ul class="media-list otherItens">
-                        
+
                     </ul>
                     <a class="btn btn-lg btn-block" href="@Url.Content("~/Podcasts")" style="text-align: right">MAIS <b>PODCASTS <span aria-hidden="true" class="glyphicon glyphicon-play-circle"></span></b></a>
                 </div>
             </div>
-            
+
         </div>
     </div>
 </div>
@@ -405,10 +378,10 @@
                     var appendable = '';
 
                     for (var i = 1; i < 4; i++) {
-                        appendable += '<li class="media thumb-item">' + 
-                                      '<a href="' + data[i].NPartyArticleLink + '">' + 
-                                      '<div class="media-left media-middle">' + 
-                                      '<figure class="media-object" style="background-image: url(' + data[i].CoverImage + ')"></figure>' + 
+                        appendable += '<li class="media thumb-item">' +
+                                      '<a href="' + data[i].NPartyArticleLink + '">' +
+                                      '<div class="media-left media-middle">' +
+                                      '<figure class="media-object" style="background-image: url(' + data[i].CoverImage + ')"></figure>' +
                                       '</div><div class="media-body">' +
                                       '<h5 class="media-heading">' + data[i].Title + '</h5>' +
                                       '</div></a></li>';

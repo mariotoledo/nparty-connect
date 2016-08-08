@@ -240,12 +240,15 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\responsive.css" />
+    <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\audioplayer.css" />
     <Content Include="Content\css\bootstrap-theme.css" />
     <Content Include="Content\css\bootstrap-theme.min.css" />
     <Content Include="Content\css\bootstrap.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\css\evo.css" />
+    <Content Include="Content\css\layerslider.css" />
     <Content Include="Content\css\nparty.css" />
     <Content Include="Content\css\e3.css" />
     <Content Include="Content\css\pokemon20th.css" />
@@ -293,6 +296,7 @@
     <Content Include="Content\img\evo\smash_wii.png" />
     <Content Include="Content\img\evo\t7_thumb.png" />
     <Content Include="Content\img\favicon.png" />
+    <Content Include="Content\img\highlight-overlay.svg" />
     <Content Include="Content\img\icons\article-share\email_32.png" />
     <Content Include="Content\img\icons\article-share\facebook_32.png" />
     <Content Include="Content\img\icons\article-share\googleplus_32.png" />
@@ -408,13 +412,24 @@
     <Content Include="Content\img\socialIcons\rss.jpg" />
     <Content Include="Content\img\socialIcons\twitter.jpg" />
     <Content Include="Content\img\socialIcons\youtube.jpg" />
+    <Content Include="Content\js\appear.js" />
     <Content Include="Content\js\audioplayer.min.js" />
     <Content Include="Content\js\bootstrap.js" />
     <Content Include="Content\js\bootstrap.min.js" />
-    <Content Include="Content\js\jquery-1.11.3.min.js" />
+    <Content Include="Content\js\greensock.js" />
+    <Content Include="Content\js\jquery-2.1.0.min.js" />
+    <Content Include="Content\js\jquery-ui.min.js" />
     <Content Include="Content\js\jquery.bgswitcher.js" />
+    <Content Include="Content\js\jquery.modernizr.js" />
+    <Content Include="Content\js\jquery.tweet.min.js" />
+    <Content Include="Content\js\layerslider.kreaturamedia.jquery.js" />
+    <Content Include="Content\js\layerslider.transitions.js" />
+    <Content Include="Content\js\layout.js" />
     <Content Include="Content\js\nparty.js" />
     <Content Include="Content\js\npm.js" />
+    <Content Include="Content\js\owl.carousel.min.js" />
+    <Content Include="Content\js\plugins.js" />
+    <Content Include="Content\js\jquery.queryloader2.js" />
     <Content Include="Content\pokemontimeline\css\arpg.css" />
     <Content Include="Content\pokemontimeline\css\chat.css" />
     <Content Include="Content\pokemontimeline\Graphics\Characters\Chick.png" />
@@ -1114,6 +1129,7 @@
     <Content Include="Views\Shared\Special_Area_Top.cshtml" />
     <Content Include="Views\Shared\Special_Area_Sidebar.cshtml" />
     <Content Include="Views\Home\SitesFeed.cshtml" />
+    <Content Include="Views\Shared\Advertisement\banner_top.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

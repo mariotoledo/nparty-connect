@@ -42,7 +42,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
 ▌   ▓█ ║   ▓█        ▌   ▓█    Æ   ▐▓▀▀▀   ╙█▌   ▓▄    ▓██  ]   ▐█▌    µ   █▌   
 ▌   ▓▀ ║   ▓█        ▌   ▓▀   ╔    ▓        ╙▌   ▓▀¼    ▀█▀ ]   ▐█`    µ   ▓▀   
 
-    N-Party - 5.0b
+    N-Party - 6.0b
     Design e desenvolvimento por Mario Toledo (mario.toledo@nparty.com.br)
 
 -->
@@ -111,6 +111,9 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
     <!-- Bootstrap core CSS -->
     <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
     <link href="@Url.Content("~/Content/css/nparty.css")?date=@DateTime.Now.ToString("ddMMyyyyhhmm")" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" media="all" href="@Url.Content("~/Content/css/animate.css")">
+    <link href="@Url.Content("~/Content/css/layerslider.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/responsive.css")" rel="stylesheet">
     <link href="http://nparty.com.br/Content/css/audioplayer.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -118,10 +121,175 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
     <link rel="alternate" type="application/atom+xml" title="N-Party - Atom" href="@feedUrl" />
     <link rel="alternate" type="application/rss+xml" title="N-Party - RSS" href="@feedUrl?alt=rss" />
 
+    <script src='@Url.Content("~/Content/js/jquery.modernizr.js")'></script>
+
     @RenderSection("Head", false)
 </head>
 <body>
-    <nav class="navbar navbar-default" style="@(menuhasBorderBottom ? "border-bottom: 1px solid #CCCCCC;" : "")">
+    <header role="banner" class="header header-main">
+        <div class="h_top_part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="header_top mobile_menu var2">
+                            <nav class="left">
+                                <ul>
+                                    <li><a href="#">O Grupo</a></li>
+                                    <li><a href="#">A Equipe</a></li>
+                                    <li><a href="#">Contato</a></li>
+                                </ul>
+                            </nav>
+                            <nav class="right">
+                                <ul>
+                                    <li class="facebook">
+                                        <a href="#">
+                                            <i class="fa fa-facebook"></i>
+                                        </a>
+                                    </li>
+                                    <li class="twitter">
+                                        <a href="#">
+                                            <i class="fa fa-twitter"></i>
+                                        </a>
+                                    </li>
+                                    <li class="google_plus">
+                                        <a href="#">
+                                            <i class="fa fa-google-plus"></i>
+                                        </a>
+                                    </li>
+                                    <li class="instagram">
+                                        <a href="#">
+                                            <i class="fa fa-instagram"></i>
+                                        </a>
+                                    </li>
+                                    <li class="youtube">
+                                        <a href="#">
+                                            <i class="fa fa-youtube-play"></i>
+                                        </a>
+                                    </li>
+                                    <li class="rss">
+                                        <a href="#">
+                                            <i class="fa fa-rss"></i>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </nav>
+                            @*<div class="login_block">
+        <ul>
+            <!--Login-->
+            <li class="login_button">
+                <a href="#" role="button"><i class="fa fa-user login_icon"></i>Login</a>
+                <div class="popup">
+                    <form>
+                        <ul>
+                            <li>
+                                <label for="username">Username</label><br>
+                                <input type="text" name="" id="username">
+                            </li>
+                            <li>
+                                <label for="password">Password</label><br>
+                                <input type="password" name="" id="password">
+                            </li>
+                            <li>
+                                <input type="checkbox" id="checkbox_10"><label for="checkbox_10">Remember me</label>
+                            </li>
+                            <li>
+                                <a href="#" class="button button_orange">Log In</a>
+                                <div class="t_align_c">
+                                    <a href="#" class="color_dark">Forgot your password?</a><br>
+                                    <a href="#" class="color_dark">Forgot your username?</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            </li>
+            <!--language settings-->
+            <li class="lang_button">
+                <a role="button" href="#"><img src="images/flag_en.jpg" alt=""><span>English</span></a>
+                <ul class="dropdown_list">
+                    <li><a href="#"><img src="images/flag_en.jpg" alt="">English</a></li>
+                    <li><a href="#"><img src="images/flag_g.jpg" alt="">German</a></li>
+                    <li><a href="#"><img src="images/flag_s.jpg" alt="">Spanish</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="h_bot_part">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="clearfix">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <a href="@Url.Content("~/")" class="f_left logo"><img class="img-responsive" src="@Url.Content("~/Content/img/logo.png")" alt="N-Party" title="N-Party"></a>
+                                </div>
+                                <div class="col-md-8" style="min-height: 15px;">
+                                    <div style="overflow-x: hidden;" class="hidden-sm hidden-xs">
+                                        @{Html.RenderPartial("Advertisement/banner_top");}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--main menu container-->
+        <div class="menu_wrap">
+            <div class="menu_border">
+                <div class="container clearfix menu_border_wrap">
+                    <!--button for responsive menu-->
+                    <button id="menu_button">
+                        Menu
+                    </button>
+                    <!--main menu-->
+                    <nav role="navigation" class="main_menu menu_var2">
+                        <ul>
+                            <li class="current">
+                                <a href="#">Home<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
+                            </li>
+                            <li class="menu_1">
+                                <a href="#">Nintendo<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
+                            </li>
+                            <li class="menu_2">
+                                <a href="#">ESports<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
+                            </li>
+                            <li class="menu_3">
+                                <a href="#">Eventos<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
+                            </li>
+                            <li class="menu_4">
+                                <a href="#">Podcast<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
+                            </li>
+                        </ul>
+                    </nav>
+                    <div class="search-holder">
+                        <div class="search_box">
+                            <button class="search_button button button_orange_hover">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                        <!--search form-->
+                        <div class="searchform_wrap var2">
+                            <div class="container vc_child h_inherit relative">
+                                <form role="search">
+                                    <input type="text" name="search" placeholder="Digite o que deseja buscar e aperte enter">
+                                </form>
+                                <button class="close_search_form">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    @*<nav class="navbar navbar-default" style="@(menuhasBorderBottom ? "border-bottom: 1px solid #CCCCCC;" : "")">
         <div class="container">
             <div class="navbar-header" itemscope itemtype="http://schema.org/Organization">
                 <meta itemprop="name" content="N-Party"> 
@@ -158,7 +326,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                                 <li><a href="#">Widgets</a></li>
                             </ul>
                         </div>
-                    </li>*@
+                    </li>
                     <li class="bordered-left bordered-right dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Sobre <span class="caret"></span></a>
                         <div class="dropdown-menu">
@@ -191,10 +359,10 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                 </div>
                 @*<ul class="nav navbar-nav navbar-right">
         <li class="bordered-left bordered-right"><a href="#"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> Login</a></li>
-    </ul>*@
+    </ul>
             </div>
         </div>
-    </nav>
+    </nav>*@
     <div>
         @{
             string flashMessage = (string)TempData["FlashMessage"];
@@ -282,9 +450,30 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
             <div class="pull-right" style="font-size: 12px">Design e desenvolvimento por <b>Mario Toledo</b></div>
         </div>
     </div>
-    <script src='@Url.Content("~/Content/js/jquery-1.11.3.min.js")'></script>
-    <script src='@Url.Content("~/Content/js/bootstrap.min.js")'></script>
-    <script src='@Url.Content("~/Content/js/nparty.js")'></script>
+    <script src='@Url.Content("~/Content/js/jquery-2.1.0.min.js")'></script>
+    <script src='@Url.Content("~/Content/js/jquery-ui.min.js")'></script>
+    <script src='@Url.Content("~/Content/js/jquery.queryloader2.js")'></script>
+    <script src='@Url.Content("~/Content/js/owl.carousel.min.js")'></script>
+    <script src='@Url.Content("~/Content/js/appear.js")'></script>
+    <script src='@Url.Content("~/Content/js/jquery.tweet.min.js")'></script>
+    <script src='@Url.Content("~/Content/js/greenstock.js")'></script>
+    <script src='@Url.Content("~/Content/js/layerslider.kreaturamedia.jquery.js")'></script>
+    <script src='@Url.Content("~/Content/js/layerslider.transitions.js")'></script>
+    <script src='@Url.Content("~/Content/js/plugins.js")'></script>
+    <script src='@Url.Content("~/Content/js/layout.js")'></script>
+
+    <script>
+    $('#layerslider').layerSlider({
+        autoStart: false,
+        responsive: true,
+        skinsPath: '',
+        imgPreload: false,
+        navPrevNext: true,
+        navButtons: false,
+        hoverPrevNext: false,
+        responsiveUnder: 940
+    });
+    </script>
     <script>
         $(document).ready(function () {
             var $hilights = $('#footer-hilights');
