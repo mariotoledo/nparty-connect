@@ -240,6 +240,8 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="Content\css\fonts.css" />
+    <Content Include="Content\css\fonts\icomoon.svg" />
     <Content Include="Content\css\responsive.css" />
     <Content Include="Content\css\animate.css" />
     <Content Include="Content\css\audioplayer.css" />
@@ -1111,6 +1113,9 @@
     <Content Include="Areas\Multi\Views\Web.config" />
     <Content Include="Areas\Multi\Views\Artigos\Ler.cshtml" />
     <Content Include="Areas\ESports\Views\EVO\Index.cshtml" />
+    <Content Include="Content\css\fonts\icomoon.eot" />
+    <Content Include="Content\css\fonts\icomoon.ttf" />
+    <Content Include="Content\css\fonts\icomoon.woff" />
     <None Include="Properties\PublishProfiles\nparty-www.pubxml" />
     <Content Include="Views\Home\UrlInvalida.cshtml" />
     <Content Include="Views\Home\GenerateUrl.cshtml" />

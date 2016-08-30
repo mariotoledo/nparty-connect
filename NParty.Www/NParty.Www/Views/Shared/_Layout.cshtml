@@ -114,6 +114,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
     <link rel="stylesheet" type="text/css" media="all" href="@Url.Content("~/Content/css/animate.css")">
     <link href="@Url.Content("~/Content/css/layerslider.css")" rel="stylesheet">
     <link href="@Url.Content("~/Content/css/responsive.css")" rel="stylesheet">
+    <link href="@Url.Content("~/Content/css/fonts.css")" rel="stylesheet">
     <link href="http://nparty.com.br/Content/css/audioplayer.css" rel="stylesheet" type="text/css" />
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
@@ -142,32 +143,32 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                             <nav class="right">
                                 <ul>
                                     <li class="facebook">
-                                        <a href="#">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook">
                                             <i class="fa fa-facebook"></i>
                                         </a>
                                     </li>
                                     <li class="twitter">
-                                        <a href="#">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter">
                                             <i class="fa fa-twitter"></i>
                                         </a>
                                     </li>
                                     <li class="google_plus">
-                                        <a href="#">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Google Plus">
                                             <i class="fa fa-google-plus"></i>
                                         </a>
                                     </li>
                                     <li class="instagram">
-                                        <a href="#">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram">
                                             <i class="fa fa-instagram"></i>
                                         </a>
                                     </li>
                                     <li class="youtube">
-                                        <a href="#">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="YouTube">
                                             <i class="fa fa-youtube-play"></i>
                                         </a>
                                     </li>
                                     <li class="rss">
-                                        <a href="#">
+                                        <a href="#" data-toggle="tooltip" data-placement="bottom" title="RSS">
                                             <i class="fa fa-rss"></i>
                                         </a>
                                     </li>
@@ -250,11 +251,125 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                     <!--main menu-->
                     <nav role="navigation" class="main_menu menu_var2">
                         <ul>
-                            <li class="current">
-                                <a href="#">Home<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
+                            <li class="">
+                                <a href="#" >Home<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
                             </li>
-                            <li class="menu_1">
-                                <a href="#">Nintendo<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
+                            <li class="menu_nintendo dropdown mega-dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Nintendo<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
+                                <div class="dropdown-menu mega-dropdown-menu">
+                                    <div class="container">
+                                        <div class="row">
+                                            @*<div class="col-sm-3 menu-col">
+                                                <ul>
+                                                    <li class="dropdown-header">Destaques</li>
+                                                    <div id="menCollection" class="carousel slide" data-ride="carousel">
+                                                        <div class="carousel-inner" role="listbox">
+                                                            <div class="item active">
+                                                                <a href="#"><img src="http://placehold.it/254x150/ff3546/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 1"></a>
+                                                                <h4><small>Summer dress floral prints</small></h4>
+                                                            </div><!-- End Item -->
+                                                            <div class="item">
+                                                                <a href="#"><img src="http://placehold.it/254x150/3498db/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 2"></a>
+                                                                <h4><small>Gold sandals with shiny touch</small></h4>
+                                                            </div><!-- End Item -->
+                                                            <div class="item">
+                                                                <a href="#"><img src="http://placehold.it/254x150/2ecc71/f5f5f5/&text=New+Collection" class="img-responsive" alt="product 3"></a>
+                                                                <h4><small>Denin jacket stamped</small></h4>
+                                                            </div><!-- End Item -->
+                                                        </div><!-- End Carousel Inner -->
+                                                        <!-- Controls -->
+                                                        <button class="left carousel-control" href="#menCollection" role="button" data-slide="prev">
+                                                            <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                                            <span class="sr-only">Previous</span>
+                                                        </button>
+                                                        <button class="right carousel-control" href="#menCollection" role="button" data-slide="next">
+                                                            <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                                            <span class="sr-only">Next</span>
+                                                        </button>
+                                                    </div><!-- /.carousel -->
+                                                </ul>
+                                            </div>*@
+                                            <div class="col-sm-2 menu-col col-bordered-right" id="mega-menu-nintendo">
+                                                <ul class="panel" role="tablist" aria-multiselectable="true">
+                                                    <li>
+                                                        <div class="list-group list-group-transparent" style="margin-bottom: 0px;">
+                                                            <a href="#" class="list-group-item">Mais recentes <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="divider"></li>
+                                                    <li><a role="button" data-parent="#mega-menu-nintendo" class="dropdown-header collapsed" data-toggle="collapse" href="#menu-plataformas-nintendo" aria-expanded="false" aria-controls="menu-plataformas-nintendo">Plataformas</a></li>
+                                                    <li class="collapse in collapsable-body" id="menu-plataformas-nintendo">
+                                                        <div class="list-group list-group-transparent">
+                                                            <a href="#" class="list-group-item">3DS <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                            <a href="#" class="list-group-item">Wii U <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                            <a href="#" class="list-group-item">Mobile <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                        </div>
+                                                    </li>
+                                                    <li><a role="button" data-parent="#mega-menu-nintendo" class="dropdown-header collapsed" data-toggle="collapse" href="#menu-franquias-nintendo" aria-expanded="false" aria-controls="menu-franquias-nintendo">Franquias</a></li>
+                                                    <li class="collapse collapsable-body" id="menu-franquias-nintendo">
+                                                        <div class="list-group list-group-transparent">
+                                                            <a href="#" class="list-group-item">Pokémon <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                            <a href="#" class="list-group-item">The Legend of Zelda<span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                            <a href="#" class="list-group-item">Mario <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                        </div>
+                                                    </li>
+                                                    <li class="dropdown-header"><a data-parent="#mega-menu-nintendo" role="button" class="dropdown-header" data-toggle="collapse" href="#menu-colunas-nintendo" aria-expanded="false" aria-controls="menu-colunas-nintendo">Colunas</a></li>
+                                                    <li class="collapse collapsable-body" id="menu-colunas-nintendo">
+                                                        <div class="list-group list-group-transparent">
+                                                            <a href="#" class="list-group-item">Review <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                            <a href="#" class="list-group-item">Retrô <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                            <a href="#" class="list-group-item">Top 10 <span class="glyphicon glyphicon-chevron-right pull-right"></span></a>
+                                                        </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="col-sm-10 menu-col">
+                                                <div class="row">
+                                                    <div class="col-md-3">
+                                                        <a href="#" class="menu-article">
+                                                            <div class="menu-article-item">
+
+                                                            </div>
+                                                            <div class="menu-article-title">
+                                                                Teste teste teste teste teste teste
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <a href="#" class="menu-article">
+                                                            <div class="menu-article-item">
+
+                                                            </div>
+                                                            <div class="menu-article-title">
+                                                                Teste teste teste teste teste teste
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <a href="#" class="menu-article" >
+                                                            <div class="menu-article-item">
+
+                                                            </div>
+                                                            <div class="menu-article-title">
+                                                                Teste teste teste teste teste teste
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                    <div class="col-md-3">
+                                                        <a href="#" class="menu-article">
+                                                            <div class="menu-article-item">
+
+                                                            </div>
+                                                            <div class="menu-article-title">
+                                                                Teste teste teste teste teste teste
+                                                            </div>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </li>
                             <li class="menu_2">
                                 <a href="#">ESports<span class="plus"><i class="fa fa-plus-square-o"></i><i class="fa fa-minus-square-o"></i></span></a>
@@ -288,6 +403,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                 </div>
             </div>
         </div>
+        
     </header>
     @*<nav class="navbar navbar-default" style="@(menuhasBorderBottom ? "border-bottom: 1px solid #CCCCCC;" : "")">
         <div class="container">
@@ -451,16 +567,21 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
         </div>
     </div>
     <script src='@Url.Content("~/Content/js/jquery-2.1.0.min.js")'></script>
+    <script src='@Url.Content("~/Content/js/bootstrap.min.js")'></script>
     <script src='@Url.Content("~/Content/js/jquery-ui.min.js")'></script>
     <script src='@Url.Content("~/Content/js/jquery.queryloader2.js")'></script>
     <script src='@Url.Content("~/Content/js/owl.carousel.min.js")'></script>
     <script src='@Url.Content("~/Content/js/appear.js")'></script>
     <script src='@Url.Content("~/Content/js/jquery.tweet.min.js")'></script>
-    <script src='@Url.Content("~/Content/js/greenstock.js")'></script>
     <script src='@Url.Content("~/Content/js/layerslider.kreaturamedia.jquery.js")'></script>
     <script src='@Url.Content("~/Content/js/layerslider.transitions.js")'></script>
     <script src='@Url.Content("~/Content/js/plugins.js")'></script>
     <script src='@Url.Content("~/Content/js/layout.js")'></script>
+    <script>
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    })
+    </script>
 
     <script>
     $('#layerslider').layerSlider({
@@ -559,5 +680,19 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
 
     </script>
     <!-- FIM ANALYTICS -->
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".dropdown").hover(
+                function () {
+                    $('.mega-dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideDown("400");
+                    $(this).toggleClass('open');
+                },
+                function () {
+                    $('.mega-dropdown-menu', this).not('.in .dropdown-menu').stop(true, true).slideUp("400");
+                    $(this).toggleClass('open');
+                }
+            );
+        });
+    </script>
 </body>
 </html>
