@@ -20,6 +20,24 @@ namespace NParty.Www.Controllers
         //
         // GET: /Home/
 
+        public JsonResult MenuJson()
+        {
+            Dictionary<string, List<Article>> feedItems = new Dictionary<string, List<Article>>();
+            ArticlesHelper helper = new ArticlesHelper();
+
+            feedItems.Add("nintendo", helper.GetArticlesFromJson(NintendoBlogId, "", 3));
+            feedItems.Add("pokemon", helper.GetArticlesFromJson(NintendoBlogId, "Pokémon", 3));
+            feedItems.Add("mario", helper.GetArticlesFromJson(NintendoBlogId, "Mario", 3));
+            feedItems.Add("zelda", helper.GetArticlesFromJson(NintendoBlogId, "The Legend of Zelda", 3));
+            feedItems.Add("3ds", helper.GetArticlesFromJson(NintendoBlogId, "Nintendo 3DS", 3));
+            feedItems.Add("wiiu", helper.GetArticlesFromJson(NintendoBlogId, "Nintendo Wii U", 3));
+            feedItems.Add("mobile", helper.GetArticlesFromJson(NintendoBlogId, "Mobile", 3));
+            feedItems.Add("review", helper.GetArticlesFromJson(NintendoBlogId, "Review", 3));
+            feedItems.Add("preview", helper.GetArticlesFromJson(NintendoBlogId, "Preview", 3));
+            feedItems.Add("top10", helper.GetArticlesFromJson(NintendoBlogId, "Top 10", 3));
+            return Json(feedItems, JsonRequestBehavior.AllowGet);
+        }
+
         public ActionResult Index()
         {
             NPartyArticlesHelper helper = new NPartyArticlesHelper();
@@ -159,32 +177,6 @@ namespace NParty.Www.Controllers
             blogDomains.Add(EventosBlogId, "Eventos");
 
             return Json(helper.GetGeneralHilights(blogDomains, 3), JsonRequestBehavior.AllowGet);
-        }
-
-        public ActionResult SitesFeed()
-        {
-            string url = "http://nintendoeverything.com/feed/";
-            XmlReader reader = XmlReader.Create(url);
-            SyndicationFeed feed = SyndicationFeed.Load(reader);
-            reader.Close();
-
-            ViewData["everything"] = feed.Items;
-
-            string url2 = "http://feedpress.me/gonintendo";
-            XmlReader reader2 = XmlReader.Create(url2);
-            SyndicationFeed feed2 = SyndicationFeed.Load(reader2);
-            reader2.Close();
-
-            ViewData["go"] = feed2.Items;
-
-            string url3 = "https://mynintendonews.com/feed/";
-            XmlReader reader3 = XmlReader.Create(url3);
-            SyndicationFeed feed3 = SyndicationFeed.Load(reader3);
-            reader2.Close();
-
-            ViewData["my"] = feed3.Items;
-
-            return View();
         }
 
         [HttpPost]

@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 using Google.Apis.Blogger.v3.Data;
 using Newtonsoft.Json;
 using System.Web;
+using System.ServiceModel.Syndication;
+using System.Collections.ObjectModel;
 
 namespace NParty.Www.Helpers
 {
@@ -193,6 +195,29 @@ namespace NParty.Www.Helpers
             return null;
         }
 
+        public List<Article> GetArticlesFromJson(string blogId, string label, int maxResults)
+        {
+            List<Article> articles = new List<Article>();
+
+            string labelAppend = string.IsNullOrEmpty(label) ? "" : "/-/" + label;
+            string url = "http://www.blogger.com/feeds/" + blogId + "/posts/default" + labelAppend + "?max-results=" + maxResults;
+            XmlReader reader = XmlReader.Create(url);
+            SyndicationFeed feed = SyndicationFeed.Load(reader);
+            reader.Close();
+
+            foreach (SyndicationItem item in feed.Items)
+            {
+                Article article = new Article();
+                article.Title = item.Title.Text;
+                article.CoverImage = GetPostImageManually(((TextSyndicationContent)item.Content).Text);
+                article.Id = GetPostIdManually(item.Id);
+
+                articles.Add(article);
+            }
+
+            return articles;
+        }
+
         public List<Article> GetArticlesFromBlog(string blogId, string blogDomain, int maxResults, int startIndex, string postsLabel, string readActionUrl)
         {
             List<Article> articles = new List<Article>();
@@ -279,6 +304,17 @@ namespace NParty.Www.Helpers
             return "";
         }
 
+        private string GetPostImageManually(string html)
+        {
+            string pattern = "<img.+?src=[\"'](.+?)[\"'].*?>";
+            MatchCollection matches = Regex.Matches(html, pattern, RegexOptions.IgnoreCase);
+
+            if (matches != null && matches.Count > 0)
+                return matches[0].Groups[1].ToString();
+
+            return "";
+        }
+
         private string GetPostIdManually(string originalId)
         {
             string[] splitedId = originalId.Split('-');
@@ -295,6 +331,17 @@ namespace NParty.Www.Helpers
             {
                 if (link.Rel.CompareTo("alternate") == 0)
                     return link.HRef.Content;
+            }
+
+            return "";
+        }
+
+        private string GetPostLinkManually(Collection<SyndicationLink> links)
+        {
+            foreach (SyndicationLink link in links)
+            {
+                if (link.RelationshipType.CompareTo("alternate") == 0)
+                    return link.Uri.AbsoluteUri;
             }
 
             return "";
