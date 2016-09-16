@@ -324,7 +324,7 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                                                 </ul>
                                             </div>
                                             <div class="col-sm-10 menu-col">
-                                                <div class="row">
+                                                <div class="row" id="nintendo-menu">
                                                     <div class="col-md-3">
                                                         <a href="#" class="menu-article">
                                                             <div class="menu-article-item">
@@ -692,7 +692,24 @@ System.Configuration.ConfigurationManager.AppSettings["SiteUrl"] + Url.Content("
                     $(this).toggleClass('open');
                 }
             );
+
+            loadMenuItems('nintendo', '7461451582720103906')
         });
+
+        function loadMenuItems(menuId, blogId) {
+            $.ajax({
+                url: '@Url.Content("~/Home/MenuJson")?menuId=' + menuId + '&blogId=' + blogId,
+                success: function (data) {
+                    var html = '';
+                    $.each(data, function (index, value) {
+                        html += '<div class="col-md-3"><a href="#" class="menu-article"><div class="menu-article-item" style="background-image: url(\'' + value.CoverImage + '\');"></div><div class="menu-article-title">Teste teste teste teste teste teste</div></a></div>';
+                        console.log(value);
+                    });
+
+                    $('#' + menuId + '-menu').html(html);
+                }
+            });
+        }
     </script>
 </body>
 </html>

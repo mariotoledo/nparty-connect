@@ -20,22 +20,10 @@ namespace NParty.Www.Controllers
         //
         // GET: /Home/
 
-        public JsonResult MenuJson()
+        public JsonResult MenuJson(string menuId, string blogId)
         {
-            Dictionary<string, List<Article>> feedItems = new Dictionary<string, List<Article>>();
             ArticlesHelper helper = new ArticlesHelper();
-
-            feedItems.Add("nintendo", helper.GetArticlesFromJson(NintendoBlogId, "", 3));
-            feedItems.Add("pokemon", helper.GetArticlesFromJson(NintendoBlogId, "Pokémon", 3));
-            feedItems.Add("mario", helper.GetArticlesFromJson(NintendoBlogId, "Mario", 3));
-            feedItems.Add("zelda", helper.GetArticlesFromJson(NintendoBlogId, "The Legend of Zelda", 3));
-            feedItems.Add("3ds", helper.GetArticlesFromJson(NintendoBlogId, "Nintendo 3DS", 3));
-            feedItems.Add("wiiu", helper.GetArticlesFromJson(NintendoBlogId, "Nintendo Wii U", 3));
-            feedItems.Add("mobile", helper.GetArticlesFromJson(NintendoBlogId, "Mobile", 3));
-            feedItems.Add("review", helper.GetArticlesFromJson(NintendoBlogId, "Review", 3));
-            feedItems.Add("preview", helper.GetArticlesFromJson(NintendoBlogId, "Preview", 3));
-            feedItems.Add("top10", helper.GetArticlesFromJson(NintendoBlogId, "Top 10", 3));
-            return Json(feedItems, JsonRequestBehavior.AllowGet);
+            return Json(helper.GetArticlesFromJson(blogId, "", 4), JsonRequestBehavior.AllowGet);
         }
 
         public ActionResult Index()
