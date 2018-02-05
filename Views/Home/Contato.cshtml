@@ -1,0 +1,68 @@
+﻿@model CampeonatosNParty.Models.StructModel.Contato
+@{
+    ViewBag.Title = "Contato";
+    string enviadoString = Model.Enviado ? "True" : "False";
+}
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+}
+
+<h2>Contato</h2>
+<div class="row">
+    <div class="span12">
+        @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["Error"]))
+        {
+        <div class="row">
+            <div class="span12">
+                <div class="alert alert-error">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["Error"]
+                </div>
+            </div>
+        </div>
+        }
+        @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["Success"]))
+        {
+        <div class="row">
+            <div class="span12">
+                <div class="alert alert-success">
+                    <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["Success"]
+                </div>
+            </div>
+        </div>
+        }
+        <h4>Complete os campos antes de enviar a mensagem</h4>
+        <form method="post" class="form-horizontal">
+            <input type="hidden" name="Enviado" id="Enviado" value="@enviadoString"/>
+            <div class="control-group">
+                <label for="Nome" class="control-label">Nome*</label>
+                <div class="controls">
+                    <input type="text" name="Nome" id="Nome" value="@Model.Nome" placeholder="">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="Email" class="control-label">Email*</label>
+                <div class="controls">
+                    <input type="text" name="Email" id="Email" value="@Model.Email" placeholder="">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="Email" class="control-label">Mensagem*</label>
+                <div class="controls">
+                    <textarea name="Mensagem" id="Mensagem" placeholder=""  style="width: 98%; max-width: 98%; height: 200px;"></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn">Enviar</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

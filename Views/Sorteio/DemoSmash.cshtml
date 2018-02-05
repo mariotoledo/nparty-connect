@@ -1,0 +1,227 @@
+﻿@model CampeonatosNParty.Models.Database.SorteioUsuario
+@{
+    ViewBag.Title = "DemoSmash";
+    Layout = null;
+
+    string erro = (string)ViewData["Error"];
+    string sucesso = (string)ViewData["Sucesso"];
+    string info = (string)ViewData["Info"];
+    DateTime dataSorteio = (DateTime)ViewData["DataSorteio"];
+    CampeonatosNParty.Models.Database.SorteioUsuario ganhador = (CampeonatosNParty.Models.Database.SorteioUsuario)ViewData["Ganhador"];
+}
+
+<!-- Criado (e quase que totalmente testado) por Mario Toledo -->
+
+<html lang="pt-br" dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr' xmlns:fb='http://ogp.me/ns/fb#'>
+    <head>
+        <title>Que tal ganhar uma chave para a demo de Super Smash Bros. do 3DS?</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta content='Participe do sorteio e concorra a uma chave da demo de Super Smash Bros. para o 3DS' />
+        <meta content='3DS, Super Smash Bros, Nintendo, demo' name='keywords' />
+        <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+        <meta content='Mario Toledo' name='author' />
+
+        <link href='http://www.nintendoparty.com.br/favicon.png' rel='icon' type='image/x-icon' />
+
+        <meta property="og:image" content="http://connect.nparty.com.br/Static/img/bgSmash.png" />
+
+        <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap.min.css")" />
+        <link rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap-responsive.min.css")" />
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <style type="text/css">
+            body {
+                color: #FFF;
+                background-color: #75010C;
+                background-image: url('/Static/img/bgSmash.png');
+                background-size: 100% auto;
+                background-position: top;
+                background-repeat: no-repeat;
+            }
+
+            a{
+                color: #FFF;
+            }
+        </style>
+    </head>
+    <body>
+        <div style="padding-top: 200px; margin: 0;">
+            <div class="container">
+                <div class="jumbotron">
+                    <h1 style="text-shadow: 4px 4px 0px rgba(0,0,0,0.5);">Que tal ganhar uma chave para a demo de Super Smash Bros. do 3DS?</h1>
+                    <p class="lead"><i>A N-Party sorteará uma chave para a demo de Super Smash Bros. para o 3DS! Para participar, basta preencher corretamente as informações abaixo, clicar em "Enviar" e confirmar o email recebido.</i></p><br />
+                    <center><p>O sorteio será realizado as 23:59 do dia 14 de setembro.</p></center>
+                </div>
+                @{
+                    
+                    if (DateTime.Now.CompareTo(dataSorteio) >= 0)
+                    {
+                        <div class="row">
+                            <div class="span3"></div>
+                            <div class="span6">
+                                @if (ganhador != null)
+                                {
+                                    <center>
+                                        <span>E o grande vencedor foi...</span><br /><br />
+                                        <div style="font-size: 80px;">@ganhador.Nome @ganhador.Sobrenome</div><br /><br />
+                                        <span>Obrigado a todos que participaram!</span>
+                                    </center>
+                                }
+                                else
+                                {
+                                    <div class="alert alert-info">
+                                        O prazo para cadastro encerrou. Em breve divulgaremos o vencedor!
+                                    </div>  
+                                }
+                            </div>
+                            <div class="span3"></div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="span3"></div>
+                            <div class="span6">
+                                @if (!String.IsNullOrEmpty(sucesso))
+                                {
+                                    <div class="alert alert-success">
+                                        @sucesso
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(erro))
+                                {
+                                    <div class="alert alert-error">
+                                        @erro
+                                    </div>
+                                }
+                                @if (!String.IsNullOrEmpty(info))
+                                {
+                                    <div class="alert alert-info">
+                                        @info
+                                    </div>
+                                }
+                                <form class="form-horizontal" method="post">
+                                    <div class="control-group">
+                                        <label class="control-label" for="Nome">Nome</label>
+                                        <div class="controls">
+                                            <input type="text" id="Nome" placeholder="Insira seu primeiro nome" name="Nome" value="@Model.Nome" style="height: 30px;">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="Sobrenome">Sobrenome</label>
+                                        <div class="controls">
+                                            <input type="text" id="Email" placeholder="Insira seu sobrenome" name="Sobrenome" value="@Model.Sobrenome" style="height: 30px;">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="inputPassword">Email</label>
+                                        <div class="controls">
+                                            <input type="text" id="Email" name="Email" placeholder="Insira seu email" value="@Model.Email" style="height: 30px;">
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="IdEstado">Estado</label>
+                                        <div class="controls">
+                                            <select name="IdEstado" id="IdEstado" onchange="loadCities(this.value)">
+                                                <option value="0">Selecione</option>
+                                                @foreach (CampeonatosNParty.Models.Database.Estado item in CampeonatosNParty.Models.Database.Estado.Select().OrderBy("Sigla"))
+                                                {
+                                                    string selected = item.EstadoId == Model.IdEstado ? "selected" : "";
+                                                    <option @selected value="@item.EstadoId">@item.Sigla</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label class="control-label" for="IdCidade">Cidade</label>
+                                        <div class="controls">
+                                            <select name="IdCidade" id="IdCidade">
+                                                <option value="">Selecione</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <center><button type="submit" class="btn btn-large btn-primary" href="#" style="margin: auto;">Enviar</button></center>
+                                </form>
+                            </div>
+                            <div class="span3"></div>
+                        </div>
+                    }
+                }
+                <div class="row">
+                    <div class="span6">
+                        <h4 style="text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">Acompanhe as notícias de Super Smash Bros. pela N-Party</h4>
+                        <ul class="thumbnails" id="Noticias">
+                            <li>
+                                Carregando...
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="span6" style="overflow: hidden;">
+                        <h4 style="text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">Curta nossa página no Facebook!</h4>
+                        <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FNParty&amp;width=570&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=141992936007985" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:570px; height:258px;" allowtransparency="true"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
+<script type="text/javascript">    
+    $(document).ready(function () {
+        $('#IdCidade').prop('disabled', true);
+        var val = $('#IdEstado').val();
+        if (val) {
+            loadCities(val);
+        }
+    });
+    function loadCities(selectedCode) {
+        if (selectedCode == 0) {
+            $('#IdCidade').prop('disabled', true);
+        } else {
+            $('#IdCidade').html('<option>Carregando...</option>');
+            $.ajax({
+                url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
+                success: function (json) {
+                    $('#IdCidade').prop('disabled', false);
+                    var optionArray = [];
+                    optionArray.push('<option value="">Selecione</option>');
+
+                    $.each(json, function (i, item) {
+                        if (selectedCode == item.CidadeId) {
+                            optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
+                        }
+                        else {
+                            optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
+                        }
+                    });
+
+
+                    $('#IdCidade').html(optionArray.join(''));
+                }
+            });
+        }
+    }
+</script>
+<script>
+    function smashcall(json) { //get categories of blog & sort them
+        console.log(json);
+        var relatedTitles = new Array();
+        var relatedTitlesNum = 0;
+        var relatedUrls = new Array();
+        $('#Noticias').html('');
+        for (var i = 0; i < json.feed.entry.length; i++) {
+            var entry = json.feed.entry[i];
+            for (var k = 0; k < entry.link.length; k++) {
+                if (entry.link[k].rel == 'alternate') {
+                    relatedUrls[relatedTitlesNum] = entry.link[k].href;
+                    relatedTitles[relatedTitlesNum] = entry.link[k].title;
+                    relatedTitlesNum++
+                }
+            }
+        }
+        for (var i = 0; i < relatedTitlesNum; i++) {
+            $('#Noticias').append('<li style="margin-bottom:0px;" class="span6"><a href="' + relatedUrls[i] + '" class="thumbnail">' + relatedTitles[i] + '</a></li>');
+        }
+    }
+</script>
+<script src='http://nparty.com.br/feeds/posts/default/-/Super Smash Bros.?alt=json-in-script&callback=smashcall&max-results=5' type='text/javascript' ></script>
+

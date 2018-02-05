@@ -1,0 +1,51 @@
+﻿@model CampeonatosNParty.Models.StructModel.Login
+@{
+    ViewBag.Title = "Login";
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.Login> presenter =
+        EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.Login>.GetInstance(1046);
+}
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+}
+
+<h2>Faça o login com sua conta da N-Party</h2>
+@if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["LoginError"]))
+{
+    <div class="row">
+        <div class="span12">
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["LoginError"]
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="span6">
+        <h4>Já possui uma conta?</h4>
+        <form method="post" class="form-horizontal">
+            @{
+                presenter.Render(this.Output, Model, "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase));
+            }
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-large">Login</button>
+                    <a href="~/Jogadores/EsqueciMinhaSenha">Esqueci minha senha</a>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+    <div class="span6">
+        <h4>Você ainda não possui uma conta?</h4>
+        <p>Com uma conta registrada da N-Party, você pode registrar sua participação nos campeonatos realizados, acumulando pontos em nosso ranking oficial. Além disto, você pode receber em primeira mão as novidades de nossas atividades, além de poder registrar outros jogadores em comunidades virtuais de games.</p>
+        <p>O que você está esperando? Crie agora uma conta, e passe a participar desta comunidade gamer.</p>
+        <a class="btn btn-primary btn-large" href="@Url.Content("~/Jogadores/Registrar")">Criar conta</a>
+    </div>
+</div>

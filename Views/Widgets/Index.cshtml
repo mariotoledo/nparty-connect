@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+}
+
+
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li class="active">Widgets</li>
+</ul>
+
+<h1>Widgets <small>Confira abaixo uma lista de widgets feitos para você conectar-se com outros jogadores.</small></h1>
+
+<div class="row">
+    <div class="span12">
+        <div id="mainSlider" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/Static/img/widgets/heroSuperSmashBros.png" alt="SuperSmashBrosChallenger">
+                    <div class="container">
+                        <div class="carousel-caption" style="bottom: 20px;">
+                            <h1>Super Smash Bros. Challengers</h1>
+                            <p class="lead">Defina os principais personagens que você usa no Super Smash Bros., e desafie outros jogadores</p><br />
+                            <a class="btn btn-large btn-primary" href="~/Widgets/SuperSmashBrosChallenger">Desafiar outros jogadores</a>
+                        </div>
+                    </div>
+                </div><br />
+                <br />
+                <br />
+                <div class="item active">
+                    <img src="/Static/img/widgets/heroPokemonFriendSafariFinder.png" alt="Pokémon Friend Safari Finder">
+                    <div class="container">
+                        <div class="carousel-caption" style="bottom: 20px;">
+                            <h1>Pokémon Friend Safari Finder</h1>
+                            <p class="lead">Encontre os mais diversos Friend Safaris dos usuários cadastrados na N-Party Connect!</p><br />
+                            <a class="btn btn-large btn-primary" href="~/Widgets/PokemonFriendSafariFinder">Procurar por Friend Safaris</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

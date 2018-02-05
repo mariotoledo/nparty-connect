@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" standalone="yes"?>
+<EmailTemplate>
+  <Smtp host="smtp.sendgrid.com" port="587" enableSSL="False" deliveryMethod="Network" username="mtoledo" password="lalala12" />
+  <Subject><![CDATA[Bem vindo ao N-Party Connect]]></Subject>
+  <Sender address="contato@nparty.com.br" displayName="" />
+  <From address="contato@nparty.com.br" displayName="" />
+  <Body isHtml="True">
+    <![CDATA[<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <title></title>
+    <style type="text/css">
+        body
+        {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <p>Olá, [=PersonName]</p>
+    <p>Você se lembra de ter participado de algum campeonato da N-Party? Pois nós guardamos seu registro para este momento!</p>
+    <p>Finalmente lançamos nosso sistema online, onde você poderá conferir sua pontuação, classificação nos campeonatos, e muitas outras coisas.</p>
+    <p>Seu login será o seu email. Anote aí sua senma provisória:</p>
+    <span style="font-size: 30px; font-color: #ff0000;">[=PersonPassword]</span><br/><br/>
+    <p>Você pode alterar esta senha dentro do sistema depois de logar.<br/>O que esta esperando? Acesse agora mesmo <a href="http://connect.nparty.com.br">clicando aqui</a><p>
+</body>
+</html>
+]]>
+  </Body>
+</EmailTemplate>

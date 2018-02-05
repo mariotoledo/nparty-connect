@@ -1,0 +1,631 @@
+﻿@using CampeonatosNParty.Models.Database
+@model CampeonatosNParty.Models.ViewModel.SmashBrosChallengerView
+@{
+    ViewBag.Title = "Pokémon Friend Safari Finder - N-Party Connect";
+
+    List<SuperSmashBrosChallengerItem> challengers;
+    if (Model.result == null)
+    {
+        challengers = NPartyDb<SuperSmashBrosChallengerItem>.Instance.Select().ToList();
+    }
+    else
+    {
+        challengers = Model.result.ToList();
+    }
+
+    List<SuperSmashBrosPersonagem> characters = SuperSmashBrosPersonagem.Select().OrderBy("Nome", EixoX.Data.SortDirection.Ascending).ToList();
+
+    int characterFilter = Request.QueryString["cId"] == null ? 0 : Int32.Parse(Request.QueryString["cId"]);
+
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+    string isFilteredCharacter = Request.QueryString["cId"] != null ? "cId=" + Request.QueryString["cId"] : "";
+
+    isFilteredCharacter = string.IsNullOrEmpty(isFilteredCharacter) ? isFilteredCharacter : "&" + isFilteredCharacter;
+}
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.connect.nparty.com.br/Static/img/widgets/heroSuperSmashBros.png" />
+    <meta property="og:title" content="Super Smash Bros. Challenger" />
+    <meta property="og:type" content="website" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="Super Smash Bros. Challenger" />
+    <meta property="og:description" content="Mostre os seus personagens principais do Super Smash Bros. para 3DS e adicione novos jogadores para batalhar!" />
+}
+
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li><a href="@Url.Content("/Widgets")">Widgets</a> <span class="divider">/</span></li>
+    <li class="active">Super Smash Bros. Challenger</li>
+</ul>
+
+<div class="row">
+    <div class="span12">
+        <div id="mainSlider" class="carousel slide" style="margin-left: -10px; margin-right: -10px;">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/Static/img/widgets/heroSuperSmashBros.png" alt="Bem vindo ao N-Party Connect">
+                    <div class="container">
+                        <div class="carousel-caption" style="bottom: 20px;">
+                            <h1>Super Smash Bros. Challenger</h1>
+                            <p class="lead">
+                                Mostre os seus personagens principais do Super Smash Bros. para 3DS e adicione novos jogadores para batalhar!
+                            </p>
+                            @{
+                                if (Model.usuario == null)
+                                {
+                                    <br />
+                                    <a href="#notLogged" role="button" data-toggle="modal" class="btn btn-large btn-primary">Registrar meus personagens</a>
+                                }
+                                if (Model.usuario != null && Model.myChallengerItem == null)
+                                {
+                                    <br />
+                                    <a href="#addCharacters" role="button" data-toggle="modal" class="btn btn-large btn-primary">Registrar meus personagens</a>
+                                }
+                                else if (Model.usuario != null && Model.myChallengerItem != null)
+                                {
+                                    <br />
+                                    <a href="#myFriendSafari" role="button" data-toggle="modal" class="btn btn-large btn-primary">Meus personagens</a>
+                                }
+                                else
+                                {
+                                    <p style="margin-top: 10px; font-size: 12px;"><i>Para registrar seus personagens, é necessário que você esteja logado no N-Party Connect, e tenha registrado o Friend Code de seu 3DS nas configurações.</i></p>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="controls controls-row">
+    @{
+        if (Model.myChallengerItem != null)
+        {
+            <div class="span6" style="margin-left: 0px;">
+                <button class="btn btn-primary btn-block" id="ShareOnFacebook" style="height: 40px; font-size: 20px;" onclick="shareCharacter()">Compartilhar meus personagens no Facebook</button>
+            </div>
+        }
+    }
+    <form class="form-inline pull-right">
+        <select name="cId" class="span3" onchange="loadPokemonFromType(this.value)">
+            <option value="0">Qualquer personagem</option>
+            @foreach (SuperSmashBrosPersonagem c in characters)
+                {
+                    string selected = characterFilter == c.Id ? "selected" : "";
+                <option @selected value="@c.Id">@c.Nome</option>
+                }
+        </select>
+        <button class="btn btn-primary span2">
+            Filtrar
+        </button>
+    </form>
+</div>
+@if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterError"]))
+{
+    <div class="row">
+        <div class="span12">
+            <div class="alert alert-error">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterError"]
+            </div>
+        </div>
+    </div>
+}
+@if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterSuccess"]))
+{
+    <div class="row">
+        <div class="span12">
+            <div class="alert alert-success">
+                <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterSuccess"]
+            </div>
+        </div>
+    </div>
+}
+<div class="row">
+    <div class="span12">
+        <div class="alert alert-info">
+            <strong>Atenção: </strong>para que a outra pessoa também te adicione no 3DS, não deixe de colocar seu Friend Code em seu perfil, acessar o perfil da pessoa desejada e solicitar uma conexão clicando no botão '+'.
+        </div>
+    </div>
+</div>
+
+@{
+    if (challengers.Count > 0)
+    {
+        foreach (SuperSmashBrosChallengerItem[] challengerArray in challengers.Segment(3))
+        {
+            <div class="row">
+                @foreach (SuperSmashBrosChallengerItem challenger in challengerArray)
+            {
+                if (challenger != null)
+                {
+                    <div class="span4">
+                        <table class="table table-hover table-striped table-condensed table-bordered pokemonSafariItem">
+                            <tr>
+                                <th colspan="3"> <a href="@Url.Content("~/Jogadores/Detalhes/" + challenger.IdUsuario)"><h4>@challenger.NomeUsuario</h4></a></th>
+                            </tr>
+                            @{
+                                if (Model.usuario != null && !string.IsNullOrEmpty(Model.usuario.FriendCode))
+                                {
+                                    <tr>
+                                        <td colspan="3"><b>Friend Code</b>: @challenger.FriendCode
+                                        @{
+                                            if (!Model.isLoggedIn)
+                                            {
+                                                <a style="margin-left: 10px; height: 18px;"  href="#notLogged" role="button" class="btn btn-primary btn-mini" data-toggle="modal">+</a>
+                                            }
+                                            else
+                                            {
+                                                if (Model.isButtonActive.ContainsKey((int)challenger.IdUsuario) && Model.isButtonActive[(int)challenger.IdUsuario])
+                                                {
+                                                    <a style="margin-left: 10px; height: 18px;" href="#addPerson" onclick="showAddModal('@challenger.NomeUsuario', '@challenger.IdUsuario');" role="button" class="btn btn-mini btn-primary" data-toggle="modal">+</a>
+                                                }
+                                                else
+                                                {
+                                                    <a style="margin-left: 10px; height: 18px;" role="button" class="btn btn-mini disabled" data-toggle="modal">+</a>
+                                                }
+                                            }
+                                        }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                            
+                            <tr>
+                                <td class="pokemon">
+                                    <img width="100" alt="@challenger.NomePersonagem1" src="@Url.Content(challenger.ImagemPersonagem1)" /><br />
+                                    <div>@challenger.NomePersonagem1</div>
+                                </td>
+                                <td class="pokemon">
+                                    <img width="100" alt="@challenger.NomePersonagem2" src="@Url.Content(challenger.ImagemPersonagem2)" /><br />
+                                    <div>@challenger.NomePersonagem2</div>
+                                </td>
+                                <td class="pokemon">
+                                    <img width="100" alt="@challenger.NomePersonagem3" src="@Url.Content(challenger.ImagemPersonagem3)" /><br />
+                                    <div>@challenger.NomePersonagem3</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                }
+            }
+            </div>
+        }
+    } else
+    {
+        <div class="row">
+            <div class="span12">
+                <p>Nenhum desafiante foi encontrado.</p>
+            </div>
+        </div>
+    }
+    if (Model.result.HasPreviousPages || Model.result.HasMorePages)
+    {
+        @Html.Raw("<div class=\"paginationButton\">");
+        if (Model.result.HasPreviousPages)
+        {
+            <a class="pull-left btn btn-primary" href="/Widgets/SuperSmashBrosChallenger/?page=@(currentPage - 1)@isFilteredCharacter"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+        }
+        if (Model.result.HasMorePages)
+        {
+            <a class="pull-right btn btn-primary" href="/Widgets/SuperSmashBrosChallenger/?page=@(currentPage + 1)@isFilteredCharacter">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+        }
+        @Html.Raw("</div>");
+    }
+    if (!Model.isLoggedIn)
+    {
+        <div id="notLogged" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="miiverseLabel">Atenção: Você não esta logado</h3>
+            </div>
+            <div class="modal-body">
+                <p>Para desafiar o jogador, você precisa estar logado no sistema para realizar esta ação.</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <a href="@Url.Content("~/Home/Login")" class="btn btn-primary">Login ou Registrar</a>
+            </div>
+        </div>
+    }
+        else
+        {
+        if (!string.IsNullOrEmpty(Model.usuario.FriendCode))
+        {
+        <div id="addPerson" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="miiverseLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3 id="notificationModalLabel">Desafiar outro jogador</h3>
+            </div>
+            <div class="modal-body">
+                <p>Deseja desafiar uma solicitação de desafio para o jogador <span id="userName"></span>?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                @{
+                        string concat = "?page=" + currentPage.ToString() + isFilteredCharacter;
+                        <a id="userAddLink" href="@Url.Content("~/Widgets/AdicionarFriendCodeDoSafari/" + concat)" class="btn btn-primary">Sim, solicitar!</a>
+                }
+
+            </div>
+        </div>
+        }
+            if (Model.usuario != null && Model.myChallengerItem == null)
+           {
+                <div id="addCharacters" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="addFriendSafariLabel" aria-hidden="true">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="addFriendSafariLabel">Adicionar meus personagens</h3>
+                    </div>
+                    <form class="form" method="post">
+                        <div class="modal-body">
+                            <div id="step1">
+                                <p>Selecione o personagem com quem você mais joga</p>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td width="100">
+                                            <img id="ImagemPersonagem1" src="@Url.Content("~/Static/img/smashBrosIcons/0/0.png")"/>
+                                        </td>
+                                        <td style="padding-left: 10px;">
+                                            <select id="Personagem1" name="Personagem1" onchange="character1Selected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                                                <option value="0">Selecione...</option>
+                                                @{
+                                                   foreach (SuperSmashBrosPersonagem character in characters)
+                                                   {
+                                                        <option value="@character.Id">@character.Nome</option>
+                                                    }
+                                                }
+                                            </select>
+                                            <select id="Personagem1Cor" name="Personagem1Cor" onchange="character1ColorSelected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px; display: none;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                        </td>
+
+                                    </tr>
+                                </table>
+                                <div class="pull-right">
+                                    <button id="next1" type="button" style="display: none;" class="btn btn-primary" onclick="toStep2()">Próximo</button>
+                                </div>
+                                
+                            </div>
+                            <div id="step2" style="display: none;">
+                                <p>Selecione o segundo personagem com quem você mais joga</p>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td width="100">
+                                            <img id="ImagemPersonagem2" src="@Url.Content("~/Static/img/smashBrosIcons/0/0.png")" />
+                                        </td>
+                                        <td style="padding-left: 10px;">
+                                            <select id="Personagem2" name="Personagem2" onchange="character2Selected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                            <select id="Personagem2Cor" name="Personagem2Cor" onchange="character2ColorSelected(this.value);" style="font-size: 24px; font-weight: bold; display: none; width: 100%; height: 50px;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-default" onclick="toStep1()">Voltar</button>
+                                    <button type="button" id="next2" style="display: none;" class="btn btn-primary" onclick="toStep3()">Próximo</button>
+                                </div>
+                            </div>
+                            <div id="step3" style="display: none;">
+                                <p>Selecione o segundo personagem com quem você mais joga</p>
+                                <table style="width: 100%">
+                                    <tr>
+                                        <td width="100">
+                                            <img id="ImagemPersonagem3" src="@Url.Content("~/Static/img/smashBrosIcons/0/0.png")" />
+                                        </td>
+                                        <td style="padding-left: 10px;">
+                                            <select id="Personagem3" name="Personagem3" onchange="character3Selected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                            <select id="Personagem3Cor" name="Personagem3Cor" onchange="character3ColorSelected(this.value);" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px; display: none;">
+                                                <option value="0">Selecione...</option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <div class="pull-right">
+                                    <button type="button" class="btn btn-default" onclick="toStep2()">Voltar</button>
+                                    <button id="next3" style="display: none;" class="btn btn-primary" type="submit">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+           }
+           else if (Model.myChallengerItem != null)
+           {
+            <div id="myFriendSafari" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myFriendSafariLabel" aria-hidden="true">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h3 id="myFriendSafariLabel">Meus personagens</h3>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-hover table-striped table-condensed table-bordered pokemonSafariItem">
+                        <tr>
+                                <td class="pokemon">
+                                    <img width="128" alt="@Model.myChallengerItem.NomePersonagem1" src="@Url.Content(Model.myChallengerItem.ImagemPersonagem1)" /><br />
+                                    <div>@Model.myChallengerItem.NomePersonagem1</div>
+                                </td>
+                                <td class="pokemon">
+                                    <img width="128" alt="@Model.myChallengerItem.NomePersonagem2" src="@Url.Content(Model.myChallengerItem.ImagemPersonagem2)" /><br />
+                                    <div>@Model.myChallengerItem.NomePersonagem2</div>
+                                </td>
+                                <td class="pokemon">
+                                    <img width="128" alt="@Model.myChallengerItem.NomePersonagem3" src="@Url.Content(Model.myChallengerItem.ImagemPersonagem3)" /><br />
+                                    <div>@Model.myChallengerItem.NomePersonagem3</div>
+                                </td>
+                            </tr>
+                    </table>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-primary pull-left" href="@Url.Content("~/Widgets/RemoverMeusPersonagensSmash")">
+                        Remover meus personagens
+                    </a>
+                    <button class="btn pull-right" data-dismiss="modal" aria-hidden="true">
+                        Fechar
+                    </button>
+                </div>
+            </div>
+           }
+    }
+}
+
+
+    <div class="row">
+        <div class="span6">
+            <h4>Acompanhe as notícias de Super Smash Bros. pela N-Party</h4>
+            <table class="table table-condensed table-striped table-bordered table-hover" id="Noticias">
+                <tr>
+                    <td> Carregando...</td>
+                </tr>
+            </table>
+        </div>
+        @{
+    if (Model.campeonatoDetailView != null)
+    {
+        string titulo = Model.campeonatoDetailView.campeonato.DataCampeonato.CompareTo(DateTime.Now) < 0 ?
+            "último" : "próximo";
+            <div class="span6" style="overflow: hidden;">
+                <h4>Nosso @titulo campeonato de Super Smash Bros:</h4>
+                <ul class="thumbnails" id="Noticias">
+                    <li>
+                        <a href="@Url.Content("~/Campeonatos/Detalhes/" + Model.campeonatoDetailView.campeonato.Id)" class="thumbnail">
+                            <img src="@Model.campeonatoDetailView.jogo.getCoverUrl()" />
+                            <h4>@Model.campeonatoDetailView.jogo.Nome</h4>
+                            <div class="textDescription">
+                                <div><b>Evento</b>: @Model.campeonatoDetailView.evento.Nome</div>
+                                <div><b>Data</b>: @Model.campeonatoDetailView.campeonato.DataCampeonato.ToString("dd/MM/yyyy")</div>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+    }
+}
+        
+    </div>
+
+<script>
+    var characters = {};
+</script>
+@foreach (SuperSmashBrosPersonagem p in characters)
+{
+    <script>
+        characters["@p.Id"] = { id: @p.Id, nome: "@p.Nome", qtdCores: @p.NumeroRoupas };
+    </script>
+}
+
+<script type="text/javascript">
+    function getCharacterImage(cId, clId){
+        var cIdString = cId <= 0 || cId > 49 ? '0' : '' + cId;
+        var clIdString = cId <= 0 || cId > 49 ? '0' : '' + clId;
+
+        return '/Static/img/smashBrosIcons/' + cIdString + '/' + clIdString + '.png';
+    }
+
+    function showAddModal(userName, userId) {
+        $('#userName').text(userName);
+        var _href = $("#userAddLink").attr("href");
+        var res = _href.split('?');
+        if (res.length > 0)
+            _href = res[0] + userId + '?' + res[1];
+        else
+            _href = _href + userId;
+        $("#userAddLink").attr("href", _href);
+    }
+
+    function character1Selected(characterId) {
+        if (characterId > 0) {
+            $('#ImagemPersonagem1').attr('src', getCharacterImage(characterId, 0));
+            var qtdRoupas = characters[characterId].qtdCores;
+            $('#Personagem1Cor').html("");
+            for(i = 0; i < qtdRoupas; i++){
+                $('#Personagem1Cor').append('<option value="' + i + '"> Roupa ' + (i + 1) + '</option>');
+            }
+            $('#Personagem1Cor').show();
+            $('#next1').show();
+        } else {
+            $('#ImagemPersonagem1').attr('src', getCharacterImage(0, 0));
+            $('#next1').hide();
+            $('#Personagem1Cor').hide();
+        }
+    }
+
+    function character2Selected(characterId) {
+        if (characterId > 0) {
+            $('#ImagemPersonagem2').attr('src', getCharacterImage(characterId, 0));
+            console.log(characterId);
+            var qtdRoupas = characters[characterId].qtdCores;
+            $('#Personagem2Cor').html("");
+            for(i = 0; i < qtdRoupas; i++){
+                $('#Personagem2Cor').append('<option value="' + i + '"> Roupa ' + (i + 1) + '</option>');
+            }
+            $('#Personagem2Cor').show();
+            $('#next2').show();
+        } else {
+            $('#ImagemPersonagem1').attr('src', getCharacterImage(0, 0));
+            $('#next2').hide();
+            $('#Personagem2Cor').hide();
+        }
+    }
+
+    function character3Selected(characterId) {
+        if (characterId > 0) {
+            $('#ImagemPersonagem3').attr('src', getCharacterImage(characterId, 0));
+            var qtdRoupas = characters[characterId].qtdCores;
+            $('#Personagem3Cor').html("");
+            for(i = 0; i < qtdRoupas; i++){
+                $('#Personagem3Cor').append('<option value="' + i + '"> Roupa ' + (i + 1) + '</option>');
+            }
+            $('#Personagem3Cor').show();
+            $('#next3').show();
+        } else {
+            $('#ImagemPersonagem1').attr('src', getCharacterImage(0, 0));
+            $('#next3').hide();
+            $('#Personagem3Cor').hide();
+        }
+    }
+
+    function character1ColorSelected(colorId) {
+        var characterId = $('#Personagem1').val();
+        $('#ImagemPersonagem1').attr('src', getCharacterImage(characterId, colorId));
+    }
+
+    function character2ColorSelected(colorId) {
+        var characterId = $('#Personagem2').val();
+        $('#ImagemPersonagem2').attr('src', getCharacterImage(characterId, colorId));
+    }
+
+    function character3ColorSelected(colorId) {
+        var characterId = $('#Personagem3').val();
+        $('#ImagemPersonagem3').attr('src', getCharacterImage(characterId, colorId));
+    }
+
+    function toStep1(){
+        $('#step3').hide();
+        $('#step2').hide();
+        $('#step1').show();
+    }
+
+    function toStep3(){
+        var optionList = '<option value="0">Selecione...</option>';
+        var selectedC1Id = $('#Personagem1').val();
+        var selectedC2Id = $('#Personagem2').val();
+        var selectedC3Id = $('#Personagem3').val();
+        for(key in characters){
+            var selected = (selectedC3Id == key ? 'selected="selected"' : '');
+            if(key != selectedC2Id && key != selectedC1Id){
+                optionList += '<option value="' + characters[key].id + '"' + ' ' + selected + '>' + characters[key].nome + '</option>';
+            }
+        }
+
+        $('#Personagem3').html(optionList);
+
+        $('#step3').show();
+        $('#step2').hide();
+        $('#step1').hide();
+    }
+
+    function toStep2(){
+        var optionList = '<option value="0">Selecione...</option>';
+        var selectedC1Id = $('#Personagem1').val();
+        var selectedC2Id = $('#Personagem2').val();
+        for(key in characters){
+            var selected = (selectedC2Id == key ? 'selected="selected"' : '');
+            if(key != selectedC1Id){
+                optionList += '<option value="' + characters[key].id + '"' + ' ' + selected + '>' + characters[key].nome + '</option>';
+            }
+        }
+
+        $('#Personagem2').html(optionList);
+
+        $('#step3').hide();
+        $('#step2').show();
+        $('#step1').hide();
+    }
+</script>
+@if (Model.myChallengerItem != null)
+{
+    <script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1437156149833942',
+            status     : true,
+            xfbml      : true,
+            oauth      : true,
+            version    : 'v2.1'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    function shareCharacter(){
+        $('#ShareOnFacebook').attr('disabled', true);
+        var myCharacterName = '@Model.myChallengerItem.NomePersonagem1';
+        var myCharacterId = '@Model.myChallengerItem.IdPersonagem1';
+        var myCharacterColorId = '@Model.myChallengerItem.IdCorPersonagem1';
+        FB.login(function(response)
+        {
+            if (response.authResponse)
+            {
+                var opts = {
+                    message : "Escolhi " + myCharacterName + " como o personagem que eu mais jogo no Super Smash Bros. Escolha o seu também!",
+                    description: 'Mostre os seus personagens principais do Super Smash Bros. para 3DS e adicione outros jogadores para batalhar!',
+                    name : 'Super Smash Bros. Challenger',
+                    link : 'http://connect.nparty.com.br/Widgets/SuperSmashBrosChallenger',
+                    picture : 'http://connect.nparty.com.br/Static/img/smashBrosIcons/' + myCharacterId + '/' + myCharacterColorId + '.png'
+                };
+ 
+                FB.api('/me/feed', 'post', opts, function(response)
+                {
+                        $('#ShareOnFacebook').attr('disabled', false);
+                        console.log('response: ' + response);                    
+                });
+            }
+            else
+            {
+                
+            }
+        }, { scope : 'publish_actions' });
+        
+    }
+</script>   
+}
+
+<script>
+    function smashcall(json) {
+        console.log(json);
+        var relatedTitles = new Array();
+        var relatedImages = new Array();
+        var relatedTitlesNum = 0;
+        var relatedUrls = new Array();
+        $('#Noticias').html('');
+        for (var i = 0; i < json.feed.entry.length; i++) {
+            var entry = json.feed.entry[i];
+            for (var k = 0; k < entry.link.length; k++) {
+                if (entry.link[k].rel == 'alternate') {
+                    relatedUrls[relatedTitlesNum] = entry.link[k].href;
+                    console.log(entry.media$thumbnail[k]);
+                    relatedImages[relatedTitlesNum] = entry.media$thumbnail.url;
+                    relatedTitles[relatedTitlesNum] = entry.link[k].title;
+                    relatedTitlesNum++
+                }
+            }
+        }
+        for (var i = 0; i < relatedTitlesNum; i++) {
+            $('#Noticias').append('<tr><td width="50px"><a target="_blank" href="' + relatedUrls[i] + '"><img style="float: left; width: 50px; height: 50px;" src="' + relatedImages[i] + '" /></a></td><td><a target="_blank" href="' + relatedUrls[i] + '">' + relatedTitles[i] + '</a></td><tr/>');
+        }
+    }
+</script>
+<script src='http://nparty.com.br/feeds/posts/default/-/Super Smash Bros.?alt=json-in-script&callback=smashcall&max-results=4' type='text/javascript'></script>

@@ -1,0 +1,69 @@
+﻿@{
+    ViewBag.Title = "Alterar Senha";
+}
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+}
+
+<h2>Alterar Senha <small>Complete os campos abaixo para alterar sua senha.</small></h2>
+
+<div class="row">
+    @{
+        Html.RenderPartial("MenuConfiguracoes");
+    }
+    <form method="post" class="form-horizontal">
+        <div class="span8" style="padding-top: 10px;">
+            @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["Error"]))
+            {
+                <div class="row">
+                    <div class="span8">
+                        <div class="alert alert-error">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["Error"]
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["Success"]))
+            {
+                <div class="row">
+                    <div class="span8">
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["Success"]
+                        </div>
+                    </div>
+                </div>
+            }
+            <div class="control-group">
+                <label for="Email" class="control-label">Senha atual</label>
+                <div class="controls">
+                    <input type="password" name="CurrentPassword" id="CurrentPassword" value="" placeholder="Digite sua senha atual">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="Senha" class="control-label">Nova senha</label>
+                <div class="controls">
+                    <input type="password" name="NewPassword" id="NewPassword" value="" placeholder="Digite sua nova senha">
+                </div>
+            </div>
+            <div class="control-group">
+                <label for="Senha" class="control-label">Confirmar nova senha</label>
+                <div class="controls">
+                    <input type="password" name="NewPasswordConfirmation" id="NewPasswordConfirmation" value="" placeholder="Confirme sua nova senha">
+                    <span class="help-inline">Sua nova senha deve conter de 6 a 8 dígitos.</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-large btn-primary">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

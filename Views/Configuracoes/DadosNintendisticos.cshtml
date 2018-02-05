@@ -1,0 +1,160 @@
+﻿@using CampeonatosNParty.Models.Database;
+@using EixoX.UI
+@using EixoX.Html
+@model CampeonatosNParty.Models.StructModel.DadosNintendisticos
+@{
+    ViewBag.Title = "Dados Nintendísticos";
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.DadosNintendisticos> presenter =
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.DadosNintendisticos>.GetInstance(1046);
+    bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
+}
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.maskedinput.min.js")"></script>
+<h2>Configurações <small>Preencha as informações abaixo e clique em "Salvar" para alterar seus dados nintendísticos</small></h2>
+<div class="row">
+    @{
+        Html.RenderPartial("MenuConfiguracoes");
+    }
+    
+        <form class="form" method="post">
+            <div class="span8" style="padding-top: 10px;">
+            @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterError"]))
+            {
+                <div class="row">
+                    <div class="span8">
+                        <div class="alert alert-error">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterError"]
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterSuccess"]))
+            {
+                <div class="row">
+                    <div class="span8">
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterSuccess"]
+                        </div>
+                    </div>
+                </div>
+            }
+                <div class="row">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label" for="MiiverseId">Miiverse Id</label>
+                            <div class="controls">
+                                <div class="input-prepend">
+                                  <input name="MiiverseId"  type="text" id="MiiverseId" value="@Model.MiiverseId" placeholder="Insira o seu id do Miiverse"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label" for="FriendCode">Friend Code</label>
+                            <div class="controls">
+                                <div class="input-prepend">
+                                  <input name="FriendCode"  type="text" id="FriendCode" value="@Model.FriendCode" placeholder="Insira o seu FriendCode do 3DS"/>
+                                </div>
+                            </div>
+                        </div>                        
+                    </div>
+                </div>
+                <p>Escolha abaixo os jogos que você possui:</p>
+                <div class="row">
+                    <div class="span8">
+                            <div id="gamesCarousel" class="carousel slide" style="min-height: 260px;">
+                                <div class="carousel-inner">
+                                    @{
+                                        string active = "active";
+                                        foreach (Jogos[] jogosArray in Jogos.Select().Segment(4))
+                                        {
+                                            <div class="item @active">
+                                                <div class="row">
+                                                    <div class="span8">
+                                                        <ul class="thumbnails">
+                                                                @{
+                                                                    if (jogosArray != null && jogosArray.Length > 0)
+                                                                    {
+                                                                        foreach (CampeonatosNParty.Models.Database.Jogos jogo in jogosArray)
+                                                                        {
+                                                                            if (jogo != null)
+                                                                            {
+                                                                                string gameId = "gameId-" + jogo.Id;
+                                                                                string thumbId = "thumbId-" + jogo.Id;
+                                                                                string checkedString = "none";
+                                                                                string thumbBorder = "";
+                                                                                if (Model.Jogos != null && Model.Jogos.Count > 0)
+                                                                                {
+                                                                                    foreach (PersonGame pg in Model.Jogos)
+                                                                                    {
+                                                                                        if (pg.GameId == jogo.Id)
+                                                                                        {
+                                                                                            checkedString = "checked";
+                                                                                            thumbBorder = "border-color: #0000FF";
+                                                                                            break;
+                                                                                        }
+                                                                                    }
+                                                                                }
+                                                                                 
+                                                                                <li class="span2">
+                                                                                    <a href="#" onclick="gameSelected(@jogo.Id)" class="thumbnail" id="@thumbId" style="@thumbBorder">
+                                                                                        <input type="checkbox" name="@gameId" id="@gameId" @checkedString style="display: none;" />
+                                                                                        <img alt="" src="@jogo.getImagemUrl()">
+                                                                                        <h5>@jogo.Nome</h5>
+                                                                                    </a>
+                                                                                </li>
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                }
+                                                        </ul>
+                                                    </div>  
+                                                </div>
+                                            </div>
+                                                                    active = "";
+                                        }
+                                    }
+                                    </div>
+                                    <a class="carousel-control left" href="#gamesCarousel" data-slide="prev">&lsaquo;</a>
+                                    <a class="carousel-control right" href="#gamesCarousel" data-slide="next">&rsaquo;</a>
+                                </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span8">
+                        <button type="submit" class="btn btn-primary btn-large">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#FriendCode").mask("9999-9999-9999");
+    });
+    function gameSelected(gameId) {
+        if ($('#gameId-' + gameId).prop('checked')) {
+            document.getElementById("gameId-" + gameId).checked = false;
+            $('#thumbId-' + gameId).css('border-color', '');
+            if (gameId == 11)
+                $('#PokemonFriendSafari').hide('fast');
+        } else {
+            $('#thumbId-' + gameId).css('border-color', '#0000FF');
+            document.getElementById("gameId-" + gameId).checked = true;
+            if (gameId == '11')
+                $('#PokemonFriendSafari').show('fast');
+        }
+    }
+</script>
+
+

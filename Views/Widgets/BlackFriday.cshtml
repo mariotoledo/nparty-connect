@@ -1,0 +1,391 @@
+﻿@model CampeonatosNParty.Models.ViewModel.BlackFridayModel
+@{
+    ViewBag.Title = "Fique por dentro dos melhores descontos de games da Black Friday deste ano";
+    CampeonatosNParty.Models.Database.Usuarios currentUser = (CampeonatosNParty.Models.Database.Usuarios)ViewData["CurrentUser"];
+    Layout = null;
+
+    int currentPage = Request.QueryString["p"] == null ? 0 : Int32.Parse(Request.QueryString["p"]);
+
+    int filter = 0;
+    if (!string.IsNullOrEmpty(Request.QueryString["f"]))
+    {
+        int.TryParse(Request.QueryString["f"], out filter);
+    }
+
+    string erro = (string)ViewData["Error"];
+    string sucesso = (string)TempData["Sucesso"];
+    string info = (string)ViewData["Info"];
+}
+
+<!-- Criado (e quase que totalmente testado) por Mario Toledo -->
+
+<html lang="pt-br" dir='ltr' xmlns='http://www.w3.org/1999/xhtml' xmlns:b='http://www.google.com/2005/gml/b' xmlns:data='http://www.google.com/2005/gml/data' xmlns:expr='http://www.google.com/2005/gml/expr' xmlns:fb='http://ogp.me/ns/fb#'>
+<head>
+    <title>Fique por dentro dos melhores descontos de games da Black Friday deste ano</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta content='Fique por dentro dos melhores descontos de games da Black Friday deste ano' />
+    <meta content='black, friday, games, nintendo, desconto, promoção' name='keywords' />
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+    <meta content='Mario Toledo' name='author' />
+
+    <link href='http://www.nintendoparty.com.br/favicon.png' rel='icon' type='image/x-icon' />
+
+    <meta property="og:image" content="http://connect.nparty.com.br/Static/img/bgblackfriday.png" />
+
+    <link rel="stylesheet" rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap.min.css")" />
+    <link rel="stylesheet" media="screen" href="@Url.Content("~/Static/css/bootstrap-responsive.min.css")" />
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery-1.9.0.min.js")"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/bootstrap.min.js")"></script>
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+    <style type="text/css">
+        body {
+            color: #FFF;
+            background-color: #75010C;
+            background-image: url('/Static/img/bgblackfriday.png');
+            background-size: 100% auto;
+            background-position: top;
+            background-repeat: no-repeat;
+        }
+
+        a {
+            color: #FFF;
+        }
+
+        .white-container {
+            background-color: #FFFFFF;
+            color: #75010C;
+            text-align: center;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        .thumbnail a {
+            color: #75010C;
+        }
+    </style>
+</head>
+<body>
+    <div style="padding-top: 200px; margin: 0;">
+        <div class="container">
+            <div class="jumbotron">
+                <h1 style="text-shadow: 4px 4px 0px rgba(0,0,0,0.5);">Fique por dentro dos melhores descontos de games da Black Friday deste ano</h1>
+                <p class="lead"><i>Cadastre os descontos de produtos voltados a jogos eletrônicos que encontrar, e dê seu voto positivo ou negativo em outros anúncios</i></p><br />
+                @{
+                    if (currentUser == null)
+                    {
+                        <center><p>É necessário estar logado para interagir nesta página. Faça seu <button onclick="loadMenu('login')" class="btn btn-default">login</button> ou <button onclick="loadMenu('registrar')" class="btn btn-default">registre-se</button>.</p></center>
+                    }
+                    else
+                    {
+                        <center><p>Olá, @currentUser.Nome. Você pode <a href="#myModal" role="button" data-toggle="modal" class="btn btn-default">cadastrar um anúncio</a> ou <a href="@Url.Content("~/Widgets/LogoutBlackFriday")" class="btn btn-default">fazer logoff</a></p></center>
+                    }
+                }
+            </div>
+        </div>
+        <div class="container">
+            @if (!String.IsNullOrEmpty(sucesso))
+            {
+                <div class="alert alert-success">
+                    @sucesso
+                </div>
+            }
+            @if (!String.IsNullOrEmpty(erro))
+            {
+                <div class="alert alert-error">
+                    @erro
+                </div>
+            }
+            @if (!String.IsNullOrEmpty(info))
+            {
+                <div class="alert alert-info">
+                    @info
+                </div>
+            }
+        </div>
+        <div class="row white-container" id="login" style="display: none;">
+            <div class="container">
+                <div class="span3"></div>
+                <div class="span6">
+                    <h2>Login</h2>
+                    <p>Insira seu email e senha nos campos abaixo. Caso ainda não seja cadastrado, clique aqui.</p>
+                    <form class="form-horizontal" method="post" name="login">
+                        <div class="control-group">
+                            <label class="control-label" for="Email">Email</label>
+                            <div class="controls">
+                                <input type="text" id="EmailLogin" placeholder="Insira seu email" name="EmailLogin" value="" style="height: 30px;">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="Sobrenome">Senha</label>
+                            <div class="controls">
+                                <input type="password" id="SenhaLogin" placeholder="Insira sua senha" name="SenhaLogin" value="" style="height: 30px;">
+                            </div>
+                        </div>
+                        <center><button type="submit" name="login" class="btn btn-large btn-primary" style="margin: auto;">Enviar</button></center>
+                    </form>
+
+                </div>
+            </div>            
+        </div>
+        <div class="row white-container" id="registrar" style="display: none;">
+            <div class="container">
+                <div class="span3"></div>
+                <div class="span6">
+                    <h2>Registre-se</h2>
+                    <p>Insira suas informações abaixo, e clique em registrar para criar o seu cadastro.</p>
+                    <form class="form-horizontal" method="post" name="registrar">
+                        <div class="control-group">
+                            <label class="control-label" for="Nome">Nome</label>
+                            <div class="controls">
+                                <input type="text" id="Nome" placeholder="Insira seu primeiro nome" name="Nome" value="" style="height: 30px;">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="Sobrenome">Sobrenome</label>
+                            <div class="controls">
+                                <input type="text" id="Email" placeholder="Insira seu sobrenome" name="Sobrenome" value="" style="height: 30px;">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Email</label>
+                            <div class="controls">
+                                <input type="text" id="Email" name="Email" placeholder="Insira seu email" value="" style="height: 30px;">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="IdEstado">Estado</label>
+                            <div class="controls">
+                                <select name="IdEstado" id="IdEstado" onchange="loadCities(this.value)">
+                                    <option value="0">Selecione</option>
+                                    @foreach (CampeonatosNParty.Models.Database.Estado item in CampeonatosNParty.Models.Database.Estado.Select().OrderBy("Sigla"))
+                                    {
+                                        <option value="@item.EstadoId">@item.Sigla</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="IdCidade">Cidade</label>
+                            <div class="controls">
+                                <select name="IdCidade" id="IdCidade">
+                                    <option value="">Selecione</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Senha</label>
+                            <div class="controls">
+                                <small>Atenção: sua senha deve ter, pelo menos, 6 dígitos</small>
+                                <input type="password" id="Senha" name="Senha" placeholder="Insira sua senha" value="" style="height: 30px;">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Confirmar Senha</label>
+                            <div class="controls">
+                                <input type="password" id="ConfirmarSenha" name="ConfirmarSenha" placeholder="Confirme sua senha" value="" style="height: 30px;">
+                            </div>
+                        </div>
+                        <center><button type="submit" name="registrar" class="btn btn-large btn-primary" style="margin: auto;">Enviar</button></center>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row" style="margin-top: 20px; margin-bottom: 20px;">
+                <div class="span12">
+                    <form method="get" class="form-search pull-right">
+                        <select name="f">
+                            <option value="0" @(filter == 0 ? "selected" : "")>Mais recentes</option>
+                            <option value="1" @(filter == 1 ? "selected" : "")>Mais antigos</option>
+                            <option value="2" @(filter == 2 ? "selected" : "")>Maior pontuação</option>
+                            <option value="3" @(filter == 3 ? "selected" : "")>Menor pontuação</option>
+                        </select>
+                        <button class="btn btn-primary">
+                            Ordenar
+                        </button>
+                    </form>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span12" style="padding-top: 20px; padding-bottom: 20px;">
+                    @if (Model == null || Model.result == null || Model.result.Count == 0)
+                    {
+
+                            <span>Não encontramos nenhum anúncio no momento</span>
+                    }
+                    else
+                    {
+                        int i = 0;
+                        foreach (CampeonatosNParty.Models.Database.BlackFridayAnuncioDetalhes[] anuncioSegment in CampeonatosNParty.Models.Database.NPartyDbExtensions.Segment(Model.result, 3))
+                        {
+                            <ul class="thumbnails">
+                            @foreach (CampeonatosNParty.Models.Database.BlackFridayAnuncioDetalhes anuncio in anuncioSegment)
+                            {
+                                if (anuncio != null)
+                                {
+                                    i++;
+                                    string buttonDisabled = currentUser == null || anuncio.IdUsuario == currentUser.Id || (Model.votos != null && Model.votos.ContainsKey(anuncio.Id)) ? "disabled" : "";
+                                    <li class="span4">
+                                        <div class="thumbnail" style="background-color: #FFF; color: #000">
+                                            <a href="@anuncio.UrlAnuncio" target="_blank"><h4>@anuncio.NomeAnuncio</h4></a>
+                                            <div class="textDescription">
+                                                <div>
+                                                    <b>Valor:</b> @anuncio.Valor.ToString("C2", new System.Globalization.CultureInfo("pt-BR"))<br />
+                                                    <small>Por: @anuncio.Nome @anuncio.Sobrenome</small>
+                                                </div>
+                                            </div><br/>
+                                            <div class="progress">
+                                                <div class="bar bar-success" style="width: @anuncio.PorcentagemPositiva()%;"></div>
+                                                <div class="bar bar-danger" style="width: @anuncio.PorcentagemNegativa()%;"></div>
+                                            </div>
+                                            <p style="font-size: 12px;"><span style="color: #35a730">@anuncio.TotalPositivo</span> positivo@(anuncio.TotalPositivo != 1 ? "s" : ""), <span style="color: #cc2121">@anuncio.TotalNegativo</span> negativo@(anuncio.TotalNegativo != 1 ? "s" : "")</p>
+                                            <div>
+                                                <button @buttonDisabled id="positivo-@i" onclick="vote(@i, '@anuncio.getEncryptedId()', true)" class="btn btn-success" style="width:49%"><i class="fa fa-thumbs-o-up"></i></button>
+                                                <button @buttonDisabled id="negativo-@i" onclick="vote(@i, '@anuncio.getEncryptedId()', false)" class=" btn btn-danger" style="width:49%"><i class="fa fa-thumbs-o-down"></i></button>
+                                            </div>   
+                                        </div>
+                                    </li> 
+                                }                                
+                            }                            
+                            </ul>
+                        }
+                        if (Model.result.HasPreviousPages || Model.result.HasMorePages)
+                        {
+                        @Html.Raw("<div class=\"paginationButton\">");
+                        if(Model.result.HasPreviousPages)
+                        {
+                            <a class="pull-left btn btn-primary" href="@Url.Content("~/Widgets/BlackFriday?p=" + (currentPage - 1) + "&f=" + filter)"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+                        }
+                        if (Model.result.HasMorePages)
+                        {
+                            <a class="pull-right btn btn-primary" href="@Url.Content("~/Widgets/BlackFriday?p=" + (currentPage + 1) + "&f=" + filter)">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+                        }
+                        @Html.Raw("</div>");
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        
+        <div class="container">
+            <div class="row">
+                <div class="span6">
+                    <h4 style="text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">Acompanhe as notícias da Nintendo pela N-Party</h4>
+                    <ul class="thumbnails" id="Noticias">
+                        <li>
+                            Carregando...
+                        </li>
+                    </ul>
+                </div>
+                <div class="span6" style="overflow: hidden;">
+                    <h4 style="text-shadow: 2px 2px 0px rgba(0,0,0,0.5);">Curta nossa página no Facebook!</h4>
+                    <iframe src="//www.facebook.com/plugins/likebox.php?href=https%3A%2F%2Fwww.facebook.com%2FNParty&amp;width=570&amp;height=258&amp;colorscheme=dark&amp;show_faces=true&amp;header=false&amp;stream=false&amp;show_border=false&amp;appId=141992936007985" scrolling="no" frameborder="0" style="border:none; overflow:hidden; width:570px; height:258px;" allowtransparency="true"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+            <h3 style="color: #000;">Criar anúncio</h3>
+        </div>
+        <form class="form" style="color: #000;" method="post">
+            <div class="modal-body">
+                <fieldset>
+                    <label>Título do anúncio</label>
+                    <input type="text" placeholder="Insira o título do anúncio (o nome do jogo ou do produto, por exemplo)" name="NomeAnuncio" style="width: 100%; height: 30px;">
+                    <label>URL do anúncio</label>
+                    <input type="text" placeholder="Insira a URL do anúncio" name="URLAnuncio" style="width: 100%; height: 30px;">
+                    <label>Valor (R$)</label>
+                    <input type="text" placeholder="Insira o valor do produto em reais" name="ValorAnuncio" style="width: 100%; height: 30px;">
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button class="btn" data-dismiss="modal" aria-hidden="true">Cancelar</button>
+                <button type="submit" name="criarAnuncio" class="btn btn-primary">Enviar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#IdCidade').prop('disabled', true);
+        var val = $('#IdEstado').val();
+        if (val) {
+            loadCities(val);
+        }
+    });
+    function loadCities(selectedCode) {
+        if (selectedCode == 0) {
+            $('#IdCidade').prop('disabled', true);
+        } else {
+            $('#IdCidade').html('<option>Carregando...</option>');
+            $.ajax({
+                url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
+                success: function (json) {
+                    $('#IdCidade').prop('disabled', false);
+                    var optionArray = [];
+                    optionArray.push('<option value="">Selecione</option>');
+
+                    $.each(json, function (i, item) {
+                        if (selectedCode == item.CidadeId) {
+                            optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
+                        }
+                        else {
+                            optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
+                        }
+                    });
+
+
+                    $('#IdCidade').html(optionArray.join(''));
+                }
+            });
+        }
+    }
+
+    function loadMenu(menuId) {
+        $('.white-container').each(function (index, value) {
+            $(this).slideUp();
+        });
+        
+        $menu = $('#' + menuId);
+        if($menu.is(":visible") == false)
+            $menu.slideDown();
+    }
+
+    function vote(selector, idAnuncio, isPositivo) {
+        $('#positivo-' + selector).prop("disabled", true);
+        $('#negativo-' + selector).prop("disabled", true);
+        $.post("@Url.Content("~/Widgets/CadastrarVoto/")", { idAnuncio: idAnuncio, isPositivo: isPositivo })
+          .done(function (data) {
+          });
+    }
+</script>
+<script>
+    function smashcall(json) { //get categories of blog & sort them
+        console.log(json);
+        var relatedTitles = new Array();
+        var relatedTitlesNum = 0;
+        var relatedUrls = new Array();
+        $('#Noticias').html('');
+        for (var i = 0; i < json.feed.entry.length; i++) {
+            var entry = json.feed.entry[i];
+            for (var k = 0; k < entry.link.length; k++) {
+                if (entry.link[k].rel == 'alternate') {
+                    relatedUrls[relatedTitlesNum] = entry.link[k].href;
+                    relatedTitles[relatedTitlesNum] = entry.link[k].title;
+                    relatedTitlesNum++
+                }
+            }
+        }
+        for (var i = 0; i < relatedTitlesNum; i++) {
+            $('#Noticias').append('<li style="margin-bottom:0px;" class="span6"><a href="' + relatedUrls[i] + '" class="thumbnail">' + relatedTitles[i] + '</a></li>');
+        }
+    }
+</script>
+<script src='http://nparty.com.br/feeds/posts/default?alt=json-in-script&callback=smashcall&max-results=5' type='text/javascript'></script>
+

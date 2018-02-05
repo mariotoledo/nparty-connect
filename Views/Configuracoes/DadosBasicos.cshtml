@@ -1,0 +1,174 @@
+﻿@using EixoX.UI
+@using EixoX.Html
+@model CampeonatosNParty.Models.StructModel.DadosBasicos
+@{
+    ViewBag.Title = "Dados Básicos";
+    EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.DadosBasicos> presenter =
+        EixoX.Html.BootstrapPresenter<CampeonatosNParty.Models.StructModel.DadosBasicos>.GetInstance(1046);
+    bool validate = "post".Equals(Request.HttpMethod, StringComparison.OrdinalIgnoreCase);
+}
+
+
+@section FacebookMeta{
+    <meta property="og:image" content="http://www.images.nparty.com.br/connect/connectFacebook.png" />
+    <meta property="og:title" content="N-Party Connect" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://connect.nparty.com.br" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:site_name" content="N-Party Connect" />
+    <meta property="og:description" content="Uma rede online para jogadores e fãs da Nintendo poderem trocar Friend Code, participar de campeonatos e muito mais." />
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.maskedinput.min.js")"></script>
+<h2>Configurações <small>Preencha as informações abaixo e clique em "Salvar" para alterar seus dados básicos</small></h2>
+<div class="row">
+    @{
+        Html.RenderPartial("MenuConfiguracoes");
+    }
+    
+        <form class="form" method="post">
+            <div class="span8" style="padding-top: 10px;">
+            @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterError"]))
+            {
+                <div class="row">
+                    <div class="span8">
+                        <div class="alert alert-error">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterError"]
+                        </div>
+                    </div>
+                </div>
+            }
+            @if (!EixoX.ValidationHelper.IsNullOrEmpty(ViewData["RegisterSuccess"]))
+            {
+                <div class="row">
+                    <div class="span8">
+                        <div class="alert alert-success">
+                            <button type="button" class="close" data-dismiss="alert">&times;</button>@ViewData["RegisterSuccess"]
+                        </div>
+                    </div>
+                </div>
+            }
+                <div class="row">
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label" for="Apelido">Apelido</label>
+                            <div class="controls">
+                                  <input name="Apelido" type="text" id="Apelido" value="@Model.Apelido" placeholder="Insira o seu apelido"/>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="Telefone">Telefone</label>
+                            <div class="controls">
+                                  <input name="Telefone" type="text" id="Telefone" value="@Model.Telefone" placeholder="Insira o seu telefone"/>
+                                  <br />
+                                  <div style="font-size: 10px; line-height: 12px;">Esta informação não aparecerá em seu perfil. Utilizamos seu telefone apenas em eventos, caso você tenha se inscrito em um campeonato, e ainda não tenha aparecido para participar.</div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="BirthdayDay">Data de Nascimento</label>
+                            <div class="controls">
+                                  <select name="BirthdayDay" class="input-mini">
+                                        @for(int i = 1; i <= 31; i++)
+                                        {
+                                            string selected = i == Model.BirthdayDay ? "selected" : "";
+                                            <option @selected value="@i">@i.ToString()</option>
+                                        }
+                                    </select>
+                                    <select name="BirthdayMonth" class="input-mini">
+                                        @for(int i = 1; i <= 12; i++)
+                                        {
+                                            string selected = i == Model.BirthdayMonth ? "selected" : "";
+                                            <option @selected value="@i">@i.ToString()</option>
+                                        }
+                                    </select>
+                                    <select name="BirthdayYear" class="input-small">
+                                        @for(int i = 0; i < 100; i++)
+                                        {
+                                            int year = DateTime.Now.Year - 10 - i;
+                                            string selected = year == Model.BirthdayYear ? "selected" : "";
+                                        
+                                            <option @selected value="@year">@year.ToString()</option>
+                                        }
+                            </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span4">
+                        <div class="control-group">
+                            <label class="control-label" for="Id_Estado">Estado</label>
+                            <div class="controls">
+                                   <select name="Id_Estado" id="Id_Estado" onchange="loadCities(this.value)">
+                                        <option value="">Selecione</option>
+                                        @foreach (CampeonatosNParty.Models.Database.Estado item in CampeonatosNParty.Models.Database.Estado.Select().OrderBy("Sigla"))
+                                        {
+                                            string selected = item.EstadoId == Model.Id_Estado ? "selected" : "";
+                                            <option @selected value="@item.EstadoId">@item.Sigla</option>
+                                        }
+                                    </select>
+                            </div>
+                        </div>
+                       <div class="control-group">
+                            <label class="control-label" for="Id_Cidade">Cidade</label>
+                            <div class="controls">
+                                   <select name="Id_Cidade" id="Id_Cidade">
+                                        <option value="">Selecione</option>
+                                        @{
+                                            if(Model.Id_Estado > 0)
+                                            {
+                                                foreach (CampeonatosNParty.Models.Database.Cidade item in CampeonatosNParty.Models.Database.Cidade.Select().Where("EstadoId", Model.Id_Estado).OrderBy("Nome"))
+                                                {
+                                                    string selected = item.CidadeId == Model.Id_Cidade ? "selected" : "";
+                                                    <option @selected value="@item.CidadeId">@item.Nome</option>
+                                                }
+                                            } else {
+                                                <script>$('#Id_Cidade').prop('disabled', true);</script>
+                                            }
+                                        }
+                                    </select>
+                            </div>
+                        </div>
+                    </div>
+                </div><br />
+                <div class="row">
+                    <div class="span8">
+                        @{presenter["Newsletter"].Render(this.Output, Model, validate);}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="span8">
+                        <button type="submit" class="btn btn-primary btn-large">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+</div>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#Telefone").mask("(99) 99999999?9");
+    });
+    function loadCities(selectedCode) {
+        if (selectedCode == 0) {
+            $('#Id_Cidade').prop('disabled', true);
+        }
+        else {
+            $.ajax({
+                url: "@Url.Content("~/Ajax/CarregarCidades/")" + selectedCode,
+                 success: function (json) {
+                     $('#Id_Cidade').prop('disabled', false);
+                     var optionArray = [];
+                     optionArray.push('<option value="">Selecione</option>');
+
+                     $.each(json, function (i, item) {
+                         if (selectedCode == item.CidadeId) {
+                             optionArray.push('<option value="' + item.CidadeId + '" selected="selected">' + item.Nome + '</option>');
+                         }
+                         else {
+                             optionArray.push('<option value="' + item.CidadeId + '">' + item.Nome + '</option>');
+                         }
+                     });
+
+                     $('#Id_Cidade').html(optionArray.join(''));
+                 }
+             });
+        }
+    }
+</script>

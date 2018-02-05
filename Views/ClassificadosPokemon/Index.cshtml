@@ -1,0 +1,426 @@
+﻿@model CampeonatosNParty.Models.ViewModel.ClassificadosPokemonView
+@using CampeonatosNParty.Models.Database
+@{
+    ViewBag.Title = "Classificados de Trocas Pokémon - N-Party Connect";
+    bool isLogado = Model.isLoggedIn;
+
+    int pokemonIdSelected = Request.QueryString["PokemonFilter"] == null ? 0 : Int32.Parse(Request.QueryString["PokemonFilter"]);
+    int natureIdSelected = Request.QueryString["NatureFilter"] == null ? 0 : Int32.Parse(Request.QueryString["NatureFilter"]);
+
+    List<PokemonTradeOfferItem> list = null;
+    if (Model != null && Model.result != null)
+    {
+        list = Model.result.ToList();
+    }
+
+    int currentPage = Request.QueryString["page"] == null ? 0 : Int32.Parse(Request.QueryString["page"]);
+    string isFilteredNature = Request.QueryString["Type"] != null ? "NatureFilter=" + Request.QueryString["NatureFilter"] : "";
+    string isFilteredPokemon = Request.QueryString["PokemonFilter"] != null ? "PokemonFilter=" + Request.QueryString["PokemonFilter"] : "";
+
+    isFilteredNature = string.IsNullOrEmpty(isFilteredNature) ? isFilteredNature : "&" + isFilteredNature;
+    isFilteredPokemon = string.IsNullOrEmpty(isFilteredPokemon) ? isFilteredPokemon : "&" + isFilteredPokemon;
+}
+<script type="text/javascript" src="@Url.Content("~/Scripts/jquery.maskedinput.min.js")"></script>
+
+<ul class="breadcrumb">
+    <li><a href="@Url.Content("/")">Home</a> <span class="divider">/</span></li>
+    <li><a href="@Url.Content("/Widgets")">Widgets</a> <span class="divider">/</span></li>
+    <li class="active">"Classificados de Trocas Pokémon</li>
+</ul>
+
+<div class="row">
+    <div class="span12">
+        <div id="mainSlider" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/Static/img/widgets/heroClassificadosPokemon.png" alt="Classificadosde Trocas Pokémon">
+                    <div class="container">
+                        <div class="carousel-caption" style="bottom: 20px;">
+                            <h1>Classificados de Trocas Pokémon</h1>
+                            <p class="lead">Anuncie seus Pokémon e faça troca com outros jogadores do N-Party Connect.</p><br />
+                            @{
+                                if (isLogado)
+                                {
+                                    <a class="btn btn-large btn-primary" href="@Url.Content("~/ClassificadosPokemon/NovoAnuncio")">Novo anúncio</a>
+                                }
+                                if (Model.myOffers != null && Model.myOffers.Count > 0)
+                                {
+                                    <button class="btn btn-large btn-primary" type="button" data-toggle="modal" data-target="#myAnnouncesModal">Meus anúncios</button>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@if (!isLogado)
+{
+    <div class="row">
+        <div class="span12">
+            <div class="alert alert-info">
+                <strong>Atenção: </strong>para ver os detalhes da oferta e conseguir entrar em contato com o anunciante, é necessário estar logado no sistema.
+            </div>
+        </div>
+    </div>
+}
+
+    <div class="controls controls-row">
+        <form class="form-inline pull-right" method="get">
+            <select name="PokemonFilter" class="span2">
+                <option value="0">Qualquer Pokemon</option>
+                @foreach (Pokemon pokemon in Pokemon.Select())
+                {
+                    string selected = pokemonIdSelected == pokemon.Id ? "selected" : "";
+                    <option value="@pokemon.Id" @selected>#@pokemon.PokedexNumber - @pokemon.Name</option>
+                }
+            </select>
+            <select class="span2" name="NatureFilter">
+                <option value="0">Qualquer Nature</option>
+                @foreach (PokemonNature nature in PokemonNature.Select())
+                {
+                    string selected = natureIdSelected == nature.Id ? "selected" : "";
+                    <option value="@nature.Id" @selected>@nature.Name</option>
+                }
+            </select>
+            <button class="btn btn-primary span2">
+                Filtrar
+            </button>
+        </form>
+</div>
+    @{
+        if (list != null && list.Count > 0)
+        {
+            foreach (PokemonTradeOfferItem[] tradeOfferArray in list.Segment(4))
+            {
+                <div class="row">
+                @{
+                foreach (PokemonTradeOfferItem tradeOffer in tradeOfferArray)
+                {
+                    if (tradeOffer != null)
+                    {
+                        <div class="span3">
+                            <table class="table table-hover table-striped table-condensed table-bordered pokemonSafariItem">
+                                <tr>
+                                    <th colspan="2">
+                                        <h4>
+                                            @{
+                                            if (isLogado)
+                                            {
+                                                    <a role="button"> @tradeOffer.Name                                          </a>
+                        }
+                        else
+                        {
+                            @tradeOffer.Name
+                        }
+                                            }
+                                            
+                                            @{
+                        if (tradeOffer.IsEgg)
+                        {
+                                                <span class="label">Ovo</span>
+                        }
+                        else if (tradeOffer.IsShiny)
+                        {
+                                                <span class="label label-warning">Shiny</span>
+                        }
+                                        }
+                                        </h4>
+                                        
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">Treinador: <a href="@Url.Content("~/Jogadores/Detalhes/" + tradeOffer.PersonId)">@tradeOffer.PersonName</a></td>
+                                </tr>
+                                <tr>
+                                    <td class="pokemon"  style="width: 100px;">
+                                        <img width="100" alt="@tradeOffer.Name" src="@tradeOffer.getImageUrl()"  /><br />
+                                    </td>
+                                    <td>
+                                        <b>Level</b>: @(tradeOffer.PokemonLevel > 0 ? tradeOffer.PokemonLevel.ToString() : "Não informado")<br />
+                                        <b>Nature</b>: @(string.IsNullOrEmpty(tradeOffer.PokemonNature) ? "Não informado" : tradeOffer.PokemonNature)<br />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    }
+                }
+                }
+                </div>
+            }
+        }
+        else
+        {
+            <div class="span12">
+                <p>Não foi encontrada nenhuma troca.</p>
+            </div>
+        }
+    }
+
+<!-- Modal -->
+<div id="newAnnouncmentModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="newAnnouncmentModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="newAnnouncmentModalLabel">Novo anúncio</h3>
+    </div>
+    <div class="modal-body">
+        <form class="form" method="post" id="announcementForm">
+        
+        <div class="control-group">
+            <label class="control-label" for="PokemonTradeId">Pokémon a ser anunciado*</label>
+            <div class="controls">
+                <select id="PokemonTradeId" name="PokemonTradeId" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                    <option value="0">Selecione o Pokémon que você possui...</option>
+                    @foreach (Pokemon pokemon in Pokemon.Select())
+                    {
+                        <option value="@pokemon.Id">#@pokemon.PokedexNumber - @pokemon.Name</option>
+                    }
+                </select>
+            </div>
+        </div>
+        <label class="checkbox">
+                <input type="checkbox" id="IsEgg" name="IsEgg" value="" onclick="isEggClicked()"> Marque se o Pokémon for um ovo.
+        </label><br />
+        <div id="ShinyValue" class="control-group" style="display: none;">
+            <label class="control-label" for="ShinyValueInput">Shiny Value</label>
+            <div class="controls">
+                <input type="text" id="ShinyValueInput" name="ShinyValue" style="width: 100%"/>
+            </div>
+        </div>
+        <div id="NotEgg" >
+            <label class="checkbox">
+                <input type="checkbox" id="IsShiny" name="IsShiny" value=""> Marque se o Pokémon for shiny.
+            </label><br />
+            <div class="control-group">
+                <label class="control-label" for="PokemonTradeLevel">Level do Pokémon</label>
+                <div class="controls">
+                    <select name="PokemonTradeLevel" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                        <option value="0">Selecione o level do Pokémon...</option>
+                            @for (int i = 1; i <= 100; i++)
+                            {
+                                <option value="@i">@i</option>
+                            }
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="PokemonTradeNature">Nature do Pokémon</label>
+                <div class="controls">
+                    <select name="PokemonTradeNature" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                        <option value="0">Selecione o level do Pokémon...</option>
+                            @foreach (PokemonNature nature in PokemonNature.Select())
+                            {
+                                <option value="@nature.Id">@nature.Name</option>
+                            }
+                    </select>
+                </div>
+            </div><br />            
+            <p>Insira os EVs do Pokémon (caso queira)</p>
+            <table style="width: 100%" class="table">
+                <tr>
+                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Hp</td>
+                    <td style="width: 30%"><input class="span2" id="HpEv" name="HpEv" type="text" placeholder="Insira o EV de HP"/></td>
+                    <td style="width: 4%"></td>
+                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Sp. Attack</td>
+                    <td style="width: 30%"><input class="span2" id="SpAttackEv" name="SpAttackEv" type="text" placeholder="Insira o EV de Sp. Attack"/></td>
+                </tr>
+                <tr>
+                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Attack</td>
+                    <td style="width: 30%"><input class="span2" id="AttackEv" name="AttackEv" type="text" placeholder="Insira o EV de Attack"/></td>
+                    <td style="width: 4%"></td>
+                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Defense</td>
+                    <td style="width: 30%"><input class="span2" id="DefenseEv" name="DefenseEv" type="text" placeholder="Insira o EV de Defense"/></td>
+                </tr>
+                <tr>
+                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Sp. Defense</td>
+                    <td style="width: 30%"><input class="span2" id="SpDefenseEv" name="SpDefenseEv" type="text" placeholder="Insira o EV de Sp. Defense"/></td>
+                    <td style="width: 4%"></td>
+                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Speed</td>
+                    <td style="width: 30%"><input class="span2" id="SpeedEv" name="SpeedEv" type="text" placeholder="Insira o EV de Speed"/></td>
+                </tr>                
+            </table><br />
+            <p>Selecione os IV's top do Pokémon (caso queira)</p>
+            <table style="width: 100%" class="table">
+                <tr>
+                    <td style="width: 10%;"><input type="checkbox" id="HasIvHp" name="HasIvHp" value="" ></td>
+                    <td style="width: 38%">Hp</td>
+                    <td style="width: 4%"></td>
+                    <td style="width: 10%;"><input type="checkbox" id="HasIvSpAttack" name="HasIvSpAttack" value="" ></td>
+                    <td style="width: 38%">Sp. Attack</td>
+                </tr>
+                <tr>
+                    <td style="width: 10%;"><input type="checkbox" id="HasIvAttack" name="HasIvAttack" value="" ></td>
+                    <td style="width: 38%">Attack</td>
+                    <td style="width: 4%"></td>
+                    <td style="width: 10%;"><input type="checkbox" id="HasIvDefense" name="HasIvDefense" value="" ></td>
+                    <td style="width: 38%">Defense</td>
+                </tr>
+                <tr>
+                    <td style="width: 10%;"><input type="checkbox" id="HasIvSpDefense" name="HasIvSpDefense" value="" ></td>
+                    <td style="width: 38%">Sp. Defense</td>
+                    <td style="width: 4%"></td>
+                    <td style="width: 10%;"><input type="checkbox" id="HasIvSpeed" name="HasIvSpeed" value="" ></td>
+                    <td style="width: 38%">Speed</td>
+                </tr>               
+            </table><br />
+        </div>
+        <div class="control-group">
+            <label class="control-label" for="PokemonTradeMessage">Caso deseje, insira uma mensagem de até 250 caracteres para complementar o seu anúncio</label>
+            <div class="controls">
+                <textarea maxlength="250" name="PokemonTradeMessage" id="PokemonTradeMessage" style="width: 100%; height: 150px;"></textarea>
+            </div>
+        </div>
+        <br />
+        <div class="alert alert-info">
+            <strong>Atenção: </strong>Ao anunciar uma troca, você estará permitindo que os usuários enviem mensagens para o email registrado no sistema. Dependendo de qual serviço de email você utiliza, tais respostas podem ser classificadas como "spam". Você estará concordando com esta regra ao clicar em "Salvar".
+        </div>
+        <div class="alert alert-error" id="errorScreen" style="display: none;"></div>
+            </form>
+        <div class="modal-footer">
+            <button class="btn btn-primary" onclick="validateForm()">Salvar</button>
+        </div>
+        
+    </div>
+</div>
+<div id="myAnnouncesModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myAnnouncesModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="myAnnouncesModalLabel">Meus anúncio</h3>
+    </div>
+    <div class="modal-body">
+         @{
+             if (Model.myOffers != null && Model.myOffers.Count > 0)
+             {
+                 foreach (PokemonTradeOfferItem tradeOffer in Model.myOffers)
+                 {
+                     if (tradeOffer != null)
+                     {
+                                <table class="table table-hover table-striped table-condensed table-bordered pokemonSafariItem">
+                                    <tr>
+                                        <th colspan="2">
+                                            <h4>@tradeOffer.Name
+                                                @{
+                         if (tradeOffer.IsEgg)
+                         {
+                                                     <span class="label">Ovo</span>
+                         }
+                         else if (tradeOffer.IsShiny)
+                         {
+                                                    <span class="label label-warning">Shiny</span>
+                         }
+                                            }
+                                            </h4>
+                                        </th>
+                                    </tr>
+                                    <tr>
+                                        <td class="pokemon"  style="width: 100px;">
+                                            <img width="100" alt="@tradeOffer.Name" src="@tradeOffer.getImageUrl()"  /><br />
+                                        </td>
+                                        <td>
+                                            <b>Level</b>: @(tradeOffer.PokemonLevel > 0 ? tradeOffer.PokemonLevel.ToString() : "Não informado")<br />
+                                            <b>Nature</b>: @(string.IsNullOrEmpty(tradeOffer.PokemonNature) ? "Não informado" : tradeOffer.PokemonNature)<br />
+                                            <br />
+                                            <a href="@Url.Content("~/Widgets/ApagarClassificado/" + tradeOffer.Id)" class="btn btn-large btn-block btn-primary">Apagar</a>
+                                        </td>
+                                    </tr>
+                                </table>
+                     }
+                 }
+                 if (Model.result.HasPreviousPages || Model.result.HasMorePages)
+                 {
+                    @Html.Raw("<div class=\"paginationButton\">");
+                                                                 if (Model.result.HasPreviousPages)
+                                                                 {
+                        <a class="pull-left btn btn-primary" href="/Widgets/ClassificadosPokemon/?page=@(currentPage - 1)@isFilteredNature@isFilteredPokemon"><i class="icon-chevron-left icon-white"></i> Página anterior</a>
+                                                                 }
+                                                                 if (Model.result.HasMorePages)
+                                                                 {
+                        <a class="pull-right btn btn-primary" href="/Widgets/ClassificadosPokemon/?page=@(currentPage + 1)@isFilteredNature@isFilteredPokemon">Próxima página <i class="icon-chevron-right icon-white"></i></a>
+                                                                 }
+                    @Html.Raw("</div>");
+                 }
+             }
+
+             else
+             {
+                <div class="span12">
+                    <p>Você não possui nenhuma oferta.</p>
+                </div>
+             }
+        }
+    </div>
+</div>
+<div id="announceDetailModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="announceDetailModalLabel" aria-hidden="true">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3 id="announceDetailModalLabel">Detalhes do anúncio</h3>
+    </div>
+    <div class="modal-body">
+        <table class="table">
+            <tr>
+                <td class="pokemon" style="width: 100px;">
+                    <img id="modalPokemonPhoto" width="100" src=""/>
+                </td>
+                <td>
+                    <h4 id="modalPokemonName"></h4>
+                    <span id="complement"></span>
+                    <div id="isEggDetail" style="display: none;">
+                        <b>Shiny Value: </b><span id="shinyValueValue"></span>
+                    </div>
+                    <div id="notEggDetail">
+                        <b>Level: </b><span id="modalPokemonLevel"></span><br />
+                        <b>Nature: </b><span id="modalPokemonNature"></span>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <div id="notEggDetail2">
+            <table class="table table-bordered table-striped table-condensed table-hover">
+                <tr>
+                    <th style="text-align: center;" colspan="6">EVs</th>
+                </tr>
+                <tr>
+                    <td style="text-align: center;">Hp</td>
+                    <td style="text-align: center;">Attack</td>
+                    <td style="text-align: center;">Defense</td>
+                    <td style="text-align: center;">Sp. Attack</td>
+                    <td style="text-align: center;">Sp. Defense</td>
+                    <td style="text-align: center;">Speed</td>
+                </tr>
+                <tr>
+                    <td style="text-align: center;" id="modalPokemonHpEv"></td>
+                    <td style="text-align: center;" id="modalPokemonAttackEv"></td>
+                    <td style="text-align: center;" id="modalPokemonDefenseEv"></td>
+                    <td style="text-align: center;" id="modalPokemonSpAttackEv"></td>
+                    <td style="text-align: center;" id="modalPokemonSpDefenseEv"></td>
+                    <td style="text-align: center;" id="modalPokemonSpeedEv"></td>
+                </tr>
+            </table>
+            <br />
+            <div>
+                <b>IV's top: </b><span id="ivs"></span>
+            </div>
+        </div>
+        <br />
+        <div id="trainerMessage" class="well">
+            Mensagem do treinador:
+            <div id="userMessage"></div><br />
+        </div>
+        <div id="sendMessage" style="display: none;">
+            <label for="sendMessageTextArea">Enviar mensagem para o anunciante</label>
+            <input type="hidden" id="tradeOfferId" />
+            <textarea id="sendMessageTextArea" style="width: 100%; height: 200px;"></textarea>
+            <button onclick="sendMessage()" id="sendMessageButton" class="btn btn-large btn-block btn-primary">Enviar Mensagem</button>
+        </div>
+        <div class="alert alert-success" id="alertSucessSentMessage" style="display: none;">Mensagem enviada. Você deverá receber a resposta em breve.</div>
+        <div class="alert alert-info" id="alertSendingMessage" style="display: none;">Enviando mensagem... Por favor, aguarde.</div>
+        <div class="alert alert-error" id="alertSendingMessageError" style="display: none;">Ops, ocorreu um erro. Por favor, tente novamente mais tarde.</div>
+    </div>
+</div>
+<script type="text/javascript">
+    jQuery(function ($) {
+        $("#ShinyValueInput").mask("99999999-99999999-99999999-99999999");
+    });
+
+</script>

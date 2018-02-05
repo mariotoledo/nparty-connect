@@ -1,0 +1,232 @@
+﻿@{
+    ViewBag.Title = "Novo Anúncio - N-Party Connect";
+}
+
+<div class="row">
+    <div class="span12">
+        <div id="mainSlider" class="carousel slide">
+            <div class="carousel-inner">
+                <div class="item active">
+                    <img src="/Static/img/widgets/heroClassificadosPokemon.png" alt="Classificadosde Trocas Pokémon">
+                    <div class="container">
+                        <div class="carousel-caption" style="bottom: 20px;">
+                            <h1>Novo anúncio</h1>
+                            <p class="lead">Preencha as informações abaixo para poder criar um novo anúncio de trocas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="span12">
+    	<div id="passo1">
+    		<h2>Qual Pokémon você quer oferecer?</h2>
+            <div ng-app="PokemonLoad">
+                <div ng-controller="PokemonLoadController">
+                    <div class="row">
+                        <div class="span12">
+                            <div class="input-prepend">
+                                <span class="add-on"><i class="icon-search"></i></span>
+                                <input type="text" name="filter" class="span4" placeholder="Filtrar por nome ou número da Pokedex" ng-model="query" style="font-size: 16px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" ng-show="loading">
+                        <div class="span12" >
+                            Carregando lista de Pokémon...
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span2" data-ng-repeat="pokemon in pokemons | filter:query">
+    				        <button class="btn btn-large btn-default btn-block" style="height: 150px; text-align: center;" onclick="executeStep1(165);">
+    					        <img width="100" alt="{{pokemon.Name}}" src="http://www.serebii.net/xy/pokemon/{{pokemon.PokedexNumber}}.png">
+    					        <h5>{{pokemon.Name}}</h5>
+    				        </button>
+    			        </div>
+                    </div>
+                </div>
+            </div>
+    		
+    	</div>
+    	<div id="passo2" style="display: none;">
+    		<h2>O Pokémon é um ovo?</h2>
+    		<div class="row">
+    			<div class="span3">
+    			</div>
+    			<div class="span3">
+    				<button class="btn btn-large btn-default btn-block" style="height: 150px; text-align: center;" onclick="executeStep2(true);">
+    					<h5>Sim</h5>
+    				</button>
+    			</div>
+    			<div class="span3">
+    				<button class="btn btn-large btn-default btn-block" style="height: 150px; text-align: center;" onclick="executeStep2(false);">
+    					<h5>Não</h5>
+    				</button>
+    			</div>
+    			<div class="span3">
+    			</div>
+    		</div>
+    	</div>
+    	<div id="passo3-1" style="display: none;">
+    		<div class="row">
+                <div class="span12">
+                    <h2>Caso queira, insira uma mensagem adicional de até 500 caracteres para seu anúncio</h2>
+                    <p>Você pode inserir uma mensagem com detalhes adicionais, como Pokémon que quer em troca ou qualquer outra informação relevante sobre o seu Pokémon anunciado.</p>
+    			    <textarea id="PokemonTradeMessage" maxlength="500"class="span12" style="min-height: 200px;"></textarea>
+                </div>
+    		</div>
+    	</div>
+    	<div id="passo3-2" style="display: none;">
+    		<div class="row">
+                <div class="span12">
+    			    <h2>Selecione o level do Pokémon</h2>
+                    <select id="PokemonTradeLevel" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;" onchange="executeStep3(this.value);">
+                        <option value="0">Selecione o level do Pokémon...</option>
+                        @for (int i = 1; i <= 100; i++)
+                        {
+                            <option value="@i">@i</option>
+                        }
+                    </select>
+                </div>
+    		</div>
+    	</div>
+        <div id="passo4" style="display: none;">
+            <div class="row">
+                <div class="span12">
+                    <h2>Dados opcionais</h2>
+                    <div class="control-group">
+                        <label class="control-label" for="PokemonTradeNature">Nature do Pokémon</label>
+                        <div class="controls">
+                            <select id="PokemonTradeNature" style="font-size: 24px; font-weight: bold; width: 100%; height: 50px;">
+                                <option value="0">Selecione a nature do Pokémon...</option>
+                                    @foreach (CampeonatosNParty.Models.Database.PokemonNature nature in 
+                                                CampeonatosNParty.Models.Database.PokemonNature.Select())
+                                    {
+                                        <option value="@nature.Id">@nature.Name</option>
+                                    }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="span6">
+                             <p>Insira os EVs do Pokémon (caso queira)</p>
+                            <table style="width: 100%" class="table">
+                                <tr>
+                                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Hp</td>
+                                    <td style="width: 30%"><input class="span2" id="HpEv" name="HpEv" type="text" placeholder="Insira o EV de HP"/></td>
+                                    <td style="width: 4%"></td>
+                                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Sp. Attack</td>
+                                    <td style="width: 30%"><input class="span2" id="SpAttackEv" name="SpAttackEv" type="text" placeholder="Insira o EV de Sp. Attack"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Attack</td>
+                                    <td style="width: 30%"><input class="span2" id="AttackEv" name="AttackEv" type="text" placeholder="Insira o EV de Attack"/></td>
+                                    <td style="width: 4%"></td>
+                                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Defense</td>
+                                    <td style="width: 30%"><input class="span2" id="DefenseEv" name="DefenseEv" type="text" placeholder="Insira o EV de Defense"/></td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Sp. Defense</td>
+                                    <td style="width: 30%"><input class="span2" id="SpDefenseEv" name="SpDefenseEv" type="text" placeholder="Insira o EV de Sp. Defense"/></td>
+                                    <td style="width: 4%"></td>
+                                    <td style="width: 18%; font-size: 13px; font-weight: bold;">Speed</td>
+                                    <td style="width: 30%"><input class="span2" id="SpeedEv" name="SpeedEv" type="text" placeholder="Insira o EV de Speed"/></td>
+                                </tr>                
+                            </table>
+                        </div>
+                        <div class="span6">
+                            <p>Selecione os IV's top do Pokémon (caso queira)</p>
+                            <table style="width: 100%" class="table">
+                                <tr>
+                                    <td style="width: 10%;"><input type="checkbox" id="HasIvHp" name="HasIvHp" value="" ></td>
+                                    <td style="width: 38%">Hp</td>
+                                    <td style="width: 4%"></td>
+                                    <td style="width: 10%;"><input type="checkbox" id="HasIvSpAttack" name="HasIvSpAttack" value="" ></td>
+                                    <td style="width: 38%">Sp. Attack</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 10%;"><input type="checkbox" id="HasIvAttack" name="HasIvAttack" value="" ></td>
+                                    <td style="width: 38%">Attack</td>
+                                    <td style="width: 4%"></td>
+                                    <td style="width: 10%;"><input type="checkbox" id="HasIvDefense" name="HasIvDefense" value="" ></td>
+                                    <td style="width: 38%">Defense</td>
+                                </tr>
+                                <tr>
+                                    <td style="width: 10%;"><input type="checkbox" id="HasIvSpDefense" name="HasIvSpDefense" value="" ></td>
+                                    <td style="width: 38%">Sp. Defense</td>
+                                    <td style="width: 4%"></td>
+                                    <td style="width: 10%;"><input type="checkbox" id="HasIvSpeed" name="HasIvSpeed" value="" ></td>
+                                    <td style="width: 38%">Speed</td>
+                                </tr>               
+                            </table>
+                        </div>
+                    </div>
+                    <p>Você pode inserir uma mensagem de até 500 caracteres com detalhes adicionais, como Pokémon que quer em troca ou qualquer outra informação relevante sobre o seu Pokémon anunciado.</p>
+  			        <textarea id="PokemonTradeMessage" maxlength="500"class="span12" style="min-height: 200px;"></textarea>
+                </div>
+            </div>
+        </div>
+    			
+    	<form class="form" method="post">
+    		<input type="hidden" name="pokemonId" value="0"/>
+    		<input type="hidden" name="isEgg"value="false"/>
+            <input type="hidden" name="pokemonLevel"value="false"/>
+            <input type="hidden" name="pokemonNature"value="false"/>
+    		<button id="btnSubmit" type="submit" class="btn btn-large btn-primary" style="display: none;">Cadastrar anúncio</button>
+            <a id="btnCancel" class="btn btn-large btn-default" href="@Url.Content("~/ClassificadosPokemon/")" style="display: none;">Cancelar</a>
+    	</form>
+    </div>
+</div>
+
+<script src="@Url.Content("~/Scripts/angular.min.js")"></script>
+<script>
+    var PokemonLoad = angular.module('PokemonLoad', []);
+
+    PokemonLoad.controller('PokemonLoadController', function ($scope, $http) {
+        $scope.loading = true;
+        $http.get('@Url.Content("~/Ajax/CarregarTodosPokemon/")')
+        .then(function (res) {
+            $scope.pokemons = res.data;
+            $scope.loading = false;
+        });
+    });
+
+    function executeStep1(pokemonSelected) {
+        $('input[name="pokemonId"]').val(pokemonSelected);
+        $('#passo1').hide('fast');
+        $('#passo2').show('fast');
+    }
+
+    function executeStep2(isEgg) {
+        $('input[name="isEgg"]').val(isEgg);
+        $('#passo2').hide('fast');
+
+        if (isEgg == true) {
+            $('#btnSubmit').show();
+            $('#btnCancel').show();
+            $('#passo3-1').show('fast');
+        }
+        else
+            $('#passo3-2').show('fast');
+    }
+
+    function executeStep3(pokemonLevel) {
+        if (!isNaN(pokemonLevel) && pokemonLevel > 0 && pokemonLevel < 101) {
+            $('input[name="pokemonLevel"]').val(pokemonLevel);
+            $('#passo3-2').hide('fast');
+            $('#passo4').show('fast');
+            $('#btnSubmit').show();
+            $('#btnCancel').show();
+        }
+    }
+
+    $('#PokemonTradeNature').on('change', function () {
+        if (!isNaN(this.value) && this.value > 0 && this.value < 26) {
+            $('input[name="pokemonNature"]').val(this.value);
+        }
+    });
+
+</script>
